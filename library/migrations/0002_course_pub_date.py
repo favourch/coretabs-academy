@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='course',
+            model_name='module',
             name='pub_date',
             field=models.DateTimeField(auto_now=True),
         ),

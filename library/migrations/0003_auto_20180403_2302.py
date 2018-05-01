@@ -8,12 +8,12 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('library', '0002_course_pub_date'),
+        ('library', '0002_module_pub_date'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='course',
+            model_name='module',
             name='pub_date',
             field=models.DateTimeField(auto_now=True, verbose_name='Publication Date'),
         ),

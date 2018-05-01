@@ -8,15 +8,15 @@ class LessonSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CourseSerializer(serializers.ModelSerializer):
+class ModuleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Course
+        model = models.Module
         fields = '__all__'
 
 
-class CourseLessonSerializer(serializers.ModelSerializer):
+class ModuleLessonSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.CourseLesson
+        model = models.ModuleLesson
         fields = '__all__'
 
 
@@ -26,8 +26,8 @@ class TrackSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TrackCourseSerializer(serializers.ModelSerializer):
+class TrackModuleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.TrackCourse
+        model = models.TrackModule
         fields = '__all__'
 

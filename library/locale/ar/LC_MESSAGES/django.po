@@ -56,11 +56,11 @@ msgid "Publication Date"
 msgstr "تاريخ الإنشاء"
 
 #: models.py:44 models.py:58 models.py:85
-msgid "Course"
+msgid "Module"
 msgstr "كورس"
 
 #: models.py:45 models.py:69
-msgid "Courses"
+msgid "Modules"
 msgstr "الكورسات"
 
 #: models.py:59 models.py:87
@@ -68,11 +68,11 @@ msgid "Order"
 msgstr "الترتيب"
 
 #: models.py:62
-msgid "Course and Lesson"
+msgid "Module and Lesson"
 msgstr "كورس ودرس"
 
 #: models.py:63
-msgid "Courses and Lessons"
+msgid "Modules and Lessons"
 msgstr "الكورسات والدروس"
 
 #: models.py:72 models.py:86
@@ -84,9 +84,9 @@ msgid "Tracks"
 msgstr "المسارات"
 
 #: models.py:90
-msgid "Track and Course"
+msgid "Track and Module"
 msgstr "مسار وكورس"
 
 #: models.py:91
-msgid "Tracks and Courses"
+msgid "Tracks and Modules"
 msgstr "المسارات والكورسات"

@@ -12,21 +12,21 @@ api_urls = [
          api.LessonRetrieveAPIView.as_view(),
          name='lesson_retrieve_update_destroy_api'),
 
-    path('courses/',
-         api.CourseListAPIView.as_view(),
-         name='course_list_create_api'),
+    path('modules/',
+         api.ModuleListAPIView.as_view(),
+         name='module_list_create_api'),
 
-    path('courses/<int:pk>/',
-         api.CourseRetrieveAPIView.as_view(),
-         name='course_retrieve_update_destroy_api'),
+    path('modules/<int:pk>/',
+         api.ModuleRetrieveAPIView.as_view(),
+         name='module_retrieve_update_destroy_api'),
 
-    path('courses_lessons/',
-         api.CourseLessonListAPIView.as_view(),
-         name='course_lesson_list_create_api'),
+    path('modules_lessons/',
+         api.ModuleLessonListAPIView.as_view(),
+         name='module_lesson_list_create_api'),
 
-    path('courses_lessons/<int:pk>/',
-         api.CourseLessonRetrieveAPIView.as_view(),
-         name='course_lesson_retrieve_update_destroy_api'),
+    path('modules_lessons/<int:pk>/',
+         api.ModuleLessonRetrieveAPIView.as_view(),
+         name='module_lesson_retrieve_update_destroy_api'),
 
     path('tracks/',
          api.TrackListAPIView.as_view(),
@@ -36,13 +36,13 @@ api_urls = [
          api.TrackRetrieveAPIView.as_view(),
          name='tracks_retrieve_update_destroy_api'),
 
-    path('tracks_courses/',
-         api.TrackCourseListAPIView.as_view(),
-         name='track_course_list_create_api'),
+    path('tracks_modules/',
+         api.TrackModuleListAPIView.as_view(),
+         name='track_module_list_create_api'),
 
-    path('tracks_courses/<int:pk>/',
-         api.TrackCourseRetrieveAPIView.as_view(),
-         name='track_course_retrieve_update_destroy_api'),
+    path('tracks_modules/<int:pk>/',
+         api.TrackModuleRetrieveAPIView.as_view(),
+         name='track_module_retrieve_update_destroy_api'),
 ]
 
 urlpatterns = [

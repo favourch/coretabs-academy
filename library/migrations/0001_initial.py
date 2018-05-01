@@ -15,27 +15,27 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name='Module',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=60, verbose_name='Title')),
                 ('slug', models.SlugField(allow_unicode=True, blank=True, max_length=140, unique=True, verbose_name='Slug')),
             ],
             options={
-                'verbose_name': 'Course',
-                'verbose_name_plural': 'Courses',
+                'verbose_name': 'Module',
+                'verbose_name_plural': 'Modules',
             },
         ),
         migrations.CreateModel(
-            name='CourseLesson',
+            name='ModuleLesson',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('order', models.IntegerField(verbose_name='Order')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='library.Course', verbose_name='Course')),
+                ('module', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='library.Module', verbose_name='Module')),
             ],
             options={
-                'verbose_name': 'Course and Lesson',
-                'verbose_name_plural': 'Courses and Lessons',
+                'verbose_name': 'Module and Lesson',
+                'verbose_name_plural': 'Modules and Lessons',
             },
         ),
         migrations.CreateModel(
@@ -66,31 +66,31 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='TrackCourse',
+            name='TrackModule',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('order', models.IntegerField(verbose_name='Order')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='library.Course', verbose_name='Course')),
+                ('module', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='library.Module', verbose_name='Module')),
                 ('track', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='library.Track', verbose_name='Track')),
             ],
             options={
-                'verbose_name': 'Track and Course',
-                'verbose_name_plural': 'Tracks and Courses',
+                'verbose_name': 'Track and Module',
+                'verbose_name_plural': 'Tracks and Modules',
             },
         ),
         migrations.AddField(
             model_name='track',
-            name='courses',
-            field=models.ManyToManyField(related_name='tracks', through='library.TrackCourse', to='library.Course', verbose_name='Courses'),
+            name='modules',
+            field=models.ManyToManyField(related_name='tracks', through='library.TrackModule', to='library.Module', verbose_name='Modules'),
         ),
         migrations.AddField(
-            model_name='courselesson',
+            model_name='modulelesson',
             name='lesson',
             field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='library.Lesson', verbose_name='Lesson'),
         ),
         migrations.AddField(
-            model_name='course',
+            model_name='module',
             name='lessons',
-            field=models.ManyToManyField(related_name='courses', through='library.CourseLesson', to='library.Lesson', verbose_name='Lessons'),
+            field=models.ManyToManyField(related_name='modules', through='library.ModuleLesson', to='library.Lesson', verbose_name='Lessons'),
         ),
     ]
