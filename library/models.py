@@ -16,11 +16,14 @@ class Lesson(models.Model):
     )
 
     title = models.CharField(max_length=60, verbose_name=_('Title'))
-    slug = models.SlugField(max_length=140, unique=True, blank=True, allow_unicode=True, verbose_name=_('Slug'))
-    type = models.CharField(max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('Type'))
+    slug = models.SlugField(max_length=140, unique=True,
+                            blank=True, allow_unicode=True, verbose_name=_('Slug'))
+    type = models.CharField(
+        max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('Type'))
     is_shown = models.BooleanField(default=False, verbose_name=_('Is Shown'))
     url = models.URLField(verbose_name=_('URL'))
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name=_('User'))
+    user = models.ForeignKey(
+        User, on_delete=models.DO_NOTHING, verbose_name=_('User'))
 
     class Meta:
         verbose_name = _('Lesson')
@@ -37,8 +40,10 @@ class Lesson(models.Model):
 
 class Module(models.Model):
     title = models.CharField(max_length=60, verbose_name=_('Title'))
-    slug = models.SlugField(max_length=140, unique=True, blank=True, allow_unicode=True, verbose_name=_('Slug'))
-    lessons = models.ManyToManyField(Lesson, through='ModuleLesson', related_name='modules', verbose_name=_('Lessons'))
+    slug = models.SlugField(max_length=140, unique=True,
+                            blank=True, allow_unicode=True, verbose_name=_('Slug'))
+    lessons = models.ManyToManyField(
+        Lesson, through='ModuleLesson', related_name='modules', verbose_name=_('Lessons'))
 
     class Meta:
         verbose_name = _('Module')
@@ -54,8 +59,10 @@ class Module(models.Model):
 
 
 class ModuleLesson(models.Model):
-    lesson = models.ForeignKey(Lesson, on_delete=models.DO_NOTHING, verbose_name=_('Lesson'))
-    module = models.ForeignKey(Module, on_delete=models.DO_NOTHING, verbose_name=_('Module'))
+    lesson = models.ForeignKey(
+        Lesson, on_delete=models.DO_NOTHING, verbose_name=_('Lesson'))
+    module = models.ForeignKey(
+        Module, on_delete=models.DO_NOTHING, verbose_name=_('Module'))
     order = models.IntegerField(verbose_name=_('Order'))
 
     class Meta:
@@ -75,10 +82,14 @@ class Workshop(models.Model):
     )
 
     title = models.CharField(max_length=60, verbose_name=_('Title'))
-    slug = models.SlugField(max_length=140, unique=True, blank=True, allow_unicode=True, verbose_name=_('Slug'))
-    pub_date = models.DateTimeField(auto_now=True, verbose_name=_('Publication Date'))
-    level = models.CharField(max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('Type'))
-    modules = models.ManyToManyField(Module, through='WorkshopModule', related_name='workshops', verbose_name=_('Modules'))
+    slug = models.SlugField(max_length=140, unique=True,
+                            blank=True, allow_unicode=True, verbose_name=_('Slug'))
+    pub_date = models.DateTimeField(
+        auto_now=True, verbose_name=_('Publication Date'))
+    level = models.CharField(
+        max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('Type'))
+    modules = models.ManyToManyField(
+        Module, through='WorkshopModule', related_name='workshops', verbose_name=_('Modules'))
 
     class Meta:
         verbose_name = _('Workshop')
@@ -94,8 +105,10 @@ class Workshop(models.Model):
 
 
 class WorkshopModule(models.Model):
-    module = models.ForeignKey(Module, on_delete=models.DO_NOTHING, verbose_name=_('Module'))
-    workshop = models.ForeignKey(Workshop, on_delete=models.DO_NOTHING, verbose_name=_('Workshop'))
+    module = models.ForeignKey(
+        Module, on_delete=models.DO_NOTHING, verbose_name=_('Module'))
+    workshop = models.ForeignKey(
+        Workshop, on_delete=models.DO_NOTHING, verbose_name=_('Workshop'))
     order = models.IntegerField(verbose_name=_('Order'))
 
     class Meta:
@@ -105,8 +118,10 @@ class WorkshopModule(models.Model):
 
 class Track(models.Model):
     title = models.CharField(max_length=60, verbose_name=_('Title'))
-    slug = models.SlugField(max_length=140, unique=True, blank=True, allow_unicode=True, verbose_name=_('Slug'))
-    workshops = models.ManyToManyField(Workshop, through='TrackWorkshop', related_name='tracks', verbose_name=_('Workshops'))
+    slug = models.SlugField(max_length=140, unique=True,
+                            blank=True, allow_unicode=True, verbose_name=_('Slug'))
+    workshops = models.ManyToManyField(
+        Workshop, through='TrackWorkshop', related_name='tracks', verbose_name=_('Workshops'))
 
     class Meta:
         verbose_name = _('Track')
@@ -122,8 +137,10 @@ class Track(models.Model):
 
 
 class TrackWorkshop(models.Model):
-    workshop = models.ForeignKey(Workshop, on_delete=models.DO_NOTHING, verbose_name=_('Workshop'))
-    track = models.ForeignKey(Track, on_delete=models.DO_NOTHING, verbose_name=_('Track'))
+    workshop = models.ForeignKey(
+        Workshop, on_delete=models.DO_NOTHING, verbose_name=_('Workshop'))
+    track = models.ForeignKey(
+        Track, on_delete=models.DO_NOTHING, verbose_name=_('Track'))
     order = models.IntegerField(verbose_name=_('Order'))
 
     class Meta:
