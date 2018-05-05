@@ -104,3 +104,6 @@ ENV/
 
 # PyCharm folder
 .idea/
+
+# VSCode folder
+.vscode/

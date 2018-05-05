@@ -76,9 +76,9 @@ class Workshop(models.Model):
 
     title = models.CharField(max_length=60, verbose_name=_('Title'))
     slug = models.SlugField(max_length=140, unique=True, blank=True, allow_unicode=True, verbose_name=_('Slug'))
-    modules = models.ManyToManyField(Lesson, through='WorkshopModule', related_name='workshops', verbose_name=_('Modules'))
     pub_date = models.DateTimeField(auto_now=True, verbose_name=_('Publication Date'))
     level = models.CharField(max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('Type'))
+    modules = models.ManyToManyField(Module, through='WorkshopModule', related_name='workshops', verbose_name=_('Modules'))
 
     class Meta:
         verbose_name = _('Workshop')
@@ -106,7 +106,7 @@ class WorkshopModule(models.Model):
 class Track(models.Model):
     title = models.CharField(max_length=60, verbose_name=_('Title'))
     slug = models.SlugField(max_length=140, unique=True, blank=True, allow_unicode=True, verbose_name=_('Slug'))
-    workshops = models.ManyToManyField(Module, through='TrackWorkshop', related_name='tracks', verbose_name=_('Workshops'))
+    workshops = models.ManyToManyField(Workshop, through='TrackWorkshop', related_name='tracks', verbose_name=_('Workshops'))
 
     class Meta:
         verbose_name = _('Track')
