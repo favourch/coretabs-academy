@@ -63,11 +63,12 @@ class ModuleLesson(models.Model):
         Lesson, on_delete=models.DO_NOTHING, verbose_name=_('Lesson'))
     module = models.ForeignKey(
         Module, on_delete=models.DO_NOTHING, verbose_name=_('Module'))
-    order = models.IntegerField(verbose_name=_('Order'))
+    order = models.IntegerField(verbose_name=_('Order'), default=0)
 
     class Meta:
         verbose_name = _('Module and Lesson')
         verbose_name_plural = _('Modules and Lessons')
+        ordering = ['order', ]
 
 
 class Workshop(models.Model):
@@ -109,11 +110,12 @@ class WorkshopModule(models.Model):
         Module, on_delete=models.DO_NOTHING, verbose_name=_('Module'))
     workshop = models.ForeignKey(
         Workshop, on_delete=models.DO_NOTHING, verbose_name=_('Workshop'))
-    order = models.IntegerField(verbose_name=_('Order'))
+    order = models.IntegerField(verbose_name=_('Order'), default=0)
 
     class Meta:
         verbose_name = _('Workshop and Module')
         verbose_name_plural = _('Workshops and Modules')
+        ordering = ['order',]
 
 
 class Track(models.Model):
@@ -141,8 +143,9 @@ class TrackWorkshop(models.Model):
         Workshop, on_delete=models.DO_NOTHING, verbose_name=_('Workshop'))
     track = models.ForeignKey(
         Track, on_delete=models.DO_NOTHING, verbose_name=_('Track'))
-    order = models.IntegerField(verbose_name=_('Order'))
+    order = models.IntegerField(verbose_name=_('Order'), default=0)
 
     class Meta:
         verbose_name = _('Track and Workshop')
         verbose_name_plural = _('Tracks and Workshops')
+        ordering = ['order', ]
