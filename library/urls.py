@@ -4,11 +4,11 @@ from . import api
 
 
 api_urls = [
-    path('tracks/<int:pk>/workshops/<int:workshop_pk>/modules/<int:module_pk>/lessons/',
+    path('tracks/<int:track_pk>/workshops/<int:workshop_pk>/modules/<int:module_pk>/lessons/',
          api.LessonListAPIView.as_view(),
          name='lesson_list_api'),
 
-    path('tracks/<int:pk>/workshops/<int:workshop_pk>/modules/<int:module_pk>/lessons/<int:pk>/',
+    path('tracks/<int:track_pk>/workshops/<int:workshop_pk>/modules/<int:module_pk>/lessons/<int:lesson_pk>/',
          api.LessonRetrieveAPIView.as_view(),
          name='lesson_retrieve_api'),
 
@@ -20,7 +20,7 @@ api_urls = [
          api.ModuleRetrieveAPIView.as_view(),
          name='module_retrieve_api'),
 
-    path('tracks/<int:pk>/workshops/',
+    path('tracks/<int:track_pk>/workshops/',
          api.WorkshopListAPIView.as_view(),
          name='workshops_list_api'),
 
@@ -38,5 +38,5 @@ api_urls = [
 ]
 
 urlpatterns = [
-    path('v1/', include(api_urls))
+    path('', include(api_urls))
 ]
