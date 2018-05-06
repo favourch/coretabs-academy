@@ -24,13 +24,14 @@ from hacks.views import password_reset_from_key, logout_view
 from discourse import views
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/auth/logout/', logout_view),
     path('api/v1/auth/', include('rest_auth.urls')),
     path('api/v1/auth/registration/', include('rest_auth.registration.urls')),
     path('discourse/sso', views.sso),
+
+    path('api/v1/', include('library.urls')),
 
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 

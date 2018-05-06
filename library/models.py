@@ -5,29 +5,31 @@ from django.contrib.auth.models import User
 
 
 class Lesson(models.Model):
-    YT_VIDEO = 'YT_VIDEO'
-    MARKDOWN = 'MARKDOWN'
-    QUIZ = 'QUIZ'
+    YOUTUBE_VIDEO = '0'
+    SCRIMBA_VIDEO = '1'
+    MARKDOWN = '2'
+    QUIZ = '3'
+    TASK = '4'
 
     TYPE_CHOICES = (
-        (YT_VIDEO, 'yt-video'),
+        (YOUTUBE_VIDEO, 'youtube-video'),
+        (SCRIMBA_VIDEO, 'scrimba-video'),
         (MARKDOWN, 'markdown'),
         (QUIZ, 'quiz'),
+        (TASK, 'task'),
     )
 
-    title = models.CharField(max_length=60, verbose_name=_('Title'))
+    title = models.CharField(max_length=60, verbose_name=_('title'))
     slug = models.SlugField(max_length=140, unique=True,
-                            blank=True, allow_unicode=True, verbose_name=_('Slug'))
+                            blank=True, allow_unicode=True, verbose_name=_('slug'))
     type = models.CharField(
-        max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('Type'))
-    is_shown = models.BooleanField(default=False, verbose_name=_('Is Shown'))
-    url = models.URLField(verbose_name=_('URL'))
-    user = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, verbose_name=_('User'))
+        max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('type'))
+    url = models.URLField(verbose_name=_('url'))
+    is_shown = models.ManyToManyField(User, verbose_name=_('shown users'))
 
     class Meta:
-        verbose_name = _('Lesson')
-        verbose_name_plural = _('Lessons')
+        verbose_name = _('lesson')
+        verbose_name_plural = _('lessons')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -39,15 +41,15 @@ class Lesson(models.Model):
 
 
 class Module(models.Model):
-    title = models.CharField(max_length=60, verbose_name=_('Title'))
+    title = models.CharField(max_length=60, verbose_name=_('title'))
     slug = models.SlugField(max_length=140, unique=True,
-                            blank=True, allow_unicode=True, verbose_name=_('Slug'))
+                            blank=True, allow_unicode=True, verbose_name=_('slug'))
     lessons = models.ManyToManyField(
-        Lesson, through='ModuleLesson', related_name='modules', verbose_name=_('Lessons'))
+        Lesson, through='ModuleLesson', related_name='modules', verbose_name=_('lessons'))
 
     class Meta:
-        verbose_name = _('Module')
-        verbose_name_plural = _('Modules')
+        verbose_name = _('module')
+        verbose_name_plural = _('modules')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -60,7 +62,7 @@ class Module(models.Model):
 
 class ModuleLesson(models.Model):
     lesson = models.ForeignKey(
-        Lesson, on_delete=models.DO_NOTHING, verbose_name=_('Lesson'))
+        Lesson, on_delete=models.DO_NOTHING, verbose_name=_('lesson'))
     module = models.ForeignKey(
         Module, on_delete=models.DO_NOTHING, verbose_name=_('Module'))
     order = models.IntegerField(verbose_name=_('Order'), default=0)
@@ -82,19 +84,19 @@ class Workshop(models.Model):
         (ADVANCED, 'advanced'),
     )
 
-    title = models.CharField(max_length=60, verbose_name=_('Title'))
+    title = models.CharField(max_length=60, verbose_name=_('title'))
     slug = models.SlugField(max_length=140, unique=True,
-                            blank=True, allow_unicode=True, verbose_name=_('Slug'))
-    pub_date = models.DateTimeField(
-        auto_now=True, verbose_name=_('Publication Date'))
+                            blank=True, allow_unicode=True, verbose_name=_('slug'))
+    last_update_date = models.DateTimeField(
+        auto_now=True, verbose_name=_('last update date'))
     level = models.CharField(
-        max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('Type'))
+        max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('type'))
     modules = models.ManyToManyField(
-        Module, through='WorkshopModule', related_name='workshops', verbose_name=_('Modules'))
+        Module, through='WorkshopModule', related_name='workshops', verbose_name=_('modules'))
 
     class Meta:
-        verbose_name = _('Workshop')
-        verbose_name_plural = _('Workshops')
+        verbose_name = _('workshop')
+        verbose_name_plural = _('workshops')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -107,7 +109,7 @@ class Workshop(models.Model):
 
 class WorkshopModule(models.Model):
     module = models.ForeignKey(
-        Module, on_delete=models.DO_NOTHING, verbose_name=_('Module'))
+        Module, on_delete=models.DO_NOTHING, verbose_name=_('module'))
     workshop = models.ForeignKey(
         Workshop, on_delete=models.DO_NOTHING, verbose_name=_('Workshop'))
     order = models.IntegerField(verbose_name=_('Order'), default=0)
@@ -119,15 +121,15 @@ class WorkshopModule(models.Model):
 
 
 class Track(models.Model):
-    title = models.CharField(max_length=60, verbose_name=_('Title'))
+    title = models.CharField(max_length=60, verbose_name=_('title'))
     slug = models.SlugField(max_length=140, unique=True,
-                            blank=True, allow_unicode=True, verbose_name=_('Slug'))
+                            blank=True, allow_unicode=True, verbose_name=_('slug'))
     workshops = models.ManyToManyField(
-        Workshop, through='TrackWorkshop', related_name='tracks', verbose_name=_('Workshops'))
+        Workshop, through='TrackWorkshop', related_name='tracks', verbose_name=_('workshops'))
 
     class Meta:
-        verbose_name = _('Track')
-        verbose_name_plural = _('Tracks')
+        verbose_name = _('track')
+        verbose_name_plural = _('tracks')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -140,7 +142,7 @@ class Track(models.Model):
 
 class TrackWorkshop(models.Model):
     workshop = models.ForeignKey(
-        Workshop, on_delete=models.DO_NOTHING, verbose_name=_('Workshop'))
+        Workshop, on_delete=models.DO_NOTHING, verbose_name=_('workshop'))
     track = models.ForeignKey(
         Track, on_delete=models.DO_NOTHING, verbose_name=_('Track'))
     order = models.IntegerField(verbose_name=_('Order'), default=0)
