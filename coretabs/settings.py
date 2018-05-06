@@ -51,7 +51,8 @@ INSTALLED_APPS = [
 
     'rest_auth.registration',
 
-    'library'
+    'library',
+    'adminsortable2'
 ]
 
 MIDDLEWARE = [
