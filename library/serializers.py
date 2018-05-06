@@ -14,9 +14,14 @@ class ModuleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ModuleLessonSerializer(serializers.ModelSerializer):
+# class ModuleLessonSerializer(serializers.ModelSerializer):
+#    class Meta:
+#        model = models.ModuleLesson
+#        fields = '__all__'
+
+class WorkshopSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.ModuleLesson
+        model = models.Workshop
         fields = '__all__'
 
 
@@ -26,8 +31,7 @@ class TrackSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TrackModuleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.TrackModule
-        fields = '__all__'
-
+# class TrackModuleSerializer(serializers.ModelSerializer):
+#    class Meta:
+#        model = models.TrackModule
+#        fields = '__all__'
