@@ -5,14 +5,18 @@ from django.contrib.auth.models import User
 
 
 class Lesson(models.Model):
-    YT_VIDEO = 'YT_VIDEO'
-    MARKDOWN = 'MARKDOWN'
-    QUIZ = 'QUIZ'
+    YOUTUBE_VIDEO = '0'
+    SCRIMBA_VIDEO = '1'
+    MARKDOWN = '2'
+    QUIZ = '3'
+    TASK = '4'
 
     TYPE_CHOICES = (
-        (YT_VIDEO, 'yt-video'),
+        (YOUTUBE_VIDEO, 'youtube-video'),
+        (SCRIMBA_VIDEO, 'scrimba-video'),
         (MARKDOWN, 'markdown'),
         (QUIZ, 'quiz'),
+        (TASK, 'task'),
     )
 
     title = models.CharField(max_length=60, verbose_name=_('Title'))
@@ -20,10 +24,11 @@ class Lesson(models.Model):
                             blank=True, allow_unicode=True, verbose_name=_('Slug'))
     type = models.CharField(
         max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('Type'))
-    is_shown = models.BooleanField(default=False, verbose_name=_('Is Shown'))
     url = models.URLField(verbose_name=_('URL'))
+
     user = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, verbose_name=_('User'))
+    is_shown = models.ManyToManyField(User)
 
     class Meta:
         verbose_name = _('Lesson')
