@@ -12,6 +12,7 @@ class LessonListAPIView(generics.ListAPIView):
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
     queryset = models.Lesson.objects.all()
     serializer_class = serializers.LessonSerializer
+    lookup_field = 'slug'
 
 
 class ModuleListAPIView(generics.ListAPIView):
@@ -22,16 +23,7 @@ class ModuleListAPIView(generics.ListAPIView):
 class ModuleRetrieveAPIView(generics.RetrieveAPIView):
     queryset = models.Module.objects.all()
     serializer_class = serializers.ModuleSerializer
-
-
-# class ModuleLessonListAPIView(generics.ListAPIView):
-#    queryset = models.ModuleLesson.objects.all()
-#    serializer_class = serializers.ModuleLessonSerializer
-#
-#
-# class ModuleLessonRetrieveAPIView(generics.RetrieveAPIView):
-#    queryset = models.ModuleLesson.objects.all()
-#    serializer_class = serializers.ModuleLessonSerializer
+    lookup_field = 'slug'
 
 
 class WorkshopListAPIView(generics.ListAPIView):
@@ -45,6 +37,7 @@ class WorkshopListAPIView(generics.ListAPIView):
 class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
     queryset = models.Track.objects.all()
     serializer_class = serializers.WorkshopSerializer
+    lookup_field = 'slug'
 
 
 class TrackListAPIView(generics.ListAPIView):
@@ -55,13 +48,4 @@ class TrackListAPIView(generics.ListAPIView):
 class TrackRetrieveAPIView(generics.RetrieveAPIView):
     queryset = models.Track.objects.all()
     serializer_class = serializers.TrackSerializer
-
-
-# class TrackWorkshopListAPIView(generics.ListAPIView):
-#    queryset = models.TrackModule.objects.all()
-#    serializer_class = serializers.TrackModuleSerializer
-#
-#
-# class TrackWorkshopRetrieveAPIView(generics.RetrieveAPIView):
-#    queryset = models.TrackModule.objects.all()
-#    serializer_class = serializers.TrackModuleSerializer
+    lookup_field = 'slug'

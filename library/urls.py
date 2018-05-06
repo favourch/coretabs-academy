@@ -4,27 +4,27 @@ from . import api
 
 
 api_urls = [
-    path('tracks/<int:track_pk>/workshops/<int:workshop_pk>/modules/<int:module_pk>/lessons/',
+    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/<slug:module_slug>/lessons/',
          api.LessonListAPIView.as_view(),
          name='lesson_list_api'),
 
-    path('tracks/<int:track_pk>/workshops/<int:workshop_pk>/modules/<int:module_pk>/lessons/<int:lesson_pk>/',
+    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/<slug:module_slug>/lessons/<slug:lesson_slug>/',
          api.LessonRetrieveAPIView.as_view(),
          name='lesson_retrieve_api'),
 
-    path('tracks/<int:track_pk>/workshops/<int:workshop_pk>/modules/',
+    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/',
          api.ModuleListAPIView.as_view(),
          name='module_liste_api'),
 
-    path('tracks/<int:track_pk>/workshops/<int:workshop_pk>/modules/<int:module_pk>/',
+    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/<slug:module_slug>/',
          api.ModuleRetrieveAPIView.as_view(),
          name='module_retrieve_api'),
 
-    path('tracks/<int:track_pk>/workshops/',
+    path('tracks/<slug:track_slug>/workshops/',
          api.WorkshopListAPIView.as_view(),
          name='workshops_list_api'),
 
-    path('tracks/<int:track_pk>/workshops/<int:workshop_pk>',
+    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>',
          api.WorkshopRetrieveAPIView.as_view(),
          name='workshops_retrieve_api'),
 
@@ -32,7 +32,7 @@ api_urls = [
          api.TrackListAPIView.as_view(),
          name='tracks_list_api'),
 
-    path('tracks/<int:pk>/',
+    path('tracks/<slug:slug>/',
          api.TrackRetrieveAPIView.as_view(),
          name='tracks_retrieve_api'),
 ]
