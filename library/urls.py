@@ -32,7 +32,7 @@ api_urls = [
          api.TrackListAPIView.as_view(),
          name='tracks_list_api'),
 
-    path('tracks/<int:track_pk>/',
+    path('tracks/<int:pk>/',
          api.TrackRetrieveAPIView.as_view(),
          name='tracks_retrieve_api'),
 ]
