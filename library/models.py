@@ -25,7 +25,7 @@ class Lesson(models.Model):
     type = models.CharField(
         max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('type'))
     url = models.URLField(verbose_name=_('url'))
-    is_shown = models.ManyToManyField(User, verbose_name=_('shown users'))
+    shown_users = models.ManyToManyField(User, verbose_name=_('shown users'))
 
     class Meta:
         verbose_name = _('lesson')

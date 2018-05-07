@@ -1,16 +1,27 @@
+from rest_framework.fields import CurrentUserDefault
 from rest_framework import serializers
+
 from . import models
 
 
 class LessonSerializer(serializers.ModelSerializer):
+    is_shown = serializers.SerializerMethodField()
+
     class Meta:
         model = models.Lesson
-        fields = '__all__'
+        fields = ('title',
+                  'slug',
+                  'type',
+                  'url',
+                  'is_shown')
+
+    def get_is_shown(self, obj):
+        # return obj.lessons.filter(shown_users__user_id=CurrentUserDefault().user.id).exists()
+        return obj.shown_users.filter(id=1).exists()
 
 
 class ModuleSerializer(serializers.ModelSerializer):
-    lessons = serializers.SlugRelatedField(
-        many=True, read_only=True, slug_field='slug')
+    lessons = LessonSerializer(many=True)
 
     class Meta:
         model = models.Module
