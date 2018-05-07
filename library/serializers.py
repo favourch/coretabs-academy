@@ -23,10 +23,7 @@ class ModuleSerializer(serializers.ModelSerializer):
 #        fields = '__all__'
 
 class WorkshopSerializer(serializers.ModelSerializer):
-    modules = serializers.SlugRelatedField(
-        many=True, read_only=True, slug_field='slug')
-
-    lessons = LessonSerializer(many=True)
+    modules = ModuleSerializer(many=True)
 
     class Meta:
         model = models.Workshop
