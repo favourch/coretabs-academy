@@ -1,4 +1,3 @@
-from rest_framework.fields import CurrentUserDefault
 from rest_framework import serializers
 
 from . import models
@@ -16,8 +15,7 @@ class LessonSerializer(serializers.ModelSerializer):
                   'is_shown')
 
     def get_is_shown(self, obj):
-        # return obj.lessons.filter(shown_users__user_id=CurrentUserDefault().user.id).exists()
-        return obj.shown_users.filter(id=1).exists()
+        return obj.shown_users.filter(id=self.context['request'].user.id).exists()
 
 
 class ModuleSerializer(serializers.ModelSerializer):
