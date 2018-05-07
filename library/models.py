@@ -117,7 +117,7 @@ class WorkshopModule(models.Model):
     class Meta:
         verbose_name = _('workshop and module')
         verbose_name_plural = _('workshops and modules')
-        ordering = ['order',]
+        ordering = ['order', ]
 
 
 class Track(models.Model):

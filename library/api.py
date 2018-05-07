@@ -31,7 +31,7 @@ class WorkshopListAPIView(generics.ListAPIView):
     serializer_class = serializers.WorkshopSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(trackworkshop__track_id=self.kwargs.get('track_pk'))
+        return self.queryset.filter(tracks__slug=self.kwargs.get('track_slug'))
 
 
 class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
