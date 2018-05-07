@@ -9,6 +9,9 @@ class LessonSerializer(serializers.ModelSerializer):
 
 
 class ModuleSerializer(serializers.ModelSerializer):
+    lessons = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field='slug')
+
     class Meta:
         model = models.Module
         fields = '__all__'
@@ -20,12 +23,20 @@ class ModuleSerializer(serializers.ModelSerializer):
 #        fields = '__all__'
 
 class WorkshopSerializer(serializers.ModelSerializer):
+    modules = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field='slug')
+
+    lessons = LessonSerializer(many=True)
+
     class Meta:
         model = models.Workshop
         fields = '__all__'
 
 
 class TrackSerializer(serializers.ModelSerializer):
+    workshops = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field='slug')
+
     class Meta:
         model = models.Track
         fields = '__all__'
