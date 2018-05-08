@@ -5,7 +5,7 @@ from . import models
 
 
 class LessonListAPIView(generics.ListAPIView):
-    queryset = models.Lesson.objects.all()
+    queryset = models.BaseLesson.objects.all()
     serializer_class = serializers.LessonSerializer
 
     def get_queryset(self):
@@ -13,7 +13,7 @@ class LessonListAPIView(generics.ListAPIView):
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
-    queryset = models.Lesson.objects.all()
+    queryset = models.BaseLesson.objects.all()
     serializer_class = serializers.LessonSerializer
     lookup_field = 'slug'
 

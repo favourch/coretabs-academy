@@ -7,11 +7,10 @@ class LessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.SerializerMethodField()
 
     class Meta:
-        model = models.Lesson
+        model = models.BaseLesson
         fields = ('title',
                   'slug',
                   'type',
-                  'url',
                   'is_shown')
 
     def get_is_shown(self, obj):
