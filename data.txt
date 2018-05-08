@@ -1,0 +1,25 @@
+Facebook
+	planning
+		creating wireframe
+		imaging layout
+	writing html
+		your first html file
+		styling it with ease
+		
+Instagram
+	creating
+		how should it be like
+		super simple page creation
+	css
+		let's style it
+		what a js introduction
+		
+========================================
+
+Python basics
+    ATM project
+        starting the project
+        
+    Making the ATM
+        functions
+        classes
