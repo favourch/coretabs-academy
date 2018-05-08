@@ -5,10 +5,10 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 
 # class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
-#    model = models.ModuleLesson
+#    model = models.BaseLesson
 #    extra = 1
-
-
+#
+#
 # class ModuleAdmin(admin.ModelAdmin):
 #    inlines = (ModuleLessonInline,)
 
@@ -34,6 +34,6 @@ class TrackAdmin(admin.ModelAdmin):
 admin.site.register(models.MarkdownLesson)
 admin.site.register(models.QuizLesson)
 admin.site.register(models.VideoLesson)
-#admin.site.register(models.Module, ModuleAdmin)
+admin.site.register(models.Module)
 admin.site.register(models.Workshop, WorkshopAdmin)
 admin.site.register(models.Track, TrackAdmin)
