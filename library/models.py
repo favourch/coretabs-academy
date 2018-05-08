@@ -17,6 +17,9 @@ class AutoSlugModel(models.Model):
     def __str__(self):
         return f'{self.title}'
 
+    class Meta():
+        abstract = True
+
 
 class BaseLesson(AutoSlugModel):
     YOUTUBE_VIDEO = '0'
