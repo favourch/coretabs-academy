@@ -1,13 +1,21 @@
+import os, requests
+
 from allauth.account.views import PasswordResetFromKeyView as PRV
 from django.urls import reverse_lazy
 
-import os, requests
+from .utils import sync_sso
+
 from rest_auth.views import LogoutView as LV
+from rest_auth.views import UserDetailsView as UDV
 from rest_framework import status
 from rest_framework.response import Response
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout as django_logout
 from django.utils.translation import ugettext_lazy as _
+
+
+from .serializers import ResendConfirmSerializer
+from rest_framework.generics import GenericAPIView
 
 
 class PasswordResetFromKeyView(PRV):
@@ -46,3 +54,38 @@ class LogoutView(LV):
 
 
 logout_view = LogoutView.as_view()
+
+
+class UserDetailsView(UDV):
+    def put(self, request, *args, **kwargs):
+        response = self.update(request, *args, **kwargs)
+        sync_sso(request.user)
+        return response
+
+
+user_details_view = UserDetailsView.as_view()
+
+
+class ResendConfirmView(GenericAPIView):
+    """
+    Calls Django Auth PasswordResetForm save method.
+
+    Accepts the following POST parameters: email
+    Returns the success/fail message.
+    """
+    serializer_class = ResendConfirmSerializer
+
+    def post(self, request, *args, **kwargs):
+        # Create a serializer with request.data
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+        # Return the success message with OK HTTP status
+        return Response(
+            {"detail": _("Confirmation e-mail has been sent.")},
+            status=status.HTTP_200_OK
+        )
+
+
+resend_confirmation_view = ResendConfirmView.as_view()
