@@ -1,4 +1,6 @@
 from rest_framework import generics
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import UpdateModelMixin
 
 from . import serializers
 from . import models
@@ -11,8 +13,8 @@ class LessonListAPIView(generics.ListAPIView):
     def get_queryset(self):
         return self.queryset.filter(modules__slug=self.kwargs.get('module_slug'))
 
-
-class LessonRetrieveAPIView(generics.RetrieveAPIView):
+# add update functionality in this view
+class LessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = models.BaseLesson.objects.all()
     serializer_class = serializers.LessonSerializer
     lookup_field = 'slug'
@@ -20,6 +22,9 @@ class LessonRetrieveAPIView(generics.RetrieveAPIView):
     def get_queryset(self):
         return self.queryset.filter(modules__slug=self.kwargs.get('module_slug'),
                                     slug=self.kwargs.get('slug'))
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
 
 
 class ModuleListAPIView(generics.ListAPIView):
