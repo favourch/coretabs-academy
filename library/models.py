@@ -140,12 +140,6 @@ class Profile(models.Model):
 
     track = models.ForeignKey(
         Track, on_delete=models.DO_NOTHING, verbose_name=_('track'))
-    last_opened_workshop = models.OneToOneField(Workshop,
-                                                on_delete=models.DO_NOTHING,
-                                                verbose_name=_('last opened workshop'))
-    last_opened_module = models.OneToOneField(Module,
-                                              on_delete=models.DO_NOTHING,
-                                              verbose_name=_('last opened module'))
     last_opened_lesson = models.OneToOneField(BaseLesson,
                                               on_delete=models.DO_NOTHING,
                                               verbose_name=_('last opened lesson'))
