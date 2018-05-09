@@ -68,19 +68,6 @@ class Module(AutoSlugModel):
         verbose_name_plural = _('modules')
 
 
-# class ModuleLesson(models.Model):
-#    lesson = models.ForeignKey(
-#        Lesson, on_delete=models.DO_NOTHING, verbose_name=_('lesson'))
-#    module = models.ForeignKey(
-#        Module, on_delete=models.DO_NOTHING, verbose_name=_('module'))
-#    order = models.IntegerField(verbose_name=_('Order'), default=0)
-#
-#    class Meta:
-#        verbose_name = _('module and lesson')
-#        verbose_name_plural = _('modules and lessons')
-#        ordering = ['order', ]
-
-
 class Workshop(AutoSlugModel):
     BEGINNER = '0'
     INTERMEDIATE = '1'
@@ -92,10 +79,19 @@ class Workshop(AutoSlugModel):
         (ADVANCED, 'advanced'),
     )
 
-    last_update_date = models.DateTimeField(
-        auto_now=True, verbose_name=_('last update date'))
     level = models.CharField(
         max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('type'))
+    last_update_date = models.DateTimeField(
+        auto_now=True, verbose_name=_('last update date'))
+    duration = models.DecimalField(
+        max_digits=3, decimal_places=1, verbose_name=_('duration'))
+    description = models.CharField(
+        max_length=1000, unique=True, blank=True, allow_unicode=True, verbose_name=_('description'))
+    used_technologies = models.CharField(
+        max_length=100, unique=True, blank=True, allow_unicode=True, verbose_name=_('used_technologies'))
+    authors = models.ManyToManyField(
+        User, related_name='workshops', verbose_name=_('authors'))
+    workshop_result_url = models.URLField(verbose_name=_('markdown url'))
     modules = models.ManyToManyField(
         Module, through='WorkshopModule', related_name='workshops', verbose_name=_('modules'))
 
@@ -142,8 +138,14 @@ class TrackWorkshop(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    track = models.ForeignKey(Track, on_delete=models.DO_NOTHING, verbose_name=_('track'))
+    track = models.ForeignKey(
+        Track, on_delete=models.DO_NOTHING, verbose_name=_('track'))
+    last_opened_workshop = models.OneToOneField(Workshop
+                                                on_delete=models.DO_NOTHING,
+                                                verbose_name=_('last opened workshop'))
+    last_opened_module = models.OneToOneField(Module
+                                              on_delete=models.DO_NOTHING,
+                                              verbose_name=_('last opened module'))
     last_opened_lesson = models.OneToOneField(BaseLesson,
                                               on_delete=models.DO_NOTHING,
-                                              verbose_name=_('last lesson'))
-
+                                              verbose_name=_('last opened lesson'))
