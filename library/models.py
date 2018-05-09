@@ -137,3 +137,13 @@ class TrackWorkshop(models.Model):
         verbose_name = _('track and workshop')
         verbose_name_plural = _('tracks and workshops')
         ordering = ['order', ]
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    track = models.ForeignKey(Track, on_delete=models.DO_NOTHING, verbose_name=_('track'))
+    last_opened_lesson = models.OneToOneField(BaseLesson,
+                                              on_delete=models.DO_NOTHING,
+                                              verbose_name=_('last lesson'))
+
