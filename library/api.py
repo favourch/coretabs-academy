@@ -13,7 +13,7 @@ class LessonListAPIView(generics.ListAPIView):
     def get_queryset(self):
         return self.queryset.filter(modules__slug=self.kwargs.get('module_slug'))
 
-# add update functionality in this view
+
 class LessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = models.BaseLesson.objects.all()
     serializer_class = serializers.LessonSerializer
