@@ -30,6 +30,19 @@ class Module(AutoSlugModel):
         verbose_name_plural = _('modules')
 
 
+class ShownLessonQuerySet(models.QuerySet):
+    def lessons(self, user_id):
+        return self.shown_users.filter(id=user_id)
+
+
+class ShownLessonManager(models.Manager):
+    def get_queryset(self):
+        return ShownLessonQuerySet(self.model, using=self._db)
+
+    def lessons(self, user_id):
+        return self.get_queryset().lessons(user_id)
+
+
 class BaseLesson(AutoSlugModel):
     YOUTUBE_VIDEO = '0'
     SCRIMBA_VIDEO = '1'
@@ -52,6 +65,8 @@ class BaseLesson(AutoSlugModel):
         Module, on_delete=models.DO_NOTHING, verbose_name=_('module'))
     shown_users = models.ManyToManyField(
         User, verbose_name=_('shown users'), blank=True)
+
+    shown_lessons = ShownLessonManager()
 
     class Meta:
         verbose_name = _('lesson')
