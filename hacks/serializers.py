@@ -10,6 +10,9 @@ from rest_auth.serializers import PasswordResetSerializer as PRS
 from allauth.account.forms import ResetPasswordForm
 
 from allauth.account.utils import send_email_confirmation
+from library.serializers import ProfileSerializer
+
+UserModel = get_user_model()
 
 
 class RegisterSerializer(RS):
@@ -24,7 +27,7 @@ class RegisterSerializer(RS):
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _("Make sure that you passed your Full Name and that it contains only letters."))
+                _("Make sure that you passed your fullname and that it contains only letters."))
 
         return name
 
@@ -38,26 +41,6 @@ class RegisterSerializer(RS):
 
     def custom_signup(self, request, user):
         sync_sso(user)
-
-
-UserModel = get_user_model()
-
-
-class UserDetailsSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = UserModel
-        fields = ('username', 'email', 'first_name')
-        read_only_fields = ('email', )
-
-    def validate_first_name(self, first_name):
-        pattern = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$"
-        compiler = re.compile(pattern)
-        if not compiler.match(first_name):
-            raise serializers.ValidationError(
-                _("Make sure that you passed your Full Name and that it contains only letters."))
-
-        return first_name
 
 
 class PasswordResetSerializer(PRS):
@@ -98,3 +81,30 @@ class ResendConfirmSerializer(serializers.Serializer):
         user = User.objects.get(email=email)
         send_email_confirmation(request, user, True)
         return email
+
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer()
+
+    class Meta:
+        model = UserModel
+        fields = ('username', 'email','first_name', 'profile')
+        read_only_fields = ('email', )
+
+    def validate_first_name(self, name):
+        pattern = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$"
+        compiler = re.compile(pattern)
+        if not compiler.match(name):
+            raise serializers.ValidationError(
+                _("Make sure that you passed your fullname and that it contains only letters."))
+
+        return name
+
+    def update(self, instance, validated_data):
+        profile = validated_data.pop('profile')
+        instance.username = validated_data.get('username', instance.username)
+        instance.first_name = validated_data.get('first_name', instance.username)
+        instance.profile.track = profile.get('track', instance.profile.track)
+        instance.profile.last_opened_lesson = profile.get('last_opened_lesson', instance.profile.last_opened_lesson)
+        instance.save()
+        return instance

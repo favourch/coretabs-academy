@@ -1,5 +1,7 @@
-from rest_framework import serializers
+import re
+from django.utils.translation import ugettext_lazy as _
 
+from rest_framework import serializers
 from . import models
 
 
@@ -72,3 +74,10 @@ class TrackSerializer(serializers.ModelSerializer):
 #    class Meta:
 #        model = models.TrackModule
 #        fields = '__all__'
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Profile
+        fields = ('track', 'last_opened_lesson')
