@@ -3,6 +3,32 @@ from rest_framework import serializers
 from . import models
 
 
+class WorkshopMainInfoSerializer(serializers.ModelSerializer):
+
+    class ModuleMainInfoSerializer(serializers.ModelSerializer):
+
+        class LessonMainInfoSerializer(serializers.ModelSerializer):
+            class Meta:
+                model = models.BaseLesson
+                fields = ('title',
+                          'slug')
+
+        lessons = LessonMainInfoSerializer(many=True)
+
+        class Meta:
+            model = models.Module
+            fields = '__all__'
+
+    modules = ModuleMainInfoSerializer(many=True)
+
+    class Meta:
+        model = models.Workshop
+        fields = ('title',
+                  'slug',
+                  'modules',
+                  'description')
+
+
 class LessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.SerializerMethodField()
 
@@ -24,11 +50,6 @@ class ModuleSerializer(serializers.ModelSerializer):
         model = models.Module
         fields = '__all__'
 
-
-# class ModuleLessonSerializer(serializers.ModelSerializer):
-#    class Meta:
-#        model = models.ModuleLesson
-#        fields = '__all__'
 
 class WorkshopSerializer(serializers.ModelSerializer):
     modules = ModuleSerializer(many=True)
