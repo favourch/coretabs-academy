@@ -40,7 +40,8 @@ class LessonSerializer(serializers.ModelSerializer):
                   'is_shown')
 
     def get_is_shown(self, obj):
-        return obj.shown_users.filter(id=self.context['request'].user.id).exists()
+        # return obj.shown_users.filter(id=self.context['request'].user.id).exists()
+        return obj.is_shown(user=self.context['request'].user)
 
 
 class ModuleSerializer(serializers.ModelSerializer):

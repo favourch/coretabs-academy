@@ -30,17 +30,9 @@ class Module(AutoSlugModel):
         verbose_name_plural = _('modules')
 
 
-class ShownLessonQuerySet(models.QuerySet):
-    def lessons(self, user_id):
-        return self.shown_users.filter(id=user_id)
-
-
-class ShownLessonManager(models.Manager):
-    def get_queryset(self):
-        return ShownLessonQuerySet(self.model, using=self._db)
-
-    def lessons(self, user_id):
-        return self.get_queryset().lessons(user_id)
+class BaseLessonManager(models.Manager):
+    def user_shown_lessons(self, user):
+        return self.get_queryset().filter(shown_users__id=user.id)
 
 
 class BaseLesson(AutoSlugModel):
@@ -62,11 +54,14 @@ class BaseLesson(AutoSlugModel):
         max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('type'))
 
     module = models.ForeignKey(
-        Module, on_delete=models.DO_NOTHING, verbose_name=_('module'))
+        Module, related_name='lessons', on_delete=models.DO_NOTHING, verbose_name=_('module'))
     shown_users = models.ManyToManyField(
         User, verbose_name=_('shown users'), blank=True)
 
-    shown_lessons = ShownLessonManager()
+    objects = BaseLessonManager()
+
+    def is_shown(self, user):
+        return self.objects.user_shown_lessons(user=user).exists()
 
     class Meta:
         verbose_name = _('lesson')
