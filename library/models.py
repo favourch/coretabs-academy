@@ -23,6 +23,28 @@ class AutoSlugModel(models.Model):
         abstract = True
 
 
+class Module(AutoSlugModel):
+    # lessons = models.ManyToManyField(
+    #    BaseLesson, related_name='modules', verbose_name=_('lessons'))
+
+    class Meta:
+        verbose_name = _('module')
+        verbose_name_plural = _('modules')
+
+
+class ShownLessonQuerySet(models.QuerySet):
+    def lessons(self, user_id):
+        return self.shown_users.filter(id=user_id)
+
+
+class ShownLessonManager(models.Manager):
+    def get_queryset(self):
+        return ShownLessonQuerySet(self.model, using=self._db)
+
+    def lessons(self, user_id):
+        return self.get_queryset().lessons(user_id)
+
+
 class BaseLesson(AutoSlugModel):
     YOUTUBE_VIDEO = '0'
     SCRIMBA_VIDEO = '1'
@@ -41,7 +63,12 @@ class BaseLesson(AutoSlugModel):
     type = models.CharField(
         max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('type'))
 
-    shown_users = models.ManyToManyField(User, verbose_name=_('shown users'))
+    module = models.ForeignKey(
+        Module, on_delete=models.DO_NOTHING, verbose_name=_('module'))
+    shown_users = models.ManyToManyField(
+        User, verbose_name=_('shown users'), blank=True)
+
+    shown_lessons = ShownLessonManager()
 
     class Meta:
         verbose_name = _('lesson')
@@ -59,15 +86,6 @@ class QuizLesson(BaseLesson):
 class VideoLesson(BaseLesson):
     video_url = models.URLField(verbose_name=_('video url'))
     markdown_url = models.URLField(verbose_name=_('markdown url'))
-
-
-class Module(AutoSlugModel):
-    lessons = models.ManyToManyField(
-        BaseLesson, related_name='modules', verbose_name=_('lessons'))
-
-    class Meta:
-        verbose_name = _('module')
-        verbose_name_plural = _('modules')
 
 
 class Workshop(AutoSlugModel):

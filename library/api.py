@@ -5,6 +5,7 @@ from rest_framework.mixins import UpdateModelMixin
 from . import serializers
 from . import models
 
+from django.contrib.auth.models import User
 
 class LessonListAPIView(generics.ListAPIView):
     queryset = models.BaseLesson.objects.all()
@@ -24,6 +25,8 @@ class LessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
                                     slug=self.kwargs.get('slug'))
 
     def patch(self, request, *args, **kwargs):
+        lesson = self.get_object()
+        lesson.shown_users.add(request.user)
         return self.partial_update(request, *args, **kwargs)
 
 
