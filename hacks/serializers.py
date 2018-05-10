@@ -85,13 +85,17 @@ class ResendConfirmSerializer(serializers.Serializer):
 
 class UserDetailsSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
+    name = serializers.CharField(source='first_name',
+                                 max_length=100,
+                                 min_length=5,
+                                 required=True)
 
     class Meta:
         model = UserModel
-        fields = ('username', 'email','first_name', 'profile')
+        fields = ('username', 'email', 'name', 'profile')
         read_only_fields = ('email', )
 
-    def validate_first_name(self, name):
+    def validate_name(self, name):
         pattern = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$"
         compiler = re.compile(pattern)
         if not compiler.match(name):
@@ -103,7 +107,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         profile = validated_data.pop('profile')
         instance.username = validated_data.get('username', instance.username)
-        instance.first_name = validated_data.get('first_name', instance.username)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.profile.track = profile.get('track', instance.profile.track)
         instance.profile.last_opened_lesson = profile.get('last_opened_lesson', instance.profile.last_opened_lesson)
         instance.save()
