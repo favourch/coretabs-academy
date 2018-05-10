@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from library.utils import get_unique_slug
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class AutoSlugModel(models.Model):
@@ -152,7 +154,18 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     track = models.ForeignKey(
-        Track, on_delete=models.DO_NOTHING, verbose_name=_('track'))
+        Track, on_delete=models.DO_NOTHING, verbose_name=_('track'), null=True)
     last_opened_lesson = models.OneToOneField(BaseLesson,
                                               on_delete=models.DO_NOTHING,
-                                              verbose_name=_('last opened lesson'))
+                                              verbose_name=_('last opened lesson'), null=True)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance, name=instance.first_name)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
