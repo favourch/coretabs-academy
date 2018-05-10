@@ -9,7 +9,7 @@ api_urls = [
          name='lesson_list_api'),
 
     path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/<slug:module_slug>/lessons/<slug:slug>/',
-         api.LessonRetrieveAPIView.as_view(),
+         api.LessonRetrieveUpdateAPIView.as_view(),
          name='lesson_retrieve_api'),
 
     path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/',

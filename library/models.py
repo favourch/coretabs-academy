@@ -39,7 +39,7 @@ class BaseLesson(AutoSlugModel):
     type = models.CharField(
         max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('type'))
 
-    shown_users = models.ManyToManyField(User, verbose_name=_('shown users'))
+    shown_users = models.ManyToManyField(User, verbose_name=_('shown users'), blank=True)
 
     class Meta:
         verbose_name = _('lesson')
