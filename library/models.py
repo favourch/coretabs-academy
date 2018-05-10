@@ -24,9 +24,6 @@ class AutoSlugModel(models.Model):
 
 
 class Module(AutoSlugModel):
-    # lessons = models.ManyToManyField(
-    #    BaseLesson, related_name='modules', verbose_name=_('lessons'))
-
     class Meta:
         verbose_name = _('module')
         verbose_name_plural = _('modules')
@@ -34,7 +31,7 @@ class Module(AutoSlugModel):
 
 class BaseLessonManager(models.Manager):
     def user_shown_lessons(self, user):
-        return self.get_queryset().filter(shown_users__id=user.id)
+        return self.get_queryset().filter(shown_users__id=1)
 
 
 class BaseLesson(AutoSlugModel):
@@ -58,12 +55,12 @@ class BaseLesson(AutoSlugModel):
     module = models.ForeignKey(
         Module, related_name='lessons', on_delete=models.DO_NOTHING, verbose_name=_('module'))
     shown_users = models.ManyToManyField(
-        User, verbose_name=_('shown users'), blank=True)
+        User, related_name='lessons', verbose_name=_('shown users'), blank=True)
 
     objects = BaseLessonManager()
 
     def is_shown(self, user):
-        return self.objects.user_shown_lessons(user=user).exists()
+        return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
 
     class Meta:
         verbose_name = _('lesson')
