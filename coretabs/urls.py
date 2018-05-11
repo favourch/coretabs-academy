@@ -23,6 +23,8 @@ from hacks.views import password_reset_from_key, logout_view
 
 from discourse import views
 
+import debug_toolbar
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +36,8 @@ urlpatterns = [
     path('api/v1/', include('library.urls')),
 
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
+
+    path('__debug__/', include(debug_toolbar.urls)),
 
     url(r"^auth/password/reset/key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$",
         password_reset_from_key,
