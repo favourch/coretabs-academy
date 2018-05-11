@@ -4,8 +4,17 @@ from . import models as lib_models
 
 class WorkshopManager(models.Manager):
     def shown_percentage(self, user):
-        shown_lessons_count = lib_models.BaseLesson.objects.user_shown_lessons(user=user).count()
+        shown_lessons_count = lib_models.BaseLesson.objects.user_shown_lessons(
+            user=user).count()
         all_lessons_count = lib_models.BaseLesson.objects.count()
         percentage = (shown_lessons_count / all_lessons_count) * 100
 
         return percentage
+    
+    def get_all_workshops_with_modules_and_lessons(self, user):
+        pass
+
+
+class BaseLessonManager(models.Manager):
+    def user_shown_lessons(self, user):
+        return self.get_queryset().filter(shown_users__id=1)
