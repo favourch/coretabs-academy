@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from . import managers
+
 
 class AutoSlugModel(models.Model):
     title = models.CharField(max_length=60, verbose_name=_('title'))
@@ -109,6 +111,8 @@ class Workshop(AutoSlugModel):
     workshop_result_url = models.URLField(verbose_name=_('markdown url'))
     modules = models.ManyToManyField(
         Module, through='WorkshopModule', related_name='workshops', verbose_name=_('modules'))
+
+    objects = managers.WorkshopManager()
 
     class Meta:
         verbose_name = _('workshop')
