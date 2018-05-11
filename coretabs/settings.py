@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
     'discourse',
 
     'rest_framework',
@@ -52,7 +52,9 @@ INSTALLED_APPS = [
     'rest_auth.registration',
 
     'library',
-    'adminsortable2'
+    'adminsortable2',
+
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'coretabs.urls'
@@ -171,4 +174,8 @@ REST_AUTH_SERIALIZERS = {
 
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'hacks.serializers.RegisterSerializer',
+}
+
+DEBUG_TOOLBAR_CONFIG = {
+   'SHOW_TOOLBAR_CALLBACK': lambda x: True
 }
