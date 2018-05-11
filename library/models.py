@@ -31,11 +31,6 @@ class Module(AutoSlugModel):
         verbose_name_plural = _('modules')
 
 
-class BaseLessonManager(models.Manager):
-    def user_shown_lessons(self, user):
-        return self.get_queryset().filter(shown_users__id=1)
-
-
 class BaseLesson(AutoSlugModel):
     YOUTUBE_VIDEO = '0'
     SCRIMBA_VIDEO = '1'
@@ -59,7 +54,7 @@ class BaseLesson(AutoSlugModel):
     shown_users = models.ManyToManyField(
         User, related_name='lessons', verbose_name=_('shown users'), blank=True)
 
-    objects = BaseLessonManager()
+    objects = managers.BaseLessonManager()
 
     def is_shown(self, user):
         return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
