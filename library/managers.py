@@ -1,15 +1,26 @@
 from django.db import models as django_models
 from . import models as library_models
 
+from decimal import Decimal
+
 
 class WorkshopManager(django_models.Manager):
-    def shown_percentage(self, user):
-        shown_lessons_count = library_models.BaseLesson.objects.user_shown_lessons(
-            user=user).count()
-        all_lessons_count = library_models.BaseLesson.objects.count()
-        percentage = (shown_lessons_count / all_lessons_count) * 100
+    def shown_percentage(self, user, workshop):
 
-        return int(percentage)
+        q = library_models.Workshop.objects.annotate(
+            shown_count=django_models.Count(
+                'modules__lessons',
+                filter=django_models.Q(modules__lessons__shown_users__id=user.id)),
+
+            total_count=django_models.Count('modules__lessons'),
+
+            percentage=django_models.ExpressionWrapper(
+                (django_models.F('shown_count') * Decimal('1.0') /
+                 django_models.F('total_count')) * 100,
+                output_field=django_models.FloatField())
+        )
+
+        return q.get(id=workshop.id).percentage
 
     def get_all_workshops(self, user):
         lessons = django_models.Prefetch(

@@ -43,8 +43,8 @@ class LessonSerializer(serializers.ModelSerializer):
                   'type',
                   'is_shown')
 
-    # def get_is_shown(self, obj):
-    #    return obj.is_shown(user=self.context['request'].user)
+    def get_is_shown(self, obj):
+        return obj.is_shown(user=self.context['request'].user)
 
 
 class ModuleSerializer(serializers.ModelSerializer):
@@ -64,7 +64,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class WorkshopSerializer(serializers.ModelSerializer):
-    #shown_percentage = serializers.SerializerMethodField()
+    shown_percentage = serializers.SerializerMethodField()
     modules = ModuleSerializer(many=True)
     #authors = AuthorSerializer(many=True)
 
@@ -78,11 +78,12 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'description',
                   'used_technologies',
                   'workshop_result_url',
-                  # 'authors',
-                  'modules')
+                  'authors',
+                  'modules',
+                  'shown_percentage')
 
-    # def get_shown_percentage(self, obj):
-    #    return obj.shown_percentage(user=self.context['request'].user)
+    def get_shown_percentage(self, obj):
+        return int(obj.shown_percentage(user=self.context['request'].user, workshop=obj))
 
 
 class TrackSerializer(serializers.ModelSerializer):
@@ -92,9 +93,3 @@ class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Track
         fields = '__all__'
-
-
-# class TrackModuleSerializer(serializers.ModelSerializer):
-#    class Meta:
-#        model = models.TrackModule
-#        fields = '__all__'

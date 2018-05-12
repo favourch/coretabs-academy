@@ -56,8 +56,8 @@ class BaseLesson(AutoSlugModel):
 
     objects = managers.BaseLessonManager()
 
-    # def is_shown(self, user):
-    #    return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
+    def is_shown(self, user):
+        return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
 
     class Meta:
         verbose_name = _('lesson')
@@ -106,8 +106,8 @@ class Workshop(AutoSlugModel):
 
     objects = managers.WorkshopManager()
 
-    def shown_percentage(self, user):
-        return Workshop.objects.shown_percentage(user=user)
+    def shown_percentage(self, user, workshop):
+        return Workshop.objects.shown_percentage(user=user, workshop=workshop)
 
     class Meta:
         verbose_name = _('workshop')
