@@ -150,8 +150,9 @@ class TrackWorkshop(models.Model):
 
 
 class Profile(models.Model):
+    # S means Student
     role = models.CharField(max_length=1000, blank=True,
-                            default='Student', verbose_name=_('role'))
+                            default='S', verbose_name=_('role'))
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     track = models.ForeignKey(
@@ -159,6 +160,10 @@ class Profile(models.Model):
     last_opened_lesson = models.OneToOneField(BaseLesson,
                                               on_delete=models.DO_NOTHING,
                                               verbose_name=_('last opened lesson'), null=True)
+
+    class Meta:
+        verbose_name = _('profile')
+        verbose_name_plural = _('profiles')
 
 
 @receiver(post_save, sender=User)
