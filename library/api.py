@@ -4,7 +4,6 @@ from rest_framework.mixins import UpdateModelMixin
 
 from . import serializers
 from . import models
-from django.db import models as django_models
 
 from django.contrib.auth.models import User
 
@@ -39,15 +38,7 @@ class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
     def get_queryset(self):
-        lessons = django_models.Prefetch(
-            'lessons', queryset=models.BaseLesson.objects.get_lesson_with_is_shown(self.request.user))
-
-        modules = django_models.Prefetch(
-            'modules', queryset=models.Module.objects.prefetch_related(lessons).all())
-
-        queryset = models.Workshop.objects\
-            .prefetch_related(modules)
-        # .select_related('authors')\
+        queryset = models.Workshop.objects.get_all_workshops(self.request.user)
 
         return queryset.filter(tracks__slug=self.kwargs.get('track_slug'),
                                slug=self.kwargs.get('slug'))
