@@ -9,7 +9,7 @@ class WorkshopManager(models.Manager):
         all_lessons_count = lib_models.BaseLesson.objects.count()
         percentage = (shown_lessons_count / all_lessons_count) * 100
 
-        return percentage
+        return int(percentage)
 
     def get_all_workshops_with_modules_and_lessons(self, user):
         workshops = lib_models.Workshop.objects.prefetch_related(
