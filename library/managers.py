@@ -1,15 +1,18 @@
 from django.db import models
+
 from . import models as lib_models
 
 
 class WorkshopManager(models.Manager):
-    def shown_percentage(self, user):
-        shown_lessons_count = lib_models.BaseLesson.objects.user_shown_lessons(
-            user=user).count()
-        all_lessons_count = lib_models.BaseLesson.objects.count()
-        percentage = (shown_lessons_count / all_lessons_count) * 100
+    def shown_percentage(self, user, workshop):
+              
+        q = lib_models.Workshop.objects.annotate(
+            percentage=(
+                models.Count('modules__lessons', filter=models.Q(modules__lessons__shown_users__id=user.id)) / 
+                models.Count('modules__lessons')) * 100
+        )
 
-        return int(percentage)
+        return q.get(id=workshop.id).percentage
 
     def get_all_workshops_with_modules_and_lessons(self, user):
         # workshops = lib_models.Workshop.objects.prefetch_related(

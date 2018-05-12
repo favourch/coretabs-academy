@@ -53,7 +53,7 @@ class ModuleSerializer(serializers.ModelSerializer):
 
 
 class WorkshopSerializer(serializers.ModelSerializer):
-    #shown_percentage = serializers.SerializerMethodField()
+    shown_percentage = serializers.SerializerMethodField()
     modules = ModuleSerializer(many=True)
 
     class Meta:
@@ -67,10 +67,11 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'used_technologies',
                   'workshop_result_url',
                   'authors',
-                  'modules')
+                  'modules',
+                  'shown_percentage')
 
-    # def get_shown_percentage(self, obj):
-    #    return obj.shown_percentage(user=self.context['request'].user)
+    def get_shown_percentage(self, obj):
+        return obj.shown_percentage(user=self.context['request'].user, workshop=obj)
 
 
 class TrackSerializer(serializers.ModelSerializer):
