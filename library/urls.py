@@ -4,21 +4,9 @@ from . import api
 
 
 api_urls = [
-    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/<slug:module_slug>/lessons/',
-         api.LessonListAPIView.as_view(),
-         name='lesson_list_api'),
-
     path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/<slug:module_slug>/lessons/<slug:slug>/',
          api.LessonRetrieveUpdateAPIView.as_view(),
          name='lesson_retrieve_api'),
-
-    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/',
-         api.ModuleListAPIView.as_view(),
-         name='module_liste_api'),
-
-    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/<slug:slug>/',
-         api.ModuleRetrieveAPIView.as_view(),
-         name='module_retrieve_api'),
 
     path('tracks/<slug:track_slug>/workshops/',
          api.WorkshopListAPIView.as_view(),
