@@ -33,7 +33,7 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
                   'description')
 
 
-class LessonSerializer(serializers.ModelSerializer):
+class BaseLessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.BooleanField()
 
     class Meta:
@@ -47,8 +47,40 @@ class LessonSerializer(serializers.ModelSerializer):
         return obj.is_shown(user=self.context['request'].user)
 
 
+class MarkdownLessonSerializer(BaseLessonSerializer):
+    class Meta(BaseLessonSerializer.Meta):
+        model = models.MarkdownLesson
+        fields = ('title',
+                  'slug',
+                  'type',
+                  'is_shown',
+                  'markdown_url')
+
+
+class VideoLessonSerializer(BaseLessonSerializer):
+    class Meta(BaseLessonSerializer.Meta):
+        model = models.MarkdownLesson
+        fields = ('title',
+                  'slug',
+                  'type',
+                  'is_shown',
+                  'video_url',
+                  'markdown_url')
+
+
+class QuizLessonSerializer(BaseLessonSerializer):
+    class Meta(BaseLessonSerializer.Meta):
+        model = models.MarkdownLesson
+        fields = ('title',
+                  'slug',
+                  'type',
+                  'is_shown',
+                  'markdown_url')
+
+
+
 class ModuleSerializer(serializers.ModelSerializer):
-    lessons = LessonSerializer(many=True)
+    lessons = BaseLessonSerializer(many=True)
 
     class Meta:
         model = models.Module

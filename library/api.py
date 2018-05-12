@@ -8,9 +8,17 @@ from . import models
 from django.contrib.auth.models import User
 
 
-class LessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+class BaseLessonListAPIView(generics.ListAPIView):
+    queryset = models.BaseLesson.objects.all()
+    serializer_class = serializers.BaseLessonSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(module__slug=self.kwargs.get('module_slug'))
+
+
+class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = models.BaseLesson.objects
-    serializer_class = serializers.LessonSerializer
+    serializer_class = serializers.BaseLessonSerializer
     lookup_field = 'slug'
     
     def get_queryset(self):
@@ -23,6 +31,55 @@ class LessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
         lesson = self.get_object()
         lesson.shown_users.add(request.user)
         return self.partial_update(request, *args, **kwargs)
+
+
+class MarkdownLessonListAPIView(BaseLessonListAPIView):
+    queryset = models.MarkdownLesson.objects.all()
+    serializer_class = serializers.MarkdownLessonSerializer
+
+
+class MarkdownRetrieveUpdateAPIView(BaseLessonRetrieveUpdateAPIView):
+    queryset = models.MarkdownLesson.objects
+    serializer_class = serializers.MarkdownLessonSerializer
+
+
+class QuizLessonListAPIView(BaseLessonListAPIView):
+    queryset = models.QuizLesson.objects.all()
+    serializer_class = serializers.QuizLessonSerializer
+
+
+class QuizRetrieveUpdateAPIView(BaseLessonRetrieveUpdateAPIView):
+    queryset = models.QuizLesson.objects
+    serializer_class = serializers.QuizLessonSerializer
+
+
+class VideoLessonListAPIView(BaseLessonListAPIView):
+    queryset = models.VideoLesson.objects.all()
+    serializer_class = serializers.VideoLessonSerializer
+
+
+class VideoRetrieveUpdateAPIView(BaseLessonRetrieveUpdateAPIView):
+    queryset = models.VideoLesson.objects
+    serializer_class = serializers.VideoLessonSerializer
+
+
+class ModuleListAPIView(generics.ListAPIView):
+    queryset = models.Module.objects.all()
+    serializer_class = serializers.ModuleSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(workshops__slug=self.kwargs.get('workshop_slug'))
+
+
+class ModuleRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = models.Module.objects.all()
+    serializer_class = serializers.ModuleSerializer
+    lookup_field = 'slug'
+
+    def get_queryset(self):
+        return self.queryset.filter(workshops__slug=self.kwargs.get('workshop_slug'),
+                                    slug=self.kwargs.get('slug'))
+
 
 
 class WorkshopListAPIView(generics.ListAPIView):
