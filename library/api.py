@@ -4,8 +4,10 @@ from rest_framework.mixins import UpdateModelMixin
 
 from . import serializers
 from . import models
+from django.db import models as django_models
 
 from django.contrib.auth.models import User
+
 
 class LessonListAPIView(generics.ListAPIView):
     queryset = models.BaseLesson.objects.all()
@@ -57,13 +59,17 @@ class WorkshopListAPIView(generics.ListAPIView):
 
 
 class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
-    queryset = models.Workshop.objects.all()
     serializer_class = serializers.WorkshopSerializer
     lookup_field = 'slug'
 
     def get_queryset(self):
-        return self.queryset.filter(tracks__slug=self.kwargs.get('track_slug'),
-                                    slug=self.kwargs.get('slug'))
+        modules = django_models.Prefetch(
+            'modules', queryset=models.Module.objects.all())
+
+        queryset = models.Workshop.objects.prefetch_related(modules)
+
+        return queryset.filter(tracks__slug=self.kwargs.get('track_slug'),
+                               slug=self.kwargs.get('slug'))
 
 
 class TrackListAPIView(generics.ListAPIView):

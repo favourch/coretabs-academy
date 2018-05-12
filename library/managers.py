@@ -12,16 +12,19 @@ class WorkshopManager(models.Manager):
         return percentage
 
     def get_all_workshops_with_modules_and_lessons(self, user):
+        # workshops = lib_models.Workshop.objects.prefetch_related(
+        #    models.Prefetch(
+        #        'modules',
+        #        queryset=lib_models.Module.objects.prefetch_related(
+        #            models.Prefetch(
+        #                'lessons',
+        #                queryset=lib_models.BaseLesson.objects.user_shown_lessons(
+        #                    user)
+        #            )),
+        #    ))
+
         workshops = lib_models.Workshop.objects.prefetch_related(
-            models.Prefetch(
-                'modules',
-                queryset=lib_models.Module.objects.prefetch_related(
-                    models.Prefetch(
-                        'lessons',
-                        queryset=lib_models.BaseLesson.objects.user_shown_lessons(
-                            user)
-                    )),
-            ))
+            'modules', 'modules__lessons')
         #modules = workshops.modules
         #lessons = modules.lessons
 

@@ -104,7 +104,7 @@ class Workshop(AutoSlugModel):
     modules = models.ManyToManyField(
         Module, through='WorkshopModule', related_name='workshops', verbose_name=_('modules'))
 
-    objects = managers.WorkshopManager()
+    #objects = managers.WorkshopManager()
 
     def shown_percentage(self, user):
         return Workshop.objects.shown_percentage(user=user)
