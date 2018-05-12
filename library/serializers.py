@@ -53,7 +53,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         return obj.profile.role
 
 
-class LessonSerializer(serializers.ModelSerializer):
+class BaseLessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.BooleanField()
 
     class Meta:
@@ -68,7 +68,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
 
 class MarkdownLessonSerializer(BaseLessonSerializer):
-    class Meta(BaseLessonSerializer.Meta):
+    class Meta:
         model = models.MarkdownLesson
         fields = ('title',
                   'slug',
@@ -78,7 +78,7 @@ class MarkdownLessonSerializer(BaseLessonSerializer):
 
 
 class VideoLessonSerializer(BaseLessonSerializer):
-    class Meta(BaseLessonSerializer.Meta):
+    class Meta:
         model = models.MarkdownLesson
         fields = ('title',
                   'slug',
@@ -89,7 +89,7 @@ class VideoLessonSerializer(BaseLessonSerializer):
 
 
 class QuizLessonSerializer(BaseLessonSerializer):
-    class Meta(BaseLessonSerializer.Meta):
+    class Meta:
         model = models.MarkdownLesson
         fields = ('title',
                   'slug',
