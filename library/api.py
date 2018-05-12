@@ -45,7 +45,9 @@ class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
         modules = django_models.Prefetch(
             'modules', queryset=models.Module.objects.prefetch_related(lessons).all())
 
-        queryset = models.Workshop.objects.prefetch_related(modules)
+        queryset = models.Workshop.objects\
+            .prefetch_related(modules)
+        # .select_related('authors')\
 
         return queryset.filter(tracks__slug=self.kwargs.get('track_slug'),
                                slug=self.kwargs.get('slug'))

@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from . import models
 
+from hacks.serializers import UserDetailsSerializer
+
 
 class WorkshopMainInfoSerializer(serializers.ModelSerializer):
 
@@ -53,9 +55,18 @@ class ModuleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AuthorSerializer(serializers.ModelSerializer):
+    user = UserDetailsSerializer()
+
+    class Meta:
+        model = models.User
+        fields = ('name')
+
+
 class WorkshopSerializer(serializers.ModelSerializer):
     #shown_percentage = serializers.SerializerMethodField()
     modules = ModuleSerializer(many=True)
+    #authors = AuthorSerializer(many=True)
 
     class Meta:
         model = models.Workshop
@@ -67,6 +78,7 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'description',
                   'used_technologies',
                   'workshop_result_url',
+                  # 'authors',
                   'modules')
 
     # def get_shown_percentage(self, obj):
@@ -86,10 +98,3 @@ class TrackSerializer(serializers.ModelSerializer):
 #    class Meta:
 #        model = models.TrackModule
 #        fields = '__all__'
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = models.Profile
-        fields = ('track', 'last_opened_lesson')

@@ -98,13 +98,13 @@ class Workshop(AutoSlugModel):
         max_length=1000, blank=True, verbose_name=_('description'))
     used_technologies = models.CharField(
         max_length=100, blank=True, verbose_name=_('used_technologies'))
+    workshop_result_url = models.URLField(verbose_name=_('markdown url'))
     authors = models.ManyToManyField(
         User, related_name='workshops', verbose_name=_('authors'))
-    workshop_result_url = models.URLField(verbose_name=_('markdown url'))
     modules = models.ManyToManyField(
         Module, through='WorkshopModule', related_name='workshops', verbose_name=_('modules'))
 
-    #objects = managers.WorkshopManager()
+    # objects = managers.WorkshopManager()
 
     def shown_percentage(self, user):
         return Workshop.objects.shown_percentage(user=user)
@@ -150,8 +150,10 @@ class TrackWorkshop(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=1000, blank=True,
+                            default='Student', verbose_name=_('role'))
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     track = models.ForeignKey(
         Track, on_delete=models.DO_NOTHING, verbose_name=_('track'), null=True)
     last_opened_lesson = models.OneToOneField(BaseLesson,
