@@ -72,7 +72,7 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'shown_percentage')
 
     def get_shown_percentage(self, obj):
-        return int(obj.shown_percentage(user=self.context['request'].user, workshop))
+        return int(obj.shown_percentage(user=self.context['request'].user, workshop=obj))
 
 
 class TrackSerializer(serializers.ModelSerializer):

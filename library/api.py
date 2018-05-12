@@ -13,7 +13,7 @@ class LessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = models.BaseLesson.objects
     serializer_class = serializers.LessonSerializer
     lookup_field = 'slug'
-    """
+    
     def get_queryset(self):
         return self.queryset\
             .get_lesson_with_is_shown(self.request.user)\
