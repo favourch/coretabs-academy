@@ -32,5 +32,8 @@ class WorkshopManager(models.Manager):
 
 
 class BaseLessonManager(models.Manager):
-    def user_shown_lessons(self, user):
-        return self.get_queryset().filter(shown_users__id=1)
+    def get_lesson_with_is_shown(self, user):
+        return self.get_queryset().annotate(
+            is_shown=models.Case(models.When(shown_users__id=user.id, then=models.Value(True)),
+                                 default=models.Value(False),
+                                 output_field=models.BooleanField()))

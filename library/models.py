@@ -56,8 +56,8 @@ class BaseLesson(AutoSlugModel):
 
     objects = managers.BaseLessonManager()
 
-    def is_shown(self, user):
-        return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
+    # def is_shown(self, user):
+    #    return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
 
     class Meta:
         verbose_name = _('lesson')

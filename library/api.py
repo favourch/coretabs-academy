@@ -63,8 +63,11 @@ class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
     def get_queryset(self):
+        lessons = django_models.Prefetch(
+            'lessons', queryset=models.BaseLesson.objects.get_lesson_with_is_shown(self.request.user))
+
         modules = django_models.Prefetch(
-            'modules', queryset=models.Module.objects.all())
+            'modules', queryset=models.Module.objects.prefetch_related(lessons).all())
 
         queryset = models.Workshop.objects.prefetch_related(modules)
 
