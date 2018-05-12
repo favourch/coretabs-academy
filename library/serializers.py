@@ -41,8 +41,8 @@ class LessonSerializer(serializers.ModelSerializer):
                   'type',
                   'is_shown')
 
-    # def get_is_shown(self, obj):
-    #    return obj.is_shown(user=self.context['request'].user)
+    def get_is_shown(self, obj):
+        return obj.is_shown(user=self.context['request'].user)
 
 
 class ModuleSerializer(serializers.ModelSerializer):
@@ -72,7 +72,7 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'shown_percentage')
 
     def get_shown_percentage(self, obj):
-        return obj.shown_percentage(user=self.context['request'].user, workshop=obj)
+        return int(obj.shown_percentage(user=self.context['request'].user, workshop))
 
 
 class TrackSerializer(serializers.ModelSerializer):

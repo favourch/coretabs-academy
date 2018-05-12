@@ -2,14 +2,22 @@ from django.db import models
 
 from . import models as lib_models
 
+from decimal import Decimal
+
 
 class WorkshopManager(models.Manager):
     def shown_percentage(self, user, workshop):
               
         q = lib_models.Workshop.objects.annotate(
-            percentage=(
-                models.Count('modules__lessons', filter=models.Q(modules__lessons__shown_users__id=user.id)) / 
-                models.Count('modules__lessons')) * 100
+            shown_count=models.Count(
+                'modules__lessons',
+                 filter=models.Q(modules__lessons__shown_users__id=user.id)),
+
+            total_count=models.Count('modules__lessons'),
+
+            percentage=models.ExpressionWrapper(
+                (models.F('shown_count') * Decimal('1.0') / models.F('total_count')) * 100,
+            output_field=models.FloatField())
         )
 
         return q.get(id=workshop.id).percentage

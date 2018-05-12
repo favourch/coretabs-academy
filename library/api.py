@@ -21,11 +21,11 @@ class LessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = models.BaseLesson.objects.all()
     serializer_class = serializers.LessonSerializer
     lookup_field = 'slug'
-
+    """
     def get_queryset(self):
         return self.queryset.filter(modules__slug=self.kwargs.get('module_slug'),
                                     slug=self.kwargs.get('slug'))
-
+"""
     def patch(self, request, *args, **kwargs):
         lesson = self.get_object()
         lesson.shown_users.add(request.user)
