@@ -1,10 +1,9 @@
 import re
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 from . import models
-
-from hacks.serializers import UserDetailsSerializer
 
 
 class WorkshopMainInfoSerializer(serializers.ModelSerializer):
@@ -33,7 +32,28 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
                   'description')
 
 
-class BaseLessonSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Profile
+        fields = ('role', 'track', 'last_opened_lesson')
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    role = serializers.SerializerMethodField()
+    name = serializers.CharField(source='first_name',
+                                 max_length=100,
+                                 min_length=5,
+                                 required=True)
+
+    class Meta:
+        model = get_user_model()
+        fields = ('name', 'role')
+
+    def get_role(self, obj):
+        return obj.profile.role
+
+
+class LessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.BooleanField()
 
     class Meta:
@@ -87,18 +107,10 @@ class ModuleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AuthorSerializer(serializers.ModelSerializer):
-    user = UserDetailsSerializer()
-
-    class Meta:
-        model = models.User
-        fields = ('name')
-
-
 class WorkshopSerializer(serializers.ModelSerializer):
     shown_percentage = serializers.SerializerMethodField()
     modules = ModuleSerializer(many=True)
-    #authors = AuthorSerializer(many=True)
+    authors = AuthorSerializer(many=True)
 
     class Meta:
         model = models.Workshop

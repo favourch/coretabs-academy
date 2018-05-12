@@ -11,6 +11,7 @@ from allauth.account.forms import ResetPasswordForm
 
 from allauth.account.utils import send_email_confirmation
 
+from library.serializers import ProfileSerializer
 from library.models import Profile
 
 UserModel = get_user_model()
@@ -84,13 +85,6 @@ class ResendConfirmSerializer(serializers.Serializer):
         user = User.objects.get(email=email)
         send_email_confirmation(request, user, True)
         return email
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Profile
-        fields = ('track', 'last_opened_lesson')
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
