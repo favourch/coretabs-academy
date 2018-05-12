@@ -32,13 +32,14 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
 
 
 class LessonSerializer(serializers.ModelSerializer):
-    #is_shown = serializers.SerializerMethodField()
+    is_shown = serializers.BooleanField()
 
     class Meta:
         model = models.BaseLesson
         fields = ('title',
                   'slug',
-                  'type')
+                  'type',
+                  'is_shown')
 
     # def get_is_shown(self, obj):
     #    return obj.is_shown(user=self.context['request'].user)
