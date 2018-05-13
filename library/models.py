@@ -32,11 +32,11 @@ class AutoSlugModel(models.Model):
     class Meta():
         abstract = True
 
-
+"""
 class InheritanceCastModel(AutoSlugModel):
-    """
+    
     https://stackoverflow.com/questions/5225556/determining-django-model-instance-types-after-a-query-on-a-base-class
-    """
+    
     real_type = models.ForeignKey(
         ContentType, editable=False, on_delete=models.DO_NOTHING)
 
@@ -51,7 +51,7 @@ class InheritanceCastModel(AutoSlugModel):
 
     def cast(self):
         return self.real_type.get_object_for_this_type(pk=self.pk)
-
+"""
 
 class Module(AutoSlugModel):
     class Meta:
@@ -59,7 +59,7 @@ class Module(AutoSlugModel):
         verbose_name_plural = _('modules')
 
 
-class BaseLesson(InheritanceCastModel):
+class BaseLesson(AutoSlugModel):
     YOUTUBE_VIDEO = '0'
     SCRIMBA_VIDEO = '1'
     MARKDOWN = '2'

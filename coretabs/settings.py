@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'adminsortable2',
 
     'debug_toolbar',
+    'model_utils',
 ]
 
 MIDDLEWARE = [

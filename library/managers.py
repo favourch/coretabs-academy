@@ -2,7 +2,7 @@ from django.db import models as django_models
 from . import models as library_models
 
 from decimal import Decimal
-
+from model_utils.managers import InheritanceManager
 
 class WorkshopManager(django_models.Manager):
     def shown_percentage(self, user, workshop):
@@ -32,7 +32,7 @@ class WorkshopManager(django_models.Manager):
         return self.get_queryset().prefetch_related(modules)
 
 
-class BaseLessonManager(django_models.Manager):
+class BaseLessonManager(InheritanceManager):
     def get_lesson_with_is_shown(self, user):
         return self.get_queryset().annotate(
             is_shown=django_models.Case(django_models.When(shown_users__id=user.id, then=django_models.Value(True)),
