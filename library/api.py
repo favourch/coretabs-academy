@@ -33,36 +33,6 @@ class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
         return self.partial_update(request, *args, **kwargs)
 
 
-class MarkdownLessonListAPIView(BaseLessonListAPIView):
-    queryset = models.MarkdownLesson.objects.all()
-    serializer_class = serializers.MarkdownLessonSerializer
-
-
-class MarkdownRetrieveUpdateAPIView(BaseLessonRetrieveUpdateAPIView):
-    queryset = models.MarkdownLesson.objects
-    serializer_class = serializers.MarkdownLessonSerializer
-
-
-class QuizLessonListAPIView(BaseLessonListAPIView):
-    queryset = models.QuizLesson.objects.all()
-    serializer_class = serializers.QuizLessonSerializer
-
-
-class QuizRetrieveUpdateAPIView(BaseLessonRetrieveUpdateAPIView):
-    queryset = models.QuizLesson.objects
-    serializer_class = serializers.QuizLessonSerializer
-
-
-class VideoLessonListAPIView(BaseLessonListAPIView):
-    queryset = models.VideoLesson.objects.all()
-    serializer_class = serializers.VideoLessonSerializer
-
-
-class VideoRetrieveUpdateAPIView(BaseLessonRetrieveUpdateAPIView):
-    queryset = models.VideoLesson.objects
-    serializer_class = serializers.VideoLessonSerializer
-
-
 class ModuleListAPIView(generics.ListAPIView):
     queryset = models.Module.objects.all()
     serializer_class = serializers.ModuleSerializer
