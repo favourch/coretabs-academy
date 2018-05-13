@@ -20,7 +20,7 @@ class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = models.BaseLesson.objects
     serializer_class = serializers.BaseLessonSerializer
     lookup_field = 'slug'
-    
+
     def get_queryset(self):
         return self.queryset\
             .get_lesson_with_is_shown(self.request.user)\
@@ -79,7 +79,6 @@ class ModuleRetrieveAPIView(generics.RetrieveAPIView):
     def get_queryset(self):
         return self.queryset.filter(workshops__slug=self.kwargs.get('workshop_slug'),
                                     slug=self.kwargs.get('slug'))
-
 
 
 class WorkshopListAPIView(generics.ListAPIView):

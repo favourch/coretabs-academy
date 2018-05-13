@@ -56,6 +56,15 @@ class AuthorSerializer(serializers.ModelSerializer):
 class BaseLessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.BooleanField()
 
+    def to_representation(self, instance):
+        print(instance.type == models.BaseLesson.MARKDOWN)
+        if instance.type == models.BaseLesson.MARKDOWN:
+            return MarkdownLessonSerializer(instance=instance).data
+    #    elif instance.type == models.BaseLesson.QUIZ:
+    #        return QuizLessonSerializer(instance=instance).data
+    #    elif instance.type == models.BaseLesson.SCRIMBA_VIDEO or instance.type == models.BaseLesson.YOUTUBE_VIDEO:
+    #        return VideoLessonSerializer(instance=instance).data
+
     class Meta:
         model = models.BaseLesson
         fields = ('title',
@@ -63,11 +72,8 @@ class BaseLessonSerializer(serializers.ModelSerializer):
                   'type',
                   'is_shown')
 
-    def get_is_shown(self, obj):
-        return obj.is_shown(user=self.context['request'].user)
 
-
-class MarkdownLessonSerializer(BaseLessonSerializer):
+class MarkdownLessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.MarkdownLesson
         fields = ('title',
@@ -96,7 +102,6 @@ class QuizLessonSerializer(BaseLessonSerializer):
                   'type',
                   'is_shown',
                   'markdown_url')
-
 
 
 class ModuleSerializer(serializers.ModelSerializer):

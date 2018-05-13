@@ -1,9 +1,14 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from library.utils import get_unique_slug
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+
 from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
+
+from library.utils import get_unique_slug
+
 
 from . import managers
 
@@ -14,9 +19,12 @@ class AutoSlugModel(models.Model):
                             blank=True, allow_unicode=True, verbose_name=_('slug'))
 
     def save(self, *args, **kwargs):
+        self.create_slug()
+        super().save()
+
+    def create_slug(self):
         if not self.slug:
             self.slug = get_unique_slug(self, 'title', 'slug')
-        super().save()
 
     def __str__(self):
         return f'{self.title}'
@@ -25,13 +33,33 @@ class AutoSlugModel(models.Model):
         abstract = True
 
 
+class InheritanceCastModel(AutoSlugModel):
+    """
+    https://stackoverflow.com/questions/5225556/determining-django-model-instance-types-after-a-query-on-a-base-class
+    """
+    real_type = models.ForeignKey(
+        ContentType, editable=False, on_delete=models.DO_NOTHING)
+
+    def save(self, *args, **kwargs):
+        self.create_slug()
+        if not self._state.adding:
+            self.real_type = self._get_real_type()
+        super(InheritanceCastModel, self).save(*args, **kwargs)
+
+    def _get_real_type(self):
+        return ContentType.objects.get_for_model(type(self))
+
+    def cast(self):
+        return self.real_type.get_object_for_this_type(pk=self.pk)
+
+
 class Module(AutoSlugModel):
     class Meta:
         verbose_name = _('module')
         verbose_name_plural = _('modules')
 
 
-class BaseLesson(AutoSlugModel):
+class BaseLesson(InheritanceCastModel):
     YOUTUBE_VIDEO = '0'
     SCRIMBA_VIDEO = '1'
     MARKDOWN = '2'
@@ -56,8 +84,8 @@ class BaseLesson(AutoSlugModel):
 
     objects = managers.BaseLessonManager()
 
-    def is_shown(self, user):
-        return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
+    # def is_shown(self, user):
+    #    return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
 
     class Meta:
         verbose_name = _('lesson')
