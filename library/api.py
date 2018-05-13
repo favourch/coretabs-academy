@@ -94,7 +94,8 @@ class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
     def get_queryset(self):
-        queryset = models.Workshop.objects.get_all_workshops(self.request.user)
+        queryset = models.Workshop.objects.get_all_workshops(
+            self.request.user)
 
         return queryset.filter(tracks__slug=self.kwargs.get('track_slug'),
                                slug=self.kwargs.get('slug'))

@@ -4,6 +4,7 @@ from . import models as library_models
 from decimal import Decimal
 from model_utils.managers import InheritanceManager
 
+
 class WorkshopManager(django_models.Manager):
     def shown_percentage(self, user, workshop):
 
@@ -24,7 +25,7 @@ class WorkshopManager(django_models.Manager):
 
     def get_all_workshops(self, user):
         lessons = django_models.Prefetch(
-            'lessons', queryset=library_models.BaseLesson.objects.get_lesson_with_is_shown(user))
+            'lessons', queryset=library_models.BaseLesson.objects.get_lesson_with_is_shown(user).select_subclasses())
 
         modules = django_models.Prefetch(
             'modules', queryset=library_models.Module.objects.prefetch_related(lessons).all())

@@ -60,10 +60,10 @@ class BaseLessonSerializer(serializers.ModelSerializer):
         print(instance.type == models.BaseLesson.MARKDOWN)
         if instance.type == models.BaseLesson.MARKDOWN:
             return MarkdownLessonSerializer(instance=instance).data
-    #    elif instance.type == models.BaseLesson.QUIZ:
-    #        return QuizLessonSerializer(instance=instance).data
-    #    elif instance.type == models.BaseLesson.SCRIMBA_VIDEO or instance.type == models.BaseLesson.YOUTUBE_VIDEO:
-    #        return VideoLessonSerializer(instance=instance).data
+        elif instance.type == models.BaseLesson.QUIZ:
+            return QuizLessonSerializer(instance=instance).data
+        elif instance.type == models.BaseLesson.SCRIMBA_VIDEO or instance.type == models.BaseLesson.YOUTUBE_VIDEO:
+            return VideoLessonSerializer(instance=instance).data
 
     class Meta:
         model = models.BaseLesson
@@ -74,6 +74,8 @@ class BaseLessonSerializer(serializers.ModelSerializer):
 
 
 class MarkdownLessonSerializer(serializers.ModelSerializer):
+    is_shown = serializers.BooleanField()
+
     class Meta:
         model = models.MarkdownLesson
         fields = ('title',
@@ -83,9 +85,11 @@ class MarkdownLessonSerializer(serializers.ModelSerializer):
                   'markdown_url')
 
 
-class VideoLessonSerializer(BaseLessonSerializer):
+class VideoLessonSerializer(serializers.ModelSerializer):
+    is_shown = serializers.BooleanField()
+
     class Meta:
-        model = models.MarkdownLesson
+        model = models.VideoLesson
         fields = ('title',
                   'slug',
                   'type',
@@ -94,9 +98,11 @@ class VideoLessonSerializer(BaseLessonSerializer):
                   'markdown_url')
 
 
-class QuizLessonSerializer(BaseLessonSerializer):
+class QuizLessonSerializer(serializers.ModelSerializer):
+    is_shown = serializers.BooleanField()
+
     class Meta:
-        model = models.MarkdownLesson
+        model = models.QuizLesson
         fields = ('title',
                   'slug',
                   'type',

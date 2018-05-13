@@ -32,26 +32,6 @@ class AutoSlugModel(models.Model):
     class Meta():
         abstract = True
 
-"""
-class InheritanceCastModel(AutoSlugModel):
-    
-    https://stackoverflow.com/questions/5225556/determining-django-model-instance-types-after-a-query-on-a-base-class
-    
-    real_type = models.ForeignKey(
-        ContentType, editable=False, on_delete=models.DO_NOTHING)
-
-    def save(self, *args, **kwargs):
-        self.create_slug()
-        if not self._state.adding:
-            self.real_type = self._get_real_type()
-        super(InheritanceCastModel, self).save(*args, **kwargs)
-
-    def _get_real_type(self):
-        return ContentType.objects.get_for_model(type(self))
-
-    def cast(self):
-        return self.real_type.get_object_for_this_type(pk=self.pk)
-"""
 
 class Module(AutoSlugModel):
     class Meta:
@@ -83,9 +63,6 @@ class BaseLesson(AutoSlugModel):
         User, related_name='lessons', verbose_name=_('shown users'), blank=True)
 
     objects = managers.BaseLessonManager()
-
-    # def is_shown(self, user):
-    #    return BaseLesson.objects.user_shown_lessons(user=user).filter(shown_users__lessons=self.id).exists()
 
     class Meta:
         verbose_name = _('lesson')
@@ -125,8 +102,9 @@ class Workshop(AutoSlugModel):
     description = models.CharField(
         max_length=1000, blank=True, verbose_name=_('description'))
     used_technologies = models.CharField(
-        max_length=100, blank=True, verbose_name=_('used_technologies'))
-    workshop_result_url = models.URLField(verbose_name=_('markdown url'))
+        max_length=100, blank=True, verbose_name=_('used technologies'))
+    workshop_result_url = models.URLField(
+        verbose_name=_('workshop result url'))
     authors = models.ManyToManyField(
         User, related_name='workshops', verbose_name=_('authors'))
     modules = models.ManyToManyField(
@@ -194,6 +172,7 @@ class Profile(models.Model):
         verbose_name_plural = _('profiles')
 
 
+"""
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -203,3 +182,4 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+"""
