@@ -11,6 +11,7 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
     class ModuleMainInfoSerializer(serializers.ModelSerializer):
 
         class LessonMainInfoSerializer(serializers.ModelSerializer):
+
             class Meta:
                 model = models.BaseLesson
                 fields = ('title',
@@ -54,7 +55,6 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class BaseLessonSerializer(serializers.ModelSerializer):
-    is_shown = serializers.BooleanField()
 
     def to_representation(self, instance):
         print(instance.type == models.BaseLesson.MARKDOWN)
@@ -69,49 +69,54 @@ class BaseLessonSerializer(serializers.ModelSerializer):
         model = models.BaseLesson
         fields = ('title',
                   'slug',
-                  'type',
-                  'is_shown')
+                  'type')
 
 
 class MarkdownLessonSerializer(serializers.ModelSerializer):
-    is_shown = serializers.BooleanField()
 
     class Meta:
         model = models.MarkdownLesson
         fields = ('title',
                   'slug',
                   'type',
-                  'is_shown',
                   'markdown_url')
 
 
 class VideoLessonSerializer(serializers.ModelSerializer):
-    is_shown = serializers.BooleanField()
 
     class Meta:
         model = models.VideoLesson
         fields = ('title',
                   'slug',
                   'type',
-                  'is_shown',
                   'video_url',
                   'markdown_url')
 
 
 class QuizLessonSerializer(serializers.ModelSerializer):
-    is_shown = serializers.BooleanField()
 
     class Meta:
         model = models.QuizLesson
         fields = ('title',
                   'slug',
                   'type',
-                  'is_shown',
                   'markdown_url')
+
+
+class IsShownSerializer(serializers.ModelSerializer):
+    is_shown = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.BaseLesson
+        fileds = ('slug', 'is_shown')
+
+    def get_is_shown(self, obj):
+        return obj.shown_users.filter(id=self.context['request'].user.id).exists()
 
 
 class ModuleSerializer(serializers.ModelSerializer):
     lessons = BaseLessonSerializer(many=True)
+    lessons_with_is_shown = IsShownSerializer(many=True)
 
     class Meta:
         model = models.Module
