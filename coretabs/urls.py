@@ -25,6 +25,8 @@ from discourse import views
 
 import debug_toolbar
 
+from rest_framework_cache.registry import cache_registry
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,3 +47,5 @@ urlpatterns = [
     url(r"^auth/confirm-email/(?P<key>[-:\w]+)/$", confirm_email,
         name="account_confirm_email"),
 ]
+
+cache_registry.autodiscover()

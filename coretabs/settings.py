@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'model_utils',
+    'rest_framework_cache',
 ]
 
 MIDDLEWARE = [
@@ -180,3 +181,15 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 DEBUG_TOOLBAR_CONFIG = {
    'SHOW_TOOLBAR_CALLBACK': lambda x: True
 }
+
+
+# Memcached Setup
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+
