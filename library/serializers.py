@@ -73,20 +73,24 @@ class BaseLessonSerializer(CachedSerializerMixin, serializers.ModelSerializer):
         model = models.BaseLesson
         fields = ('title',
                   'slug',
-                  'type')
+                  'type',
+                  'is_shown')
 
 
 class MarkdownLessonSerializer(serializers.ModelSerializer):
+    is_shown = serializers.BooleanField()
 
     class Meta:
         model = models.MarkdownLesson
         fields = ('title',
                   'slug',
                   'type',
-                  'markdown_url')
+                  'markdown_url',
+                  'is_shown')
 
 
 class VideoLessonSerializer(serializers.ModelSerializer):
+    is_shown = serializers.BooleanField()
 
     class Meta:
         model = models.VideoLesson
@@ -94,22 +98,23 @@ class VideoLessonSerializer(serializers.ModelSerializer):
                   'slug',
                   'type',
                   'video_url',
-                  'markdown_url')
+                  'markdown_url',
+                  'is_shown')
 
 
 class QuizLessonSerializer(serializers.ModelSerializer):
-
+    is_shown = serializers.BooleanField()
     class Meta:
         model = models.QuizLesson
         fields = ('title',
                   'slug',
                   'type',
-                  'markdown_url')
+                  'markdown_url',
+                  'is_shown')
 
 
 class ModuleSerializer(CachedSerializerMixin, serializers.ModelSerializer):
     lessons = BaseLessonSerializer(many=True)
-    lessons_with_is_shown = IsShownSerializer(many=True)
 
     class Meta:
         model = models.Module
