@@ -56,7 +56,6 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'model_utils',
-    'rest_framework_cache',
 ]
 
 MIDDLEWARE = [
