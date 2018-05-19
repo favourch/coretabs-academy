@@ -4,8 +4,10 @@ from . import models as library_models
 from decimal import Decimal
 from model_utils.managers import InheritanceManager
 
+from caching.base import CachingManager
 
-class WorkshopManager(django_models.Manager):
+
+class WorkshopManager(CachingManager):
     def shown_percentage(self, user, workshop):
 
         q = library_models.Workshop.objects.annotate(
@@ -33,7 +35,7 @@ class WorkshopManager(django_models.Manager):
         return self.get_queryset().prefetch_related(modules)
 
 
-class BaseLessonManager(InheritanceManager):
+class BaseLessonManager(InheritanceManager, CachingManager):
     def get_lesson_with_is_shown(self, user):
         return self.get_queryset().annotate(
             is_shown=django_models.Case(django_models.When(shown_users__id=user.id, then=django_models.Value(True)),

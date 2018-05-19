@@ -183,7 +183,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 
-# Memcached Setup
+# Cache Setup
 
 CACHES = {
     'default': {

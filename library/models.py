@@ -12,6 +12,8 @@ from library.utils import get_unique_slug
 
 from . import managers
 
+from caching.base import CachingManager, CachingMixin
+
 
 class AutoSlugModel(models.Model):
     title = models.CharField(max_length=60, verbose_name=_('title'))
@@ -33,13 +35,15 @@ class AutoSlugModel(models.Model):
         abstract = True
 
 
-class Module(AutoSlugModel):
+class Module(CachingMixin, AutoSlugModel):
+    objects = CachingManager()
+
     class Meta:
         verbose_name = _('module')
         verbose_name_plural = _('modules')
 
 
-class BaseLesson(AutoSlugModel):
+class BaseLesson(CachingMixin, AutoSlugModel):
     YOUTUBE_VIDEO = '0'
     SCRIMBA_VIDEO = '1'
     MARKDOWN = '2'
@@ -82,7 +86,7 @@ class VideoLesson(BaseLesson):
     markdown_url = models.URLField(verbose_name=_('markdown url'))
 
 
-class Workshop(AutoSlugModel):
+class Workshop(CachingMixin, AutoSlugModel):
     BEGINNER = '0'
     INTERMEDIATE = '1'
     ADVANCED = '2'
@@ -133,9 +137,10 @@ class WorkshopModule(models.Model):
         ordering = ['order', ]
 
 
-class Track(AutoSlugModel):
+class Track(CachingMixin, AutoSlugModel):
     workshops = models.ManyToManyField(
         Workshop, through='TrackWorkshop', related_name='tracks', verbose_name=_('workshops'))
+    objects = CachingManager()
 
     class Meta:
         verbose_name = _('track')
