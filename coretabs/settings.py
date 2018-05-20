@@ -25,7 +25,7 @@ SECRET_KEY = '#g61i*t=xzc3ogr#&lajy6$si-db0=%9y8d@0_fs(5n*j%q@^p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -56,6 +56,8 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'model_utils',
+
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -168,6 +170,8 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+OLD_PASSWORD_FIELD_ENABLED = True
+
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'hacks.serializers.UserDetailsSerializer',
     'PASSWORD_RESET_SERIALIZER': 'hacks.serializers.PasswordResetSerializer',
@@ -192,3 +196,6 @@ CACHES = {
 }
 
 
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
+MANAGERS_EMAILS = ['one@gmail.com', 'two@gmail.com']

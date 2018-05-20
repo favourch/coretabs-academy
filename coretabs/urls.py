@@ -20,6 +20,7 @@ from django.views.generic import TemplateView
 from allauth.account.views import confirm_email
 
 from hacks.views import password_reset_from_key, logout_view
+from contact.views import contact_view
 
 from discourse import views
 
@@ -30,6 +31,7 @@ from rest_framework_cache.registry import cache_registry
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/contact/', contact_view),
     path('api/v1/auth/logout/', logout_view),
     path('api/v1/auth/', include('rest_auth.urls')),
     path('api/v1/auth/registration/', include('rest_auth.registration.urls')),

@@ -1,0 +1,10 @@
+{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+<h1> Holà!</h1>
+<p>
+    Thank you {{ name }}, we received your message with this email {{ email }}
+</p>
+<p>
+    this is your message:
+    {{ body }}
+</p>
+{% endblocktrans %}{% endautoescape %}
