@@ -1,0 +1,315 @@
+@import '~@/assets/styles/vars';
+@import '~@/../node_modules/rfs/scss/_rfs';
+/*=====================================
+Workshop Style
+=======================================*/
+$card: (
+   max-width: 960px,
+   height: auto,
+   icon-size: 30px,
+   margin-bottom: 40px,
+   padding: 0,
+   background: $white-color
+);
+$card1: (
+   text: (margin: 0 10px 0 0, ar-margin: 0 0 0 10px, font-size:1em)
+);
+$card2: (
+   part1: (padding:40px, margin-bottom: 20px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
+   part2: (toolbar: (height: 30px, padding: 0 10px, progress-border-raduis: 50px)),
+   part3: (padding:40px, margin-bottom: 40px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
+);
+$card3: (
+   icon: (size: 35px, margin:0 10px 0 0, margin-ar:0 0 0 10px),
+   margin-bottom: 8px,
+   text-font-size: 14px
+);
+
+html[dir='rtl'] {
+   .workshop {
+      .card {
+         &:nth-child(1) {
+            .text {
+               margin: map-deep-get($card1,'text','margin') !important;
+            }
+         }
+
+         &:nth-child(2) {
+            .navigation {
+               border-width: 0 1px 0 0 !important;
+
+               @media (max-width: 960px) {
+                 border-width: 0 0 0 0 !important;
+               }
+            }
+         }
+
+         &:nth-child(3) {
+            img {
+               margin: map-deep-get($card3,'icon','margin-ar') !important;
+            }
+         }
+      }
+   }
+}
+
+.workshop {
+   overflow-x: scroll !important;
+
+   .card {
+      overflow: hidden !important;
+      border-radius: 8px !important;
+      max-width: map-deep-get($card,'max-width') !important;
+      height: map-deep-get($card,'height') !important;
+      padding: map-deep-get($card,'padding') !important;
+      margin-bottom: map-deep-get($card,'margin-bottom') !important;
+      background: map-deep-get($card,'background') !important;
+
+      .container {
+         height: 100% !important;
+
+         .layout {
+            margin: 0 !important;
+            height: 100% !important;
+         }
+      }
+
+      &:nth-child(1) {
+         .flex {
+            padding: 10px 0 !important;
+         }
+
+         .btn {
+            width: 100% !important;
+            font-weight: 700 !important;
+            background: $grading-color !important;
+            @media (max-width: 960px) {
+              margin: 0;
+            }
+         }
+
+         img {
+            width: map-deep-get($card,'icon-size') !important;
+            height: map-deep-get($card,'icon-size') !important;
+         }
+
+         .text {
+            font-weight: 700 !important;
+            margin: map-deep-get($card1,'text','margin') !important;
+
+            div {
+               &:nth-child(1) {
+                  margin-bottom: 2px !important;
+                  color: var(--workshop-normal-state) !important;
+                  @include responsive-font-size(calc(#{map-deep-get($card1,'text','font-size')} - 2px),true);
+               }
+
+               &:nth-child(2) {
+                  color: $black-color !important;
+                  @include responsive-font-size(map-deep-get($card1,'text','font-size'),true);
+               }
+            }
+         }
+      }
+
+      &:nth-child(2) {
+         padding: 0 !important;
+
+         .flex:nth-child(1) {
+            padding: map-deep-get($card2,'part1','padding') !important;
+            @media (max-width: 600px) { 
+              padding: 20px !important;
+            }
+
+            .title {
+               font-weight: 700 !important;
+               color: $black-color !important;
+               margin-bottom: map-deep-get($card2,'part1','margin-bottom') !important;
+               @include responsive-font-size(map-deep-get($card2,'part1','font-size','title'),true);
+            }
+
+            p {
+               line-height: 1.5 !important;
+               font-weight: normal !important;
+               margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
+               @include responsive-font-size(map-deep-get($card2,'part3','font-size','paragraph'),true);
+            }
+
+            .chips {
+               margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
+
+               .chip {
+                  padding: 0 5px !important;
+                  font-weight: 400 !important;
+                  pointer-events: none !important;
+                  @include font-family('en',true);
+                  background: $white-color !important;
+                  color: $black-color !important;
+                  border: 1px solid var(--workshop-normal-state) !important;
+                  @include responsive-font-size(map-deep-get($card2,'part1','font-size','chips'),true);
+               }
+            }
+
+            .authors {
+              overflow: auto;
+              display: flex;
+              flex-wrap: wrap;
+              margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
+              .author {
+                flex: 49%;
+
+                @media (max-width: 600px) {
+                  flex: 100%;
+                }
+                .avatar {
+                  float: right;
+                  color: $secondary-color;
+                  font-size: 24px;
+                  line-height: 0px;
+                  margin: 0 0 20px 10px;
+                }
+
+                .info {
+                  float: right;
+                  background-color: unset !important;
+                  border-color: unset !important;
+                  margin-bottom: 20px;
+
+                  div:first-of-type {
+                    font-weight: bold !important;
+                  }
+                }
+
+                &:nth-child(odd) {
+                  margin-left: 1%;
+                  @media (max-width: 600px) {
+                    margin-left: unset;
+                  }
+                  .avatar {
+                    background: #5145E7;
+                  }
+                }
+
+                &:nth-child(even) {
+                  margin-right: 1%;
+                  @media (max-width: 600px) {
+                    margin-right: unset;
+                  }
+                  .avatar {
+                    background: #E78A45;
+                  }
+                }
+              }
+            }
+
+            .btn {
+               font-weight: 700 !important;
+               color: $white-color !important;
+               background: #496A8A !important;
+               margin: 0px;
+               width: 100%;
+               max-width: 150px;
+               @media (max-width: 600px) {
+                max-width: 100%;
+               }
+               @include responsive-font-size(map-deep-get($card2,'part1','font-size','btn'),true);
+            }
+         }
+
+         .navigation {
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
+            border-style: solid !important;
+            border-width: 0 0 0 1px !important;
+            border-color: $shadow-color !important;
+            background: $workshop-drawer-background !important;
+
+            @media (max-width: 960px) {
+              border-width: 0 0 0 0 !important;
+            }
+
+            .toolbar {
+               height: auto !important;
+               padding: 20px !important;
+               background: $white-color !important;
+               border-bottom: 1px solid $shadow-color !important;
+
+               .toolbar__content {
+                  height: map-deep-get($card2,'part2','toolbar','height') !important;
+                  min-height: map-deep-get($card2,'part2','toolbar','height') !important;
+                  max-height: map-deep-get($card2,'part2','toolbar','height') !important;
+
+                  progress {
+                     width: 100% !important;
+                     height: 100% !important;
+                     direction: ltr !important;
+                     position: relative !important;
+                     @include appearance(none,true);
+
+                     &::after {
+                        content: attr(data-value);
+                        font-size: 14px !important;
+                        @include center(false,true);
+                        font-weight: 600 !important;
+                        position: absolute !important;
+                        color: $black-color !important;
+                        @include font-family('ar',true);
+                     }
+                     // &::-moz-progress-bar,
+                     &::-webkit-progress-bar {
+                        box-shadow: 0 2px 3px $shadow-color inset !important;
+                        background-color: $workshop-drawer-background !important;
+                        border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
+                     }
+
+                     &::-webkit-progress-value {
+                        background-color: var(--workshop-active-state) !important;
+                        border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+      &:nth-child(3) {
+         margin-bottom: 0 !important;
+
+         .flex {
+            display: inline-flex !important;
+            padding: 12px 0;
+
+            img {
+               width: map-deep-get($card3,'icon','size') !important;
+               height: map-deep-get($card3,'icon','size') !important;
+               margin: map-deep-get($card3,'icon','margin') !important;
+            }
+
+            .text {
+               // line-height: map-deep-get($card3,'icon-size') !important;
+               div {
+                  font-weight: 700 !important;
+
+                  &:nth-child(1) {
+                     color: $black-color !important;
+                     margin-bottom: map-deep-get($card3,'margin-bottom') !important;
+                     font-size: map-deep-get($card3,'text-font-size') - 2px !important;
+                  }
+
+                  &:nth-child(2) {
+                     font-weight: normal !important;
+                     color: rgba($black-color,0.8) !important;
+                     font-size: map-deep-get($card3,'text-font-size') !important;
+
+                     a {
+                        text-decoration: underline !important;
+                        color: var(--workshop-active-state) !important;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}

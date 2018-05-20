@@ -1,0 +1,51 @@
+@import '~@/assets/styles/vars';
+@import '~@/../node_modules/rfs/scss/_rfs';
+/*=====================================
+Tracks Style
+=======================================*/
+.tracks {
+   .jumbotron {
+      .layout {
+         margin: 0 5px !important;
+
+         .section-title {
+            color: $black-color !important;
+
+            &::after,
+            &::before {
+               background: $black-color !important;
+            }
+         }
+
+         .card {
+            position: relative !important;
+
+            .card__media {
+               @include responsive-ratio(3,2,true);
+            }
+
+            .card__title {
+               height: 45px !important;
+               line-height: 45px !important;
+               padding: 0 25px 0 0 !important;
+               background: $grading-color !important;
+
+               h1 {
+                  @include responsive-font-size(0.8rem,true);
+               }
+            }
+
+            .card__text {
+               top: 0 !important;
+               z-index: 80 !important;
+               border-radius: 0 !important;
+               font-weight: 600 !important;
+               position: absolute !important;
+               height: calc(100% - 45px) !important;
+               background: $grading-color !important;
+               @include responsive-font-size(0.8rem,true);
+            }
+         }
+      }
+   }
+}
