@@ -172,6 +172,12 @@ AUTHENTICATION_BACKENDS = (
 
 OLD_PASSWORD_FIELD_ENABLED = True
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'hacks.serializers.UserDetailsSerializer',
     'PASSWORD_RESET_SERIALIZER': 'hacks.serializers.PasswordResetSerializer',
