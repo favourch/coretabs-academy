@@ -5,9 +5,6 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from . import models
 
-from rest_framework_cache.serializers import CachedSerializerMixin
-from rest_framework_cache.registry import cache_registry
-
 
 class WorkshopMainInfoSerializer(serializers.ModelSerializer):
 
@@ -57,7 +54,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         return obj.profile.role
 
 
-class BaseLessonSerializer(CachedSerializerMixin, serializers.ModelSerializer):
+class BaseLessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.BooleanField()
 
     def to_representation(self, instance):
@@ -113,7 +110,7 @@ class QuizLessonSerializer(serializers.ModelSerializer):
                   'is_shown')
 
 
-class ModuleSerializer(CachedSerializerMixin, serializers.ModelSerializer):
+class ModuleSerializer(serializers.ModelSerializer):
     lessons = BaseLessonSerializer(many=True)
 
     class Meta:
@@ -121,7 +118,7 @@ class ModuleSerializer(CachedSerializerMixin, serializers.ModelSerializer):
         fields = '__all__'
 
 
-class WorkshopSerializer(CachedSerializerMixin, serializers.ModelSerializer):
+class WorkshopSerializer(serializers.ModelSerializer):
     shown_percentage = serializers.SerializerMethodField()
     modules = ModuleSerializer(many=True)
     authors = AuthorSerializer(many=True)
@@ -144,16 +141,10 @@ class WorkshopSerializer(CachedSerializerMixin, serializers.ModelSerializer):
         return int(obj.shown_percentage(user=self.context['request'].user, workshop=obj))
 
 
-class TrackSerializer(CachedSerializerMixin, serializers.ModelSerializer):
+class TrackSerializer(serializers.ModelSerializer):
     workshops = serializers.SlugRelatedField(
         many=True, read_only=True, slug_field='slug')
 
     class Meta:
         model = models.Track
         fields = '__all__'
-
-
-cache_registry.register(BaseLessonSerializer)
-cache_registry.register(ModuleSerializer)
-cache_registry.register(WorkshopSerializer)
-cache_registry.register(TrackSerializer)
