@@ -25,7 +25,7 @@ SECRET_KEY = '#g61i*t=xzc3ogr#&lajy6$si-db0=%9y8d@0_fs(5n*j%q@^p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'discourse',
 
     'rest_framework',
@@ -182,7 +182,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 
 DEBUG_TOOLBAR_CONFIG = {
-   'SHOW_TOOLBAR_CALLBACK': lambda x: True
+    'SHOW_TOOLBAR_CALLBACK': lambda x: True
 }
 
 
@@ -196,6 +196,6 @@ CACHES = {
 }
 
 
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MANAGERS_EMAILS = ['one@gmail.com', 'two@gmail.com']
