@@ -9,7 +9,7 @@ About Style
          display: flex;
          width: 1100px;
          min-width: 470px;
-         margin: 200px auto;
+         margin: 100px auto;
 
          .description {
             flex: 1;
@@ -169,7 +169,7 @@ About Style
             position: relative;
             width: 750px;
             color: white;
-            z-index: 7;
+            z-index: 5;
          }
          @media screen and (max-width: 850px) {
             h1,
@@ -387,7 +387,7 @@ About Style
          position: absolute;
          width: 100%;
          bottom: 0;
-         z-index: 6;
+         z-index: 5;
 
          button {
             background-color: #d7d7d7;
@@ -432,7 +432,7 @@ About Style
    #team {
       width: 80%;
       min-width: 1030px;
-      margin: 0 auto 120px;
+      margin: 120px auto;
       @media screen and (max-width: 1042px) {
          min-width: 780px;
       }
@@ -454,10 +454,6 @@ About Style
       h1,
       p {
          text-align: center;
-      }
-
-      h1,
-      p {
          width: 750px;
          color: #2c3e50;
       }
@@ -513,7 +509,7 @@ About Style
             }
 
             .profile {
-               background: linear-gradient(to top, unquote(#3648dbe0), unquote(#895ce8eb));
+               background: linear-gradient(to top, #2d43e7, #9042e8);
                width: 100%;
                height: 100%;
                position: relative;
@@ -566,7 +562,7 @@ About Style
                      justify-content: center;
                      align-items: center;
                      position: absolute;
-                     bottom: 10px;
+                     bottom: 25px;
                      left: 0;
                      width: 100%;
 
@@ -646,7 +642,7 @@ About Style
                      }
 
                      .social {
-                       bottom: 6px;
+                       bottom: 25px;
 
                         .icon {
                            width: 15px;
@@ -666,12 +662,14 @@ About Style
 
    #mentors {
       width: 1050px;
-      margin: 200px auto 120px;
+      margin: 120px auto;
       position: relative;
 
       * {
         -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
         -webkit-transform: translateZ(0) scale(1.0, 1.0);
+        transform: translateZ(0) scale(1.0, 1.0);
       }
 
       h1 {
@@ -686,10 +684,6 @@ About Style
       p {
          text-align: center;
          color: #2c3e50;
-      }
-
-      h1,
-      p {
          max-width: 750px;
          width: 100%;
       }
@@ -740,7 +734,7 @@ About Style
             }
 
             .profile {
-               background: linear-gradient(to top, unquote(#3648dbe0), unquote(#895ce8eb));
+               background: linear-gradient(to top, #2d43e7, #9042e8);
                width: 100%;
                height: 100%;
                position: relative;
@@ -793,7 +787,7 @@ About Style
                      justify-content: center;
                      align-items: center;
                      position: absolute;
-                     bottom: 10px;
+                     bottom: 25px;
                      left: 0;
                      width: 100%;
 
@@ -909,7 +903,7 @@ About Style
          align-items: center;
          position: absolute;
          width: 100%;
-         z-index: 6;
+         z-index: 5;
 
          button {
             background-color: #d7d7d7;
@@ -980,7 +974,7 @@ About Style
                       }
 
                       .social {
-                        bottom: 6px;
+                        bottom: 25px;
 
                          .icon {
                             width: 15px;
