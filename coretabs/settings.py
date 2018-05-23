@@ -159,6 +159,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 3
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
 ACCOUNT_ADAPTER = 'hacks.adapter.MyAccountAdapter'
+ACCOUNT_USERNAME_BLACKLIST = ['system',]
 
 # SITE_ID = 1
 
@@ -172,15 +173,28 @@ AUTHENTICATION_BACKENDS = (
 
 OLD_PASSWORD_FIELD_ENABLED = True
 
+
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
+
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    # 'rest_framework.permissions.IsAuthenticated',
+    # )
+
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '20/min',
+        'user': '20/min'
+    }
 }
+
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'hacks.serializers.UserDetailsSerializer',
     'PASSWORD_RESET_SERIALIZER': 'hacks.serializers.PasswordResetSerializer',
+    'PASSWORD_RESET_CONFIRM_SERIALIZER': 'hacks.serializers.PasswordResetConfirmSerializer'
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
