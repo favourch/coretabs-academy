@@ -37,7 +37,15 @@ class WorkshopManager(CachingManager):
 
 class BaseLessonManager(InheritanceManager, CachingManager):
     def get_lesson_with_is_shown(self, user):
-        return self.get_queryset().annotate(
-            is_shown=django_models.Case(django_models.When(shown_users__id=user.id, then=django_models.Value(True)),
-                                        default=django_models.Value(False),
-                                        output_field=django_models.BooleanField()))
+
+        shown_users = django_models.Prefetch(
+            'shown_users', queryset=library_models.ShownUsers.objects.filter(user_id=user.id))
+
+        case_user_shown = django_models.Case(
+            django_models.When(django_models.Q(
+                shown_users__id=user.id), then=django_models.Value(True)),
+            default=django_models.Value(False),
+            output_field=django_models.BooleanField())
+
+        return self.get_queryset().prefetch_related(shown_users).annotate(
+            is_shown=case_user_shown)

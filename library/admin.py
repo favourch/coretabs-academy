@@ -31,10 +31,19 @@ class TrackAdmin(admin.ModelAdmin):
     inlines = (TrackWorkshopInline,)
 
 
-admin.site.register(models.MarkdownLesson)
+class ShownUsersInline(admin.TabularInline):
+    model = models.ShownUsers
+    extra = 1
+
+
+class LessonAdmin(admin.ModelAdmin):
+    inlines = (ShownUsersInline,)
+
+admin.site.register(models.MarkdownLesson, LessonAdmin)
 admin.site.register(models.QuizLesson)
 admin.site.register(models.VideoLesson)
 admin.site.register(models.Module)
 admin.site.register(models.Workshop, WorkshopAdmin)
 admin.site.register(models.Track, TrackAdmin)
 admin.site.register(models.Profile)
+
