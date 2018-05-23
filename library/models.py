@@ -43,14 +43,6 @@ class Module(CachingMixin, AutoSlugModel):
         verbose_name_plural = _('modules')
 
 
-class ShownUsers(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING)
-    lesson = models.ForeignKey(
-        'BaseLesson', on_delete=models.DO_NOTHING)
-    order = models.IntegerField(verbose_name=_('Order'), default=0)
-
-
 class BaseLesson(CachingMixin, AutoSlugModel):
     YOUTUBE_VIDEO = '0'
     SCRIMBA_VIDEO = '1'
@@ -71,9 +63,8 @@ class BaseLesson(CachingMixin, AutoSlugModel):
 
     module = models.ForeignKey(
         Module, related_name='lessons', on_delete=models.DO_NOTHING, verbose_name=_('module'))
-
     shown_users = models.ManyToManyField(
-        User, related_name='lessons',through=ShownUsers , verbose_name=_('shown users'), blank=True)
+        User, related_name='lessons', verbose_name=_('shown users'), blank=True)
 
     objects = managers.BaseLessonManager()
 
