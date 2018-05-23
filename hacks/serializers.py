@@ -121,26 +121,8 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         return user
 
 
-class ChangeEmailSerializer(serializers.Serializer):
-    email = serializers.EmailField(required=True)
-
-    def validate_email(self, email):
-        email = get_adapter().clean_email(email)
-        if email and email_address_exists(email):
-            raise serializers.ValidationError(_("A user is already registered with this e-mail address."))
-        return email
-
-    def save(self, request):
-        user = request.user
-        adapter = get_adapter()
-        adapter.send_mail('account/email/email_change', user.email, {})
-
-        email = EmailAddress.objects.get(user=user, verified=True)
-        email.change(request, self.validated_data['email'], True)
-        return user
-
-
 class UserDetailsSerializer(serializers.ModelSerializer):
+    email_status = serializers.SerializerMethodField()
     profile = ProfileSerializer()
     name = serializers.CharField(source='first_name',
                                  max_length=100,
@@ -149,8 +131,11 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('username', 'email', 'name', 'profile')
-        read_only_fields = ('email', )
+        fields = ('username', 'email', 'email_status', 'name', 'profile')
+
+    def get_email_status(self, obj):
+        email_address = EmailAddress.objects.get_for_user(obj, obj.email)
+        return email_address.verified
 
     def validate_name(self, name):
         pattern = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$"
@@ -161,13 +146,30 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
         return name
 
+    def validate_email(self, email):
+        email = get_adapter().clean_email(email)
+        if email and email_address_exists(email):
+            raise serializers.ValidationError(_("A user is already registered with this e-mail address."))
+        return email
+
     def update(self, instance, validated_data):
-        profile = validated_data.pop('profile')
+        profile = validated_data.get('profile', None)
         instance.username = validated_data.get('username', instance.username)
         instance.first_name = validated_data.get(
             'first_name', instance.first_name)
-        instance.profile.track = profile.get('track', instance.profile.track)
-        instance.profile.last_opened_lesson = profile.get(
-            'last_opened_lesson', instance.profile.last_opened_lesson)
+        if profile:
+            instance.profile.track = profile.get('track', instance.profile.track)
+            instance.profile.last_opened_lesson = profile.get(
+                                            'last_opened_lesson', instance.profile.last_opened_lesson)
+
+        email = validated_data.get('email', None)
+        if email:
+            adapter = get_adapter()
+            request = self.context.get('request')
+            adapter.send_mail('account/email/email_change', instance.email, {})
+            email_address = EmailAddress.objects.get(user=instance, verified=True)
+            email_address.change(request, email, True)
+            instance.email = email
+
         instance.save()
         return instance

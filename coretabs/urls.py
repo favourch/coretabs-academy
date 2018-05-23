@@ -19,7 +19,7 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 from allauth.account.views import confirm_email
 
-from hacks.views import password_reset_from_key, logout_view, user_details_view, resend_confirmation_view, change_email_view
+from hacks.views import password_reset_from_key, logout_view, user_details_view, resend_confirmation_view
 from contact.views import contact_view
 
 from discourse import views
@@ -35,7 +35,6 @@ urlpatterns = [
     path('api/v1/contact/', contact_view),
 
     path('api/v1/auth/logout/', logout_view),
-    path('api/v1/auth/change_email/', change_email_view),
     path('api/v1/auth/user/', user_details_view),
     path('api/v1/auth/confirmation/', resend_confirmation_view),
     path('api/v1/auth/', include('rest_auth.urls')),
