@@ -65,6 +65,7 @@ class BaseLesson(CachingMixin, AutoSlugModel):
         Module, related_name='lessons', on_delete=models.DO_NOTHING, verbose_name=_('module'))
     shown_users = models.ManyToManyField(
         User, related_name='lessons', verbose_name=_('shown users'), blank=True)
+    order = models.IntegerField(verbose_name=_('Order'), default=0)
 
     objects = managers.BaseLessonManager()
 
