@@ -101,6 +101,7 @@ class VideoLessonSerializer(serializers.ModelSerializer):
 
 class QuizLessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.BooleanField()
+
     class Meta:
         model = models.QuizLesson
         fields = ('title',
@@ -133,6 +134,7 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'description',
                   'used_technologies',
                   'workshop_result_url',
+                  'workshop_forums_url',
                   'authors',
                   'modules',
                   'shown_percentage')

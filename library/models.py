@@ -110,6 +110,8 @@ class Workshop(CachingMixin, AutoSlugModel):
         max_length=100, blank=True, verbose_name=_('used technologies'))
     workshop_result_url = models.URLField(
         verbose_name=_('workshop result url'))
+    workshop_forums_url = models.URLField(
+        verbose_name=_('workshop forum url'))
     authors = models.ManyToManyField(
         User, related_name='workshops', verbose_name=_('authors'))
     modules = models.ManyToManyField(
