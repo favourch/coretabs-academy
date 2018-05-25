@@ -11,12 +11,14 @@ Signin Style
     @include border-radius(40px);
     background-color: $white-color;
     overflow: hidden;
+    margin: 40px auto;
     #statistics-padding{
       padding: 35px 90px;
     }
       @media (max-width: 600px) {
         flex-basis: 90%;
         max-width: 90%;
+        margin: 0px auto;
         @include border-radius(30px);
         #statistics-padding{
           padding: 30px;
@@ -32,10 +34,31 @@ Signin Style
     }
     .statistics-img{
       min-height: 225px;
+     
       img{
         max-width: 300px;
       }
     }
+    .img-0{
+      background: url("~@/assets/multimedia/images/not-ready/self-taught.svg") no-repeat center left;
+    }
+    .img-1{
+      background: url("~@/assets/multimedia/images/not-ready/co-working.svg") no-repeat center right;
+    }
+    .img-2{
+      background: url("~@/assets/multimedia/images/not-ready/salary.svg") no-repeat center left;
+    }
+    .img-3{
+      background: url("~@/assets/multimedia/images/not-ready/other-fields.svg") no-repeat center right;
+    }
+    @media (max-width: 900px) {
+      .img-0,
+      .img-1,
+      .img-2,
+      .img-3{
+        background-position: center center;
+      }
+      }
     .statistics-desc{
         padding: 0 50px;
         span{
@@ -46,8 +69,15 @@ Signin Style
         p{
           font-size: 1.2em;
         }
+        @media (max-width: 600px) {
+          padding: 0 10px;
+        }
       }
-    #yes {
+    #go-signup{
+      width: 100%;
+      background-color: $workshop-drawer-background;
+      padding: 50px 90px 70px;
+      #yes-button {
         padding: 10px 25px;
         height: 50px;
         font-size: 1.2em;
@@ -55,14 +85,9 @@ Signin Style
         background: $grading-color !important;
         @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
      }
-    #test{
-      width: 100%;
-      background-color: $workshop-drawer-background;
-      padding: 50px 90px 70px;
-      @media (max-width: 600px) {
-        padding: 30px;
-      }
-
+     @media (max-width: 600px) {
+      padding: 30px;
+    }
     }
   }
 
