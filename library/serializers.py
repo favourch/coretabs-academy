@@ -141,9 +141,7 @@ class ModuleSerializer(serializers.ModelSerializer):
 
 
 class WorkshopSerializer(serializers.ModelSerializer):
-
     shown_percentage = serializers.SerializerMethodField()
-    last_opened_lesson = serializers.SerializerMethodField()
     modules = ModuleSerializer(many=True)
     authors = AuthorSerializer(many=True)
 
@@ -160,8 +158,7 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'workshop_forums_url',
                   'authors',
                   'modules',
-                  'shown_percentage',
-                  'last_opened_lesson')
+                  'shown_percentage')
 
     def get_shown_percentage(self, obj):
         return int(obj.shown_percentage(user=self.context['request'].user, workshop=obj))
