@@ -55,6 +55,7 @@ export default {
                case 'home':
                case 'page':
                case 'about':
+               case 'not-ready':
                case 'contact-us':
                case 'signin':
                case 'signup':

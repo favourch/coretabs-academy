@@ -17,6 +17,7 @@ import ModulesComponent from './components/modules/modules.vue'
 import WorkshopComponent from './components/workshop/workshop.vue'
 import NotFoundComponent from './components/not-found/not-found.vue'
 import WorkshopsComponent from './components/workshops/workshops.vue'
+import NotReadyComponent from './components/not-ready/not-ready.vue'
 
 Vue.use(Router)
 
@@ -61,6 +62,10 @@ export default new Router({
     name: 'about',
     path: '/about',
     component: AboutComponent
+  }, {
+    name: 'not-ready',
+    path: '/not-ready',
+    component: NotReadyComponent
   }, {
     name: 'contact-us',
     path: '/contact-us',
