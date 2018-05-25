@@ -47,8 +47,8 @@ class RegisterSerializer(RS):
             'first_name': self.validated_data.get('name', '')
         }
 
-    def custom_signup(self, request, user):
-        sync_sso(user)
+    # def custom_signup(self, request, user):
+    #     sync_sso(user)
 
 
 class PasswordResetSerializer(PRS):
@@ -134,7 +134,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'email_status', 'name', 'profile')
 
     def get_email_status(self, obj):
-        email_address = EmailAddress.objects.get_for_user(obj, obj.email)
+        email_address = EmailAddress.objects.get(user=obj)
         return email_address.verified
 
     def validate_name(self, name):
