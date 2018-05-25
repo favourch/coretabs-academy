@@ -85,9 +85,15 @@ Signin Style
         background: $grading-color !important;
         @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
      }
+     p{
+       padding: 0 100px;
+       @media (max-width: 1280px) {
+        padding:0 20px;
+      }
+     }
      @media (max-width: 600px) {
       padding: 30px;
-    }
+     }
     }
   }
 
