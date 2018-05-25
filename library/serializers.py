@@ -34,9 +34,30 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    track = serializers.SerializerMethodField()
+    last_opened_workshop = serializers.SerializerMethodField()
+    last_opened_module = serializers.SerializerMethodField()
+    last_opened_lesson = serializers.SerializerMethodField()
+
     class Meta:
         model = models.Profile
-        fields = ('role', 'track', 'last_opened_lesson')
+        fields = ('role',
+                  'track',
+                  'last_opened_workshop',
+                  'last_opened_module',
+                  'last_opened_lesson')
+
+    def get_track(self, obj):
+        return obj.track.slug
+
+    def get_last_opened_workshop(self, obj):
+        return obj.last_opened_lesson.module.workshops.filter(tracks__id=obj.track.id).first().slug
+
+    def get_last_opened_module(self, obj):
+        return obj.last_opened_lesson.module.slug
+
+    def get_last_opened_lesson(self, obj):
+        return obj.last_opened_lesson.slug
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -120,7 +141,9 @@ class ModuleSerializer(serializers.ModelSerializer):
 
 
 class WorkshopSerializer(serializers.ModelSerializer):
+
     shown_percentage = serializers.SerializerMethodField()
+    last_opened_lesson = serializers.SerializerMethodField()
     modules = ModuleSerializer(many=True)
     authors = AuthorSerializer(many=True)
 
@@ -137,7 +160,8 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'workshop_forums_url',
                   'authors',
                   'modules',
-                  'shown_percentage')
+                  'shown_percentage',
+                  'last_opened_lesson')
 
     def get_shown_percentage(self, obj):
         return int(obj.shown_percentage(user=self.context['request'].user, workshop=obj))
