@@ -1,23 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomeComponent from './components/home/home.vue'
-import PageComponent from './components/page/page.vue'
+import NotReadyComponent from './components/not-ready/not-ready.vue'
 import AboutComponent from './components/about/about.vue'
 import ContactUsComponent from './components/contact-us/contact-us.vue'
-import SignInComponent from './components/signin/signin.vue'
+import PageComponent from './components/page/page.vue'
 import SignUpComponent from './components/signup/signup.vue'
 import CongratulationsComponent from './components/congratulations/congratulations.vue'
 import AccountConfirmedComponent from './components/account-confirmed/account-confirmed.vue'
-import SelectTrackComponent from './components/select-track/select-track.vue'
 import ResetPasswordComponent from './components/reset-password/reset-password.vue'
 import ForgotPasswordComponent from './components/forgot-password/forgot-password.vue'
+import SignInComponent from './components/signin/signin.vue'
+import SelectTrackComponent from './components/select-track/select-track.vue'
 import TracksComponent from './components/tracks/tracks.vue'
 import LessonComponent from './components/lesson/lesson.vue'
 import ModulesComponent from './components/modules/modules.vue'
 import WorkshopComponent from './components/workshop/workshop.vue'
 import NotFoundComponent from './components/not-found/not-found.vue'
 import WorkshopsComponent from './components/workshops/workshops.vue'
-import NotReadyComponent from './components/not-ready/not-ready.vue'
 
 Vue.use(Router)
 
@@ -31,9 +31,21 @@ export default new Router({
     path: '/home',
     redirect: '/'
   }, {
-    name: 'signin',
-    path: '/signin',
-    component: SignInComponent
+    name: 'not-ready',
+    path: '/not-ready',
+    component: NotReadyComponent
+  }, {
+    name: 'about',
+    path: '/about',
+    component: AboutComponent
+  }, {
+    name: 'contact-us',
+    path: '/contact-us',
+    component: ContactUsComponent
+  }, {
+    name: 'page',
+    path: '/page/:page',
+    component: PageComponent
   }, {
     name: 'signup',
     path: '/signup',
@@ -47,10 +59,6 @@ export default new Router({
     path: '/account-confirmed',
     component: AccountConfirmedComponent
   }, {
-    name: 'select-track',
-    path: '/select-track',
-    component: SelectTrackComponent
-  }, {
     name: 'reset-password',
     path: '/reset-password',
     component: ResetPasswordComponent
@@ -59,21 +67,13 @@ export default new Router({
     path: '/forgot-password',
     component: ForgotPasswordComponent
   }, {
-    name: 'about',
-    path: '/about',
-    component: AboutComponent
+    name: 'signin',
+    path: '/signin',
+    component: SignInComponent
   }, {
-    name: 'not-ready',
-    path: '/not-ready',
-    component: NotReadyComponent
-  }, {
-    name: 'contact-us',
-    path: '/contact-us',
-    component: ContactUsComponent
-  }, {
-    name: 'page',
-    path: '/page/:page',
-    component: PageComponent
+    name: 'select-track',
+    path: '/select-track',
+    component: SelectTrackComponent
   }, {
     name: '404',
     path: '/404',

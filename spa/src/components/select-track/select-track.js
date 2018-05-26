@@ -2,18 +2,13 @@ export default {
   name: 'SelectTrackComponent',
   components: {},
   data: () => ({
-    track_selected: '0',
-    track_1_text_en: 'BACK-END TRACK',
-    track_1_text_ar: 'مسار تطوير نظم خلفية',
-    track_2_text_en: 'FRONT-END TRACK',
-    track_2_text_ar: 'مسار تطوير واجهات الويب',
-    submit_btn_text: 'ابدأ المسار'
+    track_selected: '0'
   }),
+  computed: {
+    i18n() { return this.$store.state.i18n.select_track }
+  },
   methods: {
-    select(track) {
-      this.track_selected = track
-    },
-    submit() {
-    }
+    select(track) { this.track_selected = track },
+    submit() { }
   }
 }

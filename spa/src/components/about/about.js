@@ -5,537 +5,112 @@ let carouselTransitionM
 let mentorsSiema
 
 export default {
-   name: 'AboutComponent',
-   components: {},
-   data: () => ({
-      sectionsImages: [],
-      testimonialsImages: [],
-      teamImages: [],
-      mentorsImages: [],
-      quotationIcon: '',
-      starState: {
-        active: '',
-        inactive: ''
-      },
-      icons: {
-        github: '',
-        stackoverflow: '',
-        website: '',
-        linkedin: '',
-        twitter: '',
-        LH: ''
-      },
-      navigation: {
-        left: '',
-        right: ''
-      },
-      currentSlide: 0,
-      sections: [
-        {
-          header: 'رؤيتنا في الأكاديمية',
-          paragraph: 'بما أننا نؤمن أن أفضل طريقة لتعلم البرمجة تكون من خلال التطبيق وليس من خلال الدروس النظرية التي لا يتم ربطها بشكل عملي مع مشاريع حقيق، فقد قمنا بإيجاد هذه المنصة لمساعدتك على تحقيق حلمك بالتدرب على لغة المستقبل (البرمجة) بأساليب فعالة.',
-          src: 'about/vision',
-          alt: 'image 1 '
-        },
-        {
-          header: 'ابنِ مهاراتك بذكاء',
-          paragraph: 'من الأخطاء الشائعة التي قد ترتكبها أثناء تعلمك للبرمجة هو إعتمادك على إسلوب خاطئ كدراسة كل المفاهيم دون الإلمام بكيفية توظيفها في مشروع حقيقي، لهذا في أكاديميتنا نقوم بتوجيهك من خلال مسار محدد من الورش التطبيقية بحيث أنك تتعلم المفاهيم في الوقت المناسب عند حاجتك لها.',
-          src: 'about/building_blocks',
-          alt: 'image 2 '
-        },
-        {
-          header: 'ما الذي ستكتسبه؟',
-          paragraph: 'من أهم ما قمنا بأخذة في عين الإعتبار عند إنشاء هذه المنصة هو تدريبك لتحصل على الخبرة والإستعداد الكافي للإنخراط في سوق العمل المحلي أو الحر بمجرد إنتهائك من سلسلة ورش العمل المحددة في المسار الذي قمت بإختيارة.',
-          src: 'about/hero',
-          alt: 'image 3 '
-        }
-      ],
-      testimonials: {
-        title: 'مجتمعنا رائع يضم مئات المبرمجين',
-        description: 'بإنضمامك معنا لن تتعلم البرمجة فحسب بل ستلتحق بمجتمع يوفر بيئة خصبة لتبادل الخبرات و بناء روابط و علاقات مع عدد كبير من المبرمجين الأكفاء',
-        carousel: [{
-          img: 'saif.png',
-          name: 'منصور الجاسمي',
-          description: 'مصمم تطبيقات موبايل',
-          quote: 'venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.',
-          rating: 2
-        },
-         {
-            img: 'saif.png',
-            name: 'منصور الجاسمي',
-            description: 'مصمم تطبيقات موبايل',
-            quote: 'venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.',
-            rating: 4
-         },
-         {
-            img: 'saif.png',
-            name: 'منصور الجاسمي',
-            description: 'مصمم تطبيقات موبايل',
-            quote: 'venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.',
-            rating: 3
-         },
-         {
-            img: 'saif.png',
-            name: 'منصور الجاسمي',
-            description: 'مصمم تطبيقات موبايل',
-            quote: 'venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.',
-            rating: 5
-         },
-         {
-            img: 'saif.png',
-            name: 'منصور الجاسمي',
-            description: 'مصمم تطبيقات موبايل',
-            quote: 'venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.',
-            rating: 1
-         }
-        ]
-      },
-      testimonialsSiema: {
-        perPage: ''
-      },
-      team: {
-        title: 'فريق العمل',
-        description: 'فريق عملنا يعمل على مدار الساعة ليحرص على حصولكم على الفائدة المرجوة و على أفضل تجربة خلال رحلتكم التدريبية على منصة coretabs',
-        members: [
-          {
-            name: 'Louay Hamada',
-            about: 'Full-stack Web Application Developer',
-            src: 'contributors/LouayH.jpg',
-            links: [
-              {
-                name: 'LH',
-                src: 'http://louayhamada.com'
-              },
-              {
-                name: 'twitter',
-                src: 'http://twitter.com/LouayHamada'
-              },
-              {
-                name: 'linkedin',
-                src: 'https://www.linkedin.com/in/louayhamada/'
-              },
-              {
-                name: 'github',
-                src: 'https://github.com/LouayH'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'https://stackoverflow.com/users/1398488/louay-hamada'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'contributors/alhakem.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          }
-        ]
-      },
-      mentors: {
-        title: 'الموجهون',
-        description: 'فريق التوجية في الأكاديمية يتألف من عدد من الأشخاص المتميزين الذي سيقوموا بمساندتك أثناء رحلتك التدريبية على منصة coretabs',
-        members: [
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          }, {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          },
-          {
-            name: 'Mohammed AlHakem',
-            about: 'Front-end web developer & UI/UX designer',
-            src: 'mentors/one.jpg',
-            links: [
-              {
-                name: 'github',
-                src: 'ss'
-              },
-              {
-                name: 'stackoverflow',
-                src: 'sxs'
-              },
-              {
-                name: 'website',
-                src: 'ddcd'
-              },
-              {
-                name: 'linkedin',
-                src: 'cdcd'
-              },
-              {
-                name: 'twitter',
-                src: 'cdcd'
-              }
-            ]
-          }
-        ]
-      },
-      footer: {
-        contactUs: 'إتصل بنا',
-        termsOfService: 'شروط الخدمة',
-        privacyPolicy: 'سياسة الخصوصية'
-      },
-      perPage: 1
-   }),
-   methods: {
-      showTestimonials(i, e) {
-        let children = e.currentTarget.parentElement.children
-        for (let i = 0; i < children.length; i++) {
-          children[i].classList.remove('active')
-        }
-        e.currentTarget.classList.add('active')
-        this.testimonialsSiema.goTo(i)
-      },
-      showMentors(i, e) {
-        let children = e.currentTarget.parentElement.children
-        for (let i = 0; i < children.length; i++) {
-          children[i].classList.remove('active')
-        }
-        e.currentTarget.classList.add('active')
-        mentorsSiema.goTo(i * this.perPage)
-      },
-      calc(i, j) {
-        return i <= j ? this.starState.active : this.starState.inactive
-      },
-      stopTSiema() {
-        clearInterval(carouselTransitionT)
-      },
-      playTSiema() {
-        carouselTransitionT = setInterval(() => { this.testimonialsSiema.prev() }, 4000)
-      },
-      stopMSiema() {
-        clearInterval(carouselTransitionM)
-      },
-      playMSiema() {
-        carouselTransitionM = setInterval(() => {
-          if (mentorsSiema.currentSlide + mentorsSiema.perPage >= this.mentors.members.length) {
-            mentorsSiema.prev(this.mentors.members.length)
-          } else {
-            mentorsSiema.next(mentorsSiema.perPage)
-          }
-        }, 5000)
-      },
-      mentorsSliderCount() {
-        return Math.ceil(this.mentors.members.length / this.perPage)
-      },
-      prev() {
-        var index = mentorsSiema.currentSlide / mentorsSiema.perPage
-        if (mentorsSiema.currentSlide % mentorsSiema.perPage === 0) {
-          const slideM = document.querySelector('.m')
-          if (slideM) {
-            var children = slideM.children
-            for (var i = 0; i < children.length; i++) {
-              children[i].classList.remove('active')
-            }
-            index = Math.ceil(index)
-            children[index].classList.add('active')
-          }
-        }
-        mentorsSiema.prev(mentorsSiema.perPage)
-      },
-      next() {
-        var index = mentorsSiema.currentSlide / mentorsSiema.perPage
-        if (mentorsSiema.currentSlide % mentorsSiema.perPage === 0) {
-          const slideM = document.querySelector('.m')
-          if (slideM) {
-            var children = slideM.children
-            for (var i = 0; i < children.length; i++) {
-              children[i].classList.remove('active')
-            }
-            index = Math.ceil(index)
-            children[index].classList.add('active')
-          }
-        }
-        mentorsSiema.next(mentorsSiema.perPage)
+  name: 'AboutComponent',
+  data: () => ({
+    sectionsImages: [],
+    testimonialsImages: [],
+    teamImages: [],
+    mentorsImages: [],
+    quotationIcon: '',
+    starState: {
+      active: '',
+      inactive: ''
+    },
+    icons: {
+      github: '',
+      stackoverflow: '',
+      website: '',
+      linkedin: '',
+      twitter: '',
+      LH: ''
+    },
+    navigation: {
+      left: '',
+      right: ''
+    },
+    currentSlide: 0,
+    testimonialsSiema: {
+      perPage: ''
+    },
+    perPage: 1
+  }),
+  computed: {
+    i18n() { return this.$store.state.i18n.about }
+  },
+  methods: {
+    showTestimonials(i, e) {
+      let children = e.currentTarget.parentElement.children
+      for (let i = 0; i < children.length; i++) {
+        children[i].classList.remove('active')
       }
-   },
+      e.currentTarget.classList.add('active')
+      this.testimonialsSiema.goTo(i)
+    },
+    showMentors(i, e) {
+      let children = e.currentTarget.parentElement.children
+      for (let i = 0; i < children.length; i++) {
+        children[i].classList.remove('active')
+      }
+      e.currentTarget.classList.add('active')
+      mentorsSiema.goTo(i * this.perPage)
+    },
+    calc(i, j) {
+      return i <= j ? this.starState.active : this.starState.inactive
+    },
+    stopTSiema() {
+      clearInterval(carouselTransitionT)
+    },
+    playTSiema() {
+      carouselTransitionT = setInterval(() => { this.testimonialsSiema.prev() }, 4000)
+    },
+    stopMSiema() {
+      clearInterval(carouselTransitionM)
+    },
+    playMSiema() {
+      carouselTransitionM = setInterval(() => {
+        if (mentorsSiema.currentSlide + mentorsSiema.perPage >= this.i18n.mentors.members.length) {
+          mentorsSiema.prev(this.i18n.mentors.members.length)
+        } else {
+          mentorsSiema.next(mentorsSiema.perPage)
+        }
+      }, 5000)
+    },
+    mentorsSliderCount() {
+      return Math.ceil(this.i18n.mentors.members.length / this.perPage)
+    },
+    prev() {
+      var index = mentorsSiema.currentSlide / mentorsSiema.perPage
+      if (mentorsSiema.currentSlide % mentorsSiema.perPage === 0) {
+        const slideM = document.querySelector('.m')
+        if (slideM) {
+          var children = slideM.children
+          for (var i = 0; i < children.length; i++) {
+            children[i].classList.remove('active')
+          }
+          index = Math.ceil(index)
+          children[index].classList.add('active')
+        }
+      }
+      mentorsSiema.prev(mentorsSiema.perPage)
+    },
+    next() {
+      var index = mentorsSiema.currentSlide / mentorsSiema.perPage
+      if (mentorsSiema.currentSlide % mentorsSiema.perPage === 0) {
+        const slideM = document.querySelector('.m')
+        if (slideM) {
+          var children = slideM.children
+          for (var i = 0; i < children.length; i++) {
+            children[i].classList.remove('active')
+          }
+          index = Math.ceil(index)
+          children[index].classList.add('active')
+        }
+      }
+      mentorsSiema.next(mentorsSiema.perPage)
+    }
+  },
   created() {
-    for (let section of this.sections) {
+    for (let section of this.i18n.sections) {
       this.$store.dispatch('getImgUrl', `images/${section.src}.svg`).then(img => {
         this.sectionsImages.push(img)
       }).catch(error => {
@@ -543,7 +118,7 @@ export default {
       })
     }
 
-    for (let testimonial of this.testimonials.carousel) {
+    for (let testimonial of this.i18n.testimonials.carousel) {
       this.$store.dispatch('getImgUrl', `images/testimonials/${testimonial.img}`).then(img => {
         this.testimonialsImages.push(img)
       }).catch(error => {
@@ -577,7 +152,7 @@ export default {
       })
     }
 
-    for (let member of this.team.members) {
+    for (let member of this.i18n.team.members) {
       this.$store.dispatch('getImgUrl', `images/${member.src}`).then(img => {
         this.teamImages.push(img)
       }).catch(error => {
@@ -585,7 +160,7 @@ export default {
       })
     }
 
-    for (let member of this.mentors.members) {
+    for (let member of this.i18n.mentors.members) {
       this.$store.dispatch('getImgUrl', `images/${member.src}`).then(img => {
         this.mentorsImages.push(img)
       }).catch(error => {
@@ -700,5 +275,9 @@ export default {
     childrenM[0].classList.add('active')
 
     this.perPage = mentorsSiema.perPage
+  },
+  beforeDestroy() {
+    clearInterval(carouselTransitionT)
+    clearInterval(carouselTransitionM)
   }
 }
