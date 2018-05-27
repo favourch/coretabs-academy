@@ -64,7 +64,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -192,6 +191,7 @@ REST_FRAMEWORK = {
 
 
 REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'hacks.serializers.LoginSerializer',
     'USER_DETAILS_SERIALIZER': 'hacks.serializers.UserDetailsSerializer',
     'PASSWORD_RESET_SERIALIZER': 'hacks.serializers.PasswordResetSerializer',
     'PASSWORD_RESET_CONFIRM_SERIALIZER': 'hacks.serializers.PasswordResetConfirmSerializer'
