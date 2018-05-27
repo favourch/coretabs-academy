@@ -2,25 +2,20 @@ export default {
   name: 'ForgotPasswordComponent',
   components: {},
   data: () => ({
-    heading_text: 'نسيت كلمة المرور؟',
-    forgot_text: 'أدخل عنوانك الإلكتروني وسنُرسل بريدًا لإعادة تعيين كلمة المرور.',
-    submit_btn_text: 'إرسال',
     alert: {
       success: false,
       error: false,
       message: ''
     },
     valid: false,
-    email: '',
-    email_label: 'البريد الإلكتروني',
-    emRules: [
-      v => !!v || '',
-      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'البريد الإلكتروني غير صالح'
-    ]
+    email: ''
   }),
+  computed: {
+    i18n() { return this.$store.state.i18n.auth.forgot_password },
+    form() { return this.$store.state.i18n.form }
+  },
   methods: {
-    submit() {
-    },
+    submit() { },
     setSplashHeight() {
       var sDiv = document.querySelector('#splash')
       if (sDiv) {
@@ -29,12 +24,15 @@ export default {
       }
     }
   },
+  created() {
+    this.emRules = [
+      v => !!v || '',
+      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.form.email_validator_error
+    ]
+  },
   mounted() {
     window.addEventListener('resize', this.setSplashHeight)
-
-    this.$nextTick(function() {
-      this.setSplashHeight()
-    })
+    this.$nextTick(function() { this.setSplashHeight() })
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)

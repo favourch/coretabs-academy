@@ -1,15 +1,13 @@
 export default {
   name: 'CongratulationsComponent',
-  components: {},
   data: () => ({
-    heading_title_text: 'تهانينا!',
-    description_text: 'لقد قمت بإنشاء حسابك بنجاح، تفقد بريدك الإلكتروني لتفعيل حسابك.',
-    submit_btn_text: 'أعد إرسال بريد التفعيل',
     counter: 30
   }),
+  computed: {
+    i18n() { return this.$store.state.i18n.auth.congratulations }
+  },
   methods: {
-    submit() {
-    },
+    submit() { },
     setSplashHeight() {
       var sDiv = document.querySelector('#splash')
       if (sDiv) {
@@ -26,10 +24,7 @@ export default {
     }, 1000)
 
     window.addEventListener('resize', this.setSplashHeight)
-
-    this.$nextTick(function() {
-      this.setSplashHeight()
-    })
+    this.$nextTick(function() { this.setSplashHeight() })
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)

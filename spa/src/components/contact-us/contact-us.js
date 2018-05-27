@@ -1,14 +1,6 @@
 export default {
   name: 'ContactUsComponent',
-  components: {},
   data: () => ({
-    forums_icon: '',
-    forums_text: 'تذكر في حال احتجت إلى مساعدة بإمكانك بدء نقاش مع زملائك والموجهين من خلال المنتدى <a href="http://forums.coretabs.net" target="_blank">من هنا</a>',
-    heading_title_text: 'اتصل بنا',
-    description_text: 'للتواصل معنا قم باستخدام النموذج التالي أو بإمكانك مراسلتنا مباشرة على العنوان <a href="mailto:info@coretabs.com">info@coretabs.com</a>',
-    heading_text: 'نسيت كلمة المرور؟',
-    forgot_text: 'أدخل عنوانك الإلكتروني وسنُرسل بريدًا لإعادة تعيين كلمة المرور.',
-    submit_btn_text: 'إرسال',
     alert: {
       success: false,
       error: false,
@@ -20,34 +12,14 @@ export default {
       v2: 0,
       v3: 0
     },
+    forums_icon: '',
     fullname: '',
-    fullname_label: 'اسمك الكامل',
-    fnRules: [
-      v => !!v || '',
-      v => (v && v.length <= 20) || 'اسم المستخدم لا يجب أن يتجاوز 20 حرفًا'
-    ],
     email: '',
-    email_label: 'البريد الإلكتروني',
-    emRules: [
-      v => !!v || '',
-      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'البريد الإلكتروني غير صالح'
-    ],
-    message: '',
-    message_label: 'أدخل رسالتك هنا',
-    meRules: [
-      v => !!v || '',
-      v => (v && v.length >= 10) || 'الرسالة قصيرة جدًا'
-    ]
+    message: ''
   }),
-  created() {
-    this.$store.dispatch('getImgUrl', 'icons/forums-logo.png').then(img => {
-      this.forums_icon = img
-    }).catch(error => {
-        throw new Error(error.message)
-    })
-  },
-  updated() {
-    this.chackValid()
+  computed: {
+    i18n() { return this.$store.state.i18n.contact },
+    form() { return this.$store.state.i18n.form }
   },
   methods: {
     chackValid() {
@@ -77,7 +49,29 @@ export default {
 
       root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3
     },
-    submit() {
-    }
+    submit() { }
+  },
+  created() {
+    this.fnRules = [
+      v => !!v || '',
+      v => (v && v.length <= 20) || this.form.fullname_length_error
+    ]
+    this.emRules = [
+      v => !!v || '',
+      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.form.email_validator_error
+    ]
+    this.meRules = [
+      v => !!v || '',
+      v => (v && v.length >= 10) || this.form.message_length_error
+    ]
+
+    this.$store.dispatch('getImgUrl', 'icons/forums-logo.png').then(img => {
+      this.forums_icon = img
+    }).catch(error => {
+        throw new Error(error.message)
+    })
+  },
+  updated() {
+    this.chackValid()
   }
 }

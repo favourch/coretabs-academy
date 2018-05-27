@@ -1,7 +1,7 @@
 <template>
   <div id="about">
     <div id="presentation">
-      <div v-for="(section, i) in sections" :key="i" id="desc-box">
+      <div v-for="(section, i) in i18n.sections" :key="i" id="desc-box">
         <div class="description">
           <div class="desc-text">
             <h1 v-html="section.header"></h1>
@@ -16,11 +16,11 @@
     <div id="testimonials">
       <div class="skew-box">
         <div class="particles"></div>
-        <h1 v-html="testimonials.title"></h1>
-        <p v-html="testimonials.description"></p>
+        <h1 v-html="i18n.testimonials.title"></h1>
+        <p v-html="i18n.testimonials.description"></p>
       </div>
       <div class="testimonials-carousel">
-        <div class="testimonials-carousel-item" v-for="(testimonial, i) in testimonials.carousel" :key="i" @mouseenter="stopTSiema()" @mouseleave="playTSiema()">
+        <div class="testimonials-carousel-item" v-for="(testimonial, i) in i18n.testimonials.carousel" :key="i" @mouseenter="stopTSiema()" @mouseleave="playTSiema()">
           <img class="quotation" :src="quotationIcon" />
           <div class="avatar" :style="{ backgroundImage: 'linear-gradient(rgba(84, 0, 255, 0.4), rgba(202, 62, 75, 0.4)), url(' + testimonialsImages[i] + ')' }" />
           <div class="testimonial">
@@ -40,15 +40,15 @@
         </div>
       </div>
       <div class="controls t" ref="controlsT">
-        <button v-for="(button, i) in testimonials.carousel.length" type="button" name="button" @click="showTestimonials(button - 1, $event)" :key="i"></button>
+        <button v-for="(button, i) in i18n.testimonials.carousel.length" type="button" name="button" @click="showTestimonials(button - 1, $event)" :key="i"></button>
       </div>
     </div>
 
     <div id="team">
-      <h1 v-html="team.title"></h1>
-      <p v-html="team.description"></p>
+      <h1 v-html="i18n.team.title"></h1>
+      <p v-html="i18n.team.description"></p>
       <div class="flex">
-        <div class="box" v-for="(member, i) in team.members" :key="i">
+        <div class="box" v-for="(member, i) in i18n.team.members" :key="i">
           <div class="image-container">
             <img :src="teamImages[i]">
           </div>
@@ -70,10 +70,10 @@
     </div>
 
     <div id="mentors">
-      <h1 v-html="mentors.title"></h1>
-      <p v-html="mentors.description"></p>
+      <h1 v-html="i18n.mentors.title"></h1>
+      <p v-html="i18n.mentors.description"></p>
       <div class="mentors-carousel">
-        <div class="mentors-carousel-item" v-for="(member, i) in mentors.members" :key="i" :ref="'item' + i" @mouseenter="stopMSiema()" @mouseleave="playMSiema()">
+        <div class="mentors-carousel-item" v-for="(member, i) in i18n.mentors.members" :key="i" :ref="'item' + i" @mouseenter="stopMSiema()" @mouseleave="playMSiema()">
           <div class="image-container">
             <img :src="mentorsImages[i]" :ref="'img'+i" class="photo">
           </div>
@@ -102,9 +102,9 @@
     </div>
 
     <footer>
-      <router-link to="/contact-us" v-html="footer.contactUs"></router-link>|
-      <router-link to="/page/terms-of-service" v-html="footer.termsOfService"></router-link>|
-      <router-link to="/page/privacy-policy" v-html="footer.privacyPolicy"></router-link>
+      <router-link to="/contact-us" v-html="i18n.footer.contactUs"></router-link>|
+      <router-link to="/page/terms-of-service" v-html="i18n.footer.termsOfService"></router-link>|
+      <router-link to="/page/privacy-policy" v-html="i18n.footer.privacyPolicy"></router-link>
     </footer>
   </div>
 </template>

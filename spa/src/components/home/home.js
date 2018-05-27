@@ -7,13 +7,6 @@ export default {
     videoPlayer
   },
   data: () => ({
-    introduction: {
-      heading_text: 'إن تعلم البرمجة شيء رائع!',
-      description_text_1: 'الأروع من ذلك أن أكاديمية Coretabs ستقوم بتوجيهك لبدأ تعلمها عبر عمل تطبيقات من أول يوم.',
-      description_text_2: 'مستعد لتغيير حياتك وتعلم مهارات جديدة؟',
-      yes_btn_text: 'نعم، اكتشف ميولي',
-      no_btn_text: 'لا، أنا لست قدها'
-    },
     playerOptions: {
       autoplay: false,
       sources: [{
@@ -23,9 +16,8 @@ export default {
     }
   }),
   computed: {
-    vPlayer() {
-      return this.$refs.videoPlayer.player
-    }
+    i18n() { return this.$store.state.i18n.home },
+    vPlayer() { return this.$refs.videoPlayer.player }
   },
   methods: {
     setIntroVideoHeight() {
@@ -58,14 +50,8 @@ export default {
   },
   mounted() {
     window.addEventListener('resize', this.setIntroVideoHeight)
-
-    this.vPlayer.on('fullscreenchange', () => {
-      this.exit(this.vPlayer)
-    })
-
-    this.$nextTick(function() {
-      this.setIntroVideoHeight()
-    })
+    this.$nextTick(function() { this.setIntroVideoHeight() })
+    this.vPlayer.on('fullscreenchange', () => { this.exit(this.vPlayer) })
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)

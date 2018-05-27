@@ -7,9 +7,9 @@
           </v-flex>
           <v-flex id="form" class="text-xs-right" xs12 sm12 md6>
             <v-form ref="form" lazy-validation>
-              <h2 class="black--text mb-2" v-html="heading_title_text"></h2>
-              <p v-html="description_text"></p>
-              <v-btn round id="submit" @click="submit" v-html="counter > 0 ? counter : submit_btn_text  " :disabled="counter > 0"></v-btn>
+              <h2 class="black--text mb-2" v-html="i18n.heading_title_text"></h2>
+              <p v-html="i18n.description_text"></p>
+              <v-btn round id="submit" @click="submit" v-html="counter > 0 ? counter : i18n.submit_btn_text  " :disabled="counter > 0"></v-btn>
             </v-form>
           </v-flex>
         </v-layout>
