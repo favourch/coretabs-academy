@@ -48,17 +48,28 @@ class ProfileSerializer(serializers.ModelSerializer):
                   'last_opened_lesson')
 
     def get_track(self, obj):
-        return obj.track.slug
+        result = None
+        if obj.track:
+            result = obj.track.slug
+        return result
 
     def get_last_opened_workshop(self, obj):
-        return obj.last_opened_lesson.module.workshops.filter(tracks__id=obj.track.id).first().slug
+        result = None
+        if obj.last_opened_lesson and obj.track:
+            result = obj.last_opened_lesson.module.workshops.filter(tracks__id=obj.track.id).first().slug
+        return result
 
     def get_last_opened_module(self, obj):
-        return obj.last_opened_lesson.module.slug
+        result = None
+        if obj.last_opened_lesson:
+            result = obj.last_opened_lesson.module.slug
+        return result
 
     def get_last_opened_lesson(self, obj):
-        return obj.last_opened_lesson.slug
-
+        result = None
+        if obj.last_opened_lesson:
+            result = obj.last_opened_lesson.slug
+        return result
 
 class AuthorSerializer(serializers.ModelSerializer):
     role = serializers.SerializerMethodField()
