@@ -7,12 +7,12 @@
           </v-flex>
           <v-flex id="form" class="text-xs-right" xs12 sm12 md6>
             <v-form v-model="valid" ref="form" lazy-validation>
-              <h2 class="black--text mb-2" v-html="heading_text"></h2>
-              <p v-html="forgot_text"></p>
+              <h2 class="black--text mb-2" v-html="i18n.heading_text"></h2>
+              <p v-html="i18n.forgot_text"></p>
               <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
               <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
-              <v-text-field :label="email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" required></v-text-field>
-              <v-btn round id="submit" @click="submit" v-show="!alert.success" v-html="submit_btn_text" :disabled="!valid"></v-btn>
+              <v-text-field :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" required></v-text-field>
+              <v-btn round id="submit" @click="submit" v-show="!alert.success" v-html="i18n.submit_btn_text" :disabled="!valid"></v-btn>
             </v-form>
           </v-flex>
         </v-layout>

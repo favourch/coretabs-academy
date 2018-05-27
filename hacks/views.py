@@ -7,6 +7,7 @@ from .utils import sync_sso
 
 from rest_auth.views import LogoutView as LV
 from rest_auth.views import UserDetailsView as UDV
+from rest_auth.registration.views import VerifyEmailView as VEV
 from rest_framework import status
 from rest_framework.response import Response
 from django.core.exceptions import ObjectDoesNotExist
@@ -15,6 +16,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from .serializers import ResendConfirmSerializer
 from rest_framework.generics import GenericAPIView
+
+from allauth.account.utils import perform_login
 
 
 class PasswordResetFromKeyView(PRV):
@@ -61,6 +64,11 @@ class UserDetailsView(UDV):
         sync_sso(request.user)
         return response
 
+    def patch(self, request, *args, **kwargs):
+        response = self.update(request, *args, **kwargs)
+        sync_sso(request.user)
+        return response
+
 
 user_details_view = UserDetailsView.as_view()
 
@@ -83,3 +91,24 @@ class ResendConfirmView(GenericAPIView):
 
 
 resend_confirmation_view = ResendConfirmView.as_view()
+
+
+class VerifyEmailView(VEV):
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.kwargs['key'] = serializer.validated_data['key']
+        confirmation = self.get_object()
+        confirmation.confirm(self.request)
+        self.login_on_confirm(confirmation)
+        return Response({'detail': _('ok')}, status=status.HTTP_200_OK)
+
+    def login_on_confirm(self, confirmation):
+        user = confirmation.email_address.user
+        if user and self.request.user.is_anonymous:
+            return perform_login(self.request,
+                                 user,
+                                 'none')
+
+
+verify_email = VerifyEmailView.as_view()

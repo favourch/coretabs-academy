@@ -4,9 +4,10 @@ from django.contrib.auth import get_user_model
 
 from .utils import sync_sso
 
-from rest_framework import serializers
+from rest_framework import serializers, exceptions
 from rest_auth.registration.serializers import RegisterSerializer as RS
 from rest_auth.serializers import PasswordResetSerializer as PRS
+from rest_auth.serializers import LoginSerializer as LS
 from allauth.account.forms import ResetPasswordForm
 
 from allauth.account.utils import send_email_confirmation
@@ -35,7 +36,7 @@ class RegisterSerializer(RS):
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _("Make sure that you passed your fullname and that it contains only letters."))
+                _("Make sure it contains only letters and spaces."))
 
         return name
 
@@ -47,9 +48,35 @@ class RegisterSerializer(RS):
             'first_name': self.validated_data.get('name', '')
         }
 
-    def custom_signup(self, request, user):
-        sync_sso(user)
+    # def custom_signup(self, request, user):
+    #     sync_sso(user)
 
+
+class LoginSerializer(LS):
+
+    def validate(self, attrs):
+        username = attrs.get('username')
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        user = self._validate_username_email(username, email, password)
+
+        # Did we get back an active user?
+        if user:
+            if not user.is_active:
+                msg = _('User account is disabled.')
+                raise exceptions.ValidationError(msg)
+        else:
+            msg = _('Unable to log in with provided credentials.')
+            raise exceptions.ValidationError(msg)
+
+        # If required, is the email verified?
+        email_address = user.emailaddress_set.get(email=user.email)
+        if not email_address.verified:
+            raise exceptions.PermissionDenied('not verified')
+
+        attrs['user'] = user
+        return attrs
 
 class PasswordResetSerializer(PRS):
     password_reset_form_class = ResetPasswordForm
@@ -134,7 +161,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'email_status', 'name', 'profile')
 
     def get_email_status(self, obj):
-        email_address = EmailAddress.objects.get_for_user(obj, obj.email)
+        email_address = EmailAddress.objects.get(user=obj)
         return email_address.verified
 
     def validate_name(self, name):
@@ -142,7 +169,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _("Make sure that you passed your fullname and that it contains only letters."))
+                _("Make sure it contains only letters and spaces."))
 
         return name
 

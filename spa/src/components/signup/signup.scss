@@ -25,6 +25,13 @@ Signup Style
       padding: 0 20px;
     }
 
+    .alert {
+      border-radius: 10px;
+      margin: 0 0 10px;
+      padding: 10px 10px 12px;
+      border-color: rgba(0, 0, 0, 0) !important;
+    }
+
     #avatars {
       background-image: url("~@/assets/multimedia/images/auth/avatars.png");
       background-position: right center;
@@ -44,6 +51,7 @@ Signup Style
         border-radius: 0;
         color: $white-color;
         margin: 10px 0 0 20px;
+        text-align: center;
       }
 
       #avatar:before {
@@ -52,13 +60,6 @@ Signup Style
     }
 
     #form {
-      .alert {
-        border-radius: 10px;
-        margin: 0 0 10px;
-        padding: 10px 10px 12px;
-        border-color: rgba(0, 0, 0, 0) !important;
-      }
-
       .input-group.disabled {
         .input-group__details {
           min-height: 10px;
