@@ -49,10 +49,10 @@ urlpatterns = [
 
     path('__debug__/', include(debug_toolbar.urls)),
 
-    url(r"^auth/password/reset/key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$",
+    url(r"^password-reset/(?P<uidb36>[0-9A-Za-z]+)/(?P<key>.+)/$",
         password_reset_from_key,
         name="account_reset_password_from_key"),
-    url(r"^auth/confirm-email/(?P<key>[-:\w]+)/$", confirm_email,
+    url(r"^confirm-email/(?P<key>[-:\w]+)/$", confirm_email,
         name="account_confirm_email"),
 ]
 
