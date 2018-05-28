@@ -34,29 +34,31 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    track = serializers.SerializerMethodField()
-    last_opened_workshop = serializers.SerializerMethodField()
-    last_opened_module = serializers.SerializerMethodField()
-    last_opened_lesson = serializers.SerializerMethodField()
+    track_slug = serializers.SerializerMethodField()
+    last_opened_workshop_slug = serializers.SerializerMethodField()
+    last_opened_module_slug = serializers.SerializerMethodField()
+    last_opened_lesson_slug = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Profile
         fields = ('role',
                   'track',
-                  'last_opened_workshop',
-                  'last_opened_module',
-                  'last_opened_lesson')
+                  'track_slug',
+                  'last_opened_workshop_slug',
+                  'last_opened_module_slug',
+                  'last_opened_lesson',
+                  'last_opened_lesson_slug')
 
-    def get_track(self, obj):
+    def get_track_slug(self, obj):
         return obj.track.slug
 
-    def get_last_opened_workshop(self, obj):
+    def get_last_opened_workshop_slug(self, obj):
         return obj.last_opened_lesson.module.workshops.filter(tracks__id=obj.track.id).first().slug
 
-    def get_last_opened_module(self, obj):
+    def get_last_opened_module_slug(self, obj):
         return obj.last_opened_lesson.module.slug
 
-    def get_last_opened_lesson(self, obj):
+    def get_last_opened_lesson_slug(self, obj):
         return obj.last_opened_lesson.slug
 
 
