@@ -153,8 +153,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     name = serializers.CharField(source='first_name',
                                  max_length=100,
-                                 min_length=5,
-                                 required=True)
+                                 min_length=5)
 
     class Meta:
         model = UserModel

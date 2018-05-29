@@ -6,16 +6,16 @@ from django.urls import reverse_lazy
 from .utils import sync_sso
 
 from rest_auth.views import LogoutView as LV
-from rest_auth.views import UserDetailsView as UDV
 from rest_auth.registration.views import VerifyEmailView as VEV
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout as django_logout
 from django.utils.translation import ugettext_lazy as _
 
-from .serializers import ResendConfirmSerializer
-from rest_framework.generics import GenericAPIView
+from .serializers import ResendConfirmSerializer, UserDetailsSerializer
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 
 from allauth.account.utils import perform_login
 
@@ -58,15 +58,23 @@ class LogoutView(LV):
 logout_view = LogoutView.as_view()
 
 
-class UserDetailsView(UDV):
+class UserDetailsView(RetrieveUpdateAPIView):
+
+    serializer_class = UserDetailsSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        return self.request.user
+
     def put(self, request, *args, **kwargs):
         response = self.update(request, *args, **kwargs)
-        sync_sso(request.user)
+        # sync_sso(request.user)
         return response
 
     def patch(self, request, *args, **kwargs):
+        kwargs['partial'] = True
         response = self.update(request, *args, **kwargs)
-        sync_sso(request.user)
+        # sync_sso(request.user)
         return response
 
 
