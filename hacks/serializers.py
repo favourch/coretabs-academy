@@ -217,3 +217,14 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+
+from rest_auth.models import TokenModel
+
+
+class TokenSerializer(serializers.ModelSerializer):
+    user = UserDetailsSerializer()
+
+    class Meta:
+        model = TokenModel
+        fields = ('key', 'user')

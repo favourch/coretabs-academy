@@ -109,7 +109,7 @@ class VerifyEmailView(VEV):
         confirmation = self.get_object()
         confirmation.confirm(self.request)
         self.login_on_confirm(confirmation)
-        return Response({'detail': _('ok')}, status=status.HTTP_200_OK)
+        return self.get_response()
 
     def login_on_confirm(self, confirmation):
         user = confirmation.email_address.user
@@ -117,6 +117,14 @@ class VerifyEmailView(VEV):
             return perform_login(self.request,
                                  user,
                                  'none')
+
+    def get_response(self):
+        serializer_class = UserDetailsSerializer
+
+        serializer = serializer_class(instance=self.request.user,
+                                          context={'request': self.request})
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 verify_email = VerifyEmailView.as_view()

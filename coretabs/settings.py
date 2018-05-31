@@ -195,7 +195,8 @@ REST_AUTH_SERIALIZERS = {
     'LOGIN_SERIALIZER': 'hacks.serializers.LoginSerializer',
     'USER_DETAILS_SERIALIZER': 'hacks.serializers.UserDetailsSerializer',
     'PASSWORD_RESET_SERIALIZER': 'hacks.serializers.PasswordResetSerializer',
-    'PASSWORD_RESET_CONFIRM_SERIALIZER': 'hacks.serializers.PasswordResetConfirmSerializer'
+    'PASSWORD_RESET_CONFIRM_SERIALIZER': 'hacks.serializers.PasswordResetConfirmSerializer',
+    'TOKEN_SERIALIZER': 'hacks.serializers.TokenSerializer'
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
