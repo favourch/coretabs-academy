@@ -115,7 +115,7 @@ class ResendConfirmSerializer(serializers.Serializer):
         request = self.context.get('request')
         User = get_user_model()
         email = self.reset_form.cleaned_data["email"]
-        user = User.objects.get(email=email)
+        user = User.objects.get(email__iexact=email)
         send_email_confirmation(request, user, True)
         return email
 
