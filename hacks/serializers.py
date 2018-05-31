@@ -6,11 +6,11 @@ from .utils import sync_sso
 
 from rest_framework import serializers, exceptions
 from rest_auth.registration.serializers import RegisterSerializer as RS
-from rest_auth.serializers import PasswordResetSerializer as PRS
 from rest_auth.serializers import LoginSerializer as LS
-from allauth.account.forms import ResetPasswordForm
+from allauth.account.forms import ResetPasswordForm, default_token_generator
 
-from allauth.account.utils import send_email_confirmation
+from allauth.account.utils import send_email_confirmation, user_pk_to_url_str
+from django.contrib.sites.shortcuts import get_current_site
 
 from library.serializers import ProfileSerializer
 
@@ -78,24 +78,42 @@ class LoginSerializer(LS):
         attrs['user'] = user
         return attrs
 
-class PasswordResetSerializer(PRS):
-    password_reset_form_class = ResetPasswordForm
 
-    def save(self):
-        request = self.context.get('request')
-        self.reset_form.save(request)
+class PasswordResetSerializer(serializers.Serializer):
+
+    email = serializers.EmailField()
 
     def validate_email(self, email):
+        email = get_adapter().clean_email(email)
+        if not email_address_exists(email):
+            raise serializers.ValidationError(_("The e-mail address is not assigned "
+                                                "to any user account"))
         return email
 
-    def validate(self, attrs):
-        # Create PasswordResetForm with the serializer
-        self.reset_form = self.password_reset_form_class(
-            data=self.initial_data)
-        if not self.reset_form.is_valid():
-            raise serializers.ValidationError(self.reset_form.errors)
+    def save(self, *args, **kwargs):
+        request = self.context.get('request')
 
-        return attrs
+        current_site = get_current_site(request)
+        email = self.validated_data["email"]
+
+        user = UserModel.objects.get(email__iexact=email)
+
+        token_generator = kwargs.get("token_generator", default_token_generator)
+        temp_key = token_generator.make_token(user)
+
+        path = "/reset-password/{}/{}".format(user_pk_to_url_str(user), temp_key)
+        url = request.build_absolute_uri(path)
+        context = {"current_site": current_site,
+                   "user": user,
+                   "password_reset_url": url,
+                   "request": request}
+
+        get_adapter().send_mail(
+            'account/email/password_reset_key',
+            email,
+            context)
+
+        return email
 
 
 class ResendConfirmSerializer(serializers.Serializer):

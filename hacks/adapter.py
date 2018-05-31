@@ -1,7 +1,6 @@
 from allauth.account.adapter import DefaultAccountAdapter
-from allauth.utils import build_absolute_uri
 from django.http import HttpResponseRedirect
-from django.conf import settings
+from django.shortcuts import reverse
 
 
 class MyAccountAdapter(DefaultAccountAdapter):
@@ -9,7 +8,7 @@ class MyAccountAdapter(DefaultAccountAdapter):
     def respond_email_verification_sent(self, request, user):
         return HttpResponseRedirect('')
 
-    # def get_email_confirmation_url(self, request, emailconfirmation):
-    #     url = 'confirm-email/{}'.format(emailconfirmation.key)
-    #     ret = "{}/{}".format(settings.SITE_URL, url)
-    #     return ret
+    def get_email_confirmation_url(self, request, emailconfirmation):
+        url = "/confirm-account/{}".format(emailconfirmation.key)
+        ret = request.build_absolute_uri(url)
+        return ret

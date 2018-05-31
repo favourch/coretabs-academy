@@ -49,11 +49,6 @@ urlpatterns = [
 
     path('__debug__/', include(debug_toolbar.urls)),
 
-    url(r"^reset-password/(?P<uidb36>[0-9A-Za-z]+)/(?P<key>.+)/$",
-        password_reset_from_key,
-        name="account_reset_password_from_key"),
-    url(r"^confirm-account/(?P<key>[-:\w]+)/$", confirm_email,
-        name="account_confirm_email"),
 ]
 
 cache_registry.autodiscover()
