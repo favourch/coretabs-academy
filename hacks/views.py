@@ -14,7 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout as django_logout
 from django.utils.translation import ugettext_lazy as _
 
-from .serializers import ResendConfirmSerializer, UserDetailsSerializer
+from .serializers import ResendConfirmSerializer, UserDetailsSerializer, TokenSerializer
 from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 
 from allauth.account.utils import perform_login
@@ -119,9 +119,9 @@ class VerifyEmailView(VEV):
                                  'none')
 
     def get_response(self):
-        serializer_class = UserDetailsSerializer
+        serializer_class = TokenSerializer
 
-        serializer = serializer_class(instance=self.request.user,
+        serializer = serializer_class(instance=self.request.user.auth_token,
                                           context={'request': self.request})
 
         return Response(serializer.data, status=status.HTTP_200_OK)
