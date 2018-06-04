@@ -25,7 +25,7 @@ SECRET_KEY = '#g61i*t=xzc3ogr#&lajy6$si-db0=%9y8d@0_fs(5n*j%q@^p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.99.100']
 
 
 # Application definition
@@ -159,7 +159,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 3
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
 ACCOUNT_ADAPTER = 'hacks.adapter.MyAccountAdapter'
-ACCOUNT_USERNAME_BLACKLIST = ['system',]
+ACCOUNT_USERNAME_BLACKLIST = ['system', ]
 
 SITE_ID = 1
 
