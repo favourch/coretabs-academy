@@ -5,9 +5,23 @@ services:
     container_name: 'coretabs_academy_django_api'
     build:
       context: .
-      dockerfile: ./development.dockerfile
-    volumes:
-      - .:/djangoapp/
+      dockerfile: ./production.dockerfile
+    #volumes:
+    #  - .:/djangoapp/
     command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
+    links:
+      - db:db
     ports:
       - "8000:8000"
+  db:
+    container_name: 'postgres'
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: MySup3rPassword!
+    restart: always
+    image: postgres
+    expose:
+      - "5432"

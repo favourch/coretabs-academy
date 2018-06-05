@@ -3,13 +3,14 @@ import dj_database_url
 
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-# DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
     '.herokuapp.com',
-	'www.coretabs.net',
+    'www.coretabs.net',
     'coretabs.net',
+    '192.168.99.100',
 ]
 
 DATABASES = {
@@ -23,4 +24,3 @@ MIDDLEWARE += [
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
     'whitenoise.middleware.WhiteNoiseMiddleware']
-
