@@ -11,7 +11,7 @@ services:
     command: gunicorn --bind 0.0.0.0:8000 coretabs.wsgi
     environment:
       DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
-      SECRET_KEY:
+      SECRET_KEY: zby2z^8x2(zlhlfa233=-ji9eq)$$&^aa-vjs@8a)u0h0t#eqh^
     links:
       - db:db
     ports:

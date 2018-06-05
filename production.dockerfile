@@ -5,7 +5,7 @@ RUN apk update
 RUN apk add --virtual deps gcc python-dev linux-headers musl-dev postgresql-dev
 RUN apk add --no-cache libpq
 
-COPY start.sh /start.sh
+#COPY start.sh /start.sh
 COPY . ./djangoapp
 WORKDIR ./djangoapp
 
