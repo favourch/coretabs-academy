@@ -3,6 +3,7 @@ import os
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from django.conf import settings
+from django.utils.module_loading import import_string
 
 from avatar.models import Avatar
 from avatar.signals import avatar_updated
@@ -15,8 +16,12 @@ class UploadAvatarSerializer(serializers.ModelSerializer):
         model = Avatar
         fields = ('avatar', 'avatar_url',)
 
-    def get_avatar_url(self, obj):
-        return obj.avatar_set.get(primary=True).get_absolute_url()
+    def get_avatar_url(self, obj, size=settings.AVATAR_DEFAULT_SIZE):
+        for provider_path in settings.AVATAR_PROVIDERS:
+            provider = import_string(provider_path)
+            avatar_url = provider.get_avatar_url(obj, size)
+            if avatar_url:
+                return avatar_url
     
     def validate_avatar(self, avatar):
         if settings.AVATAR_ALLOWED_FILE_EXTS:

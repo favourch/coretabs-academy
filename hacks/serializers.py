@@ -1,6 +1,8 @@
 import re
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
+from django.conf import settings
+from django.utils.module_loading import import_string
 
 from .utils import sync_sso
 
@@ -13,6 +15,7 @@ from allauth.account.utils import send_email_confirmation, user_pk_to_url_str
 from django.contrib.sites.shortcuts import get_current_site
 
 from library.serializers import ProfileSerializer
+from avatars.serializers import UploadAvatarSerializer
 
 from allauth.account.forms import UserTokenForm
 from allauth.account.adapter import get_adapter
@@ -168,6 +171,7 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
 class UserDetailsSerializer(serializers.ModelSerializer):
     email_status = serializers.SerializerMethodField()
+    avatar_url = serializers.SerializerMethodField()
     profile = ProfileSerializer()
     name = serializers.CharField(source='first_name',
                                  max_length=100,
@@ -175,11 +179,18 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('username', 'email', 'email_status', 'name', 'profile')
+        fields = ('username', 'email', 'email_status', 'name', 'profile', 'avatar_url')
 
     def get_email_status(self, obj):
         email_address = EmailAddress.objects.get(user=obj)
         return email_address.verified
+
+    def get_avatar_url(self, obj, size=settings.AVATAR_DEFAULT_SIZE):
+        for provider_path in settings.AVATAR_PROVIDERS:
+            provider = import_string(provider_path)
+            avatar_url = provider.get_avatar_url(obj, size)
+            if avatar_url:
+                return avatar_url
 
     def validate_name(self, name):
         pattern = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$"
@@ -189,6 +200,15 @@ class UserDetailsSerializer(serializers.ModelSerializer):
                 _("Make sure it contains only letters and spaces."))
 
         return name
+
+    def validate_avatar(self, avatar):
+        if settings.AVATAR_ALLOWED_FILE_EXTS:
+            root, ext = os.path.splitext(avatar.name.lower())
+            if ext not in settings.AVATAR_ALLOWED_FILE_EXTS:
+                raise serializers.ValidationError(_("invalid file extension."))
+
+        if avatar.size > settings.AVATAR_MAX_SIZE:
+            raise serializers.ValidationError("Your file is too big")
 
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
