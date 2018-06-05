@@ -11,6 +11,8 @@ ALLOWED_HOSTS = [
     'www.coretabs.net',
     'coretabs.net',
     '192.168.99.100',
+    '172.17.0.1',
+    '0.0.0.0'
 ]
 
 DATABASES = {

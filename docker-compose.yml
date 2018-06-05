@@ -8,9 +8,10 @@ services:
       dockerfile: ./production.dockerfile
     #volumes:
     #  - .:/djangoapp/
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn --bind 0.0.0.0:8000 coretabs.wsgi
     environment:
       DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
+      SECRET_KEY:
     links:
       - db:db
     ports:
