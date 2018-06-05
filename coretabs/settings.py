@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'model_utils',
 
     'contact',
+    'avatar',
 ]
 
 MIDDLEWARE = [
@@ -221,3 +222,9 @@ CACHES = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MANAGERS_EMAILS = ['one@gmail.com', 'two@gmail.com']
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+AVATAR_CLEANUP_DELETED = True
+AVATAR_MAX_AVATARS_PER_USER = 1
