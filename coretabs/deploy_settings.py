@@ -3,7 +3,7 @@ import dj_database_url
 
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
