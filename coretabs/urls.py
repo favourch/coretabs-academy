@@ -15,28 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
 from django.views.generic import TemplateView
-from allauth.account.views import confirm_email
 
-from hacks.views import password_reset_from_key, logout_view,\
-    user_details_view, resend_confirmation_view, verify_email
+from hacks.views import logout_view, user_details_view, resend_confirmation_view, verify_email
+from avatars.views import upload_avatar_view
 from contact.views import contact_view
-
 from discourse import views
 
 import debug_toolbar
 
-from rest_framework_cache.registry import cache_registry
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('avatar/', include('avatar.urls')),
 
     path('api/v1/contact/', contact_view),
 
     path('api/v1/auth/logout/', logout_view),
     path('api/v1/auth/user/', user_details_view),
+    path('api/v1/auth/user/avatar/', upload_avatar_view),
     path('api/v1/auth/confirmation/', resend_confirmation_view),
     path('api/v1/auth/registration/verify-email/', verify_email),
     path('api/v1/auth/', include('rest_auth.urls')),
@@ -51,4 +48,8 @@ urlpatterns = [
 
 ]
 
-cache_registry.autodiscover()
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
