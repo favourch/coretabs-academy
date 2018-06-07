@@ -16,7 +16,6 @@ services:
     build:
       context: .
       dockerfile: ./production.dockerfile
-    command: /bin/sh source ./venv/bin/activate && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi
     volumes:
     #  - .:/djangoapp/
        - ./venv/:/djangoapp/venv/

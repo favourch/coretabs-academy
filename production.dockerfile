@@ -1,6 +1,7 @@
 FROM python:alpine3.7
 
 RUN apk update
+RUN apk upgrade
 RUN apk add --virtual deps gcc python-dev linux-headers musl-dev postgresql-dev
 RUN apk add --no-cache libpq
 RUN apk add jpeg-dev \
@@ -13,6 +14,9 @@ RUN apk add jpeg-dev \
     tcl-dev \
     harfbuzz-dev \
     fribidi-dev
+#RUN apk add --no-cache bash
+#RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
 
 COPY . ./djangoapp
 WORKDIR ./djangoapp
@@ -37,5 +41,5 @@ RUN echo "from coretabs.deploy_settings import *" >> ./coretabs/settings.py
 #RUN python manage.py migrate
 #RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
 
-#CMD gunicorn --bind 0.0.0.0:8000 coretabs.wsgi
+CMD [ "sh", "-c", "source ./venv/bin/activate && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi" ]
 #CMD ["./build.sh"]
