@@ -247,7 +247,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
                                             'last_opened_lesson', instance.profile.last_opened_lesson)
 
         email = validated_data.get('email', None)
-        if email:
+        if email and email != instance.email:
             adapter = get_adapter()
             adapter.send_mail('account/email/email_change', instance.email, {})
             email_address = EmailAddress.objects.get(user=instance, verified=True)

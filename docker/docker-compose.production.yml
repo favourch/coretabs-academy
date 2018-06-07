@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    container_name: 'postgres'
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: MySup3rPassword!
+    restart: always
+    image: postgres
+    ports:
+      - 5432:5432
+  app:
+    container_name: 'coretabs_academy_django_api'
+    build:
+      context: ../
+      dockerfile: ./docker/production.dockerfile
+    volumes:
+       - ./venv/:/djangoapp/venv/
+    environment:
+      DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
+      SECRET_KEY: zby2z^8x2(zlhlfa233=-ji9eq)$$&^aa-vjs@8a)u0h0t#eqh^
+    links:
+      - db:db
+    ports:
+      - "8000:8000"
