@@ -1,20 +1,6 @@
 version: '3'
 
 services:
-  app:
-    container_name: 'coretabs_academy_django_api'
-    build:
-      context: .
-      dockerfile: ./production.dockerfile
-    #volumes:
-    #  - .:/djangoapp/
-    environment:
-      DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
-      SECRET_KEY: zby2z^8x2(zlhlfa233=-ji9eq)$$&^aa-vjs@8a)u0h0t#eqh^
-    links:
-      - db:db
-    ports:
-      - "8000:8000"
   db:
     container_name: 'postgres'
     environment:
@@ -25,3 +11,19 @@ services:
     image: postgres
     ports:
       - 5432:5432
+  app:
+    container_name: 'coretabs_academy_django_api'
+    build:
+      context: .
+      dockerfile: ./production.dockerfile
+    command: /bin/sh source ./venv/bin/activate && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi
+    volumes:
+    #  - .:/djangoapp/
+       - ./venv/:/djangoapp/venv/
+    environment:
+      DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
+      SECRET_KEY: zby2z^8x2(zlhlfa233=-ji9eq)$$&^aa-vjs@8a)u0h0t#eqh^
+    links:
+      - db:db
+    ports:
+      - "8000:8000"
