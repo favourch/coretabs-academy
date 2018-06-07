@@ -1,4 +1,4 @@
-import re
+import re, os
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -15,13 +15,18 @@ from allauth.account.utils import send_email_confirmation, user_pk_to_url_str
 from django.contrib.sites.shortcuts import get_current_site
 
 from library.serializers import ProfileSerializer
-from avatars.serializers import UploadAvatarSerializer
 
 from allauth.account.forms import UserTokenForm
 from allauth.account.adapter import get_adapter
 
 from allauth.utils import email_address_exists
 from allauth.account.models import EmailAddress
+
+from avatar.models import Avatar
+from avatar.signals import avatar_updated
+from django.template.defaultfilters import filesizeformat
+
+from rest_auth.models import TokenModel
 
 
 UserModel = get_user_model()
@@ -173,13 +178,14 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     email_status = serializers.SerializerMethodField()
     avatar_url = serializers.SerializerMethodField()
     profile = ProfileSerializer()
+    avatar = serializers.ImageField(write_only=True)
     name = serializers.CharField(source='first_name',
                                  max_length=100,
                                  min_length=5)
 
     class Meta:
         model = UserModel
-        fields = ('username', 'email', 'email_status', 'name', 'profile', 'avatar_url')
+        fields = ('username', 'email', 'email_status', 'name', 'profile','avatar', 'avatar_url')
 
     def get_email_status(self, obj):
         email_address = EmailAddress.objects.get(user=obj)
@@ -205,10 +211,22 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         if settings.AVATAR_ALLOWED_FILE_EXTS:
             root, ext = os.path.splitext(avatar.name.lower())
             if ext not in settings.AVATAR_ALLOWED_FILE_EXTS:
-                raise serializers.ValidationError(_("invalid file extension."))
+                valid_exts = ", ".join(settings.AVATAR_ALLOWED_FILE_EXTS)
+                error = _("%(ext)s is an invalid file extension. "
+                          "Authorized extensions are : %(valid_exts_list)s")
+                raise serializers.ValidationError(error %
+                                            {'ext': ext,
+                                             'valid_exts_list': valid_exts})
 
         if avatar.size > settings.AVATAR_MAX_SIZE:
-            raise serializers.ValidationError("Your file is too big")
+            error = _("Your file is too big: %(size)s, "
+                      "the maximum allowed size is: %(max_valid_size)s")
+
+            raise serializers.ValidationError(error % {
+                'size': filesizeformat(avatar.size),
+                'max_valid_size': filesizeformat(settings.AVATAR_MAX_SIZE)
+            })
+
 
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
@@ -217,6 +235,8 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         return email
 
     def update(self, instance, validated_data):
+        request = self.context.get('request')
+
         profile = validated_data.get('profile', None)
         instance.username = validated_data.get('username', instance.username)
         instance.first_name = validated_data.get(
@@ -229,17 +249,20 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         email = validated_data.get('email', None)
         if email:
             adapter = get_adapter()
-            request = self.context.get('request')
             adapter.send_mail('account/email/email_change', instance.email, {})
             email_address = EmailAddress.objects.get(user=instance, verified=True)
             email_address.change(request, email, True)
             instance.email = email
 
+        if 'avatar' in request.FILES:
+            avatar = Avatar(user=instance, primary=True)
+            image_file = request.FILES['avatar']
+            avatar.avatar.save(image_file.name, image_file)
+            avatar.save()
+            avatar_updated.send(sender=Avatar, user=instance, avatar=avatar)
+
         instance.save()
         return instance
-
-
-from rest_auth.models import TokenModel
 
 
 class TokenSerializer(serializers.ModelSerializer):
