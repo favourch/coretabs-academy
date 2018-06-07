@@ -178,14 +178,14 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     email_status = serializers.SerializerMethodField()
     avatar_url = serializers.SerializerMethodField()
     profile = ProfileSerializer()
-    avatar = serializers.ImageField(write_only=True)
+    avatar = serializers.ImageField(write_only=True, required=False)
     name = serializers.CharField(source='first_name',
                                  max_length=100,
                                  min_length=5)
 
     class Meta:
         model = UserModel
-        fields = ('username', 'email', 'email_status', 'name', 'profile','avatar', 'avatar_url')
+        fields = ('username', 'email', 'email_status', 'name', 'profile', 'avatar', 'avatar_url')
 
     def get_email_status(self, obj):
         email_address = EmailAddress.objects.get(user=obj)
@@ -230,7 +230,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
-        if email and email_address_exists(email):
+        if email and email_address_exists(email, exclude_user=self.context.get('request').user):
             raise serializers.ValidationError(_("A user is already registered with this e-mail address."))
         return email
 
@@ -247,7 +247,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
                                             'last_opened_lesson', instance.profile.last_opened_lesson)
 
         email = validated_data.get('email', None)
-        if email:
+        if email and email != instance.email:
             adapter = get_adapter()
             adapter.send_mail('account/email/email_change', instance.email, {})
             email_address = EmailAddress.objects.get(user=instance, verified=True)
@@ -262,6 +262,9 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             avatar_updated.send(sender=Avatar, user=instance, avatar=avatar)
 
         instance.save()
+
+        # sync_sso(instance)
+
         return instance
 
 

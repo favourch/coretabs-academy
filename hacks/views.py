@@ -66,17 +66,6 @@ class UserDetailsView(RetrieveUpdateAPIView):
     def get_object(self):
         return self.request.user
 
-    def put(self, request, *args, **kwargs):
-        response = self.update(request, *args, **kwargs)
-        # sync_sso(request.user)
-        return response
-
-    def patch(self, request, *args, **kwargs):
-        kwargs['partial'] = True
-        response = self.update(request, *args, **kwargs)
-        # sync_sso(request.user)
-        return response
-
 
 user_details_view = UserDetailsView.as_view()
 
