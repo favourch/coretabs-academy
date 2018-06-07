@@ -18,7 +18,7 @@ RUN apk add jpeg-dev \
 #RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 
-COPY . ./djangoapp
+COPY ../ ./djangoapp
 WORKDIR ./djangoapp
 
 #RUN pip install --upgrade pip
@@ -41,5 +41,5 @@ RUN echo "from coretabs.deploy_settings import *" >> ./coretabs/settings.py
 #RUN python manage.py migrate
 #RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
 
-CMD [ "sh", "-c", "source ./venv/bin/activate && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi" ]
+CMD [ "sh", "-c", "source ./venv/bin/activate && ./build.sh" ]
 #CMD ["./build.sh"]

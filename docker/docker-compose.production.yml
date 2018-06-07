@@ -14,10 +14,9 @@ services:
   app:
     container_name: 'coretabs_academy_django_api'
     build:
-      context: .
-      dockerfile: ./production.dockerfile
+      context: ../
+      dockerfile: ./docker/production.dockerfile
     volumes:
-    #  - .:/djangoapp/
        - ./venv/:/djangoapp/venv/
     environment:
       DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
