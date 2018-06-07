@@ -19,6 +19,9 @@ from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 
 from allauth.account.utils import perform_login
 
+from rest_auth.models import TokenModel
+from rest_auth.app_settings import create_token
+
 
 class PasswordResetFromKeyView(PRV):
     success_url = reverse_lazy("home")
@@ -91,26 +94,29 @@ resend_confirmation_view = ResendConfirmView.as_view()
 
 
 class VerifyEmailView(VEV):
+    token_model = TokenModel
+
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.kwargs['key'] = serializer.validated_data['key']
+        self.serializer = self.get_serializer(data=request.data)
+        self.serializer.is_valid(raise_exception=True)
+        self.kwargs['key'] = self.serializer.validated_data['key']
         confirmation = self.get_object()
         confirmation.confirm(self.request)
         self.login_on_confirm(confirmation)
         return self.get_response()
 
     def login_on_confirm(self, confirmation):
-        user = confirmation.email_address.user
-        if user and self.request.user.is_anonymous:
+        self.user = confirmation.email_address.user
+        if self.user and self.request.user.is_anonymous:
             return perform_login(self.request,
-                                 user,
+                                 self.user,
                                  'none')
 
     def get_response(self):
+        token = create_token(self.token_model, self.user, self.serializer)
         serializer_class = TokenSerializer
 
-        serializer = serializer_class(instance=self.request.user.auth_token,
+        serializer = serializer_class(instance=token,
                                           context={'request': self.request})
 
         return Response(serializer.data, status=status.HTTP_200_OK)
