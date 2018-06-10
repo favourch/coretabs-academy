@@ -3,7 +3,7 @@ import dj_database_url
 
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -21,6 +21,22 @@ DATABASES = {
     )
 }
 
+
+# EMAIL config
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+DISCOURSE_BASE_URL = os.environ.get('DISCOURSE_HOST')
+DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET')
+DISCOURSE_API_KEY = os.environ.get('DISCOURSE_API_KEY')
+DISCOURSE_API_USERNAME = os.environ.get('DISCOURSE_API_USERNAME')
+
+MANAGERS_EMAILS = [os.environ.get('ADMIN_EMAIL01'), os.environ.get('ADMIN_EMAIL02')]
 
 MIDDLEWARE += [
     # Simplified static file serving.

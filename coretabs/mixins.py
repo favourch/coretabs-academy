@@ -69,7 +69,6 @@ class LoggingMixin(object):
             )
             try:
                 self.handle_log(status_code)
-                print('logging!')
             except Exception as e:
                 # ensure that all exceptions raised by handle_log
                 # doesn't prevent API call to continue as expected

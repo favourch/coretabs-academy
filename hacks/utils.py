@@ -4,7 +4,6 @@ import hashlib
 from urllib import parse
 
 import requests
-import os
 
 from django.conf import settings
 from django.utils.module_loading import import_string
@@ -30,14 +29,14 @@ def sync_sso(request, user):
         'avatar_force_update': True
     }
 
-    key = bytes(os.environ.get('DISCOURSE_SSO_SECRET'), encoding='utf-8')
+    key = bytes(settings.DISCOURSE_BASE_URL, encoding='utf-8')
     return_payload = base64.b64encode(bytes(parse.urlencode(params), 'utf-8'))
     h = hmac.new(key, return_payload, digestmod=hashlib.sha256)
     query_string = parse.urlencode({'sso': return_payload, 'sig': h.hexdigest()})
 
-    data = {"api_key": os.environ.get('DISCOURSE_API_KEY'),
-            "api_username": os.environ.get('DISCOURSE_API_USERNAME')}
+    data = {"api_key": settings.DISCOURSE_API_KEY,
+            "api_username": settings.DISCOURSE_API_USERNAME}
 
-    url = '{}/admin/users/sync_sso/?{}'.format(os.environ.get('DISCOURSE_HOST'), query_string)
+    url = '{}/admin/users/sync_sso/?{}'.format(settings.DISCOURSE_BASE_URL, query_string)
 
     r = requests.post(url, data=data)
