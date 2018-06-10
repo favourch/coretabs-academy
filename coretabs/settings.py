@@ -228,3 +228,7 @@ MEDIA_URL = '/media/'
 
 AVATAR_CLEANUP_DELETED = True
 AVATAR_MAX_AVATARS_PER_USER = 1
+
+
+# Logging
+from .logging import *
