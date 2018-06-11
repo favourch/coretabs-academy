@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'adminsortable2',
     'debug_toolbar',
     'model_utils',
+
+    'django_logging',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django_logging.middleware.DjangoLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'coretabs.urls'
@@ -157,3 +160,4 @@ CACHES = {
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda x: True
 }
+

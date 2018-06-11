@@ -38,6 +38,12 @@ DISCOURSE_API_USERNAME = os.environ.get('DISCOURSE_API_USERNAME')
 
 MANAGERS_EMAILS = [os.environ.get('ADMIN_EMAIL01'), os.environ.get('ADMIN_EMAIL02')]
 
+
+DJANGO_LOGGING = {
+    "SQL_LOG": False,
+    'CONSOLE_LOG': False,
+}
+
 MIDDLEWARE += [
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/

@@ -8,34 +8,16 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
-            'formatter': 'rest',
-        },
         'sentry': {
-            'level': 'INFO',
+            'level': 'ERROR',
             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-    },
-    'formatters': {
-        'rest': {
-            'format': '%(levelname)-8s %(asctime)s \n'
-                      '   %(message)s'
         },
     },
     'loggers': {
         '': {
             'handlers': ['sentry'],
-            'level': 'WARNING',
+            'level': 'ERROR',
             'propagate': True,
-        },
-        'rest': {
-            'level': 'INFO',
-            'handlers': ['file'],
-            # required to avoid double logging with root logger
-            'propagate': False,
         },
     },
 }
