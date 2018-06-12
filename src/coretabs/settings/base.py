@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'model_utils',
 
     'django_logging',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
