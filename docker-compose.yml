@@ -4,9 +4,10 @@ services:
   app:
     container_name: 'coretabs_academy_django_api_dev'
     build:
-      context: ../
-      dockerfile: ./docker/development.dockerfile
+      context: .
+      dockerfile: ./development.dockerfile
+    command: sh -c "source ./venv/bin/activate && python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ../:/djangoapp/
+      - ./src/:/djangoapp/
     ports:
       - "8000:8000"

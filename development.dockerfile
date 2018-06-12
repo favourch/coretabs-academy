@@ -16,4 +16,4 @@ RUN apk add jpeg-dev \
 
 WORKDIR ./djangoapp
 
-CMD ["sh", "-c", "source ./venv/bin/activate && python manage.py runserver 0.0.0.0:8000"]
+#CMD ["sh", "-c", "source ./venv/bin/activate && python manage.py runserver 0.0.0.0:8000"]
