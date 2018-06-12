@@ -9,7 +9,7 @@ SECRET_KEY = '#g61i*t=xzc3ogr#&lajy6$si-db0=%9y8d@0_fs(5n*j%q@^p'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.99.100', 'localhost']
 
 
 # Application definition
