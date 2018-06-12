@@ -30,3 +30,5 @@ sqlparse==0.2.4
 urllib3==1.22
 whitenoise==3.3.1
 wrapt==1.10.11
+django-logging-json==1.15
+raven==6.9.0
