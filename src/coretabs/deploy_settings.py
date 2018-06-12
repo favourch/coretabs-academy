@@ -1,4 +1,4 @@
-from coretabs.settings import *
+from .settings import *
 import dj_database_url
 
 
@@ -38,6 +38,9 @@ DISCOURSE_API_USERNAME = os.environ.get('DISCOURSE_API_USERNAME')
 
 MANAGERS_EMAILS = [os.environ.get('ADMIN_EMAIL01'), os.environ.get('ADMIN_EMAIL02')]
 
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('SENTRY_DSN'),
+}
 
 DJANGO_LOGGING = {
     "SQL_LOG": False,
