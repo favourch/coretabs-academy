@@ -8,10 +8,10 @@ export default {
       lesson_content: '',
       i18n: {
          video: [{
-            icon: 'add',
+            icon: 'description',
             text: 'ملاحظات الدرس'
          }, {
-            icon: 'add',
+            icon: 'info',
             text: 'لديك سؤال'
          }],
          quiz: {
@@ -50,7 +50,6 @@ export default {
       }
    },
    updated() {
-
       document.querySelectorAll('#lesson-markdown img').forEach((img) => {
          let src = img.src.replace(/^.*[\\/]/, '')
          this.$store.commit('getGithubFileURL', {
@@ -63,7 +62,7 @@ export default {
 
       document.querySelectorAll('#lesson-markdown pre code').forEach((code) => {
          hljs.highlightBlock(code)
-      });
+      })
    },
    methods: {
       getLesson() {
@@ -71,39 +70,39 @@ export default {
          this.type = this.$encryption.b64DecodeUnicode(this.$route.query.type)
          let notes = this.$encryption.b64DecodeUnicode(this.$route.query.notes)
          switch (this.type) {
-            case "0":
-            case "1":
+            case '0':
+            case '1':
                this.lesson_content = url
-               this.$http.get(notes)
-                  .then(data => {
-                     this.notes_content = this.previewMarkdowText(data)
+               axios.get(notes)
+                  .then(response => {
+                     this.notes_content = this.previewMarkdowText(response.data)
                      this.loaded = true
                   }).catch(err => {
                      console.error(err)
                   })
                break
-            case "2":
-               this.$http.get(url)
-                  .then(data => {
-                     this.lesson_content = this.previewMarkdowText(data)
+            case '2':
+               axios.get(url)
+                  .then(response => {
+                     this.lesson_content = this.previewMarkdowText(response.data)
                      this.loaded = true
                   }).catch(err => {
                      console.error(err)
                   })
                break
-            case "3":
-               this.$http.get(url)
-                  .then(data => {
-                     this.lesson_content = data
+            case '3':
+                  axios.get(url)
+                  .then(response => {
+                     this.lesson_content = response.data
                      this.loaded = true
                   }).catch(err => {
                      console.error(err)
                   })
                break
-            case "4":
-               this.$http.get(url)
-                  .then(data => {
-                     this.lesson_content = this.previewMarkdowText(data)
+            case '4':
+                  axios.get(url)
+                  .then(response => {
+                     this.lesson_content = this.previewMarkdowText(response.data)
                      this.loaded = true
                   }).catch(err => {
                      console.error(err)
