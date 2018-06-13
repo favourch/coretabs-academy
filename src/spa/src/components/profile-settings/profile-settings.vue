@@ -1,0 +1,53 @@
+<template>
+  <div class="settings">
+    <workshop-header-component :title="header"></workshop-header-component>
+    <v-navigation-drawer id="sidenav" app :right="drawer.isRight" v-model="drawer.isOpen" :width="$store.state.css.workshops.drawerWidth"
+      hide-overlay>
+      <v-toolbar flat>
+        <v-btn @click="drawer.isOpen=!drawer.isOpen" icon>
+          <v-icon>keyboard_arrow_right</v-icon>
+        </v-btn>
+        <v-toolbar-title v-html="i18n.settings"></v-toolbar-title>
+      </v-toolbar>
+      <v-list class="py-0">
+        <router-link to="/profile/personal-info">
+          <v-list-tile>
+            <v-list-tile-action>
+              <v-icon :color="`grey`">settings</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-html="i18n.personal_info"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </router-link>
+        <v-divider></v-divider>
+        <router-link to="/profile/change-track">
+          <v-list-tile>
+            <v-list-tile-action>
+              <v-icon :color="`grey`">compare_arrows</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-html="i18n.change_track"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </router-link>
+        <v-divider></v-divider>
+        <router-link to="/profile/change-password">
+          <v-list-tile>
+            <v-list-tile-action>
+              <v-icon :color="`grey`">lock</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-html="i18n.change_password"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </router-link>
+      </v-list>
+    </v-navigation-drawer>
+    <div class="content">
+      <router-view ></router-view>
+    </div>
+  </div>
+</template>
+<script src="./profile-settings.js"></script>
+<style src="./profile-settings.scss" lang="scss"></style>

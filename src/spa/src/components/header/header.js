@@ -16,10 +16,13 @@ export default {
     ],
     user_navs: [
       {
-        url: '/classroom',
+        url: '/profile',
         radius: true
       }, {
         url: '/logout',
+        dropdown: false
+      }, {
+        url: '/about',
         dropdown: false
       }
     ],
@@ -57,11 +60,10 @@ export default {
   methods: {
     setHeader() {
       this.currentClass = `${this.$route.name}-main-content`
-      if (this.$store.state.isLogin) {
-        this.role = 'user_navs'
-        this.navs = this.user_navs
-      }
       switch (this.$route.name) {
+        case 'personal-info':
+        case 'change-track':
+        case 'change-password':
         case 'lessons':
         case 'modules':
         case 'workshop':
@@ -72,6 +74,10 @@ export default {
           this.show = true
           this.role = 'default_navs'
           this.navs = this.default_navs
+          if (this.$store.getters.isLogin) {
+            this.role = 'user_navs'
+            this.navs = this.user_navs
+          }
           break
       }
     },

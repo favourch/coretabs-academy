@@ -14,6 +14,10 @@ import ResetPasswordComponent from './components/reset-password/reset-password.v
 import ForgotPasswordComponent from './components/forgot-password/forgot-password.vue'
 import SignInComponent from './components/signin/signin.vue'
 import SelectTrackComponent from './components/select-track/select-track.vue'
+import ProfileSettingsComponent from './components/profile-settings/profile-settings.vue'
+import EditPersonalInfoComponent from './components/profile-settings/edit-personal-info/edit-personal-info.vue'
+import ChangeTrackComponent from './components/profile-settings/change-track/change-track.vue'
+import ChangePasswordComponent from './components/profile-settings/change-password/change-password.vue'
 import LogoutComponent from './components/logout/logout.vue'
 import TracksComponent from './components/tracks/tracks.vue'
 import LessonComponent from './components/lesson/lesson.vue'
@@ -89,6 +93,30 @@ const router = new Router({
     name: 'select-track',
     path: '/select-track',
     component: SelectTrackComponent
+  }, {
+    path: '/profile',
+    component: ProfileSettingsComponent,
+    children: [
+      {
+        path: '',
+        redirect: {
+         name: 'personal-info'
+        }
+      }, {
+        name: 'personal-info',
+        path: '/profile/personal-info',
+        component: EditPersonalInfoComponent
+      }, {
+        name: 'change-track',
+        path: '/profile/change-track',
+        component: ChangeTrackComponent
+      }, {
+        name: 'change-password',
+        path: '/profile/change-password',
+        component: ChangePasswordComponent
+      }
+    ],
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'logout',
     path: '/logout',

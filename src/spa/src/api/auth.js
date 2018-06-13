@@ -112,11 +112,57 @@ const AuthAPI = {
       await this.removeUser(store)
     })
   },
+  changeInfo(root) {
+    let formData = new FormData()
+    formData.append('name', root.fullname)
+    formData.append('email', root.email)
+    formData.append('username', root.username)
+    formData.append('avatar', root.validImage.imageData)
+
+    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
+    axios.patch('/api/v1/auth/user/', formData, {
+      headers: {
+          'Content-Type': 'multipart/form-data'
+      }
+    }).then((response) => {
+      root.alert.success = true
+      if (root.$store.getters.user('email') === root.email) {
+        root.alert.message = root.i18n.success_message
+        root.$store.dispatch('user', { prop: 'name', data: root.fullname })
+        root.$store.dispatch('user', { prop: 'username', data: root.username })
+        if (root.$store.getters.user('avatar_url') !== root.avatar_url) {
+          root.$store.dispatch('user', { prop: 'avatar_url', data: '/media/avatars/' + root.username + '/resized/80/' + root.validImage.imageData.name })
+        }
+
+        this.updateUser(root.$store)
+      } else {
+        root.alert.message = root.i18n.logout_message
+        setTimeout(() => {
+          this.logout(root)
+        }, 3000)
+      }
+    }).catch((error) => {
+      if (error.response) {
+        if (error.response.status === 400) {
+          for (var err in error.response.data) {
+            root.alert.error = true
+            root.alert.message = error.response.data[err][0]
+            break
+          }
+        } else { console.log(error.response.status + ': ' + error.response.data) }
+      }
+    })
+  },
   logout(root) {
     axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/auth/logout/').then((response) => {
       this.removeUser(root.$store)
       root.$router.push('/')
+    })
+  },
+  getTracks() {
+    return axios.get('/api/v1/tracks/').then((response) => {
+      return response.data
     })
   },
   selectTrack(root) {
@@ -129,6 +175,25 @@ const AuthAPI = {
       root.$store.dispatch('profile', { prop: 'track', data: root.track_selected })
       this.updateUser(root.$store)
       return true
+    })
+  },
+  changePassword(root) {
+    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
+    axios.post('/api/v1/auth/password/change/', {
+      old_password: root.old_password,
+      new_password1: root.new_password1,
+      new_password2: root.new_password2
+    }).then((response) => {
+      root.alert.success = true
+      root.alert.message = response.data
+    }).catch((error) => {
+      if (error.response) {
+        for (var err in error.response.data) {
+          root.alert.error = true
+          root.alert.message = error.response.data[err][0]
+          break
+        }
+      }
     })
   },
   storeUser(store, data = null) {
