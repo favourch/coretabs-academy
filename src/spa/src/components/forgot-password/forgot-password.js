@@ -15,11 +15,15 @@ export default {
     form() { return this.$store.state.i18n.form }
   },
   methods: {
-    submit() { },
+    submit() {
+      var root = this
+      this.$auth.requestReset(root)
+    },
     setSplashHeight() {
       var sDiv = document.querySelector('#splash')
       if (sDiv) {
-        var sDivHeight = sDiv.clientWidth / 2
+        var sDivHeight
+        if (sDiv.clientWidth < 250) { sDivHeight = sDiv.clientWidth } else { sDivHeight = sDiv.clientWidth / 1.5 }
         sDiv.setAttribute('style', 'height: ' + sDivHeight + 'px !important')
       }
     }

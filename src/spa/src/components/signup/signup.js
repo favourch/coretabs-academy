@@ -43,7 +43,10 @@ export default {
       root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v4 = 0 } })
       root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3 + root.vs.v4
     },
-    submit() { },
+    submit() {
+      var root = this
+      this.$auth.registration(root)
+    },
     setAvatarsHeight() {
       var aDiv = document.querySelector('#avatars')
       if (aDiv) {
@@ -76,12 +79,12 @@ export default {
 
     this.unRules = [
       v => !!v || '',
-      v => (v && v.length <= 20) || this.form.username_length_error
+      v => (v && v.length <= 8) || this.form.username_length_error
     ]
 
     this.pwRules = [
       v => !!v || '',
-      v => (v && v.length >= 10) || this.form.password_length_error
+      v => (v && v.length >= 8) || this.form.password_length_error
     ]
   },
   mounted() {

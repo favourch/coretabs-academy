@@ -1,4 +1,5 @@
 /* eslint-disable */
+import AuthAPI from './auth'
 import WorkshopsAPI from './workshops'
 import showdown from 'showdown'
 
@@ -18,6 +19,7 @@ const markdown = new showdown.Converter({
 
 export default {
   install: (Vue) => {
+    Vue.prototype.$auth = AuthAPI
     Vue.prototype.$api = WorkshopsAPI
     
     Vue.prototype.$util = {

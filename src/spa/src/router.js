@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store/app.store'
 import HomeComponent from './components/home/home.vue'
 import NotReadyComponent from './components/not-ready/not-ready.vue'
 import AboutComponent from './components/about/about.vue'
@@ -7,11 +8,13 @@ import ContactUsComponent from './components/contact-us/contact-us.vue'
 import PageComponent from './components/page/page.vue'
 import SignUpComponent from './components/signup/signup.vue'
 import CongratulationsComponent from './components/congratulations/congratulations.vue'
+import ConfirmAccountComponent from './components/confirm-account/confirm-account.vue'
 import AccountConfirmedComponent from './components/account-confirmed/account-confirmed.vue'
 import ResetPasswordComponent from './components/reset-password/reset-password.vue'
 import ForgotPasswordComponent from './components/forgot-password/forgot-password.vue'
 import SignInComponent from './components/signin/signin.vue'
 import SelectTrackComponent from './components/select-track/select-track.vue'
+import LogoutComponent from './components/logout/logout.vue'
 import TracksComponent from './components/tracks/tracks.vue'
 import LessonComponent from './components/lesson/lesson.vue'
 import ModulesComponent from './components/modules/modules.vue'
@@ -21,7 +24,7 @@ import WorkshopsComponent from './components/workshops/workshops.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [{
     path: '/',
@@ -49,31 +52,48 @@ export default new Router({
   }, {
     name: 'signup',
     path: '/signup',
-    component: SignUpComponent
+    component: SignUpComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'congratulations',
     path: '/congratulations',
-    component: CongratulationsComponent
+    component: CongratulationsComponent,
+    props: true,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'confirm-account',
+    path: '/confirm-account/:key',
+    component: ConfirmAccountComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'account-confirmed',
     path: '/account-confirmed',
-    component: AccountConfirmedComponent
-  }, {
-    name: 'reset-password',
-    path: '/reset-password',
-    component: ResetPasswordComponent
+    component: AccountConfirmedComponent,
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'forgot-password',
     path: '/forgot-password',
-    component: ForgotPasswordComponent
+    component: ForgotPasswordComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'reset-password',
+    path: '/reset-password',
+    component: ResetPasswordComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'signin',
     path: '/signin',
-    component: SignInComponent
+    component: SignInComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'select-track',
     path: '/select-track',
     component: SelectTrackComponent
+  }, {
+    name: 'logout',
+    path: '/logout',
+    component: LogoutComponent,
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }, {
     name: '404',
     path: '/404',
@@ -90,18 +110,29 @@ export default new Router({
     path: '/:track',
     component: WorkshopsComponent,
     children: [{
-        name: 'workshop',
-        path: ':workshop',
-        component: WorkshopComponent
-    }]
+      name: 'workshop',
+      path: ':workshop',
+      component: WorkshopComponent
+    }],
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'modules',
     component: ModulesComponent,
     path: '/:track/:workshop/:module',
     children: [{
-        name: 'lessons',
-        path: ':lesson',
-        component: LessonComponent
-    }]
+      name: 'lessons',
+      path: ':lesson',
+      component: LessonComponent
+    }],
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }]
 })
+
+router.beforeEach(async(to, from, next) => {
+  if (window.localStorage.getItem('token') && !store.getters.isLogin) {
+    await Vue.prototype.$auth.checkUser(store)
+  }
+  next()
+})
+
+export default router

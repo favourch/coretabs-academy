@@ -15,11 +15,15 @@ export default {
     form() { return this.$store.state.i18n.form }
   },
   methods: {
-    submit() { },
+    submit() {
+      var root = this
+      this.$auth.resetConfirm(root)
+    },
     setSplashHeight() {
       var sDiv = document.querySelector('#splash')
       if (sDiv) {
-        var sDivHeight = sDiv.clientWidth / 2
+        var sDivHeight
+        if (sDiv.clientWidth < 250) { sDivHeight = sDiv.clientWidth / 1.25 } else { sDivHeight = sDiv.clientWidth / 2 }
         sDiv.setAttribute('style', 'height: ' + sDivHeight + 'px !important')
       }
     }
@@ -27,7 +31,7 @@ export default {
   created() {
     this.pwRules = [
       v => !!v || '',
-      v => (v && v.length >= 10) || this.form.password_length_error
+      v => (v && v.length >= 8) || this.form.password_length_error
     ]
   },
   mounted() {

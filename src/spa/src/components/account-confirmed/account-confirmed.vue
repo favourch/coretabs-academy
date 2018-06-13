@@ -11,7 +11,7 @@
               <p v-html="i18n.description_text"></p>
               <div id="buttons">
                 <v-btn round id="start" @click="start" v-html="i18n.start_btn_text"></v-btn>
-                <v-btn round id="dismiss" @click="dismiss" v-html="i18n.dismiss_btn_text"></v-btn>
+                <v-btn round id="dismiss" v-html="i18n.dismiss_btn_text" to="/select-track"></v-btn>
               </div>
             </v-form>
           </v-flex>
