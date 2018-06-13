@@ -14,11 +14,11 @@ services:
   app:
     container_name: 'coretabs_academy_django_api'
     build:
-      context: ../
-      dockerfile: ./docker/production.dockerfile
+      context: .
+      dockerfile: ./production.dockerfile
     command: sh -c "source ./venv/bin/activate && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi"
     volumes:
-       - ../venv/:/djangoapp/venv/
+      - ./src/venv/:/djangoapp/venv/
     environment:
       DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
       SECRET_KEY: zby2z^8x2(zlhlfa233=-ji9eq)$$&^aa-vjs@8a)u0h0t#eqh^
