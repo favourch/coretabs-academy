@@ -2,6 +2,12 @@
   <v-container id="forgot-password" fluid fill-height>
     <v-layout row align-center justify-center>
       <v-flex id="container" xs6>
+        <v-layout row justify-center>
+          <v-flex xs12>
+            <v-alert type="success" row xs12 class="mb-4" v-model="alert.success" v-text="alert.message"></v-alert>
+            <v-alert type="error" row xs12 class="mb-4" v-model="alert.error" v-text="alert.message"></v-alert>
+          </v-flex>
+        </v-layout>
         <v-layout row align-center justify-center>
           <v-flex id="splash" xs0 sm0 md6>
           </v-flex>
@@ -9,8 +15,6 @@
             <v-form v-model="valid" ref="form" lazy-validation>
               <h2 class="black--text mb-2" v-html="i18n.heading_text"></h2>
               <p v-html="i18n.forgot_text"></p>
-              <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
-              <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
               <v-text-field :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" required></v-text-field>
               <v-btn round id="submit" @click="submit" v-show="!alert.success" v-html="i18n.submit_btn_text" :disabled="!valid"></v-btn>
             </v-form>

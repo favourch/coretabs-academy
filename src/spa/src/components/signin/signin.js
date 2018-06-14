@@ -2,7 +2,6 @@ export default {
   name: 'SignInComponent',
   data: () => ({
     alert: {
-      success: false,
       error: false,
       message: ''
     },
@@ -29,7 +28,10 @@ export default {
       root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v2 = 0 } })
       root.valid = root.vs.v1 + root.vs.v2
     },
-    submit() { },
+    submit() {
+      var root = this
+      this.$auth.login(root)
+    },
     setSplashHeight() {
       var sDiv = document.querySelector('#splash')
       if (sDiv) {
@@ -45,8 +47,7 @@ export default {
     ]
 
     this.pwRules = [
-      v => !!v || '',
-      v => (v && v.length >= 10) || this.form.password_length_error
+      v => !!v || ''
     ]
   },
   mounted() {

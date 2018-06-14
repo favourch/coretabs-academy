@@ -3,14 +3,17 @@
     <v-container fluid fill-height>
       <v-layout row wrap align-center justify-center>
         <v-flex id="container" xs6>
+          <v-layout row justify-center>
+            <v-flex xs12>
+              <v-alert type="error" row xs12 class="mb-4" v-model="alert.error" v-text="alert.message"></v-alert>
+            </v-flex>
+          </v-layout>
           <v-layout row align-center justify-center>
             <v-flex id="splash" xs0 sm0 md6>
             </v-flex>
             <v-flex id="form" xs12 sm12 md6>
               <v-form ref="form" lazy-validation>
                 <h2 class="black--text mb-2" v-html="i18n.heading_text"></h2>
-                <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
-                <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
                 <v-text-field :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" required></v-text-field>
                 <v-text-field :label="form.password_label" v-model="password" :class="[alert.success ? 'disabled' : '']" :rules="pwRules" :disabled="alert.success" required
                               :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'"></v-text-field>

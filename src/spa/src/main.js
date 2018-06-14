@@ -1,12 +1,12 @@
+
+import axios from 'axios'
 import Vue from 'vue'
-import API from './api'
 import App from './app.vue'
 import Vuetify from 'vuetify'
 import router from './router'
 import store from './store/app.store'
-
-Vue.use(API)
-
+window.axios = axios
+Vue.use(require('./api/api').default)
 // User Vuetify material desing && customize own theme
 Vue.use(Vuetify, {
    theme: {

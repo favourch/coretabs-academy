@@ -18,7 +18,7 @@ RUN apk add jpeg-dev \
 #RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 
-COPY . ./djangoapp
+COPY ./src/ ./djangoapp
 WORKDIR ./djangoapp
 
 #RUN pip install --upgrade pip
@@ -32,8 +32,8 @@ WORKDIR ./djangoapp
 
 RUN apk del deps
 
-RUN echo "" >> ./coretabs/settings.py
-RUN echo "from coretabs.deploy_settings import *" >> ./coretabs/settings.py
+#RUN echo "" >> ./coretabs/settings/__init__.py
+#RUN echo "from coretabs.deploy_settings import *" >> ./coretabs/settings/__init__.py
 
 #RUN python manage.py collectstatic
 #RUN python manage.py migrate

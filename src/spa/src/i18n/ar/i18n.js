@@ -17,8 +17,9 @@ var i18n = `{
       "عن الأكاديمية"
     ],
     "user_navs": [
-      "الصف الدراسي",
-      "خروج"
+      "الملف الشخصي",
+      "خروج",
+      "عن الأكاديمية"
     ],
     "admin_navs": []
   },
@@ -82,6 +83,32 @@ var i18n = `{
     "track_2_text_en": "FRONT-END TRACK",
     "track_2_text_ar": "مسار تطوير واجهات الويب",
     "submit_btn_text": "ابدأ المسار"
+  },
+  "profile": {
+    "titles": {
+      "settings": "إعدادات الحساب",
+      "personal_info": "المعلومات الشخصية",
+      "change_track": "تغيير المسار",
+      "change_password": "تغيير كلمة السر"
+    },
+    "personal_info": {
+      "success_message": "تم تغيير بياناتك الشخصية بنجاح",
+      "logout_message": "يُرجى تأكيد بريدك الإلكتروني الجديد",
+      "submit_btn_text": "حفظ التغييرات"
+    },
+    "change_track": {
+      "success_message": "تم تغيير المسار بنجاح.",
+      "heading_text": "اختر المسار المطلوب",
+      "select_text": "اختر",
+      "hint_text": "بإمكانك العودة للمسار الحالي لاحقاُ للإكمال من حيث توقفت",
+      "submit_btn_text": "حفظ التغييرات"
+    },
+    "change_password": {
+      "old_password": "كلمة المرور الحالية",
+      "new_password": "كلمة المرور الجديدة",
+      "re_new_password": "تأكيد كلمة المرور الجديدة",
+      "submit_btn_text": "حفظ التغيرات"
+    }
   }
 }`
 

@@ -1,14 +1,21 @@
 export default {
   name: 'SelectTrackComponent',
-  components: {},
   data: () => ({
-    track_selected: '0'
+    track_selected: null
   }),
   computed: {
     i18n() { return this.$store.state.i18n.select_track }
   },
   methods: {
     select(track) { this.track_selected = track },
-    submit() { }
+    async submit() {
+      var root = this
+      if (await this.$auth.selectTrack(root)) {
+        this.$router.push('/')
+      }
+    }
+  },
+  created() {
+    this.track_selected = (this.$store.getters.profile('track')) ? this.$store.getters.profile('track') : null
   }
 }

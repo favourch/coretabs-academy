@@ -2,6 +2,12 @@
   <v-container id="congratulations" fluid fill-height>
     <v-layout row align-center justify-center>
       <v-flex id="container" xs6>
+        <v-layout row justify-center>
+          <v-flex xs12>
+            <v-alert type="success" row xs12 class="mb-4" v-model="alert.success" v-text="alert.message"></v-alert>
+            <v-alert type="error" row xs12 class="mb-4" v-model="alert.error" v-text="alert.message"></v-alert>
+          </v-flex>
+        </v-layout>
         <v-layout row align-center justify-center>
           <v-flex id="splash" xs0 sm0 md6>
           </v-flex>
