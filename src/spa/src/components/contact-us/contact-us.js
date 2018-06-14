@@ -29,29 +29,21 @@ export default {
       root.vs.v2 = 1
       root.vs.v3 = 1
 
-      root.fnRules.forEach((rule) => {
-        if (rule(root.fullname) !== true) {
-          root.vs.v1 = 0
-        }
-      })
-
-      root.emRules.forEach((rule) => {
-        if (rule(root.email) !== true) {
-          root.vs.v2 = 0
-        }
-      })
-
-      root.meRules.forEach((rule) => {
-        if (rule(root.message) !== true) {
-          root.vs.v3 = 0
-        }
-      })
+      root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = 0 } })
+      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = 0 } })
+      root.meRules.forEach((rule) => { if (rule(root.message) !== true) { root.vs.v3 = 0 } })
 
       root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3
     },
-    submit() { }
+    submit() {
+      var root = this
+      this.$auth.contact(root)
+    }
   },
   created() {
+    this.fullname = this.$store.getters.user('name') || ''
+    this.email = this.$store.getters.user('email') || ''
+
     this.fnRules = [
       v => !!v || '',
       v => (v && v.length <= 20) || this.form.fullname_length_error

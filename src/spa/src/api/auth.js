@@ -196,6 +196,28 @@ const AuthAPI = {
       }
     })
   },
+  contact(root) {
+    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
+    axios.post('/api/v1/contact/', {
+      name: root.fullname,
+      email: root.email,
+      body: root.message
+    }).then((response) => {
+      console.log(response.data)
+      root.alert.success = true
+      root.alert.message = response.data.detail
+    }).catch((error) => {
+      if (error.response) {
+        if (error.response.status === 400) {
+          for (var err in error.response.data) {
+            root.alert.error = true
+            root.alert.message = error.response.data[err][0]
+            break
+          }
+        }
+      }
+    })
+  },
   storeUser(store, data = null) {
     store.dispatch('isLogin', true)
     if (data !== null) {
