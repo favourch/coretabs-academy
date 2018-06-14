@@ -6,7 +6,7 @@ from library.models import Workshop, Track, TrackWorkshop, Module, WorkshopModul
 User = get_user_model()
 
 
-class EmailFactory(factory.Factory):
+class EmailFactory(factory.DjangoModelFactory):
     class Meta:
         model = EmailAddress
 
@@ -16,7 +16,7 @@ class EmailFactory(factory.Factory):
     verified = True
 
 
-class UserFactory(factory.Factory):
+class UserFactory(factory.DjangoModelFactory):
     class Meta:
         model = User
 
@@ -27,8 +27,19 @@ class UserFactory(factory.Factory):
     is_active = True
     is_superuser = False
 
+    @factory.post_generation
+    def lessons(self, create, extracted, **kwargs):
+        if not create:
+            # Simple build, do nothing.
+            return
 
-class WorkshopFactory(factory.Factory):
+        if extracted:
+            # A list of groups were passed in, use them
+            for lesson in extracted:
+                self.lessons.add(lesson)
+
+
+class WorkshopFactory(factory.DjangoModelFactory):
     class Meta:
         model = Workshop
 
@@ -42,14 +53,14 @@ class WorkshopFactory(factory.Factory):
     workshop_forums_url = factory.Faker('url')
 
 
-class TrackFactory(factory.Factory):
+class TrackFactory(factory.DjangoModelFactory):
     class Meta:
         model = Track
 
     title = 'Track'
 
 
-class TrackWorkshopFactory(factory.Factory):
+class TrackWorkshopFactory(factory.DjangoModelFactory):
     class Meta:
         model = TrackWorkshop
 
@@ -58,14 +69,14 @@ class TrackWorkshopFactory(factory.Factory):
     order = factory.Sequence(lambda n: n)
 
 
-class ModuleFactory(factory.Factory):
+class ModuleFactory(factory.DjangoModelFactory):
     class Meta:
         model = Module
 
-    title = 'Module'
+    title = factory.Sequence(lambda n: 'Module%d' % n)
 
 
-class WorkshopModuleFactory(factory.Factory):
+class WorkshopModuleFactory(factory.DjangoModelFactory):
     class Meta:
         model = WorkshopModule
 
@@ -74,35 +85,35 @@ class WorkshopModuleFactory(factory.Factory):
     order = factory.Sequence(lambda n: n)
 
 
-class MarkdownFactory(factory.Factory):
+class MarkdownFactory(factory.DjangoModelFactory):
     class Meta:
         model = MarkdownLesson
 
-    title = factory.Sequence(lambda n: 'lesson %d' % n)
+    title = factory.Sequence(lambda n: 'Lesson%d' % n)
     markdown_url = factory.Faker('url')
-    type = 0
+    type = 2
     module = ''
     order = factory.Sequence(lambda n: n)
 
 
-def create_users(users=1000):
+def create_users(track, users=1000):
+    lessons = MarkdownLesson.objects.all()
     for i in range(users):
-        user = UserFactory()
+        user = UserFactory(lessons=lessons)
+        user.profile.track = track
         user.save()
-        email = EmailFactory(user=user, email=user.email)
-        email.save()
+        EmailFactory(user=user, email=user.email)
+        print('{} users created'.format(i + 1))
 
 
 def create_track(track_name='Test Track', workshops=7, modules=5, lessons=5):
     track = TrackFactory(title=track_name)
-    track.save()
     for i in range(workshops):
         workshop = WorkshopFactory()
-        workshop.save()
-        TrackWorkshopFactory(workshop=workshop, track=track).save()
+        TrackWorkshopFactory(workshop=workshop, track=track)
         for j in range(modules):
             module = ModuleFactory()
-            module.save()
-            WorkshopModuleFactory(workshop=workshop, module=module).save()
+            WorkshopModuleFactory(workshop=workshop, module=module)
             for k in range(lessons):
-                MarkdownFactory(module=module).save()
+                MarkdownFactory(module=module)
+    return track
