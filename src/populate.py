@@ -1,4 +1,6 @@
 import factory
+from django.db import transaction
+
 from django.contrib.auth import get_user_model
 from allauth.account.models import EmailAddress
 from library.models import Workshop, Track, TrackWorkshop, Module, WorkshopModule, MarkdownLesson
@@ -95,9 +97,9 @@ class MarkdownFactory(factory.DjangoModelFactory):
     module = ''
     order = factory.Sequence(lambda n: n)
 
-
+@transaction.atomic
 def create_users(track, users=1000):
-    lessons = MarkdownLesson.objects.all()
+    lessons = list(MarkdownLesson.objects.all())
     for i in range(users):
         user = UserFactory(lessons=lessons)
         user.profile.track = track
@@ -106,6 +108,7 @@ def create_users(track, users=1000):
         print('{} users created'.format(i + 1))
 
 
+@transaction.atomic
 def create_track(track_name='Test Track', workshops=7, modules=5, lessons=5):
     track = TrackFactory(title=track_name)
     for i in range(workshops):
