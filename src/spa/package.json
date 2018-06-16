@@ -14,6 +14,7 @@
       "connect-history-api-fallback": "^1.5.0",
       "express": "^4.16.3",
       "js-cookie": "^2.2.0",
+      "phantomjs-prebuilt": "^2.1.16",
       "rfs": "^7.1.1",
       "serve": "^6.5.6",
       "showdown": "^1.8.6",
