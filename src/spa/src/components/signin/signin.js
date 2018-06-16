@@ -47,8 +47,7 @@ export default {
     ]
 
     this.pwRules = [
-      v => !!v || '',
-      v => (v && v.length >= 8) || this.form.password_length_error
+      v => !!v || ''
     ]
   },
   mounted() {
