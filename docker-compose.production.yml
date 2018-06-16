@@ -15,7 +15,7 @@ services:
     container_name: 'coretabs_academy_django_api'
     build:
       context: .
-      dockerfile: ./production.dockerfile
+      dockerfile: ./production.api.dockerfile
     command: sh -c "source ./venv/bin/activate && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi"
     volumes:
       - ./src/venv/:/djangoapp/venv/
@@ -26,3 +26,12 @@ services:
       - db:db
     ports:
       - "8000:8000"
+  spa:
+    container_name: 'coretabs_academy_spa'
+    build:
+      context: .
+      dockerfile: ./production.spa.dockerfile
+    command: sh -c "yarn start"
+    ports:
+      - "8001:3000"
+    

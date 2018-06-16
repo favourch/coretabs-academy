@@ -1,2 +1,6 @@
 /node_modules
+/node_modules2
+/public_html
 /design
+yarn.lock
+yarn-error.log
