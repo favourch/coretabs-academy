@@ -32,3 +32,4 @@ whitenoise==3.3.1
 wrapt==1.10.11
 django-logging-json==1.15
 raven==6.9.0
+django-cors-headers==2.2.0
