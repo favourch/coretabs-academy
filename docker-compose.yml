@@ -1,13 +1,22 @@
 version: '3'
 
 services:
+  spa:
+    container_name: 'coretabs_academy_spa_dev'
+    image: "node:alpine"
+    working_dir: /home/node/app
+    volumes:
+      - ./src/spa/:/home/node/app
+    ports:
+      - "8081:8080"
+    command: sh -c "yarn install && yarn run serve"
   app:
     container_name: 'coretabs_academy_django_api_dev'
     build:
       context: .
       dockerfile: ./development.dockerfile
-    command: sh -c "source ./venv/bin/activate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./src/:/djangoapp/
     ports:
       - "8000:8000"
+    command: sh -c "source ./venv/bin/activate && python manage.py runserver 0.0.0.0:8000"
