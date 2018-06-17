@@ -1,5 +1,7 @@
 FROM python:alpine3.7
 
+# Install libraries
+
 RUN apk update
 RUN apk upgrade
 RUN apk add --virtual deps gcc python-dev linux-headers musl-dev postgresql-dev
@@ -14,31 +16,16 @@ RUN apk add jpeg-dev \
     tcl-dev \
     harfbuzz-dev \
     fribidi-dev
-#RUN apk add --no-cache bash
-#RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
+RUN apk del deps
+
+# Copy from current folder
 
 COPY ./src/ ./djangoapp
 WORKDIR ./djangoapp
 
-#RUN pip install --upgrade pip
-#RUN pip install --upgrade setuptools
+# Intall dependencies 
 
-#RUN pip install virtualenv
-#RUN virtualenv venv
-#RUN source ./venv/bin/activate
-
-#RUN pip install -r requirements.txt
-
-RUN apk del deps
-
-#RUN echo "" >> ./coretabs/settings/__init__.py
-#RUN echo "from coretabs.deploy_settings import *" >> ./coretabs/settings/__init__.py
-
-#RUN python manage.py collectstatic
-#RUN python manage.py migrate
-#RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
-
-#CMD ["sh", "-c", "source ./venv/bin/activate && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi"]
-#CMD [ "sh", "-c", "ls && source ./venv/bin/activate && ./build.sh" ]
-#CMD ["./build.sh"]
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
+RUN pip install -r requirements.txt
