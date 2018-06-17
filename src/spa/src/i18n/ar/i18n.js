@@ -71,7 +71,7 @@ var i18n = `{
     "username_length_error": "اسم المستخدم لا يجب أن يتجاوز 20 حرفًا",
     "password_label": "كلمة السر",
     "new_password_label": "كلمة المرور الجديدة",
-    "password_length_error": "كلمة السر يجب أن تتكون من 10 أحرف على الأقل",
+    "password_length_error": "كلمة السر يجب أن تتكون من 8 أحرف على الأقل",
     "message_label": "أدخل رسالتك هنا",
     "message_length_error": "الرسالة قصيرة جدًا"
   },

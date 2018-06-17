@@ -7,7 +7,7 @@ is_venv_exist = os.path.isdir(venv_path) & os.path.exists(venv_path)
 print(venv_path)
 print(platform.system())
 
-command = r"python manage.py runserver"
+command = r"python3 manage.py runserver"
 
 if platform.system() == "Windows":
     if not is_venv_exist:
