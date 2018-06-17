@@ -97,6 +97,18 @@ a {
    user-select: none !important;
 }
 
+.cursor-pointer {
+   cursor: pointer !important;
+}
+
+.cursor-text {
+   cursor: text !important;
+}
+
+.cursor-default {
+   cursor: default !important;
+}
+
 .text-left {
    text-align: left !important;
 }
@@ -132,7 +144,7 @@ a {
 }
 
 .menu__content {
-   min-width: 11vw !important;
+   // min-width: 11vw !important;
 }
 
 .main-container {

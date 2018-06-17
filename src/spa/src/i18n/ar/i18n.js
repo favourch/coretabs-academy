@@ -9,6 +9,7 @@ var i18n = `{
   "app": {
     "lang": "ar",
     "direction": "rtl",
+    "rev_direction": "ltr",
     "progress": {
       "pageText": "جارٍ تحميل الصفحة",
       "lessonText": "جارٍ تحميل الدرس"
