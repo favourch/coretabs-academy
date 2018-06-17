@@ -1,6 +1,9 @@
-import about from './about'
 import page from './page'
 import auth from './auth'
+import about from './about'
+import lesson from './lesson'
+import workshop from './workshop'
+import workshops from './workshops'
 
 var i18n = `{
   "app": {
@@ -56,6 +59,9 @@ var i18n = `{
     "yes_btn_text": "نعم، اكتشف ميولي"
   },
   "about": ${JSON.stringify(about)},
+  "lesson": ${JSON.stringify(lesson)},
+  "workshop": ${JSON.stringify(workshop)},
+  "workshops": ${JSON.stringify(workshops)},
   "form": {
     "fullname_label": "اسمك الكامل",
     "fullname_length_error": "اسم المستخدم لا يجب أن يتجاوز 20 حرفًا",

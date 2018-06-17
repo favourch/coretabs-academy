@@ -4,7 +4,7 @@
    <v-navigation-drawer id="sidenav" app :right="drawer.isRight" v-model="drawer.isOpen" :width="$store.state.css.workshops.drawerWidth" hide-overlay>
       <v-toolbar flat>
          <v-toolbar-side-icon v-on:click="drawer.isOpen=!drawer.isOpen"></v-toolbar-side-icon>
-         <v-toolbar-title>{{title}}</v-toolbar-title>
+         <v-toolbar-title v-html="i18n.workshops.title"></v-toolbar-title>
       </v-toolbar>
       <v-list class="py-0">
          <v-stepper v-model="current.workshop.index" vertical class="py-0">
