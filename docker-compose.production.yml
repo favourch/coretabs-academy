@@ -16,9 +16,9 @@ services:
     build:
       context: .
       dockerfile: ./production.api.dockerfile
-    command: sh -c "source ./venv/bin/activate && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi"
-    volumes:
-      - ./src/venv/:/djangoapp/venv/
+    command: sh -c "gunicorn --bind 0.0.0.0:8000 coretabs.wsgi"
+    #volumes:
+    #  - ./src/venv/:/djangoapp/venv/
     environment:
       DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
       SECRET_KEY: zby2z^8x2(zlhlfa233=-ji9eq)$$&^aa-vjs@8a)u0h0t#eqh^

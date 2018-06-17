@@ -17,7 +17,9 @@ RUN apk add jpeg-dev \
     harfbuzz-dev \
     fribidi-dev
 
-RUN apk del deps
+
+
+#RUN PATH=$PATH:/opt/local/lib/postgresql91/bin/
 
 # Copy from current folder
 
@@ -29,3 +31,5 @@ WORKDIR ./djangoapp
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
 RUN pip install -r requirements.txt
+
+RUN apk del deps
