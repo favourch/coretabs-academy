@@ -25,6 +25,12 @@ export default {
       }
    },
    created() {
+      if (window.localStorage.getItem('token') !== null && typeof window.localStorage.getItem('user') !== null) {
+         this.$auth.storeUser(this.$store, {
+            key: window.localStorage.getItem('token'),
+            user: window.localStorage.getItem('user')
+         })
+      }
       this.$store.state.direction = this.i18n.direction
       this.$store.state.rev_direction = this.i18n.rev_direction
       this.$store.state.progress = {

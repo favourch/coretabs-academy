@@ -219,8 +219,8 @@ const AuthAPI = {
     })
   },
   storeUser(store, data = null) {
-    store.dispatch('isLogin', true)
     if (data !== null) {
+      store.dispatch('isLogin', true)
       window.localStorage.setItem('token', data.key)
       window.localStorage.setItem('user', JSON.stringify(data.user))
       return store.dispatch('user', { prop: null, data: data.user })
