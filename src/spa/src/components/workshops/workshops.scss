@@ -11,7 +11,7 @@ $drawer-group-height: 60px;
 
 main.workshop-main-content,
 main.workshops-main-content {
-   padding-top: $workshop-header-height !important;
+   padding-top: $inner-header-height !important;
    background: $workshop-content-background !important;
 }
 
@@ -95,14 +95,14 @@ html[dir='rtl'] {
       .toolbar {
          background: $grading-color !important;
          padding: 0 0 0 $scrollbar-width !important;
-         height: $workshop-header-height !important;
-         min-height: $workshop-header-height !important;
-         max-height: $workshop-header-height !important;
+         height: $inner-header-height !important;
+         min-height: $inner-header-height !important;
+         max-height: $inner-header-height !important;
 
          .toolbar__content {
             height: auto !important;
-            min-height: $workshop-header-height !important;
-            max-height: $workshop-header-height !important;
+            min-height: $inner-header-height !important;
+            max-height: $inner-header-height !important;
 
             .btn {
                color: $white-color !important;
@@ -129,14 +129,14 @@ html[dir='rtl'] {
          direction: rtl !important;
          overflow: hidden !important;
          background: $workshop-drawer-background !important;
-         height: calc(100vh - #{$workshop-header-height}) !important;
+         height: calc(100vh - #{$inner-header-height}) !important;
 
          .stepper {
             box-shadow: none !important;
             overflow-y: scroll !important;
             overflow-x: hidden !important;
             background: $workshop-drawer-background !important;
-            height: calc(100vh - #{$workshop-header-height}) !important;
+            height: calc(100vh - #{$inner-header-height}) !important;
 
             &::-webkit-scrollbar {
                background: $shadow-color !important;

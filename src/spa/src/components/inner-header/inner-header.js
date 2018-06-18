@@ -1,7 +1,4 @@
 export default {
-   name: 'WorkshopHeaderComponent',
-   components: {},
-   data: () => ({}),
-   props: ['title'],
-   created() {}
+  name: 'InnerHeaderComponent',
+  props: ['title']
 }

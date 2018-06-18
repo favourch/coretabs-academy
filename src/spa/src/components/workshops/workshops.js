@@ -1,8 +1,8 @@
-import WorkshopHeaderComponent from '../workshop-header/workshop-header.vue'
+import InnerHeaderComponent from '../inner-header/inner-header.vue'
 export default {
    name: 'WorkshopsComponent',
    components: {
-      WorkshopHeaderComponent
+      InnerHeaderComponent
    },
    data: () => ({
       height: 0,
@@ -36,7 +36,7 @@ export default {
          }
       },
       onResize() {
-         let selector = '.workshops >.workshop-header >.toolbar'
+         let selector = '.workshops >.inner-header >.toolbar'
          if (document.querySelector(selector) !== null) {
             this.height = window.innerHeight - document.querySelector(selector).offsetHeight
          } else {

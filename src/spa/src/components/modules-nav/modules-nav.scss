@@ -86,7 +86,7 @@ html[dir='rtl'] {
       direction: rtl !important;
       overflow: hidden !important;
       background: $white-color !important;
-      height: calc(100vh - #{$workshop-header-height}) !important;
+      height: calc(100vh - #{$inner-header-height}) !important;
 
       @media (max-width: 960px) {
         height: auto !important;
@@ -97,7 +97,7 @@ html[dir='rtl'] {
          overflow-y: scroll !important;
          overflow-x: hidden !important;
          background: $workshop-drawer-background !important;
-         height: calc(100vh - #{$workshop-header-height}) !important;
+         height: calc(100vh - #{$inner-header-height}) !important;
 
          @media (max-width: 960px) {
            height: auto !important;

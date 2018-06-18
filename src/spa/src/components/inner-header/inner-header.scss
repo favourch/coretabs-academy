@@ -1,20 +1,20 @@
 @import '~@/assets/styles/vars';
 @import '~@/../node_modules/rfs/scss/_rfs';
 /*=====================================
-Workshop Header Style
+Inner Header Style
 =======================================*/
 $toolbar-padding: 0 15px;
 
-.workshop-header {
+.inner-header {
    > .toolbar {
-      height: $workshop-header-height !important;
-      line-height: $workshop-header-height !important;
+      height: $inner-header-height !important;
+      line-height: $inner-header-height !important;
       box-shadow: 0 10px 10px -2px rgba(0, 0, 0, 0.025), 0 10px 10px 0 rgba(0, 0, 0, 0.025), 0 0px 10px 0 rgba(0, 0, 0, 0.025) !important;
 
       .toolbar__content {
          padding: $toolbar-padding !important;
-         height: $workshop-header-height !important;
-         line-height: $workshop-header-height !important;
+         height: $inner-header-height !important;
+         line-height: $inner-header-height !important;
 
          .toolbar__title {
             font-size: 16px !important;
@@ -23,30 +23,30 @@ $toolbar-padding: 0 15px;
          }
 
          .brand-logo {
-            width: $workshop-header-height / 1.6 !important;
-            height: $workshop-header-height / 1.6 !important;
+            width: $inner-header-height / 1.6 !important;
+            height: $inner-header-height / 1.6 !important;
             background: $workshop-drawer-background !important;
 
             a {
-               width: $workshop-header-height / 1.6 !important;
-               height: $workshop-header-height / 1.6 !important;
+               width: $inner-header-height / 1.6 !important;
+               height: $inner-header-height / 1.6 !important;
 
                img {
-                  width: $workshop-header-height / 2 !important;
-                  height: $workshop-header-height / 2 !important;
+                  width: $inner-header-height / 2 !important;
+                  height: $inner-header-height / 2 !important;
                }
             }
          }
 
          .btn {
             color: $primary-color !important;
-            width: $workshop-header-height / 1.5 !important;
-            height: $workshop-header-height / 1.5 !important;
+            width: $inner-header-height / 1.5 !important;
+            height: $inner-header-height / 1.5 !important;
 
             .icon {
-               width: $workshop-header-height / 2 !important;
-               height: $workshop-header-height / 2 !important;
-               font-size: $workshop-header-height / 2 !important;
+               width: $inner-header-height / 2 !important;
+               height: $inner-header-height / 2 !important;
+               font-size: $inner-header-height / 2 !important;
             }
          }
       }

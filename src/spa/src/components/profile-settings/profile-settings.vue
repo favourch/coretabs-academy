@@ -1,6 +1,6 @@
 <template>
   <div class="settings">
-    <workshop-header-component :title="header"></workshop-header-component>
+    <inner-header-component :title="header"></inner-header-component>
     <v-navigation-drawer id="sidenav" app :right="drawer.isRight" v-model="drawer.isOpen" :width="$store.state.css.workshops.drawerWidth"
       hide-overlay>
       <v-toolbar flat>
