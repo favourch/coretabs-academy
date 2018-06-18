@@ -6,49 +6,137 @@ Inner Header Style
 $toolbar-padding: 0 15px;
 
 .inner-header {
-   > .toolbar {
+  > .toolbar {
+    height: $inner-header-height !important;
+    line-height: $inner-header-height !important;
+    box-shadow: 0 10px 10px -2px rgba(0, 0, 0, 0.025), 0 10px 10px 0 rgba(0, 0, 0, 0.025), 0 0px 10px 0 rgba(0, 0, 0, 0.025) !important;
+
+    .toolbar__content {
+      padding: $toolbar-padding !important;
       height: $inner-header-height !important;
       line-height: $inner-header-height !important;
-      box-shadow: 0 10px 10px -2px rgba(0, 0, 0, 0.025), 0 10px 10px 0 rgba(0, 0, 0, 0.025), 0 0px 10px 0 rgba(0, 0, 0, 0.025) !important;
+      max-width: 960px;
 
-      .toolbar__content {
-         padding: $toolbar-padding !important;
-         height: $inner-header-height !important;
-         line-height: $inner-header-height !important;
-
-         .toolbar__title {
-            font-size: 16px !important;
-            font-weight: bold !important;
-            color: $black-color !important;
-         }
-
-         .brand-logo {
-            width: $inner-header-height / 1.6 !important;
-            height: $inner-header-height / 1.6 !important;
-            background: $workshop-drawer-background !important;
-
-            a {
-               width: $inner-header-height / 1.6 !important;
-               height: $inner-header-height / 1.6 !important;
-
-               img {
-                  width: $inner-header-height / 2 !important;
-                  height: $inner-header-height / 2 !important;
-               }
-            }
-         }
-
-         .btn {
-            color: $primary-color !important;
-            width: $inner-header-height / 1.5 !important;
-            height: $inner-header-height / 1.5 !important;
-
-            .icon {
-               width: $inner-header-height / 2 !important;
-               height: $inner-header-height / 2 !important;
-               font-size: $inner-header-height / 2 !important;
-            }
-         }
+      .toolbar__title {
+        font-size: 16px !important;
+        font-weight: bold !important;
+        color: $black-color !important;
       }
-   }
+
+      nav {
+        height: $inner-header-height - 10 !important;
+        margin: 5px 0;
+
+        a {
+          float: left;
+          width: $inner-header-height - 10 !important;
+          height: $inner-header-height - 10 !important;
+          margin-right: 10px;
+
+          img {
+            display: block;
+            width: $inner-header-height - 10 !important;
+            height: $inner-header-height - 10 !important;
+          }
+        }
+
+        .menu {
+          display: inline-block;
+          width: $inner-header-height - 10 !important;
+          height: $inner-header-height - 10 !important;
+          vertical-align: top;
+          
+          .btn {
+            background: $workshop-drawer-background !important;
+            border-radius: 50%;
+            box-shadow: unset;
+            margin: 0;
+            min-width: unset;
+            
+            .btn__content {
+              overflow: hidden;
+              width: $inner-header-height - 10;
+              padding: 0;
+
+              img {
+                display: block;
+                width: $inner-header-height - 10 !important;
+                height: $inner-header-height - 10 !important;
+              }
+            }
+          }
+        }
+      }
+
+      .btn {
+        color: $primary-color !important;
+        width: $inner-header-height / 1.5 !important;
+        height: $inner-header-height / 1.5 !important;
+
+        .icon {
+          width: $inner-header-height / 2 !important;
+          height: $inner-header-height / 2 !important;
+          font-size: $inner-header-height / 2 !important;
+        }
+      }
+    }
+  }
+}
+
+.menu__content {
+  top: -1px !important;
+  margin-left: -10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.25) !important;
+  width: 300px;
+
+  a {
+    color: $black-color;
+  }
+  
+  .list {
+    padding: 0;
+    &:first-of-type {
+      padding: 5px 0;
+      background-color: #FAFAFA;
+    }
+
+    .list__tile {
+      direction: ltr;
+
+      &.list__tile--avatar {
+        height: 40px;
+        padding: 0 10px;
+      }
+    }
+    .notification {
+      .list__tile {
+        direction: rtl;
+        width: 100%;
+        min-height: 24px;
+        height: unset;
+        padding: 5px 10px;
+        font-size: 12px;
+
+        .list__tile__title {
+          text-align: right;
+          min-height: 24px;
+        }
+      }
+
+      &.unread {
+        background-color: #d1f0ff;
+      }
+    }
+  }
+
+  .card__actions {
+    justify-content: center;
+    padding: 10px 0;
+    
+    a {
+      display: flex;
+    }
+  }
 }

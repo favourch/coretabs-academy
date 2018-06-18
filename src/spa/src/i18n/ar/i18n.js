@@ -27,6 +27,10 @@ var i18n = `{
     ],
     "admin_navs": []
   },
+  "inner_header": {
+    "profile_settings_btn_text": "إعدادات الحساب",
+    "logout_btn_text": "تسجيل خروج"
+  },
   "home": {
     "heading_text": "إن تعلم البرمجة شيء رائع!",
     "description_text_1": "الأروع من ذلك أن أكاديمية Coretabs ستقوم بتوجيهك لبدأ تعلمها عبر عمل تطبيقات من أول يوم.",
