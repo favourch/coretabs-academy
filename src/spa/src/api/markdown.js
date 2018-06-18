@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Vue from 'vue'
 import showdown from 'showdown'
 
 showdown.setFlavor('github')

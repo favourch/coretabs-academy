@@ -74,6 +74,7 @@ export default {
           this.show = true
           this.role = 'default_navs'
           this.navs = this.default_navs
+          console.log(this.$store.getters.isLogin)
           if (this.$store.getters.isLogin) {
             this.role = 'user_navs'
             this.navs = this.user_navs

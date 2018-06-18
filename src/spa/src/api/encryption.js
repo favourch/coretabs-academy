@@ -1,6 +1,4 @@
 /* eslint-disable */
-import Vue from 'vue'
-
 const EncryptionAPI = {
    b64DecodeUnicode(str) {
       return decodeURIComponent(atob(str).split('').map(function(c) {
