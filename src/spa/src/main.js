@@ -7,13 +7,6 @@ import store from './store/app.store'
 
 axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
 
-axios.get('/api/v1/tracks/', {
-}).then((response) => {
-    console.log(response)
-}).catch((error) => {
-    console.log(error)
-})
-
 window.axios = axios
 Vue.use(require('./api/api').default)
 // User Vuetify material desing && customize own theme
