@@ -83,7 +83,7 @@ $toolbar-padding: 0 15px;
   }
 }
 
-.menu__content {
+.menu__content.notifications-menu {
   top: -1px !important;
   margin-left: -10px;
   border-bottom-left-radius: 10px;
@@ -95,48 +95,52 @@ $toolbar-padding: 0 15px;
     color: $black-color;
   }
   
-  .list {
+  .card {
     padding: 0;
-    &:first-of-type {
-      padding: 5px 0;
-      background-color: #FAFAFA;
-    }
-
-    .list__tile {
-      direction: ltr;
-
-      &.list__tile--avatar {
-        height: 40px;
-        padding: 0 10px;
+    
+    .list {
+      padding: 0;
+      &:first-of-type {
+        padding: 5px 0;
+        background-color: #FAFAFA;
       }
-    }
-    .notification {
+  
       .list__tile {
-        direction: rtl;
-        width: 100%;
-        min-height: 24px;
-        height: unset;
-        padding: 5px 10px;
-        font-size: 12px;
-
-        .list__tile__title {
-          text-align: right;
-          min-height: 24px;
+        direction: ltr;
+  
+        &.list__tile--avatar {
+          height: 40px;
+          padding: 0 10px;
         }
       }
-
-      &.unread {
-        background-color: #d1f0ff;
+      .notification {
+        .list__tile {
+          direction: rtl;
+          width: 100%;
+          min-height: 24px;
+          height: unset;
+          padding: 5px 10px;
+          font-size: 12px;
+  
+          .list__tile__title {
+            text-align: right;
+            min-height: 24px;
+          }
+        }
+  
+        &.unread {
+          background-color: #d1f0ff;
+        }
       }
     }
-  }
-
-  .card__actions {
-    justify-content: center;
-    padding: 10px 0;
-    
-    a {
-      display: flex;
+  
+    .card__actions {
+      justify-content: center;
+      padding: 10px 0;
+      
+      a {
+        display: flex;
+      }
     }
   }
 }

@@ -27,7 +27,7 @@ export default {
     }
   },
   created() {
-    let selector = '.workshops > .inner-header > .toolbar'
+    let selector = '.settings > .inner-header > .toolbar'
     if (document.querySelector(selector) !== null) {
       this.y = document.querySelector(selector).clientHeight
     } else {
