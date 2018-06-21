@@ -8,6 +8,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '.herokuapp.com',
+    '.compute.amazonaws.com',
     'www.coretabs.net',
     'coretabs.net',
     '192.168.99.100',
