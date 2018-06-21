@@ -1,5 +1,5 @@
 db.sqlite3
-
+src/spa/node_modules/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

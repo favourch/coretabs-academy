@@ -1,11 +1,15 @@
-import about from './about'
 import page from './page'
 import auth from './auth'
+import about from './about'
+import lesson from './lesson'
+import workshop from './workshop'
+import workshops from './workshops'
 
 var i18n = `{
   "app": {
     "lang": "ar",
     "direction": "rtl",
+    "rev_direction": "ltr",
     "progress": {
       "pageText": "جارٍ تحميل الصفحة",
       "lessonText": "جارٍ تحميل الدرس"
@@ -22,6 +26,10 @@ var i18n = `{
       "عن الأكاديمية"
     ],
     "admin_navs": []
+  },
+  "inner_header": {
+    "profile_settings_btn_text": "إعدادات الحساب",
+    "logout_btn_text": "تسجيل خروج"
   },
   "home": {
     "heading_text": "إن تعلم البرمجة شيء رائع!",
@@ -56,6 +64,9 @@ var i18n = `{
     "yes_btn_text": "نعم، اكتشف ميولي"
   },
   "about": ${JSON.stringify(about)},
+  "lesson": ${JSON.stringify(lesson)},
+  "workshop": ${JSON.stringify(workshop)},
+  "workshops": ${JSON.stringify(workshops)},
   "form": {
     "fullname_label": "اسمك الكامل",
     "fullname_length_error": "اسم المستخدم لا يجب أن يتجاوز 20 حرفًا",
@@ -65,7 +76,7 @@ var i18n = `{
     "username_length_error": "اسم المستخدم لا يجب أن يتجاوز 20 حرفًا",
     "password_label": "كلمة السر",
     "new_password_label": "كلمة المرور الجديدة",
-    "password_length_error": "كلمة السر يجب أن تتكون من 10 أحرف على الأقل",
+    "password_length_error": "كلمة السر يجب أن تتكون من 8 أحرف على الأقل",
     "message_label": "أدخل رسالتك هنا",
     "message_length_error": "الرسالة قصيرة جدًا"
   },

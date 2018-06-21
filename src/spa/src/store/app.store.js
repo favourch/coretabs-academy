@@ -9,6 +9,7 @@ export default new Vuex.Store({
     i18n: i18n,
     icon: '',
     direction: '',
+    rev_direction: '',
     logo: '',
     forumLogo: '',
     isLogin: false,
