@@ -33,3 +33,4 @@ wrapt==1.10.11
 django-logging-json==1.15
 raven==6.9.0
 django-cors-headers==2.2.0
+factory-boy==2.11.1
