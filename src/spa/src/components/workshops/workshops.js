@@ -62,7 +62,6 @@ export default {
       }
    },
    created() {
-      this.onResize()
       this.$on('toggle-drawer', function(data) {
          this.drawer.isOpen = !this.drawer.isOpen
       })

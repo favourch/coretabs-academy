@@ -81,7 +81,7 @@ export default {
          }
       },
       onResize() {
-         let selector = '.modules >.workshop-header >.toolbar'
+         let selector = '.modules >.inner-header >.toolbar'
          if (document.querySelector(selector) !== null) {
             this.height = window.innerHeight - document.querySelector(selector).offsetHeight
          } else {

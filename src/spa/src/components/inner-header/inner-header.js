@@ -27,16 +27,6 @@ export default {
     }
   },
   created() {
-    let selector = '.settings > .inner-header > .toolbar'
-    if (document.querySelector(selector) !== null) {
-      this.y = document.querySelector(selector).clientHeight
-    } else {
-      let self = this
-      this.timeout = setTimeout(() => {
-        self.y = document.querySelector(selector).clientHeight
-      }, 100)
-    }
-
     this.notifications = notifications
   },
   mounted() {
