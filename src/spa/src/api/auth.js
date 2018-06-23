@@ -110,6 +110,18 @@ const AuthAPI = {
       }
     })
   },
+  get_notifications(root) {
+    axios.get('https://forums.coretabs.net/notifications.json?api_key=e0545b44febdf89e6cc92e16b34a4e8fb63d72587487ff12b799ab792c8da252&api_username=' + root.$store.getters.user('username'))
+    .then((response) => {
+      for (var notification in response.data.notifications.slice(0, 5)) {
+        if (!notification.read) {
+          root.unread = true
+          break
+        }
+      }
+      root.notifications = response.data
+    })
+  },
   async checkUser(store) {
     await axios.get('/api/v1/auth/user/').then(async () => {
       await this.storeUser(store)

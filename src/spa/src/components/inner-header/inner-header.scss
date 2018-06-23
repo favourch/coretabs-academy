@@ -52,6 +52,18 @@ $toolbar-padding: 0 15px;
             box-shadow: unset;
             margin: 0;
             min-width: unset;
+
+            &.unread::after {
+              position: absolute;
+              top: 0;
+              right: 0;
+              content: '';
+              display: block;
+              border-radius: 5px;
+              width: 10px;
+              height: 10px;
+              background-color: #e74c3c;
+            }
             
             .btn__content {
               overflow: hidden;

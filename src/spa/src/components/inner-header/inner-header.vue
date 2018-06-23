@@ -8,7 +8,7 @@
         <img :src="$store.state.icon" alt="coretabs" />
       </router-link>
       <v-menu :close-on-content-click="false" v-model="menu" content-class="notifications-menu" offset-y>
-        <v-btn slot="activator" class="menu">
+        <v-btn slot="activator" class="menu" :class="{'unread': unread}" @click="unread = false">
           <img :src="$store.getters.user('avatar_url')" />
         </v-btn>
         <v-card>
@@ -20,8 +20,8 @@
               <v-list-tile-title v-html="$store.getters.user('name')"></v-list-tile-title>
             </v-list-tile>
           </v-list>
-          <v-list>
-            <v-list-tile v-for="(notification, i) in notifications.notifications" v-if="notification.notification_type != 12" :key="i" :class="(!notification.read) ? 'notification unread' : 'notification'">
+          <v-list v-if="notifications">
+            <v-list-tile v-for="(notification, i) in notifications.notifications.slice(0, 5)" :key="i" v-if="notification.notification_type != 12" class="notification" :class="{'unread': !notification.read}">
               <v-list-tile-title>
                 <a :href="`https://forums.coretabs.net/t/${notification.slug}/${notification.topic_id}${(notification.post_number > 1) ? '/' + notification.post_number : ''}`" target="_blank">
                   <v-icon>
