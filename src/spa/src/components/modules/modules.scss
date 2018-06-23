@@ -9,7 +9,7 @@ $ar-padding: 0 15px 0 0;
 
 main.lessons-main-content,
 main.modules-main-content {
-   padding-top: $workshop-header-height !important;
+   padding-top: $inner-header-height !important;
    background: $workshop-content-background !important;
 }
 
@@ -43,13 +43,13 @@ html[dir='rtl'] {
          height: auto !important;
          padding: $padding !important;
          background: $grading-color !important;
-         min-height: $workshop-header-height !important;
-         max-height: $workshop-header-height !important;
+         min-height: $inner-header-height !important;
+         max-height: $inner-header-height !important;
 
          .toolbar__content {
             height: auto !important;
-            min-height: $workshop-header-height !important;
-            max-height: $workshop-header-height !important;
+            min-height: $inner-header-height !important;
+            max-height: $inner-header-height !important;
 
             .btn {
                width: 25px !important;

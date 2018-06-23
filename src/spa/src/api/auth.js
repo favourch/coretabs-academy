@@ -12,7 +12,7 @@ const AuthAPI = {
       password2: root.password,
       email: root.email
     }).then((response) => {
-      root.$router.push({name: 'congratulations', params: { email: root.email }})
+      root.$router.push({ name: 'congratulations', params: { email: root.email } })
     }).catch((error) => {
       if (error.response) {
         root.alert.error = true
@@ -100,17 +100,34 @@ const AuthAPI = {
           }
         }
         if (error.response.status === 403) {
-          root.$router.push({name: 'congratulations', params: { email: root.email }})
+          root.$router.push({
+            name: 'congratulations',
+            params: {
+                email: root.email
+            }
+          })
         }
       }
     })
   },
-  async checkUser(store) {
-    await axios.get('/api/v1/auth/user/').then(async() => {
-      await this.storeUser(store)
-    }).catch(async() => {
-      await this.removeUser(store)
+  get_notifications(root) {
+    axios.get('https://forums.coretabs.net/notifications.json?api_key=e0545b44febdf89e6cc92e16b34a4e8fb63d72587487ff12b799ab792c8da252&api_username=' + root.$store.getters.user('username'))
+    .then((response) => {
+      for (var notification in response.data.notifications.slice(0, 5)) {
+        if (!notification.read) {
+          root.unread = true
+          break
+        }
+      }
+      root.notifications = response.data
     })
+  },
+  async checkUser(store) {
+    await axios.get('/api/v1/auth/user/').then(async () => {
+      await this.storeUser(store)
+    }).catch(async () => {
+      await this.removeUser(store)
+    })    
   },
   changeInfo(root) {
     let formData = new FormData()
@@ -122,7 +139,7 @@ const AuthAPI = {
     axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.patch('/api/v1/auth/user/', formData, {
       headers: {
-          'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data'
       }
     }).then((response) => {
       root.alert.success = true
@@ -133,7 +150,6 @@ const AuthAPI = {
         if (root.$store.getters.user('avatar_url') !== root.avatar_url) {
           root.$store.dispatch('user', { prop: 'avatar_url', data: '/media/avatars/' + root.username + '/resized/80/' + root.validImage.imageData.name })
         }
-
         this.updateUser(root.$store)
       } else {
         root.alert.message = root.i18n.logout_message
@@ -149,7 +165,9 @@ const AuthAPI = {
             root.alert.message = error.response.data[err][0]
             break
           }
-        } else { console.log(error.response.status + ': ' + error.response.data) }
+        } else {
+          console.log(error.response.status + ': ' + error.response.data)
+        }
       }
     })
   },
@@ -172,7 +190,8 @@ const AuthAPI = {
         track: root.track_selected
       }
     }).then((response) => {
-      root.$store.dispatch('profile', { prop: 'track', data: root.track_selected })
+      root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
+      root.$store.dispatch('profile', { prop: 'track_slug', data: response.data.profile.track_slug })
       this.updateUser(root.$store)
       return true
     })
@@ -203,7 +222,6 @@ const AuthAPI = {
       email: root.email,
       body: root.message
     }).then((response) => {
-      console.log(response.data)
       root.alert.success = true
       root.alert.message = response.data.detail
     }).catch((error) => {
@@ -221,21 +239,21 @@ const AuthAPI = {
   storeUser(store, data = null) {
     store.dispatch('isLogin', true)
     if (data !== null) {
-      window.localStorage.setItem('token', data.key)
-      window.localStorage.setItem('user', JSON.stringify(data.user))
+      window.localStorage.setItem('token', Vue.prototype.$encryption.b64EncodeUnicode(data.key))
+      window.localStorage.setItem('user', Vue.prototype.$encryption.b64EncodeUnicode(JSON.stringify(data.user)))
       return store.dispatch('user', { prop: null, data: data.user })
       .then((response) => {
         return response
       })
     } else {
-      return store.dispatch('user', { prop: null, data: JSON.parse(window.localStorage.getItem('user')) })
+      return store.dispatch('user', { prop: null, data: JSON.parse(Vue.prototype.$encryption.b64DecodeUnicode(window.localStorage.getItem('user'))) })
       .then((response) => {
         return response
       })
     }
   },
   updateUser(store) {
-    window.localStorage.setItem('user', JSON.stringify(store.getters.user(null)))
+    window.localStorage.setItem('user', Vue.prototype.$encryption.b64EncodeUnicode(JSON.stringify(store.getters.user(null))))
   },
   removeUser(store) {
     window.localStorage.removeItem('token')

@@ -1,8 +1,8 @@
-import WorkshopHeaderComponent from '../workshop-header/workshop-header.vue'
+import InnerHeaderComponent from '../inner-header/inner-header.vue'
 export default {
   name: 'ProfileSettingsComponent',
   components: {
-    WorkshopHeaderComponent
+    InnerHeaderComponent
   },
   data: () => ({
     header: '',

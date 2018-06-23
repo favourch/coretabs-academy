@@ -1,5 +1,5 @@
 <template>
-  <div dir="ltr">
+  <div :dir="$store.state.rev_direction">
     <v-container fluid>
       <v-layout row wrap>
         <v-flex xs12 md8 offset-md2 d-flex class="mother-container">
@@ -8,14 +8,16 @@
               <v-layout row wrap>
                 <v-flex xs12 sm4 md12 class="image-container">
                   <div class="pic-border">
-                    <img class="pic" :src="avatar_url" />
-                    <label for="file_uploader" class="leave">
+                     <label for="file_uploader" class="cursor-pointer">
+                        <img class="pic" :src="avatar_url" />
+                     </label>
+                    <label for="file_uploader" class="leave cursor-pointer">
                       <v-icon small>edit</v-icon>
                       <input @change="previewImage($event)" v-show="false" name="avatar" type="file" id="file_uploader" accept="image/*"/>
                     </label>
                   </div>
                 </v-flex>
-                <v-flex xs12 sm8 md12 d-flex justify-center align-center class="info-container">
+                <v-flex xs12 sm8 md12 d-flex justify-center align-center class="info-container no-select text-center">
                   <div class="">
                     <h3 v-html="fullname"></h3>
                     <span v-html="`@${username}`"></span>

@@ -1,10 +1,10 @@
 import ModulesNavComponent from '../modules-nav/modules-nav.vue'
-import WorkshopHeaderComponent from '../workshop-header/workshop-header.vue'
+import InnerHeaderComponent from '../inner-header/inner-header.vue'
 export default {
    name: 'ModulesComponent',
    components: {
       ModulesNavComponent,
-      WorkshopHeaderComponent
+      InnerHeaderComponent
    },
    data: () => ({
       height: 0,
@@ -33,7 +33,7 @@ export default {
          this.current.workshopURL = {
             name: 'workshop',
             params: {
-               workshop: this.$route.params.workshop,
+               workshop: this.$route.params.workshop
             }
          }
          this.loaded = true
@@ -65,7 +65,6 @@ export default {
             }).catch(err => {
                console.error(err)
             })
-
       },
       getCurrentLesson(lessons) {
          if (typeof this.$route.params.lesson !== 'undefined') {
@@ -82,7 +81,7 @@ export default {
          }
       },
       onResize() {
-         let selector = '.modules >.workshop-header >.toolbar'
+         let selector = '.modules >.inner-header >.toolbar'
          if (document.querySelector(selector) !== null) {
             this.height = window.innerHeight - document.querySelector(selector).offsetHeight
          } else {

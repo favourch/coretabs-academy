@@ -1,19 +1,11 @@
-
-import axios from 'axios'
 import Vue from 'vue'
+import axios from 'axios'
 import App from './app.vue'
 import Vuetify from 'vuetify'
 import router from './router'
 import store from './store/app.store'
 
-axios.defaults.baseURL = 'http://192.168.99.100:8000'
-
-axios.get('/api/v1/tracks/', {
-}).then((response) => {
-    console.log(response)
-}).catch((error) => {
-    console.log(error)
-})
+axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
 
 window.axios = axios
 Vue.use(require('./api/api').default)

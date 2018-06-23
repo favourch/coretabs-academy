@@ -6,30 +6,6 @@ export default {
       loaded: false,
       notes_content: '',
       lesson_content: '',
-      i18n: {
-         video: [{
-            icon: 'description',
-            text: 'ملاحظات الدرس'
-         }, {
-            icon: 'info',
-            text: 'لديك سؤال'
-         }],
-         quiz: {
-            heading_text: 'اختر الإجابات الصحيحة',
-            results_texts: {
-               success: 'أحسنت الإجابة صحيحة',
-               fail: 'أحسنت المحاولة! ',
-               hint: 'هل تريد الحصول على تلميح ؟'
-            },
-            buttons_texts: {
-               confirm: 'تأكيد الإجابة',
-               retry: 'أعد المحاولة',
-               dismiss: 'تجاهل السؤال',
-               next: 'السؤال التالي',
-               pre: 'السؤال السابق'
-            }
-         }
-      },
       quiz: {
          result: '',
          status: {
@@ -48,6 +24,11 @@ export default {
       $route(to, from) {
          this.getLesson()
       }
+   },
+   computed: {
+      i18n() {
+         return this.$store.state.i18n.lesson
+      },
    },
    updated() {
       document.querySelectorAll('#lesson-markdown img').forEach((img) => {
@@ -91,7 +72,7 @@ export default {
                   })
                break
             case '3':
-                  axios.get(url)
+               axios.get(url)
                   .then(response => {
                      this.lesson_content = response.data
                      this.loaded = true
@@ -100,7 +81,7 @@ export default {
                   })
                break
             case '4':
-                  axios.get(url)
+               axios.get(url)
                   .then(response => {
                      this.lesson_content = this.previewMarkdowText(response.data)
                      this.loaded = true
