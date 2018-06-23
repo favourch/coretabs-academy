@@ -22,11 +22,8 @@ export EMAIL_HOST_USER=$email_host_user
 read -p "Enter EMAIL_HOST_PASSWORD: " email_host_password
 export EMAIL_HOST_PASSWORD=$email_host_password
 
-read -p "Enter ADMIN_EMAIL01: " admin_email01
-export ADMIN_EMAIL01=$admin_email01
-
-read -p "Enter ADMIN_EMAIL02: " admin_email02
-export ADMIN_EMAIL02=$admin_email02
+read -p "Enter ADMIN_EMAILS: " admin_emails
+export ADMIN_EMAILS=$admin_emails
 
 # Discourse env vars
 

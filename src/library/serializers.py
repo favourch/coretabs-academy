@@ -92,7 +92,6 @@ class BaseLessonSerializer(serializers.ModelSerializer):
     is_shown = serializers.BooleanField()
 
     def to_representation(self, instance):
-        print(instance.type == models.BaseLesson.MARKDOWN)
         if instance.type == models.BaseLesson.MARKDOWN:
             return MarkdownLessonSerializer(instance=instance).data
         elif instance.type == models.BaseLesson.QUIZ:
