@@ -1,5 +1,6 @@
 <template>
 <v-app>
+  <header-component></header-component>
   <v-content>
     <v-container fluid class="main-container">
       <nuxt/>
@@ -7,5 +8,5 @@
   </v-content>
 </v-app>
 </template>
-<script src="./index.js"></script>
-<style src="./index.scss" lang="scss" scoped></style>
+<script src="./main.js"></script>
+<style src="./main.scss" lang="scss" scoped></style>

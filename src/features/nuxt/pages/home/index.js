@@ -1,5 +1,7 @@
+import 'video.js/dist/video-js.min.css'
+
 export default {
-  layout: 'index/index',
+  layout: 'main/main',
   asyncData(nuxt) {
     // called every time before loading the component
     let i18n = nuxt.app.store.state.i18n

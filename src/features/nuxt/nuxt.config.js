@@ -63,8 +63,7 @@ module.exports = {
     cssSourceMap: false,
     vendor: [
       'axios',
-      'vuetify',
-      // 'vue-video-player'
+      'vuetify'
     ],
     /*
      ** Run ESLint on save
