@@ -1,0 +1,42 @@
+@import './functions';
+@import './mixins';
+@import '~rfs/scss/_rfs';
+
+:root {
+  --workshop-normal-state: #cdcdcd;
+  --workshop-active-state: #74dad9;
+  --workshop-complete-state: #7d68df;
+}
+$info-color: #2196f3;
+$error-color: #f44336;
+$black-color: #555555;
+$white-color: #ffffff;
+$accent-color: #ff4081;
+$primary-color: #4445e7;
+$success-color: #4caf50;
+$warning-color: #ffeb3b;
+$heading-color: #2c3e50;
+$secondary-color: #dcdcdc;
+$shadow-color: rgba(0, 0, 0, 0.15);
+$white-color-alpha: rgba(255,255,255,0.5);
+$grading-color: linear-gradient(to left, #2d43e7, #9042e8);
+$scrollbar-width: 5px;
+$header-height: 100px;
+$workshop-margin: 0 0 0 20px;
+$inner-header-height: 50px;
+$workshop-drawer-width: 350px;
+$workshop-ar-margin: 0 20px 0 0;
+$workshop-drawer-background: #fafafa;
+$workshop-content-background: $white-color;
+$cairo-font: '~/assets/vendor/fonts/cairo/';
+$poppins-font: '~/assets/vendor/fonts/poppins/';
+$droid-kufi-font: '~/assets/vendor/fonts/droid-kufi/';
+$material-design-font: '~/assets/vendor/fonts/material-design-icons/';
+$open-sans-condensed-font: '~/assets/vendor/fonts/open-sans-condensed/';
+$loader: (
+  error-container-background: $error-color,
+  succeed-container-background: $grading-color,
+  error-lesson-container-background: $error-color,
+  succeed-lesson-container-background: $workshop-drawer-background,
+  progress: (size: 80px, precent: 80%, stroke: (width:12, color: $white-color, lesson-color: var(--workshop-complete-state)))
+)

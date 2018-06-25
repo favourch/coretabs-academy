@@ -1,0 +1,119 @@
+@import './vars';
+@import '../vendor/fonts/cairo/cairo';
+@import '../vendor/fonts/poppins/poppins';
+@import '../vendor/fonts/droid-kufi/droid-kufi';
+@import '../vendor/fonts/material-design-icons/material-icons';
+@import '../vendor/fonts/open-sans-condensed/open-sans-condensed';
+@import '~vuetify/dist/vuetify.min';
+@import './scrollbar';
+/*=====================================
+Global Style
+=======================================*/
+*,
+*::after,
+*::before {
+  outline: none;
+  box-sizing: border-box;
+  @include font-family('ar');
+}
+
+::selection {
+  color: $white-color;
+  background: $primary-color;
+}
+
+html {
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  overflow: auto !important;
+  @include responsive-font-size(14px,true);
+}
+
+body {
+  color: $white-color;
+  overflow: hidden !important;
+}
+
+.btn {
+  font-family: 'Cairo';
+}
+
+.font-family-ar {
+  @include font-family('ar',true);
+}
+
+.font-family-en {
+  @include font-family('en',true);
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+.btn--active .btn__content:before,
+.btn:active .btn__content:before,
+.btn:focus .btn__content:before,
+.btn:hover .btn__content:before {
+  background-color: unset;
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-weight: 700 !important;
+  @include responsive-font-size(2rem,true);
+
+  &:after,
+  &:before {
+    top: 50%;
+    content: '';
+    height: 5px;
+    width: 35px;
+    position: absolute;
+    background: $black-color;
+  }
+
+  &:after {
+    left: 100%;
+    margin-left: 10px;
+  }
+
+  &:before {
+    right: 100%;
+    margin-right: 10px;
+  }
+}
+@include center(true,true);
+
+.no-select {
+  user-select: none !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}

@@ -1,0 +1,28 @@
+@import '~assets/styles/vars';
+/*=====================================
+Main Layout Component Style
+=======================================*/
+.content {
+  .container {
+    padding: 0;
+
+    & .main-container {
+      height: 100% !important;
+    }
+
+    &.fill-height {
+      min-height: calc(100vh - #{$header-height * 2});
+    }
+  }
+}
+
+.application--wrap {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: $white-color;
+  background-image: url("~assets/multimedia/images/home/second_layer.svg"), url("~assets/multimedia/images/home/first_layer.svg");
+  background-size: 40%, 55%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: right top, right top;
+}
