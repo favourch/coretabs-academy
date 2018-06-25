@@ -1,4 +1,3 @@
-import '@/node_modules/video.js/dist/video-js.min.css'
 export default {
   layout: 'index/index',
   asyncData(nuxt) {
