@@ -1,5 +1,12 @@
+# Test Database
 db.sqlite3
-src/spa/node_modules/
+
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -9,6 +16,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+.nuxt
 .Python
 env/
 build/
