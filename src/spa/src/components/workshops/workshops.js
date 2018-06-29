@@ -69,11 +69,10 @@ export default {
          clearTimeout(this.timeout)
       })
       this.drawer.isRight = this.$store.state.direction === 'rtl'
-      this.$store.commit('getGithubFileURL', {
-         repo: `${this.$route.params.track}-tutorials`,
-         path: 'workshops.json'
-      })
-      this.$api.getWorkshopsData(this.$store.state.githubFileURL)
+      // if (typeof this.$route.params.workshop === 'undefined') {
+      // this.$api.navigationToFirstWorkshop(`/api/v1/tracks/${this.$route.params.track}/`)
+      // } else {
+      this.$api.getWorkshopsList(`/api/v1/tracks/${this.$route.params.track}/`)
          .then(data => {
             this.workshops = data
             if (typeof this.$route.params.workshop === 'undefined') {
@@ -90,6 +89,7 @@ export default {
          }).catch(err => {
             console.error(err)
          })
+      // }
    },
    updated() {
       document.querySelectorAll('#sidenav .stepper__step__step').forEach((stepper, index) => {

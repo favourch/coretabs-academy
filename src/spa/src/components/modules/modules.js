@@ -23,6 +23,7 @@ export default {
       this.$on('toggle-drawer', function(data) {
          this.drawer.isOpen = !this.drawer.isOpen
       })
+      console.log(this.$route.params)
       this.drawer.isRight = this.$store.state.direction === 'rtl'
       let modulesData = this.$route.params.modules
       if (typeof modulesData === 'undefined') {
@@ -46,13 +47,8 @@ export default {
    },
    methods: {
       getModules() {
-         this.$store.commit('getGithubFileURL', {
-            repo: `${this.$route.params.track}-tutorials`,
-            path: 'workshops.json'
-         })
-         this.$api.getWorkshopsData(this.$store.state.githubFileURL)
-            .then(data => {
-               let workshop = this.$api.getWorkshopId(data)
+         this.$api.getWorkshopData(`/api/v1/tracks/${this.$route.params.track}/workshops/${this.$route.params.workshop}`)
+            .then(workshop => {
                this.modules = workshop.modules
                this.current.workshopURL = workshop.url
                let module = this.$api.getModuleId(this.modules)
