@@ -75,6 +75,7 @@ const WorkshopsAPI = {
                description: response.data.description,
                shown_percentage: response.data.shown_percentage,
                workshop_result_url: response.data.workshop_result_url,
+               workshop_forums_url: response.data.workshop_forums_url,
                used_technologies: response.data.used_technologies.split(', ').reverse(),
                last_update_date: Vue.prototype.$date.get(new Date(response.data.last_update_date)),
                authors: response.data.authors,
@@ -130,7 +131,6 @@ const WorkshopsAPI = {
                   })
                })
             })
-            console.log(workshop)
             return workshop
          })
          .catch(err => {

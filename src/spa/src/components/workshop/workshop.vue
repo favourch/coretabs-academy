@@ -90,7 +90,7 @@
                   <img :src="$store.state.forumLogo" alt="forum-logo icon">
                   <div class="text">
                      <div v-html="i18n.card3.title"></div>
-                     <div v-html="i18n.card3.text"><a href="https://forums.coretabs.net" target="_blank" v-html="i18n.card3.here"></a></div>
+                     <div>{{i18n.card3.text}} <a :href="workshop.workshop_forums_url" target="_blank">{{i18n.card3.here}}</a></div>
                   </div>
                </v-layout>
             </v-flex>
