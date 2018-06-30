@@ -4,6 +4,9 @@
     <v-toolbar-side-icon v-on:click="$parent.$emit('toggle-drawer')"></v-toolbar-side-icon>
     <v-toolbar-title class="mx-auto">{{title}}</v-toolbar-title>
     <nav>
+      <router-link to="/">
+        <img :src="$store.state.icon" alt="coretabs" />
+      </router-link>
       <v-menu :close-on-content-click="false" v-model="menu" content-class="notifications-menu" offset-y>
         <v-btn slot="activator" class="menu" :class="{'unread': unread}" @click="unread = false">
           <img :src="$store.getters.user('avatar_url')" />
