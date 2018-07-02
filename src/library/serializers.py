@@ -108,7 +108,7 @@ class BaseLessonSerializer(serializers.ModelSerializer):
 
 
 class MarkdownLessonSerializer(serializers.ModelSerializer):
-    is_shown = serializers.BooleanField()
+    is_shown = serializers.BooleanField(default=False)
 
     class Meta:
         model = models.MarkdownLesson
@@ -120,7 +120,7 @@ class MarkdownLessonSerializer(serializers.ModelSerializer):
 
 
 class VideoLessonSerializer(serializers.ModelSerializer):
-    is_shown = serializers.BooleanField()
+    is_shown = serializers.BooleanField(default=False)
 
     class Meta:
         model = models.VideoLesson
@@ -133,7 +133,7 @@ class VideoLessonSerializer(serializers.ModelSerializer):
 
 
 class QuizLessonSerializer(serializers.ModelSerializer):
-    is_shown = serializers.BooleanField()
+    is_shown = serializers.BooleanField(default=False)
 
     class Meta:
         model = models.QuizLesson
