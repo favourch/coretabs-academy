@@ -4,6 +4,7 @@ __pycache__
 *.pyo
 *.pyd
 .Python
+venv
 venv2
 .cache
 *.log
