@@ -54,10 +54,17 @@ class ModuleRetrieveAPIView(generics.RetrieveAPIView):
 
 class WorkshopListAPIView(generics.ListAPIView):
     queryset = models.Workshop.objects.all()
+    lookup_field = 'slug'
     serializer_class = serializers.WorkshopMainInfoSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(tracks__slug=self.kwargs.get('track_slug'))
+        lessons = django_models.Prefetch(
+            'lessons', queryset=models.BaseLesson.objects.select_subclasses())
+
+        modules = django_models.Prefetch(
+            'modules', queryset=models.Module.objects.prefetch_related(lessons).all())
+
+        return self.queryset.prefetch_related(modules).filter(tracks__slug=self.kwargs.get('track_slug'))
 
 
 class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
