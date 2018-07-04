@@ -34,4 +34,6 @@ services:
     command: sh -c "yarn start"
     ports:
       - "8001:3000"
+    environment:
+      VUE_APP_BASE_URL: https://api.coretabs.net
     
