@@ -58,6 +58,7 @@ class WorkshopListAPIView(generics.ListAPIView):
     serializer_class = serializers.WorkshopMainInfoSerializer
 
     def get_queryset(self):
+
         lessons = django_models.Prefetch(
             'lessons', queryset=models.BaseLesson.objects.select_subclasses())
 
@@ -73,14 +74,15 @@ class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = serializers.WorkshopSerializer
 
     def get_queryset(self):
+        user = self.request.user
+
         lessons = django_models.Prefetch(
-            'lessons', queryset=models.BaseLesson.objects.select_subclasses())
+            'lessons', queryset=models.BaseLesson.objects.get_lesson_with_is_shown(user).select_subclasses())
 
         modules = django_models.Prefetch(
             'modules', queryset=models.Module.objects.prefetch_related(lessons).all())
 
         return self.queryset.prefetch_related(modules).filter(tracks__slug=self.kwargs.get('track_slug'))
-
 
 
 class TrackListAPIView(generics.ListAPIView):
