@@ -119,9 +119,6 @@ class Workshop(CachingMixin, AutoSlugModel):
 
     objects = managers.WorkshopManager()
 
-    def shown_percentage(self, user, workshop):
-        return Workshop.objects.shown_percentage(user=user, workshop=workshop)
-
     class Meta:
         verbose_name = _('workshop')
         verbose_name_plural = _('workshops')
@@ -172,8 +169,8 @@ class Profile(models.Model):
     track = models.ForeignKey(
         Track, on_delete=models.DO_NOTHING, verbose_name=_('track'), null=True)
     last_opened_lesson = models.ForeignKey(BaseLesson,
-                                              on_delete=models.DO_NOTHING,
-                                              verbose_name=_('last opened lesson'), null=True)
+                                           on_delete=models.DO_NOTHING,
+                                           verbose_name=_('last opened lesson'), null=True)
 
     class Meta:
         verbose_name = _('profile')
@@ -189,4 +186,3 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-

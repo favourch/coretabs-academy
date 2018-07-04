@@ -23,6 +23,7 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
             model = models.Module
             fields = '__all__'
 
+    shown_percentage = serializers.FloatField()
     modules = ModuleMainInfoSerializer(many=True)
 
     class Meta:
@@ -30,7 +31,8 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
         fields = ('title',
                   'slug',
                   'modules',
-                  'description')
+                  'description',
+                  'shown_percentage')
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -58,7 +60,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_last_opened_workshop_slug(self, obj):
         result = None
         if obj.last_opened_lesson and obj.track:
-            result = obj.last_opened_lesson.module.workshops.filter(tracks__id=obj.track.id).first().slug
+            result = obj.last_opened_lesson.module.workshops.filter(
+                tracks__id=obj.track.id).first().slug
         return result
 
     def get_last_opened_module_slug(self, obj):
@@ -72,6 +75,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         if obj.last_opened_lesson:
             result = obj.last_opened_lesson.slug
         return result
+
 
 class AuthorSerializer(serializers.ModelSerializer):
     role = serializers.SerializerMethodField()
@@ -153,7 +157,7 @@ class ModuleSerializer(serializers.ModelSerializer):
 
 
 class WorkshopSerializer(serializers.ModelSerializer):
-    shown_percentage = serializers.SerializerMethodField()
+    shown_percentage = serializers.FloatField()
     modules = ModuleSerializer(many=True)
     authors = AuthorSerializer(many=True)
 
@@ -171,9 +175,6 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'authors',
                   'modules',
                   'shown_percentage')
-
-    def get_shown_percentage(self, obj):
-        return int(obj.shown_percentage(user=self.context['request'].user, workshop=obj))
 
 
 class TrackSerializer(serializers.ModelSerializer):

@@ -8,35 +8,31 @@ from caching.base import CachingManager
 
 
 class WorkshopManager(CachingManager):
-    def shown_percentage(self, user, workshop):
+    def with_shown_percentage(self, user):
 
-        q = library_models.Workshop.objects.annotate(
-            shown_count=django_models.Count(
-                'modules__lessons',
-                filter=django_models.Q(modules__lessons__shown_users__id=user.id)),
+        workshops = library_models.Workshop.objects.annotate(
 
-            total_count=django_models.Count('modules__lessons'),
+            shown_count=django_models.Count('modules__lessons', filter=django_models.Q(
+                modules__lessons__id__in=user.lessons.values('id'))),
 
-            percentage=django_models.ExpressionWrapper(
-                (django_models.F('shown_count') * Decimal('1.0') /
-                 django_models.F('total_count')) * 100,
-                output_field=django_models.FloatField())
-        )
+            total_count=django_models.Count('modules__lessons'))
 
-        return q.get(id=workshop.id).percentage
+        # print("fields = ", result[0].shown_count, result[0].total_count)
 
-    def get_all_workshops(self, user):
-        lessons = django_models.Prefetch(
-            'lessons', queryset=library_models.BaseLesson.objects.get_lesson_with_is_shown(user).select_subclasses())
+        workshops = workshops.annotate(
+            shown_percentage=django_models.ExpressionWrapper(
+                (float(100.0) * django_models.F('shown_count') /
+                 django_models.F('total_count')),
+                output_field=django_models.DecimalField(max_digits=2, decimal_places=2)))
 
-        modules = django_models.Prefetch(
-            'modules', queryset=library_models.Module.objects.prefetch_related(lessons).all())
+        #print("calculated = ", result[0].shown_count / result[0].total_count)
+        #print("queried = ", result[0].shown_percentage)
 
-        return self.get_queryset().prefetch_related(modules)
+        return workshops
 
 
 class BaseLessonManager(InheritanceManager, CachingManager):
-    def get_lesson_with_is_shown(self, user):
+    def with_is_shown(self, user):
 
         user_shown_lessons = user.lessons.values('id')
 
