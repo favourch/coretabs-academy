@@ -1,7 +1,7 @@
 <template>
   <v-container id="reset-password" fluid fill-height>
     <v-layout row align-center justify-center>
-      <v-flex id="container" xs6>
+      <v-flex id="container">
         <v-layout row align-center justify-center>
           <v-flex id="splash" xs0 sm0 md6>
           </v-flex>
