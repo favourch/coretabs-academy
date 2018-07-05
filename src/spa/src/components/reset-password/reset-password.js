@@ -11,7 +11,7 @@ export default {
     pw: true
   }),
   computed: {
-    i18n() { return this.$store.state.i18n.auth.forgot_password },
+    i18n() { return this.$store.state.i18n.auth.reset_password },
     form() { return this.$store.state.i18n.form }
   },
   methods: {
