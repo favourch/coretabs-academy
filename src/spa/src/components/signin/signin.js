@@ -59,5 +59,6 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
-  }
+  },
+
 }

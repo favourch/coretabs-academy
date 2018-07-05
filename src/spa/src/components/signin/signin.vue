@@ -2,7 +2,7 @@
   <div id="signin">
     <v-container fluid fill-height>
       <v-layout row wrap align-center justify-center>
-        <v-flex id="container" xs6>
+        <v-flex id="container" >
           <v-layout row justify-center>
             <v-flex xs12>
               <v-alert type="error" row xs12 class="mb-4" v-model="alert.error" v-text="alert.message"></v-alert>
