@@ -23,10 +23,8 @@ class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     lookup_field = 'slug'
 
     def get_queryset(self):
-        return self.queryset\
-            .get_lesson_with_is_shown(self.request.user)\
-            .filter(module__slug=self.kwargs.get('module_slug'),
-                    slug=self.kwargs.get('slug'))
+        return self.queryset.with_is_shown(self.request.user).select_subclasses().filter(
+            module__slug=self.kwargs.get('module_slug'), slug=self.kwargs.get('slug'))
 
     def patch(self, request, *args, **kwargs):
         lesson = self.get_object()
