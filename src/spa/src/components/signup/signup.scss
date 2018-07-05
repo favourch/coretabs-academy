@@ -36,6 +36,7 @@ Signup Style
 
     @media (max-width: 1023px){
       max-width: 90%;
+      @include border-radius(25px);
     }
 
     @media (min-width: 1441px){
@@ -55,7 +56,9 @@ Signup Style
       padding: 10px 10px 12px;
       border-color: rgba(0, 0, 0, 0) !important;
     }
-
+    p{
+      line-height: 30px;
+    }
     #avatars {
       background-image: url("~@/assets/multimedia/images/auth/avatars.png");
       background-position: right center;
@@ -85,6 +88,10 @@ Signup Style
 
     #form {
       padding-right: 30px;
+      @media (max-width: 960px) {
+        padding-right: 0px;
+      }
+
       .input-group.disabled {
         .input-group__details {
           min-height: 10px;
@@ -138,7 +145,8 @@ Signup Style
           max-width: 150px;
 
           @media (max-width: 960px) {
-            margin-top: 20px;
+            margin-top: 25px;
+            height: 50px !important;
           }
         }
 
@@ -161,4 +169,5 @@ Signup Style
       }
     }
   }
+
 }
