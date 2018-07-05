@@ -37,6 +37,9 @@ Signup Style
     @media (max-width: 1023px){
       max-width: 90%;
       @include border-radius(25px);
+      p{
+        line-height: 30px;
+      }
     }
 
     @media (min-width: 1441px){
@@ -56,9 +59,7 @@ Signup Style
       padding: 10px 10px 12px;
       border-color: rgba(0, 0, 0, 0) !important;
     }
-    p{
-      line-height: 30px;
-    }
+  
     #avatars {
       background-image: url("~@/assets/multimedia/images/auth/avatars.png");
       background-position: right center;
