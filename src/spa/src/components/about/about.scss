@@ -7,10 +7,11 @@ About Style
    #presentation {
       #desc-box {
          display: flex;
-         width: 1100px;
+         max-width: 1100px;
          min-width: 470px;
-         margin: 100px auto;
-
+         margin: 0px auto;
+         min-height: 80vh;
+         align-items: center;
          .description {
             flex: 1;
             display: flex;
@@ -20,7 +21,7 @@ About Style
             .desc-text {
                padding-right: 60px;
                color: #2c3e50;
-               line-height: 27px;
+               line-height: 30px;
 
                h1 {
                   margin: 20px auto;
@@ -31,7 +32,7 @@ About Style
          .desc-image {
             background-color: $white-color;
             flex: 1;
-            @include border-radius(50px);
+            @include border-radius(40px);
             height: 400px;
             overflow: hidden;
             @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
@@ -86,7 +87,7 @@ About Style
          #desc-box {
             flex-direction: column;
             width: 80%;
-
+           
             .description {
                order: 1;
 
@@ -110,11 +111,12 @@ About Style
          }
       }
       @media screen and (max-width: 480px) {
+         margin-top: 100px;
+
          #desc-box {
             width: 100%;
-            min-width: auto;
-            margin: 100px 0;
-
+            min-width: auto;            
+            
             .description {
                padding: 0 20px 0 10px;
 
@@ -142,11 +144,10 @@ About Style
 
    #testimonials {
      position: relative;
-     margin-top: 300px;
+     margin-top: 200px;
       .skew-box {
          position: relative;
          text-align: center;
-
          .particles {
             position: absolute;
             background: linear-gradient(to right, #8855ea, #3044e7);
@@ -157,13 +158,25 @@ About Style
          }
 
          h1 {
-            margin: 50px auto;
+            margin: 50px auto 20px;
+            padding-top: 50px;
          }
 
          p {
-            margin: auto auto 60px;
+            margin: auto auto 90px;
+            line-height: 30px;
          }
+         
+         @media screen and (max-width: 480px) {
+          h1 {
+              padding-top: 0px;
+            }
 
+          p {
+              margin: auto auto 60px;
+          }
+         }
+         
          h1,
          p {
             position: relative;
@@ -188,7 +201,7 @@ About Style
             }
          }
       }
-
+      
       .testimonials-carousel {
         margin-top: -50px;
         margin-bottom: 200px;
@@ -202,13 +215,13 @@ About Style
           position: relative;
           margin: 60px auto;
           @include box-shadow(0, 0, 20px, 1px, rgba(0,0,0,0.2));
-          @include border-radius(40px);
+          @include border-radius(30px);
 
           .quotation {
             width: 30px;
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 20px;
+            left: 20px;
           }
 
           .avatar {
@@ -426,13 +439,13 @@ About Style
            transform: scale(0.9);
          }
       }
-
+      
    }
 
    #team {
       width: 80%;
       min-width: 1030px;
-      margin: 120px auto;
+      margin: 100px auto 200px;
       @media screen and (max-width: 1042px) {
          min-width: 780px;
       }
@@ -444,11 +457,12 @@ About Style
       }
 
       h1 {
-         margin: 0 auto 60px;
+         margin: 0 auto 20px;
       }
 
       p {
          margin: auto auto 60px;
+         line-height: 30px;
       }
 
       h1,
@@ -662,7 +676,7 @@ About Style
 
    #mentors {
       width: 1050px;
-      margin: 120px auto;
+      margin: 120px auto 200px;
       position: relative;
 
       * {
@@ -673,11 +687,12 @@ About Style
       }
 
       h1 {
-         margin: 0 auto 60px;
+         margin: 0 auto 20px;
       }
 
       p {
          margin: auto auto 60px;
+         line-height: 30px;
       }
 
       h1,
@@ -996,12 +1011,12 @@ About Style
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #727272;
+      color: #cdcdcd;
 
       a {
-         color: #727272;
+         color: #999;
          display: inline-block;
-         padding: 25px 10px;
+         padding: 18px 10px;
          transition: color 0.4s ease;
 
          &:hover {

@@ -9,8 +9,8 @@ Congratulations Style
   div#container {
     position: relative;
     @include box-shadow(0px, 15px, 34px, 0px, $shadow-color);
-    border-radius: 25px;
-    padding: 20px;
+    @include border-radius(40px);
+    padding: 40px;
     background: $white-color;
 
     @media (max-width: 600px) {
@@ -18,6 +18,30 @@ Congratulations Style
       max-width: 90%;
     }
 
+    @media (max-width: 1440px){
+      max-width: 60%;
+    }
+
+    @media (max-width: 1280px){
+      max-width: 70%;
+    }
+
+    @media (max-width: 1366px){
+      max-width: 60%;
+    }
+
+    @media (max-width: 1024px){
+      max-width: 70%;
+    }
+
+    @media (max-width: 1023px){
+      max-width: 90%;
+      @include border-radius(25px);
+    }
+
+    @media (min-width: 1441px){
+      max-width: 45%;
+    }
     .alert {
       border-radius: 10px;
       margin: 0 0 10px;
@@ -47,11 +71,15 @@ Congratulations Style
       h2 {
         text-align: right;
         @include responsive-font-size(1.5rem,true);
+        margin-bottom: 20px !important;
+      }
+      p{
+        line-height: 30px;
       }
 
       #submit {
-        float: left;
-        margin: 0 0 0 auto;
+        float: right;
+        margin: 15px 0 0 auto;
         background: $grading-color;
         @include box-shadow(0px, 2px, 5px, 0px , $shadow-color);
         color: $white-color !important;

@@ -9,8 +9,8 @@ Contact Us Style
   div#container {
     position: relative;
     @include box-shadow(0px, 15px, 34px, 0px, $shadow-color);
-    border-radius: 25px;
-    padding: 20px;
+    @include border-radius(40px);
+    padding: 40px;
     
     background: $white-color;
     //background: $white-color;

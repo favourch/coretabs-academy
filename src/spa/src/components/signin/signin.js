@@ -5,7 +5,7 @@ export default {
       error: false,
       message: ''
     },
-    valid: 2,
+    valid: 0,
     vs: {
       v1: 0,
       v2: 0
@@ -59,5 +59,6 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
-  }
+  },
+
 }

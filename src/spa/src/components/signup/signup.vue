@@ -2,7 +2,7 @@
   <div id="signup">
     <v-container fluid fill-height>
       <v-layout row wrap align-center justify-center>
-        <v-flex id="container" xs6>
+        <v-flex id="container">
           <v-layout row justify-center>
             <v-flex xs10 class="text-xs-right">
               <h2 class="black--text mt-4 mb-2" v-html="i18n.heading_text"></h2>
