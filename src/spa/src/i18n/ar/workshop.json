@@ -8,7 +8,11 @@
       "start": ["بدء", "استمرار"],
       "level": {
          "title": "المستوى",
-         "value": ["مبتدئ", "متوسط", "صعب"]
+         "value": {
+           "beginner": "مبتدئ",
+           "intermediate": "متوسط",
+           "advanced": "صعب"
+         }
       }
    },
    "card2": {
