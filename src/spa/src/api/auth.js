@@ -273,6 +273,13 @@ const AuthAPI = {
     .then((response) => {
       return response
     })
+  },
+  showLesson(endpoint, shown) {
+    return axios.patch(endpoint, {
+      is_shown: true
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
+    }).then(() => { return true })
   }
 }
 

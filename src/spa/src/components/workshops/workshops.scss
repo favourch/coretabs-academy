@@ -11,290 +11,289 @@ $drawer-group-height: 60px;
 
 main.workshop-main-content,
 main.workshops-main-content {
-   padding-top: $inner-header-height !important;
-   background: $workshop-content-background !important;
+  padding-top: $inner-header-height !important;
+  background: $workshop-content-background !important;
 }
 
 html[dir='rtl'] {
-   .workshops {
-      > .navigation-drawer {
-         .toolbar {
-            padding: 0 $scrollbar-width 0 0 !important;
-
-            .btn {
-               margin: $workshop-ar-margin !important;
-            }
-
-            .toolbar__title {
-               margin: $workshop-ar-margin !important;
-            }
-         }
-
-         .list {
-            direction: ltr !important;
-
-            .stepper {
-               * {
-                  direction: rtl !important;
-               }
-
-               .list__group {
-                  div {
-                     .list__tile {
-                        .stepper__step {
-                           .stepper__step__step {
-                              margin: $workshop-ar-margin !important;
-                           }
-
-                           .stepper__label {
-                              margin: $workshop-ar-margin !important;
-                              width: calc(100% - #{$stepper-icon-size - ((getValue($workshop-ar-margin,'left',true) + getValue($workshop-ar-margin,'right',true)) * 2) - $scrollbar-width}) !important;
-
-                              a {
-                                 text-align: right !important;
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
-}
-
-.workshops {
-   height: 100% !important;
-   overflow: hidden !important;
-   position: relative !important;
-   background: $white-color !important;
-
-   > .navigation-drawer {
-      height: 100vh !important;
-      overflow: hidden !important;
-      background: $workshop-drawer-background !important;
-      @include box-shadow(0px, 15px, 34px, 0px, $shadow-color,true);
-
-      &.navigation-drawer--is-mobile {
-         .toolbar {
-            .toolbar__content {
-               .btn {
-                  .icon {
-                     display: block !important;
-                  }
-               }
-            }
-         }
-      }
-
-      .navigation-drawer__border {
-         display: none !important;
-      }
-
+  .workshops {
+    > .navigation-drawer {
       .toolbar {
-         background: $grading-color !important;
-         padding: 0 0 0 $scrollbar-width !important;
-         height: $inner-header-height !important;
-         min-height: $inner-header-height !important;
-         max-height: $inner-header-height !important;
+        padding: 0 $scrollbar-width 0 0 !important;
 
-         .toolbar__content {
-            height: auto !important;
-            min-height: $inner-header-height !important;
-            max-height: $inner-header-height !important;
+        .btn {
+          margin: $workshop-ar-margin !important;
+        }
 
-            .btn {
-               color: $white-color !important;
-               width: $stepper-icon-size !important;
-               height: $stepper-icon-size !important;
-
-               .icon {
-                  display: none !important;
-                  width: $stepper-icon-size !important;
-                  height: $stepper-icon-size !important;
-                  font-size: $stepper-icon-size !important;
-               }
-            }
-
-            .toolbar__title {
-               font-size: 16px !important;
-               font-weight: bold !important;
-               color: $white-color !important;
-            }
-         }
+        .toolbar__title {
+          margin: $workshop-ar-margin !important;
+        }
       }
 
       .list {
-         direction: rtl !important;
-         overflow: hidden !important;
-         background: $workshop-drawer-background !important;
-         height: calc(100vh - #{$inner-header-height}) !important;
+        direction: ltr !important;
 
-         .stepper {
-            box-shadow: none !important;
-            overflow-y: scroll !important;
-            overflow-x: hidden !important;
-            background: $workshop-drawer-background !important;
-            height: calc(100vh - #{$inner-header-height}) !important;
+        .stepper {
+          * {
+            direction: rtl !important;
+          }
 
-            &::-webkit-scrollbar {
-               background: $shadow-color !important;
-            }
-
-            * {
-               direction: ltr !important;
-            }
-
-            .list__group {
-               height: $drawer-group-height !important;
-
-               &::after,
-               &::before {
-                  height: 0 !important;
-                  background: none !important;
-               }
-
-               &.list__group--active {
-                  height: $drawer-group-height !important;
-               }
-
-               .list__group__header {
-                  border-bottom: 1px solid $secondary-color;
-                  padding: 0 !important;
-                  max-width: 100% !important;
-                  background: $white-color !important;
-                  height: $drawer-group-height !important;
-                  box-shadow: 0 3px 3px -2px rgba(0,0,0,.025),0 3px 4px 0 rgba(0,0,0,.025),0 1px 10px 0 rgba(0,0,0,.025) !important;
-
-                  &:hover {
-                     background: $white-color !important;
+          .list__group {
+            div {
+              .list__tile {
+                .stepper__step {
+                  .stepper__step__step {
+                    margin: $workshop-ar-margin !important;
                   }
 
-                  > div {
-                     width: 100% !important;
+                  .stepper__label {
+                    margin: $workshop-ar-margin !important;
+                    width: calc(100% - #{$stepper-icon-size - ((getValue($workshop-ar-margin,'left',true) + getValue($workshop-ar-margin,'right',true)) * 2) - $scrollbar-width}) !important;
 
-                     .list__tile {
-                        padding: 0 !important;
-                        height: 100% !important;
-
-                        .stepper__step {
-                           padding: 0 !important;
-                           z-index: 1 !important;
-                           width: 100% !important;
-                           height: $drawer-group-height !important;
-
-                           &.stepper__step--complete {
-                              .stepper__step__step {
-                                 color: $white-color !important;
-                                 background: var(--workshop-complete-state) !important;
-
-                                 &:before {
-                                    display: none !important;
-                                 }
-                              }
-                           }
-
-                           &.stepper__step--active {
-                              .stepper__step__step {
-                                 &:before {
-                                    color: var(--workshop-complete-state) !important;
-                                 }
-                              }
-                           }
-
-                           .stepper__step__step {
-                              font-size: 14px !important;
-                              position: relative !important;
-                              margin: $workshop-margin !important;
-                              width: $stepper-icon-size !important;
-                              height: $stepper-icon-size !important;
-                              transition: all 0.3s linear !important;
-                              background: linear-gradient(90deg, var(--workshop-normal-state) 50%, transparent 50%, transparent),linear-gradient(90deg, var(--workshop-complete-state) 50%, var(--workshop-normal-state) 50%, var(--workshop-normal-state));
-
-                              &:before {
-                                 top: 0 !important;
-                                 left: 0 !important;
-                                 z-index: 0 !important;
-                                 width: 100% !important;
-                                 height: 100% !important;
-                                 text-align: center !important;
-                                 border-radius: 50% !important;
-                                 position: absolute !important;
-                                 transform: scale(0.82) !important;
-                                 @include font-family('number',true);
-                                 content: attr(data-index) !important;
-                                 background-color: $white-color !important;
-                                 line-height: $stepper-icon-size !important;
-                                 color: var(--workshop-normal-state) !important;
-                                 font-size: $stepper-icon-size - 10px !important;
-                              }
-                           }
-
-                           .stepper__label {
-                              font-size: 14px !important;
-                              text-shadow: none !important;
-                              margin: $workshop-margin !important;
-                              height: $drawer-group-height !important;
-                              line-height: $drawer-group-height !important;
-                              width: calc(100% - #{$stepper-icon-size - ((getValue($workshop-margin,'left',true) + getValue($workshop-margin,'right',true)) * 2) - $scrollbar-width}) !important;
-
-                              a {
-                                 width: 100% !important;
-                                 text-align: left !important;
-                                 color: $black-color !important;
-                                 @include truncate-Text(ellipsis,true);
-                                 height: $drawer-group-height !important;
-                              }
-                           }
-                        }
-                     }
-
-                     .list__group__header__append-icon {
-                        .icon {
-                           display: none !important;
-                        }
-                     }
+                    a {
+                      text-align: right !important;
+                    }
                   }
-               }
-
-               &:last-of-type {
-                  .list__group__header {
-                     border-bottom: unset;
-                  }
-               }
-
-               .list__group__items {
-                  display: none !important;
-               }
+                }
+              }
             }
-         }
+          }
+        }
       }
-   }
+    }
+  }
+}
 
-   .content {
-      margin: 0 !important;
-      padding: 0 !important;
-      border-left: 0 !important;
-      transition: none !important;
+.workshops {
+  height: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: $white-color !important;
+
+  > .navigation-drawer {
+    height: 100vh !important;
+    overflow: hidden !important;
+    background: $workshop-drawer-background !important;
+    @include box-shadow(0px, 15px, 34px, 0px, $shadow-color,true);
+
+    &.navigation-drawer--is-mobile {
+      .toolbar {
+        .toolbar__content {
+          .btn {
+            .icon {
+              display: block !important;
+            }
+          }
+        }
+      }
+    }
+
+    .navigation-drawer__border {
+      display: none !important;
+    }
+
+    .toolbar {
+      background: $grading-color !important;
+      padding: 0 0 0 $scrollbar-width !important;
+      height: $inner-header-height !important;
+      min-height: $inner-header-height !important;
+      max-height: $inner-header-height !important;
+
+      .toolbar__content {
+        height: auto !important;
+        min-height: $inner-header-height !important;
+        max-height: $inner-header-height !important;
+
+        .btn {
+          color: $white-color !important;
+          width: $stepper-icon-size !important;
+          height: $stepper-icon-size !important;
+
+          .icon {
+            display: none !important;
+            width: $stepper-icon-size !important;
+            height: $stepper-icon-size !important;
+            font-size: $stepper-icon-size !important;
+          }
+        }
+
+        .toolbar__title {
+          font-size: 16px !important;
+          font-weight: bold !important;
+          color: $white-color !important;
+        }
+      }
+    }
+
+    .list {
+      direction: rtl !important;
       overflow: hidden !important;
-      background: $workshop-content-background !important;
+      background: $workshop-drawer-background !important;
+      height: calc(100vh - #{$inner-header-height}) !important;
 
-      > div {
-         width: 100% !important;
-         height: 100% !important;
-         transition: none !important;
-         // overflow: hidden !important;
-         overflow-x: hidden !important;
-         user-select: text !important;
-         padding: $content-padding !important;
-         @media (max-width: 600px) {
-            padding: 5% !important;
-         }
+      .stepper {
+        box-shadow: none !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+        background: $workshop-drawer-background !important;
+        height: calc(100vh - #{$inner-header-height}) !important;
 
-         &::-webkit-scrollbar {
-            background: $workshop-content-background !important;
-         }
+        &::-webkit-scrollbar {
+          background: $shadow-color !important;
+        }
+
+        * {
+          direction: ltr !important;
+        }
+
+        .list__group {
+          height: $drawer-group-height !important;
+
+          &::after,
+          &::before {
+            height: 0 !important;
+            background: none !important;
+          }
+
+          &.list__group--active {
+            height: $drawer-group-height !important;
+          }
+
+          .list__group__header {
+            border-bottom: 1px solid $secondary-color;
+            padding: 0 !important;
+            max-width: 100% !important;
+            background: $white-color !important;
+            height: $drawer-group-height !important;
+            box-shadow: 0 3px 3px -2px rgba(0,0,0,.025),0 3px 4px 0 rgba(0,0,0,.025),0 1px 10px 0 rgba(0,0,0,.025) !important;
+
+            &:hover {
+              background: $white-color !important;
+            }
+
+            > div {
+              width: 100% !important;
+
+              .list__tile {
+                padding: 0 !important;
+                height: 100% !important;
+
+                .stepper__step {
+                  padding: 0 !important;
+                  z-index: 1 !important;
+                  width: 100% !important;
+                  height: $drawer-group-height !important;
+
+                  &.stepper__step--complete {
+                    .stepper__step__step {
+                      color: $white-color !important;
+                      background: var(--workshop-complete-state) !important;
+
+                      &:before {
+                        display: none !important;
+                      }
+                    }
+                  }
+
+                  &.stepper__step--active {
+                    .stepper__step__step {
+                      &:before {
+                        color: var(--workshop-complete-state) !important;
+                      }
+                    }
+                  }
+
+                  .stepper__step__step {
+                    font-size: 14px !important;
+                    position: relative !important;
+                    margin: $workshop-margin !important;
+                    width: $stepper-icon-size !important;
+                    height: $stepper-icon-size !important;
+                    transition: all 0.3s linear !important;
+                    background: linear-gradient(90deg, var(--workshop-normal-state) 50%, transparent 50%, transparent),linear-gradient(90deg, var(--workshop-complete-state) 50%, var(--workshop-normal-state) 50%, var(--workshop-normal-state));
+
+                    &:before {
+                      top: 0 !important;
+                      left: 0 !important;
+                      z-index: 0 !important;
+                      width: 100% !important;
+                      height: 100% !important;
+                      text-align: center !important;
+                      border-radius: 50% !important;
+                      position: absolute !important;
+                      transform: scale(0.82) !important;
+                      @include font-family('number',true);
+                      content: attr(data-index) !important;
+                      background-color: $white-color !important;
+                      line-height: $stepper-icon-size !important;
+                      color: var(--workshop-normal-state) !important;
+                      font-size: $stepper-icon-size - 10px !important;
+                    }
+                  }
+
+                  .stepper__label {
+                    font-size: 14px !important;
+                    text-shadow: none !important;
+                    margin: $workshop-margin !important;
+                    height: $drawer-group-height !important;
+                    line-height: $drawer-group-height !important;
+                    width: calc(100% - #{$stepper-icon-size - ((getValue($workshop-margin,'left',true) + getValue($workshop-margin,'right',true)) * 2) - $scrollbar-width}) !important;
+
+                    a {
+                      width: 100% !important;
+                      text-align: left !important;
+                      color: $black-color !important;
+                      @include truncate-Text(ellipsis,true);
+                      height: $drawer-group-height !important;
+                    }
+                  }
+                }
+              }
+
+              .list__group__header__append-icon {
+                .icon {
+                  display: none !important;
+                }
+              }
+            }
+          }
+
+          &:last-of-type {
+            .list__group__header {
+              border-bottom: unset;
+            }
+          }
+
+          .list__group__items {
+            display: none !important;
+          }
+        }
       }
-   }
+    }
+  }
+
+  .content {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-left: 0 !important;
+    transition: none !important;
+    overflow: hidden !important;
+    background: $workshop-content-background !important;
+
+    > div {
+      width: 100% !important;
+      height: 100% !important;
+      transition: none !important;
+      overflow-x: hidden !important;
+      user-select: text !important;
+      padding: $content-padding !important;
+      @media (max-width: 600px) {
+        padding: 5% !important;
+      }
+
+      &::-webkit-scrollbar {
+        background: $workshop-content-background !important;
+      }
+    }
+  }
 }
