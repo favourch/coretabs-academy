@@ -16,11 +16,8 @@ export default {
     ],
     user_navs: [
       {
-        url: '/profile',
+        url: '/tour/',
         radius: true
-      }, {
-        url: '/logout',
-        dropdown: false
       }, {
         url: '/about',
         dropdown: false
@@ -60,6 +57,7 @@ export default {
   methods: {
     setHeader() {
       this.currentClass = `${this.$route.name}-main-content`
+
       switch (this.$route.name) {
         case 'personal-info':
         case 'change-track':
@@ -77,6 +75,9 @@ export default {
           if (this.$store.getters.isLogin) {
             this.role = 'user_navs'
             this.navs = this.user_navs
+            if (this.$store.getters.profile('track_slug')) {
+              this.user_navs[0].url = `/${this.$store.getters.profile('track_slug')}/`
+            }
           }
           break
       }

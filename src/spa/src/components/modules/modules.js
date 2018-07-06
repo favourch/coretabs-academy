@@ -23,7 +23,6 @@ export default {
       this.$on('toggle-drawer', function(data) {
          this.drawer.isOpen = !this.drawer.isOpen
       })
-      console.log(this.$route.params)
       this.drawer.isRight = this.$store.state.direction === 'rtl'
       let modulesData = this.$route.params.modules
       if (typeof modulesData === 'undefined') {
