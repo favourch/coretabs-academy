@@ -19,7 +19,6 @@ import EditPersonalInfoComponent from './components/profile-settings/edit-person
 import ChangeTrackComponent from './components/profile-settings/change-track/change-track.vue'
 import ChangePasswordComponent from './components/profile-settings/change-password/change-password.vue'
 import LogoutComponent from './components/logout/logout.vue'
-import TracksComponent from './components/tracks/tracks.vue'
 import LessonComponent from './components/lesson/lesson.vue'
 import ModulesComponent from './components/modules/modules.vue'
 import WorkshopComponent from './components/workshop/workshop.vue'
@@ -29,158 +28,132 @@ import WorkshopsComponent from './components/workshops/workshops.vue'
 Vue.use(Router)
 
 const router = new Router({
-   mode: 'history',
-   routes: [{
-      path: '/',
-      name: 'home',
-      component: HomeComponent
-   }, {
-      path: '/home',
-      redirect: '/'
-   }, {
-      name: 'not-ready',
-      path: '/not-ready',
-      component: NotReadyComponent
-   }, {
-      name: 'about',
-      path: '/about',
-      component: AboutComponent
-   }, {
-      name: 'contact-us',
-      path: '/contact-us',
-      component: ContactUsComponent
-   }, {
-      name: 'page',
-      path: '/page/:page',
-      component: PageComponent
-   }, {
-      name: 'signup',
-      path: '/signup',
-      component: SignUpComponent,
-      beforeEnter: (to, from, next) => {
-         (!store.getters.isLogin) ? next(): next('/')
+  mode: 'history',
+  routes: [{
+    path: '/',
+    name: 'home',
+    component: HomeComponent
+  }, {
+    path: '/home',
+    redirect: '/'
+  }, {
+    name: 'not-ready',
+    path: '/not-ready',
+    component: NotReadyComponent
+  }, {
+    name: 'about',
+    path: '/about',
+    component: AboutComponent
+  }, {
+    name: 'contact-us',
+    path: '/contact-us',
+    component: ContactUsComponent
+  }, {
+    name: 'page',
+    path: '/page/:page',
+    component: PageComponent
+  }, {
+    name: 'signup',
+    path: '/signup',
+    component: SignUpComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'congratulations',
+    path: '/congratulations',
+    component: CongratulationsComponent,
+    props: true,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'confirm-account',
+    path: '/confirm-account/:key',
+    component: ConfirmAccountComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'account-confirmed',
+    path: '/account-confirmed',
+    component: AccountConfirmedComponent,
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'forgot-password',
+    path: '/forgot-password',
+    component: ForgotPasswordComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'reset-password',
+    path: '/reset-password',
+    component: ResetPasswordComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'signin',
+    path: '/signin',
+    component: SignInComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'select-track',
+    path: '/select-track',
+    component: SelectTrackComponent
+  }, {
+    path: '/profile',
+    component: ProfileSettingsComponent,
+    children: [{
+      path: '',
+      redirect: {
+        name: 'personal-info'
       }
-   }, {
-      name: 'congratulations',
-      path: '/congratulations',
-      component: CongratulationsComponent,
-      props: true,
-      beforeEnter: (to, from, next) => {
-         (!store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: 'confirm-account',
-      path: '/confirm-account/:key',
-      component: ConfirmAccountComponent,
-      beforeEnter: (to, from, next) => {
-         (!store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: 'account-confirmed',
-      path: '/account-confirmed',
-      component: AccountConfirmedComponent,
-      beforeEnter: (to, from, next) => {
-         (store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: 'forgot-password',
-      path: '/forgot-password',
-      component: ForgotPasswordComponent,
-      beforeEnter: (to, from, next) => {
-         (!store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: 'reset-password',
-      path: '/reset-password',
-      component: ResetPasswordComponent,
-      beforeEnter: (to, from, next) => {
-         (!store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: 'signin',
-      path: '/signin',
-      component: SignInComponent,
-      beforeEnter: (to, from, next) => {
-         (!store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: 'select-track',
-      path: '/select-track',
-      component: SelectTrackComponent
-   }, {
-      path: '/profile',
-      component: ProfileSettingsComponent,
-      children: [{
-         path: '',
-         redirect: {
-            name: 'personal-info'
-         }
-      }, {
-         name: 'personal-info',
-         path: '/profile/personal-info',
-         component: EditPersonalInfoComponent
-      }, {
-         name: 'change-track',
-         path: '/profile/change-track',
-         component: ChangeTrackComponent
-      }, {
-         name: 'change-password',
-         path: '/profile/change-password',
-         component: ChangePasswordComponent
-      }],
-      beforeEnter: (to, from, next) => {
-         (store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: 'logout',
-      path: '/logout',
-      component: LogoutComponent,
-      beforeEnter: (to, from, next) => {
-         (store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: '404',
-      path: '/404',
-      component: NotFoundComponent
-   }, {
-      path: '*',
-      redirect: '/404'
-   }, {
-      name: 'tracks',
-      path: '/tracks',
-      component: TracksComponent
-   }, {
-      name: 'workshops',
-      path: '/tracks/:track',
-      component: WorkshopsComponent,
-      children: [{
-         name: 'workshop',
-         path: ':workshop',
-         component: WorkshopComponent
-      }],
-      beforeEnter: (to, from, next) => {
-         (store.getters.isLogin) ? next(): next('/')
-      }
-   }, {
-      name: 'modules',
-      component: ModulesComponent,
-      path: '/tracks/:track/:workshop/:module',
-      children: [{
-         name: 'lessons',
-         path: ':lesson',
-         component: LessonComponent
-      }],
-      beforeEnter: (to, from, next) => {
-         (store.getters.isLogin) ? next(): next('/')
-      }
-   }]
+    }, {
+      name: 'personal-info',
+      path: '/profile/personal-info',
+      component: EditPersonalInfoComponent
+    }, {
+      name: 'change-track',
+      path: '/profile/change-track',
+      component: ChangeTrackComponent
+    }, {
+      name: 'change-password',
+      path: '/profile/change-password',
+      component: ChangePasswordComponent
+    }],
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'logout',
+    path: '/logout',
+    component: LogoutComponent,
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: '404',
+    path: '/404',
+    component: NotFoundComponent
+  }, {
+    path: '*',
+    redirect: '/404'
+  }, {
+    name: 'workshops',
+    path: '/tracks/:track',
+    component: WorkshopsComponent,
+    children: [{
+      name: 'workshop',
+      path: ':workshop',
+      component: WorkshopComponent
+    }],
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'modules',
+    component: ModulesComponent,
+    path: '/tracks/:track/:workshop/:module',
+    children: [{
+      name: 'lessons',
+      path: ':lesson',
+      component: LessonComponent
+    }],
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }]
 })
 
-router.beforeEach(async (to, from, next) => {
-   if (window.localStorage.getItem('token') && !store.getters.isLogin) {
-      await Vue.prototype.$auth.checkUser(store)
-   }
-   next()
+router.beforeEach(async(to, from, next) => {
+  if (window.localStorage.getItem('token') && !store.getters.isLogin) {
+    await Vue.prototype.$auth.checkUser(store)
+  }
+  next()
 })
 
 export default router
