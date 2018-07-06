@@ -14,8 +14,8 @@
             <v-flex id="form" xs12 sm12 md6>
               <v-form ref="form" lazy-validation>
                 <h2 class="black--text mb-2" v-html="i18n.heading_text"></h2>
-                <v-text-field :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" required></v-text-field>
-                <v-text-field :label="form.password_label" v-model="password" :class="[alert.success ? 'disabled' : '']" :rules="pwRules" :disabled="alert.success" required
+                <v-text-field :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" dir="auto" required></v-text-field>
+                <v-text-field :label="form.password_label" v-model="password" :class="[alert.success ? 'disabled' : '']" :rules="pwRules" :disabled="alert.success" dir="auto" required
                               :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'"></v-text-field>
                 <p id="forgot" v-html="i18n.forgot_link_text" class="black--text mt-1 mb-1"></p>
                 <div id="buttons">

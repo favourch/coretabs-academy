@@ -13,9 +13,9 @@
               <p v-html="i18n.description_text"></p>
               <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
               <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
-              <v-text-field :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success" required></v-text-field>
-              <v-text-field :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" required></v-text-field>
-              <v-text-field :label="form.message_label" v-model="message" class="disabled" :rules="meRules" :disabled="alert.success" multi-line required></v-text-field>
+              <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success" required></v-text-field>
+              <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" required></v-text-field>
+              <v-text-field dir="auto" :label="form.message_label" v-model="message" class="disabled" :rules="meRules" :disabled="alert.success" multi-line required></v-text-field>
               <v-btn round id="submit" @click="submit" v-show="!alert.success" v-html="i18n.submit_btn_text" :disabled="valid < 3"></v-btn>
             </v-form>
           </v-flex>
