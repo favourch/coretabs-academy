@@ -4,13 +4,14 @@ import Cookies from 'js-cookie'
 
 const AuthAPI = {
   registration(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/auth/registration/', {
       username: root.username,
       name: root.fullname,
       password1: root.password,
       password2: root.password,
       email: root.email
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.$router.push({ name: 'congratulations', params: { email: root.email } })
     }).catch((error) => {
@@ -29,9 +30,10 @@ const AuthAPI = {
     })
   },
   confirmation(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/auth/confirmation/', {
       email: root.email
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
       root.alert.message = root.i18n.success_message_text
@@ -41,9 +43,10 @@ const AuthAPI = {
     })
   },
   verifyEmail(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/auth/registration/verify-email/', {
       key: root.$route.params.key
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       this.storeUser(root.$store, response.data)
       root.$router.push('/account-confirmed')
@@ -56,9 +59,10 @@ const AuthAPI = {
     })
   },
   requestReset(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/auth/password/reset/', {
       email: root.email
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
       root.alert.message = root.i18n.success_message_text
@@ -68,21 +72,23 @@ const AuthAPI = {
     })
   },
   resetConfirm(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/auth/password/reset/confirm/', {
       new_password1: root.password,
       new_password2: root.password,
       uid: root.$route.params.uid,
       key: root.$route.params.key
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.$router.push('/signin')
     })
   },
   login(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/auth/login/', {
       email: root.email,
       password: root.password
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       this.storeUser(root.$store, response.data)
       if (root.$route.query.next) {
@@ -136,9 +142,9 @@ const AuthAPI = {
     formData.append('username', root.username)
     formData.append('avatar', root.validImage.imageData)
 
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.patch('/api/v1/auth/user/', formData, {
       headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
         'Content-Type': 'multipart/form-data'
       }
     }).then((response) => {
@@ -172,8 +178,9 @@ const AuthAPI = {
     })
   },
   logout(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
-    axios.post('/api/v1/auth/logout/').then((response) => {
+    axios.post('/api/v1/auth/logout/', {}, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
+    }).then((response) => {
       this.removeUser(root.$store)
       root.$router.push('/')
     })
@@ -184,11 +191,12 @@ const AuthAPI = {
     })
   },
   selectTrack(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     return axios.patch('/api/v1/auth/user/', {
       profile: {
-        track: root.track_selected
+        track_slug: root.track_selected
       }
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
       root.$store.dispatch('profile', { prop: 'track_slug', data: response.data.profile.track_slug })
@@ -197,11 +205,12 @@ const AuthAPI = {
     })
   },
   changePassword(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/auth/password/change/', {
       old_password: root.old_password,
       new_password1: root.new_password1,
       new_password2: root.new_password2
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
       root.alert.message = response.data
@@ -216,11 +225,12 @@ const AuthAPI = {
     })
   },
   contact(root) {
-    axios.defaults.headers.common['X-CSRFToken'] = Cookies.get('csrftoken')
     axios.post('/api/v1/contact/', {
       name: root.fullname,
       email: root.email,
       body: root.message
+    }, {
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
       root.alert.message = response.data.detail
