@@ -8,13 +8,17 @@
       "start": ["بدء", "استمرار"],
       "level": {
          "title": "المستوى",
-         "value": ["مبتدئ", "متوسط", "صعب"]
+         "value": {
+           "beginner": "مبتدئ",
+           "intermediate": "متوسط",
+           "advanced": "صعب"
+         }
       }
    },
    "card2": {
       "authors": "المدربون",
-      "resutlBtn": "مشاهدة حية",
-      "resutl": "النتيجة النهائية",
+      "result": "النتيجة النهائية",
+      "resultBtn": "مشاهدة حية",
       "description": "عن ورشة العمل",
       "used_technologies": "التقنيات المستخدمة"
    },
