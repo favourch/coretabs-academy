@@ -16,7 +16,7 @@ export default {
     ],
     user_navs: [
       {
-        url: null,
+        url: '/tour/',
         radius: true
       }, {
         url: '/about',
@@ -75,7 +75,9 @@ export default {
           if (this.$store.getters.isLogin) {
             this.role = 'user_navs'
             this.navs = this.user_navs
-            this.user_navs[0].url = `/tracks/${this.$store.getters.profile('track_slug')}/`
+            if (this.$store.getters.profile('track_slug')) {
+              this.user_navs[0].url = `/${this.$store.getters.profile('track_slug')}/`
+            }
           }
           break
       }
