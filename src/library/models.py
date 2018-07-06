@@ -72,6 +72,7 @@ class BaseLesson(CachingMixin, AutoSlugModel):
     class Meta:
         verbose_name = _('lesson')
         verbose_name_plural = _('lessons')
+        ordering = ['order']
 
 
 class MarkdownLesson(BaseLesson):
