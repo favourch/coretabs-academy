@@ -14,6 +14,10 @@ api_urls = [
     #     api.ModuleRetrieveAPIView.as_view(),
     #     name='module_retrieve_api'),
 
+    path('tracks/<slug:track_slug>/workshops/<slug:workshop_slug>/modules/<slug:module_slug>/lessons/<slug:slug>',
+         api.BaseLessonRetrieveUpdateAPIView.as_view(),
+         name='lesson_retrieve_update_api'),
+
     path('tracks/<slug:track_slug>/workshops/',
          api.WorkshopListAPIView.as_view(),
          name='workshops_list_api'),
