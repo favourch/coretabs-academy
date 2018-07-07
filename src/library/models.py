@@ -41,6 +41,7 @@ class Module(CachingMixin, AutoSlugModel):
     class Meta:
         verbose_name = _('module')
         verbose_name_plural = _('modules')
+        ordering = ['workshopmodule__order']
 
 
 class BaseLesson(CachingMixin, AutoSlugModel):
@@ -123,6 +124,7 @@ class Workshop(CachingMixin, AutoSlugModel):
     class Meta:
         verbose_name = _('workshop')
         verbose_name_plural = _('workshops')
+        ordering = ['trackworkshop__order', ]
 
 
 class WorkshopModule(models.Model):
@@ -135,7 +137,6 @@ class WorkshopModule(models.Model):
     class Meta:
         verbose_name = _('workshop and module')
         verbose_name_plural = _('workshops and modules')
-        ordering = ['order', ]
 
 
 class Track(CachingMixin, AutoSlugModel):
@@ -158,7 +159,6 @@ class TrackWorkshop(models.Model):
     class Meta:
         verbose_name = _('track and workshop')
         verbose_name_plural = _('tracks and workshops')
-        ordering = ['order', ]
 
 
 class Profile(models.Model):
