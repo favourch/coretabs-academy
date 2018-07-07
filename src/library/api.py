@@ -26,9 +26,14 @@ class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
         return self.queryset.with_is_shown(self.request.user).select_subclasses().filter(
             module__slug=self.kwargs.get('module_slug'), slug=self.kwargs.get('slug'))
 
-    def patch(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         lesson = self.get_object()
         lesson.shown_users.add(request.user)
+
+        user_profile = models.Profile.objects.get(id=request.user.profile.id)
+        user_profile.last_opened_lesson = lesson
+        user_profile.save()
+
         return self.partial_update(request, *args, **kwargs)
 
 
