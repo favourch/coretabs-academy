@@ -5,7 +5,7 @@ import Vuetify from 'vuetify'
 import router from './router'
 import store from './store/app.store'
 
-axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
+axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 
 window.axios = axios
 Vue.use(require('./api/api').default)

@@ -18,6 +18,7 @@ services:
     #volumes:
     #  - ./src/venv/:/djangoapp/venv/
     environment:
+      SPA_BASE_URL: https://coretabs.net
       DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
       SECRET_KEY: zby2z^8x2(zlhlfa233=-ji9eq)$$&^aa-vjs@8a)u0h0t#eqh^
       EMAIL_HOST: your_smtp_server
@@ -28,7 +29,7 @@ services:
       DISCOURSE_API_KEY: 123456
       DISCOURSE_API_USERNAME: your_discourse_user
       MANAGERS_EMAILS: manager1@email.com;manager2@email.com
-      SENTRY_DSN: http://your_sentry_dns
+      SENTRY_DSN: https://your_sentry_dns
     links:
       - db:db
     ports:
@@ -41,5 +42,5 @@ services:
     ports:
       - "8001:3000"
     environment:
-      VUE_APP_BASE_URL: https://api.coretabs.net
+      VUE_APP_API_BASE_URL: https://api.coretabs.net
     
