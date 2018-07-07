@@ -15,7 +15,7 @@ $toolbar-padding: 0 15px;
       padding: $toolbar-padding !important;
       height: $inner-header-height !important;
       line-height: $inner-header-height !important;
-      max-width: 960px;
+      max-width: 100%;
 
       .toolbar__title {
         font-size: 16px !important;
@@ -47,7 +47,7 @@ $toolbar-padding: 0 15px;
           vertical-align: top;
           
           .btn {
-            background: $workshop-drawer-background !important;
+            background: $white-color !important;
             border-radius: 50%;
             box-shadow: unset;
             margin: 0;

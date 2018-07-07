@@ -34,14 +34,10 @@ html[dir='rtl'] {
                background: #393ba8 !important;
             }
 
-            .toolbar__title {
-               margin: $workshop-ar-margin !important;
-            }
          }
 
          .list {
             direction: rtl !important;
-
             a {
                color: #000000EE;
 
@@ -51,11 +47,21 @@ html[dir='rtl'] {
                   .list__tile__action i {
                      color: #4445e7 !important;
                   }
+                 
                }
-
+               .list__tile__action{
+                min-width:44px;
+                i{
+                  color: #bbbbbb !important;
+                }
+              }
                .list__tile {
-                  margin-top: 1px !important;
-
+                  padding: auto 26px;
+                  background: $white-color;
+                  height: 55px;
+                  margin-top: -1px;
+                  border-bottom: 1px solid #eee;
+                  @include box-shadow(0px, 1px, 5px ,0 , rgba(0,0,0,0.1));
                   .list__tile__content {
                      .list__tile__title {
                         text-align: right !important;

@@ -1,7 +1,7 @@
 <template>
   <v-container id="change-track" fluid>
     <v-layout row wrap align-center justify-center>
-      <v-flex xs12 md8>
+      <v-flex>
         <v-form ref="form" lazy-validation>
           <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
           <p class="heading" v-text="i18n.heading_text"></p>
