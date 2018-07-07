@@ -2,7 +2,6 @@ version: '3'
 
 services:
   db:
-    container_name: 'postgres'
     environment:
       POSTGRES_DB: app_db
       POSTGRES_USER: app_user
@@ -12,7 +11,6 @@ services:
     ports:
       - 5432:5432
   api:
-    container_name: 'coretabs_academy_django_api'
     build:
       context: .
       dockerfile: ./production.api.dockerfile
@@ -36,7 +34,6 @@ services:
     ports:
       - "8000:8000"
   spa:
-    container_name: 'coretabs_academy_spa'
     build:
       context: .
       dockerfile: ./production.spa.dockerfile
