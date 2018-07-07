@@ -1,4 +1,5 @@
-import re, os
+import re
+import os
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -27,7 +28,6 @@ from avatar.signals import avatar_updated
 from django.template.defaultfilters import filesizeformat
 
 from rest_auth.models import TokenModel
-
 
 UserModel = get_user_model()
 
@@ -106,11 +106,13 @@ class PasswordResetSerializer(serializers.Serializer):
 
         user = UserModel.objects.get(email__iexact=email)
 
-        token_generator = kwargs.get("token_generator", default_token_generator)
+        token_generator = kwargs.get(
+            "token_generator", default_token_generator)
         temp_key = token_generator.make_token(user)
 
-        path = "/reset-password/{}/{}".format(user_pk_to_url_str(user), temp_key)
-        url = request.build_absolute_uri(path)
+        path = "/reset-password/{}/{}".format(
+            user_pk_to_url_str(user), temp_key)
+        url = settings.SPA_BASE_URL + path
         context = {"current_site": current_site,
                    "user": user,
                    "password_reset_url": url,
@@ -156,13 +158,15 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         return get_adapter().clean_password(password)
 
     def validate(self, attrs):
-        self.user_token_form = UserTokenForm(data={'uidb36': attrs['uid'], 'key': attrs['key']})
+        self.user_token_form = UserTokenForm(
+            data={'uidb36': attrs['uid'], 'key': attrs['key']})
 
         if not self.user_token_form.is_valid():
             raise serializers.ValidationError(_("Invalid Token"))
 
         if attrs['new_password1'] != attrs['new_password2']:
-            raise serializers.ValidationError(_("The two password fields didn't match."))
+            raise serializers.ValidationError(
+                _("The two password fields didn't match."))
 
         self.password = attrs['new_password1']
 
@@ -185,7 +189,8 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('username', 'email', 'email_status', 'name', 'profile', 'avatar', 'avatar_url')
+        fields = ('username', 'email', 'email_status',
+                  'name', 'profile', 'avatar', 'avatar_url')
 
     def get_email_status(self, obj):
         email_address = EmailAddress.objects.get(user=obj)
@@ -215,8 +220,8 @@ class UserDetailsSerializer(serializers.ModelSerializer):
                 error = _("%(ext)s is an invalid file extension. "
                           "Authorized extensions are : %(valid_exts_list)s")
                 raise serializers.ValidationError(error %
-                                            {'ext': ext,
-                                             'valid_exts_list': valid_exts})
+                                                  {'ext': ext,
+                                                   'valid_exts_list': valid_exts})
 
         if avatar.size > settings.AVATAR_MAX_SIZE:
             error = _("Your file is too big: %(size)s, "
@@ -227,11 +232,11 @@ class UserDetailsSerializer(serializers.ModelSerializer):
                 'max_valid_size': filesizeformat(settings.AVATAR_MAX_SIZE)
             })
 
-
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
         if email and email_address_exists(email, exclude_user=self.context.get('request').user):
-            raise serializers.ValidationError(_("A user is already registered with this e-mail address."))
+            raise serializers.ValidationError(
+                _("A user is already registered with this e-mail address."))
         return email
 
     def update(self, instance, validated_data):
@@ -242,15 +247,17 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get(
             'first_name', instance.first_name)
         if profile:
-            instance.profile.track = profile.get('track', instance.profile.track)
+            instance.profile.track = profile.get(
+                'track', instance.profile.track)
             instance.profile.last_opened_lesson = profile.get(
-                                            'last_opened_lesson', instance.profile.last_opened_lesson)
+                'last_opened_lesson', instance.profile.last_opened_lesson)
 
         email = validated_data.get('email', None)
         if email and email != instance.email:
             adapter = get_adapter()
             adapter.send_mail('account/email/email_change', instance.email, {})
-            email_address = EmailAddress.objects.get(user=instance, verified=True)
+            email_address = EmailAddress.objects.get(
+                user=instance, verified=True)
             email_address.change(request, email, True)
             instance.email = email
 
