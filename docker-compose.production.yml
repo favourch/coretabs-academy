@@ -40,7 +40,7 @@ services:
     build:
       context: .
       dockerfile: ./production.spa.dockerfile
-    command: sh -c "yarn start"
+    command: sh -c "npm start"
     ports:
       - "8001:3000"
     environment:
