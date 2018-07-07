@@ -10,6 +10,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'www.coretabs.net',
     'coretabs.net',
+    '0.0.0.0'
 ]
 
 DATABASES = {
