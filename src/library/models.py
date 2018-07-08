@@ -137,6 +137,7 @@ class WorkshopModule(models.Model):
     class Meta:
         verbose_name = _('workshop and module')
         verbose_name_plural = _('workshops and modules')
+        ordering = ['order']
 
 
 class Track(CachingMixin, AutoSlugModel):
@@ -159,6 +160,7 @@ class TrackWorkshop(models.Model):
     class Meta:
         verbose_name = _('track and workshop')
         verbose_name_plural = _('tracks and workshops')
+        ordering = ['order']
 
 
 class Profile(models.Model):
