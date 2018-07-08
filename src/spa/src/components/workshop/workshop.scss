@@ -70,6 +70,7 @@ html[dir='rtl'] {
       background: map-deep-get($card,'background') !important;
       @include box-shadow(0px, 5px, 20px, 0px, $shadow-color,true);
       border-top: none !important;
+      
       .container {
          height: 100% !important;
 
@@ -82,6 +83,12 @@ html[dir='rtl'] {
       &:nth-child(1) {
          .flex {
             padding: 10px 0 !important;
+            @media (max-width: 600px) {
+              padding: 20px 0 12px !important;
+              &:last-of-type{
+                padding: 10px 0 12px !important;
+              }
+            }
          }
 
          .btn {
@@ -91,8 +98,11 @@ html[dir='rtl'] {
             float: left;
             background: $grading-color !important;
             @media (max-width: 960px) {
-              margin: 0;
+              margin: 0 !important;
+              width: 100% !important;
+              min-height: 50px;
             }
+            
          }
 
          img {
@@ -106,14 +116,15 @@ html[dir='rtl'] {
 
             div {
                &:nth-child(1) {
-                  margin-bottom: 2px !important;
-                  color: var(--workshop-normal-state) !important;
+                  margin-bottom: 3px !important;
+                  color: #999 !important;
                   @include responsive-font-size(calc(#{map-deep-get($card1,'text','font-size')} - 2px),true);
                }
 
                &:nth-child(2) {
-                  color: $black-color !important;
-                  @include responsive-font-size(map-deep-get($card1,'text','font-size'),true);
+                  color: #425468 !important;
+                  @include responsive-font-size(calc(#{map-deep-get($card1,'text','font-size')} + 3px),true);
+                
                }
             }
          }
@@ -125,7 +136,7 @@ html[dir='rtl'] {
          .flex:nth-child(1) {
             padding: map-deep-get($card2,'part1','padding') !important;
             @media (max-width: 600px) { 
-              padding: 20px !important;
+              padding: 40px 30px !important;
             }
 
             .title {
@@ -171,7 +182,7 @@ html[dir='rtl'] {
                 }
                 .avatar {
                   float: right;
-                  color: $secondary-color;
+                  color: $white-color;
                   font-size: 24px;
                   line-height: 0px;
                   margin: 0 0 20px 10px;
@@ -227,7 +238,8 @@ html[dir='rtl'] {
                 background: #406181 !important;
                }
                @media (max-width: 600px) {
-                max-width: 100%;
+                min-height: 50px;
+                margin:10px auto 30px;
                }
                @include responsive-font-size(map-deep-get($card2,'part1','font-size','btn'),true);
             }
@@ -251,7 +263,9 @@ html[dir='rtl'] {
                padding: 25px 20px !important;
                background: $white-color !important;
                border-bottom: 1px solid #ededed !important;
-
+               @media (max-width: 600px) {
+                border-top: 1px solid #ededed !important;
+               }
                .toolbar__content {
                   height: map-deep-get($card2,'part2','toolbar','height') !important;
                   min-height: map-deep-get($card2,'part2','toolbar','height') !important;
@@ -281,6 +295,7 @@ html[dir='rtl'] {
                      }
 
                      &::-webkit-progress-value {
+                        box-shadow: 0 2px 4px $shadow-color inset !important;
                         background-color: var(--workshop-active-state) !important;
                         border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
                      }
