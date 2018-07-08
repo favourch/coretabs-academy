@@ -1,6 +1,6 @@
 <template>
 <div v-if="loaded" class="workshop">
-  <v-card class="elevation-5">
+  <v-card class="elevation-0">
     <v-container class="no-select" fluid grid-list-xl>
       <v-layout row wrap align-center justify-center>
         <v-flex xs8 sm4 md3>
@@ -43,7 +43,7 @@
       </v-layout>
     </v-container>
   </v-card>
-  <v-card class="elevation-5">
+  <v-card class="elevation-0">
     <v-container class="no-select" fluid>
       <v-layout row wrap>
         <v-flex xs12 sm12 md7>
@@ -81,7 +81,7 @@
       </v-layout>
     </v-container>
   </v-card>
-  <v-card class="elevation-5">
+  <v-card class="elevation-0">
     <v-container class="no-select" fluid grid-list-xl>
       <v-layout row wrap align-center justify-center>
         <v-flex xs11 sm11 md11>

@@ -4,12 +4,12 @@
 Workshop Style
 =======================================*/
 $card: (
-   max-width: 960px,
+   max-width: 1080px,
    height: auto,
-   icon-size: 30px,
+   icon-size: 38px,
    margin-bottom: 40px,
-   padding: 0,
-   background: $white-color
+   padding: 8px 0,
+   background: $white-color   
 );
 $card1: (
    text: (margin: 0 10px 0 0, ar-margin: 0 0 0 10px, font-size:1em)
@@ -17,10 +17,10 @@ $card1: (
 $card2: (
    part1: (padding:40px, margin-bottom: 20px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
    part2: (toolbar: (height: 30px, padding: 0 10px, progress-border-raduis: 50px)),
-   part3: (padding:40px, margin-bottom: 40px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
+   part3: (padding:40px, margin-bottom: 50px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
 );
 $card3: (
-   icon: (size: 35px, margin:0 10px 0 0, margin-ar:0 0 0 10px),
+   icon: (width: 60px, height:50px, margin:0 10px 0 0, margin-ar:0 0 0 20px),
    margin-bottom: 8px,
    text-font-size: 14px
 );
@@ -28,6 +28,7 @@ $card3: (
 html[dir='rtl'] {
    .workshop {
       .card {
+        
          &:nth-child(1) {
             .text {
                margin: map-deep-get($card1,'text','margin') !important;
@@ -37,6 +38,7 @@ html[dir='rtl'] {
          &:nth-child(2) {
             .navigation {
                border-width: 0 1px 0 0 !important;
+               border-color: #e5e5e5 !important;
 
                @media (max-width: 960px) {
                  border-width: 0 0 0 0 !important;
@@ -58,13 +60,16 @@ html[dir='rtl'] {
 
    .card {
       overflow: hidden !important;
-      border-radius: 8px !important;
+      border-radius: 15px !important;
       max-width: map-deep-get($card,'max-width') !important;
       height: map-deep-get($card,'height') !important;
       padding: map-deep-get($card,'padding') !important;
       margin-bottom: map-deep-get($card,'margin-bottom') !important;
+      margin-left: auto;
+      margin-right: auto;
       background: map-deep-get($card,'background') !important;
-
+      @include box-shadow(0px, 5px, 20px, 0px, $shadow-color,true);
+      border-top: none !important;
       .container {
          height: 100% !important;
 
@@ -80,8 +85,10 @@ html[dir='rtl'] {
          }
 
          .btn {
-            width: 100% !important;
+            width: 70% !important;
             font-weight: 700 !important;
+            min-height: 40px;
+            float: left;
             background: $grading-color !important;
             @media (max-width: 960px) {
               margin: 0;
@@ -129,7 +136,7 @@ html[dir='rtl'] {
             }
 
             p {
-               line-height: 1.5 !important;
+               line-height: 1.8 !important;
                font-weight: normal !important;
                margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
                @include responsive-font-size(map-deep-get($card2,'part3','font-size','paragraph'),true);
@@ -140,12 +147,12 @@ html[dir='rtl'] {
 
                .chip {
                   padding: 0 5px !important;
-                  font-weight: 400 !important;
+                  font-weight: 500 !important;
                   pointer-events: none !important;
                   @include font-family('en',true);
                   background: $white-color !important;
-                  color: $black-color !important;
-                  border: 1px solid var(--workshop-normal-state) !important;
+                  color: #999 !important;
+                  border: 2px solid #ddd !important;
                   @include responsive-font-size(map-deep-get($card2,'part1','font-size','chips'),true);
                }
             }
@@ -155,6 +162,7 @@ html[dir='rtl'] {
               display: flex;
               flex-wrap: wrap;
               margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
+              margin-top: 30px !important; 
               .author {
                 flex: 49%;
 
@@ -173,10 +181,14 @@ html[dir='rtl'] {
                   float: right;
                   background-color: unset !important;
                   border-color: unset !important;
-                  margin-bottom: 20px;
+                  margin: 6px auto 20px;
 
                   div:first-of-type {
                     font-weight: bold !important;
+                  }
+                  div:nth-of-type(2){
+                    color:#888;
+                    font-size: 14px;
                   }
                 }
 
@@ -208,7 +220,12 @@ html[dir='rtl'] {
                background: #496A8A !important;
                margin: 0px;
                width: 100%;
-               max-width: 150px;
+               max-width: 140px;
+               padding: 22px 5px !important;
+               margin-top: 5px;
+               &:hover{
+                background: #406181 !important;
+               }
                @media (max-width: 600px) {
                 max-width: 100%;
                }
@@ -231,9 +248,9 @@ html[dir='rtl'] {
 
             .toolbar {
                height: auto !important;
-               padding: 20px !important;
+               padding: 25px 20px !important;
                background: $white-color !important;
-               border-bottom: 1px solid $shadow-color !important;
+               border-bottom: 1px solid #ededed !important;
 
                .toolbar__content {
                   height: map-deep-get($card2,'part2','toolbar','height') !important;
@@ -274,6 +291,7 @@ html[dir='rtl'] {
       }
 
       &:nth-child(3) {
+         padding: 15px 0 !important;
          margin-bottom: 0 !important;
 
          .flex {
@@ -281,8 +299,8 @@ html[dir='rtl'] {
             padding: 12px 0;
 
             img {
-               width: map-deep-get($card3,'icon','size') !important;
-               height: map-deep-get($card3,'icon','size') !important;
+               width: map-deep-get($card3,'icon','width') !important;
+               height: map-deep-get($card3,'icon','height') !important;
                margin: map-deep-get($card3,'icon','margin') !important;
             }
 
@@ -294,7 +312,7 @@ html[dir='rtl'] {
                   &:nth-child(1) {
                      color: $black-color !important;
                      margin-bottom: map-deep-get($card3,'margin-bottom') !important;
-                     font-size: map-deep-get($card3,'text-font-size') - 2px !important;
+                     font-size: map-deep-get($card3,'text-font-size') + 2px !important;
                   }
 
                   &:nth-child(2) {
@@ -304,7 +322,7 @@ html[dir='rtl'] {
 
                      a {
                         text-decoration: underline !important;
-                        color: var(--workshop-active-state) !important;
+                        color: #666 !important;
                      }
                   }
                }
