@@ -147,7 +147,7 @@ html[dir='rtl'] {
             }
 
             p {
-               line-height: 1.8 !important;
+               line-height: 1.9 !important;
                font-weight: normal !important;
                margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
                @include responsive-font-size(map-deep-get($card2,'part3','font-size','paragraph'),true);
