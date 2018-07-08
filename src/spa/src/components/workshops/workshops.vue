@@ -3,7 +3,6 @@
     <inner-header-component :title="current.workshop.title"></inner-header-component>
     <v-navigation-drawer id="sidenav" app :right="drawer.isRight" v-model="drawer.isOpen" :width="$store.state.css.workshops.drawerWidth" hide-overlay>
       <v-toolbar flat>
-        <v-toolbar-side-icon v-on:click="drawer.isOpen=!drawer.isOpen"></v-toolbar-side-icon>
         <v-toolbar-title v-html="i18n.title"></v-toolbar-title>
       </v-toolbar>
       <v-list class="py-0">
