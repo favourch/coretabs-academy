@@ -13,6 +13,9 @@ ALLOWED_HOSTS = [
     '0.0.0.0'
 ]
 
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = ('spa.coretabs.net', 'coretabs.net')
+
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL')
