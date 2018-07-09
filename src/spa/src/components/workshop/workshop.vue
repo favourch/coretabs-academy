@@ -51,7 +51,9 @@
           <p>{{workshop.description}}</p>
           <div class="title" v-html="i18n.card2.used_technologies"></div>
           <div class="chips">
-            <v-chip v-for="used_technologies in workshop.used_technologies" :key="used_technologies">{{used_technologies}}</v-chip>
+              <div v-for="used_technologies in workshop.used_technologies" :key="used_technologies">
+                <v-chip div v-for="technology in used_technologies.split(',')" :key="technology">{{technology}}</v-chip>
+              </div>
           </div>
           <div class="title" v-html="i18n.card2.authors"></div>
           <div class="authors">

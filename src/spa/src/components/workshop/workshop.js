@@ -15,7 +15,7 @@ export default {
    computed: {
       i18n() {
          return this.$store.state.i18n.workshop
-      },
+      }
    },
    methods: {
       toggleAvatar() {
