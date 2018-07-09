@@ -29,8 +29,8 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
         fields = ('title',
                   'slug',
                   'level',
-                  'description'
-                  'modules',)
+                  'description',
+                  'modules')
 
 
 class TrackMainInfoSerializer(serializers.ModelSerializer):
