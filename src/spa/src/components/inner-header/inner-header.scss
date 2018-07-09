@@ -152,7 +152,11 @@ $toolbar-padding: 0 15px;
       border-top:1px solid #eee; 
       a {
         display: flex;
-        margin: 0 10px;
+        margin: 0 9px;
+        i{
+          margin-left: 3px;
+          color:#999;
+        }
       }
     }
   }
