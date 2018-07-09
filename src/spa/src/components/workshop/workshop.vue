@@ -35,8 +35,8 @@
         <v-flex xs8 sm4 md3>
           <v-layout row wrap align-center justify-center>
             <v-flex md8>
-              <v-btn round class="white--text" v-if="workshop.shown_percentage === 0" v-html="i18n.card1.start[0]"></v-btn>
-              <v-btn round class="white--text" v-else v-html="i18n.card1.start[1]"></v-btn>
+              <v-btn round class="white--text" v-if="workshop.shown_percentage === 0" v-html="i18n.card1.start" :to="workshop.modules[0].lessons[0].url"></v-btn>
+              <v-btn round class="white--text" v-else v-html="i18n.card1.continue" @click="getContinueURL(workshop)"></v-btn>
             </v-flex>
           </v-layout>
         </v-flex>

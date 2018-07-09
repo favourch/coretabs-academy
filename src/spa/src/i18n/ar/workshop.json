@@ -5,7 +5,8 @@
          "title": "الجدول الزمني"
       },
       "last_update_date": "آخر تحديث",
-      "start": ["بدء", "استمرار"],
+      "start": "بدء",
+      "continue": "استمرار",
       "level": {
          "title": "المستوى",
          "value": {

@@ -129,8 +129,8 @@ const AuthAPI = {
     })
   },
   async checkUser(store) {
-    await axios.get('/api/v1/auth/user/').then(async () => {
-      await this.storeUser(store)
+    await axios.get('/api/v1/auth/user/').then(async (response) => {
+      await this.storeUser(store, response.data)
     }).catch(async () => {
       await this.removeUser(store)
     })    
@@ -171,8 +171,6 @@ const AuthAPI = {
             root.alert.message = error.response.data[err][0]
             break
           }
-        } else {
-          console.log(error.response.status + ': ' + error.response.data)
         }
       }
     })
@@ -249,12 +247,20 @@ const AuthAPI = {
   storeUser(store, data = null) {
     store.dispatch('isLogin', true)
     if (data !== null) {
-      window.localStorage.setItem('token', Vue.prototype.$encryption.b64EncodeUnicode(data.key))
-      window.localStorage.setItem('user', Vue.prototype.$encryption.b64EncodeUnicode(JSON.stringify(data.user)))
-      return store.dispatch('user', { prop: null, data: data.user })
-      .then((response) => {
-        return response
-      })
+      if(data.key) {
+        window.localStorage.setItem('token', Vue.prototype.$encryption.b64EncodeUnicode(data.key))
+        window.localStorage.setItem('user', Vue.prototype.$encryption.b64EncodeUnicode(JSON.stringify(data.user)))
+        return store.dispatch('user', { prop: null, data: data.user })
+        .then((response) => {
+          return response
+        })
+      } else {
+        window.localStorage.setItem('user', Vue.prototype.$encryption.b64EncodeUnicode(JSON.stringify(data)))
+        return store.dispatch('user', { prop: null, data: data })
+        .then((response) => {
+          return response
+        })
+      }
     } else {
       return store.dispatch('user', { prop: null, data: JSON.parse(Vue.prototype.$encryption.b64DecodeUnicode(window.localStorage.getItem('user'))) })
       .then((response) => {
@@ -274,12 +280,16 @@ const AuthAPI = {
       return response
     })
   },
-  showLesson(endpoint, shown) {
-    return axios.patch(endpoint, {
+  showLesson(endpoint, store) {
+    return axios.put(endpoint, {
       is_shown: true
     }, {
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
-    }).then(() => { return true })
+    }).then(async () => {
+      if (await this.checkUser(store)) {
+        return true
+      }
+    })
   }
 }
 
