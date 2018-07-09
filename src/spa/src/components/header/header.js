@@ -76,8 +76,8 @@ export default {
           if (this.$store.getters.isLogin) {
             this.role = 'user_navs'
             this.navs = this.user_navs
-            if (this.$store.getters.profile('track_slug')) {
-              this.user_navs[0].url = `/classroom/${this.$store.getters.profile('track_slug')}/`
+            if (this.$store.getters.profile('track')) {
+              this.user_navs[0].url = `/classroom/${this.$store.getters.profile('track')}/`
             }
           }
           break

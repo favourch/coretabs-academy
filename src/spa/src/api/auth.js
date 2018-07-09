@@ -191,13 +191,12 @@ const AuthAPI = {
   selectTrack(root) {
     return axios.patch('/api/v1/auth/user/', {
       profile: {
-        track_slug: root.track_selected
+        track: root.track_selected
       }
     }, {
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
-      root.$store.dispatch('profile', { prop: 'track_slug', data: response.data.profile.track_slug })
       this.updateUser(root.$store)
       return true
     })

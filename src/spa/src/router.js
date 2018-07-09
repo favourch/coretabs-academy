@@ -91,7 +91,8 @@ const router = new Router({
   }, {
     name: 'select-track',
     path: '/select-track',
-    component: SelectTrackComponent
+    component: SelectTrackComponent,
+    beforeEnter: (to, from, next) => { (store.getters.isLogin && !store.getters.profile('track')) ? next() : next('/') }
   }, {
     path: '/profile',
     component: ProfileSettingsComponent,

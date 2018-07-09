@@ -1,6 +1,8 @@
 export default {
   name: 'SelectTrackComponent',
   data: () => ({
+    track1: 'backend',
+    track2: 'frontend',
     track_selected: null
   }),
   computed: {
@@ -14,8 +16,5 @@ export default {
         this.$router.push('/')
       }
     }
-  },
-  created() {
-    this.track_selected = (this.$store.getters.profile('track')) ? this.$store.getters.profile('track') : null
   }
 }
