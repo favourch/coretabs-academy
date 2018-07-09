@@ -46,11 +46,10 @@ export default new Vuex.Store({
       state.user.profile[payload.prop] = payload.data
     },
     progress(state, payload) {
+      state.progress.error = payload.error
       if (payload.error === false) {
-        state.progress.error = payload.error
         state.progress.text = i18n.app.progress.loadingText
       } else {
-        state.progress.error = payload.error
         state.progress.text = i18n.app.progress.errorText
       }
     }

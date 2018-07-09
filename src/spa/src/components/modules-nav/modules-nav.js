@@ -1,6 +1,5 @@
 export default {
   name: 'ModulesNavComponent',
-  components: {},
   data: () => ({
     current: {
       module: {}
