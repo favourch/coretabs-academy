@@ -97,6 +97,10 @@ html[dir='rtl'] {
             min-height: 40px;
             float: left;
             background: $grading-color !important;
+            @include box-shadow(0px, 5px, 30px, 0px, $shadow-color,true);
+            &:hover{
+              @include box-shadow(0px, 0px, 0px, 0px, $shadow-color,true);
+            }
             @media (max-width: 960px) {
               margin: 0 !important;
               width: 100% !important;
