@@ -16,6 +16,7 @@ from allauth.account.utils import send_email_confirmation, user_pk_to_url_str
 from django.contrib.sites.shortcuts import get_current_site
 
 from library.serializers import ProfileSerializer
+from library.models import Track
 
 from allauth.account.forms import UserTokenForm
 from allauth.account.adapter import get_adapter
@@ -247,8 +248,9 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get(
             'first_name', instance.first_name)
         if profile:
-            instance.profile.track = profile.get(
-                'track', instance.profile.track)
+            new_track = profile.get('track')
+            track = Track.objects.get(slug=new_track.slug)
+            instance.profile.track = track
             instance.profile.last_opened_lesson = profile.get(
                 'last_opened_lesson', instance.profile.last_opened_lesson)
 

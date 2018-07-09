@@ -36,7 +36,8 @@ class WorkshopMainInfoSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    track_slug = serializers.SerializerMethodField()
+    track = serializers.SlugRelatedField(
+        slug_field='slug', read_only=False, queryset=models.Track.objects)
     last_opened_workshop_slug = serializers.SerializerMethodField()
     last_opened_module_slug = serializers.SerializerMethodField()
     last_opened_lesson_slug = serializers.SerializerMethodField()
@@ -46,16 +47,9 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ('role',
                   'track',
                   'last_opened_lesson',
-                  'track_slug',
                   'last_opened_workshop_slug',
                   'last_opened_module_slug',
                   'last_opened_lesson_slug',)
-
-    def get_track_slug(self, obj):
-        result = None
-        if obj.track:
-            result = obj.track.slug
-        return result
 
     def get_last_opened_workshop_slug(self, obj):
         result = None
