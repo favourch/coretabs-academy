@@ -165,6 +165,10 @@ html[dir='rtl'] {
                   color: #999 !important;
                   border: 2px solid #ddd !important;
                   @include responsive-font-size(map-deep-get($card2,'part1','font-size','chips'),true);
+                  margin-bottom: 6px;
+               }
+               div{
+                 display: inline-block;
                }
             }
 
