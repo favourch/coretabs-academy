@@ -61,17 +61,18 @@
 
     } 
     h1{ 
-      margin-bottom: 25px !important; 
+      margin-bottom: 30px !important; 
     } 
     p{ 
       line-height: 30px !important; 
+      max-width: 350px;
     } 
     #back-home { 
       background: $grading-color; 
       color: $white-color !important; 
       height: 45px; 
       padding: 5px 18px !important; 
-      margin-top: 10px; 
+      margin-top: 15px; 
     } 
   } 
 } 
