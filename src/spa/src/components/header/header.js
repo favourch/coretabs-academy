@@ -16,7 +16,7 @@ export default {
     ],
     user_navs: [
       {
-        url: '/tour/',
+        url: '/classroom/tour/',
         radius: true
       }, {
         url: '/about',
@@ -40,7 +40,7 @@ export default {
   },
   watch: {
     role() { this.i18n = this.$store.state.i18n.header[this.role] },
-    $route(to, from) {
+    $route() {
       this.setHeader()
       let el = document.querySelector('main.content')
       el.className = ''
@@ -76,7 +76,7 @@ export default {
             this.role = 'user_navs'
             this.navs = this.user_navs
             if (this.$store.getters.profile('track_slug')) {
-              this.user_navs[0].url = `/${this.$store.getters.profile('track_slug')}/`
+              this.user_navs[0].url = `/classroom/${this.$store.getters.profile('track_slug')}/`
             }
           }
           break

@@ -128,7 +128,7 @@ const router = new Router({
     redirect: '/404'
   }, {
     name: 'workshops',
-    path: '/:track',
+    path: '/classroom/:track',
     component: WorkshopsComponent,
     children: [{
       name: 'workshop',
@@ -139,7 +139,7 @@ const router = new Router({
   }, {
     name: 'modules',
     component: ModulesComponent,
-    path: '/:track/:workshop/:module',
+    path: '/classroom/:track/:workshop/:module',
     children: [{
       name: 'lessons',
       path: ':lesson',
