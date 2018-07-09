@@ -3,36 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
-from . import models
-
-
-class WorkshopMainInfoSerializer(serializers.ModelSerializer):
-
-    class ModuleMainInfoSerializer(serializers.ModelSerializer):
-
-        class LessonMainInfoSerializer(serializers.ModelSerializer):
-
-            class Meta:
-                model = models.BaseLesson
-                fields = ('title',
-                          'slug')
-
-        lessons = LessonMainInfoSerializer(many=True)
-
-        class Meta:
-            model = models.Module
-            fields = '__all__'
-
-    shown_percentage = serializers.FloatField()
-    modules = ModuleMainInfoSerializer(many=True)
-
-    class Meta:
-        model = models.Workshop
-        fields = ('title',
-                  'slug',
-                  'modules',
-                  'description',
-                  'shown_percentage')
+from library import models
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -148,6 +119,19 @@ class ModuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Module
         fields = '__all__'
+
+
+class WorkshopsSerializer(serializers.ModelSerializer):
+    shown_percentage = serializers.FloatField()
+    modules = serializers.SlugRelatedField(
+        many=True, read_only=True, slug_field='slug')
+
+    class Meta:
+        model = models.Workshop
+        fields = ('title',
+                  'slug',
+                  'modules',
+                  'shown_percentage')
 
 
 class WorkshopSerializer(serializers.ModelSerializer):
