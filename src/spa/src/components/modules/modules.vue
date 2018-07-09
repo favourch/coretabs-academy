@@ -18,12 +18,13 @@
    </div>
 </div>
 <div v-else class="progress-container">
-   <v-container fluid fill-height>
-      <v-layout column align-center justify-center>
-         <v-progress-circular indeterminate :size="$store.state.progress.size" :width="$store.state.progress.width"></v-progress-circular>
-         <div class="progress-text text-center">{{$store.state.progress.pageText}}...</div>
-      </v-layout>
-   </v-container>
+  <v-container fluid fill-height>
+    <v-layout column align-center justify-center>
+      <v-progress-circular indeterminate :size="$store.state.progress.size" :width="$store.state.progress.width" v-if="$store.state.progress.error"></v-progress-circular>
+      <div class="error text-center" v-else>!</div>
+      <div class="text text-center">{{$store.state.progress.text}}</div>
+    </v-layout>
+  </v-container>
 </div>
 </template>
 <script src="./modules.js"></script>

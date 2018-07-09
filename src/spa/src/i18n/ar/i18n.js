@@ -10,8 +10,8 @@ var i18n = `{
     "direction": "rtl",
     "rev_direction": "ltr",
     "progress": {
-      "pageText": "جارٍ تحميل الصفحة",
-      "lessonText": "جارٍ تحميل الدرس"
+      "loadingText": "يُرجى الانتظار قليلًا",
+      "errorText": "خطأ.. حاول مرة أخرى!"
     }
   },
   "header": {

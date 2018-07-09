@@ -11,195 +11,197 @@
 Global Style
 =======================================*/
 :root {
-   --workshop-normal-state: #cdcdcd;
-   --workshop-active-state: #74dad9;
-   --workshop-complete-state: #7d68df;
+  --workshop-normal-state: #cdcdcd;
+  --workshop-active-state: #74dad9;
+  --workshop-complete-state: #7d68df;
 }
 
 *,
 *::after,
 *::before {
-   outline: none;
-   box-sizing: border-box;
-   @include font-family('ar');
+  outline: none;
+  box-sizing: border-box;
+  @include font-family('ar');
 }
 
 ::selection {
-   color: $white-color;
-   background: $primary-color;
+  color: $white-color;
+  background: $primary-color;
 }
 
 html {
-   line-height: 1.5;
-   scroll-behavior: smooth;
-   overflow: auto !important;
-   @include responsive-font-size(14px,true);
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  overflow: auto !important;
+  @include responsive-font-size(14px,true);
 }
 
 body {
-   color: $white-color;
-   overflow: hidden !important;
+  color: $white-color;
+  overflow: hidden !important;
 }
 
 .btn {
-   font-family: 'Cairo';
+  font-family: 'Cairo';
 }
 
 .font-family-ar {
-   @include font-family('ar',true);
+  @include font-family('ar',true);
 }
 
 .font-family-en {
-   @include font-family('en',true);
+  @include font-family('en',true);
 }
 
 a {
-   color: inherit;
-   text-decoration: none !important;
+  color: inherit;
+  text-decoration: none !important;
 }
 
 .btn--active .btn__content:before,
 .btn:active .btn__content:before,
 .btn:focus .btn__content:before,
 .btn:hover .btn__content:before {
-   background-color: unset;
+  background-color: unset;
 }
 
 .section-title {
-   position: relative;
-   display: inline-block;
-   font-weight: 700 !important;
-   @include responsive-font-size(2rem,true);
+  position: relative;
+  display: inline-block;
+  font-weight: 700 !important;
+  @include responsive-font-size(2rem,true);
 
-   &:after,
-   &:before {
-      top: 50%;
-      content: '';
-      height: 5px;
-      width: 35px;
-      position: absolute;
-      background: $black-color;
-   }
+  &:after,
+  &:before {
+    top: 50%;
+    content: '';
+    height: 5px;
+    width: 35px;
+    position: absolute;
+    background: $black-color;
+  }
 
-   &:after {
-      left: 100%;
-      margin-left: 10px;
-   }
+  &:after {
+    left: 100%;
+    margin-left: 10px;
+  }
 
-   &:before {
-      right: 100%;
-      margin-right: 10px;
-   }
+  &:before {
+    right: 100%;
+    margin-right: 10px;
+  }
 }
 @include center(true,true);
 
 .no-select {
-   user-select: none !important;
+  user-select: none !important;
 }
 
 .cursor-pointer {
-   cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 .cursor-text {
-   cursor: text !important;
+  cursor: text !important;
 }
 
 .cursor-default {
-   cursor: default !important;
+  cursor: default !important;
 }
 
 .text-left {
-   text-align: left !important;
+  text-align: left !important;
 }
 
 .text-right {
-   text-align: right !important;
+  text-align: right !important;
 }
 
 .text-center {
-   text-align: center !important;
+  text-align: center !important;
 }
 
 .text-justify {
-   text-align: justify !important;
+  text-align: justify !important;
 }
 
 .hide {
-   display: none !important;
+  display: none !important;
 }
 
 .float-left {
-   float: left !important;
+  float: left !important;
 }
 
 .float-right {
-   float: right !important;
+  float: right !important;
 }
 
 .content {
-   .container {
-      padding: 0;
-   }
-}
-
-.menu__content {
-   // min-width: 11vw !important;
+  .container {
+    padding: 0;
+  }
 }
 
 .main-container {
-   height: 100% !important;
+  height: 100% !important;
 }
 
 .progress-container {
-   height: 100vh !important;
-   margin-top: $inner-header-height * -1 !important;
-   background: map-deep-get($loader,'container-background') !important;
+  height: 100vh !important;
+  margin-top: $inner-header-height * -1 !important;
+  background: map-deep-get($loader,'container-background') !important;
 
-   &.lesson-progress {
-      margin-top: 0 !important;
-      background: map-deep-get($loader,'lesson-container-background') !important;
+  &.lesson-progress {
+    margin-top: 0 !important;
+    background: map-deep-get($loader,'lesson-container-background') !important;
 
-      .progress-circular {
-         svg {
-            circle {
-               stroke: map-deep-get($loader,'progress','stroke','lesson-color') !important;
-            }
-         }
-      }
-
-      .progress-text {
-         color: map-deep-get($loader,'progress','stroke','lesson-color') !important;
-      }
-   }
-
-   .progress-circular {
+    .progress-circular {
       svg {
-         circle {
-            stroke: map-deep-get($loader,'progress','stroke','color') !important;
-         }
+        circle {
+          stroke: map-deep-get($loader,'progress','stroke','lesson-color') !important;
+        }
       }
-   }
+    }
 
-   .progress-text {
-      width: 100% !important;
-      margin-top: 20px !important;
-      font-weight: 700 !important;
-      color: map-deep-get($loader,'progress','stroke','color') !important;
-   }
+    .text, .error {
+      color: map-deep-get($loader,'progress','stroke','lesson-color') !important;
+    }
+  }
+
+  .progress-circular {
+    svg {
+      circle {
+      stroke: map-deep-get($loader,'progress','stroke','color') !important;
+      }
+    }
+  }
+
+  .text, .error {
+    width: 100% !important;
+    margin-top: 20px !important;
+    font-weight: 700 !important;
+    color: map-deep-get($loader,'progress','stroke','color') !important;
+  }
+
+  .error {
+    margin-top: 0 !important;
+    background-color: unset !important;
+    font-size: 50px;
+  }
 }
 
 .application--wrap {
-   margin: 0;
-   padding: 0;
-   width: 100%;
-   background-color: #ffffff;
-   background-image: url("assets/multimedia/images/home/second_layer.svg"), url("assets/multimedia/images/home/first_layer.svg");
-   background-size: 40%, 55%;
-   background-repeat: no-repeat, no-repeat;
-   background-position: right top, right top;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #ffffff;
+  background-image: url("assets/multimedia/images/home/second_layer.svg"), url("assets/multimedia/images/home/first_layer.svg");
+  background-size: 40%, 55%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: right top, right top;
 }
 
 .container.fill-height {
-   min-height: calc(100vh - #{$header-height * 2});
+  min-height: calc(100vh - #{$header-height * 2});
 }

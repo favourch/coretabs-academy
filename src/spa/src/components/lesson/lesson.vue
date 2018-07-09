@@ -118,8 +118,9 @@
   <div v-else class="progress-container lesson-progress">
     <v-container fluid fill-height>
       <v-layout column align-center justify-center>
-        <v-progress-circular indeterminate :size="$store.state.progress.size" :width="$store.state.progress.width"></v-progress-circular>
-        <div class="progress-text text-center">{{$store.state.progress.lessonText}}...</div>
+        <v-progress-circular indeterminate :size="$store.state.progress.size" :width="$store.state.progress.width" v-if="!$store.state.progress.error"></v-progress-circular>
+        <div class="error text-center" v-else>!</div>
+        <div class="text text-center">{{$store.state.progress.text}}</div>
       </v-layout>
     </v-container>
   </div>

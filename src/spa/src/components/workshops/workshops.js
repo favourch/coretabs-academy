@@ -74,18 +74,18 @@ export default {
       .then(data => {
         this.workshops = data
         if (typeof this.$route.params.workshop === 'undefined') {
-            this.$router.push({
-              name: 'workshop',
-              params: {
-                workshop: this.workshops[0].url.params.workshop
-              }
-            })
+          this.$router.push({
+            name: 'workshop',
+            params: {
+              workshop: this.workshops[0].url.params.workshop
+            }
+          })
         } else {
           this.current.workshop = this.$api.getWorkshopId(this.workshops)
         }
         this.loaded = true
-      }).catch(err => {
-        console.error(err)
+      }).catch(() => {
+        this.$store.dispatch('progress', { error: true })
       })
   },
   updated() {

@@ -56,8 +56,6 @@ export default {
       let lesson = this.$route.params.lesson
       let endpoint = `/api/v1/tracks/${track}/workshops/${workshop}/modules/${module}/lessons/${lesson}`
 
-      this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint)
-
       switch (this.type) {
         case '0':
         case '1':
@@ -65,36 +63,40 @@ export default {
           axios.get(notes)
             .then(response => {
               this.notes_content = this.previewMarkdowText(response.data)
+              this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
               this.loaded = true
-            }).catch(err => {
-              console.error(err)
+            }).catch(() => {
+              this.$store.dispatch('progress', { error: true })
             })
           break
         case '2':
           axios.get(url)
             .then(response => {
               this.lesson_content = this.previewMarkdowText(response.data)
+              this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
               this.loaded = true
-            }).catch(err => {
-              console.error(err)
+            }).catch(() => {
+              this.$store.dispatch('progress', { error: true })
             })
           break
         case '3':
           axios.get(url)
             .then(response => {
               this.lesson_content = response.data
+              this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
               this.loaded = true
-            }).catch(err => {
-              console.error(err)
+            }).catch(() => {
+              this.$store.dispatch('progress', { error: true })
             })
           break
         case '4':
           axios.get(url)
             .then(response => {
               this.lesson_content = this.previewMarkdowText(response.data)
+              this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
               this.loaded = true
-            }).catch(err => {
-              console.error(err)
+            }).catch(() => {
+              this.$store.dispatch('progress', { error: true })
             })
           break
       }

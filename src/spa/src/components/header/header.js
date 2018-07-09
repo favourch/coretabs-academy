@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     setHeader() {
+      this.$store.dispatch('progress', { error: false })
       this.currentClass = `${this.$route.name}-main-content`
 
       switch (this.$route.name) {

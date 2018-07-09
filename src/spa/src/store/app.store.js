@@ -16,10 +16,10 @@ export default new Vuex.Store({
     githubFileURL: '',
     user: {},
     progress: {
-      size: 0,
-      width: 0,
-      pageText: '',
-      lessonText: ''
+      width: 5,
+      size: 80,
+      error: null,
+      text: ''
     },
     css: {
       workshops: {
@@ -44,6 +44,15 @@ export default new Vuex.Store({
     },
     profile(state, payload) {
       state.user.profile[payload.prop] = payload.data
+    },
+    progress(state, payload) {
+      if (payload.error === false) {
+        state.progress.error = payload.error
+        state.progress.text = i18n.app.progress.loadingText
+      } else {
+        state.progress.error = payload.error
+        state.progress.text = i18n.app.progress.errorText
+      }
     }
   },
   actions: {
@@ -61,6 +70,9 @@ export default new Vuex.Store({
     },
     profile(context, payload) {
       context.commit('profile', payload)
+    },
+    progress(context, payload) {
+      context.commit('progress', payload)
     }
   },
   getters: {
