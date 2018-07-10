@@ -13,7 +13,6 @@ export default new Vuex.Store({
     logo: '',
     forumLogo: '',
     isLogin: false,
-    githubFileURL: '',
     user: {},
     progress: {
       width: 5,
@@ -28,10 +27,6 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    getGithubFileURL(state, params) {
-      params.owner = params.owner === undefined ? 'coretabs-academy' : params.owner
-      state.githubFileURL = `https://raw.githubusercontent.com/${params.owner}/${params.repo}/master/${params.path}`
-    },
     user(state, payload) {
       if (payload.prop === null) {
         state.user = payload.data

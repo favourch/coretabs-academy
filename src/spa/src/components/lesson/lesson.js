@@ -33,11 +33,8 @@ export default {
   updated() {
     document.querySelectorAll('#lesson-markdown img').forEach((img) => {
       let src = img.src.replace(/^.*[\\/]/, '')
-      this.$store.commit('getGithubFileURL', {
-        repo: `fullstack-tutorials`,
-        path: `${this.$encryption.b64DecodeUnicode(this.$route.query.url).replace(/[a-zA-Z-]+\.txt/, '')}/${src}`
-      })
-      img.src = this.$store.state.githubFileURL
+      src = `${this.$encryption.b64DecodeUnicode(this.$route.query.url).replace(/[a-zA-Z-]+\.txt/, '')}/${src}`
+      img.src = src
     })
 
     document.querySelectorAll('#lesson-markdown pre code').forEach((code) => {
