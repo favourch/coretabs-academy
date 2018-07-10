@@ -70,9 +70,9 @@ export default {
     })
     this.drawer.isRight = this.$store.state.direction === 'rtl'
 
-    this.$api.getWorkshopsList(`/api/v1/tracks/${this.$route.params.track}/`)
-      .then(data => {
-        this.workshops = data
+    this.$api.getWorkshops(`/api/v1/tracks/${this.$route.params.track}/workshops/`)
+      .then(async(data) => {
+        this.workshops = await data
         if (typeof this.$route.params.workshop === 'undefined') {
           this.$router.push({
             name: 'workshop',

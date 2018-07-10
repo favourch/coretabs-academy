@@ -9,7 +9,7 @@
          <v-btn v-else flat icon color="white" :to="current.workshopURL">
             <v-icon>chevron_right</v-icon>
          </v-btn>
-         <v-toolbar-title>{{current.workshopURL.params.workshop}}</v-toolbar-title>
+         <v-toolbar-title>{{drawer.title}}</v-toolbar-title>
       </v-toolbar>
       <modules-nav-component :modules="modules"></modules-nav-component>
    </v-navigation-drawer>

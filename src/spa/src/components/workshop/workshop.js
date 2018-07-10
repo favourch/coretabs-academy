@@ -5,9 +5,9 @@ export default {
     ModulesNavComponent
   },
   data: () => ({
-    loaded: true
+    loaded: false,
+    workshop: {}
   }),
-  props: ['workshop'],
   computed: {
     i18n() {
       return this.$store.state.i18n.workshop
@@ -45,6 +45,15 @@ export default {
         }
       })
     }
+  },
+  created() {
+    this.$api.getWorkshop(`/api/v1/tracks/${this.$route.params.track}/workshops/${this.$route.params.workshop}`)
+    .then(workshop => {
+      this.workshop = workshop
+      this.loaded = true
+    }).catch(() => {
+      this.$store.dispatch('progress', { error: true })
+    })
   },
   mounted() {
     window.addEventListener('resize', this.toggleAvatar)
