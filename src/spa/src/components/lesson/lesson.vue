@@ -115,7 +115,7 @@
       <div id="lesson-task" class="lesson-task" v-html="lesson_content"></div>
     </template>
   </div>
-  <div v-else class="progress-container lesson-progress">
+  <div v-else class="progress-container contrast">
     <v-container fluid fill-height>
       <v-layout column align-center justify-center>
         <v-progress-circular indeterminate :size="$store.state.progress.size" :width="$store.state.progress.width" v-if="!$store.state.progress.error"></v-progress-circular>

@@ -32,7 +32,7 @@
             </div>
           </v-layout>
         </v-flex>
-        <v-flex xs8 sm4 md3 v-if="workshop.shown_percentage">
+        <v-flex xs8 sm4 md3>
           <v-layout row wrap align-center justify-center>
             <v-flex md8>
               <v-btn round class="white--text" v-if="workshop.shown_percentage === 0" v-html="i18n.card1.start" :to="workshop.modules[0].lessons[0].url"></v-btn>
@@ -75,7 +75,7 @@
         <v-flex xs12 sm12 md5>
           <div class="navigation">
             <v-toolbar flat>
-              <progress v-if="workshop.shown_percentage" :value="workshop.shown_percentage" max="100" :data-value="workshop.shown_percentage + '%'"></progress>
+              <progress :value="workshop.shown_percentage" max="100" :data-value="workshop.shown_percentage + '%'"></progress>
             </v-toolbar>
             <modules-nav-component v-if="workshop.modules" :modules="workshop.modules"></modules-nav-component>
           </div>
@@ -99,7 +99,7 @@
     </v-container>
   </v-card>
 </div>
-<div v-else class="progress-container">
+<div v-else class="progress-container contrast">
   <v-container fluid fill-height>
     <v-layout column align-center justify-center>
       <v-progress-circular indeterminate :size="$store.state.progress.size" :width="$store.state.progress.width" v-if="!$store.state.progress.error"></v-progress-circular>
