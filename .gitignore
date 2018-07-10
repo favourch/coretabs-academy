@@ -1,6 +1,10 @@
 # Test Database
 db.sqlite3
 
+# secrets
+secrets.api.env
+secrets.db.env
+
 # dependencies
 node_modules
 
