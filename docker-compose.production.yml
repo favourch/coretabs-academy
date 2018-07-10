@@ -2,10 +2,8 @@ version: '3'
 
 services:
   db:
-    environment:
-      POSTGRES_DB: app_db
-      POSTGRES_USER: app_user
-      POSTGRES_PASSWORD: MySup3rPassword!
+    env_file:
+      - secrets.db.env
     restart: always
     image: postgres
     ports:
@@ -21,17 +19,8 @@ services:
     #  - ./src/venv/:/djangoapp/venv/
     environment:
       SPA_BASE_URL: https://coretabs.net
-      DATABASE_URL: postgres://app_user:MySup3rPassword!@db/app_db
-      SECRET_KEY: zby2z^8x2(zlhlfa233=-ji9eq)$$&^aa-vjs@8a)u0h0t#eqh^
-      EMAIL_HOST: your_smtp_server
-      EMAIL_HOST_USER: your_email
-      EMAIL_HOST_PASSWORD: your_email_pass
-      DISCOURSE_HOST: discourse_domain_name
-      DISCOURSE_SSO_SECRET: your_discourse_secret
-      DISCOURSE_API_KEY: 123456
-      DISCOURSE_API_USERNAME: your_discourse_user
-      MANAGERS_EMAILS: manager1@email.com;manager2@email.com
-      SENTRY_DSN: https://your_sentry_dns
+    env_file:
+      - secrets.api.env
     links:
       - db:db
     ports:
