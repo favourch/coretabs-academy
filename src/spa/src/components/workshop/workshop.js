@@ -13,7 +13,22 @@ export default {
       return this.$store.state.i18n.workshop
     }
   },
+  watch: {
+    $route() {
+      this.loaded = false
+      this.getWorkshop()
+    }
+  },
   methods: {
+    getWorkshop() {
+      this.$api.getWorkshop(`/api/v1/tracks/${this.$route.params.track}/workshops/${this.$route.params.workshop}`)
+        .then(workshop => {
+          this.workshop = workshop
+          this.loaded = true
+        }).catch(() => {
+          this.$store.dispatch('progress', { error: true })
+        })
+    },
     getContinueURL(workshop) {
       let module = this.$store.getters.profile('last_opened_module_slug')
       let lesson = this.$store.getters.profile('last_opened_lesson_slug')
@@ -47,13 +62,7 @@ export default {
     }
   },
   created() {
-    this.$api.getWorkshop(`/api/v1/tracks/${this.$route.params.track}/workshops/${this.$route.params.workshop}`)
-    .then(workshop => {
-      this.workshop = workshop
-      this.loaded = true
-    }).catch(() => {
-      this.$store.dispatch('progress', { error: true })
-    })
+    this.getWorkshop()
   },
   mounted() {
     window.addEventListener('resize', this.toggleAvatar)

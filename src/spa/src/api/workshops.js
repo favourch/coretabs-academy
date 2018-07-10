@@ -63,10 +63,13 @@ const WorkshopsAPI = {
           description: response.data.description,
           workshop_result_url: response.data.workshop_result_url,
           workshop_forums_url: response.data.workshop_forums_url,
-          used_technologies: response.data.used_technologies.split(', ').reverse(),
+          used_technologies: [],
           last_update_date: Vue.prototype.$date.get(new Date(response.data.last_update_date)),
           authors: response.data.authors,
           modules: []
+        }
+        if (response.data.used_technologies.length > 0) {
+          workshop.used_technologies = response.data.used_technologies.split(', ').reverse()
         }
         response.data.modules.forEach((module, moduleIndex) => {
           workshop.modules.push({

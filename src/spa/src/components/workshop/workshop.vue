@@ -49,11 +49,11 @@
         <v-flex xs12 sm12 md7>
           <div class="title" v-if="workshop.description" v-html="i18n.card2.description"></div>
           <p v-if="workshop.description">{{workshop.description}}</p>
-          <div class="title" v-html="i18n.card2.used_technologies" v-if="workshop.used_technologies"></div>
-          <div class="chips" v-if="workshop.used_technologies">
-              <div v-for="used_technologies in workshop.used_technologies" :key="used_technologies">
-                <v-chip div v-for="technology in used_technologies.split(',')" :key="technology">{{technology}}</v-chip>
-              </div>
+          <div class="title" v-if="workshop.used_technologies && workshop.used_technologies.length > 0" v-html="i18n.card2.used_technologies"></div>
+          <div class="chips" v-if="workshop.used_technologies && workshop.used_technologies.length > 0">
+            <div v-for="used_technologies in workshop.used_technologies" :key="used_technologies">
+              <v-chip div v-for="technology in used_technologies.split(',')" :key="technology">{{technology}}</v-chip>
+            </div>
           </div>
           <div class="title" v-html="i18n.card2.authors" v-if="workshop.authors && workshop.authors.length > 0"></div>
           <div class="authors" v-if="workshop.authors && workshop.authors.length > 0">
