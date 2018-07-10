@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 
 const AuthAPI = {
   registration(root) {
+    root.alert.error = false
     axios.post('/api/v1/auth/registration/', {
       username: root.username,
       name: root.fullname,
@@ -30,6 +31,8 @@ const AuthAPI = {
     })
   },
   confirmation(root) {
+    root.alert.success = false
+    root.alert.error = false
     axios.post('/api/v1/auth/confirmation/', {
       email: root.email
     }, {
@@ -59,6 +62,8 @@ const AuthAPI = {
     })
   },
   requestReset(root) {
+    root.alert.success = false
+    root.alert.error = false
     axios.post('/api/v1/auth/password/reset/', {
       email: root.email
     }, {
@@ -84,6 +89,7 @@ const AuthAPI = {
     })
   },
   login(root) {
+    root.alert.error = false
     axios.post('/api/v1/auth/login/', {
       email: root.email,
       password: root.password
@@ -136,6 +142,8 @@ const AuthAPI = {
     })    
   },
   changeInfo(root) {
+    root.alert.success = false
+    root.alert.error = false
     let formData = new FormData()
     formData.append('name', root.fullname)
     formData.append('email', root.email)
@@ -156,7 +164,6 @@ const AuthAPI = {
         if (root.$store.getters.user('avatar_url') !== root.avatar_url) {
           root.$store.dispatch('user', { prop: 'avatar_url', data: '/media/avatars/' + root.username + '/resized/80/' + root.validImage.imageData.name })
         }
-        this.updateUser(root.$store)
       } else {
         root.alert.message = root.i18n.logout_message
         setTimeout(() => {
@@ -197,11 +204,12 @@ const AuthAPI = {
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
-      this.updateUser(root.$store)
       return true
     })
   },
   changePassword(root) {
+    root.alert.success = false
+    root.alert.error = false
     axios.post('/api/v1/auth/password/change/', {
       old_password: root.old_password,
       new_password1: root.new_password1,
@@ -222,6 +230,8 @@ const AuthAPI = {
     })
   },
   contact(root) {
+    root.alert.success = false
+    root.alert.error = false
     axios.post('/api/v1/contact/', {
       name: root.fullname,
       email: root.email,
@@ -243,41 +253,28 @@ const AuthAPI = {
       }
     })
   },
-  storeUser(store, data = null) {
-    store.dispatch('isLogin', true)
+  storeUser(store, data) {
     if (data !== null) {
       if(data.key) {
-        window.localStorage.setItem('token', Vue.prototype.$encryption.b64EncodeUnicode(data.key))
-        window.localStorage.setItem('user', Vue.prototype.$encryption.b64EncodeUnicode(JSON.stringify(data.user)))
+        window.localStorage.setItem('token', data.key)
         return store.dispatch('user', { prop: null, data: data.user })
-        .then((response) => {
-          return response
-        })
+          .then((response) => {
+            return response
+          })
       } else {
-        window.localStorage.setItem('user', Vue.prototype.$encryption.b64EncodeUnicode(JSON.stringify(data)))
         return store.dispatch('user', { prop: null, data: data })
-        .then((response) => {
-          return response
-        })
+          .then((response) => {
+            return response
+          })
       }
-    } else {
-      return store.dispatch('user', { prop: null, data: JSON.parse(Vue.prototype.$encryption.b64DecodeUnicode(window.localStorage.getItem('user'))) })
-      .then((response) => {
-        return response
-      })
     }
-  },
-  updateUser(store) {
-    window.localStorage.setItem('user', Vue.prototype.$encryption.b64EncodeUnicode(JSON.stringify(store.getters.user(null))))
   },
   removeUser(store) {
     window.localStorage.removeItem('token')
-    window.localStorage.removeItem('user')
-    store.dispatch('isLogin', false)
-    return store.dispatch('user', { prop: null, data: 'empty' })
-    .then((response) => {
-      return response
-    })
+    return store.dispatch('user', { prop: null, data: null })
+      .then((response) => {
+        return response
+      })
   },
   showLesson(endpoint, store) {
     return axios.put(endpoint, {

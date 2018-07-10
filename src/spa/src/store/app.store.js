@@ -32,12 +32,15 @@ export default new Vuex.Store({
       params.owner = params.owner === undefined ? 'coretabs-academy' : params.owner
       state.githubFileURL = `https://raw.githubusercontent.com/${params.owner}/${params.repo}/master/${params.path}`
     },
-    isLogin(state, boolean) {
-      state.isLogin = boolean
-    },
     user(state, payload) {
       if (payload.prop === null) {
         state.user = payload.data
+
+        if (payload.data === null) {
+          state.isLogin = false
+        } else {
+          state.isLogin = true
+        }
       } else {
         state.user[payload.prop] = payload.data
       }
@@ -57,9 +60,6 @@ export default new Vuex.Store({
   actions: {
     getImgUrl(state, img) {
       return require(`@/assets/multimedia/${img}`)
-    },
-    isLogin(context, boolean) {
-      context.commit('isLogin', boolean)
     },
     user: ({commit}, payload) => {
       return new Promise((resolve, reject) => {
