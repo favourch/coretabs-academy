@@ -24,7 +24,7 @@ $toolbar-padding: 0 15px;
       }
 
       nav {
-        height: $inner-header-height - 10 !important;
+        height: $inner-header-height - 15 !important;
         margin: 5px 0;
 
         a {
@@ -42,8 +42,8 @@ $toolbar-padding: 0 15px;
 
         .menu {
           display: inline-block;
-          width: $inner-header-height - 10 !important;
-          height: $inner-header-height - 10 !important;
+          width: $inner-header-height - 15 !important;
+          height: $inner-header-height - 15 !important;
           vertical-align: top;
           
           .btn {
@@ -67,13 +67,13 @@ $toolbar-padding: 0 15px;
             
             .btn__content {
               overflow: hidden;
-              width: $inner-header-height - 10;
+              width: $inner-header-height - 15;
               padding: 0;
 
               img {
                 display: block;
-                width: $inner-header-height - 10 !important;
-                height: $inner-header-height - 10 !important;
+                width: $inner-header-height - 15 !important;
+                height: $inner-header-height - 15 !important;
               }
             }
           }
@@ -119,10 +119,13 @@ $toolbar-padding: 0 15px;
   
       .list__tile {
         direction: ltr;
-  
         &.list__tile--avatar {
           height: 40px;
           padding: 0 10px;
+          .avatar{
+            height: $inner-header-height - 15 !important;
+            width:  $inner-header-height - 15 !important;
+          } 
         }
       }
       .notification {
@@ -133,7 +136,6 @@ $toolbar-padding: 0 15px;
           height: unset;
           padding: 5px 10px;
           font-size: 12px;
-  
           .list__tile__title {
             text-align: right;
             min-height: 24px;
