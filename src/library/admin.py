@@ -4,13 +4,13 @@ from . import models
 from adminsortable2.admin import SortableInlineAdminMixin
 
 
-# class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
-#    model = models.BaseLesson
-#    extra = 1
-#
-#
-# class ModuleAdmin(admin.ModelAdmin):
-#    inlines = (ModuleLessonInline,)
+class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
+    model = models.BaseLesson
+    #extra = 1
+
+
+class ModuleAdmin(admin.ModelAdmin):
+    inlines = (ModuleLessonInline,)
 
 
 class WorkshopModuleInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -34,7 +34,7 @@ class TrackAdmin(admin.ModelAdmin):
 admin.site.register(models.MarkdownLesson)
 admin.site.register(models.QuizLesson)
 admin.site.register(models.VideoLesson)
-admin.site.register(models.Module)
+admin.site.register(models.Module, ModuleAdmin)
 admin.site.register(models.WorkshopModule)
 admin.site.register(models.Workshop, WorkshopAdmin)
 admin.site.register(models.TrackWorkshop)
