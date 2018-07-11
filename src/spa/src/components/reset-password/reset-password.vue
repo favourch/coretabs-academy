@@ -11,7 +11,7 @@
               <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
               <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
               <v-text-field dir="auto" :label="form.new_password_label" v-model="password" :class="[alert.success ? 'disabled' : '']" :rules="pwRules" :disabled="alert.success" required
-                            :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'"></v-text-field>
+                            :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'" @keyup.enter="submit"></v-text-field>
               <v-btn round id="submit" @click="submit" v-show="!alert.success" v-html="i18n.submit_btn_text" :disabled="!valid"></v-btn>
             </v-form>
           </v-flex>
