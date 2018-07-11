@@ -22,111 +22,113 @@ const WorkshopsAPI = {
     if (index === -1) { router.push('/404') } else { return lessons[index] }
   },
   getWorkshops(url) {
-    return axios.get(url)
-      .then(async (response) => {
-        let data = await response.data
-        let workshops = []
-        for (let workshopIndex = 0; workshopIndex < data.length; workshopIndex++) {
-          let workshop = {
-            index: workshopIndex + 1,
-            url: {
-              name: 'workshop',
-              params: {
-                workshop: data[workshopIndex].slug
-              }
-            },
-            title: data[workshopIndex].title,
-            shown_percentage: data[workshopIndex].shown_percentage
-          }
-          workshops.push(workshop)
-        }
-        return workshops
-      })
-      .catch(err => {
-        console.error(err)
-      })
-  },
-  async getWorkshop(url) {
-    return axios.get(url)
-      .then(response => {
+    return axios.get(url, {
+      withCredentials: true
+    }).then(async (response) => {
+      let data = await response.data
+      let workshops = []
+      for (let workshopIndex = 0; workshopIndex < data.length; workshopIndex++) {
         let workshop = {
+          index: workshopIndex + 1,
           url: {
             name: 'workshop',
             params: {
-              workshop: response.data.slug
+              workshop: data[workshopIndex].slug
             }
           },
-          title: response.data.title,
-          shown_percentage: response.data.shown_percentage,
-          level: response.data.level,
-          duration: response.data.duration,
-          description: response.data.description,
-          workshop_result_url: response.data.workshop_result_url,
-          workshop_forums_url: response.data.workshop_forums_url,
-          used_technologies: [],
-          last_update_date: Vue.prototype.$date.get(new Date(response.data.last_update_date)),
-          authors: response.data.authors,
-          modules: []
+          title: data[workshopIndex].title,
+          shown_percentage: data[workshopIndex].shown_percentage
         }
-        if (response.data.used_technologies.length > 0) {
-          workshop.used_technologies = response.data.used_technologies.split(', ').reverse()
-        }
-        response.data.modules.forEach((module, moduleIndex) => {
-          workshop.modules.push({
-            active: true,
-            title: module.title,
-            index: moduleIndex + 1,
-            url: {
-              name: 'modules',
-              params: {
-                module: module.slug
-              }
-            },
-            lessons: []
-          })
-          module.lessons.forEach((lesson, lessonIndex) => {
-            let url = ''
-            let notes = ''
-            if (lesson.type === '0' || lesson.type === '1') {
-              url = Vue.prototype.$encryption.b64EncodeUnicode(lesson.video_url)
-              notes = Vue.prototype.$encryption.b64EncodeUnicode(lesson.markdown_url)
-            } else {
-              url = Vue.prototype.$encryption.b64EncodeUnicode(lesson.markdown_url)
-              notes = ''
+        workshops.push(workshop)
+      }
+      return workshops
+    })
+    .catch(err => {
+      console.error(err)
+    })
+  },
+  async getWorkshop(url) {
+    return axios.get(url, {
+      withCredentials: true
+    }).then(response => {
+      let workshop = {
+        url: {
+          name: 'workshop',
+          params: {
+            workshop: response.data.slug
+          }
+        },
+        title: response.data.title,
+        shown_percentage: response.data.shown_percentage,
+        level: response.data.level,
+        duration: response.data.duration,
+        description: response.data.description,
+        workshop_result_url: response.data.workshop_result_url,
+        workshop_forums_url: response.data.workshop_forums_url,
+        used_technologies: [],
+        last_update_date: Vue.prototype.$date.get(new Date(response.data.last_update_date)),
+        authors: response.data.authors,
+        modules: []
+      }
+      if (response.data.used_technologies.length > 0) {
+        workshop.used_technologies = response.data.used_technologies.split(', ').reverse()
+      }
+      response.data.modules.forEach((module, moduleIndex) => {
+        workshop.modules.push({
+          active: true,
+          title: module.title,
+          index: moduleIndex + 1,
+          url: {
+            name: 'modules',
+            params: {
+              module: module.slug
             }
-            workshop.modules[moduleIndex].lessons.push({
-              index: lessonIndex + 1,
-              url: {
-                name: 'lessons',
-                params: {
-                  module: module.slug,
-                  lesson: lesson.slug,
-                  workshopTitle: workshop.title,
-                  workshopURL: response.data.url,
-                  modules: workshop.modules
-                },
-                query: {
-                  url: url,
-                  notes: notes,
-                  type: Vue.prototype.$encryption.b64EncodeUnicode(lesson.type)
-                }
+          },
+          lessons: []
+        })
+        module.lessons.forEach((lesson, lessonIndex) => {
+          let url = ''
+          let notes = ''
+          if (lesson.type === '0' || lesson.type === '1') {
+            url = Vue.prototype.$encryption.b64EncodeUnicode(lesson.video_url)
+            notes = Vue.prototype.$encryption.b64EncodeUnicode(lesson.markdown_url)
+          } else {
+            url = Vue.prototype.$encryption.b64EncodeUnicode(lesson.markdown_url)
+            notes = ''
+          }
+          workshop.modules[moduleIndex].lessons.push({
+            index: lessonIndex + 1,
+            url: {
+              name: 'lessons',
+              params: {
+                module: module.slug,
+                lesson: lesson.slug,
+                workshopTitle: workshop.title,
+                workshopURL: response.data.url,
+                modules: workshop.modules
               },
               query: {
                 url: url,
                 notes: notes,
                 type: Vue.prototype.$encryption.b64EncodeUnicode(lesson.type)
-              },
-              type: lesson.type,
-              title: lesson.title,
-              is_shown: lesson.is_shown
-            })
+              }
+            },
+            query: {
+              url: url,
+              notes: notes,
+              type: Vue.prototype.$encryption.b64EncodeUnicode(lesson.type)
+            },
+            type: lesson.type,
+            title: lesson.title,
+            is_shown: lesson.is_shown
           })
         })
-        return workshop
       })
-      .catch(err => {
-        console.error(err)
-      })
+      return workshop
+    })
+    .catch(err => {
+      console.error(err)
+    })
   }
 }
 

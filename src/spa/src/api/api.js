@@ -5,7 +5,6 @@ import MarkdownAPI from './markdown'
 import WorkshopsAPI from './workshops'
 import EncryptionAPI from './encryption'
 
-
 export default {
    install: (Vue) => {
       Vue.prototype.$date = DateAPI

@@ -12,6 +12,7 @@ const AuthAPI = {
       password2: root.password,
       email: root.email
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.$router.push({ name: 'congratulations', params: { email: root.email } })
@@ -36,6 +37,7 @@ const AuthAPI = {
     axios.post('/api/v1/auth/confirmation/', {
       email: root.email
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
@@ -49,6 +51,7 @@ const AuthAPI = {
     axios.post('/api/v1/auth/registration/verify-email/', {
       key: root.$route.params.key
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       this.storeUser(root.$store, response.data)
@@ -67,6 +70,7 @@ const AuthAPI = {
     axios.post('/api/v1/auth/password/reset/', {
       email: root.email
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
@@ -83,6 +87,7 @@ const AuthAPI = {
       uid: root.$route.params.uid,
       key: root.$route.params.key
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.$router.push('/signin')
@@ -94,6 +99,7 @@ const AuthAPI = {
       email: root.email,
       password: root.password
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       this.storeUser(root.$store, response.data)
@@ -135,7 +141,9 @@ const AuthAPI = {
     })
   },
   async checkUser(store) {
-    await axios.get('/api/v1/auth/user/').then(async (response) => {
+    await axios.get('/api/v1/auth/user/', {
+      withCredentials: true
+    }).then(async (response) => {
       await this.storeUser(store, response.data)
     }).catch(async () => {
       await this.removeUser(store)
@@ -151,6 +159,7 @@ const AuthAPI = {
     formData.append('avatar', root.validImage.imageData)
 
     axios.patch('/api/v1/auth/user/', formData, {
+      withCredentials: true,
       headers: {
         'X-CSRFToken': Cookies.get('csrftoken'),
         'Content-Type': 'multipart/form-data'
@@ -184,6 +193,7 @@ const AuthAPI = {
   },
   logout(root) {
     axios.post('/api/v1/auth/logout/', {}, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       this.removeUser(root.$store)
@@ -201,6 +211,7 @@ const AuthAPI = {
         track: root.track_selected
       }
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
@@ -215,6 +226,7 @@ const AuthAPI = {
       new_password1: root.new_password1,
       new_password2: root.new_password2
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
@@ -237,6 +249,7 @@ const AuthAPI = {
       email: root.email,
       body: root.message
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
@@ -280,6 +293,7 @@ const AuthAPI = {
     return axios.put(endpoint, {
       is_shown: true
     }, {
+      withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then(async () => {
       if (await this.checkUser(store)) {
