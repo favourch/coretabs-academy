@@ -31,10 +31,6 @@ export default {
       var root = this
       this.$auth.login(root)
     },
-    enterSubmit() {
-      var btn = document.getElementById('submit')
-      btn.click()
-    },
     setSplashHeight() {
       var sDiv = document.querySelector('#splash')
       if (sDiv) {
@@ -62,6 +58,5 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
-  },
-
+  }
 }

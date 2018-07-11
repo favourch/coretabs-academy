@@ -40,7 +40,6 @@ export default {
         img.src = window.URL.createObjectURL(input.files[0])
         img.onload = () => {
           window.URL.revokeObjectURL(img.src)
-
           this.validImage.valid = 1
           this.validImage.imageData = input.files[0]
           this.reader.onload = (e) => {
@@ -55,11 +54,9 @@ export default {
       root.vs.v1 = 1
       root.vs.v2 = 1
       root.vs.v3 = 1
-
       root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = 0 } })
       root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = 0 } })
       root.unRules.forEach((rule) => { if (rule(root.username) !== true) { root.vs.v3 = 0 } })
-
       root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3 + root.validImage.valid
     },
     submit() {
@@ -72,7 +69,6 @@ export default {
     this.email = this.$store.getters.user('email')
     this.username = this.$store.getters.user('username')
     this.avatar_url = this.$store.getters.user('avatar_url')
-
     this.fnRules = [
       v => !!v || '',
       v => (v && v.length <= 20) || this.form.fullname_length_error
