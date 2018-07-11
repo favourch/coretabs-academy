@@ -23,7 +23,6 @@ export default {
       var root = this
       root.vs.v1 = 1
       root.vs.v2 = 1
-
       root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v1 = 0 } })
       root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v2 = 0 } })
       root.valid = root.vs.v1 + root.vs.v2
@@ -31,6 +30,10 @@ export default {
     submit() {
       var root = this
       this.$auth.login(root)
+    },
+    enterSubmit() {
+      var btn = document.getElementById('submit')
+      btn.click()
     },
     setSplashHeight() {
       var sDiv = document.querySelector('#splash')
