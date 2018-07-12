@@ -2,7 +2,7 @@ from .settings import *
 import dj_database_url
 
 
-SPA_BASE_URL = os.environ.get(SPA_BASE_URL)
+SPA_BASE_URL = os.environ.get('SPA_BASE_URL')
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
