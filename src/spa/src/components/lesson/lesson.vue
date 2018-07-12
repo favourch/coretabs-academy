@@ -1,61 +1,61 @@
 <template>
   <div v-if="loaded" class="lesson">
     <template v-if="type === '0'">
-        <div id="lesson-scrimba" class="lesson-video lesson-scrimba">
-          <iframe :src="lesson_content"></iframe>
-          <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
-              <v-tab v-for="tab in i18n.video" :key="tab.text">
-                {{tab.text}}
-                <v-icon>{{tab.icon}}</v-icon>
-              </v-tab>
-          </v-tabs>
-          <v-tabs-items v-model="current.tab">
-              <v-tab-item><div v-html="notes_content"></div></v-tab-item>
-              <v-tab-item>
-                <v-container id="have-question" fluid grid-list-xl>
-                  <v-layout row wrap align-center justify-right>
-                    <img :src="$store.state.forumLogo" alt="forum-logo icon">
-                    <div class="text">
-                      <strong>هل لديك أي سؤال بخصوص هذا الدرس؟</strong>
-                      <div>بإمكانك طرح أسئلتك أو منافشة الدرس مع زملائك والمدربين في المنتدى <a href="https://forums.coretabs.net" target="_blank">من هنا</a></div>
-                    </div>
-                  </v-layout>
-                </v-container>
-              </v-tab-item>
-          </v-tabs-items>
-        </div>
+      <div id="lesson-scrimba" class="lesson-video lesson-scrimba">
+        <iframe :src="lesson_content"></iframe>
+        <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
+            <v-tab v-for="tab in i18n.video.tabs" :key="tab.text">
+              {{tab.text}}
+              <v-icon>{{tab.icon}}</v-icon>
+            </v-tab>
+        </v-tabs>
+        <v-tabs-items v-model="current.tab">
+          <v-tab-item><div v-html="notes_content"></div></v-tab-item>
+          <v-tab-item>
+            <v-container id="have-question no-select" fluid grid-list-xl>
+              <v-layout row wrap align-center justify-right>
+                <img :src="$store.state.forumLogo" alt="forum-logo icon">
+                <div class="text">
+                  <h4 v-html="i18n.video.question.title"></h4>
+                  <div>{{ i18n.video.question.text }} <a :href="$route.params.workshop_forums_url" target="_blank">{{ i18n.video.question.here }}</a></div>
+                </div>
+              </v-layout>
+            </v-container>
+          </v-tab-item>
+        </v-tabs-items>
+      </div>
     </template>
     <template v-if="type === '1'">
-        <div id="lesson-youtube" class="lesson-video lesson-youtube">
-          <iframe :src="lesson_content" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
-              <v-tab v-for="tab in i18n.video" :key="tab.text">
-                {{tab.text}}
-                <v-icon>{{tab.icon}}</v-icon>
-              </v-tab>
-          </v-tabs>
-          <v-tabs-items v-model="current.tab">
-              <v-tab-item><div id="notes_content" v-html="notes_content"></div></v-tab-item>
-              <v-tab-item>
-                <v-container class="no-select" fluid grid-list-xl>
-                  <v-layout row wrap align-center justify-center>
-                      <v-flex xs11 sm11 md12>
-                        <v-layout row align-center>
-                            <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
-                            <div class="text">
-                              <h4>هل لديك أي سؤال بخصوص هذا الدرس؟</h4>
-                              <div>بإمكانك طرح أسئلتك أو منافشة الدرس مع زملائك والمدربين في المنتدى <a href="https://forums.coretabs.net" target="_blank">من هنا</a></div>
-                            </div>
-                        </v-layout>
-                      </v-flex>
+      <div id="lesson-youtube" class="lesson-video lesson-youtube">
+        <iframe :src="lesson_content" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
+          <v-tab v-for="tab in i18n.video.tabs" :key="tab.text">
+            {{tab.text}}
+            <v-icon>{{tab.icon}}</v-icon>
+          </v-tab>
+        </v-tabs>
+        <v-tabs-items v-model="current.tab">
+          <v-tab-item><div id="notes_content" v-html="notes_content"></div></v-tab-item>
+          <v-tab-item>
+            <v-container id="have-question no-select" fluid grid-list-xl>
+              <v-layout row wrap align-center justify-center>
+                <v-flex xs11 sm11 md12>
+                  <v-layout row align-center>
+                    <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
+                    <div class="text">
+                      <h4 v-html="i18n.video.question.title"></h4>
+                      <div>{{ i18n.video.question.text }} <a :href="$route.params.workshop_forums_url" target="_blank">{{ i18n.video.question.here }}</a></div>
+                    </div>
                   </v-layout>
-                </v-container>
-              </v-tab-item>
-          </v-tabs-items>
-        </div>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-tab-item>
+        </v-tabs-items>
+      </div>
     </template>
     <template v-if="type === '2'">
-        <div id="lesson-markdown" class="lesson-markdown" v-html="lesson_content"></div>
+      <div id="lesson-markdown" class="lesson-markdown" v-html="lesson_content"></div>
     </template>
     <template v-if="type === '3'">
       <v-container id="lesson-quiz" class="lesson-quiz" fluid>
@@ -70,7 +70,7 @@
               </v-stepper-header>
               <v-stepper-items>
                 <v-card v-show="current.quiz <= lesson_content.length" flat>
-                  <p class="question-num py-0">السؤال {{current.quiz}} من {{lesson_content.length}} : {{i18n.quiz.heading_text}}</p>
+                  <p class="question-num py-0">{{ i18n.quiz.steppers.question }} {{current.quiz}} {{ i18n.quiz.steppers.from }} {{lesson_content.length}} : {{i18n.quiz.heading_text}}</p>
                 </v-card>
                 <template v-for="(question, qIndex) in lesson_content">
                   <v-stepper-content :step="qIndex + 1" :key="qIndex" :class="{checkboxes : (question.correct.length > 1) }">

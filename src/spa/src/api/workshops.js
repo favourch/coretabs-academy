@@ -105,6 +105,7 @@ const WorkshopsAPI = {
                 lesson: lesson.slug,
                 workshopTitle: workshop.title,
                 workshopURL: response.data.url,
+                workshop_forums_url: response.data.workshop_forums_url,
                 modules: workshop.modules
               },
               query: {
