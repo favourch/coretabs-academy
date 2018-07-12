@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
   name: 'LessonComponent',
   components: {},
@@ -65,7 +66,9 @@ export default {
           axios.get(notes)
             .then(response => {
               this.notes_content = this.previewMarkdowText(response.data)
-              this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+              if (!this.$parent.current.lesson.is_shown) {
+                this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+              }
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
@@ -75,7 +78,9 @@ export default {
           axios.get(url)
             .then(response => {
               this.lesson_content = this.previewMarkdowText(response.data)
-              this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+              if (!this.$parent.current.lesson.is_shown) {
+                this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+              }
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
@@ -85,7 +90,9 @@ export default {
           axios.get(url)
             .then(response => {
               this.lesson_content = response.data
-              this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+              if (!this.$parent.current.lesson.is_shown) {
+                this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+              }
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
@@ -95,7 +102,9 @@ export default {
           axios.get(url)
             .then(response => {
               this.lesson_content = this.previewMarkdowText(response.data)
-              this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+              if (!this.$parent.current.lesson.is_shown) {
+                this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+              }
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
