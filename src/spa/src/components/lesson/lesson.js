@@ -47,7 +47,7 @@ export default {
       this.type = this.$encryption.b64DecodeUnicode(this.$route.query.type)
       let notes = this.$encryption.b64DecodeUnicode(this.$route.query.notes)
 
-      let track = this.$store.getters.profile('track_slug')
+      let track = this.$store.getters.profile('track')
       let workshop = this.$route.params.workshop
       let module = this.$route.params.module
       let lesson = this.$route.params.lesson
