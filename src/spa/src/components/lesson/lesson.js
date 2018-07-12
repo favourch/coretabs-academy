@@ -60,7 +60,7 @@ export default {
           break
         case '1':
           let youtube = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g
-          url = url.replace(youtube, 'http://www.youtube.com/embed/$1')
+          url = url.replace(youtube, 'https://www.youtube.com/embed/$1')
           this.lesson_content = url
 
           axios.get(notes)
