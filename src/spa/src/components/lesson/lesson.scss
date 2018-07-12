@@ -382,6 +382,10 @@ $markdown-em-spacer-6: 0.75em !default;
          height: 100% !important;
          // height: calc(100% - #{map-deep-get($lesson,'video','tab','height') + getValue(map-deep-get($lesson,'video','tab','margin'),'top',true) + getValue(map-deep-get($lesson,'video','tab','margin'),'bottom',true) + map-deep-get($lesson,'video','tab','content','height')}) !important;
          // height: calc(100% - #{map-deep-get($lesson,'video','tab','height') + getValue(map-deep-get($lesson,'video','tab','margin'),'top',true) + getValue(map-deep-get($lesson,'video','tab','margin'),'bottom',true) map-deep-get($lesson,'video','tab','content','height') + getValue(map-deep-get($lesson,'video','tab','content','padding'),'top',true) + getValue(map-deep-get($lesson,'video','tab','content','padding'),'bottom',true)}) !important;
+
+         &.youtube {
+          height: 720px !important;
+         }
       }
 
       .tabs {
