@@ -106,7 +106,11 @@ const AuthAPI = {
       if (root.$route.query.next) {
         root.$router.push(root.$route.query.next)
       } else {
-        root.$router.push('/')
+        if (root.$store.getters.profile('track')) {
+          root.$router.push(`/classroom/${root.$store.getters.profile('track')}/`)
+        } else {
+          root.$router.push('/select-track')
+        }
       }
     }).catch((error) => {
       if (error.response) {
@@ -121,7 +125,7 @@ const AuthAPI = {
           root.$router.push({
             name: 'congratulations',
             params: {
-                email: root.email
+              email: root.email
             }
           })
         }

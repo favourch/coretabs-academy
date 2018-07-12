@@ -48,6 +48,15 @@ export default {
       }
     }
   },
+  created() {
+    if (this.$store.getters.isLogin) {
+      if (this.$store.getters.profile('track')) {
+        this.$router.push(`/classroom/${this.$store.getters.profile('track')}/`)
+      } else {
+        this.$router.push('/select-track')
+      }
+    }
+  },
   mounted() {
     window.addEventListener('resize', this.setIntroVideoHeight)
     this.$nextTick(function() { this.setIntroVideoHeight() })
