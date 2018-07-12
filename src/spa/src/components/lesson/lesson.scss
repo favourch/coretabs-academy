@@ -4,7 +4,7 @@
 Lesson Style
 =======================================*/
 $lesson: (
-   video: (tab:(margin:10px 15px 0 30px,ar-margin:10px 30px 0 15px,content:(height:150px, padding:20px 40px 20px 80px, ar-padding:20px 80px 20px 40px),slider-height:2px,height:60px,min-width:130px,font-size:12px,icon-size:20px))
+   video: (tab:(margin:10px 15px 0 30px,ar-margin:10px 30px 0 15px,content:(height:150px, padding:20px 40px 20px 80px, ar-padding:20px 40px 20px 40px),slider-height:2px,height:60px,min-width:130px,font-size:12px,icon-size:20px))
 );
 $markdown-list-padding: 5em;
 $markdown-spacer: 10px !default;
@@ -43,7 +43,7 @@ $markdown-em-spacer-6: 0.75em !default;
       $lite_grey: #727272;
       $hint_icon_color: #f89f2c;
       $error_color: #cc5a5a;
-
+      margin-top: 80px;
       .stepper__step__step {
          font-size: 0;
       }
@@ -95,7 +95,7 @@ $markdown-em-spacer-6: 0.75em !default;
         .stepper__header {
           box-shadow: 0 1px 0 #dcdcdc;
           background-color: #fcfcfc !important;
-
+          border-bottom: 1px solid #e7e7e7;
           .divider {
             background: #e6e6e6 !important;
           }
@@ -146,7 +146,9 @@ $markdown-em-spacer-6: 0.75em !default;
                   display: block;
                   position: relative;
                   margin-top: 1px;
-                  font-size: 22px;
+                  margin-right: 1px;
+                  font-size: 18px;
+                  font-weight: bold;
                   color: #57c881;
                 }
 
@@ -173,9 +175,9 @@ $markdown-em-spacer-6: 0.75em !default;
                   content: 'close';
                   display: block;
                   position: relative;
-                  margin-top: 1px;
-                  margin-left: .5px;
-                  font-size: 22px;
+                  margin-right: 0.5px;
+                  font-size: 18px;
+                  font-weight: bold;
                   color: $error_color;
                 }
                 
@@ -208,7 +210,7 @@ $markdown-em-spacer-6: 0.75em !default;
               .checkbox_cont {
                 width: 1.7rem;
                 height: 1.7rem;
-                border: 1px solid #a2a2a2;
+                border: 2px solid #dadada;
                 position: relative;
                 margin: auto;
                 border-radius: 50%;
@@ -247,7 +249,7 @@ $markdown-em-spacer-6: 0.75em !default;
               justify-content: center;
               align-items: center;
               position: relative;
-              cursor: pointer;
+              margin-left: 10px;
           }
 
           .hint_bold {
@@ -299,15 +301,17 @@ $markdown-em-spacer-6: 0.75em !default;
       .question-content {
          color: #5c6c7c;
          @include rfs(18);
-         padding: 20px 24px;
+         padding: 10px 24px 40px;
       }
 
       .question-num {
-        color: #8d8d8d;
+        color: #a4a4a4;
         @include rfs(15);
         margin: 0;
-        padding: 15px 25px !important;
+        padding: 30px 25px 15px !important;
         background: #fff;
+        font-weight: bold;
+        font-size: 12px;
       }
 
       .btns-control {
@@ -443,15 +447,19 @@ $markdown-em-spacer-6: 0.75em !default;
       .tabs__items {
          height: auto !important;
          // height: map-deep-get($lesson,'video','tab','content','height') !important;
-         padding: map-deep-get($lesson,'video','tab','content','padding') !important;
+         //padding: map-deep-get($lesson,'video','tab','content','padding') !important;
          // max-height: map-deep-get($lesson,'video','tab','content','height') !important;
          // min-height: map-deep-get($lesson,'video','tab','content','height') !important;
+         padding: map-deep-get($lesson,'video','tab','content','padding') !important;
+         
       }
    }
 
    .lesson-markdown,
    .lesson-task {
-      padding: 20px !important;
+      padding: 50px 20px !important;
+      max-width: 740px;
+      margin: 0 auto;
       word-wrap: break-word !important;
 
       > *:first-child {
@@ -481,7 +489,9 @@ $markdown-em-spacer-6: 0.75em !default;
          margin-top: 0 !important;
          margin-bottom: $markdown-spacer-3 !important;
       }
-
+      p{
+        line-height: 30px;
+      }
       hr {
          border: 0 !important;
          padding: 0 !important;
@@ -492,14 +502,13 @@ $markdown-em-spacer-6: 0.75em !default;
 
       blockquote {
          display: flex !important;
-         width: fit-content !important;
+         width: 100% !important;
          align-items: center !important;
          color: $black-color !important;
-         margin: $markdown-spacer-6 auto !important;
+         margin: $markdown-spacer-5 auto !important;
          border: 1px solid $secondary-color !important;
          border-left: 10px solid $secondary-color !important;
          padding: $markdown-spacer-2 $markdown-spacer-2 !important;
-         @include box-shadow(0px, 15px, 34px, 0px, $shadow-color,true);
 
          .quotes {
             height: 80px !important;
@@ -507,6 +516,7 @@ $markdown-em-spacer-6: 0.75em !default;
 
             .material-icons {
                font-size: 40px !important;
+               color:#ccc;
             }
 
             &:first-child {
@@ -563,6 +573,7 @@ $markdown-em-spacer-6: 0.75em !default;
 
       li {
          word-wrap: break-all !important;
+         padding-top: 10px;
       }
 
       li > p {
@@ -640,17 +651,26 @@ $markdown-em-spacer-6: 0.75em !default;
          overflow: auto !important;
          direction: ltr !important;
          text-align: left !important;
-         line-height: 1.5 !important;
+         line-height: normal !important;
          word-wrap: normal !important;
-         max-height: 300px !important;
+         max-height: 400px !important;
          height: fit-content !important;
-         background: $white-color !important;
+         background: #f9f9f9 !important;
          padding: $markdown-spacer-3 !important;
-         margin: $markdown-spacer-6 auto !important;
-         font-family: 'Open Sans Condensed' !important;
-         border: 2px dashed $secondary-color !important;
-         @include box-shadow(0px, 15px, 34px, 0px, $shadow-color,true);
-
+         margin: $markdown-spacer-4 auto !important;
+         font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace !important;
+         span{
+          font-family:  inherit;
+          }
+        .code-action{
+          display: none;
+        }
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1; 
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #d5d5d5 !important; 
+        }
          pre {
             border: 0 !important;
             margin: 0 !important;
@@ -796,9 +816,29 @@ html[dir='rtl'] {
          .tabs {
             margin: map-deep-get($lesson,'video','tab','ar-margin') !important;
          }
-
          .tabs__items {
-            padding: map-deep-get($lesson,'video','tab','content','ar-padding') !important;
+           min-height: 150px;
+              #notes_content{
+                padding: map-deep-get($lesson,'video','tab','content','ar-padding') !important;
+                max-width: 740px;
+                p{
+                  line-height: 30px;
+                }
+              }
+              .text{
+                margin: 30px 0;
+                  a{
+                    color: $black-color;
+                    text-decoration: underline !important;
+                  }
+              }
+              #forum-logo{
+                max-width: 60px;
+                margin: 5px 25px 0;
+              }
+              h4{
+                margin-bottom: 8px !important;
+              }
          }
       }
 

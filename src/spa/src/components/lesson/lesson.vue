@@ -35,15 +35,15 @@
               </v-tab>
           </v-tabs>
           <v-tabs-items v-model="current.tab">
-              <v-tab-item><div v-html="notes_content"></div></v-tab-item>
+              <v-tab-item><div id="notes_content" v-html="notes_content"></div></v-tab-item>
               <v-tab-item>
                 <v-container class="no-select" fluid grid-list-xl>
                   <v-layout row wrap align-center justify-center>
-                      <v-flex xs11 sm11 md11>
+                      <v-flex xs11 sm11 md12>
                         <v-layout row align-center>
-                            <img :src="$store.state.forumLogo" alt="forum-logo icon">
+                            <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
                             <div class="text">
-                              <div>هل لديك أي سؤال بخصوص هذا الدرس؟</div>
+                              <h4>هل لديك أي سؤال بخصوص هذا الدرس؟</h4>
                               <div>بإمكانك طرح أسئلتك أو منافشة الدرس مع زملائك والمدربين في المنتدى <a href="https://forums.coretabs.net" target="_blank">من هنا</a></div>
                             </div>
                         </v-layout>
@@ -58,9 +58,9 @@
         <div id="lesson-markdown" class="lesson-markdown" v-html="lesson_content"></div>
     </template>
     <template v-if="type === '3'">
-      <v-container id="lesson-quiz" class="lesson-quiz" fluid fill-height>
+      <v-container id="lesson-quiz" class="lesson-quiz" fluid>
         <v-layout row wrap align-center justify-center class="quizz-layout">
-          <v-flex xs12 md8>
+          <v-flex xs10 md6>
             <v-stepper v-model="current.quiz" class="quizz-stepper" non-linear>
               <v-stepper-header>
                 <template v-for="(question, qIndex) in lesson_content">
