@@ -24,9 +24,8 @@ const AuthAPI = {
             root.alert.message = error.response.data[err][0]
             break
           }
-        }
-        if (error.response.status === 500) {
-          root.alert.message = 'Oops! Please Try again later!'
+        } else {
+          root.alert.message = root.form.message_endpoint_error
         }
       }
     })
@@ -58,9 +57,7 @@ const AuthAPI = {
       root.$router.push('/account-confirmed')
     }).catch((error) => {
       if (error.response) {
-        if (error.response.status === 404) {
-          root.$router.push('/404')
-        }
+        root.$router.push('/404')
       }
     })
   },
@@ -114,20 +111,26 @@ const AuthAPI = {
       }
     }).catch((error) => {
       if (error.response) {
+        root.alert.error = true
         if (error.response.status === 400) {
           for (var err in error.response.data) {
-            root.alert.error = true
             root.alert.message = error.response.data[err][0]
             break
           }
         }
-        if (error.response.status === 403) {
-          root.$router.push({
-            name: 'congratulations',
-            params: {
-              email: root.email
-            }
-          })
+        else if (error.response.status === 403) {
+          if (error.response.data.detail === 'not verified') {
+            root.$router.push({
+              name: 'congratulations',
+              params: {
+                email: root.email
+              }
+            })
+          } else {
+            root.alert.message = root.form.message_endpoint_error
+          }
+        } else {
+          root.alert.message = root.form.message_endpoint_error
         }
       }
     })
@@ -186,23 +189,16 @@ const AuthAPI = {
       }
     }).catch((error) => {
       if (error.response) {
+        root.alert.error = true
         if (error.response.status === 400) {
           for (var err in error.response.data) {
-            root.alert.error = true
             root.alert.message = error.response.data[err][0]
             break
           }
+        } else {
+          root.alert.message = root.form.message_endpoint_error
         }
       }
-    })
-  },
-  logout(root) {
-    axios.post('/api/v1/auth/logout/', {}, {
-      withCredentials: true,
-      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
-    }).then((response) => {
-      this.removeUser(root.$store)
-      root.$router.push('/')
     })
   },
   getTracks() {
@@ -238,12 +234,25 @@ const AuthAPI = {
       root.alert.message = response.data
     }).catch((error) => {
       if (error.response) {
-        for (var err in error.response.data) {
-          root.alert.error = true
-          root.alert.message = error.response.data[err][0]
-          break
+        root.alert.error = true
+        if (error.response.status === 400) {
+          for (var err in error.response.data) {
+            root.alert.message = error.response.data[err][0]
+            break
+          }
+        } else {
+          root.alert.message = root.form.message_endpoint_error
         }
       }
+    })
+  },
+  logout(root) {
+    axios.post('/api/v1/auth/logout/', {}, {
+      withCredentials: true,
+      headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
+    }).then((response) => {
+      this.removeUser(root.$store)
+      root.$router.push('/')
     })
   },
   contact(root) {
@@ -261,12 +270,14 @@ const AuthAPI = {
       root.alert.message = response.data.detail
     }).catch((error) => {
       if (error.response) {
+        root.alert.error = true
         if (error.response.status === 400) {
           for (var err in error.response.data) {
-            root.alert.error = true
             root.alert.message = error.response.data[err][0]
             break
           }
+        } else {
+          root.alert.message = root.form.message_endpoint_error
         }
       }
     })

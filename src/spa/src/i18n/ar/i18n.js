@@ -78,7 +78,8 @@ var i18n = `{
     "new_password_label": "كلمة المرور الجديدة",
     "password_length_error": "كلمة السر يجب أن تتكون من 8 أحرف على الأقل",
     "message_label": "أدخل رسالتك هنا",
-    "message_length_error": "الرسالة قصيرة جدًا"
+    "message_length_error": "الرسالة قصيرة جدًا",
+    "message_endpoint_error": "خطأ.. حاول مرة أخرى!"
   },
   "contact": {
     "forums_text": "تذكر في حال احتجت إلى مساعدة بإمكانك بدء نقاش مع زملائك والموجهين من خلال المنتدى <a href='http://forums.coretabs.net' target='_blank'>من هنا</a>",
