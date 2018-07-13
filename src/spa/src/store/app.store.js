@@ -12,6 +12,7 @@ export default new Vuex.Store({
     rev_direction: '',
     logo: '',
     forumLogo: '',
+    header: true,
     isLogin: false,
     user: {},
     progress: {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    header(state, payload) {
+      state.header = payload
+    },
     user(state, payload) {
       if (payload.prop === null) {
         state.user = payload.data
@@ -56,6 +60,12 @@ export default new Vuex.Store({
     getImgUrl(state, img) {
       return require(`@/assets/multimedia/${img}`)
     },
+    header: ({commit}, payload) => {
+      return new Promise((resolve, reject) => {
+        commit('header', payload)
+        resolve(true)
+      })
+    },
     user: ({commit}, payload) => {
       return new Promise((resolve, reject) => {
         commit('user', payload)
@@ -70,6 +80,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    header: state => {
+      return state.header
+    },
     isLogin: state => {
       return state.isLogin
     },

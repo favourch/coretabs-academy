@@ -172,6 +172,7 @@ const AuthAPI = {
     }).catch(async () => {
       await this.removeUser(store)
     })
+    await store.dispatch('header', true)
   },
   async changeInfo(root) {
     root.alert.success = false
