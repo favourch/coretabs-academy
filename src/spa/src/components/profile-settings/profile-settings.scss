@@ -50,7 +50,7 @@ html[dir='rtl'] {
                  
                }
                .list__tile__action{
-                min-width:44px;
+                min-width:35px;
                 i{
                   color: #bbbbbb !important;
                 }
@@ -131,6 +131,7 @@ html[dir='rtl'] {
                font-size: 16px !important;
                font-weight: bold !important;
                color: $white-color !important;
+               margin-right: 9px;
             }
          }
       }

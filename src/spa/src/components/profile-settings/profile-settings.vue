@@ -4,13 +4,13 @@
     <v-navigation-drawer id="sidenav" app :right="drawer.isRight" v-model="drawer.isOpen" :width="$store.state.css.workshops.drawerWidth"
       hide-overlay>
       <v-toolbar flat>
-        <v-btn @click="drawer.isOpen=!drawer.isOpen" icon>
+        <v-btn @click="$router.go(-1)" icon>
           <v-icon>keyboard_arrow_right</v-icon>
         </v-btn>
         <v-toolbar-title v-html="i18n.settings"></v-toolbar-title>
       </v-toolbar>
       <v-list class="py-0">
-        <router-link to="/profile/personal-info">
+        <router-link to="/profile/personal-info" replace>
           <v-list-tile>
             <v-list-tile-action>
               <v-icon :color="`grey`">settings</v-icon>
@@ -21,7 +21,7 @@
           </v-list-tile>
         </router-link>
         <v-divider></v-divider>
-        <router-link to="/profile/change-track">
+        <router-link to="/profile/change-track" replace>
           <v-list-tile>
             <v-list-tile-action>
               <v-icon :color="`grey`">compare_arrows</v-icon>
@@ -32,7 +32,7 @@
           </v-list-tile>
         </router-link>
         <v-divider></v-divider>
-        <router-link to="/profile/change-password">
+        <router-link to="/profile/change-password" replace>
           <v-list-tile>
             <v-list-tile-action>
               <v-icon :color="`grey`">lock</v-icon>
