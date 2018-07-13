@@ -6,9 +6,9 @@ export default {
   methods: {
     start() { },
     setSplashHeight() {
-      var sDiv = document.querySelector('#splash')
+      let sDiv = document.querySelector('#splash')
       if (sDiv) {
-        var sDivHeight
+        let sDivHeight
         if (sDiv.clientWidth < 250) { sDivHeight = sDiv.clientWidth * 1.25 } else { sDivHeight = sDiv.clientWidth / 1.25 }
         sDiv.setAttribute('style', 'height: ' + sDivHeight + 'px !important')
       }

@@ -33,7 +33,10 @@
                   <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :rules="fnRules" @keyup.enter="submit" required></v-text-field>
                   <v-text-field dir="auto" :label="form.email_label" v-model="email" :rules="emRules" @keyup.enter="submit" required></v-text-field>
                   <v-text-field dir="auto" :label="form.username_label" v-model="username" :rules="unRules" @keyup.enter="submit" required></v-text-field>
-                  <v-btn right round id="submit" v-html="i18n.submit_btn_text" @click="submit" :disabled="valid < 4"></v-btn>
+                  <v-btn right round id="submit" @click="submit" :disabled="valid < 4 || waiting">
+                    <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
+                    {{ i18n.submit_btn_text }}
+                  </v-btn>
                 </v-form>
               </div>
             </v-flex>

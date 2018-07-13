@@ -5,6 +5,7 @@ export default {
       error: false,
       message: ''
     },
+    waiting: false,
     valid: 0,
     vs: {
       v1: 0,
@@ -31,7 +32,7 @@ export default {
   },
   methods: {
     chackValid() {
-      var root = this
+      let root = this
       root.vs.v1 = 1
       root.vs.v2 = 1
       root.vs.v3 = 1
@@ -43,18 +44,19 @@ export default {
       root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v4 = 0 } })
       root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3 + root.vs.v4
     },
-    submit() {
-      var root = this
-      this.$auth.registration(root)
+    async submit() {
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.registration(root)
     },
     setAvatarsHeight() {
-      var aDiv = document.querySelector('#avatars')
+      let aDiv = document.querySelector('#avatars')
       if (aDiv) {
-        var aDivHeight = aDiv.clientWidth
+        let aDivHeight = aDiv.clientWidth
         aDiv.setAttribute('style', 'height: ' + aDivHeight + 'px !important')
 
-        var vDiv = document.querySelector('#avatar')
-        var vDivX = (aDiv.clientWidth / 7.5) * 2
+        let vDiv = document.querySelector('#avatar')
+        let vDivX = (aDiv.clientWidth / 7.5) * 2
 
         vDiv.setAttribute('style', `
           height: ${vDivX}px !important;

@@ -10,6 +10,7 @@ export default {
     old_password: '',
     new_password1: '',
     new_password2: '',
+    waiting: false,
     valid: 0,
     vs: {
       v1: 0,
@@ -24,7 +25,7 @@ export default {
   },
   methods: {
     chackValid() {
-      var root = this
+      let root = this
       root.vs.v1 = 1
       root.vs.v2 = 1
       root.vs.v3 = 1
@@ -37,9 +38,10 @@ export default {
 
       root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3 + root.vs.v4
     },
-    submit() {
-      var root = this
-      this.$auth.changePassword(root)
+    async submit() {
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.changePassword(root)
     }
   },
   created() {

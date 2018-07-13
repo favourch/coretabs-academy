@@ -7,6 +7,7 @@ export default {
       error: false,
       message: ''
     },
+    waiting: false,
     valid: false,
     email: ''
   }),
@@ -15,14 +16,15 @@ export default {
     form() { return this.$store.state.i18n.form }
   },
   methods: {
-    submit() {
-      var root = this
-      this.$auth.requestReset(root)
+    async submit() {
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.requestReset(root)
     },
     setSplashHeight() {
-      var sDiv = document.querySelector('#splash')
+      let sDiv = document.querySelector('#splash')
       if (sDiv) {
-        var sDivHeight
+        let sDivHeight
         if (sDiv.clientWidth < 250) { sDivHeight = sDiv.clientWidth } else { sDivHeight = sDiv.clientWidth / 1.5 }
         sDiv.setAttribute('style', 'height: ' + sDivHeight + 'px !important')
       }

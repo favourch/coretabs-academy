@@ -18,11 +18,11 @@
             </v-flex>
             <v-flex id="form" xs10 sm10 md5>
               <v-form ref="form" lazy-validation>
-                <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success" required></v-text-field>
-                <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" required></v-text-field>
-                <v-text-field dir="auto" :label="form.username_label" v-model="username" :class="[alert.success ? 'disabled' : '']" :rules="unRules" :disabled="alert.success" required></v-text-field>
+                <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
+                <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
+                <v-text-field dir="auto" :label="form.username_label" v-model="username" :class="[alert.success ? 'disabled' : '']" :rules="unRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
                 <v-text-field dir="auto" :label="form.password_label" v-model="password" :class="[alert.success ? 'disabled' : '']" :rules="pwRules"
-                              :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'" :disabled="alert.success" required></v-text-field>
+                              :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
               </v-form>
             </v-flex>
           </v-layout>
@@ -31,7 +31,10 @@
               <p id="tos" v-html="i18n.tos_text" class="black--text text-xs-right mt-1 mb-0"></p>
             </v-flex>
             <v-flex xs10 sm10 md3 id="submit-container">
-              <v-btn round id="submit" @click="submit" v-show="!alert.success" v-text="i18n.submit_btn_text" :disabled="valid < 4"></v-btn>
+              <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="valid < 4 || waiting">
+                <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
+                {{ i18n.submit_btn_text }}
+              </v-btn>
             </v-flex>
           </v-layout>
         </v-flex>

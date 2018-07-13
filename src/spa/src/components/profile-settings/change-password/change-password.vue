@@ -9,7 +9,10 @@
                         :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'" :disabled="false" @keyup.enter="submit" required></v-text-field>
           <v-text-field :placeholder="i18n.new_password" v-model="new_password1" :rules="pwRules" type="password" @keyup.enter="submit" required></v-text-field>
           <v-text-field :placeholder="i18n.re_new_password" v-model="new_password2" :rules="pwRules" type="password" @keyup.enter="submit" required></v-text-field>
-          <v-btn round flat v-text="i18n.submit_btn_text" @click="submit" :disabled="valid < 4"></v-btn>
+          <v-btn round flat @click="submit" :disabled="valid < 4 || waiting">
+            <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
+            {{ i18n.submit_btn_text }}
+          </v-btn>
         </v-form>
       </v-flex>
     </v-layout>

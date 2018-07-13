@@ -6,6 +6,7 @@ export default {
       error: false,
       message: ''
     },
+    waiting: false,
     valid: false,
     password: '',
     pw: true
@@ -15,14 +16,15 @@ export default {
     form() { return this.$store.state.i18n.form }
   },
   methods: {
-    submit() {
-      var root = this
-      this.$auth.resetConfirm(root)
+    async submit() {
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.resetConfirm(root)
     },
     setSplashHeight() {
-      var sDiv = document.querySelector('#splash')
+      let sDiv = document.querySelector('#splash')
       if (sDiv) {
-        var sDivHeight
+        let sDivHeight
         if (sDiv.clientWidth < 250) { sDivHeight = sDiv.clientWidth / 1.25 } else { sDivHeight = sDiv.clientWidth / 2 }
         sDiv.setAttribute('style', 'height: ' + sDivHeight + 'px !important')
       }

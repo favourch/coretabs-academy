@@ -5,6 +5,7 @@ export default {
       success: false,
       message: ''
     },
+    waiting: false,
     track_selected: null,
     tracks: []
   }),
@@ -17,11 +18,9 @@ export default {
       this.tracks = await this.$auth.getTracks()
     },
     async submit() {
-      var root = this
-      if (await this.$auth.selectTrack(root)) {
-        this.alert.success = true
-        this.alert.message = this.i18n.success_message
-      }
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.selectTrack(root)
     }
   },
   mounted() {

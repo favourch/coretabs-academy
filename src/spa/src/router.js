@@ -80,7 +80,7 @@ const router = new Router({
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'reset-password',
-    path: '/reset-password',
+    path: '/reset-password/:uid/:key',
     component: ResetPasswordComponent,
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {

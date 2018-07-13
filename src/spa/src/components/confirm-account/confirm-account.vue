@@ -2,7 +2,7 @@
 export default {
   name: 'ConfirmAccountComponent',
   mounted() {
-    var root = this
+    let root = this
     this.$auth.verifyEmail(root)
   }
 }

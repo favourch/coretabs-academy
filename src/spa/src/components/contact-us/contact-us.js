@@ -6,6 +6,7 @@ export default {
       error: false,
       message: ''
     },
+    waiting: false,
     valid: 0,
     vs: {
       v1: 0,
@@ -23,7 +24,7 @@ export default {
   },
   methods: {
     chackValid() {
-      var root = this
+      let root = this
 
       root.vs.v1 = 1
       root.vs.v2 = 1
@@ -35,14 +36,17 @@ export default {
 
       root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3
     },
-    submit() {
-      var root = this
-      this.$auth.contact(root)
+    async submit() {
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.contact(root)
     }
   },
   created() {
-    this.fullname = this.$store.getters.user('name') || ''
-    this.email = this.$store.getters.user('email') || ''
+    if (this.$store.getters.isLogin) {
+      this.fullname = this.$store.getters.user('name')
+      this.email = this.$store.getters.user('email')
+    }
 
     this.fnRules = [
       v => !!v || '',
@@ -60,7 +64,7 @@ export default {
     this.$store.dispatch('getImgUrl', 'icons/forums-logo.png').then(img => {
       this.forums_icon = img
     }).catch(error => {
-        throw new Error(error.message)
+      throw new Error(error.message)
     })
   },
   updated() {

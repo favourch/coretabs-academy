@@ -5,6 +5,7 @@ export default {
       error: false,
       message: ''
     },
+    waiting: false,
     valid: 0,
     vs: {
       v1: 0,
@@ -20,21 +21,22 @@ export default {
   },
   methods: {
     chackValid() {
-      var root = this
+      let root = this
       root.vs.v1 = 1
       root.vs.v2 = 1
       root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v1 = 0 } })
       root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v2 = 0 } })
       root.valid = root.vs.v1 + root.vs.v2
     },
-    submit() {
-      var root = this
-      this.$auth.login(root)
+    async submit() {
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.login(root)
     },
     setSplashHeight() {
-      var sDiv = document.querySelector('#splash')
+      let sDiv = document.querySelector('#splash')
       if (sDiv) {
-        var sDivHeight = sDiv.clientWidth - 20
+        let sDivHeight = sDiv.clientWidth - 20
         sDiv.setAttribute('style', 'height: ' + sDivHeight + 'px !important')
       }
     }

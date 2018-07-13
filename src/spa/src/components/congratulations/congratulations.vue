@@ -15,7 +15,10 @@
             <v-form ref="form" lazy-validation>
               <h2 class="black--text mb-2" v-html="i18n.heading_title_text"></h2>
               <p v-html="i18n.description_text"></p>
-              <v-btn round id="submit" @click="submit" v-html="counter > 0 ? counter : i18n.submit_btn_text  " :disabled="counter > 0"></v-btn>
+              <v-btn round id="submit" @click="submit" :disabled="counter > 0 || waiting">
+                <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
+                {{ counter > 0 ? counter : i18n.submit_btn_text }}
+              </v-btn>
             </v-form>
           </v-flex>
         </v-layout>

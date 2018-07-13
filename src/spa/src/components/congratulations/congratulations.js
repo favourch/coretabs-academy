@@ -7,20 +7,27 @@ export default {
       error: false,
       message: ''
     },
+    waiting: false,
     counter: 30
   }),
   computed: {
     i18n() { return this.$store.state.i18n.auth.congratulations }
   },
   methods: {
-    submit() {
-      var root = this
-      this.$auth.confirmation(root)
+    async submit() {
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.confirmation(root)
+      setInterval(() => {
+        if (this.counter > 0) {
+          this.counter -= 1
+        }
+      }, 1000)
     },
     setSplashHeight() {
-      var sDiv = document.querySelector('#splash')
+      let sDiv = document.querySelector('#splash')
       if (sDiv) {
-        var sDivHeight
+        let sDivHeight
         if (sDiv.clientWidth < 250) { sDivHeight = sDiv.clientWidth * 1.25 } else { sDivHeight = sDiv.clientWidth / 1.5 }
         sDiv.setAttribute('style', 'height: ' + sDivHeight + 'px !important')
       }

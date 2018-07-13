@@ -12,6 +12,7 @@ export default {
       error: false,
       message: ''
     },
+    waiting: false,
     valid: 0,
     vs: {
       v1: 0,
@@ -50,7 +51,7 @@ export default {
       }
     },
     chackValid() {
-      var root = this
+      let root = this
       root.vs.v1 = 1
       root.vs.v2 = 1
       root.vs.v3 = 1
@@ -59,9 +60,10 @@ export default {
       root.unRules.forEach((rule) => { if (rule(root.username) !== true) { root.vs.v3 = 0 } })
       root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3 + root.validImage.valid
     },
-    submit() {
-      var root = this
-      this.$auth.changeInfo(root)
+    async submit() {
+      let root = this
+      root.waiting = true
+      root.waiting = await this.$auth.changeInfo(root)
     }
   },
   created() {

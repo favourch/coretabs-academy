@@ -3,9 +3,9 @@ import Vue from 'vue'
 import Cookies from 'js-cookie'
 
 const AuthAPI = {
-  registration(root) {
+  async registration(root) {
     root.alert.error = false
-    axios.post('/api/v1/auth/registration/', {
+    await axios.post('/api/v1/auth/registration/', {
       username: root.username,
       name: root.fullname,
       password1: root.password,
@@ -27,13 +27,14 @@ const AuthAPI = {
         } else {
           root.alert.message = root.form.message_endpoint_error
         }
+        return false
       }
     })
   },
-  confirmation(root) {
+  async confirmation(root) {
     root.alert.success = false
     root.alert.error = false
-    axios.post('/api/v1/auth/confirmation/', {
+    await axios.post('/api/v1/auth/confirmation/', {
       email: root.email
     }, {
       withCredentials: true,
@@ -41,9 +42,13 @@ const AuthAPI = {
     }).then((response) => {
       root.alert.success = true
       root.alert.message = root.i18n.success_message_text
+      root.counter = 30
+      return false
     }).catch(() => {
       root.alert.error = true
       root.alert.message = root.i18n.error_message_text
+      root.counter = 30
+      return false
     })
   },
   verifyEmail(root) {
@@ -55,16 +60,14 @@ const AuthAPI = {
     }).then((response) => {
       this.storeUser(root.$store, response.data)
       root.$router.push('/account-confirmed')
-    }).catch((error) => {
-      if (error.response) {
-        root.$router.push('/404')
-      }
+    }).catch(() => {
+      root.$router.push('/404')
     })
   },
-  requestReset(root) {
+  async requestReset(root) {
     root.alert.success = false
     root.alert.error = false
-    axios.post('/api/v1/auth/password/reset/', {
+    await axios.post('/api/v1/auth/password/reset/', {
       email: root.email
     }, {
       withCredentials: true,
@@ -72,13 +75,17 @@ const AuthAPI = {
     }).then((response) => {
       root.alert.success = true
       root.alert.message = root.i18n.success_message_text
+      return false
     }).catch(() => {
       root.alert.error = true
       root.alert.message = root.i18n.error_message_text
+      return false
     })
   },
-  resetConfirm(root) {
-    axios.post('/api/v1/auth/password/reset/confirm/', {
+  async resetConfirm(root) {
+    root.alert.success = false
+    root.alert.error = false
+    await axios.post('/api/v1/auth/password/reset/confirm/', {
       new_password1: root.password,
       new_password2: root.password,
       uid: root.$route.params.uid,
@@ -87,12 +94,20 @@ const AuthAPI = {
       withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
-      root.$router.push('/signin')
+      root.alert.success = true
+      root.alert.message = root.i18n.success_message_text
+      setTimeout(() => {
+        root.$router.push('/signin')
+      }, 3000)
+    }).catch(() => {
+      root.alert.error = true
+      root.alert.message = root.i18n.error_message_text
+      return false
     })
   },
-  login(root) {
+  async login(root) {
     root.alert.error = false
-    axios.post('/api/v1/auth/login/', {
+    await axios.post('/api/v1/auth/login/', {
       email: root.email,
       password: root.password
     }, {
@@ -132,6 +147,7 @@ const AuthAPI = {
         } else {
           root.alert.message = root.form.message_endpoint_error
         }
+        return false
       }
     })
   },
@@ -155,9 +171,9 @@ const AuthAPI = {
       await this.storeUser(store, response.data)
     }).catch(async () => {
       await this.removeUser(store)
-    })    
+    })
   },
-  changeInfo(root) {
+  async changeInfo(root) {
     root.alert.success = false
     root.alert.error = false
     let formData = new FormData()
@@ -166,7 +182,7 @@ const AuthAPI = {
     formData.append('username', root.username)
     formData.append('avatar', root.validImage.imageData)
 
-    axios.patch('/api/v1/auth/user/', formData, {
+    await axios.patch('/api/v1/auth/user/', formData, {
       withCredentials: true,
       headers: {
         'X-CSRFToken': Cookies.get('csrftoken'),
@@ -181,6 +197,7 @@ const AuthAPI = {
         if (root.$store.getters.user('avatar_url') !== root.avatar_url) {
           root.$store.dispatch('user', { prop: 'avatar_url', data: '/media/avatars/' + root.username + '/resized/80/' + root.validImage.imageData.name })
         }
+        return false
       } else {
         root.alert.message = root.i18n.logout_message
         setTimeout(() => {
@@ -198,6 +215,7 @@ const AuthAPI = {
         } else {
           root.alert.message = root.form.message_endpoint_error
         }
+        return false
       }
     })
   },
@@ -206,8 +224,10 @@ const AuthAPI = {
       return response.data
     })
   },
-  selectTrack(root) {
-    return axios.patch('/api/v1/auth/user/', {
+  async selectTrack(root) {
+    root.alert.success = false
+    root.alert.error = false
+    await axios.patch('/api/v1/auth/user/', {
       profile: {
         track: root.track_selected
       }
@@ -215,14 +235,20 @@ const AuthAPI = {
       withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
+      root.alert.success = true
+      root.alert.message = root.i18n.success_message
       root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
-      return true
+      return false
+    }).catch(() => {
+      root.alert.error = true
+      root.alert.message = root.i18n.error_message
+      return false
     })
   },
-  changePassword(root) {
+  async changePassword(root) {
     root.alert.success = false
     root.alert.error = false
-    axios.post('/api/v1/auth/password/change/', {
+    await axios.post('/api/v1/auth/password/change/', {
       old_password: root.old_password,
       new_password1: root.new_password1,
       new_password2: root.new_password2
@@ -231,7 +257,8 @@ const AuthAPI = {
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
       root.alert.success = true
-      root.alert.message = response.data
+      root.alert.message = response.data.detail
+      return false
     }).catch((error) => {
       if (error.response) {
         root.alert.error = true
@@ -243,6 +270,7 @@ const AuthAPI = {
         } else {
           root.alert.message = root.form.message_endpoint_error
         }
+        return false
       }
     })
   },
@@ -255,10 +283,10 @@ const AuthAPI = {
       root.$router.push('/')
     })
   },
-  contact(root) {
+  async contact(root) {
     root.alert.success = false
     root.alert.error = false
-    axios.post('/api/v1/contact/', {
+    await axios.post('/api/v1/contact/', {
       name: root.fullname,
       email: root.email,
       body: root.message
@@ -268,6 +296,7 @@ const AuthAPI = {
     }).then((response) => {
       root.alert.success = true
       root.alert.message = response.data.detail
+      return false
     }).catch((error) => {
       if (error.response) {
         root.alert.error = true
@@ -279,6 +308,7 @@ const AuthAPI = {
         } else {
           root.alert.message = root.form.message_endpoint_error
         }
+        return false
       }
     })
   },

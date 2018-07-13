@@ -13,10 +13,13 @@
               <p v-html="i18n.description_text"></p>
               <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
               <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
-              <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
-              <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
-              <v-text-field dir="auto" :label="form.message_label" v-model="message" class="disabled" :rules="meRules" :disabled="alert.success" @keyup.enter="submit" multi-line required></v-text-field>
-              <v-btn round id="submit" @click="submit" v-show="!alert.success" v-html="i18n.submit_btn_text" :disabled="valid < 3"></v-btn>
+              <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success || $store.getters.isLogin" @keyup.enter="submit" required></v-text-field>
+              <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success || $store.getters.isLogin" @keyup.enter="submit" required></v-text-field>
+              <v-text-field multi-line dir="auto" :label="form.message_label" v-model="message" class="disabled" :rules="meRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
+              <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="valid < 3 || waiting">
+                <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
+                {{ i18n.submit_btn_text }}
+              </v-btn>
             </v-form>
           </v-flex>
         </v-layout>
