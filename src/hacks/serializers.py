@@ -250,9 +250,12 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         if profile:
             new_track = profile.get('track')
             track = Track.objects.get(slug=new_track.slug)
+            is_track_updated = instance.profile.track != new_track
             instance.profile.track = track
             instance.profile.last_opened_lesson = profile.get(
                 'last_opened_lesson', instance.profile.last_opened_lesson)
+            if is_track_updated:
+                instance.profile.last_opened_lesson = None
 
         email = validated_data.get('email', None)
         if email and email != instance.email:
