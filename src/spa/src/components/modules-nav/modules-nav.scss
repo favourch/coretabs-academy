@@ -4,8 +4,9 @@
 Modules Navigation Style
 =======================================*/
 $padding: 0 0 0 15px;
-$ar-padding: 0 15px 0 0;
+$ar-padding: 0 8px 0 0;
 $stepper-icon-size: 25px;
+$menu-stepper-icon-size: 14px;
 $stepper-line-width: 2px;
 $drawer-group-height: 45px;
 $drawer-group-item-height: 40px;
@@ -327,7 +328,7 @@ html[dir='rtl'] {
                   width: $stepper-icon-size !important;
                   height: $stepper-icon-size !important;
                   color: var(--workshop-normal-state) !important;
-                  font-size: $stepper-icon-size / 2 !important;
+                  font-size: $menu-stepper-icon-size !important;
                   border: 2px dashed var(--workshop-normal-state) !important;
 
                   &::after,
