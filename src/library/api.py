@@ -28,11 +28,16 @@ class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
 
     def put(self, request, *args, **kwargs):
         lesson = self.get_object()
-        lesson.shown_users.add(request.user)
+        user = request.user
 
-        user_profile = models.Profile.objects.get(id=request.user.profile.id)
-        user_profile.last_opened_lesson = lesson
-        user_profile.save()
+        lesson.shown_users.add(user)
+
+        user_profile = models.Profile.objects.get(id=user.profile.id)
+        lesson_exist_in_track = lesson.module.workshops.filter(
+            tracks__id=user.track.id).first() != None
+        if lesson_exist_in_track:
+            user_profile.last_opened_lesson = lesson
+            user_profile.save()
 
         return self.partial_update(request, *args, **kwargs)
 
