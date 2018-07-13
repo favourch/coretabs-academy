@@ -56,11 +56,11 @@ export default {
 
       switch (this.type) {
         case '0':
+          let youtube = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g
+          url = url.replace(youtube, 'https://www.youtube.com/embed/$1')
           this.lesson_content = url
           break
         case '1':
-          let youtube = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g
-          url = url.replace(youtube, 'https://www.youtube.com/embed/$1')
           this.lesson_content = url
 
           axios.get(notes)
