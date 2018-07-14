@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 const AuthAPI = {
   async registration(root) {
     root.alert.error = false
-    await axios.post('/api/v1/auth/registration/', {
+    return await axios.post('/api/v1/auth/registration/', {
       username: root.username,
       name: root.fullname,
       password1: root.password,
@@ -34,7 +34,7 @@ const AuthAPI = {
   async confirmation(root) {
     root.alert.success = false
     root.alert.error = false
-    await axios.post('/api/v1/auth/confirmation/', {
+    return await axios.post('/api/v1/auth/confirmation/', {
       email: root.email
     }, {
       withCredentials: true,
@@ -67,7 +67,7 @@ const AuthAPI = {
   async requestReset(root) {
     root.alert.success = false
     root.alert.error = false
-    await axios.post('/api/v1/auth/password/reset/', {
+    return await axios.post('/api/v1/auth/password/reset/', {
       email: root.email
     }, {
       withCredentials: true,
@@ -85,7 +85,7 @@ const AuthAPI = {
   async resetConfirm(root) {
     root.alert.success = false
     root.alert.error = false
-    await axios.post('/api/v1/auth/password/reset/confirm/', {
+    return await axios.post('/api/v1/auth/password/reset/confirm/', {
       new_password1: root.password,
       new_password2: root.password,
       uid: root.$route.params.uid,
@@ -107,7 +107,7 @@ const AuthAPI = {
   },
   async login(root) {
     root.alert.error = false
-    await axios.post('/api/v1/auth/login/', {
+    return await axios.post('/api/v1/auth/login/', {
       email: root.email,
       password: root.password
     }, {
@@ -165,14 +165,15 @@ const AuthAPI = {
     })
   },
   async checkUser(store) {
-    await axios.get('/api/v1/auth/user/', {
+    return await axios.get('/api/v1/auth/user/', {
       withCredentials: true
     }).then(async (response) => {
+      await store.dispatch('header', true)
       await this.storeUser(store, response.data)
     }).catch(async () => {
+      await store.dispatch('header', true)
       await this.removeUser(store)
     })
-    await store.dispatch('header', true)
   },
   async changeInfo(root) {
     root.alert.success = false
@@ -183,7 +184,7 @@ const AuthAPI = {
     formData.append('username', root.username)
     formData.append('avatar', root.validImage.imageData)
 
-    await axios.patch('/api/v1/auth/user/', formData, {
+    return await axios.patch('/api/v1/auth/user/', formData, {
       withCredentials: true,
       headers: {
         'X-CSRFToken': Cookies.get('csrftoken'),
@@ -245,7 +246,7 @@ const AuthAPI = {
   async changePassword(root) {
     root.alert.success = false
     root.alert.error = false
-    await axios.post('/api/v1/auth/password/change/', {
+    return await axios.post('/api/v1/auth/password/change/', {
       old_password: root.old_password,
       new_password1: root.new_password1,
       new_password2: root.new_password2
@@ -283,7 +284,7 @@ const AuthAPI = {
   async contact(root) {
     root.alert.success = false
     root.alert.error = false
-    await axios.post('/api/v1/contact/', {
+    return await axios.post('/api/v1/contact/', {
       name: root.fullname,
       email: root.email,
       body: root.message
