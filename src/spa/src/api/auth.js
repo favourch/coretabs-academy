@@ -226,9 +226,7 @@ const AuthAPI = {
     })
   },
   async selectTrack(root) {
-    root.alert.success = false
-    root.alert.error = false
-    await axios.patch('/api/v1/auth/user/', {
+    return await axios.patch('/api/v1/auth/user/', {
       profile: {
         track: root.track_selected
       }
@@ -236,13 +234,11 @@ const AuthAPI = {
       withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
-      root.alert.success = true
-      root.alert.message = root.i18n.success_message
-      root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
-      return false
+      return root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
+        .then((response) => {
+          return response
+        })
     }).catch(() => {
-      root.alert.error = true
-      root.alert.message = root.i18n.error_message
       return false
     })
   },

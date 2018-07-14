@@ -72,8 +72,11 @@ export default new Vuex.Store({
         resolve(true)
       })
     },
-    profile(context, payload) {
-      context.commit('profile', payload)
+    profile: ({commit}, payload) => {
+      return new Promise((resolve, reject) => {
+        commit('profile', payload)
+        resolve(true)
+      })
     },
     progress(context, payload) {
       context.commit('progress', payload)

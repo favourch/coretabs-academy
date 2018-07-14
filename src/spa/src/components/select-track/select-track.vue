@@ -11,7 +11,10 @@
               <p v-html="i18n.track_1_text_en" class="mt-4 mb-2"></p>
               <p v-html="i18n.track_1_text_ar" class="mt-2 mb-4"></p>
             </div>
-            <v-btn round class="submit" @click="submit()" v-html="i18n.submit_btn_text" :disabled="track_selected != track1"></v-btn>
+            <v-btn round class="submit" @click="submit" :disabled="track_selected != track1 || waiting">
+              <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
+              {{ i18n.submit_btn_text }}
+            </v-btn>
           </v-flex>
           <v-flex class="track" xs12 sm6 md6>
             <div @click="select(track2)">
@@ -21,7 +24,9 @@
               <p v-html="i18n.track_2_text_en" class="mt-4 mb-2"></p>
               <p v-html="i18n.track_2_text_ar" class="mt-2 mb-4"></p>
             </div>
-            <v-btn round class="submit" @click="submit()" v-html="i18n.submit_btn_text" :disabled="track_selected != track2"></v-btn>
+            <v-btn round class="submit" @click="submit" :disabled="track_selected != track2 || waiting">
+              {{ i18n.submit_btn_text }}
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
