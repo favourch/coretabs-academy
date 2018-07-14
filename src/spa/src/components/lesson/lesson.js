@@ -65,6 +65,17 @@ export default {
           let youtube = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g
           url = url.replace(youtube, 'https://www.youtube.com/embed/$1')
           this.lesson_content = url
+
+          axios.get(notes)
+            .then(response => {
+              this.notes_content = this.previewMarkdowText(response.data)
+              if (!this.$parent.current.lesson.is_shown) {
+                this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
+              }
+              this.loaded = true
+            }).catch(() => {
+              this.$store.dispatch('progress', { error: true })
+            })
           break
         case '1':
           this.lesson_content = url

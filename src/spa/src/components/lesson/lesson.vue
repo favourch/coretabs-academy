@@ -1,8 +1,8 @@
 <template>
   <div v-if="loaded" class="lesson">
     <template v-if="type === '0'">
-      <div id="lesson-scrimba" class="lesson-video lesson-scrimba">
-        <iframe :src="lesson_content"></iframe>
+      <div id="lesson-youtube" class="lesson-video lesson-youtube">
+        <iframe :src="lesson_content" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
             <v-tab v-for="tab in i18n.video.tabs" :key="tab.text">
               {{tab.text}}
@@ -26,8 +26,8 @@
       </div>
     </template>
     <template v-if="type === '1'">
-      <div id="lesson-youtube" class="lesson-video lesson-youtube">
-        <iframe :src="lesson_content" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <div id="lesson-scrimba" class="lesson-video lesson-scrimba">
+        <iframe :src="lesson_content"></iframe>
         <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
           <v-tab v-for="tab in i18n.video.tabs" :key="tab.text">
             {{tab.text}}
