@@ -6,7 +6,10 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
     model = models.BaseLesson
-    #extra = 1
+    extra = 1
+
+    def get_queryset(self, request):
+        return self.model.objects.select_subclasses()
 
 
 class ModuleAdmin(admin.ModelAdmin):
