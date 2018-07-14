@@ -175,6 +175,9 @@ class Profile(models.Model):
                                            on_delete=models.DO_NOTHING,
                                            verbose_name=_('last opened lesson'), null=True)
 
+    def __str__(self):
+        return f"{self.user.first_name} ({self.user.username})"
+
     class Meta:
         verbose_name = _('profile')
         verbose_name_plural = _('profiles')
