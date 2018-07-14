@@ -153,7 +153,7 @@ const AuthAPI = {
   },
   get_notifications(root) {
     let key = process.env.VUE_APP_DISCOURSE_API_KEY
-    axios.get(`https://forums.coretabs.net/notifications.json?api_key=${key}&api_username=${root.$store.getters.user('username')}`)
+    axios.get(`https://discourse.coretabs.net/notifications.json?api_key=${key}&api_username=${root.$store.getters.user('username')}`)
     .then((response) => {
       for (var notification in response.data.notifications.slice(0, 5)) {
         if (!notification.read) {
