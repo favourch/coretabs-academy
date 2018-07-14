@@ -22,11 +22,11 @@ export default {
       root.alert.success = false
       root.alert.error = false
       root.waiting = true
-
       if (await this.$auth.selectTrack(root)) {
         root.alert.success = true
         root.alert.message = root.i18n.success_message
         root.waiting = false
+        setTimeout(() => this.$router.push('/'), 3000)
       } else {
         root.alert.error = true
         root.alert.message = root.i18n.error_message
