@@ -24,6 +24,7 @@ import ModulesComponent from './components/modules/modules.vue'
 import WorkshopComponent from './components/workshop/workshop.vue'
 import NotFoundComponent from './components/not-found/not-found.vue'
 import WorkshopsComponent from './components/workshops/workshops.vue'
+import i18n from './i18n/ar/i18n'
 
 Vue.use(Router)
 
@@ -155,6 +156,13 @@ router.beforeEach(async(to, from, next) => {
     await store.dispatch('header', false)
     await Vue.prototype.$auth.checkUser(store)
   }
+  const pageName = to.name
+  if (i18n.meta[pageName]) {
+    to.meta.title = i18n.meta[pageName].title + ' - ' + i18n.meta.default.title
+  } else {
+    to.meta.title = i18n.meta.default.title
+  }
+  document.title = to.meta.title
   next()
 })
 

@@ -24,6 +24,9 @@ export default {
   watch: {
     $route(to, from) {
       this.getLesson()
+      const lessonTitle = this.$route.params.lesson
+      const workshopTitle =  this.$route.params.workshop
+      document.title = lessonTitle  +' - '+ workshopTitle
     }
   },
   computed: {
