@@ -29,6 +29,14 @@ export default {
   computed: {
     i18n() {
       return this.$store.state.i18n.lesson
+    },
+    endpoint() {
+      let track = this.$store.getters.profile('track')
+      let workshop = this.$route.params.workshop
+      let module = this.$route.params.module
+      let lesson = this.$route.params.lesson
+
+      return `/api/v1/tracks/${track}/workshops/${workshop}/modules/${module}/lessons/${lesson}`
     }
   },
   updated() {
@@ -47,13 +55,7 @@ export default {
       let url = this.$encryption.b64DecodeUnicode(this.$route.query.url)
       this.type = this.$encryption.b64DecodeUnicode(this.$route.query.type)
       let notes = this.$encryption.b64DecodeUnicode(this.$route.query.notes)
-
-      let track = this.$store.getters.profile('track')
-      let workshop = this.$route.params.workshop
-      let module = this.$route.params.module
-      let lesson = this.$route.params.lesson
-      let endpoint = `/api/v1/tracks/${track}/workshops/${workshop}/modules/${module}/lessons/${lesson}`
-
+      
       switch (this.type) {
         case '0':
           let youtube = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g
@@ -67,7 +69,7 @@ export default {
             .then(response => {
               this.notes_content = this.previewMarkdowText(response.data)
               if (!this.$parent.current.lesson.is_shown) {
-                this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+                this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               }
               this.loaded = true
             }).catch(() => {
@@ -79,7 +81,7 @@ export default {
             .then(response => {
               this.lesson_content = this.previewMarkdowText(response.data)
               if (!this.$parent.current.lesson.is_shown) {
-                this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+                this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               }
               this.loaded = true
             }).catch(() => {
@@ -90,9 +92,6 @@ export default {
           axios.get(url)
             .then(response => {
               this.lesson_content = response.data
-              if (!this.$parent.current.lesson.is_shown) {
-                this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
-              }
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
@@ -103,7 +102,7 @@ export default {
             .then(response => {
               this.lesson_content = this.previewMarkdowText(response.data)
               if (!this.$parent.current.lesson.is_shown) {
-                this.$parent.current.lesson.is_shown = this.$auth.showLesson(endpoint, this.$store)
+                this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               }
               this.loaded = true
             }).catch(() => {
@@ -115,13 +114,13 @@ export default {
     previewMarkdowText(mdText) {
       return this.$markdown.render(mdText)
     },
-    chooseAnswer(question, answer) {
+    chooseAnswer(questions, question, answer) {
       if (question.correct.length === 1) {
         question.choose = []
         if (!question.choose.includes(answer)) {
           question.choose.push(answer)
         }
-        this.checkAnswers(question, answer)
+        this.checkAnswers(questions, question)
       } else {
         if (this.quiz.status.right) {
           this.quiz.status.right = ''
@@ -133,7 +132,7 @@ export default {
         }
       }
     },
-    checkAnswers(question, answer) {
+    checkAnswers(questions, question) {
       question.choose.sort()
       if (question.choose.toString() === question.correct.toString()) {
         this.quiz.result = this.i18n.quiz.results_texts.success
@@ -144,6 +143,16 @@ export default {
         this.quiz.result = this.i18n.quiz.results_texts.fail
         question.true = false
         question.wrong = true
+      }
+      
+      let count = 0
+      questions.forEach((q) => {
+        if (q.true) count++
+      })
+      if(questions.length === count) {
+        if (!this.$parent.current.lesson.is_shown) {
+          this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
+        }
       }
     },
     goNextAnswers() {

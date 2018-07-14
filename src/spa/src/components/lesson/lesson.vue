@@ -78,7 +78,7 @@
                     <v-card color="grey lighten-1" flat>
                       <v-list three-line subheader>
                         <template v-for="(answer, aIndex) in question.answers">
-                          <v-list-tile @click="chooseAnswer(question, aIndex)" :key="aIndex" :class="[question.choose.includes(aIndex) && !question.correct.includes(aIndex) && question.correct.length === 1 ? 'wrong_answer' : '' ,question.choose.includes(aIndex) && question.correct.includes(aIndex) && question.correct.length === 1 ? 'true_answer' : '',question.correct.includes(aIndex) && question.correct.length > 1 ? quiz.status.right : '']" >
+                          <v-list-tile @click="chooseAnswer(lesson_content, question, aIndex)" :key="aIndex" :class="[question.choose.includes(aIndex) && !question.correct.includes(aIndex) && question.correct.length === 1 ? 'wrong_answer' : '' ,question.choose.includes(aIndex) && question.correct.includes(aIndex) && question.correct.length === 1 ? 'true_answer' : '',question.correct.includes(aIndex) && question.correct.length > 1 ? quiz.status.right : '']" >
                             <v-list-tile-action>
                               <input type="checkbox" v-model="question.choose" :value="answer" />
                               <span class="checkbox_cont">
@@ -99,7 +99,7 @@
                 </template>
                 <v-card class="btns-control" flat>
                   <v-btn v-show="current.quiz < lesson_content.length" class="r-btn" flat @click="goNextAnswers" :disabled="!quiz.result">{{i18n.quiz.buttons_texts.next}}</v-btn>
-                  <v-btn v-if="current.quiz > 0" v-show="lesson_content[current.quiz - 1].correct.length > 1" class="r-btn" flat @click="checkAnswers(lesson_content[current.quiz - 1])">{{i18n.quiz.buttons_texts.confirm}}</v-btn>
+                  <v-btn v-if="current.quiz > 0" v-show="lesson_content[current.quiz - 1].correct.length > 1" class="r-btn" flat @click="checkAnswers(lesson_content, lesson_content[current.quiz - 1])">{{i18n.quiz.buttons_texts.confirm}}</v-btn>
                   <v-btn v-show="current.quiz > 1" class="r-btn" flat @click="goPrevAnswers">{{i18n.quiz.buttons_texts.pre}}</v-btn>
                   <span class="result-container">
                     <span v-show="quiz.result" :class="['result', quiz.result === i18n.quiz.results_texts.fail ? 'err' : '']">{{quiz.result}}</span>
