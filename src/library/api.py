@@ -34,7 +34,7 @@ class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
 
         user_profile = models.Profile.objects.get(id=user.profile.id)
         lesson_exist_in_track = lesson.module.workshops.filter(
-            tracks__id=user.track.id).first() != None
+            tracks__id=user.profile.track.id).first() != None
         if lesson_exist_in_track:
             user_profile.last_opened_lesson = lesson
             user_profile.save()
