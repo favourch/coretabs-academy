@@ -165,6 +165,7 @@ const AuthAPI = {
     })
   },
   async checkUser(store) {
+    await store.dispatch('header', false)
     return await axios.get('/api/v1/auth/user/', {
       withCredentials: true
     }).then(async (response) => {

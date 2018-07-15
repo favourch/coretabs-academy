@@ -153,7 +153,6 @@ const router = new Router({
 
 router.beforeEach(async(to, from, next) => {
   if (window.localStorage.getItem('token') && !store.getters.isLogin) {
-    await store.dispatch('header', false)
     await Vue.prototype.$auth.checkUser(store)
   }
   const pageName = to.name
