@@ -25,8 +25,6 @@ export default {
   watch: {
     $route(to, from) {
       this.current.workshop = this.$api.getWorkshopId(this.workshops)
-      const workshopTitle = ' - ' + this.$route.params.workshop
-      document.title += workshopTitle
     }
   },
   methods: {

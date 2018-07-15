@@ -19,10 +19,14 @@ export default {
       this.getWorkshop()
     }
   },
+  created() {
+    this.getWorkshop()
+  },
   methods: {
     getWorkshop() {
       this.$api.getWorkshop(`/api/v1/tracks/${this.$route.params.track}/workshops/${this.$route.params.workshop}`)
         .then(workshop => {
+          document.title = `${workshop.title} - ${document.title}`
           this.workshop = workshop
           this.loaded = true
         }).catch(() => {
@@ -60,9 +64,6 @@ export default {
         }
       })
     }
-  },
-  created() {
-    this.getWorkshop()
   },
   mounted() {
     window.addEventListener('resize', this.toggleAvatar)
