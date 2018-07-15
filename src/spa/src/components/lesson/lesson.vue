@@ -1,42 +1,19 @@
 <template>
   <div v-if="loaded" class="lesson">
-    <template v-if="type === '0'">
+    <template v-if="$parent.current.lesson.type === '0'">
       <div id="lesson-youtube" class="lesson-video lesson-youtube">
-        <iframe :src="lesson_content" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe :src="content.video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
-            <v-tab v-for="tab in i18n.video.tabs" :key="tab.text">
-              {{tab.text}}
-              <v-icon>{{tab.icon}}</v-icon>
-            </v-tab>
-        </v-tabs>
-        <v-tabs-items v-model="current.tab">
-          <v-tab-item><div v-html="notes_content"></div></v-tab-item>
-          <v-tab-item>
-            <v-container id="have-question no-select" fluid grid-list-xl>
-              <v-layout row wrap align-center justify-right>
-                <img :src="$store.state.forumLogo" alt="forum-logo icon">
-                <div class="text">
-                  <h4 v-html="i18n.video.question.title"></h4>
-                  <div>{{ i18n.video.question.text }} <a :href="$route.params.workshop_forums_url" target="_blank">{{ i18n.video.question.here }}</a></div>
-                </div>
-              </v-layout>
-            </v-container>
-          </v-tab-item>
-        </v-tabs-items>
-      </div>
-    </template>
-    <template v-if="type === '1'">
-      <div id="lesson-scrimba" class="lesson-video lesson-scrimba">
-        <iframe :src="lesson_content"></iframe>
-        <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
-          <v-tab v-for="tab in i18n.video.tabs" :key="tab.text">
+          <v-tab v-for="(tab, i) in i18n.video.tabs" :key="i">
             {{tab.text}}
             <v-icon>{{tab.icon}}</v-icon>
           </v-tab>
         </v-tabs>
         <v-tabs-items v-model="current.tab">
-          <v-tab-item><div id="notes_content" v-html="notes_content"></div></v-tab-item>
-          <v-tab-item>
+          <v-tab-item id="0" key="0">
+            <div class="lesson-markdown" v-html="content.markdown"></div>
+          </v-tab-item>
+          <v-tab-item id="1" key="1">
             <v-container id="have-question no-select" fluid grid-list-xl>
               <v-layout row wrap align-center justify-center>
                 <v-flex xs11 sm11 md12>
@@ -44,7 +21,7 @@
                     <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
                     <div class="text">
                       <h4 v-html="i18n.video.question.title"></h4>
-                      <div>{{ i18n.video.question.text }} <a :href="$route.params.workshop_forums_url" target="_blank">{{ i18n.video.question.here }}</a></div>
+                      <div>{{ i18n.video.question.text }} <a :href="$parent.current.workshop.forums" target="_blank">{{ i18n.video.question.here }}</a></div>
                     </div>
                   </v-layout>
                 </v-flex>
@@ -54,31 +31,62 @@
         </v-tabs-items>
       </div>
     </template>
-    <template v-if="type === '2'">
-      <div id="lesson-markdown" class="lesson-markdown" v-html="lesson_content"></div>
+    <template v-if="$parent.current.lesson.type === '1'">
+      <div id="lesson-scrimba" class="lesson-video lesson-scrimba">
+        <iframe :src="content.video"></iframe>
+        <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="current.tab">
+          <v-tab v-for="(tab, i) in i18n.video.tabs" :key="i">
+            {{tab.text}}
+            <v-icon>{{tab.icon}}</v-icon>
+          </v-tab>
+        </v-tabs>
+        <v-tabs-items v-model="current.tab">
+          <v-tab-item id="0" key="0">
+            <div class="lesson-markdown" v-html="content.markdown"></div>
+          </v-tab-item>
+          <v-tab-item id="1" key="1">
+            <v-container id="have-question no-select" fluid grid-list-xl>
+              <v-layout row wrap align-center justify-center>
+                <v-flex xs11 sm11 md12>
+                  <v-layout row align-center>
+                    <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
+                    <div class="text">
+                      <h4 v-html="i18n.video.question.title"></h4>
+                      <div>{{ i18n.video.question.text }} <a :href="$parent.current.workshop.forums" target="_blank">{{ i18n.video.question.here }}</a></div>
+                    </div>
+                  </v-layout>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-tab-item>
+        </v-tabs-items>
+      </div>
     </template>
-    <template v-if="type === '3'">
+    <template v-if="$parent.current.lesson.type === '2'">
+      <div class="lesson-markdown" v-html="content.markdown"></div>
+    </template>
+    <template v-if="$parent.current.lesson.type === '3'">
       <v-container id="lesson-quiz" class="lesson-quiz" fluid>
         <v-layout row wrap align-center justify-center class="quizz-layout">
           <v-flex xs10 md6>
             <v-stepper v-model="current.quiz" class="quizz-stepper" non-linear>
               <v-stepper-header>
-                <template v-for="(question, qIndex) in lesson_content">
+                <template v-for="(question, qIndex) in content.markdown">
                   <v-stepper-step :class="{'wrong_step': question.wrong, 'true_step': question.true}" :step="qIndex+1" :key="qIndex" :complete="current.quiz > qIndex+1"></v-stepper-step>
-                  <v-divider v-if="qIndex + 1 < lesson_content.length" :key="`divider-${qIndex}`"></v-divider>
+                  <v-divider v-if="qIndex + 1 < content.markdown.length" :key="`divider-${qIndex}`"></v-divider>
                 </template>
               </v-stepper-header>
               <v-stepper-items>
-                <v-card v-show="current.quiz <= lesson_content.length" flat>
-                  <p class="question-num py-0">{{ i18n.quiz.steppers.question }} {{current.quiz}} {{ i18n.quiz.steppers.from }} {{lesson_content.length}} : {{i18n.quiz.heading_text}}</p>
+                <v-card v-show="current.quiz <= content.markdown.length" flat>
+                  <p class="question-num py-0">{{ i18n.quiz.steppers.question }} {{current.quiz}} {{ i18n.quiz.steppers.from }} {{content.markdown.length}} : {{i18n.quiz.heading_text}}</p>
                 </v-card>
-                <template v-for="(question, qIndex) in lesson_content">
+                <template v-for="(question, qIndex) in content.markdown">
                   <v-stepper-content :step="qIndex + 1" :key="qIndex" :class="{checkboxes : (question.correct.length > 1) }">
                     <h3 class="question-content">{{question.text}}</h3>
                     <v-card color="grey lighten-1" flat>
                       <v-list three-line subheader>
                         <template v-for="(answer, aIndex) in question.answers">
-                          <v-list-tile @click="chooseAnswer(lesson_content, question, aIndex)" :key="aIndex" :class="[question.choose.includes(aIndex) && !question.correct.includes(aIndex) && question.correct.length === 1 ? 'wrong_answer' : '' ,question.choose.includes(aIndex) && question.correct.includes(aIndex) && question.correct.length === 1 ? 'true_answer' : '',question.correct.includes(aIndex) && question.correct.length > 1 ? quiz.status.right : '']" >
+                          <v-list-tile @click="chooseAnswer(content.markdown, question, aIndex)" :key="aIndex" :class="[question.choose.includes(aIndex) && !question.correct.includes(aIndex) && question.correct.length === 1 ? 'wrong_answer' : '' ,question.choose.includes(aIndex) && question.correct.includes(aIndex) && question.correct.length === 1 ? 'true_answer' : '',question.correct.includes(aIndex) && question.correct.length > 1 ? quiz.status.right : '']" >
                             <v-list-tile-action>
                               <input type="checkbox" v-model="question.choose" :value="answer" />
                               <span class="checkbox_cont">
@@ -98,8 +106,8 @@
                   </v-stepper-content>
                 </template>
                 <v-card class="btns-control" flat>
-                  <v-btn v-show="current.quiz < lesson_content.length" class="r-btn" flat @click="goNextAnswers" :disabled="!quiz.result">{{i18n.quiz.buttons_texts.next}}</v-btn>
-                  <v-btn v-if="current.quiz > 0" v-show="lesson_content[current.quiz - 1].correct.length > 1" class="r-btn" flat @click="checkAnswers(lesson_content, lesson_content[current.quiz - 1])">{{i18n.quiz.buttons_texts.confirm}}</v-btn>
+                  <v-btn v-show="current.quiz < content.markdown.length" class="r-btn" flat @click="goNextAnswers" :disabled="!quiz.result">{{i18n.quiz.buttons_texts.next}}</v-btn>
+                  <v-btn v-if="current.quiz > 0" v-show="content.markdown[current.quiz - 1].correct.length > 1" class="r-btn" flat @click="checkAnswers(content.markdown, content.markdown[current.quiz - 1])">{{i18n.quiz.buttons_texts.confirm}}</v-btn>
                   <v-btn v-show="current.quiz > 1" class="r-btn" flat @click="goPrevAnswers">{{i18n.quiz.buttons_texts.pre}}</v-btn>
                   <span class="result-container">
                     <span v-show="quiz.result" :class="['result', quiz.result === i18n.quiz.results_texts.fail ? 'err' : '']">{{quiz.result}}</span>
@@ -111,8 +119,8 @@
         </v-layout>
       </v-container>
     </template>
-    <template v-if="type === '4'">
-      <div id="lesson-task" class="lesson-task" v-html="lesson_content"></div>
+    <template v-if="$parent.current.lesson.type === '4'">
+      <div id="lesson-task" class="lesson-task" v-html="content.markdown"></div>
     </template>
   </div>
   <div v-else class="progress-container contrast">

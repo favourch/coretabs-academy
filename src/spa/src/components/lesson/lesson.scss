@@ -816,8 +816,8 @@ html[dir='rtl'] {
       .tabs__items {
         min-height: 150px;
 
-        #notes_content {
-          padding: map-deep-get($lesson,'video','tab','content','ar-padding') !important;
+        .lesson-markdown {
+          // padding: map-deep-get($lesson,'video','tab','content','ar-padding') !important;
           max-width: 740px;
           p {
             line-height: 30px;

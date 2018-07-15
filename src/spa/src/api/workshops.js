@@ -87,15 +87,6 @@ const WorkshopsAPI = {
           lessons: []
         })
         module.lessons.forEach((lesson, lessonIndex) => {
-          let url = ''
-          let notes = ''
-          if (lesson.type === '0' || lesson.type === '1') {
-            url = Vue.prototype.$encryption.b64EncodeUnicode(lesson.video_url)
-            notes = Vue.prototype.$encryption.b64EncodeUnicode(lesson.markdown_url)
-          } else {
-            url = Vue.prototype.$encryption.b64EncodeUnicode(lesson.markdown_url)
-            notes = ''
-          }
           workshop.modules[moduleIndex].lessons.push({
             index: lessonIndex + 1,
             url: {
@@ -103,24 +94,17 @@ const WorkshopsAPI = {
               params: {
                 module: module.slug,
                 lesson: lesson.slug,
-                workshopTitle: workshop.title,
-                workshopURL: response.data.url,
-                workshop_forums_url: response.data.workshop_forums_url,
-                modules: workshop.modules
-              },
-              query: {
-                url: url,
-                notes: notes,
-                type: Vue.prototype.$encryption.b64EncodeUnicode(lesson.type)
+                modules: workshop.modules,
+                _workshop: {
+                  title: workshop.title,
+                  forums: workshop.workshop_forums_url
+                }
               }
             },
-            query: {
-              url: url,
-              notes: notes,
-              type: Vue.prototype.$encryption.b64EncodeUnicode(lesson.type)
-            },
-            type: lesson.type,
             title: lesson.title,
+            type: lesson.type,
+            video: (lesson.video_url) ? lesson.video_url : undefined,
+            markdown: lesson.markdown_url,
             is_shown: lesson.is_shown
           })
         })

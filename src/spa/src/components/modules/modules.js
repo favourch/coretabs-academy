@@ -11,13 +11,12 @@ export default {
     modules: [],
     loaded: false,
     drawer: {
-      title: null,
       isOpen: true,
       isRight: false
     },
     current: {
       lesson: {},
-      workshopURL: ''
+      workshop: {}
     }
   }),
   created() {
@@ -25,19 +24,23 @@ export default {
       this.drawer.isOpen = !this.drawer.isOpen
     })
     this.drawer.isRight = this.$store.state.direction === 'rtl'
+
+    this.current.workshop.URL = {
+      name: 'workshop',
+      params: {
+        workshop: this.$route.params.workshop
+      }
+    }
+
     let modulesData = this.$route.params.modules
     if (typeof modulesData === 'undefined') {
       this.getModules()
     } else {
-      this.drawer.title = this.$route.params.workshopTitle
+      this.current.workshop.title = this.$route.params._workshop.title
+      this.current.workshop.forums = this.$route.params._workshop.forums
+
       this.modules = modulesData
       this.getCurrentLesson(this.$api.getModuleId(this.modules).lessons)
-      this.current.workshopURL = {
-        name: 'workshop',
-        params: {
-          workshop: this.$route.params.workshop
-        }
-      }
       this.loaded = true
     }
   },
@@ -50,9 +53,10 @@ export default {
     getModules() {
       this.$api.getWorkshop(`/api/v1/tracks/${this.$route.params.track}/workshops/${this.$route.params.workshop}`)
         .then(workshop => {
-          this.drawer.title = workshop.title
+          this.current.workshop.title = workshop.title
+          this.current.workshop.forums = workshop.workshop_forums_url
+
           this.modules = workshop.modules
-          this.current.workshopURL = workshop.url
           let module = this.$api.getModuleId(this.modules)
           if (typeof module !== 'undefined') {
             this.getCurrentLesson(module.lessons)

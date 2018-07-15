@@ -1,12 +1,12 @@
 /* eslint-disable */
 export default {
   name: 'LessonComponent',
-  components: {},
   data: () => ({
-    type: '',
     loaded: false,
-    notes_content: '',
-    lesson_content: '',
+    content: {
+      video: null,
+      markdown: null
+    },
     quiz: {
       result: '',
       status: {
@@ -18,18 +18,6 @@ export default {
       tab: null
     }
   }),
-  created() {
-    this.getLesson()
-  },
-  watch: {
-    $route(to, from) {
-      this.getLesson()
-      //TODO: get lesson title
-      const lessonTitle = this.$route.params.lesson.split('-').join(' ')
-      const workshopTitle =  this.$route.params.workshopTitle
-      document.title = lessonTitle  +' - '+ workshopTitle
-    }
-  },
   computed: {
     i18n() {
       return this.$store.state.i18n.lesson
@@ -43,32 +31,29 @@ export default {
       return `/api/v1/tracks/${track}/workshops/${workshop}/modules/${module}/lessons/${lesson}`
     }
   },
-  updated() {
-    document.querySelectorAll('#lesson-markdown img').forEach((img) => {
-      let src = img.src.replace(/^.*[\\/]/, '')
-      src = `${this.$encryption.b64DecodeUnicode(this.$route.query.url).replace(/[a-zA-Z-]+\.txt/, '')}/${src}`
-      img.src = src
-    })
-
-    document.querySelectorAll('#lesson-markdown pre code').forEach((code) => {
-      hljs.highlightBlock(code)
-    })
+  watch: {
+    $route() {
+      this.getLesson()
+    }
+  },
+  created() {
+    this.getLesson()
   },
   methods: {
     getLesson() {
-      let url = this.$encryption.b64DecodeUnicode(this.$route.query.url)
-      this.type = this.$encryption.b64DecodeUnicode(this.$route.query.type)
-      let notes = this.$encryption.b64DecodeUnicode(this.$route.query.notes)
+      let lesson = this.$parent.current.lesson
+      let workshop = this.$parent.current.workshop      
+      document.title = `${lesson.title} - ${workshop.title}`
       
-      switch (this.type) {
+      switch (lesson.type) {
         case '0':
           let youtube = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g
-          url = url.replace(youtube, 'https://www.youtube.com/embed/$1')
-          this.lesson_content = url
-
-          axios.get(notes)
+          this.content.video = lesson.video.replace(youtube, 'https://www.youtube.com/embed/$1')
+          
+          axios.get(lesson.markdown)
             .then(response => {
-              this.notes_content = this.previewMarkdowText(response.data)
+              this.content.markdown = this.previewMarkdowText(response.data)
+              setTimeout(() => { this.parser() }, 50)
               if (!this.$parent.current.lesson.is_shown) {
                 this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               }
@@ -78,11 +63,12 @@ export default {
             })
           break
         case '1':
-          this.lesson_content = url
+          this.content.video = lesson.video
 
-          axios.get(notes)
+          axios.get(lesson.markdown)
             .then(response => {
-              this.notes_content = this.previewMarkdowText(response.data)
+              this.content.markdown = this.previewMarkdowText(response.data)
+              setTimeout(() => { this.parser() }, 50)
               if (!this.$parent.current.lesson.is_shown) {
                 this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               }
@@ -92,9 +78,10 @@ export default {
             })
           break
         case '2':
-          axios.get(url)
+          axios.get(lesson.markdown)
             .then(response => {
-              this.lesson_content = this.previewMarkdowText(response.data)
+              this.content.markdown = this.previewMarkdowText(response.data)
+              setTimeout(() => { this.parser() }, 50)
               if (!this.$parent.current.lesson.is_shown) {
                 this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               }
@@ -104,18 +91,20 @@ export default {
             })
           break
         case '3':
-          axios.get(url)
+          axios.get(lesson.markdown)
             .then(response => {
-              this.lesson_content = response.data
+              this.content.markdown = response.data
+              setTimeout(() => { this.parser() }, 50)
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
             })
           break
         case '4':
-          axios.get(url)
+          axios.get(lesson.markdown)
             .then(response => {
-              this.lesson_content = this.previewMarkdowText(response.data)
+              this.content.markdown = this.previewMarkdowText(response.data)
+              setTimeout(() => { this.parser() }, 50)
               if (!this.$parent.current.lesson.is_shown) {
                 this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               }
@@ -128,6 +117,17 @@ export default {
     },
     previewMarkdowText(mdText) {
       return this.$markdown.render(mdText)
+    },
+    parser() {
+      document.querySelectorAll('.lesson-markdown img').forEach((img) => {
+        let src = img.src.replace(/^.*[\\/]/, '')
+        src = `${this.$parent.current.lesson.markdown.replace(/[a-zA-Z-]+\.txt/, '')}${src}`
+        img.src = src
+      })
+  
+      document.querySelectorAll('.lesson-markdown pre code').forEach((code) => {
+        hljs.highlightBlock(code)
+      })
     },
     chooseAnswer(questions, question, answer) {
       if (question.correct.length === 1) {
