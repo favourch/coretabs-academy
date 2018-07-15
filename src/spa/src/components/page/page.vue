@@ -1,7 +1,7 @@
 <template>
   <v-container id="page" fluid fill-height>
     <v-layout row align-center justify-center>
-      <v-flex id="container" class="text-xs-center" xs8>
+      <v-flex id="container" class="text-xs-center">
         <div>
           <h2 class="my-4" v-html="i18n.heading_title_text">
           </h2>
@@ -11,7 +11,7 @@
             </v-tab>
             <v-tab-item v-for="(tab, oindex) in i18n.tabs" :id="tab.id" :key="oindex">
               <v-card flat>
-                <v-card-text class="text-xs-right" v-html="tab.content"></v-card-text>
+                <v-card-text class="text-xs-left" v-html="tab.content"></v-card-text>
               </v-card>
             </v-tab-item>
           </v-tabs>

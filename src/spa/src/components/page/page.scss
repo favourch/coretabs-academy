@@ -17,6 +17,31 @@ Page Style
       flex-basis: 90%;
       max-width: 90%;
     }
+    
+    @media (max-width: 1440px){
+      max-width: 60%;
+    }
+
+    @media (max-width: 1280px){
+      max-width: 70%;
+    }
+
+    @media (max-width: 1366px){
+      max-width: 60%;
+    }
+
+    @media (max-width: 1024px){
+      max-width: 70%;
+    }
+
+    @media (max-width: 1023px){
+      max-width: 90%;
+      @include border-radius(25px);
+    }
+
+    @media (min-width: 1441px){
+      max-width: 45%;
+    }
 
     .tabs__container--fixed-tabs .tabs__div {
       min-width: auto;
@@ -37,6 +62,9 @@ Page Style
       border-color: unset !important;
       background: $grading-color;
       border-image: $grading-color;
+    }
+    .tabs__content{
+      direction: ltr;
     }
   }
 }
