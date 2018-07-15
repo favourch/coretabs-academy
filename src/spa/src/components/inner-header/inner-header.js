@@ -2,6 +2,7 @@ export default {
   name: 'InnerHeaderComponent',
   props: ['title'],
   data: () => ({
+    avatar_url: null,
     menu: false,
     notifications: null,
     unread: false
@@ -32,6 +33,12 @@ export default {
         default:
           return 'notifications'
       }
+    }
+  },
+  created() {
+    this.avatar_url = this.$store.getters.user('avatar_url')
+    if (this.avatar_url.slice(0, 4) !== 'http') {
+      this.avatar_url = `${process.env.VUE_APP_API_BASE_URL}${this.$store.getters.user('avatar_url')}`
     }
   },
   mounted() {

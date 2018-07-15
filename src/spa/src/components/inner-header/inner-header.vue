@@ -9,13 +9,13 @@
       </router-link>-->
       <v-menu :close-on-content-click="false" v-model="menu" content-class="notifications-menu" offset-y>
         <v-btn slot="activator" class="menu" :class="{'unread': unread}" @click="unread = false">
-          <img :src="$store.getters.user('avatar_url')" />
+          <img :src="avatar_url" />
         </v-btn>
         <v-card>
           <v-list>
             <v-list-tile avatar>
               <v-list-tile-avatar>
-                <img :src="$store.getters.user('avatar_url') || $store.state.icon" />
+                <img :src="avatar_url" />
               </v-list-tile-avatar>
               <v-list-tile-title v-html="$store.getters.user('name')"></v-list-tile-title>
             </v-list-tile>
