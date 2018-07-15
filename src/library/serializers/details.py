@@ -136,7 +136,7 @@ class WorkshopsSerializer(serializers.ModelSerializer):
 
 class WorkshopSerializer(serializers.ModelSerializer):
     level = serializers.CharField(source='get_level_display')
-    shown_percentage = serializers.DecimalField(max_digits=5, decimal_places=2)
+    shown_percentage = serializers.IntegerField()
     modules = ModuleSerializer(many=True)
     authors = AuthorSerializer(many=True)
 
