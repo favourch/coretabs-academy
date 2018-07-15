@@ -114,7 +114,8 @@ $toolbar-padding: 0 15px;
       padding: 0;
       &:first-of-type {
         padding: 5px 0;
-        background-color: #fff;
+        background-color: #fafafa;
+        border-bottom: 1px solid #eee;
       }
   
       .list__tile {
@@ -138,7 +139,23 @@ $toolbar-padding: 0 15px;
           font-size: 12px;
           .list__tile__title {
             text-align: right;
+            height: auto;
+            white-space: inherit;
             min-height: 24px;
+            a{
+              display: block;
+              width: 100%;
+              line-height: normal;
+            }
+            .icon{
+              font-size: 22px;
+              color: #919191;
+              direction: rtl;
+              width: auto;
+            }
+            &:hover{
+              background-color: #ffffcd;
+            }
           }
         }
   
