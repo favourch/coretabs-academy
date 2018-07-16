@@ -19,7 +19,7 @@
                               :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'" ></v-text-field>
                 <p id="forgot" v-html="i18n.forgot_link_text" class="black--text mt-1 mb-1"></p>
                 <div id="buttons">
-                  <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="valid < 2 || waiting">
+                  <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="!valid || waiting">
                     <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
                     {{ i18n.submit_btn_text }}
                   </v-btn>

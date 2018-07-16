@@ -6,10 +6,10 @@ export default {
       message: ''
     },
     waiting: false,
-    valid: 0,
+    valid: false,
     vs: {
-      v1: 0,
-      v2: 0
+      v1: false,
+      v2: false
     },
     email: '',
     password: '',
@@ -22,16 +22,18 @@ export default {
   methods: {
     chackValid() {
       let root = this
-      root.vs.v1 = 1
-      root.vs.v2 = 1
-      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v1 = 0 } })
-      root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v2 = 0 } })
-      root.valid = root.vs.v1 + root.vs.v2
+      root.vs.v1 = true
+      root.vs.v2 = true
+      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v1 = false } })
+      root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v2 = false } })
+      root.valid = root.vs.v1 && root.vs.v2
     },
     async submit() {
-      let root = this
-      root.waiting = true
-      root.waiting = await this.$auth.login(root)
+      if (this.valid) {
+        let root = this
+        root.waiting = true
+        root.waiting = await this.$auth.login(root)
+      }
     },
     setSplashHeight() {
       let sDiv = document.querySelector('#splash')
