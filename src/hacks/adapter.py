@@ -1,4 +1,8 @@
+
+import os
+
 from allauth.account.adapter import DefaultAccountAdapter
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from django.conf import settings
@@ -11,4 +15,4 @@ class MyAccountAdapter(DefaultAccountAdapter):
 
     def get_email_confirmation_url(self, request, emailconfirmation):
         url = "/confirm-account/{}".format(emailconfirmation.key)
-        return settings.SPA_BASE_URL + url
+        return os.environ.get('SPA_BASE_URL') + url
