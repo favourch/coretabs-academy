@@ -65,6 +65,30 @@ Page Style
     }
     .tabs__content{
       direction: ltr;
+      max-height: 500px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar-thumb {
+        background: #bbb !important;
+      }
+    }
+    h4{
+      margin-bottom: 5px;
+    }
+    ul{
+      margin: 0 0 10px 20px;
+    }
+    details{
+      margin:0 0 10px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      background: #fff;
+      @include border-radius(5px);
+      h4:first-of-type{
+        padding-top: 15px;
+      }
+      summary{
+        cursor: pointer;        
+      }
     }
   }
 }
