@@ -11,11 +11,10 @@ class ContactSerializer(serializers.Serializer):
     body = serializers.CharField(required=True)
 
     def render_mail(self, template_prefix, emails, context):
-        subject = render_to_string(
-            '{0}_subject.txt'.format(template_prefix), context)
+        subject = render_to_string(f'{template_prefix}_subject.txt', context)
         subject = ''.join(subject.splitlines()).strip()
         from_email = settings.DEFAULT_FROM_EMAIL
-        template_name = '{0}_message.html'.format(template_prefix)
+        template_name = f'{template_prefix}_message.html'
         body = render_to_string(template_name, context)
         msg = EmailMessage(subject, body, from_email, emails)
         msg.content_subtype = 'html'

@@ -97,6 +97,7 @@ class MarkdownFactory(factory.DjangoModelFactory):
     module = ''
     order = factory.Sequence(lambda n: n)
 
+
 @transaction.atomic
 def create_users(track, users=1000):
     lessons = list(MarkdownLesson.objects.all())
@@ -105,7 +106,7 @@ def create_users(track, users=1000):
         user.profile.track = track
         user.save()
         EmailFactory(user=user, email=user.email)
-        print('{} users created'.format(i + 1))
+        print(f'{i + 1} users created')
 
 
 @transaction.atomic

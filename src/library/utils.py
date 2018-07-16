@@ -16,7 +16,7 @@ def get_unique_slug(model_instance, slugable_field_name, slug_field_name):
     while ModelClass._default_manager.filter(
             **{slug_field_name: unique_slug}
     ).exists():
-        unique_slug = '{}-{}'.format(slug, extension)
+        unique_slug = f'{slug}-{extension}'
         extension += 1
 
     return unique_slug

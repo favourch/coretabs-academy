@@ -15,8 +15,12 @@ class Command(BaseCommand):
             modules = options['data'][2]
             workshops = options['data'][3]
         except IndexError:
-            raise CommandError('python manage.py populate [users] [lessons_per_module] [modules_per_workshop] [workshops]')
+            raise CommandError(
+                'python manage.py populate [users] [lessons_per_module] [modules_per_workshop] [workshops]')
 
-        track = create_track(workshops=workshops, modules=modules, lessons=lessons)
+        track = create_track(workshops=workshops,
+                             modules=modules, lessons=lessons)
         create_users(track, users=users)
-        self.stdout.write(self.style.SUCCESS('Successfully added {0} users and {1} lessons'.format(users, lessons*modules*workshops)))
+        lessons_number = lessons * modules * workshops
+        self.stdout.write(self.style.SUCCESS(
+            f'Successfully added {users} users and {lessons_number} lessons'))

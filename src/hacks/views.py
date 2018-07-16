@@ -51,7 +51,7 @@ class LogoutView(LV):
                 'api_username': settings.DISCOURSE_API_USERNAME}
 
         user = requests.get(settings.DISCOURSE_BASE_URL +
-                            '/users/by-external/{}.json'.format(request.user.id), data=data)
+                            f'/users/by-external/{request.user.id}.json', data=data)
 
         user = user.json()
         user_id = user['user']['id']
