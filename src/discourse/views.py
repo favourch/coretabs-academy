@@ -61,3 +61,13 @@ def sso(request):
 
     url = '%s/session/sso_login' % settings.DISCOURSE_BASE_URL
     return HttpResponseRedirect('%s?%s' % (url, query_string))
+
+
+@login_required
+def notifications(request):
+
+    username = request.user
+    discourse_notifications_url = f'{settings.DISCOURSE_BASE_URL}/notifications.json?api_key={settings.DISCOURSE_API_KEY}&api_username={settings.DISCOURSE_API_USERNAME}&username={username}'
+    user_notifications = requests.get(discourse_notifications_url).json()
+
+    return JsonResponse(user_notifications, status=status.HTTP_200_OK)

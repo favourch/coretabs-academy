@@ -35,7 +35,7 @@ urlpatterns = [
     path('api/v1/auth/logout/', logout_view),
     path('api/v1/auth/user/', user_details_view),
     path('api/v1/auth/user/notifications/',
-         discourse_views.notifications_view),
+         discourse_views.notifications),
     path('api/v1/auth/user/avatar/', upload_avatar_view),
     path('api/v1/auth/confirmation/', resend_confirmation_view),
     path('api/v1/auth/registration/verify-email/', verify_email),
