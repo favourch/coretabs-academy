@@ -1,11 +1,18 @@
 import base64
 import hmac
 import hashlib
+import requests
+import os
 from urllib import parse
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.conf import settings
+from django.views.generic import View
+
+
+from rest_framework.response import Response
+from rest_framework import status
 
 
 @login_required
@@ -16,7 +23,7 @@ def sso(request):
     if payload is None or signature is None:
         return HttpResponseBadRequest('No SSO payload or signature. Please contact support if this problem persists.')
 
-    ## Validate the payload
+    # Validate the payload
 
     try:
         payload = bytes(parse.unquote(payload), encoding='utf-8')
@@ -26,14 +33,15 @@ def sso(request):
     except AssertionError:
         return HttpResponseBadRequest('Invalid payload. Please contact support if this problem persists.')
 
-    key = bytes(settings.DISCOURSE_SSO_SECRET, encoding='utf-8') # must not be unicode
+    key = bytes(settings.DISCOURSE_SSO_SECRET,
+                encoding='utf-8')  # must not be unicode
     h = hmac.new(key, payload, digestmod=hashlib.sha256)
     this_signature = h.hexdigest()
 
     if not hmac.compare_digest(this_signature, signature):
         return HttpResponseBadRequest('Invalid payload. Please contact support if this problem persists.')
 
-    ## Build the return payload
+    # Build the return payload
 
     qs = parse.parse_qs(decoded)
     params = {
@@ -46,9 +54,10 @@ def sso(request):
 
     return_payload = base64.b64encode(bytes(parse.urlencode(params), 'utf-8'))
     h = hmac.new(key, return_payload, digestmod=hashlib.sha256)
-    query_string = parse.urlencode({'sso': return_payload, 'sig': h.hexdigest()})
+    query_string = parse.urlencode(
+        {'sso': return_payload, 'sig': h.hexdigest()})
 
-    ## Redirect back to Discourse
+    # Redirect back to Discourse
 
     url = '%s/session/sso_login' % settings.DISCOURSE_BASE_URL
     return HttpResponseRedirect('%s?%s' % (url, query_string))

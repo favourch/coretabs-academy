@@ -18,6 +18,7 @@ services:
     #volumes:
     #  - ./src/venv/:/djangoapp/venv/
     environment:
+      HOST_ENV: production
       SPA_BASE_URL: https://coretabs.net
     env_file:
       - secrets.api.env

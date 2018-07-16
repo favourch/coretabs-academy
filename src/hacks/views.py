@@ -1,26 +1,28 @@
-import os, requests
+import os
+import requests
 
 from allauth.account.views import PasswordResetFromKeyView as PRV
-from django.urls import reverse_lazy
-
-from .utils import sync_sso
+from allauth.account.utils import perform_login
 
 from rest_auth.views import LogoutView as LV
 from rest_auth.registration.views import VerifyEmailView as VEV
+from rest_auth.models import TokenModel
+from rest_auth.app_settings import create_token
+
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
+
+from django.urls import reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout as django_logout
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from .serializers import ResendConfirmSerializer, UserDetailsSerializer, TokenSerializer
-from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 
-from allauth.account.utils import perform_login
-
-from rest_auth.models import TokenModel
-from rest_auth.app_settings import create_token
+from .utils import sync_sso
 
 
 class PasswordResetFromKeyView(PRV):
@@ -45,81 +47,82 @@ class LogoutView(LV):
                         status=status.HTTP_200_OK)
 
     def discourse_logout(self, request):
-        data = {"api_key": os.environ.get('DISCOURSE_API_KEY'),
-                     "api_username": os.environ.get('DISCOURSE_API_USERNAME')}
+        data = {"api_key": settings.DISCOURSE_API_KEY),
+                     "api_username": settings.DISCOURSE_API_USERNAME}
 
-        user = requests.get( os.environ.get('DISCOURSE_HOST') + '/users/by-external/{}.json'.format(request.user.id), data=data)
+        user = requests.get(settings.DISCOURSE_BASE_URL) + '/users/by-external/{}.json'.format(request.user.id), data = data)
 
-        user = user.json()
-        user_id = user['user']['id']
+        user=user.json()
+        user_id=user['user']['id']
 
-        url = os.environ.get('DISCOURSE_HOST') + '/admin/users/{}/log_out/'.format(user_id)
+        url=settings.DISCOURSE_BASE_URL +
+                             '/admin/users/{}/log_out/'.format(user_id)
 
-        r = requests.post(url, data=data)
+        r=requests.post(url, data = data)
 
 
-logout_view = LogoutView.as_view()
+logout_view=LogoutView.as_view()
 
 
 class UserDetailsView(RetrieveUpdateAPIView):
 
-    serializer_class = UserDetailsSerializer
-    permission_classes = (IsAuthenticated,)
+    serializer_class=UserDetailsSerializer
+    permission_classes=(IsAuthenticated,)
 
     def get_object(self):
         return self.request.user
 
 
-user_details_view = UserDetailsView.as_view()
+user_details_view=UserDetailsView.as_view()
 
 
 class ResendConfirmView(GenericAPIView):
 
-    serializer_class = ResendConfirmSerializer
+    serializer_class=ResendConfirmSerializer
 
     def post(self, request, *args, **kwargs):
         # Create a serializer with request.data
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        serializer=self.get_serializer(data = request.data)
+        serializer.is_valid(raise_exception = True)
 
         serializer.save()
         # Return the success message with OK HTTP status
         return Response(
             {"detail": _("Confirmation e-mail has been sent.")},
-            status=status.HTTP_200_OK
+            status = status.HTTP_200_OK
         )
 
 
-resend_confirmation_view = ResendConfirmView.as_view()
+resend_confirmation_view=ResendConfirmView.as_view()
 
 
 class VerifyEmailView(VEV):
-    token_model = TokenModel
+    token_model=TokenModel
 
     def post(self, request, *args, **kwargs):
-        self.serializer = self.get_serializer(data=request.data)
-        self.serializer.is_valid(raise_exception=True)
-        self.kwargs['key'] = self.serializer.validated_data['key']
-        confirmation = self.get_object()
+        self.serializer=self.get_serializer(data = request.data)
+        self.serializer.is_valid(raise_exception = True)
+        self.kwargs['key']=self.serializer.validated_data['key']
+        confirmation=self.get_object()
         confirmation.confirm(self.request)
         self.login_on_confirm(confirmation)
         return self.get_response()
 
     def login_on_confirm(self, confirmation):
-        self.user = confirmation.email_address.user
+        self.user=confirmation.email_address.user
         if self.user and self.request.user.is_anonymous:
             return perform_login(self.request,
                                  self.user,
                                  'none')
 
     def get_response(self):
-        token = create_token(self.token_model, self.user, self.serializer)
-        serializer_class = TokenSerializer
+        token=create_token(self.token_model, self.user, self.serializer)
+        serializer_class=TokenSerializer
 
-        serializer = serializer_class(instance=token,
-                                          context={'request': self.request})
+        serializer=serializer_class(instance = token,
+                                          context = {'request': self.request})
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status = status.HTTP_200_OK)
 
 
-verify_email = VerifyEmailView.as_view()
+verify_email=VerifyEmailView.as_view()

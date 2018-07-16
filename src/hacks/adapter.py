@@ -15,4 +15,4 @@ class MyAccountAdapter(DefaultAccountAdapter):
 
     def get_email_confirmation_url(self, request, emailconfirmation):
         url = "/confirm-account/{}".format(emailconfirmation.key)
-        return os.environ.get('SPA_BASE_URL') + url
+        return settings.SPA_BASE_URL + url
