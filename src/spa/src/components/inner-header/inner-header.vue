@@ -27,7 +27,7 @@
                   <v-icon>
                     {{ notification_icon(notification.notification_type) }}
                   </v-icon>
-                  {{ notification.data.topic_title }} {{ notification.data.topic_title }}
+                  {{ notification.data.topic_title }}
                 </a>
               </v-list-tile-title>
             </v-list-tile>
