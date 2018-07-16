@@ -5,17 +5,12 @@ export default {
     loaded: false,
     content: {
       video: null,
-      markdown: null
+      markdown: null,
+      tab: null
     },
     quiz: {
-      result: '',
-      status: {
-        right: ''
-      }
-    },
-    current: {
-      quiz: 0,
-      tab: null
+      currentQuestion: 1,
+      questions: null
     }
   }),
   computed: {
@@ -34,6 +29,20 @@ export default {
   watch: {
     $route() {
       this.getLesson()
+    },
+    'quiz.questions': {
+      handler: function (after, before) {
+        let questions = after
+        let count = 0
+        questions.forEach((q) => { if (q.success) count++ })
+
+        if(questions.length === count) {
+          if (!this.$parent.current.lesson.is_shown) {
+            this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
+          }
+        }
+      },
+      deep: true
     }
   },
   created() {
@@ -93,7 +102,7 @@ export default {
         case '3':
           axios.get(lesson.markdown)
             .then(response => {
-              this.content.markdown = response.data
+              this.quiz.questions = response.data
               setTimeout(() => { this.parser() }, 50)
               this.loaded = true
             }).catch(() => {
@@ -129,16 +138,16 @@ export default {
         hljs.highlightBlock(code)
       })
     },
-    chooseAnswer(questions, question, answer) {
+    chooseAnswer(question, answer) {
       if (question.correct.length === 1) {
         question.choose = []
         if (!question.choose.includes(answer)) {
           question.choose.push(answer)
         }
-        this.checkAnswers(questions, question)
+        this.checkAnswers(question)
       } else {
-        if (this.quiz.status.right) {
-          this.quiz.status.right = ''
+        if (question.status) {
+          question.status = ''
         }
         if (question.choose.includes(answer)) {
           question.choose.splice(question.choose.indexOf(answer), 1)
@@ -147,35 +156,16 @@ export default {
         }
       }
     },
-    checkAnswers(questions, question) {
+    checkAnswers(question) {
       question.choose.sort()
       if (question.choose.toString() === question.correct.toString()) {
-        this.quiz.result = this.i18n.quiz.results_texts.success
-        if (question.correct.length > 1) this.quiz.status.right = 'true_answer_checkbox'
-        question.true = true
-        question.wrong = false
+       question.result = this.i18n.quiz.results_texts.success
+        if (question.correct.length > 1) question.status = 'true_answer_checkbox'
+        question.success = true
       } else {
-        this.quiz.result = this.i18n.quiz.results_texts.fail
-        question.true = false
-        question.wrong = true
+        question.result = this.i18n.quiz.results_texts.fail
+        question.success = false
       }
-      
-      let count = 0
-      questions.forEach((q) => {
-        if (q.true) count++
-      })
-      if(questions.length === count) {
-        if (!this.$parent.current.lesson.is_shown) {
-          this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
-        }
-      }
-    },
-    goNextAnswers() {
-      this.current.quiz += 1
-      this.quiz.result = ''
-    },
-    goPrevAnswers() {
-      this.current.quiz -= 1
     }
   }
 }
