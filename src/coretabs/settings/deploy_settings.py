@@ -1,6 +1,7 @@
-from .settings import *
+import os
 import dj_database_url
 
+from .base import *
 
 SPA_BASE_URL = os.environ.get('SPA_BASE_URL')
 
