@@ -6,12 +6,12 @@ export default {
       message: ''
     },
     waiting: false,
-    valid: 0,
+    valid: false,
     vs: {
-      v1: 0,
-      v2: 0,
-      v3: 0,
-      v4: 0
+      v1: false,
+      v2: false,
+      v3: false,
+      v4: false
     },
     fullname: '',
     email: '',
@@ -33,21 +33,23 @@ export default {
   methods: {
     chackValid() {
       let root = this
-      root.vs.v1 = 1
-      root.vs.v2 = 1
-      root.vs.v3 = 1
-      root.vs.v4 = 1
+      root.vs.v1 = true
+      root.vs.v2 = true
+      root.vs.v3 = true
+      root.vs.v4 = true
 
-      root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = 0 } })
-      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = 0 } })
-      root.unRules.forEach((rule) => { if (rule(root.username) !== true) { root.vs.v3 = 0 } })
-      root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v4 = 0 } })
-      root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3 + root.vs.v4
+      root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = false } })
+      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = false } })
+      root.unRules.forEach((rule) => { if (rule(root.username) !== true) { root.vs.v3 = false } })
+      root.pwRules.forEach((rule) => { if (rule(root.password) !== true) { root.vs.v4 = false } })
+      root.valid = root.vs.v1 && root.vs.v2 && root.vs.v3 && root.vs.v4
     },
     async submit() {
-      let root = this
-      root.waiting = true
-      root.waiting = await this.$auth.registration(root)
+      if (this.valid) {
+        let root = this
+        root.waiting = true
+        root.waiting = await this.$auth.registration(root)
+      }
     },
     setAvatarsHeight() {
       let aDiv = document.querySelector('#avatars')

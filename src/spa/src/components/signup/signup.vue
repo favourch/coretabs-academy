@@ -31,7 +31,7 @@
               <p id="tos" v-html="i18n.tos_text" class="black--text text-xs-right mt-1 mb-0"></p>
             </v-flex>
             <v-flex xs10 sm10 md3 id="submit-container">
-              <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="valid < 4 || waiting">
+              <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="!valid|| waiting">
                 <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
                 {{ i18n.submit_btn_text }}
               </v-btn>

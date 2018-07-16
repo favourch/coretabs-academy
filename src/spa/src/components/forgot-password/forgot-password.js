@@ -17,9 +17,11 @@ export default {
   },
   methods: {
     async submit() {
-      let root = this
-      root.waiting = true
-      root.waiting = await this.$auth.requestReset(root)
+      if (this.valid) {
+        let root = this
+        root.waiting = true
+        root.waiting = await this.$auth.requestReset(root)
+      }
     },
     setSplashHeight() {
       let sDiv = document.querySelector('#splash')

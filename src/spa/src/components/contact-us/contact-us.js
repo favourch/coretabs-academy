@@ -7,11 +7,11 @@ export default {
       message: ''
     },
     waiting: false,
-    valid: 0,
+    valid: false,
     vs: {
-      v1: 0,
-      v2: 0,
-      v3: 0
+      v1: false,
+      v2: false,
+      v3: false
     },
     forums_icon: '',
     fullname: '',
@@ -26,20 +26,22 @@ export default {
     chackValid() {
       let root = this
 
-      root.vs.v1 = 1
-      root.vs.v2 = 1
-      root.vs.v3 = 1
+      root.vs.v1 = true
+      root.vs.v2 = true
+      root.vs.v3 = true
 
-      root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = 0 } })
-      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = 0 } })
-      root.meRules.forEach((rule) => { if (rule(root.message) !== true) { root.vs.v3 = 0 } })
+      root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = false } })
+      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = false } })
+      root.meRules.forEach((rule) => { if (rule(root.message) !== true) { root.vs.v3 = false } })
 
-      root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3
+      root.valid = root.vs.v1 && root.vs.v2 && root.vs.v3
     },
     async submit() {
-      let root = this
-      root.waiting = true
-      root.waiting = await this.$auth.contact(root)
+      if (this.valid) {
+        let root = this
+        root.waiting = true
+        root.waiting = await this.$auth.contact(root)
+      }
     }
   },
   created() {
