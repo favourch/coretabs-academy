@@ -176,7 +176,7 @@ class Profile(models.Model):
                                            verbose_name=_('last opened lesson'), null=True)
 
     def __str__(self):
-        return f"{self.user.first_name} ({self.user.username})"
+        return f'{self.user.first_name} ({self.user.username})'
 
     class Meta:
         verbose_name = _('profile')

@@ -41,11 +41,11 @@ class RegisterSerializer(RS):
     )
 
     def validate_name(self, name):
-        pattern = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$"
+        pattern = '^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$'
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _("Make sure it contains only letters and spaces."))
+                _('Make sure it contains only letters and spaces.'))
 
         return name
 
@@ -95,29 +95,28 @@ class PasswordResetSerializer(serializers.Serializer):
     def validate_email(self, email):
         email = get_adapter().clean_email(email)
         if not email_address_exists(email):
-            raise serializers.ValidationError(_("The e-mail address is not assigned "
-                                                "to any user account"))
+            raise serializers.ValidationError(_('The e-mail address is not assigned '
+                                                'to any user account'))
         return email
 
     def save(self, *args, **kwargs):
         request = self.context.get('request')
 
         current_site = get_current_site(request)
-        email = self.validated_data["email"]
+        email = self.validated_data['email']
 
         user = UserModel.objects.get(email__iexact=email)
 
         token_generator = kwargs.get(
-            "token_generator", default_token_generator)
+            'token_generator', default_token_generator)
         temp_key = token_generator.make_token(user)
 
-        path = "/reset-password/{}/{}".format(
-            user_pk_to_url_str(user), temp_key)
+        path = f'/reset-password/{user_pk_to_url_str(user)}/{temp_key}'
         url = settings.SPA_BASE_URL + path
-        context = {"current_site": current_site,
-                   "user": user,
-                   "password_reset_url": url,
-                   "request": request}
+        context = {'current_site': current_site,
+                   'user': user,
+                   'password_reset_url': url,
+                   'request': request}
 
         get_adapter().send_mail(
             'account/email/password_reset_key',
@@ -143,7 +142,7 @@ class ResendConfirmSerializer(serializers.Serializer):
     def save(self):
         request = self.context.get('request')
         User = get_user_model()
-        email = self.reset_form.cleaned_data["email"]
+        email = self.reset_form.cleaned_data['email']
         user = User.objects.get(email__iexact=email)
         send_email_confirmation(request, user, True)
         return email
@@ -163,11 +162,11 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
             data={'uidb36': attrs['uid'], 'key': attrs['key']})
 
         if not self.user_token_form.is_valid():
-            raise serializers.ValidationError(_("Invalid Token"))
+            raise serializers.ValidationError(_('Invalid Token'))
 
         if attrs['new_password1'] != attrs['new_password2']:
             raise serializers.ValidationError(
-                _("The two password fields didn't match."))
+                _('The two password fields did not match.'))
 
         self.password = attrs['new_password1']
 
@@ -205,11 +204,11 @@ class UserDetailsSerializer(serializers.ModelSerializer):
                 return avatar_url
 
     def validate_name(self, name):
-        pattern = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$"
+        pattern = '^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+ [a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي]+[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ðء-ي ]*$'
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _("Make sure it contains only letters and spaces."))
+                _('Make sure it contains only letters and spaces.'))
 
         return name
 
@@ -217,16 +216,16 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         if settings.AVATAR_ALLOWED_FILE_EXTS:
             root, ext = os.path.splitext(avatar.name.lower())
             if ext not in settings.AVATAR_ALLOWED_FILE_EXTS:
-                valid_exts = ", ".join(settings.AVATAR_ALLOWED_FILE_EXTS)
-                error = _("%(ext)s is an invalid file extension. "
-                          "Authorized extensions are : %(valid_exts_list)s")
+                valid_exts = ', '.join(settings.AVATAR_ALLOWED_FILE_EXTS)
+                error = _('%(ext)s is an invalid file extension. '
+                          'Authorized extensions are : %(valid_exts_list)s')
                 raise serializers.ValidationError(error %
                                                   {'ext': ext,
                                                    'valid_exts_list': valid_exts})
 
         if avatar.size > settings.AVATAR_MAX_SIZE:
-            error = _("Your file is too big: %(size)s, "
-                      "the maximum allowed size is: %(max_valid_size)s")
+            error = _('Your file is too big: %(size)s, '
+                      'the maximum allowed size is: %(max_valid_size)s')
 
             raise serializers.ValidationError(error % {
                 'size': filesizeformat(avatar.size),
@@ -237,7 +236,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         email = get_adapter().clean_email(email)
         if email and email_address_exists(email, exclude_user=self.context.get('request').user):
             raise serializers.ValidationError(
-                _("A user is already registered with this e-mail address."))
+                _('A user is already registered with this e-mail address.'))
         return email
 
     def update(self, instance, validated_data):

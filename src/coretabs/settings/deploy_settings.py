@@ -48,7 +48,7 @@ RAVEN_CONFIG = {
 }
 
 DJANGO_LOGGING = {
-    "SQL_LOG": False,
+    'SQL_LOG': False,
     'CONSOLE_LOG': False,
 }
 

@@ -17,7 +17,7 @@ class ContactView(GenericAPIView):
         serializer.save()
         # Return the success message with OK HTTP status
         return Response(
-            {"detail": _("Thanks for your message!")},
+            {'detail': _('Thanks for your message!')},
             status=status.HTTP_200_OK
         )
 

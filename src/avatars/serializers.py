@@ -11,7 +11,7 @@ from avatar.signals import avatar_updated
 
 class UploadAvatarSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = Avatar
         fields = ('avatar', 'avatar_url',)
@@ -22,15 +22,15 @@ class UploadAvatarSerializer(serializers.ModelSerializer):
             avatar_url = provider.get_avatar_url(obj, size)
             if avatar_url:
                 return avatar_url
-    
+
     def validate_avatar(self, avatar):
         if settings.AVATAR_ALLOWED_FILE_EXTS:
             root, ext = os.path.splitext(avatar.name.lower())
             if ext not in settings.AVATAR_ALLOWED_FILE_EXTS:
-                raise serializers.ValidationError(_("invalid file extension."))
+                raise serializers.ValidationError(_('invalid file extension.'))
 
         if avatar.size > settings.AVATAR_MAX_SIZE:
-            raise serializers.ValidationError("Your file is too big")
+            raise serializers.ValidationError('Your file is too big')
 
     def save(self, *args, **kwargs):
         request = self.context.get('request')

@@ -20,7 +20,7 @@ class UploadAvatarView(RetrieveUpdateAPIView):
         serializer.save()
         # Return the success message with OK HTTP status
         return Response(
-            {"detail": _("Avatar has been changed.")},
+            {'detail': _('Avatar has been changed.')},
             status=status.HTTP_200_OK
         )
 

@@ -35,8 +35,8 @@ def sync_sso(request, user):
     query_string = parse.urlencode(
         {'sso': return_payload, 'sig': h.hexdigest()})
 
-    data = {"api_key": settings.DISCOURSE_API_KEY,
-            "api_username": settings.DISCOURSE_API_USERNAME}
+    data = {'api_key': settings.DISCOURSE_API_KEY,
+            'api_username': settings.DISCOURSE_API_USERNAME}
 
     url = '{}/admin/users/sync_sso/?{}'.format(
         settings.DISCOURSE_BASE_URL, query_string)

@@ -17,7 +17,7 @@ class WorkshopManager(CachingManager):
 
             total_count=django_models.Count('modules__lessons'))
 
-        # print("fields = ", result[0].shown_count, result[0].total_count)
+        # print('fields = ', result[0].shown_count, result[0].total_count)
 
         workshops = workshops.annotate(
             shown_percentage=django_models.ExpressionWrapper(
@@ -25,8 +25,8 @@ class WorkshopManager(CachingManager):
                  django_models.F('total_count')),
                 output_field=django_models.DecimalField(max_digits=2, decimal_places=2)))
 
-        #print("calculated = ", result[0].shown_count / result[0].total_count)
-        #print("queried = ", result[0].shown_percentage)
+        #print('calculated = ', result[0].shown_count / result[0].total_count)
+        #print('queried = ', result[0].shown_percentage)
 
         return workshops
 

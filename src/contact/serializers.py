@@ -11,8 +11,9 @@ class ContactSerializer(serializers.Serializer):
     body = serializers.CharField(required=True)
 
     def render_mail(self, template_prefix, emails, context):
-        subject = render_to_string('{0}_subject.txt'.format(template_prefix), context)
-        subject = " ".join(subject.splitlines()).strip()
+        subject = render_to_string(
+            '{0}_subject.txt'.format(template_prefix), context)
+        subject = ''.join(subject.splitlines()).strip()
         from_email = settings.DEFAULT_FROM_EMAIL
         template_name = '{0}_message.html'.format(template_prefix)
         body = render_to_string(template_name, context)
