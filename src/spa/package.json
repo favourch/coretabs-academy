@@ -3,8 +3,8 @@
    "version": "0.1.0",
    "private": true,
    "scripts": {
-      "serve": "vue-cli-service serve",
-      "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
       "lint": "vue-cli-service lint",
       "start": "node server"
    },
@@ -31,6 +31,7 @@
       "@vue/cli-plugin-eslint": "^3.0.0-rc.3",
       "@vue/cli-service": "^3.0.0-rc.3",
       "@vue/eslint-config-standard": "^3.0.0-rc.3",
+      "compression-webpack-plugin": "^1.1.11",
       "favicons-webpack-plugin": "0.0.9",
       "node-sass": "^4.9.0",
       "sass-loader": "^6.0.6",
