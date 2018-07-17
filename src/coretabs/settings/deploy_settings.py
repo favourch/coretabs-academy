@@ -15,7 +15,8 @@ ALLOWED_HOSTS = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ('spa.coretabs.net', 'www.coretab.net', 'coretabs.net')
+CORS_ORIGIN_WHITELIST = (
+    'spa.coretabs.net', 'www.coretabs.net', 'coretabs.net')
 
 SESSION_COOKIE_DOMAIN = '.coretabs.net'
 CSRF_COOKIE_DOMAIN = '.coretabs.net'
