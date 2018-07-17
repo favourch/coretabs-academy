@@ -1,14 +1,59 @@
 {% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
-<h1> Holà! </h1>
-<p>
-    Hello from {{ site_name }}!
-</p>
 
-<p>
-    You're receiving this e-mail because user {{ user_display }} has given yours as an e-mail address to connect their account.
-</p>
+<table style="width: 100%; direction: rtl; border-collapse: collapse;">
+    <thead>
+      <tr style="text-align: center;">
+        <td style="padding:20px 0 10px;">
+          <img src="https://forums.coretabs.net/uploads/default/original/1X/a5ccc636dda6380ef461b51f79ea34b5633457e5.png" alt="Coretabs logo" width="200">
+        </td>
+      </tr>
+    </thead>
+    <tbody style=" background: #fafafa; padding: 20px;">
+      <tr style="padding:20px; text-align: center;">
+        <td style="padding-top: 40px;">
+          <h2>تهانينا {{ user_display }} تبقت الخطوة الأخيرة</h2>
+          <p style="font-size: 18px; max-width: 600px; margin: 0 auto;">يرجى تأكيد بريدك الإلكتروني لتفعيل حسابك، الأمر سهل كل ما عليك فعلة هو الضغط على الزر تفعيل الأن </p>
+          <a href="{{ activate_url }}" style="display: block; width: 200px; background:linear-gradient(to left, #2d43e7, #9042e8); color:#fff; padding: 10px; margin: 30px auto; border-radius:100px; text-decoration: none; font-size: 18px;">تفعيل الأن</a>
+        </td>
+      </tr>
+      <tr style="padding:20px; text-align: center;">
+        <td style="padding: 0 0 50px;">
+          <div style="max-width: 500px; margin: 0 auto;">
+            <img style="width: 100%" src="https://forums.coretabs.net/uploads/default/original/1X/5f6c0c865743bc22c0a3861cc33ecabbb1b1f3a7.png" alt="">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p style="font-size: 14px; max-width: 600px; margin: 0px auto 50px; color: #a4a4a4; text-align: center;">إذا كان الزر لا يعمل، قم بنسخ الرابط أدناه ولصقه في المتصفح
 
-<h3>To confirm this is correct, go to {{ activate_url }}</h3>
+            <a href="{{ activate_url }}" style="display: block; color:#9042e8; text-decoration: none;">{{ activate_url }}</a>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr style="text-align: center;">
+        <td>
+          <span style="display: block; padding-top: 30px; color: #666;">مع أطيب الأمنيات</span>
+          <span  style="display: block; color: #666;">فريق أكاديمية كورتابز</span>
+        </td>
+      </tr>
+      <tr style="text-align: center; ">
+        <td style="padding: 15px 0 30px;">
+            <a href="https://www.facebook.com/coretabs.academy/" style="padding: 3px; text-decoration: none;" target="_blank" title="facebook">
+                <img src="https://forums.coretabs.net/uploads/default/original/1X/f626d1403b20960c174d1b6adeec4c0fde4277de.png" alt="facebook">
+            </a>
+            <a href="https://twitter.com/CoretabsAcademy" style="padding: 3px; text-decoration: none;" target="_blank" title="twitter">
+              <img src="https://forums.coretabs.net/uploads/default/original/1X/6f8cb52ab0203ac1d7b8bbedd1b09c087db7a727.png" alt="twitter">
+            </a>
+            <a href="https://www.youtube.com/channel/UCe47ca6TFCIIglUsgK5Ml3w?view_as=subscriber" target="_blank" style="padding: 3px; text-decoration: none;" title="youtube">
+              <img src="https://forums.coretabs.net/uploads/default/original/1X/6fdc398d1e4fa619fee7611d67b1092807305db5.png" alt="youtube">   
+            </a>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
 {% endblocktrans %}{% endautoescape %}
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you from {{ site_name }}!
-{{ site_domain }}{% endblocktrans %}
+

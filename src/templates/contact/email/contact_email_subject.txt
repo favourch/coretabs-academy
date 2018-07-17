@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Message received from {{ name }}{% endblocktrans %}
+{% blocktrans %}لقد إستلمنا رسالتك{% endblocktrans %}
 {% endautoescape %}
