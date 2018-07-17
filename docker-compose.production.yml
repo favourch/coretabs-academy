@@ -15,7 +15,8 @@ services:
       context: .
       dockerfile: ./production.api.dockerfile
     command: sh -c "gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
-    #volumes:
+    volumes:
+      - /var/academy-media:/djangoapp/media
     #  - ./src/venv/:/djangoapp/venv/
     environment:
       HOST_ENV: production
