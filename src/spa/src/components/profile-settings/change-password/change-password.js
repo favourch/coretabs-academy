@@ -11,12 +11,12 @@ export default {
     new_password1: '',
     new_password2: '',
     waiting: false,
-    valid: 0,
+    valid: false,
     vs: {
-      v1: 0,
-      v2: 0,
-      v3: 0,
-      v4: 0
+      v1: false,
+      v2: false,
+      v3: false,
+      v4: false
     }
   }),
   computed: {
@@ -26,22 +26,24 @@ export default {
   methods: {
     chackValid() {
       let root = this
-      root.vs.v1 = 1
-      root.vs.v2 = 1
-      root.vs.v3 = 1
-      root.vs.v4 = 1
+      root.vs.v1 = true
+      root.vs.v2 = true
+      root.vs.v3 = true
+      root.vs.v4 = true
 
-      root.pwRules.forEach((rule) => { if (rule(root.old_password) !== true) { root.vs.v1 = 0 } })
-      root.pwRules.forEach((rule) => { if (rule(root.new_password1) !== true) { root.vs.v2 = 0 } })
-      root.pwRules.forEach((rule) => { if (rule(root.new_password2) !== true) { root.vs.v3 = 0 } })
-      if (root.new_password1 !== root.new_password2) { root.vs.v4 = 0 }
+      root.pwRules.forEach((rule) => { if (rule(root.old_password) !== true) { root.vs.v1 = false } })
+      root.pwRules.forEach((rule) => { if (rule(root.new_password1) !== true) { root.vs.v2 = false } })
+      root.pwRules.forEach((rule) => { if (rule(root.new_password2) !== true) { root.vs.v3 = false } })
+      if (root.new_password1 !== root.new_password2) { root.vs.v4 = false }
 
-      root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3 + root.vs.v4
+      root.valid = root.vs.v1 && root.vs.v2 && root.vs.v3 && root.vs.v4
     },
     async submit() {
-      let root = this
-      root.waiting = true
-      root.waiting = await this.$auth.changePassword(root)
+      if (this.valid) {
+        let root = this
+        root.waiting = true
+        root.waiting = await this.$auth.changePassword(root)
+      }
     }
   },
   created() {

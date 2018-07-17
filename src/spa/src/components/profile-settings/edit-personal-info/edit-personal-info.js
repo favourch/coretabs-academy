@@ -13,11 +13,11 @@ export default {
       message: ''
     },
     waiting: false,
-    valid: 0,
+    valid: false,
     vs: {
-      v1: 0,
-      v2: 0,
-      v3: 0
+      v1: false,
+      v2: false,
+      v3: false
     },
     fullname: '',
     email: '',
@@ -41,7 +41,7 @@ export default {
         img.src = window.URL.createObjectURL(input.files[0])
         img.onload = () => {
           window.URL.revokeObjectURL(img.src)
-          this.validImage.valid = 1
+          this.validImage.valid = true
           this.validImage.imageData = input.files[0]
           this.reader.onload = (e) => {
             this.avatar_url = e.target.result
@@ -52,18 +52,20 @@ export default {
     },
     chackValid() {
       let root = this
-      root.vs.v1 = 1
-      root.vs.v2 = 1
-      root.vs.v3 = 1
-      root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = 0 } })
-      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = 0 } })
-      root.unRules.forEach((rule) => { if (rule(root.username) !== true) { root.vs.v3 = 0 } })
-      root.valid = root.vs.v1 + root.vs.v2 + root.vs.v3 + root.validImage.valid
+      root.vs.v1 = true
+      root.vs.v2 = true
+      root.vs.v3 = true
+      root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = false } })
+      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = false } })
+      root.unRules.forEach((rule) => { if (rule(root.username) !== true) { root.vs.v3 = false } })
+      root.valid = root.vs.v1 && root.vs.v2 && root.vs.v3 && root.validImage.valid
     },
     async submit() {
-      let root = this
-      root.waiting = true
-      root.waiting = await this.$auth.changeInfo(root)
+      if (this.valid) {
+        let root = this
+        root.waiting = true
+        root.waiting = await this.$auth.changeInfo(root)
+     }
     }
   },
   created() {
