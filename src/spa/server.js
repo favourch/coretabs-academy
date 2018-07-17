@@ -19,7 +19,7 @@ app.get('*.css', (req, res, next) => {
   next()
 })
 
-const staticFileMiddleware = express.static('public_html', { maxAge: 31536000 })
+const staticFileMiddleware = express.static('public_html', { maxAge: '356d' })
 app.use(staticFileMiddleware)
 app.use(history({
    disableDotRule: true,
