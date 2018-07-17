@@ -42,8 +42,7 @@ DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET')
 DISCOURSE_API_KEY = os.environ.get('DISCOURSE_API_KEY')
 DISCOURSE_API_USERNAME = os.environ.get('DISCOURSE_API_USERNAME')
 
-if os.environ.get('ADMIN_EMAILS'):
-    MANAGERS_EMAILS = os.environ.get('ADMIN_EMAILS').split(';')
+MANAGERS_EMAILS = os.environ.get('MANAGERS_EMAILS').split(';')
 
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN'),
