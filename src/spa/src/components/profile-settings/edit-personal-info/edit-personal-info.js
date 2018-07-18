@@ -16,7 +16,7 @@ export default {
     valid: false,
     vs: {
       v1: false,
-      v2: false,
+      // v2: false,
       v3: false
     },
     fullname: '',
@@ -53,12 +53,12 @@ export default {
     chackValid() {
       let root = this
       root.vs.v1 = true
-      root.vs.v2 = true
+      // root.vs.v2 = true
       root.vs.v3 = true
       root.fnRules.forEach((rule) => { if (rule(root.fullname) !== true) { root.vs.v1 = false } })
-      root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = false } })
+      // root.emRules.forEach((rule) => { if (rule(root.email) !== true) { root.vs.v2 = false } })
       root.unRules.forEach((rule) => { if (rule(root.username) !== true) { root.vs.v3 = false } })
-      root.valid = root.vs.v1 && root.vs.v2 && root.vs.v3 && root.validImage.valid
+      root.valid = root.vs.v1 && root.vs.v3 && root.validImage.valid
     },
     async submit() {
       if (this.valid) {

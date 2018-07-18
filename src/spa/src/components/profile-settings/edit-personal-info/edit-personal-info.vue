@@ -31,7 +31,8 @@
                   <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
                   <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
                   <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :rules="fnRules" @keyup.enter="submit" required></v-text-field>
-                  <v-text-field dir="auto" :label="form.email_label" v-model="email" :rules="emRules" @keyup.enter="submit" required></v-text-field>
+                  <!--<v-text-field dir="auto" :label="form.email_label" v-model="email" :rules="emRules" @keyup.enter="submit" required></v-text-field>-->
+                  <v-text-field dir="auto" :label="form.email_label" v-model="email" disabled></v-text-field>
                   <v-text-field dir="auto" :label="form.username_label" v-model="username" :rules="unRules" @keyup.enter="submit" required></v-text-field>
                   <v-btn right round id="submit" @click="submit" :disabled="!valid || waiting">
                     <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
