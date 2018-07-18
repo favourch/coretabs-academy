@@ -155,6 +155,7 @@ router.beforeEach(async(to, from, next) => {
   if (window.localStorage.getItem('token') && !store.getters.isLogin) {
     await Vue.prototype.$auth.checkUser(store)
   }
+
   const pageName = to.name
   if (i18n.meta[pageName]) {
     to.meta.title = i18n.meta[pageName].title + ' - ' + i18n.meta.default.title
@@ -162,7 +163,17 @@ router.beforeEach(async(to, from, next) => {
     to.meta.title = i18n.meta.default.title
   }
   document.title = to.meta.title
-  next()
+
+  if (process.env.VUE_APP_API_MAINTENANCE_MODE === 'true' && store.state.maintenance) {
+    if (to.query.maintenance === 'false') {
+      store.state.maintenance = false
+      next()
+    } else {
+      await store.dispatch('header', false)
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

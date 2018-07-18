@@ -12,6 +12,7 @@ export default new Vuex.Store({
     rev_direction: '',
     logo: '',
     forumLogo: '',
+    maintenance: true,
     header: true,
     isLogin: false,
     user: {},
