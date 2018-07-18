@@ -73,7 +73,6 @@ export default {
           break
         case '1':
           this.content.video = lesson.video
-
           axios.get(lesson.markdown)
             .then(response => {
               this.content.markdown = this.previewMarkdowText(response.data)

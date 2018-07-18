@@ -129,7 +129,6 @@ $markdown-em-spacer-6: 0.75em !default;
             
             &.true_answer {
               z-index: 2;
-              box-shadow: 0 0 10px #dad6d6;
               background-color: #fff;
       
               .checkbox_cont {
@@ -159,7 +158,6 @@ $markdown-em-spacer-6: 0.75em !default;
       
             &.wrong_answer {
               z-index: 2;
-              box-shadow: 0 0 10px #dad6d6;
               background-color: #fff;
       
               .checkbox_cont {
@@ -378,14 +376,34 @@ $markdown-em-spacer-6: 0.75em !default;
   .lesson-video {
     height: 88% !important;
 
-    &.lesson-scrimba {}
+    &.lesson-scrimba {
+
+      #scrimba-tabs{
+        position: relative;
+        #scrimba-logo{
+          position: absolute;
+          left: 0;
+          top: 0;
+          span{
+            font-size: 12px;
+            font-weight: 700;
+            color: #999;
+          }
+          a{
+            display: block;
+            margin-top: 1px;
+          }
+        }
+      }
+
+    }
 
     &.lesson-youtube {}
 
     iframe {
       width: 100% !important;
       height: 100% !important;
-
+      border: none;
       &.youtube {
       height: 720px !important;
       }
@@ -445,7 +463,7 @@ $markdown-em-spacer-6: 0.75em !default;
 
     .tabs__items {
       height: auto !important;
-      padding: map-deep-get($lesson,'video','tab','content','padding') !important;
+      padding: 20px 40px !important;
     }
   }
 
@@ -814,7 +832,7 @@ html[dir='rtl'] {
         margin: map-deep-get($lesson,'video','tab','ar-margin') !important;
       }
       .tabs__items {
-        min-height: 150px;
+        min-height: 300px;
 
         .lesson-markdown {
           // padding: map-deep-get($lesson,'video','tab','content','ar-padding') !important;
@@ -824,7 +842,7 @@ html[dir='rtl'] {
           }
         }
         .text {
-          margin: 30px 0;
+          margin: 50px 0;
           a {
             color: $black-color;
             text-decoration: underline !important;
@@ -833,6 +851,9 @@ html[dir='rtl'] {
         #forum-logo {
           max-width: 60px;
           margin: 5px 25px 0;
+          @media (max-width: 600px){
+            display: none;
+          }
         }
         h4 {
           margin-bottom: 8px !important;

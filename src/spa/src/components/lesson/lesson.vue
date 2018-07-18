@@ -16,7 +16,7 @@
           <v-tab-item id="1" key="1">
             <v-container id="have-question no-select" fluid grid-list-xl>
               <v-layout row wrap align-center justify-center>
-                <v-flex xs11 sm11 md12>
+                <v-flex sm12>
                   <v-layout row align-center>
                     <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
                     <div class="text">
@@ -34,11 +34,15 @@
     <template v-if="$parent.current.lesson.type === '1'">
       <div id="lesson-scrimba" class="lesson-video lesson-scrimba">
         <iframe :src="content.video"></iframe>
-        <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="content.tab">
+        <v-tabs id="scrimba-tabs" :right="$store.state.direction === 'rtl'" icons-and-text v-model="content.tab">
           <v-tab v-for="(tab, i) in i18n.video.tabs" :key="i">
             {{tab.text}}
             <v-icon>{{tab.icon}}</v-icon>
           </v-tab>
+          <div id="scrimba-logo">
+            <span>Workspace by</span>
+            <a :href="content.video" title="open in new window" target="_blank"><img src="../../assets/multimedia/images/scrimba-logo.png" width="88" height="19" alt="scrimba"></a>
+          </div>
         </v-tabs>
         <v-tabs-items v-model="content.tab">
           <v-tab-item id="0" key="0">
@@ -47,7 +51,7 @@
           <v-tab-item id="1" key="1">
             <v-container id="have-question no-select" fluid grid-list-xl>
               <v-layout row wrap align-center justify-center>
-                <v-flex xs11 sm11 md12>
+                <v-flex sm12>
                   <v-layout row align-center>
                     <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
                     <div class="text">
