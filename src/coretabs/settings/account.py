@@ -39,4 +39,5 @@ AVATAR_MAX_AVATARS_PER_USER = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+EMAIL_SUBJECT_PREFIX = ''
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
