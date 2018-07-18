@@ -46,14 +46,13 @@ Contact Us Style
       @media (max-width: 959px) {
         padding: 0 20px;
       }
-
+      input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset;
+      }
       h2 {
         text-align: right;
         @include responsive-font-size(1.5rem,true);
       }
-      
-     
-
       a {
         text-decoration: none !important;
       }
@@ -64,12 +63,10 @@ Contact Us Style
         padding: 10px 10px 12px;
         border-color: rgba(0, 0, 0, 0) !important;
       }
-
       .input-group.disabled {
         .input-group__details {
           min-height: 10px;
         }
-
         .icon--disabled {
           display: none;
         }
@@ -95,11 +92,10 @@ Contact Us Style
 
       #submit {
         float: left;
-        margin: 10px 0;
+        margin: 20px 0 0;
         background: $grading-color;
         @include box-shadow(0px, 2px, 5px, 0px , $shadow-color);
         color: $white-color !important;
-
         font-weight: 400;
         height: 40px;
         width: 150px;

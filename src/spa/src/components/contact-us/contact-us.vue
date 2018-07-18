@@ -13,8 +13,8 @@
               <p v-html="i18n.description_text"></p>
               <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
               <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
-              <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success || $store.getters.isLogin" required></v-text-field>
-              <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success || $store.getters.isLogin" required></v-text-field>
+              <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" autocomplete="on" name="name" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success || $store.getters.isLogin" required></v-text-field>
+              <v-text-field dir="auto" :label="form.email_label" v-model="email" autocomplete="on" name="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success || $store.getters.isLogin" required></v-text-field>
               <v-text-field multi-line dir="auto" :label="form.message_label" v-model="message" class="disabled" :rules="meRules" :disabled="alert.success" required></v-text-field>
               <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="!valid || waiting">
                 <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
