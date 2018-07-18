@@ -393,6 +393,11 @@ $markdown-em-spacer-6: 0.75em !default;
             display: block;
             margin-top: 1px;
           }
+
+          @media (max-width: 400px) {
+            display: none;
+          }
+
         }
       }
 
