@@ -92,7 +92,9 @@ Signup Style
       @media (max-width: 960px) {
         padding-right: 0px;
       }
-
+      input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset;
+      }
       .input-group.disabled {
         .input-group__details {
           min-height: 10px;

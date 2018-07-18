@@ -18,8 +18,8 @@
             </v-flex>
             <v-flex id="form" xs10 sm10 md5>
               <v-form ref="form" lazy-validation>
-                <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
-                <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
+                <v-text-field dir="auto" :label="form.fullname_label" v-model="fullname" :class="[alert.success ? 'disabled' : '']" :rules="fnRules" :disabled="alert.success" @keyup.enter="submit" autocomplete="on" name="name" required></v-text-field>
+                <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" @keyup.enter="submit" autocomplete="on" name="email" required></v-text-field>
                 <v-text-field dir="auto" :label="form.username_label" v-model="username" :class="[alert.success ? 'disabled' : '']" :rules="unRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
                 <v-text-field dir="auto" :label="form.password_label" v-model="password" :class="[alert.success ? 'disabled' : '']" :rules="pwRules"
                               :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>

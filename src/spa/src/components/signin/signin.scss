@@ -78,6 +78,10 @@ Signin Style
         @include responsive-font-size(2rem,true);
       }
 
+      input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 30px white inset;
+      }
+      
       #forgot {
 
         text-align: right;

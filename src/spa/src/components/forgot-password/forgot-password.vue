@@ -15,7 +15,7 @@
             <v-form v-model="valid" ref="form" @submit.prevent lazy-validation>
               <h2 class="black--text mb-2" v-html="i18n.heading_text"></h2>
               <p v-html="i18n.forgot_text"></p>
-              <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" @keyup.enter="submit" required></v-text-field>
+              <v-text-field dir="auto" :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" @keyup.enter="submit" autocomplete="on" name="email" required></v-text-field>
               <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="!valid || waiting">
                 <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
                 {{ i18n.submit_btn_text }}
