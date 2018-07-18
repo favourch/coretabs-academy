@@ -181,7 +181,6 @@ const AuthAPI = {
         root.alert.error = false
         let formData = new FormData()
         formData.append('name', root.fullname)
-        formData.append('email', root.email)
         formData.append('username', root.username)
         formData.append('avatar', root.validImage.imageData)
 
@@ -193,20 +192,13 @@ const AuthAPI = {
             }
         }).then((response) => {
             root.alert.success = true
-            if (root.$store.getters.user('email') === root.email) {
-                root.alert.message = root.i18n.success_message
-                root.$store.dispatch('user', { prop: 'name', data: root.fullname })
-                root.$store.dispatch('user', { prop: 'username', data: root.username })
-                if (root.$store.getters.user('avatar_url') !== root.avatar_url) {
-                    root.$store.dispatch('user', { prop: 'avatar_url', data: '/media/avatars/' + root.username + '/resized/80/' + root.validImage.imageData.name })
-                }
-                return false
-            } else {
-                root.alert.message = root.i18n.logout_message
-                setTimeout(() => {
-                    this.logout(root)
-                }, 3000)
+            root.alert.message = root.i18n.success_message
+            root.$store.dispatch('user', { prop: 'name', data: root.fullname })
+            root.$store.dispatch('user', { prop: 'username', data: root.username })
+            if (root.$store.getters.user('avatar_url') !== root.avatar_url) {
+                root.$store.dispatch('user', { prop: 'avatar_url', data: '/media/avatars/' + root.username + '/resized/80/' + root.validImage.imageData.name })
             }
+            return false
         }).catch((error) => {
             if (error.response) {
                 root.alert.error = true
