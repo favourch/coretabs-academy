@@ -4,6 +4,13 @@ import App from './app.vue'
 import Vuetify from 'vuetify'
 import router from './router'
 import store from './store/app.store'
+import Raven from 'raven-js'
+import RavenVue from 'raven-js/plugins/vue'
+
+Raven
+    .config('https://5134f66568be4bb090819995c88110eb@sentry.io/1222814')
+    .addPlugin(RavenVue, Vue)
+    .install()
 
 axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
 window.axios = axios

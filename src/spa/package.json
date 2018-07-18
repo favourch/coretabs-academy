@@ -1,69 +1,70 @@
 {
-   "name": "coretabs",
-   "version": "0.1.0",
-   "private": true,
-   "scripts": {
+  "name": "coretabs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-      "lint": "vue-cli-service lint",
-      "start": "node server"
-   },
-   "dependencies": {
-      "@vue/cli": "^3.0.0-rc.3",
-      "axios": "^0.18.0",
-      "connect-history-api-fallback": "^1.5.0",
-      "express": "^4.16.3",
-      "js-cookie": "^2.2.0",
-      "phantomjs-prebuilt": "^2.1.16",
-      "rfs": "^7.1.1",
-      "serve": "^6.5.8",
-      "showdown": "^1.8.6",
-      "siema": "^1.5.1",
-      "vue": "^2.5.13",
-      "vue-carousel": "^0.7.3",
-      "vue-router": "^3.0.1",
-      "vue-video-player": "^5.0.2",
-      "vuetify": "^1.0.19",
-      "vuex": "^3.0.1"
-   },
-   "devDependencies": {
-      "@vue/cli-plugin-babel": "^3.0.0-rc.3",
-      "@vue/cli-plugin-eslint": "^3.0.0-rc.3",
-      "@vue/cli-service": "^3.0.0-rc.3",
-      "@vue/eslint-config-standard": "^3.0.0-rc.3",
-      "compression-webpack-plugin": "^1.1.11",
-      "favicons-webpack-plugin": "0.0.9",
-      "node-sass": "^4.9.0",
-      "sass-loader": "^6.0.6",
-      "vue-template-compiler": "^2.5.13"
-   },
-   "babel": {
-      "presets": [
-         "@vue/app"
+    "lint": "vue-cli-service lint",
+    "start": "node server"
+  },
+  "dependencies": {
+    "@vue/cli": "^3.0.0-rc.3",
+    "axios": "^0.18.0",
+    "connect-history-api-fallback": "^1.5.0",
+    "express": "^4.16.3",
+    "js-cookie": "^2.2.0",
+    "phantomjs-prebuilt": "^2.1.16",
+    "raven-js": "^3.26.3",
+    "rfs": "^7.1.1",
+    "serve": "^6.5.8",
+    "showdown": "^1.8.6",
+    "siema": "^1.5.1",
+    "vue": "^2.5.13",
+    "vue-carousel": "^0.7.3",
+    "vue-router": "^3.0.1",
+    "vue-video-player": "^5.0.2",
+    "vuetify": "^1.0.19",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-rc.3",
+    "@vue/cli-plugin-eslint": "^3.0.0-rc.3",
+    "@vue/cli-service": "^3.0.0-rc.3",
+    "@vue/eslint-config-standard": "^3.0.0-rc.3",
+    "compression-webpack-plugin": "^1.1.11",
+    "favicons-webpack-plugin": "0.0.9",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^6.0.6",
+    "vue-template-compiler": "^2.5.13"
+  },
+  "babel": {
+    "presets": [
+      "@vue/app"
+    ]
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/standard"
+    ],
+    "rules": {
+      "indent": 0,
+      "space-before-function-paren": [
+        "error",
+        "never"
       ]
-   },
-   "eslintConfig": {
-      "root": true,
-      "extends": [
-         "plugin:vue/essential",
-         "@vue/standard"
-      ],
-      "rules": {
-         "indent": 0,
-         "space-before-function-paren": [
-            "error",
-            "never"
-         ]
-      }
-   },
-   "postcss": {
-      "plugins": {
-         "autoprefixer": {}
-      }
-   },
-   "browserslist": [
-      "> 1%",
-      "last 2 versions",
-      "not ie <= 8"
-   ]
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
