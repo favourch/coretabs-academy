@@ -4,10 +4,6 @@
 Home Style
 =======================================*/
 #home {
-   #player {
-      display: none;
-   }
-
    h2 {
       @media (min-width: 768px) {
          font-size: 28px;
@@ -26,12 +22,7 @@ Home Style
       background: url("~@/assets/multimedia/images/home/video_cover.png") no-repeat;
       background-size: 100% 100%;
       position: relative;
-
-      iframe {
-         width: 100%;
-         background-color: rgba(0,0,0,0.25);
-      }
-
+      cursor: pointer;
       button#play {
          width: 100px;
          height: 100px;
@@ -133,15 +124,88 @@ Home Style
          padding: 0 4% 0 0;
       }
    }
-}
-@keyframes pulse-border {
-   0% {
-      transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
-      opacity: 1;
-   }
 
-   100% {
-      transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+   
+  .video-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 99999;
+    transition: all ease-in-out 0.4s;
+  }
+  .video-modal.open {
+    animation-name: fadeIn;  
+    animation-duration: .4s;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .video-modal.open iframe {
+    animation-name: grow;  
+    animation-duration: .4s;
+    @include border-radius(20px);
+    @media (max-width: 600px) {
+      width: 300px;
+      height: 169px;
+    }
+  }
+  .video-modal.close {
+    animation-name: fadeOut;  
+    animation-duration: .4s;
+    visibility: hidden !important;
+  }
+  .video-modal.close iframe {
+    @include border-radius(20px);
+    @media (max-width: 600px) {
+      width: 300px;
+      height: 169px;
+    }
+  }
+
+  @keyframes grow {
+    0% {
+      transform: scale(0,0);
+    }
+   
+    100% {
+      transform: scale(1,1);
+    }
+  }
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+   
+    100% {
       opacity: 0;
-   }
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+   
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes pulse-border {
+    0% {
+       transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+       opacity: 1;
+    }
+ 
+    100% {
+       transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+       opacity: 0;
+    }
+ }
 }
+

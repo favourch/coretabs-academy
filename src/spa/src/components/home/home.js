@@ -1,23 +1,17 @@
-import { videoPlayer } from 'vue-video-player'
-import '../../../node_modules/video.js/dist/video-js.css'
+import Vue from 'vue'
+import VueYoutube from 'vue-youtube'
+Vue.use(VueYoutube)
 
 export default {
   name: 'HomeComponent',
-  components: {
-    videoPlayer
-  },
-  data: () => ({
-    playerOptions: {
-      autoplay: false,
-      sources: [{
-        type: 'video/mp4',
-        src: 'https://www.w3schools.com/html/mov_bbb.mp4'
-      }]
+  data() {
+    return {
+      videoId: 'Dv7gLpW91DM',
+      playerVars: {
+        showinfo: 0,
+        rel: 0
+      }
     }
-  }),
-  computed: {
-    i18n() { return this.$store.state.i18n.home },
-    vPlayer() { return this.$refs.videoPlayer.player }
   },
   methods: {
     setIntroVideoHeight() {
@@ -27,26 +21,21 @@ export default {
         vDiv.setAttribute('style', 'height: ' + vDivHeight + 'px !important')
       }
     },
-    play(vPlayer) {
-      var player = document.getElementById('player')
-      player.style.display = 'block'
-      vPlayer.requestFullscreen()
-      vPlayer.play()
+    play() {
+      let modal = document.querySelector('.video-modal')
+      modal.classList.add('open')
+      modal.classList.remove('close')
+      this.$refs.youtube.player.playVideo()
     },
-    pause(vPlayer) {
-      vPlayer.pause()
-    },
-    ended(vPlayer) {
-      vPlayer.exitFullscreen()
-      var player = document.getElementById('player')
-      player.style.display = 'none'
-    },
-    exit(vPlayer) {
-      if (vPlayer.isFullscreen() === false) {
-        this.pause(vPlayer)
-        this.ended(vPlayer)
-      }
+    closeModal() {
+      let modal = document.querySelector('.video-modal')
+      modal.classList.add('close')
+      modal.classList.remove('open')
+      this.$refs.youtube.player.pauseVideo()       
     }
+  },
+  computed: {
+    i18n() { return this.$store.state.i18n.home }
   },
   created() {
     if (this.$store.getters.isLogin) {
@@ -60,7 +49,6 @@ export default {
   mounted() {
     window.addEventListener('resize', this.setIntroVideoHeight)
     this.$nextTick(function() { this.setIntroVideoHeight() })
-    this.vPlayer.on('fullscreenchange', () => { this.exit(this.vPlayer) })
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
