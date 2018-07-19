@@ -5,6 +5,7 @@ Header Style
 =======================================*/
 .overlay{
   background-color: rgba(0,0,0,0.1);
+  z-index: 6 !important;
 }
 header {
    .navigation-drawer {
