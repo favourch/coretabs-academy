@@ -1,0 +1,79 @@
+@import '~@/assets/styles/vars';
+@import '~@/../node_modules/rfs/scss/_rfs';
+/*===================================== 
+404 page Style 
+=======================================*/ 
+#maintenance{ 
+   
+  #container { 
+    position: relative; 
+    @include box-shadow(0px, 15px, 34px, 0px, $shadow-color); 
+    @include border-radius(40px); 
+    padding: 50px; 
+    margin-top: 100px;
+    background-color: $white-color; 
+    @media (max-width: 600px) { 
+      flex-basis: 90%; 
+      max-width: 90%; 
+    } 
+     
+    @media (max-width: 1440px){ 
+      max-width: 60%; 
+    } 
+
+    @media (max-width: 1280px){ 
+      max-width: 70%; 
+    } 
+
+    @media (max-width: 1366px){ 
+      max-width: 60%; 
+    } 
+ 
+    @media (max-width: 1024px){ 
+      max-width: 70%; 
+    } 
+ 
+    @media (max-width: 1023px){ 
+      max-width: 90%; 
+      @include border-radius(25px); 
+    } 
+ 
+    @media (min-width: 1441px){ 
+      max-width: 45%; 
+    } 
+
+    #splash { 
+      background-image: url("~@/assets/multimedia/images/maintenance/maintenance.svg"); 
+      background-position: 20px 20px; 
+      background-size: calc(100% - 20px) calc(100% - 20px); 
+      background-repeat: no-repeat; 
+      padding: 0 0 0 20px; 
+      margin-left:50px; 
+      max-height: 300px; 
+      @media (max-width: 1200px) { 
+        flex-basis: 240px; 
+        width: 240px !important; 
+        max-width: 240px; 
+        height: 180px; 
+      } 
+      @media (max-width: 960px) { 
+        display: none; 
+      } 
+
+    } 
+    h1{ 
+      margin-bottom: 30px !important; 
+    } 
+    p{ 
+      line-height: 30px !important; 
+      max-width: 350px;
+    } 
+    #back-home { 
+      background: $grading-color; 
+      color: $white-color !important; 
+      height: 45px; 
+      padding: 5px 18px !important; 
+      margin-top: 15px; 
+    } 
+  } 
+} 

@@ -24,6 +24,8 @@ import ModulesComponent from './components/modules/modules.vue'
 import WorkshopComponent from './components/workshop/workshop.vue'
 import NotFoundComponent from './components/not-found/not-found.vue'
 import WorkshopsComponent from './components/workshops/workshops.vue'
+import maintenanceComponent from './components/maintenance/maintenance.vue'
+
 import i18n from './i18n/ar/i18n'
 
 Vue.use(Router)
@@ -125,6 +127,11 @@ const router = new Router({
     name: '404',
     path: '/404',
     component: NotFoundComponent
+  },
+  {
+    name: 'maintenance',
+    path: '/maintenance',
+    component: maintenanceComponent
   }, {
     path: '*',
     redirect: '/404'
@@ -164,15 +171,17 @@ router.beforeEach(async(to, from, next) => {
   }
   document.title = to.meta.title
 
-  if (process.env.VUE_APP_API_MAINTENANCE_MODE === 'true' && store.state.maintenance) {
-    if (to.query.maintenance === 'false') {
-      store.state.maintenance = false
-      next()
-    } else {
-      await store.dispatch('header', false)
-    }
+  let isNotMaintenancePath = to.path !== '/maintenance'
+  let isMaintenanceMode = process.env.VUE_APP_API_MAINTENANCE_MODE === 'true' && store.state.maintenance
+  if (isMaintenanceMode && isNotMaintenancePath) {
+      if (to.query.maintenance === 'false') {
+          store.state.maintenance = false
+          next()
+      } else {
+          next('/maintenance')
+      }
   } else {
-    next()
+       next()
   }
 })
 
