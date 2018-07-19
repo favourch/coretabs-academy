@@ -99,6 +99,10 @@ Home Style
          #yes {
             background: $grading-color !important;
             @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
+            transition: box-shadow ease-in-out 0.6s;
+            &:hover{
+              box-shadow: none;
+            }
          }
 
          #no {
