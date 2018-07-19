@@ -17,7 +17,9 @@
                 <v-text-field :label="form.email_label" v-model="email" :class="[alert.success ? 'disabled' : '']" :rules="emRules" :disabled="alert.success" dir="auto" @keyup.enter="submit" autocomplete="on" name="email" style="-webkit-autofill: none;" required autofocus></v-text-field>
                 <v-text-field :label="form.password_label" v-model="password" :class="[alert.success ? 'disabled' : '']" :rules="pwRules" :disabled="alert.success" dir="auto" @keyup.enter="submit" required
                               :append-icon="pw ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (pw = !pw)" :type="pw ? 'password' : 'text'" ></v-text-field>
-                <p id="forgot" v-html="i18n.forgot_link_text" class="black--text mt-1 mb-1"></p>
+                <p id="forgot" class="black--text mt-1 mb-1">
+                  <router-link to="/forgot-password" v-html="i18n.forgot_link_text"></router-link>
+                </p>
                 <div id="buttons">
                   <v-btn round id="submit" @click="submit" v-show="!alert.success" :disabled="!valid || waiting">
                     <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
