@@ -9,14 +9,6 @@ var config = {
       path: path.resolve(__dirname, './public_html')
     },
     plugins: [
-      new CompressionPlugin({
-        asset: '[path].gz[query]',
-        algorithm: 'gzip',
-        test: /\.js$|\.css$|\.html$/,
-        threshold: 10240,
-        minRatio: 0.8,
-        deleteOriginalAssets: true
-      }),
       new FaviconsWebpackPlugin({
         logo: './src/assets/multimedia/icons/icon.png',
         prefix: 'icons/',
@@ -39,6 +31,17 @@ var config = {
       })
     ]
   }
+}
+
+if (process.env.NODE_ENV === 'production') {
+  config.configureWebpack.plugins.push(new CompressionPlugin({
+    asset: '[path].gz[query]',
+    algorithm: 'gzip',
+    test: /\.js$|\.css$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.8,
+    deleteOriginalAssets: true
+  }))
 }
 
 module.exports = config
