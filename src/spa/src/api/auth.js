@@ -116,7 +116,7 @@ const AuthAPI = {
             }).then((response) => {
                 this.storeUser(root.$store, response.data)
                 if (root.$route.query.next) {
-                    root.$router.push(root.$route.query.next)
+                    window.location = root.$route.query.next
                 } else {
                     if (root.$store.getters.profile('track')) {
                         root.$router.push(`/classroom/${root.$store.getters.profile('track')}/`)
