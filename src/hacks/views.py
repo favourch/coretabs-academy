@@ -43,7 +43,7 @@ class LogoutView(LV):
 
         django_logout(request)
 
-        return Response({'detail': _('Successfully logged out.')},
+        return Response({'detail': _("تم تسجيل الخروج بنجاح")},
                         status=status.HTTP_200_OK)
 
     def discourse_logout(self, request):
@@ -88,7 +88,7 @@ class ResendConfirmView(GenericAPIView):
         serializer.save()
         # Return the success message with OK HTTP status
         return Response(
-            {'detail': _('Confirmation e-mail has been sent.')},
+            {'detail': _("تم ارسال بريد التفعيل")},
             status=status.HTTP_200_OK
         )
 

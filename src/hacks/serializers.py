@@ -45,7 +45,7 @@ class RegisterSerializer(RS):
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _('Make sure it contains only letters and spaces.'))
+                _("تأكد أن الإسم الكامل لا يحتوي الا على حروف و مسافات."))
 
         return name
 
@@ -162,7 +162,7 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
             data={'uidb36': attrs['uid'], 'key': attrs['key']})
 
         if not self.user_token_form.is_valid():
-            raise serializers.ValidationError(_('Invalid Token'))
+            raise serializers.ValidationError(_("التوكن غير صالح"))
 
         if attrs['new_password1'] != attrs['new_password2']:
             raise serializers.ValidationError(
@@ -208,7 +208,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _('Make sure it contains only letters and spaces.'))
+                _("تأكد أن الإسم الكامل لا يحتوي الا على حروف و مسافات."))
 
         return name
 
@@ -217,15 +217,13 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             root, ext = os.path.splitext(avatar.name.lower())
             if ext not in settings.AVATAR_ALLOWED_FILE_EXTS:
                 valid_exts = ', '.join(settings.AVATAR_ALLOWED_FILE_EXTS)
-                error = _('%(ext)s is an invalid file extension. '
-                          'Authorized extensions are : %(valid_exts_list)s')
+                error = _("لا يمكن استعمال %(ext)s .. الامتدادات الصالحة:%(valid_exts_list)s")
                 raise serializers.ValidationError(error %
                                                   {'ext': ext,
                                                    'valid_exts_list': valid_exts})
 
         if avatar.size > settings.AVATAR_MAX_SIZE:
-            error = _('Your file is too big: %(size)s, '
-                      'the maximum allowed size is: %(max_valid_size)s')
+            error = _("الملف كبير جدا %(size)s, أفصى حد هو:%(max_valid_size)s")
 
             raise serializers.ValidationError(error % {
                 'size': filesizeformat(avatar.size),
