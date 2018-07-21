@@ -75,25 +75,105 @@
       }]
     }, {
       "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
+      "about": "Full-stack Designer",
       "src": "contributors/alhakem.jpg",
       "links": [{
         "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
+        "src": "https://github.com/Alhakem"
+      },{
         "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
+        "src": "http://alhakem.me"
+      },{
         "name": "twitter",
-        "src": "cdcd"
+        "src": "https://twitter.com/Mo_Alhakem"
       }]
-    }]
+    }, {
+      "name": "Yasser Alnajjar",
+      "about": "Software Architect",
+      "src": "contributors/yaser.jpg",
+      "links": [{
+        "name": "github",
+        "src": "https://github.com/yaseralnajjar"
+      },{
+        "name": "linkedin",
+        "src": "https://www.linkedin.com/in/yaser-al-najjar-429b9096/"
+      }]
+    }, {
+      "name": "Ahmed Alrifai",
+      "about": "Full-stack Web Developer",
+      "src": "contributors/ahmed.jpg",
+      "links": [{
+        "name": "github",
+        "src": "https://github.com/ahmedalrifai/"
+      },{
+        "name": "linkedin",
+        "src": "https://www.linkedin.com/in/ahmedalrifai/"
+      },{
+        "name": "twitter",
+        "src": "https://twitter.com/ahmedalrifai_ly"
+      }]
+    }, {
+      "name": "Hichem Mahboubi",
+      "about": "Full-stack Web Developer and Django Enthusiast",
+      "src": "contributors/hichem.jpg",
+      "links": [{
+        "name": "github",
+        "src": "https://github.com/hichem2h"
+        }]
+      }, {
+        "name": "Ayman Alrifai",
+        "about": "full-stack designer",
+        "src": "contributors/ayman.jpg",
+        "links": [{
+          "name": "github",
+          "src": "https://github.com/Ayman97"
+        },{
+          "name": "twitter",
+          "src": "https://twitter.com/Ayman97rf"
+        }]
+      }, {
+        "name": "Salah Eddine Lachkar",
+        "about": "Front-end Web Developer & 3D Designer",
+        "src": "contributors/salah.jpg",
+        "links": [{  }]
+      }, {
+        "name": "KHALED LAKEHAL",
+        "about": "Software Engineer & Front-end Web Developer",
+        "src": "contributors/khaled_lakehal.jpg",
+        "links": [{
+          "name": "linkedin",
+          "src": "https://www.linkedin.com/in/khaled-lakehal-1744a910a/"
+        },{
+          "name": "twitter",
+          "src": "https://twitter.com/KHALED_DEV_Alg"
+        }]
+      }, {
+        "name": "Ez Abushaar",
+        "about": "Marketing Officer",
+        "src": "contributors/ez.jpg",
+        "links": [{
+          "name": "facebook",
+          "src": "https://www.facebook.com/ezzabushaar"
+        },{
+          "name": "twitter",
+          "src": "https://twitter.com/ezabushaar"
+        }] 
+      }, {
+        "name": "Shakir Abdo",
+        "about": "Front-end developer",
+        "src": "contributors/shakir.jpg",
+        "links": [{
+          "name": "github",
+          "src": "https://github.com/shakir-abdo"
+        },{
+          "name": "twitter",
+          "src": "https://twitter/shicolareone"
+        },{
+          "name": "website",
+          "src": "https://t.me/shicolare1"
+        }]
+      }]
+      
   },
   "mentors": {
     "title": "الموجهون",

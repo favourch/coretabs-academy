@@ -22,6 +22,7 @@ export default {
       website: '',
       linkedin: '',
       twitter: '',
+      facebook: '',
       LH: ''
     },
     navigation: {
@@ -191,7 +192,7 @@ export default {
       multipleDrag: true,
       threshold: 20,
       loop: true,
-      rtl: false,
+      rtl: true,
       onInit: changeCurrentSlideT,
       onChange: changeCurrentSlideT
     })

@@ -470,6 +470,7 @@ About Style
          text-align: center;
          width: 750px;
          color: #2c3e50;
+         max-width: 70%;
       }
       @media screen and (max-width: 850px) {
          h1,
@@ -493,13 +494,13 @@ About Style
          }
 
          .box {
-            width: 237px;
-            height: 300px;
+            width: 210px;
+            height: 250px;
             @include border-radius(25px);
-            margin: 15px 10px;
+            margin: 16px;
             position: relative;
             overflow: hidden;
-            @include box-shadow(0, 0, 20px, 1px, rgba(0,0,0,0.2));
+           // @include box-shadow(0, 0, 20px, 1px, rgba(0,0,0,0.2));
 
             .image-container {
                width: 100%;
@@ -508,17 +509,17 @@ About Style
                justify-content: center;
                align-items: center;
                position: absolute;
-
                img {
                   position: absolute;
                   height: 100%;
                }
             }
             .filter {
-              background: linear-gradient(rgba(84, 0, 255, 0.8), rgba(202, 62, 75, 0.8));
+              //background: linear-gradient(rgba(84, 0, 255, 0.8), rgba(202, 62, 75, 0.8));
+              background: #4448e9;
               width: 100%;
               height: 100%;
-              opacity: 0.5;
+              opacity: 0.2;
               position: absolute;
             }
 
@@ -533,7 +534,7 @@ About Style
 
                .profile-container {
                   position: absolute;
-                  padding-top: 100px;
+                  padding-top: 60px;
                   width: 100%;
                   height: 100%;
                   opacity: 0;
@@ -546,7 +547,7 @@ About Style
                      color: white;
                      position: relative;
                      z-index: 2;
-                     width: 90%;
+                     width: 85%;
                      text-align: center;
                   }
                   h3 {
@@ -675,7 +676,7 @@ About Style
    }
 
    #mentors {
-      width: 1050px;
+      width: 960px;
       margin: 120px auto 200px;
       position: relative;
 
@@ -700,12 +701,12 @@ About Style
          text-align: center;
          color: #2c3e50;
          max-width: 750px;
-         width: 100%;
+         max-width: 70%;
       }
       @media screen and (max-width: 850px) {
          h1,
          p {
-            width: 90%;
+          max-width: 90%;
          }
       }
 
@@ -720,8 +721,8 @@ About Style
          }
 
          .mentors-carousel-item {
-            width: 237px;
-            height: 300px;
+            width: 210px;
+            height: 250px;
             @include border-radius(25px);
             margin: 15px 10px;
             position: relative;
@@ -759,7 +760,7 @@ About Style
 
                .profile-container {
                   position: absolute;
-                  padding-top: 100px;
+                  padding-top: 60px;
                   width: 100%;
                   height: 100%;
                   opacity: 0;
