@@ -57,8 +57,8 @@ class RegisterSerializer(RS):
             'first_name': self.validated_data.get('name', '')
         }
 
-    # def custom_signup(self, request, user):
-    #     sync_sso(user)
+    def custom_signup(self, request, user):
+        sync_sso(user)
 
 
 class LoginSerializer(LS):
@@ -272,7 +272,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
         instance.save()
 
-        # sync_sso(instance)
+        sync_sso(instance)
 
         return instance
 
