@@ -29,7 +29,7 @@ def sync_sso(user):
         'avatar_force_update': True
     }
 
-    key = bytes(settings.DISCOURSE_BASE_URL, encoding='utf-8')
+    key = bytes(settings.DISCOURSE_SSO_SECRET, encoding='utf-8')
     return_payload = base64.b64encode(bytes(parse.urlencode(params), 'utf-8'))
     h = hmac.new(key, return_payload, digestmod=hashlib.sha256)
     query_string = parse.urlencode(
