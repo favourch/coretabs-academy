@@ -62,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django_logging.middleware.DjangoLoggingMiddleware',
+    "coretabs.middleware.AdminLocaleMiddleware",
 ]
 
 ROOT_URLCONF = 'coretabs.urls'
