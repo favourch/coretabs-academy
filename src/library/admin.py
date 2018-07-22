@@ -1,4 +1,5 @@
 from django.contrib import admin
+from coretabs.admin import site
 from . import models
 
 from adminsortable2.admin import SortableInlineAdminMixin
@@ -34,12 +35,12 @@ class TrackAdmin(admin.ModelAdmin):
     inlines = (TrackWorkshopInline,)
 
 
-admin.site.register(models.MarkdownLesson)
-admin.site.register(models.QuizLesson)
-admin.site.register(models.VideoLesson)
-admin.site.register(models.Module, ModuleAdmin)
-admin.site.register(models.WorkshopModule)
-admin.site.register(models.Workshop, WorkshopAdmin)
-admin.site.register(models.TrackWorkshop)
-admin.site.register(models.Track, TrackAdmin)
-admin.site.register(models.Profile)
+site.register(models.MarkdownLesson)
+site.register(models.QuizLesson)
+site.register(models.VideoLesson)
+site.register(models.Module, ModuleAdmin)
+site.register(models.WorkshopModule)
+site.register(models.Workshop, WorkshopAdmin)
+site.register(models.TrackWorkshop)
+site.register(models.Track, TrackAdmin)
+site.register(models.Profile)

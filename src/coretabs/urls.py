@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 '''
 
-from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
@@ -22,12 +21,16 @@ from hacks.views import logout_view, user_details_view, resend_confirmation_view
 from avatars.views import upload_avatar_view
 from contact.views import contact_view
 from discourse import views as discourse_views
+from .admin import site
 
 import debug_toolbar
 
+site.site_header = 'Coretabs Admin'
+site.site_title = 'Coretabs Admin'
+site.index_title = 'Coretabs Admin'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', site.urls),
     path('avatar/', include('avatar.urls')),
 
     path('api/v1/contact/', contact_view),
