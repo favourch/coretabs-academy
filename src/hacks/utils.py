@@ -9,7 +9,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 
-def get_avatar_url(request, user, size=settings.AVATAR_DEFAULT_SIZE):
+def get_avatar_url(user, size=settings.AVATAR_DEFAULT_SIZE):
     for provider_path in settings.AVATAR_PROVIDERS:
         provider = import_string(provider_path)
         avatar_url = provider.get_avatar_url(user, size)
@@ -19,13 +19,13 @@ def get_avatar_url(request, user, size=settings.AVATAR_DEFAULT_SIZE):
             return avatar_url
 
 
-def sync_sso(request, user):
+def sync_sso(user):
     params = {
         'email': user.email,
         'external_id': user.id,
         'username': user.username,
         'name': user.first_name,
-        'avatar_url': get_avatar_url(request, user),
+        'avatar_url': get_avatar_url(user),
         'avatar_force_update': True
     }
 
