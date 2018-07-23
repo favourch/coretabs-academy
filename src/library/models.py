@@ -139,6 +139,8 @@ class WorkshopModule(models.Model):
         verbose_name_plural = _('workshops and modules')
         ordering = ['order']
 
+    def __str__(self):
+        return f'{self.workshop} --> {self.module}'
 
 class Track(CachingMixin, AutoSlugModel):
     workshops = models.ManyToManyField(
@@ -161,6 +163,9 @@ class TrackWorkshop(models.Model):
         verbose_name = _('track and workshop')
         verbose_name_plural = _('tracks and workshops')
         ordering = ['order']
+
+    def __str__(self):
+        return f'{self.track} --> {self.workshop}'
 
 
 class Profile(models.Model):
