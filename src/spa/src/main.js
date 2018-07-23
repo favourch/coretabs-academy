@@ -7,12 +7,11 @@ import store from './store/app.store'
 import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
 
-Raven
-    .config('https://5134f66568be4bb090819995c88110eb@sentry.io/1222814')
-    .addPlugin(RavenVue, Vue)
-    .install()
+Raven.config('https://5134f66568be4bb090819995c88110eb@sentry.io/1222814')
+  .addPlugin(RavenVue, Vue)
+  .install()
 
-axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL
+axios.defaults.baseURL = process.env.API_BASE_URL
 window.axios = axios
 
 Vue.use(require('./api/api').default)

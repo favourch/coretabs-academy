@@ -172,7 +172,7 @@ router.beforeEach(async(to, from, next) => {
   document.title = to.meta.title
 
   let isNotMaintenancePath = to.path !== '/maintenance'
-  let isMaintenanceMode = process.env.VUE_APP_API_MAINTENANCE_MODE === 'true' && store.state.maintenance
+  let isMaintenanceMode = process.env.MAINTENANCE_MODE === 'true' && store.state.maintenance
   if (isMaintenanceMode && isNotMaintenancePath) {
       if (to.query.maintenance === 'false') {
           store.state.maintenance = false

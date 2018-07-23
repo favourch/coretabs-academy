@@ -1,5 +1,6 @@
 const CompressionPlugin = require('compression-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const webpack = require('webpack')
 const path = require('path')
 var config = {
   outputDir: 'public_html',
@@ -9,6 +10,7 @@ var config = {
       path: path.resolve(__dirname, './public_html')
     },
     plugins: [
+      new webpack.EnvironmentPlugin(['API_BASE_URL', 'MAINTENANCE_MODE']),
       new FaviconsWebpackPlugin({
         logo: './src/assets/multimedia/icons/icon.png',
         prefix: 'icons/',

@@ -74,7 +74,7 @@ export default {
     this.username = this.$store.getters.user('username')
     this.avatar_url = this.$store.getters.user('avatar_url')
     if (this.avatar_url.slice(0, 4) !== 'http') {
-      this.avatar_url = `${process.env.VUE_APP_API_BASE_URL}${this.$store.getters.user('avatar_url')}`
+      this.avatar_url = `${process.env.API_BASE_URL}${this.$store.getters.user('avatar_url')}`
     }
 
     this.fnRules = [
