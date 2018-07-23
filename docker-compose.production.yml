@@ -35,5 +35,6 @@ services:
     ports:
       - "8001:3000"
     environment:
-      VUE_APP_API_BASE_URL: https://api.coretabs.net
+      API_BASE_URL: https://api.coretabs.net
+      MAINTENANCE_MODE: 0
     
