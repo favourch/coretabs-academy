@@ -6,8 +6,8 @@ var config = {
   outputDir: 'public_html',
   configureWebpack: {
     output: {
-      publicPath: '/',
-      path: path.resolve(__dirname, './public_html')
+      path: path.resolve(__dirname, './public_html'),
+      publicPath: '/'
     },
     plugins: [
       new webpack.EnvironmentPlugin(['API_BASE_URL', 'MAINTENANCE_MODE']),
@@ -19,16 +19,16 @@ var config = {
         background: '#fff',
         title: 'Coretabs Academy',
         icons: {
-            android: true,
-            appleIcon: true,
-            appleStartup: true,
-            coast: false,
-            favicons: true,
-            firefox: true,
-            opengraph: true,
-            twitter: true,
-            yandex: true,
-            windows: true
+          android: true,
+          appleIcon: true,
+          appleStartup: true,
+          coast: false,
+          favicons: true,
+          firefox: true,
+          opengraph: true,
+          twitter: true,
+          yandex: true,
+          windows: true
         }
       })
     ]
