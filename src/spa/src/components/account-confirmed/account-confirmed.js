@@ -4,7 +4,6 @@ export default {
     i18n() { return this.$store.state.i18n.auth.account_confirmed }
   },
   methods: {
-    start() { },
     setSplashHeight() {
       let sDiv = document.querySelector('#splash')
       if (sDiv) {

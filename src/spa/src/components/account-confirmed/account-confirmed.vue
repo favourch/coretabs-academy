@@ -10,7 +10,7 @@
               <h2 class="black--text mb-4" v-html="i18n.heading_title_text"></h2>
               <p v-html="i18n.description_text"></p>
               <div id="buttons">
-                <v-btn round id="start" @click="start" v-html="i18n.start_btn_text" to="/classroom/tour/"></v-btn>
+                <v-btn round id="start" v-html="i18n.start_btn_text" to="/classroom/tour/"></v-btn>
                 <v-btn round id="dismiss" v-html="i18n.dismiss_btn_text" to="/select-track"></v-btn>
               </div>
             </v-form>
