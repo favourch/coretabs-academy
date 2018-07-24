@@ -10,10 +10,7 @@ var config = {
       path: path.resolve(__dirname, './public_html')
     },
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env.API_BASE_URL': JSON.stringify(process.env.API_BASE_URL),
-        'process.env.MAINTENANCE_MODE': JSON.stringify(process.env.MAINTENANCE_MODE)
-      }),
+      new webpack.EnvironmentPlugin(['API_BASE_URL', 'MAINTENANCE_MODE']),
       new FaviconsWebpackPlugin({
         logo: './src/assets/multimedia/icons/icon.png',
         prefix: 'icons/',
