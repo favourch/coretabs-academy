@@ -8,7 +8,7 @@ export default {
       message: ''
     },
     waiting: false,
-    counter: 30
+    counter: 60
   }),
   computed: {
     i18n() { return this.$store.state.i18n.auth.congratulations }

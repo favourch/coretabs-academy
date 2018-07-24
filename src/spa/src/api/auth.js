@@ -42,12 +42,12 @@ const AuthAPI = {
     }).then((response) => {
       root.alert.success = true
       root.alert.message = root.i18n.success_message_text
-      root.counter = 30
+      root.counter = 60
       return false
     }).catch(() => {
       root.alert.error = true
       root.alert.message = root.i18n.error_message_text
-      root.counter = 30
+      root.counter = 60
       return false
     })
   },
