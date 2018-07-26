@@ -1,45 +1,16 @@
 <template>
   <div v-if="loaded" class="lesson">
-    <template v-if="$parent.current.lesson.type === '0'">
-      <div id="lesson-youtube" class="lesson-video lesson-youtube">
-        <iframe :src="content.video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <v-tabs :right="$store.state.direction === 'rtl'" icons-and-text v-model="content.tab">
+    <template v-if="['0', '1'].includes($parent.current.lesson.type)">
+      <div :id="($parent.current.lesson.type === '0') ? 'lesson-youtube' : 'lesson-scrimba'"
+        :class="['lesson-video', ($parent.current.lesson.type === '0') ? 'lesson-youtube' : 'lesson-scrimba']">
+        <iframe v-if="$parent.current.lesson.type === '0'" :src="content.video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe v-else :src="content.video"></iframe>
+        <v-tabs :id="($parent.current.lesson.type === '0') ? 'youtube-tabs' : 'scrimba-tabs'" :right="$store.state.direction === 'rtl'" icons-and-text v-model="content.tab">
           <v-tab v-for="(tab, i) in i18n.video.tabs" :key="i">
             {{tab.text}}
             <v-icon>{{tab.icon}}</v-icon>
           </v-tab>
-        </v-tabs>
-        <v-tabs-items v-model="content.tab">
-          <v-tab-item id="0" key="0">
-            <div class="lesson-markdown" v-html="content.markdown"></div>
-          </v-tab-item>
-          <v-tab-item id="1" key="1">
-            <v-container id="have-question no-select" fluid grid-list-xl>
-              <v-layout row wrap align-center justify-center>
-                <v-flex sm12>
-                  <v-layout row align-center>
-                    <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
-                    <div class="text">
-                      <h4 v-html="i18n.video.question.title"></h4>
-                      <div>{{ i18n.video.question.text }} <a :href="$parent.current.workshop.forums" target="_blank">{{ i18n.video.question.here }}</a></div>
-                    </div>
-                  </v-layout>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-tab-item>
-        </v-tabs-items>
-      </div>
-    </template>
-    <template v-if="$parent.current.lesson.type === '1'">
-      <div id="lesson-scrimba" class="lesson-video lesson-scrimba">
-        <iframe :src="content.video"></iframe>
-        <v-tabs id="scrimba-tabs" :right="$store.state.direction === 'rtl'" icons-and-text v-model="content.tab">
-          <v-tab v-for="(tab, i) in i18n.video.tabs" :key="i">
-            {{tab.text}}
-            <v-icon>{{tab.icon}}</v-icon>
-          </v-tab>
-          <div id="scrimba-logo">
+          <div v-if="$parent.current.lesson.type === '1'" id="scrimba-logo">
             <span>Workspace by</span>
             <a :href="content.video" title="open in new window" target="_blank"><img src="../../assets/multimedia/images/scrimba-logo.png" width="88" height="19" alt="scrimba"></a>
           </div>
