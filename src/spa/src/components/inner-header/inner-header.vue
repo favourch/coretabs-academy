@@ -21,7 +21,7 @@
             </v-list-tile>
           </v-list>
           <v-list v-if="notifications">
-            <v-list-tile v-for="(notification, i) in notifications.notifications.slice(0, 5)" :key="i" v-if="notification.notification_type != 12" class="notification" :class="{'unread': !notification.read}">
+            <v-list-tile v-for="(notification, i) in notifications" :key="i" v-if="notification.notification_type != 12" class="notification" :class="{'unread': !notification.read}">
               <v-list-tile-title>
                 <a :href="`https://forums.coretabs.net/t/${notification.slug}/${notification.topic_id}${(notification.post_number > 1) ? '/' + notification.post_number : ''}`" target="_blank">
                   <v-icon>
