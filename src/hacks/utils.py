@@ -15,7 +15,7 @@ def get_avatar_url(user, size=settings.AVATAR_DEFAULT_SIZE):
         avatar_url = provider.get_avatar_url(user, size)
         if avatar_url:
             if provider_path == 'avatar.providers.PrimaryAvatarProvider':
-                avatar_url = settings.SPA_BASE_URL + avatar_url
+                avatar_url = settings.API_BASE_URL + avatar_url
             return avatar_url
 
 

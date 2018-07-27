@@ -4,6 +4,7 @@ import dj_database_url
 from .base import *
 
 SPA_BASE_URL = os.environ.get('SPA_BASE_URL')
+API_BASE_URL = os.environ.get('API_BASE_URL')
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False

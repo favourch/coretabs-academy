@@ -21,6 +21,7 @@ services:
     environment:
       HOST_ENV: production
       SPA_BASE_URL: https://coretabs.net
+      API_BASE_URL: https://api.coretabs.net
     env_file:
       - secrets.api.env
     links:

@@ -41,5 +41,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_SUBJECT_PREFIX = ''
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
-
-LOGIN_URL = 'https://www.coretabs.net/signin'

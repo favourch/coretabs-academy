@@ -12,3 +12,5 @@ from .logging import *
 
 if os.environ.get('HOST_ENV') == 'production':
     from .deploy_settings import *
+
+LOGIN_URL = SPA_BASE_URL + '/signin'
