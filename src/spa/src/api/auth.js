@@ -155,13 +155,13 @@ const AuthAPI = {
     axios.get(`/api/v1/auth/user/notifications/`,
       { withCredentials: true })
       .then((response) => {
-        for (var notification in response.data.notifications.slice(0, 5)) {
+        let notifications = response.data.notifications.slice(0, 5)
+        notifications.forEach(notification => {
           if (!notification.read) {
             root.unread = true
-            break
           }
-        }
-        root.notifications = response.data
+        })
+        root.notifications = notifications
       })
   },
   async checkUser(store) {

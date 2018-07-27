@@ -15,7 +15,6 @@ ALLOWED_HOSTS = [
     '0.0.0.0'
 ]
 
-CORS_ALLOW_CREDENTIALS = False
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'spa.coretabs.net', 'www.coretabs.net', 'coretabs.net')
