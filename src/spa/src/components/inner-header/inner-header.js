@@ -33,6 +33,11 @@ export default {
         default:
           return 'notifications'
       }
+    },
+    mark_read(notification) {
+      if (!notification.read) {
+        notification.read = true
+      }
     }
   },
   created() {
