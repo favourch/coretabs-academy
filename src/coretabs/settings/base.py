@@ -153,8 +153,8 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle'
     ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '20/min',
-        'user': '20/min'
+        'anon': '20/minute',
+        'user': '20/minute'
     }
 }
 
@@ -164,7 +164,7 @@ REST_FRAMEWORK = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+        'LOCATION': 'unix:/tmp/memcached.sock',
     }
 }
 

@@ -4,6 +4,7 @@ FROM python:alpine3.7
 
 RUN apk update
 RUN apk upgrade
+RUN apk add memcached
 RUN apk add --virtual deps gcc python-dev linux-headers musl-dev postgresql-dev
 RUN apk add --no-cache libpq
 RUN apk add jpeg-dev \
@@ -35,3 +36,4 @@ RUN pip install -r requirements.txt
 RUN apk del deps
 
 RUN python manage.py collectstatic
+RUN memcached -d -u root -s /tmp/memcached.sock
