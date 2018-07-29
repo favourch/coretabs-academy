@@ -173,3 +173,9 @@ CACHES = {
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda x: True
 }
+
+
+# Mock server 
+DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io'
+DISCOURSE_API_KEY = 'anilliqnmsakmcnahojdwklaklsa'
+DISCOURSE_API_USERNAME = 'discourse_mock'
