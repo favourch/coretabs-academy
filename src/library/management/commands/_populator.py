@@ -101,7 +101,7 @@ class MarkdownFactory(factory.DjangoModelFactory):
 
 @transaction.atomic
 def create_users(track, users=1000):
-    lessons = list(MarkdownLesson.objects.all())
+    lessons = list(MarkdownLesson.objects.all()[10:MarkdownLesson.objects.count()])
     for i in range(users):
         user = UserFactory(lessons=lessons)
         user.profile.track = track
