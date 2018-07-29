@@ -179,3 +179,4 @@ DEBUG_TOOLBAR_CONFIG = {
 DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io'
 DISCOURSE_API_KEY = 'anilliqnmsakmcnahojdwklaklsa'
 DISCOURSE_API_USERNAME = 'discourse_mock'
+DISCOURSE_SSO_SECRET = 'd836444a9e4084d5b224a60c208dce14'
