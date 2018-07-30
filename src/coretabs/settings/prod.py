@@ -1,32 +1,42 @@
-import os
+from .base import *
 import dj_database_url
 
-from .base import *
-
-SPA_BASE_URL = os.environ.get('SPA_BASE_URL')
-API_BASE_URL = os.environ.get('API_BASE_URL')
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
+
+# Database
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
+}
+
+
+# Hosts
 ALLOWED_HOSTS = [
     'www.coretabs.net',
     '.coretabs.net',
     '0.0.0.0'
 ]
 
+
+# URLs
+SPA_BASE_URL = os.environ.get('SPA_BASE_URL')
+API_BASE_URL = os.environ.get('API_BASE_URL')
+LOGIN_URL = SPA_BASE_URL + '/signin'
+
+
+# Cors Settings
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'spa.coretabs.net', 'www.coretabs.net', 'coretabs.net')
 
+
+# CSRF and Session
 SESSION_COOKIE_DOMAIN = '.coretabs.net'
 CSRF_COOKIE_DOMAIN = '.coretabs.net'
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
-    )
-}
 
 
 # EMAIL config
@@ -38,13 +48,17 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
+MANAGERS_EMAILS = os.environ.get('MANAGERS_EMAILS').split(';')
+
+
+# Discourse Settings
 DISCOURSE_BASE_URL = os.environ.get('DISCOURSE_BASE_URL')
 DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET')
 DISCOURSE_API_KEY = os.environ.get('DISCOURSE_API_KEY')
 DISCOURSE_API_USERNAME = os.environ.get('DISCOURSE_API_USERNAME')
 
-MANAGERS_EMAILS = os.environ.get('MANAGERS_EMAILS').split(';')
 
+# Logging Settings
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN'),
 }
@@ -54,7 +68,6 @@ DJANGO_LOGGING = {
     'CONSOLE_LOG': False,
 }
 
-MIDDLEWARE += [
-    # Simplified static file serving.
-    # https://warehouse.python.org/project/whitenoise/
-    'whitenoise.middleware.WhiteNoiseMiddleware']
+
+# Media Settings
+MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware', ]
