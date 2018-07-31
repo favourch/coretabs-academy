@@ -6,7 +6,7 @@ export default {
   name: 'HomeComponent',
   data() {
     return {
-      videoId: 'Dv7gLpW91DM',
+      videoId: '1wgiLnGl0JU',
       playerVars: {
         showinfo: 0,
         rel: 0
