@@ -13,7 +13,7 @@ Raven.config('https://5134f66568be4bb090819995c88110eb@sentry.io/1222814')
   .install()
 
 axios.defaults.baseURL = process.env.API_BASE_URL
-window.axios = axios
+if (typeof window !== 'undefined') { window.axios = axios }
 
 Vue.use(require('./api/api').default)
 Vue.use(Vuetify, {

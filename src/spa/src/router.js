@@ -159,17 +159,21 @@ const router = new Router({
 })
 
 router.beforeEach(async(to, from, next) => {
-  if (window.localStorage.getItem('token') && !store.getters.isLogin) {
-    await Vue.prototype.$auth.checkUser(store)
+  if (typeof window !== 'undefined') {
+    if (window.localStorage.getItem('token') && !store.getters.isLogin) {
+      await Vue.prototype.$auth.checkUser(store)
+    }
   }
 
-  const pageName = to.name
-  if (i18n.meta[pageName]) {
-    to.meta.title = i18n.meta[pageName].title + ' - ' + i18n.meta.default.title
-  } else {
-    to.meta.title = i18n.meta.default.title
+  if (typeof document !== 'undefined') {
+    const pageName = to.name
+    if (i18n.meta[pageName]) {
+      to.meta.title = i18n.meta[pageName].title + ' - ' + i18n.meta.default.title
+    } else {
+      to.meta.title = i18n.meta.default.title
+    }
+    document.title = to.meta.title
   }
-  document.title = to.meta.title
 
   let isNotMaintenancePath = to.path !== '/maintenance'
   let isMaintenanceMode = process.env.MAINTENANCE_MODE === 'true' && store.state.maintenance
