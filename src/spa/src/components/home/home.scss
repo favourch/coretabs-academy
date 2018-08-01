@@ -1,5 +1,5 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
 /*=====================================
 Home Style
 =======================================*/
@@ -19,7 +19,7 @@ Home Style
       overflow: hidden;
       max-width: 500px;
       height: 374px !important;
-      background: url("~@/assets/multimedia/images/home/video_cover.png") no-repeat;
+      background: url("../../assets/multimedia/images/home/video_cover.png") no-repeat;
       background-size: 100% 100%;
       position: relative;
       cursor: pointer;

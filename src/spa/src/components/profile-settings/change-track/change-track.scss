@@ -1,5 +1,5 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../../assets/styles/vars';
+@import '../../../../node_modules/rfs/scss/_rfs';
 
 #change-track {
 
@@ -8,78 +8,78 @@
     max-width: 65%;
   }
 
-  @media (max-width: 1366px){
+  @media (max-width: 1366px) {
     max-width: 70%;
   }
 
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     max-width: 70%;
   }
 
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     max-width: 90%;
   }
 
-  @media (min-width: 1441px){
+  @media (min-width: 1441px) {
     max-width: 55%;
   }
 
-   .flex {
-      box-shadow: 5px 2px 14px #d8d7d7, -3px 6px 13px #d8d7d7;
-      border-radius: 25px;
-      padding: 40px 20px;
-      @media screen and (min-width: 600px) {
-         padding: 45px;
-      }
-   }
+  .flex {
+    box-shadow: 5px 2px 14px #d8d7d7, -3px 6px 13px #d8d7d7;
+    border-radius: 25px;
+    padding: 40px 20px;
+    @media screen and (min-width: 600px) {
+      padding: 45px;
+    }
+  }
 
-   .alert {
-      text-align: right;
-      border-radius: 10px;
-      margin: 0 0 10px;
-      padding: 10px 10px 12px;
+  .alert {
+    text-align: right;
+    border-radius: 10px;
+    margin: 0 0 10px;
+    padding: 10px 10px 12px;
+    border-color: transparent !important;
+
+    &.alert {
       border-color: transparent !important;
+    }
+  }
 
-      &.alert {
-         border-color: transparent !important;
-      }
-   }
+  .input-group {
+    label {
+      max-width: 95% !important;
+      text-align: right;
+    }
+  }
 
-   .input-group {
-      label {
-         max-width: 95% !important;
-         text-align: right;
-      }
-   }
+  .input-group__details {
+    margin-top: 4px !important;
+  }
 
-   .input-group__details {
-      margin-top: 4px !important;
-   }
+  .heading {
+    color: rgb(131, 131, 131) !important;
+  }
 
-   .heading {
-      color: rgb(131, 131, 131) !important;
-   }
+  .sub-headin {
+    @include rfs(16);
+  }
 
-   .sub-headin {
-      @include rfs(16);
-   }
+  .btn {
+    height: 40px;
+    margin: 20px 0 0 !important;
+    padding: 0px 30px;
+    background: $grading-color;
+    color: $white-color !important;
+  }
 
-   .btn {
-      height: 40px;
-      margin: 20px 0 0 !important;
-      padding: 0px 30px;
-      background: $grading-color;
-      color: $white-color !important;
-   }
-
-   .btn--disabled {
-      background: #d5d5d5 !important;
-      color: #fff !important;
-   }
+  .btn--disabled {
+    background: #d5d5d5 !important;
+    color: #fff !important;
+  }
 }
 
 .menu__content.change-track {
-   .card {
-      padding: 0;
-   }
+  .card {
+    padding: 0;
+  }
 }

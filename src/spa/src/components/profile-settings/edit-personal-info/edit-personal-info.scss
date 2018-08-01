@@ -1,28 +1,28 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../../assets/styles/vars';
+@import '../../../../node_modules/rfs/scss/_rfs';
 
 .mother-container {
   box-shadow: 5px 2px 14px #d8d7d7, -3px 6px 13px #d8d7d7;
   @include border-radius(20px);
   margin: 0 auto;
 
-  @media (max-width: 1440px){
+  @media (max-width: 1440px) {
     max-width: 65%;
   }
 
-  @media (max-width: 1366px){
+  @media (max-width: 1366px) {
     max-width: 70%;
   }
 
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     max-width: 70%;
   }
 
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     max-width: 90%;
   }
 
-  @media (min-width: 1441px){
+  @media (min-width: 1441px) {
     max-width: 55%;
   }
 
@@ -74,7 +74,7 @@
           align-items: center;
           border-top-left-radius: 22px;
           border-top-left-radius: 22px;
-          i{
+          i {
             font-size: 20px !important;
             color: #8997a4;
           }
