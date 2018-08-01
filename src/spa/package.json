@@ -6,7 +6,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config client.config.js --hot --inline",
+    "client": "cross-env NODE_ENV=production webpack --config client.config.js --progress --hide-modules",
+    "server": "cross-env NODE_ENV=production webpack --config server.config.js --progress --hide-modules",
+    "ssr": "npm run client && npm run server && cp ../static/index.html ../templates/index.html",
+    "start": "npm run ssr && node server"
   },
   "dependencies": {
     "@vue/cli": "^3.0.0-rc.3",
