@@ -174,15 +174,17 @@ router.beforeEach(async(to, from, next) => {
   let isNotMaintenancePath = to.path !== '/maintenance'
   let isMaintenanceMode = process.env.MAINTENANCE_MODE === 'true' && store.state.maintenance
   if (isMaintenanceMode && isNotMaintenancePath) {
-      if (to.query.maintenance === 'false') {
-          store.state.maintenance = false
-          next()
-      } else {
-          next('/maintenance')
-      }
+    if (to.query.maintenance === 'false') {
+      store.state.maintenance = false
+      next()
+    } else {
+      next('/maintenance')
+    }
   } else {
-       next()
+    next()
   }
 })
 
-export default router
+export function createRouter() {
+  return router
+}
