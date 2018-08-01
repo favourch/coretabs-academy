@@ -39,7 +39,6 @@ export default {
     this.i18n = this.$store.state.i18n.header[this.role]
   },
   watch: {
-    role() { this.i18n = this.$store.state.i18n.header[this.role] },
     $route() {
       this.setHeader()
       let el = document.querySelector('main.content')
@@ -72,9 +71,11 @@ export default {
         default:
           this.show = true
           this.role = 'default_navs'
+          this.i18n = this.$store.state.i18n.header[this.role]
           this.navs = this.default_navs
           if (this.$store.getters.isLogin) {
             this.role = 'user_navs'
+            this.i18n = this.$store.state.i18n.header[this.role]
             this.navs = this.user_navs
             if (this.$store.getters.profile('track')) {
               this.user_navs[0].url = `/classroom/${this.$store.getters.profile('track')}/`
