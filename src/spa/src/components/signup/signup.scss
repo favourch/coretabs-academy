@@ -1,5 +1,5 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
 /*=====================================
 Signup Style
 =======================================*/
@@ -18,23 +18,23 @@ Signup Style
       max-width: 90%;
     }
 
-    @media (max-width: 1440px){
+    @media (max-width: 1440px)  {
       max-width: 60%;
     }
 
-    @media (max-width: 1280px){
+    @media (max-width: 1280px) {
       max-width: 70%;
     }
 
-    @media (max-width: 1366px){
+    @media (max-width: 1366px) {
       max-width: 60%;
     }
 
-    @media (max-width: 1024px){
+    @media (max-width: 1024px) {
       max-width: 70%;
     }
 
-    @media (max-width: 1023px){
+    @media (max-width: 1023px) {
       max-width: 90%;
       @include border-radius(25px);
       p{
@@ -42,7 +42,7 @@ Signup Style
       }
     }
 
-    @media (min-width: 1441px){
+    @media (min-width: 1441px) {
       max-width: 45%;
     }
 
@@ -61,7 +61,7 @@ Signup Style
     }
   
     #avatars {
-      background-image: url("~@/assets/multimedia/images/auth/avatars.png");
+      background-image: url("../../assets/multimedia/images/auth/avatars.png");
       background-position: right center;
       background-size: calc(100% - 20px) calc(100% - 20px);
       background-repeat: no-repeat;

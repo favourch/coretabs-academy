@@ -1,5 +1,5 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
 /*=====================================
 Signin Style
 =======================================*/
@@ -18,31 +18,30 @@ Signin Style
       max-width: 90%;
     }
     
-    @media (max-width: 1440px){
+    @media (max-width: 1440px) {
       max-width: 60%;
     }
 
-    @media (max-width: 1280px){
+    @media (max-width: 1280px) {
       max-width: 70%;
     }
 
-    @media (max-width: 1366px){
+    @media (max-width: 1366px) {
       max-width: 60%;
     }
 
-    @media (max-width: 1024px){
+    @media (max-width: 1024px) {
       max-width: 70%;
     }
 
-    @media (max-width: 1023px){
+    @media (max-width: 1023px) {
       max-width: 90%;
       @include border-radius(25px);
     }
 
-    @media (min-width: 1441px){
+    @media (min-width: 1441px) {
       max-width: 45%;
     }
-
 
     .alert {
       border-radius: 10px;
@@ -52,7 +51,7 @@ Signin Style
     }
 
     #splash {
-      background-image: url("~@/assets/multimedia/images/auth/signin.svg");
+      background-image: url("../../assets/multimedia/images/auth/signin.svg");
       background-position: 20px 20px;
       background-size: calc(100% - 20px) calc(100% - 20px);
       background-repeat: no-repeat;
@@ -83,7 +82,6 @@ Signin Style
       }
       
       #forgot {
-
         text-align: right;
 
         a {

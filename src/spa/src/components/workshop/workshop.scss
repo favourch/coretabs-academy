@@ -1,356 +1,355 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
 /*=====================================
 Workshop Style
 =======================================*/
 $card: (
-   max-width: 1080px,
-   height: auto,
-   icon-size: 38px,
-   margin-bottom: 40px,
-   padding: 8px 0,
-   background: $white-color   
+  max-width: 1080px,
+  height: auto,
+  icon-size: 38px,
+  margin-bottom: 40px,
+  padding: 8px 0,
+  background: $white-color   
 );
 $card1: (
-   text: (margin: 0 10px 0 0, ar-margin: 0 0 0 10px, font-size:1em)
+  text: (margin: 0 10px 0 0, ar-margin: 0 0 0 10px, font-size:1em)
 );
 $card2: (
-   part1: (padding:40px, margin-bottom: 20px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
-   part2: (toolbar: (height: 30px, padding: 0 10px, progress-border-raduis: 50px)),
-   part3: (padding:40px, margin-bottom: 50px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
+  part1: (padding:40px, margin-bottom: 20px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
+  part2: (toolbar: (height: 30px, padding: 0 10px, progress-border-raduis: 50px)),
+  part3: (padding:40px, margin-bottom: 50px, font-size:(title:1.25em, paragraph:0.95em, chips:1em, btn:1em)),
 );
 $card3: (
-   icon: (width: 60px, height:50px, margin:0 10px 0 0, margin-ar:0 0 0 20px),
-   margin-bottom: 8px,
-   text-font-size: 14px
+  icon: (width: 60px, height:50px, margin:0 10px 0 0, margin-ar:0 0 0 20px),
+  margin-bottom: 8px,
+  text-font-size: 14px
 );
 
 html[dir='rtl'] {
-   .workshop {
-      .card {
-        
-         &:nth-child(1) {
-            .text {
-               margin: map-deep-get($card1,'text','margin') !important;
-            }
-         }
-
-         &:nth-child(2) {
-            .navigation {
-               border-width: 0 1px 0 0 !important;
-               border-color: #e5e5e5 !important;
-
-               @media (max-width: 960px) {
-                 border-width: 0 0 0 0 !important;
-               }
-            }
-         }
-
-         &:nth-child(3) {
-            img {
-               margin: map-deep-get($card3,'icon','margin-ar') !important;
-            }
-         }
-      }
-   }
-}
-
-.workshop {
-   overflow-x: scroll !important;
-
-   .card {
-      overflow: hidden !important;
-      border-radius: 15px !important;
-      max-width: map-deep-get($card,'max-width') !important;
-      height: map-deep-get($card,'height') !important;
-      padding: map-deep-get($card,'padding') !important;
-      margin-bottom: map-deep-get($card,'margin-bottom') !important;
-      margin-left: auto;
-      margin-right: auto;
-      background: map-deep-get($card,'background') !important;
-      @include box-shadow(0px, 5px, 20px, 0px, $shadow-color,true);
-      border-top: none !important;
-      
-      .container {
-         height: 100% !important;
-
-         .layout {
-            margin: 0 !important;
-            height: 100% !important;
-         }
-      }
-
+  .workshop {
+    .card {
       &:nth-child(1) {
-         .flex {
-            padding: 10px 0 !important;
-            @media (max-width: 600px) {
-              padding: 20px 0 12px !important;
-              &:last-of-type{
-                padding: 10px 0 12px !important;
-              }
-            }
-         }
-
-         .btn {
-            width: 70% !important;
-            font-weight: 700 !important;
-            min-height: 40px;
-            float: left;
-            background: $grading-color !important;
-            @include box-shadow(0px, 5px, 30px, 0px, $shadow-color,true);
-            &:hover{
-              @include box-shadow(0px, 0px, 0px, 0px, $shadow-color,true);
-            }
-            @media (max-width: 960px) {
-              margin: 0 !important;
-              width: 100% !important;
-              min-height: 50px;
-            }
-            
-         }
-
-         img {
-            width: map-deep-get($card,'icon-size') !important;
-            height: map-deep-get($card,'icon-size') !important;
-         }
-
-         .text {
-            font-weight: 700 !important;
-            margin: map-deep-get($card1,'text','margin') !important;
-
-            div {
-               &:nth-child(1) {
-                  margin-bottom: 3px !important;
-                  color: #999 !important;
-                  @include responsive-font-size(calc(#{map-deep-get($card1,'text','font-size')} - 2px),true);
-               }
-
-               &:nth-child(2) {
-                  color: #425468 !important;
-                  @include responsive-font-size(calc(#{map-deep-get($card1,'text','font-size')} + 3px),true);
-                
-               }
-            }
-         }
+        .text {
+          margin: map-deep-get($card1,'text','margin') !important;
+        }
       }
 
       &:nth-child(2) {
-         padding: 0 !important;
+        .navigation {
+          border-width: 0 1px 0 0 !important;
+          border-color: #e5e5e5 !important;
 
-         .flex:nth-child(1) {
-            padding: map-deep-get($card2,'part1','padding') !important;
-            @media (max-width: 600px) { 
-              padding: 40px 30px !important;
-            }
-
-            .title {
-               font-weight: 700 !important;
-               color: $black-color !important;
-               margin-bottom: map-deep-get($card2,'part1','margin-bottom') !important;
-               @include responsive-font-size(map-deep-get($card2,'part1','font-size','title'),true);
-            }
-
-            p {
-               line-height: 1.9 !important;
-               font-weight: normal !important;
-               margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
-               @include responsive-font-size(map-deep-get($card2,'part3','font-size','paragraph'),true);
-            }
-
-            .chips {
-               margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
-
-               .chip {
-                  padding: 0 5px !important;
-                  font-weight: 500 !important;
-                  pointer-events: none !important;
-                  @include font-family('en',true);
-                  background: $white-color !important;
-                  color: #999 !important;
-                  border: 2px solid #ddd !important;
-                  @include responsive-font-size(map-deep-get($card2,'part1','font-size','chips'),true);
-                  margin-bottom: 6px;
-               }
-               div{
-                 display: inline-block;
-               }
-            }
-
-            .authors {
-              overflow: auto;
-              display: flex;
-              flex-wrap: wrap;
-              margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
-              margin-top: 30px !important; 
-              .author {
-                flex: 49%;
-
-                @media (max-width: 600px) {
-                  flex: 100%;
-                }
-                .avatar {
-                  float: right;
-                  color: $white-color;
-                  font-size: 24px;
-                  line-height: 0px;
-                  margin: 0 0 20px 10px;
-                }
-
-                .info {
-                  float: right;
-                  background-color: unset !important;
-                  border-color: unset !important;
-                  margin: 6px auto 20px;
-
-                  div:first-of-type {
-                    font-weight: bold !important;
-                  }
-                  div:nth-of-type(2){
-                    color:#888;
-                    font-size: 14px;
-                  }
-                }
-
-                &:nth-child(odd) {
-                  margin-left: 1%;
-                  @media (max-width: 600px) {
-                    margin-left: unset;
-                  }
-                  .avatar {
-                    background: #5145E7;
-                  }
-                }
-
-                &:nth-child(even) {
-                  margin-right: 1%;
-                  @media (max-width: 600px) {
-                    margin-right: unset;
-                  }
-                  .avatar {
-                    background: #E78A45;
-                  }
-                }
-              }
-            }
-
-            .btn {
-               font-weight: 700 !important;
-               color: $white-color !important;
-               background: #496A8A !important;
-               margin: 0px;
-               width: 100%;
-               max-width: 140px;
-               padding: 22px 5px !important;
-               margin-top: 5px;
-               &:hover{
-                background: #406181 !important;
-               }
-               @media (max-width: 600px) {
-                min-height: 50px;
-                margin:10px auto 30px;
-               }
-               @include responsive-font-size(map-deep-get($card2,'part1','font-size','btn'),true);
-            }
-         }
-
-         .navigation {
-            width: 100% !important;
-            height: 100% !important;
-            overflow: hidden !important;
-            border-style: solid !important;
-            border-width: 0 0 0 1px !important;
-            border-color: $shadow-color !important;
-            background: $workshop-drawer-background !important;
-
-            @media (max-width: 960px) {
-              border-width: 0 0 0 0 !important;
-            }
-
-            .toolbar {
-               height: auto !important;
-               padding: 25px 20px !important;
-               background: $white-color !important;
-               border-bottom: 1px solid #ededed !important;
-               @media (max-width: 600px) {
-                border-top: 1px solid #ededed !important;
-               }
-               .toolbar__content {
-                  height: map-deep-get($card2,'part2','toolbar','height') !important;
-                  min-height: map-deep-get($card2,'part2','toolbar','height') !important;
-                  max-height: map-deep-get($card2,'part2','toolbar','height') !important;
-
-                  progress {
-                     width: 100% !important;
-                     height: 100% !important;
-                     direction: ltr !important;
-                     position: relative !important;
-                     @include appearance(none,true);
-
-                     &::after {
-                        content: attr(data-value);
-                        font-size: 14px !important;
-                        @include center(false,true);
-                        font-weight: 600 !important;
-                        position: absolute !important;
-                        color: $black-color !important;
-                        @include font-family('ar',true);
-                     }
-                     // &::-moz-progress-bar,
-                     &::-webkit-progress-bar {
-                        box-shadow: 0 2px 3px $shadow-color inset !important;
-                        background-color: $workshop-drawer-background !important;
-                        border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
-                     }
-
-                     &::-webkit-progress-value {
-                        box-shadow: 0 2px 4px $shadow-color inset !important;
-                        background-color: var(--workshop-active-state) !important;
-                        border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
-                     }
-                  }
-               }
-            }
-         }
+          @media (max-width: 960px) {
+            border-width: 0 0 0 0 !important;
+          }
+        }
       }
 
       &:nth-child(3) {
-         padding: 15px 0 !important;
-         margin-bottom: 0 !important;
-
-         .flex {
-            display: inline-flex !important;
-            padding: 12px 0;
-
-            img {
-               width: map-deep-get($card3,'icon','width') !important;
-               height: map-deep-get($card3,'icon','height') !important;
-               margin: map-deep-get($card3,'icon','margin') !important;
-            }
-
-            .text {
-               // line-height: map-deep-get($card3,'icon-size') !important;
-               div {
-                  font-weight: 700 !important;
-
-                  &:nth-child(1) {
-                     color: $black-color !important;
-                     margin-bottom: map-deep-get($card3,'margin-bottom') !important;
-                     font-size: map-deep-get($card3,'text-font-size') + 2px !important;
-                  }
-
-                  &:nth-child(2) {
-                     font-weight: normal !important;
-                     color: rgba($black-color,0.8) !important;
-                     font-size: map-deep-get($card3,'text-font-size') !important;
-
-                     a {
-                        text-decoration: underline !important;
-                        color: #666 !important;
-                     }
-                  }
-               }
-            }
-         }
+        img {
+          margin: map-deep-get($card3,'icon','margin-ar') !important;
+        }
       }
-   }
+    }
+  }
+}
+
+.workshop {
+  overflow-x: scroll !important;
+
+  .card {
+    overflow: hidden !important;
+    border-radius: 15px !important;
+    max-width: map-deep-get($card,'max-width') !important;
+    height: map-deep-get($card,'height') !important;
+    padding: map-deep-get($card,'padding') !important;
+    margin-bottom: map-deep-get($card,'margin-bottom') !important;
+    margin-left: auto;
+    margin-right: auto;
+    background: map-deep-get($card,'background') !important;
+    @include box-shadow(0px, 5px, 20px, 0px, $shadow-color,true);
+    border-top: none !important;
+    
+    .container {
+        height: 100% !important;
+
+        .layout {
+          margin: 0 !important;
+          height: 100% !important;
+        }
+    }
+
+    &:nth-child(1) {
+      .flex {
+        padding: 10px 0 !important;
+        @media (max-width: 600px) {
+          padding: 20px 0 12px !important;
+          &:last-of-type{
+            padding: 10px 0 12px !important;
+          }
+        }
+      }
+
+      .btn {
+        width: 70% !important;
+        font-weight: 700 !important;
+        min-height: 40px;
+        float: left;
+        background: $grading-color !important;
+        @include box-shadow(0px, 5px, 30px, 0px, $shadow-color,true);
+        &:hover{
+          @include box-shadow(0px, 0px, 0px, 0px, $shadow-color,true);
+        }
+        @media (max-width: 960px) {
+          margin: 0 !important;
+          width: 100% !important;
+          min-height: 50px;
+        }
+      }
+
+      img {
+        width: map-deep-get($card,'icon-size') !important;
+        height: map-deep-get($card,'icon-size') !important;
+      }
+
+      .text {
+        font-weight: 700 !important;
+        margin: map-deep-get($card1,'text','margin') !important;
+
+        div {
+          &:nth-child(1) {
+            margin-bottom: 3px !important;
+            color: #999 !important;
+            @include responsive-font-size(calc(#{map-deep-get($card1,'text','font-size')} - 2px),true);
+          }
+
+          &:nth-child(2) {
+            color: #425468 !important;
+            @include responsive-font-size(calc(#{map-deep-get($card1,'text','font-size')} + 3px),true);
+          
+          }
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      padding: 0 !important;
+
+      .flex:nth-child(1) {
+        padding: map-deep-get($card2,'part1','padding') !important;
+        @media (max-width: 600px) { 
+          padding: 40px 30px !important;
+        }
+
+        .title {
+          font-weight: 700 !important;
+          color: $black-color !important;
+          margin-bottom: map-deep-get($card2,'part1','margin-bottom') !important;
+          @include responsive-font-size(map-deep-get($card2,'part1','font-size','title'),true);
+        }
+
+        p {
+          line-height: 1.9 !important;
+          font-weight: normal !important;
+          margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
+          @include responsive-font-size(map-deep-get($card2,'part3','font-size','paragraph'),true);
+        }
+
+        .chips {
+          margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
+
+          .chip {
+            padding: 0 5px !important;
+            font-weight: 500 !important;
+            pointer-events: none !important;
+            @include font-family('en',true);
+            background: $white-color !important;
+            color: #999 !important;
+            border: 2px solid #ddd !important;
+            @include responsive-font-size(map-deep-get($card2,'part1','font-size','chips'),true);
+            margin-bottom: 6px;
+          }
+          div{
+            display: inline-block;
+          }
+        }
+
+        .authors {
+          overflow: auto;
+          display: flex;
+          flex-wrap: wrap;
+          margin-bottom: map-deep-get($card2,'part3','margin-bottom') !important;
+          margin-top: 30px !important; 
+          .author {
+            flex: 49%;
+
+            @media (max-width: 600px) {
+              flex: 100%;
+            }
+            .avatar {
+              float: right;
+              color: $white-color;
+              font-size: 24px;
+              line-height: 0px;
+              margin: 0 0 20px 10px;
+            }
+
+            .info {
+              float: right;
+              background-color: unset !important;
+              border-color: unset !important;
+              margin: 6px auto 20px;
+
+              div:first-of-type {
+                font-weight: bold !important;
+              }
+              div:nth-of-type(2){
+                color:#888;
+                font-size: 14px;
+              }
+            }
+
+            &:nth-child(odd) {
+              margin-left: 1%;
+              @media (max-width: 600px) {
+                margin-left: unset;
+              }
+              .avatar {
+                background: #5145E7;
+              }
+            }
+
+            &:nth-child(even) {
+              margin-right: 1%;
+              @media (max-width: 600px) {
+                margin-right: unset;
+              }
+              .avatar {
+                background: #E78A45;
+              }
+            }
+          }
+        }
+
+        .btn {
+          font-weight: 700 !important;
+          color: $white-color !important;
+          background: #496A8A !important;
+          margin: 0px;
+          width: 100%;
+          max-width: 140px;
+          padding: 22px 5px !important;
+          margin-top: 5px;
+
+          &:hover{
+            background: #406181 !important;
+          }
+          @media (max-width: 600px) {
+            min-height: 50px;
+            margin:10px auto 30px;
+          }
+          @include responsive-font-size(map-deep-get($card2,'part1','font-size','btn'),true);
+        }
+      }
+
+      .navigation {
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden !important;
+        border-style: solid !important;
+        border-width: 0 0 0 1px !important;
+        border-color: $shadow-color !important;
+        background: $workshop-drawer-background !important;
+
+        @media (max-width: 960px) {
+          border-width: 0 0 0 0 !important;
+        }
+
+        .toolbar {
+            height: auto !important;
+            padding: 25px 20px !important;
+            background: $white-color !important;
+            border-bottom: 1px solid #ededed !important;
+            @media (max-width: 600px) {
+            border-top: 1px solid #ededed !important;
+            }
+            .toolbar__content {
+              height: map-deep-get($card2,'part2','toolbar','height') !important;
+              min-height: map-deep-get($card2,'part2','toolbar','height') !important;
+              max-height: map-deep-get($card2,'part2','toolbar','height') !important;
+
+              progress {
+                  width: 100% !important;
+                  height: 100% !important;
+                  direction: ltr !important;
+                  position: relative !important;
+                  @include appearance(none,true);
+
+                  &::after {
+                    content: attr(data-value);
+                    font-size: 14px !important;
+                    @include center(false,true);
+                    font-weight: 600 !important;
+                    position: absolute !important;
+                    color: $black-color !important;
+                    @include font-family('ar',true);
+                  }
+                  // &::-moz-progress-bar,
+                  &::-webkit-progress-bar {
+                    box-shadow: 0 2px 3px $shadow-color inset !important;
+                    background-color: $workshop-drawer-background !important;
+                    border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
+                  }
+
+                  &::-webkit-progress-value {
+                    box-shadow: 0 2px 4px $shadow-color inset !important;
+                    background-color: var(--workshop-active-state) !important;
+                    border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
+                  }
+              }
+            }
+        }
+      }
+    }
+
+    &:nth-child(3) {
+      padding: 15px 0 !important;
+      margin-bottom: 0 !important;
+
+      .flex {
+        display: inline-flex !important;
+        padding: 12px 0;
+
+        img {
+          width: map-deep-get($card3,'icon','width') !important;
+          height: map-deep-get($card3,'icon','height') !important;
+          margin: map-deep-get($card3,'icon','margin') !important;
+        }
+
+        .text {
+          // line-height: map-deep-get($card3,'icon-size') !important;
+          div {
+            font-weight: 700 !important;
+
+            &:nth-child(1) {
+              color: $black-color !important;
+              margin-bottom: map-deep-get($card3,'margin-bottom') !important;
+              font-size: map-deep-get($card3,'text-font-size') + 2px !important;
+            }
+
+            &:nth-child(2) {
+              font-weight: normal !important;
+              color: rgba($black-color,0.8) !important;
+              font-size: map-deep-get($card3,'text-font-size') !important;
+
+              a {
+                text-decoration: underline !important;
+                color: #666 !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

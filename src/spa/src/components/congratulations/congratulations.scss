@@ -1,5 +1,5 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
 /*=====================================
 Congratulations Style
 =======================================*/
@@ -18,28 +18,28 @@ Congratulations Style
       max-width: 90%;
     }
 
-    @media (max-width: 1440px){
+    @media (max-width: 1440px) {
       max-width: 60%;
     }
 
-    @media (max-width: 1280px){
+    @media (max-width: 1280px) {
       max-width: 70%;
     }
 
-    @media (max-width: 1366px){
+    @media (max-width: 1366px) {
       max-width: 60%;
     }
 
-    @media (max-width: 1024px){
+    @media (max-width: 1024px) {
       max-width: 70%;
     }
 
-    @media (max-width: 1023px){
+    @media (max-width: 1023px) {
       max-width: 90%;
       @include border-radius(25px);
     }
 
-    @media (min-width: 1441px){
+    @media (min-width: 1441px) {
       max-width: 45%;
     }
     .alert {
@@ -50,7 +50,7 @@ Congratulations Style
     }
 
     #splash {
-      background-image: url("~@/assets/multimedia/images/auth/email.svg");
+      background-image: url("../../assets/multimedia/images/auth/email.svg");
       background-position: center center;
       background-size: contain;
       background-repeat: no-repeat;
@@ -73,7 +73,8 @@ Congratulations Style
         @include responsive-font-size(1.5rem,true);
         margin-bottom: 20px !important;
       }
-      p{
+      
+      p {
         line-height: 30px;
       }
 

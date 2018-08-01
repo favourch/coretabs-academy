@@ -1,5 +1,5 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
 /*=====================================
 Modules Style
 =======================================*/
@@ -9,91 +9,92 @@ $ar-padding: 0 15px 0 0;
 
 main.lessons-main-content,
 main.modules-main-content {
-   padding-top: $inner-header-height !important;
-   background: $workshop-content-background !important;
+  padding-top: $inner-header-height !important;
+  background: $workshop-content-background !important;
 }
 
 html[dir='rtl'] {
-   .modules {
-      .navigation-drawer {
-         .toolbar {
-            padding: $ar-padding !important;
-         }
+  .modules {
+    .navigation-drawer {
+      .toolbar {
+        padding: $ar-padding !important;
       }
-   }
+    }
+  }
 }
 
 .modules {
-   height: 100% !important;
-   overflow: hidden !important;
-   position: relative !important;
-   background: $white-color !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: $white-color !important;
 
-   .navigation-drawer {
-      height: 100vh !important;
-      overflow: hidden !important;
-      background: $workshop-drawer-background !important;
-      @include box-shadow(0px, 15px, 34px, 0px, $shadow-color,true);
-      @media (max-width: 350px) {
-        width: 290px !important;
+  .navigation-drawer {
+    height: 100vh !important;
+    overflow: hidden !important;
+    background: $workshop-drawer-background !important;
+    @include box-shadow(0px, 15px, 34px, 0px, $shadow-color,true);
+    
+    @media (max-width: 350px) {
+      width: 290px !important;
+    }
+    .navigation-drawer__border {
+      display: none !important;
+    }
+    .toolbar {
+      height: auto !important;
+      padding: $padding !important;
+      background: $grading-color !important;
+      min-height: $inner-header-height !important;
+      max-height: $inner-header-height !important;
+
+      .toolbar__content {
+        height: auto !important;
+        min-height: $inner-header-height !important;
+        max-height: $inner-header-height !important;
+
+        .btn {
+          width: 25px !important;
+          height: 25px !important;
+          background: #393ba8 !important;
+
+          .icon {
+            width: 25px !important;
+            height: 25px !important;
+            font-size: 25px !important;
+          }
+        }
+
+        .toolbar__title {
+          font-size: 16px !important;
+          font-weight: bold !important;
+          color: $white-color !important;
+          margin-right: 0px;
+        }
       }
-      .navigation-drawer__border {
-         display: none !important;
-      }
-      .toolbar {
-         height: auto !important;
-         padding: $padding !important;
-         background: $grading-color !important;
-         min-height: $inner-header-height !important;
-         max-height: $inner-header-height !important;
+    }
+  }
 
-         .toolbar__content {
-            height: auto !important;
-            min-height: $inner-header-height !important;
-            max-height: $inner-header-height !important;
+  .content {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-left: 0 !important;
+    transition: none !important;
+    overflow: hidden !important;
+    background: $workshop-content-background !important;
 
-            .btn {
-               width: 25px !important;
-               height: 25px !important;
-               background: #393ba8 !important;
-
-               .icon {
-                  width: 25px !important;
-                  height: 25px !important;
-                  font-size: 25px !important;
-               }
-            }
-
-            .toolbar__title {
-               font-size: 16px !important;
-               font-weight: bold !important;
-               color: $white-color !important;
-               margin-right: 0px;
-            }
-         }
-      }
-   }
-
-   .content {
-      margin: 0 !important;
-      padding: 0 !important;
-      border-left: 0 !important;
+    > div {
+      width: 100% !important;
+      height: 100% !important;
       transition: none !important;
-      overflow: hidden !important;
-      background: $workshop-content-background !important;
+      // overflow: hidden !important;
+      overflow-x: hidden !important;
+      user-select: text !important;
+      padding: $content-padding !important;
 
-      > div {
-         width: 100% !important;
-         height: 100% !important;
-         transition: none !important;
-         // overflow: hidden !important;
-         overflow-x: hidden !important;
-         user-select: text !important;
-         padding: $content-padding !important;
-
-         &::-webkit-scrollbar {
-            background: $workshop-content-background !important;
-         }
+      &::-webkit-scrollbar {
+        background: $workshop-content-background !important;
       }
-   }
+    }
+  }
 }
