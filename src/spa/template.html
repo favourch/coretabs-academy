@@ -7,7 +7,7 @@
     <meta name="description" content="Coretabs Academy is the first step that will transform your career as a developer. Start talking the future language, select your track, we will make you READY to work">
     <meta name="msapplication-TileColor" content="#4f45e6">
     <meta name="theme-color" content="#4f45e6">
-    <script src="<%= webpackConfig.output.publicPath %>js/highlight.pack.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122474292-1"></script>
     <script>
@@ -17,24 +17,14 @@
 
       gtag('config', 'UA-122474292-1');
     </script>
-
-    <style>
-    #no-javascript{
-      width: 100%;
-      text-align: center;
-      font-weight: bold;
-      padding: 100px 0;
-      font-family:'Droid Arabic Kufi';
-    }
-    </style>
-    <title>أكاديمية كورتابز</title>
   </head>
 
   <body class="no-select">
     <noscript>
       <div id="no-javascript">عذراً أكاديمية كورتابز لا تعمل جيداً بدون الجافاسكربت، الرجاء تفعيل الجافاسكربت في المتصفح الخاص بك ومن ثم المحاولة مجدداً</div>
     </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <div id="app">
+      {{ APP }}
+    </div>
   </body>
 </html>
