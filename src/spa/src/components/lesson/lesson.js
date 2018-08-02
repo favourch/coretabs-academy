@@ -37,9 +37,7 @@ export default {
         questions.forEach((q) => { if (q.success) count++ })
 
         if(questions.length === count) {
-          if (!this.$parent.current.lesson.is_shown) {
-            this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
-          }
+          this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
         }
       },
       deep: true
@@ -63,9 +61,7 @@ export default {
             .then(response => {
               this.content.markdown = this.previewMarkdowText(response.data)
               setTimeout(() => { this.parser() }, 50)
-              if (!this.$parent.current.lesson.is_shown) {
-                this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
-              }
+              this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
@@ -77,9 +73,7 @@ export default {
             .then(response => {
               this.content.markdown = this.previewMarkdowText(response.data)
               setTimeout(() => { this.parser() }, 50)
-              if (!this.$parent.current.lesson.is_shown) {
-                this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
-              }
+              this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
@@ -90,9 +84,7 @@ export default {
             .then(response => {
               this.content.markdown = this.previewMarkdowText(response.data)
               setTimeout(() => { this.parser() }, 50)
-              if (!this.$parent.current.lesson.is_shown) {
-                this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
-              }
+              this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
@@ -113,9 +105,7 @@ export default {
             .then(response => {
               this.content.markdown = this.previewMarkdowText(response.data)
               setTimeout(() => { this.parser() }, 50)
-              if (!this.$parent.current.lesson.is_shown) {
-                this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
-              }
+              this.$parent.current.lesson.is_shown = this.$auth.showLesson(this.endpoint, this.$store)
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
