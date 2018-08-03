@@ -32,6 +32,7 @@ LOGIN_URL = SPA_BASE_URL + '/signin'
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'spa.coretabs.net', 'www.coretabs.net', 'coretabs.net')
+CORS_ALLOW_CREDENTIALS = True
 
 
 # CSRF and Session
