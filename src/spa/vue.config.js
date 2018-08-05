@@ -3,10 +3,11 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
 var config = {
-  outputDir: 'public_html',
+  outputDir: 'static',
   configureWebpack: {
+    entry: './src/client-entry.js',
     output: {
-      path: path.resolve(__dirname, './public_html'),
+      path: path.resolve(__dirname, './static'),
       publicPath: '/'
     },
     plugins: [
@@ -41,8 +42,7 @@ if (process.env.NODE_ENV === 'production') {
     algorithm: 'gzip',
     test: /\.js$|\.css$|\.html$/,
     threshold: 10240,
-    minRatio: 0.8,
-    deleteOriginalAssets: true
+    minRatio: 0.8
   }))
 }
 

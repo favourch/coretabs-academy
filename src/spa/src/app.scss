@@ -16,6 +16,22 @@ Global Style
   --workshop-complete-state: #7d68df;
 }
 
+#no-javascript{
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 100px 0;
+  background: #ffffff;
+  color: $primary-color;
+  text-align: center;
+  font-weight: bold;
+  font-family:'Droid Arabic Kufi';
+}
+
 *,
 *::after,
 *::before {

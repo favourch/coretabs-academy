@@ -3,7 +3,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import App from './app.vue'
 import Vuetify from 'vuetify'
-import router from './router'
+import { createRouter } from './router'
 import store from './store/app.store'
 import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
@@ -13,7 +13,7 @@ Raven.config('https://5134f66568be4bb090819995c88110eb@sentry.io/1222814')
   .install()
 
 axios.defaults.baseURL = process.env.API_BASE_URL
-window.axios = axios
+if (typeof window !== 'undefined') { window.axios = axios }
 
 Vue.use(require('./api/api').default)
 Vue.use(Vuetify, {
@@ -31,8 +31,13 @@ Vue.use(Vuetify, {
 Vue.config.productionTip = false
 Vue.config.delimiters = ['[[', ']]']
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+export function createApp() {
+  const router = createRouter()
+  const app = new Vue({
+    router,
+    store,
+    render: h => h(App)
+  })
+
+  return { app, router }
+}
