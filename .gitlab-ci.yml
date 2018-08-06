@@ -22,7 +22,7 @@ stages:
 build:
   stage: build
   script:
-    - docker-compose -f docker-compose.production.yml build -d
+    - docker-compose -f docker-compose.production.yml build
 
 deploy-prod:
   stage: production
