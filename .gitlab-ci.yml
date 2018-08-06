@@ -53,7 +53,8 @@ deploy-prod:
     # Sets the permission to 600 to prevent a problem with AWS
     # that it's too unprotected.
     - chmod 600  ~/.ssh/id_rsa
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - apk add --no-cache bash   
   script:     
     - bash ./gitlab-deploy/.gitlab-deploy.prod.sh   
   environment:     
