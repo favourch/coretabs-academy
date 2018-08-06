@@ -47,8 +47,8 @@ services:
       context: .
       dockerfile: ./production.spa.dockerfile
       args:
-        - API_BASE_URL
-        - MAINTENANCE_MODE
+        API_BASE_URL: $API_BASE_URL
+        MAINTENANCE_MODE: $MAINTENANCE_MODE
     command: sh -c "npm start"
     ports:
       - "8001:3000"
