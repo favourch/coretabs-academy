@@ -28,7 +28,9 @@ services:
 # We tell GitLab to install all the packages
 # before running anything.
 before_script:  
-  - apt-get update -qq && apt-get install
+  - apk add --no-cache python py2-pip
+  - pip install --no-cache-dir docker-compose
+  - docker-compose -v
   - docker info
 
 # You specify the stages. Those are the steps that GitLab will go through 
