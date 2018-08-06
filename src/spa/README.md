@@ -11,4 +11,4 @@
 
     npm run build
 
->   SPA is now alive at /public_html/index.html
+>   SPA is now alive at /static/index.html

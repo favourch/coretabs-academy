@@ -17,21 +17,17 @@ export default {
       let isAbout = document.querySelector('#about')
       let header = document.querySelector('header')
       let brandLogo = document.querySelector('.brand-logo')
-      let drawerIcon = document.querySelector('.drawer-icon')
       if (isAbout) {
         if (window.scrollY >= 100) {
           header.classList.add('fixed-header')
           this.setProperty(brandLogo, 'margin', '10px')
-          this.setProperty(drawerIcon, 'margin-top', '22px')
         } else {
           header.classList.remove('fixed-header')
           this.setProperty(brandLogo, 'margin', '25px 10px 10px 20px')
-          this.setProperty(drawerIcon, 'margin-top', '13px')
         }
       } else {
         header.classList.remove('fixed-header')
         this.setProperty(brandLogo, 'margin', '25px 10px 10px 20px')
-        this.setProperty(drawerIcon, 'margin-top', '13px')
       }
     }
   },

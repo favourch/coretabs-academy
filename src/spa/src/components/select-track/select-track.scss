@@ -1,5 +1,5 @@
-@import '~@/assets/styles/vars';
-@import '~@/../node_modules/rfs/scss/_rfs';
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
 /*=====================================
 Select Track Style
 =======================================*/
@@ -73,7 +73,7 @@ Select Track Style
         margin: 0 auto;
         width: 120px;
         height: 92px;
-        background-image: url("~@/assets/multimedia/images/tracks-icons.png");
+        background-image: url("../../assets/multimedia/images/tracks-icons.png");
         background-position: left top;
       }
 

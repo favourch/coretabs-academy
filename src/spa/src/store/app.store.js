@@ -59,7 +59,7 @@ export default new Vuex.Store({
   },
   actions: {
     getImgUrl(state, img) {
-      return require(`@/assets/multimedia/${img}`)
+      return require(`../assets/multimedia/${img}`)
     },
     header: ({commit}, payload) => {
       return new Promise((resolve, reject) => {

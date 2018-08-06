@@ -4,17 +4,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
-SECRET_KEY = '#g61i*t=xzc3ogr#&lajy6$si-db0=%9y8d@0_fs(5n*j%q@^p'
-
-DEBUG = True
-
-ALLOWED_HOSTS = ['192.168.99.100', 'localhost', '127.0.0.1']
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-
-SESSION_COOKIE_DOMAIN = '127.0.0.1'
-CSRF_COOKIE_DOMAIN = '127.0.0.1'
 
 # Application definition
 
@@ -86,18 +75,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'coretabs.wsgi.application'
 
 
-# Database
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Password validation
-# https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -116,7 +94,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'ar'
 
@@ -129,12 +106,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# vue SPA url
-SPA_BASE_URL = 'https://spa.coretabs.net'
-
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
@@ -142,11 +114,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-REST_FRAMEWORK = {
+# DRF settings
 
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    # 'rest_framework.permissions.IsAuthenticated',
-    # )
+REST_FRAMEWORK = {
 
     'DEFAULT_THROTTLE_CLASSES': (
         'rest_framework.throttling.AnonRateThrottle',
@@ -158,7 +128,6 @@ REST_FRAMEWORK = {
     }
 }
 
-
 # Cache Setup
 
 CACHES = {
@@ -169,9 +138,33 @@ CACHES = {
 }
 
 
-# Only for DEBUG
-DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda x: True
+# Account Settings
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_MIN_LENGTH = 3
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
+ACCOUNT_ADAPTER = 'hacks.adapter.MyAccountAdapter'
+ACCOUNT_USERNAME_BLACKLIST = ['system', ]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+OLD_PASSWORD_FIELD_ENABLED = True
+
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'hacks.serializers.LoginSerializer',
+    'USER_DETAILS_SERIALIZER': 'hacks.serializers.UserDetailsSerializer',
+    'PASSWORD_RESET_SERIALIZER': 'hacks.serializers.PasswordResetSerializer',
+    'PASSWORD_RESET_CONFIRM_SERIALIZER': 'hacks.serializers.PasswordResetConfirmSerializer',
+    'TOKEN_SERIALIZER': 'hacks.serializers.TokenSerializer'
 }
 
 
@@ -180,3 +173,13 @@ DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io
 DISCOURSE_API_KEY = 'anilliqnmsakmcnahojdwklaklsa'
 DISCOURSE_API_USERNAME = 'discourse_mock'
 DISCOURSE_SSO_SECRET = 'd836444a9e4084d5b224a60c208dce14'
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'hacks.serializers.RegisterSerializer',
+}
+
+AVATAR_CLEANUP_DELETED = True
+AVATAR_MAX_AVATARS_PER_USER = 1
+
+EMAIL_SUBJECT_PREFIX = ''
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''

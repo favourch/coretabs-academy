@@ -36,4 +36,3 @@ RUN pip install -r requirements.txt
 RUN apk del deps
 
 RUN python manage.py collectstatic
-RUN memcached -d -u root -s /tmp/memcached.sock

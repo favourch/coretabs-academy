@@ -36,7 +36,6 @@ class AutoSlugModel(models.Model):
 
 
 class Module(CachingMixin, AutoSlugModel):
-    objects = CachingManager()
 
     class Meta:
         verbose_name = _('module')
@@ -63,7 +62,7 @@ class BaseLesson(CachingMixin, AutoSlugModel):
         max_length=10, choices=TYPE_CHOICES, default=MARKDOWN, verbose_name=_('type'))
 
     module = models.ForeignKey(
-        Module, related_name='lessons', on_delete=models.DO_NOTHING, verbose_name=_('module'))
+        Module, related_name='lessons', on_delete=models.CASCADE, verbose_name=_('module'))
     shown_users = models.ManyToManyField(
         User, related_name='lessons', verbose_name=_('shown users'), blank=True)
     order = models.IntegerField(verbose_name=_('Order'), default=0)
@@ -129,9 +128,9 @@ class Workshop(CachingMixin, AutoSlugModel):
 
 class WorkshopModule(models.Model):
     module = models.ForeignKey(
-        Module, on_delete=models.DO_NOTHING, verbose_name=_('module'))
+        Module, on_delete=models.CASCADE, verbose_name=_('module'))
     workshop = models.ForeignKey(
-        Workshop, on_delete=models.DO_NOTHING, verbose_name=_('workshop'))
+        Workshop, on_delete=models.CASCADE, verbose_name=_('workshop'))
     order = models.IntegerField(verbose_name=_('Order'), default=0)
 
     class Meta:
@@ -154,9 +153,9 @@ class Track(CachingMixin, AutoSlugModel):
 
 class TrackWorkshop(models.Model):
     workshop = models.ForeignKey(
-        Workshop, on_delete=models.DO_NOTHING, verbose_name=_('workshop'))
+        Workshop, on_delete=models.CASCADE, verbose_name=_('workshop'))
     track = models.ForeignKey(
-        Track, on_delete=models.DO_NOTHING, verbose_name=_('track'))
+        Track, on_delete=models.CASCADE, verbose_name=_('track'))
     order = models.IntegerField(verbose_name=_('Order'), default=0)
 
     class Meta:
