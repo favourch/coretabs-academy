@@ -23,20 +23,20 @@ services:
     #  - ./src/venv/:/djangoapp/venv/
     environment:
       HOST_ENV: production
-      API_BASE_URL: https://api.coretabs.net
-      SPA_BASE_URL: https://www.coretabs.net
-      DATABASE_URL
-      DEFAULT_FROM_EMAIL
-      DISCOURSE_API_KEY
-      DISCOURSE_API_USERNAME
-      DISCOURSE_BASE_URL
-      DISCOURSE_SSO_SECRET
-      EMAIL_HOST
-      EMAIL_HOST_PASSWORD
-      EMAIL_HOST_USER
-      MANAGERS_EMAILS
-      SECRET_KEY
-      SENTRY_DSN
+      - API_BASE_URL
+      - SPA_BASE_URL
+      - DATABASE_URL
+      - DEFAULT_FROM_EMAIL
+      - DISCOURSE_API_KEY
+      - DISCOURSE_API_USERNAME
+      - DISCOURSE_BASE_URL
+      - DISCOURSE_SSO_SECRET
+      - EMAIL_HOST
+      - EMAIL_HOST_PASSWORD
+      - EMAIL_HOST_USER
+      - MANAGERS_EMAILS
+      - SECRET_KEY
+      - SENTRY_DSN
 
     links:
       - db:db
@@ -47,8 +47,8 @@ services:
       context: .
       dockerfile: ./production.spa.dockerfile
       args:
-        API_BASE_URL: $API_BASE_URL
-        MAINTENANCE_MODE: $MAINTENANCE_MODE
+        - API_BASE_URL
+        - MAINTENANCE_MODE
     command: sh -c "npm start"
     ports:
       - "8001:3000"
