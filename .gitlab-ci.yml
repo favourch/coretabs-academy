@@ -39,5 +39,5 @@ deploy-prod:
   environment:     
     name: production     
     # Exposes a button that when clicked take you to the defined URL:
-    url: ec2-52-15-186-230.us-east-2.compute.amazonaws.com
+    url: $DEPLOY_SERVER_URL
   when: manual
