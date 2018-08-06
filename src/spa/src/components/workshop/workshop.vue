@@ -58,7 +58,9 @@
           <div class="title" v-html="i18n.card2.authors" v-if="workshop.authors && workshop.authors.length > 0"></div>
           <div class="authors" v-if="workshop.authors && workshop.authors.length > 0">
             <div class="author" v-for="(author, index) in workshop.authors" :key="index">
-              <v-avatar>{{ author.name[0] }}</v-avatar>
+              <v-avatar>
+                <img :src="getAuthorAvatar(author.avatar_url)" />
+              </v-avatar>
               <div class="info">
                 <div>
                   {{ author.name }}
