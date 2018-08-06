@@ -5,6 +5,9 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from library import models
 
+from django.conf import settings
+from django.utils.module_loading import import_string
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     track = serializers.SlugRelatedField(
@@ -43,6 +46,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+    avatar_url = serializers.SerializerMethodField()
     role = serializers.SerializerMethodField()
     name = serializers.CharField(source='first_name',
                                  max_length=100,
@@ -51,10 +55,17 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('name', 'role')
+        fields = ('name', 'role', 'avatar_url')
 
     def get_role(self, obj):
         return obj.profile.role
+
+    def get_avatar_url(self, obj, size=settings.AVATAR_DEFAULT_SIZE):
+        for provider_path in settings.AVATAR_PROVIDERS:
+            provider = import_string(provider_path)
+            avatar_url = provider.get_avatar_url(obj, size)
+            if avatar_url:
+                return avatar_url
 
 
 class BaseLessonSerializer(serializers.ModelSerializer):

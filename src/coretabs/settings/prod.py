@@ -59,6 +59,15 @@ DISCOURSE_API_KEY = os.environ.get('DISCOURSE_API_KEY')
 DISCOURSE_API_USERNAME = os.environ.get('DISCOURSE_API_USERNAME')
 
 
+# Cache Setup
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'unix:/tmp/memcached.sock',
+    }
+}
+
 # Logging Settings
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN'),

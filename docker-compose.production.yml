@@ -46,10 +46,9 @@ services:
     build:
       context: .
       dockerfile: ./production.spa.dockerfile
-    command: sh -c "npm run build && npm start"
+      args:
+        API_BASE_URL: $API_BASE_URL
+        MAINTENANCE_MODE: $MAINTENANCE_MODE
+    command: sh -c "npm start"
     ports:
       - "8001:3000"
-    environment:
-      API_BASE_URL: https://api.coretabs.net
-      MAINTENANCE_MODE: 0
-    
