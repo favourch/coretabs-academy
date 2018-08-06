@@ -20,9 +20,9 @@ services:
       - /var/academy-media:/djangoapp/media
     #  - ./src/venv/:/djangoapp/venv/
     environment:
-      HOST_ENV: production
-      SPA_BASE_URL: https://coretabs.net
-      API_BASE_URL: https://api.coretabs.net
+      HOST_ENV: $HOST_ENV
+      SPA_BASE_URL: $SPA_BASE_URL
+      API_BASE_URL: $API_BASE_URL
     env_file:
       - secrets.api.env
     links:
@@ -33,10 +33,9 @@ services:
     build:
       context: .
       dockerfile: ./production.spa.dockerfile
-    command: sh -c "npm run build && npm start"
+      args:
+        API_BASE_URL: $API_BASE_URL
+        MAINTENANCE_MODE: $MAINTENANCE_MODE
+    command: sh -c "npm start"
     ports:
       - "8001:3000"
-    environment:
-      API_BASE_URL: https://api.coretabs.net
-      MAINTENANCE_MODE: 0
-    
