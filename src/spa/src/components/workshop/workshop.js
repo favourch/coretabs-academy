@@ -33,6 +33,12 @@ export default {
           this.$store.dispatch('progress', { error: true })
         })
     },
+    getAuthorAvatar(url) {
+      if (url.slice(0, 4) !== 'http') {
+        url = `${process.env.API_BASE_URL || ''}${url}`
+      }
+      return url
+    },
     getContinueURL(workshop) {
       let module = this.$store.getters.profile('last_opened_module_slug')
       let lesson = this.$store.getters.profile('last_opened_lesson_slug')

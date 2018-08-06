@@ -214,18 +214,12 @@ html[dir='rtl'] {
               @media (max-width: 600px) {
                 margin-left: unset;
               }
-              .avatar {
-                background: #5145E7;
-              }
             }
 
             &:nth-child(even) {
               margin-right: 1%;
               @media (max-width: 600px) {
                 margin-right: unset;
-              }
-              .avatar {
-                background: #E78A45;
               }
             }
           }
