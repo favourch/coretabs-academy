@@ -159,8 +159,8 @@ a {
   }
 }
 
-.application[data-server-rendered='true'] > application--wrap > header,
-.application[data-server-rendered='true'] > application--wrap > main {
+.application[data-server-rendered='true'] > .application--wrap > header,
+.application[data-server-rendered='true'] > .application--wrap > main {
   display: none;
 }
 
