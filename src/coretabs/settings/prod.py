@@ -79,5 +79,13 @@ DJANGO_LOGGING = {
 }
 
 
+# DRF settings
+REST_FRAMEWORK.update({
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+})
+
+
 # Media Settings
 MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware', ]
