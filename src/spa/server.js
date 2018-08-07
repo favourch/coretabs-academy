@@ -35,8 +35,9 @@ server.get('*', (req, res) => {
         }
       } else {
         html = template.replace('{{ APP }}', html)
+        res.setHeader('Content-Type', 'text/html')
         res.write(html)
-        res.end()
+        res.send()
       }
     })
   }, (err) => {
