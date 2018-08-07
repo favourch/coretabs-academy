@@ -1,4 +1,5 @@
 /* eslint-disable */
+import * as hljs from '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'
 export default {
   name: 'LessonComponent',
   data: () => ({
