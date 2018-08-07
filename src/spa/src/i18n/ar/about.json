@@ -203,246 +203,97 @@
     "title": "الموجهون",
     "description": "فريق التوجية في الأكاديمية يتألف من عدد من الأشخاص المتميزين الذي سيقوموا بمساندتك أثناء رحلتك التدريبية على منصة coretabs",
     "members": [{
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/one.jpg",
+      "name": "Hossam Hassan",
+      "about": "Front-end developer",
+      "src": "mentors/hossam-hassan.png",
       "links": [{
         "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
+        "src": "https://github.com/HossamHassann"
       }, {
         "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
+        "src": "https://www.linkedin.com/in/hossam-hassan-738420145"
       }]
     }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/two.jpg",
+      "name": "Walid Adly",
+      "about": "Full-stack developer",
+      "src": "mentors/walid-adly.png",
       "links": [{
         "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
+        "src": "https://github.com/walidpiano"
       }, {
         "name": "linkedin",
-        "src": "cdcd"
+        "src": "https://www.linkedin.com/in/walid-adly/"
+      }
+      , {
+        "name": "facebook",
+        "src": "https://www.facebook.com/walidpiano"
+      }]
+    },  {
+      "name": "Fethi TChi",
+      "about": "Full-Stack Developer",
+      "src": "mentors/fathi-tchi.png",
+      "links": [{
+        "name": "github",
+        "src": "https://github.com/TChi91"
+      }, {
+        "name": "facebook",
+        "src": "https://www.facebook.com/fethi.tchi.5"
+      }]
+    },  {
+      "name": "Nabila Amdouni",
+      "about": "Full-Stack Developer",
+      "src": "mentors/nabila-am.png",
+      "links": [{
+        "name": "github",
+        "src": "https://github.com/bibaflower1"
+      }, {
+        "name": "facebook",
+        "src": "https://m.facebook.com/rose.amira.7370"
       }, {
         "name": "twitter",
-        "srs": "cdcd"
+        "srs": "https://twitter.com/PrincesNabila11"
+      }, {
+        "name": "linkedin",
+        "src": "https://www.linkedin.com/in/nabila-amdouni-0bb980142/"
       }]
     }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/three.jpg",
+      "name": "Thamer Al-Harbi",
+      "about": "Full-Stack Developer",
+      "src": "mentors/t.png",
       "links": [{
         "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
+        "src": "https://github.com/thxa"
       }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/four.jpg",
+    },  {
+      "name": "Abdelhadi Salih",
+      "about": "Front-end Developer",
+      "src": "mentors/abdelhadi-salih.png",
       "links": [{
         "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
+        "src": "https://github.com/thegeeko"
+      },
+      {
         "name": "linkedin",
-        "src": "cdcd"
-      }, {
+        "src": "https://www.linkedin.com/in/abdelhadi-mohammed-salih-28a953164/"
+      },
+      {
         "name": "twitter",
-        "srs": "cdcd"
+        "src": "https://twitter.com/TheGeek12353"
       }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/one.jpg",
+    },  {
+      "name": "Rakan Ali",
+      "about": "Front-end Developer",
+      "src": "mentors/rakan-ali2.png",
       "links": [{
-        "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
+        "name": "facebook",
+        "src": "https://www.facebook.com/profile.php?id=100014538182322"
+      },
+      {
         "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
-      }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/two.jpg",
-      "links": [{
-        "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
-      }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/three.jpg",
-      "links": [{
-        "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
-      }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/four.jpg",
-      "links": [{
-        "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
-      }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/one.jpg",
-      "links": [{
-        "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
-      }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/two.jpg",
-      "links": [{
-        "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
-      }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/three.jpg",
-      "links": [{
-        "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
-      }]
-    }, {
-      "name": "Mohammed AlHakem",
-      "about": "Front-end web developer & UI/UX designer",
-      "src": "mentors/four.jpg",
-      "links": [{
-        "name": "github",
-        "src": "ss"
-      }, {
-        "name": "stackoverflow",
-        "src": "sxs"
-      }, {
-        "name": "website",
-        "src": "ddcd"
-      }, {
-        "name": "linkedin",
-        "src": "cdcd"
-      }, {
-        "name": "twitter",
-        "srs": "cdcd"
+        "src": "https://www.linkedin.com/in/rakan-ali-pmp®-0788bb96/"
       }]
     }]
+    
   },
   "footer": {
     "contactUs": "اتصل بنا",

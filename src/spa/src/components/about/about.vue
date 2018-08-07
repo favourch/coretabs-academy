@@ -84,8 +84,7 @@
               <p class="mb" v-html="member.about"></p>
               <div class="social">
                 <div class="icon" v-for="(link, i) in member.links" v-if="link.src" :key="i">
-                  <a :href="link.src" :title="link.name" target="_blank"></a>
-                  <img :src="icons[link.name]" :alt="link.name">
+                  <a :href="link.src" :title="link.name" target="_blank"><img :src="icons[link.name]" :alt="link.name"></a>
                 </div>
               </div>
             </div>
