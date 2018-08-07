@@ -1,7 +1,7 @@
 {
   "sections": [{
     "header": "رؤيتنا في الأكاديمية",
-    "paragraph": "بما أننا نؤمن أن أفضل طريقة لتعلم البرمجة تكون من خلال التطبيق وليس من خلال الدروس النظرية التي لا يتم ربطها بشكل عملي مع مشاريع حقيق، فقد قمنا بإيجاد هذه المنصة لمساعدتك على تحقيق حلمك بالتدرب على لغة المستقبل (البرمجة) بأساليب فعالة.",
+    "paragraph": "بما أننا نؤمن أن أفضل طريقة لتعلم البرمجة تكون من خلال التطبيق وليس من خلال الدروس النظرية التي لا يتم ربطها بشكل عملي مع مشاريع حقيقة، فقد قمنا بإيجاد هذه المنصة لمساعدتك على تحقيق حلمك بالتدرب على لغة المستقبل (البرمجة) بأساليب فعالة.",
     "src": "about/vision",
     "alt": "رؤيتنا في الأكاديمية"
   }, {
@@ -19,35 +19,59 @@
     "title": "مجتمعنا رائع يضم مئات المبرمجين",
     "description": "بإنضمامك معنا لن تتعلم البرمجة فحسب بل ستلتحق بمجتمع يوفر بيئة خصبة لتبادل الخبرات و بناء روابط و علاقات مع عدد كبير من المبرمجين الأكفاء",
     "carousel": [{
-      "img": "saif.png",
-      "name": "منصور الجاسمي",
-      "description": "مصمم تطبيقات موبايل",
-      "quote": "venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.",
-      "rating": 2
-    }, {
-      "img": "saif.png",
-      "name": "منصور الجاسمي",
-      "description": "مصمم تطبيقات موبايل",
-      "quote": "venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.",
-      "rating": 4
-    }, {
-      "img": "saif.png",
-      "name": "منصور الجاسمي",
-      "description": "مصمم تطبيقات موبايل",
-      "quote": "venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.",
-      "rating": 3
-    }, {
-      "img": "saif.png",
-      "name": "منصور الجاسمي",
-      "description": "مصمم تطبيقات موبايل",
-      "quote": "venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.",
+      "img": "fethi-tchi.png",
+      "name": "Fethi Tchi",
+      "description": "Full-Stack Developer",
+      "quote": "أحاول دخول عالم البرمجة و تعلمها منذ وقت طويل ولم أفلح لأنني كنت دائما أسير في ذلك وحيدا وأحاول ذلك بمفردي إلى أن قادني القدر إلى أروع مكان مع أروع مجموعة تأخذ بيدك بكل احترافية نحو هدف. شكرا Coretabs Academy",
       "rating": 5
     }, {
-      "img": "saif.png",
-      "name": "منصور الجاسمي",
-      "description": "مصمم تطبيقات موبايل",
-      "quote": "venenatis dui ac pharetra. Nunc eu felis fermentum diam molestie dictum. Ut pretium laoreet tincidunt. Curabitur suscipit iaculis elit et lobortis.",
-      "rating": 1
+      "img": "hussein-alarasie.png",
+      "name": "Hussein AL-arasie",
+      "description": "Front-End Developer",
+      "quote": "Keep up growing guys. I am a big advocate of this page. It is my pleasure to be one part of this lovely community. You are such a great and outstanding community I've ever known!",
+      "rating": 5
+    }, {
+      "img": "hassan-ali.png",
+      "name": "Hassan Ali ",
+      "description": "Front-End Developer",
+      "quote": "بكل صراحة اعتقد ان فكرة انشاء اكاديمة كورتابس كانت الافضل ، اكاديمية كورتابس هى اكاديمية عربية و يقوم عليها معلمين عرب على اعلى مستوى و لقد تعاملت من قبل مع بعضهم على المستوى الشخصي و عملنا معا قليلا ... وتعلمت منهم الكثير اعتقد انكم ستخسرون كثيرا ان لم تتعلموا من هذه الاكاديمية العربية الرائعة و من معلميها الرائعين",
+      "rating": 5
+    }, {
+      "img": "ahmed-bakkar.png",
+      "name": "Ahmad Bakkar",
+      "description": "Front-End Developer",
+      "quote": "البرمجة هي المستقبل، ولذلك علينا تشجيع بعضنا البعض لبناء مستقبل مشرق للشباب العربي. لذلك نشكر كل من يقوم على مثل هذه المبادرات والتحفيزات لتشجيع الشباب. والجميل في الموضوع أن القائمين على أمر هذه الاكاديمة يهتمون في التطبيق العملي كثيرا من خلال ورشات العمل وهذا ما يميزهم عن غيره.ان شاء الله ستكون تجربة مفيدة ورائعة للجميع.",
+      "rating": 5
+    }, {
+      "img": "saifaldeen.png",
+      "name": "‎سيف الدين المطوي‎ ",
+      "description": "مطور واجهات الويب",
+      "quote": "Even if letters can't describe what I want to say.. but.. Coretabs is the best resource till now .😇. for learning web development.. Practical lessons and helpful Tutors And with the family that I found in coretabs forums.. Gave me an unforgettable experience 😍",
+      "rating": 5
+    }, {
+      "img": "nabila-amdouni.png",
+      "name": "‎Nabila Amdouni",
+      "description": "Full-Stack Developer",
+      "quote": "This is my favorite educational platform in programming, there are many workshops and advices about how to learn programming, how to use applications and how to do. The most important things is the speed of answers and helps. 👌",
+      "rating": 5
+    }, {
+      "img": "rakan-ali.png",
+      "name": "Rakan Ali",
+      "description": "Front-End Developer",
+      "quote": "بدون شك سيكون بداية العمل المشترك في عالمنا و سيساهم في ربط المبرمجين مع بعض و تناقل الخبرات و ان شاء الله يستخرج مبرمجون محترفون من هذه المنصة المباركة.",
+      "rating": 5
+    }, {
+      "img": "jona-saad.png",
+      "name": "Jona Saad",
+      "description": "Front-End Developer",
+      "quote": "بصراحة ناس محترمة ومحترفة ومجتهدة وانا استفدت كتييييير منهم واتمني التوفيق الدائم لهم 😍",
+      "rating": 5
+    }, {
+      "img": "abo-musab.png",
+      "name": "Abo Musab Al-Akbari",
+      "description": "Front-End Developer",
+      "quote": "منصة عربية رائعة، تقوم بتدريب الشباب العربي للدخول الى عالم البرمجة، يشرف عليها مجموعة من رواد المبرمجين، ومتعاونين مع الاعضاء وأصحاب خلق فضيلة",
+      "rating": 5
     }]
   },
   "team": {
