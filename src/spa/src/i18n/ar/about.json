@@ -242,7 +242,7 @@
     },  {
       "name": "Nabila Amdouni",
       "about": "Full-Stack Developer",
-      "src": "mentors/nabila-am.png",
+      "src": "mentors/n.png",
       "links": [{
         "name": "github",
         "src": "https://github.com/bibaflower1"
@@ -264,23 +264,7 @@
         "name": "github",
         "src": "https://github.com/thxa"
       }]
-    },  {
-      "name": "Abdelhadi Salih",
-      "about": "Front-end Developer",
-      "src": "mentors/abdelhadi-salih.png",
-      "links": [{
-        "name": "github",
-        "src": "https://github.com/thegeeko"
-      },
-      {
-        "name": "linkedin",
-        "src": "https://www.linkedin.com/in/abdelhadi-mohammed-salih-28a953164/"
-      },
-      {
-        "name": "twitter",
-        "src": "https://twitter.com/TheGeek12353"
-      }]
-    },  {
+    }, {
       "name": "Rakan Ali",
       "about": "Front-end Developer",
       "src": "mentors/rakan-ali2.png",
