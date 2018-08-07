@@ -28,8 +28,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_last_opened_workshop_slug(self, obj):
         result = None
         if obj.last_opened_lesson and obj.track:
-            result = obj.last_opened_lesson.module.workshops.filter(
-                tracks__id=obj.track.id).first().slug
+            try:
+                result = obj.last_opened_lesson.module.workshops.filter(
+                    tracks__id=obj.track.id).first().slug
+            except AttributeError:
+                result = None
         return result
 
     def get_last_opened_module_slug(self, obj):

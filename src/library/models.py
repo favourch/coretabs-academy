@@ -174,9 +174,9 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     track = models.ForeignKey(
-        Track, on_delete=models.DO_NOTHING, verbose_name=_('track'), null=True)
+        Track, on_delete=models.SET_NULL, verbose_name=_('track'), null=True)
     last_opened_lesson = models.ForeignKey(BaseLesson,
-                                           on_delete=models.DO_NOTHING,
+                                           on_delete=models.SET_NULL,
                                            verbose_name=_('last opened lesson'), null=True)
 
     def __str__(self):
