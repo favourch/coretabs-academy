@@ -54,7 +54,7 @@ deploy-prod:
     # that it's too unprotected.
     - chmod 600  ~/.ssh/id_rsa
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - apk add --no-cache bash   
+    - apk add --no-cache bash openssh-client
   script:     
     - bash ./gitlab-deploy/.gitlab-deploy.prod.sh   
   environment:     
