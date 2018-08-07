@@ -159,6 +159,10 @@ a {
   }
 }
 
+.application[data-server-rendered='true'] {
+  display: none;
+}
+
 .main-container {
   height: 100% !important;
 }
