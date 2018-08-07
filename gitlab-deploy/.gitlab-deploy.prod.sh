@@ -11,5 +11,5 @@ array=(${string//,/ })
 # Careful with the ; https://stackoverflow.com/a/20666248/1057052
 for i in "${!array[@]}"; do
   echo "Deploy project on server ${array[i]}"
-  ssh ubuntu@${array[i]} "cd /var/academy && git stash  && sudo git checkout $CI_BUILD_REF_NAME && git stash && git pull origin master && docker-compose -f docker-compose.production.yml up --force-recreate --build -d"
+  ssh ubuntu@${array[i]} "cd /var/academy && git stash  && sudo git checkout $CI_BUILD_REF_NAME && git stash && sudo git pull origin master && docker-compose -f docker-compose.production.yml up --force-recreate --build -d"
 done
