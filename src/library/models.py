@@ -102,7 +102,7 @@ class Workshop(CachingMixin, AutoSlugModel):
     level = models.CharField(
         max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('type'))
     last_update_date = models.DateTimeField(
-        auto_now=True, verbose_name=_('last update date'))
+        verbose_name=_('last update date'))
     duration = models.DecimalField(
         max_digits=3, decimal_places=1, verbose_name=_('duration'))
     description = models.CharField(
