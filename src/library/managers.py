@@ -7,10 +7,17 @@ from model_utils.managers import InheritanceManager
 from caching.base import CachingManager
 
 
-class WorkshopManager(CachingManager):
-    def with_shown_percentage(self, user):
+class WorkshopManagerCacheable(CachingManager):
+    def get_workshop(self):
+        return library_models.Workshop.objects
 
-        workshops = library_models.Workshop.objects.annotate(
+
+class WorkshopManager(django_models.Manager):
+    workshop_manager = WorkshopManagerCacheable()
+
+    def with_shown_percentage(self, user):
+        workshops = self.workshop_manager.get_workshop()
+        workshops = workshops.annotate(
 
             shown_count=django_models.Count('modules__lessons', filter=django_models.Q(
                 modules__lessons__id__in=user.lessons.values('id'))),
