@@ -608,6 +608,7 @@ $markdown-em-spacer-6: 0.75em !default;
 
     li + li {
       margin-top: $markdown-em-spacer-3 !important;
+      line-height: 30px !important;
     }
 
     dl {
