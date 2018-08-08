@@ -9,7 +9,7 @@
                 <v-flex xs12 sm4 md12 class="image-container">
                   <div class="pic-border">
                      <label for="file_uploader" class="cursor-pointer">
-                        <img class="pic" :src="avatar_url" />
+                        <img v-if="avatar_url" class="pic" :src="avatar_url" />
                      </label>
                     <label for="file_uploader" class="leave cursor-pointer">
                       <v-icon small>edit</v-icon>
