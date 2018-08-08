@@ -22,8 +22,8 @@ const MarkdownAPI = {
       let youtube = new RegExp('(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)', 'g')
       mdText = mdText.replace(youtube, '<iframe class="youtube" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>')
       let html = markdown.makeHtml(mdText)
-      html = html.replace(new RegExp('<blockquote>(.*?)<\/blockquote>', 'gs'), '<blockquote><div class="quotes no-select"><i class="material-icons">format_quote</i></div>$1<div class="quotes no-select"><i class="material-icons">format_quote</i></div></blockquote>')
-      html = html.replace(new RegExp('<pre>(.*?)<\/pre>', 'gs'), '<pre><div class="code-action"><v-btn flat icon><v-icon>content_copy</v-icon></v-btn></div>$1</pre>')
+      html = html.replace(new RegExp('<blockquote>(.*?)<\/blockquote>', 'ig'), '<blockquote><div class="quotes no-select"><i class="material-icons">format_quote</i></div>$1<div class="quotes no-select"><i class="material-icons">format_quote</i></div></blockquote>')
+      html = html.replace(new RegExp('<pre>(.*?)<\/pre>', 'ig'), '<pre><div class="code-action"><v-btn flat icon><v-icon>content_copy</v-icon></v-btn></div>$1</pre>')
       return html
    }
 }
