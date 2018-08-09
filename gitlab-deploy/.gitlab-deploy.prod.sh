@@ -33,9 +33,9 @@ for i in "${!array[@]}"; do
           MAINTENANCE_MODE=$MAINTENANCE_MODE
 
   cd /var/academy
-  git stash 
+  sudo git stash 
   sudo git checkout $CI_BUILD_REF_NAME
-  git stash
+  sudo git stash
   sudo git pull origin master 
   docker-compose -f docker-compose.production.yml up --force-recreate --build -d
 EOF
