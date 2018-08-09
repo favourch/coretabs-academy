@@ -30,7 +30,9 @@ for i in "${!array[@]}"; do
           POSTGRES_DB="$POSTGRES_DB" \
           POSTGRES_USER="$POSTGRES_USER" \
           POSTGRES_PASSWORD="$POSTGRES_PASSWORD" \
-          MAINTENANCE_MODE=$MAINTENANCE_MODE
+          MAINTENANCE_MODE=$MAINTENANCE_MODE \
+          DOCKER_HOST="$DOCKER_HOST" \
+          DOCKER_DRIVER="$DOCKER_DRIVER"
 
   cd /var/academy
   sudo git stash 
