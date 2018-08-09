@@ -12,7 +12,7 @@ array=(${string//,/ })
 for i in "${!array[@]}"; do
   echo "Deploy project on server ${array[i]}"
   ssh ubuntu@${array[i]} <<EOF
-  export HOST_ENV=$HOST_ENV /
+  export HOST_ENV=$HOST_ENV \
             API_BASE_URL=$API_BASE_URL \
             SPA_BASE_URL=$SPA_BASE_URL \
             DATABASE_URL=$DATABASE_URL \
