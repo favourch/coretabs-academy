@@ -191,6 +191,4 @@ router.beforeEach(async(to, from, next) => {
   }
 })
 
-export function createRouter() {
-  return router
-}
+export default router

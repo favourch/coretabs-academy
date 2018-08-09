@@ -5,7 +5,6 @@ const path = require('path')
 var config = {
   outputDir: 'static',
   configureWebpack: {
-    entry: './src/client-entry.js',
     output: {
       path: path.resolve(__dirname, './static'),
       publicPath: '/'
