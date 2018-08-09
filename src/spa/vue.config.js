@@ -42,7 +42,8 @@ if (process.env.NODE_ENV === 'production') {
     algorithm: 'gzip',
     test: /\.js$|\.css$|\.html$/,
     threshold: 10240,
-    minRatio: 0.8
+    minRatio: 0.8,
+    deleteOriginalAssets: true
   }))
 }
 
