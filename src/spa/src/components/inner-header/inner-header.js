@@ -3,6 +3,7 @@ export default {
   props: ['title'],
   data: () => ({
     avatar_url: null,
+    avatar_letter: null,
     menu: false,
     notifications: null,
     unread: false
@@ -44,6 +45,9 @@ export default {
     this.avatar_url = this.$store.getters.user('avatar_url')
     if (this.avatar_url.slice(0, 4) !== 'http') {
       this.avatar_url = `${process.env.API_BASE_URL || ''}${this.$store.getters.user('avatar_url')}`
+    } else {
+      this.avatar_url = null
+      this.avatar_letter = this.$store.getters.user('name')[0]
     }
   },
   mounted() {
