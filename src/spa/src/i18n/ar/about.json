@@ -242,7 +242,7 @@
     },  {
       "name": "Nabila Amdouni",
       "about": "Full-Stack Developer",
-      "src": "mentors/n.png",
+      "src": "mentors/nabila.png",
       "links": [{
         "name": "github",
         "src": "https://github.com/bibaflower1"
@@ -275,6 +275,51 @@
       {
         "name": "linkedin",
         "src": "https://www.linkedin.com/in/rakan-ali-pmp®-0788bb96/"
+      }]
+    }, {
+      "name": "Malek Salem",
+      "about": "Back-End Developer",
+      "src": "mentors/malek-salem.png",
+      "links": [{
+        "name": "github",
+        "src": "https://github.com/maleksal"
+      },
+      {
+        "name": "linkedin",
+        "src": "https://www.linkedin.com/in/malek-salem-204573120/"
+      }]
+    }, {
+      "name": "Makhloufi Smail",
+      "about": "full-stack developer",
+      "src": "mentors/makhloufi-smail.png",
+      "links": []
+    }, {
+      "name": "Ahmed Alakbari",
+      "about": "Front-End Developer",
+      "src": "mentors/ahmed-alakbari.png",
+      "links": [{
+        "name": "github",
+        "src": "https://github.com/roabaot"
+      },
+      {
+        "name": "facebook",
+        "src": "https://www.facebook.com/profile.php?id=100006510944126"
+      }]
+    }, {
+      "name": "abdelhadi Mohammed",
+      "about": "Front-End Developer",
+      "src": "mentors/abdelhadi.png",
+      "links": [{
+        "name": "github",
+        "src": "https://github.com/thegeeko"
+      },
+      {
+        "name": "twitter",
+        "src": "https://twitter.com/TheGeek12353"
+      },
+      {
+        "name": "facebook",
+        "src": "https://www.facebook.com/profile.php?id=100004737486157"
       }]
     }]
     

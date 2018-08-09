@@ -68,7 +68,7 @@
        </div>
       </div>
     </div>
-<!--
+
     <div id="mentors">
       <h1 v-html="i18n.mentors.title"></h1>
       <p v-html="i18n.mentors.description"></p>
@@ -99,7 +99,7 @@
         <button v-for="(button, i) in mentorsSliderCount()" type="button" name="button" @click="showMentors(button - 1, $event)" :key="i"></button>
       </div>
     </div>
--->
+
     <footer>
       <router-link to="/contact-us" v-html="i18n.footer.contactUs"></router-link>|
       <router-link to="/page/terms-of-service" v-html="i18n.footer.termsOfService"></router-link>|
