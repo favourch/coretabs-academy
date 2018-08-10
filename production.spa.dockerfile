@@ -10,5 +10,6 @@ ARG API_BASE_URL
 ARG MAINTENANCE_MODE
 
 RUN npm install
-RUN npm i -g cross-env
-RUN npm run ssr
+#RUN npm i -g cross-env
+#RUN npm run ssr
+RUN npm run build
