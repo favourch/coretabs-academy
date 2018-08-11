@@ -14,7 +14,7 @@ for i in "${!array[@]}"; do
   ssh ubuntu@${array[i]} <<EOF
   export HOST_ENV="$HOST_ENV" \
           API_BASE_URL="${API_BASE_URL[1]}" \
-          SPA_BASE_URL="${SPA_BASE_URL[1]" \
+          SPA_BASE_URL="${SPA_BASE_URL[1]}" \
           DATABASE_URL="$DATABASE_URL" \
           DEFAULT_FROM_EMAIL="$DEFAULT_FROM_EMAIL" \
           DISCOURSE_API_KEY="${DISCOURSE_API_KEY[1]}" \
