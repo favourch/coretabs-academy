@@ -80,4 +80,6 @@ deploy-prod:
     name: production     
     # Exposes a button that when clicked take you to the defined URL:
     url: $DEPLOY_SERVER_URL
+  only:
+    - master
   when: manual
