@@ -36,6 +36,7 @@ before_script:
 # Order matters. 
 stages:
   - build
+  - staging
   - production
 
 build:
