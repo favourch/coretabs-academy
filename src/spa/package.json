@@ -1,6 +1,6 @@
 {
   "name": "coretabs",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,7 +10,7 @@
     "client": "cross-env NODE_ENV=production webpack --config client.config.js --progress --hide-modules",
     "server": "cross-env NODE_ENV=production webpack --config server.config.js --progress --hide-modules",
     "ssr": "npm run client && npm run server",
-    "start": "node server"
+    "start": "node express"
   },
   "dependencies": {
     "@vue/cli": "^3.0.0-rc.3",
