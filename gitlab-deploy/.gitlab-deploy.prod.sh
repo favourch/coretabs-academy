@@ -13,14 +13,14 @@ for i in "${!array[@]}"; do
   echo "Deploy project on server ${array[i]}"
   ssh ubuntu@${array[i]} <<EOF
   export HOST_ENV="$HOST_ENV" \
-          API_BASE_URL="$API_BASE_URL" \
-          SPA_BASE_URL="$SPA_BASE_URL" \
+          API_BASE_URL="${API_BASE_URL[0]}" \
+          SPA_BASE_URL="${SPA_BASE_URL[0]" \
           DATABASE_URL="$DATABASE_URL" \
           DEFAULT_FROM_EMAIL="$DEFAULT_FROM_EMAIL" \
-          DISCOURSE_API_KEY="$DISCOURSE_API_KEY" \
+          DISCOURSE_API_KEY="${DISCOURSE_API_KEY[0]}" \
           DISCOURSE_API_USERNAME="$DISCOURSE_API_USERNAME" \
-          DISCOURSE_BASE_URL="$DISCOURSE_BASE_URL" \
-          DISCOURSE_SSO_SECRET="$DISCOURSE_SSO_SECRET" \
+          DISCOURSE_BASE_URL="${DISCOURSE_BASE_URL[0]}" \
+          DISCOURSE_SSO_SECRET="${DISCOURSE_SSO_SECRET[0]}" \
           EMAIL_HOST="$EMAIL_HOST" \
           EMAIL_HOST_PASSWORD="$EMAIL_HOST_PASSWORD" \
           EMAIL_HOST_USER="$EMAIL_HOST_USER" \
