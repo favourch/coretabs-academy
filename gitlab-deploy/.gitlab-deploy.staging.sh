@@ -24,7 +24,7 @@ for i in "${!array[@]}"; do
           EMAIL_HOST="$EMAIL_HOST" \
           EMAIL_HOST_PASSWORD="$EMAIL_HOST_PASSWORD" \
           EMAIL_HOST_USER="$EMAIL_HOST_USER" \
-          DEV_MANAGERS_EMAILS="$MANAGERS_EMAILS" \
+          MANAGERS_EMAILS="$DEV_MANAGERS_EMAILS" \
           SECRET_KEY="$SECRET_KEY" \
           SENTRY_DSN="$SENTRY_DSN" \
           POSTGRES_DB="$POSTGRES_DB" \
