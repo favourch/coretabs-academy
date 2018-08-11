@@ -5,6 +5,7 @@ const path = require('path')
 var config = {
   outputDir: 'static',
   configureWebpack: {
+    entry: './src/client-entry.js',
     output: {
       path: path.resolve(__dirname, './static'),
       publicPath: '/'
@@ -41,7 +42,8 @@ if (process.env.NODE_ENV === 'production') {
     algorithm: 'gzip',
     test: /\.js$|\.css$|\.html$/,
     threshold: 10240,
-    minRatio: 0.8
+    minRatio: 0.8,
+    deleteOriginalAssets: true
   }))
 }
 

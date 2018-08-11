@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Vue from 'vue'
-import router from '../router'
+import { createRouter } from '../router'
+const router = createRouter()
 
 const WorkshopsAPI = {
   getWorkshopId(workshops) {
