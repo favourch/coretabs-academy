@@ -151,17 +151,24 @@ const AuthAPI = {
       }
     })
   },
-  get_notifications(root) {
-    axios.get(`/api/v1/auth/user/notifications/`,
+  async get_notifications(root) {
+    return await axios.get(`/api/v1/auth/user/notifications/`,
       { withCredentials: true })
-      .then((response) => {
+      .then(async (response) => {
+        let unread = root.$store.getters.unread
         let notifications = response.data.notifications.slice(0, 5)
-        notifications.forEach(notification => {
+        notifications.forEach(async (notification) => {
           if (!notification.read) {
-            root.unread = true
+            await root.$store.dispatch('unread', true)
           }
         })
+
+        if(unread === false || notifications[0].id === response.data.seen_notification_id) {
+          await root.$store.dispatch('unread', false)
+        }
+
         root.notifications = notifications
+        return root.$store.getters.unread
       })
   },
   async checkUser(store) {

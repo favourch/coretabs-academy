@@ -16,6 +16,7 @@ export default new Vuex.Store({
     header: true,
     isLogin: false,
     user: {},
+    unread: null,
     progress: {
       width: 5,
       size: 80,
@@ -48,6 +49,9 @@ export default new Vuex.Store({
     profile(state, payload) {
       state.user.profile[payload.prop] = payload.data
     },
+    unread(state, payload) {
+      state.unread = payload
+    },
     progress(state, payload) {
       state.progress.error = payload.error
       if (payload.error === false) {
@@ -79,6 +83,12 @@ export default new Vuex.Store({
         resolve(true)
       })
     },
+    unread: ({commit}, payload) => {
+      return new Promise((resolve, reject) => {
+        commit('unread', payload)
+        resolve(payload)
+      })
+    },
     progress(context, payload) {
       context.commit('progress', payload)
     }
@@ -99,6 +109,9 @@ export default new Vuex.Store({
     },
     profile: (state) => (prop) => {
       return state.user.profile[prop]
+    },
+    unread: state => {
+      return state.unread
     }
   }
 })
