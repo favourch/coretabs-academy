@@ -6,12 +6,12 @@ export default {
     avatar_letter: null,
     menu: false,
     notifications: null,
-    unread: false
+    unread: null
   }),
   watch: {
-    $route() {
+    async $route() {
       var root = this
-      this.$auth.get_notifications(root)
+      this.unread = await this.$auth.get_notifications(root)
     }
   },
   methods: {
@@ -35,6 +35,9 @@ export default {
           return 'notifications'
       }
     },
+    async set_unread() {
+      this.unread = await this.$store.dispatch('unread', false)
+    },
     mark_read(notification) {
       if (!notification.read) {
         notification.read = true
@@ -50,8 +53,8 @@ export default {
       this.avatar_letter = this.$store.getters.user('name')[0]
     }
   },
-  mounted() {
+  async mounted() {
     var root = this
-    this.$auth.get_notifications(root)
+    this.unread = await this.$auth.get_notifications(root)
   }
 }
