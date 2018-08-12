@@ -48,7 +48,9 @@ build:
 test:
   stage: test
   before_script:
-    - source ./src/venv/bin/activate
+    - apk add --no-cache py3-virtualenv
+    - virtualenv venv
+    - source ./venv/bin/activate
     - pip install -r ./src/requirements.txt
     - python ./src/manage.py makemigrations
     - python ./src/manage.py migrate
