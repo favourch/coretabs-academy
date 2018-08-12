@@ -48,16 +48,16 @@ build:
 test:
   stage: test
   before_script:
-    - source src/venv/bin/activate
-    - pip install -r src/requirements.txt
-    - python src/manage.py makemigrations
-    - python src/manage.py migrate
-    - python src/manage.py populate 10 4 3 2
+    - source ./src/venv/bin/activate
+    - pip install -r ./src/requirements.txt
+    - python ./src/manage.py makemigrations
+    - python ./src/manage.py migrate
+    - python ./src/manage.py populate 10 4 3 2
     - apk add --update nodejs nodejs-npm
     - npm i newman -g
-    - python src/manage.py runserver
+    - python ./src/manage.py runserver
   script:
-    - newman run src/postman/academy_api_collection.json -e src/postman/discourse_api_environment.json
+    - newman run ./src/postman/academy_api_collection.json -e ./src/postman/discourse_api_environment.json
 
 deploy-dev:
   stage: staging
