@@ -1,0 +1,27 @@
+{
+  "id": "e0c3f1da-5f4f-4851-a95f-89a13729a3ae",
+  "name": "Discourse API",
+  "values": [
+    {
+      "key": "url",
+      "value": "https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "api_key",
+      "value": "anilliqnmsakmcnahojdwklaklsa",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "api_username",
+      "value": "discourse_mock",
+      "enabled": true,
+      "type": "text"
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-08-12T01:37:01.093Z",
+  "_postman_exported_using": "Postman/6.1.4"
+}

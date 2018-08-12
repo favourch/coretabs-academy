@@ -1,0 +1,785 @@
+{
+	"info": {
+		"_postman_id": "9c3dec19-d2e8-457e-895b-aadebbab8755",
+		"name": "Coretabs Academy API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c71155da-5f38-49d4-8b65-1ee4f246da82",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"Created\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user3d0kl99\",\n    \"email\": \"user9lkl90039@gmail.com\",\n    \"password1\": \"testpass123\",\n    \"password2\": \"testpass123\",\n    \"name\": \"user user\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/auth/registration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"registration",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8540c539-a641-4818-862e-3794a5feb85c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.key);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user1\",\n    \"email\": \"\",\n    \"password\": \"testpass123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/auth/login/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show All Tracks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "074240cd-9244-4e55-8e7b-8f8cb26495bc",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Postman\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/tracks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Track Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1bc3d0c4-fffb-487e-994b-01a9276d46e5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/tracks/test-track/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"test-track",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show All Workshops",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94e8df61-ab60-4c7e-8bbc-ddb877169567",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test(\"Authorization is present\", function () {",
+							"    pm.request.to.have.header(\"Authorization\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjE6dGVzdHBhc3MxMjM="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/tracks/test-track/workshops/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"test-track",
+						"workshops",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Workshop Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "649e4288-ac31-45cd-993b-49ddd275eed9",
+						"type": "text/javascript",
+						"exec": [
+							"const calcShownPercentage = function() {",
+							"    modules = pm.response.json().modules;",
+							"    totalLessonsCount = 0;",
+							"    shownLessonsCount = 0;",
+							"    ",
+							"    for (let module of modules) {",
+							"        lessons = module.lessons;",
+							"        totalLessonsCount += lessons.length;",
+							"        for (let lesson of lessons) {",
+							"             if (lesson.is_shown === true) {",
+							"                 shownLessonsCount++;",
+							"             }",
+							"        }",
+							"    }",
+							"    ",
+							"    shownPercentageShouldBe = 100 * shownLessonsCount / totalLessonsCount;",
+							"    ",
+							"    return parseInt(shownPercentageShouldBe);",
+							"}",
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Authorization is present\", function () {",
+							"    pm.request.to.have.header(\"Authorization\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test shown_percentage\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.shown_percentage).to.eql(calcShownPercentage());",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWhtZWRhbHJpZmFpOmZlZG9yYXVzZXI=",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjE6dGVzdHBhc3MxMjM="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/tracks/test-track/workshops/workshop0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"test-track",
+						"workshops",
+						"workshop0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mark Lesson as Shown",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50e87181-027c-4ea3-b923-94e6ac8b5f6b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.is_shown).to.true;",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjE6dGVzdHBhc3MxMjM="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"is_shown\":true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/tracks/test-track/workshops/workshop0/modules/module0/lessons/lesson0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"test-track",
+						"workshops",
+						"workshop0",
+						"modules",
+						"module0",
+						"lessons",
+						"lesson0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "247df7d7-30fc-468e-bdce-ebc89689a079",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "testpass123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/auth/logout/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show User Profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7848ae68-50af-46c2-9567-ec172b16a390",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjE6dGVzdHBhc3MxMjM="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/auth/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Discourse Notification in Coretabs Academy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a623e9a1-e75c-443c-96cc-79eaea3901c8",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjE6dGVzdHBhc3MxMjM="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/auth/user/notifications/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"user",
+						"notifications",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Password reset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "71d3a1cd-82c1-48e1-8094-17465953ceeb",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjE6dGVzdHBhc3MxMjM="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user1@email.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/auth/password/reset/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"password",
+						"reset",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resend Verifiction",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "32264e28-fd15-4aa8-9f2b-65779670d4bb",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"user1@email.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/auth/confirmation/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"confirmation",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contact Academy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dfdb34a0-ecc1-4c53-ad77-a4039b57c75f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Ahmed Alrifai\",\n    \"email\": \"ahmed.alrifai.97@gmail.com\",\n    \"body\": \"Testing Contact endpoint\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/contact/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"contact",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Avatar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "71df9d13-ff41-4789-b15c-ada370068e5c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"",
+							"pm.test(\"Status code name has OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjE6dGVzdHBhc3MxMjM="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"avatar_url\": \"https://www.gravatar.com/avatar/3acc837f898bdaa338b7cd7a9ab6dd5b/?s=80\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/auth/user/avatar/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"user",
+						"avatar",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
