@@ -53,13 +53,16 @@ deploy-dev:
     # Sets the permission to 600 to prevent a problem with AWS
     # that it's too unprotected.
     - chmod 600  ~/.ssh/id_rsa
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - apk add --no-cache bash openssh-client
   script:     
-    - bash ./gitlab-deploy/.gitlab-deploy.staging.sh   
+    - bash ./gitlab-deploy/.gitlab-deploy.staging.sh
   environment:     
     name: staging     
     # Exposes a button that when clicked take you to the defined URL:
     url: $DEV_DEPLOY_SEVER_URL   
+  only:
+    - develop
 
 deploy-prod:
   stage: production
@@ -78,4 +81,6 @@ deploy-prod:
     name: production     
     # Exposes a button that when clicked take you to the defined URL:
     url: $DEPLOY_SERVER_URL
+  only:
+    - master
   when: manual
