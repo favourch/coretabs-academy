@@ -23,7 +23,7 @@
             <v-container id="have-question no-select" fluid grid-list-xl>
               <v-layout row wrap align-center justify-center>
                 <v-flex sm12>
-                  <v-layout row align-center>
+                  <v-layout class="tab-question" row align-center>
                     <img id="forum-logo" :src="$store.state.forumLogo" alt="forum-logo icon">
                     <div class="text">
                       <h4 v-html="i18n.video.question.title"></h4>
