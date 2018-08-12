@@ -50,7 +50,8 @@ test:
   before_script:
     - apk update
     - apk add --virtual build-deps gcc python3-dev musl-dev
-    - apk add --no-cache py3-virtualenv postgresql-dev nodejs nodejs-npm
+    - apk add --no-cache py3-virtualenv postgresql-dev nodejs nodejs-npm jpeg-dev
+    - apk add --no-cache zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev harfbuzz-dev fribidi-dev
     - virtualenv venv
     - source ./venv/bin/activate
     - pip install -r ./src/requirements.txt
