@@ -48,7 +48,7 @@ build:
 test:
   stage: test
   before_script:
-    - source src/venv/activate
+    - source src/venv/bin/activate
     - pip install -r src/requirements.txt
     - python src/manage.py makemigrations
     - python src/manage.py migrate
