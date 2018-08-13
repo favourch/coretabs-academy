@@ -35,8 +35,8 @@ before_script:
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters. 
 stages:
-  - build
   - test
+  - build
   - staging
   - production
 
@@ -58,6 +58,7 @@ test:
     - source ./venv/bin/activate
     - pip install -r ./src/requirements.txt
     - apk del build-deps
+    - echo "$HOST_ENV"
     - python ./src/manage.py migrate
     - python ./src/manage.py populate 10 4 3 2
     - npm i newman -g
