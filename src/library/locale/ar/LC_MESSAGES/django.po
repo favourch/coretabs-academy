@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-03 12:08+0200\n"
+"POT-Creation-Date: 2018-08-15 17:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,74 +19,172 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: apps.py:7
+#: library/apps.py:7
 msgid "Library"
 msgstr "المكتبة"
 
-#: models.py:18 models.py:38 models.py:67
-msgid "Title"
+#: library/models.py:19
+#, fuzzy
+#| msgid "Title"
+msgid "title"
 msgstr "العنوان"
 
-#: models.py:19 models.py:39 models.py:68
-msgid "Slug"
-msgstr "العنوان في الرابط"
+#: library/models.py:21
+msgid "slug"
+msgstr ""
 
-#: models.py:20
-msgid "Type"
-msgstr "النوع"
-
-#: models.py:21
-msgid "URL"
-msgstr "الرابط"
-
-#: models.py:22
-msgid "User"
-msgstr "المستخدم"
-
-#: models.py:25 models.py:57
-msgid "Lesson"
-msgstr "دروس"
-
-#: models.py:26 models.py:40
-msgid "Lessons"
-msgstr "الدروس"
-
-#: models.py:41
-msgid "Publication Date"
-msgstr "تاريخ الإنشاء"
-
-#: models.py:44 models.py:58 models.py:85
-msgid "Module"
+#: library/models.py:41 library/models.py:65 library/models.py:131
+#, fuzzy
+#| msgid "Module"
+msgid "module"
 msgstr "كورس"
 
-#: models.py:45 models.py:69
-msgid "Modules"
+#: library/models.py:42 library/models.py:119
+#, fuzzy
+#| msgid "Modules"
+msgid "modules"
 msgstr "الكورسات"
 
-#: models.py:59 models.py:87
+#: library/models.py:62 library/models.py:103
+msgid "type"
+msgstr ""
+
+#: library/models.py:67
+msgid "shown users"
+msgstr ""
+
+#: library/models.py:68 library/models.py:134 library/models.py:159
 msgid "Order"
 msgstr "الترتيب"
 
-#: models.py:62
-msgid "Module and Lesson"
-msgstr "كورس ودرس"
+#: library/models.py:73
+#, fuzzy
+#| msgid "Lesson"
+msgid "lesson"
+msgstr "دروس"
 
-#: models.py:63
-msgid "Modules and Lessons"
-msgstr "الكورسات والدروس"
+#: library/models.py:74
+#, fuzzy
+#| msgid "Lessons"
+msgid "lessons"
+msgstr "الدروس"
 
-#: models.py:72 models.py:86
-msgid "Track"
+#: library/models.py:79 library/models.py:83 library/models.py:88
+msgid "markdown url"
+msgstr ""
+
+#: library/models.py:87
+msgid "video url"
+msgstr ""
+
+#: library/models.py:105
+msgid "last update date"
+msgstr ""
+
+#: library/models.py:107
+msgid "duration"
+msgstr ""
+
+#: library/models.py:109
+msgid "description"
+msgstr ""
+
+#: library/models.py:111
+msgid "used technologies"
+msgstr ""
+
+#: library/models.py:113
+msgid "workshop result url"
+msgstr ""
+
+#: library/models.py:115
+msgid "workshop forum url"
+msgstr ""
+
+#: library/models.py:117
+msgid "authors"
+msgstr ""
+
+#: library/models.py:124 library/models.py:133 library/models.py:156
+msgid "workshop"
+msgstr ""
+
+#: library/models.py:125 library/models.py:146
+msgid "workshops"
+msgstr ""
+
+#: library/models.py:137
+#, fuzzy
+#| msgid "Tracks and Modules"
+msgid "workshop and module"
+msgstr "المسارات والكورسات"
+
+#: library/models.py:138
+#, fuzzy
+#| msgid "Tracks and Modules"
+msgid "workshops and modules"
+msgstr "المسارات والكورسات"
+
+#: library/models.py:150 library/models.py:158 library/models.py:177
+#, fuzzy
+#| msgid "Track"
+msgid "track"
 msgstr "مسار"
 
-#: models.py:73
-msgid "Tracks"
+#: library/models.py:151
+#, fuzzy
+#| msgid "Tracks"
+msgid "tracks"
 msgstr "المسارات"
 
-#: models.py:90
-msgid "Track and Module"
-msgstr "مسار وكورس"
-
-#: models.py:91
-msgid "Tracks and Modules"
+#: library/models.py:162
+#, fuzzy
+#| msgid "Tracks and Modules"
+msgid "track and workshop"
 msgstr "المسارات والكورسات"
+
+#: library/models.py:163
+#, fuzzy
+#| msgid "Tracks and Modules"
+msgid "tracks and workshops"
+msgstr "المسارات والكورسات"
+
+#: library/models.py:173
+msgid "role"
+msgstr ""
+
+#: library/models.py:180
+msgid "last opened lesson"
+msgstr ""
+
+#: library/models.py:186
+msgid "profile"
+msgstr ""
+
+#: library/models.py:187
+msgid "profiles"
+msgstr ""
+
+#~ msgid "Slug"
+#~ msgstr "العنوان في الرابط"
+
+#~ msgid "Type"
+#~ msgstr "النوع"
+
+#~ msgid "URL"
+#~ msgstr "الرابط"
+
+#~ msgid "User"
+#~ msgstr "المستخدم"
+
+#~ msgid "Publication Date"
+#~ msgstr "تاريخ الإنشاء"
+
+#~ msgid "Module and Lesson"
+#~ msgstr "كورس ودرس"
+
+#~ msgid "Modules and Lessons"
+#~ msgstr "الكورسات والدروس"
+
+#~ msgid "Track and Module"
+#~ msgstr "مسار وكورس"

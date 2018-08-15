@@ -20,6 +20,7 @@ variables:
   # When using dind, it's wise to use the overlayfs driver for
   # improved performance.
   DOCKER_DRIVER: overlay2
+  HOST_ENV: production
 
 services:
 - docker:dind
@@ -46,18 +47,24 @@ build:
     - docker-compose -f docker-compose.production.yml build
 
 test:
+  variables:
+    HOST_ENV: dev
   stage: test
   before_script:
-    - source src/venv/activate
-    - pip install -r src/requirements.txt
-    - python src/manage.py makemigrations
-    - python src/manage.py migrate
-    - python src/manage.py populate 10 4 3 2
-    - apk add --update nodejs nodejs-npm
+    - apk update
+    - apk add --virtual build-deps gcc python3-dev musl-dev
+    - apk add --no-cache py3-virtualenv postgresql-dev nodejs nodejs-npm jpeg-dev
+    - apk add --no-cache zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev harfbuzz-dev fribidi-dev
+    - virtualenv venv
+    - source ./venv/bin/activate
+    - pip install -r ./src/requirements.txt
+    - apk del build-deps
+    - python ./src/manage.py migrate
+    - python ./src/manage.py populate 10 4 3 2
     - npm i newman -g
-    - python src/manage.py runserver
+    - python ./src/manage.py runserver &
   script:
-    - newman run src/postman/academy_api_collection.json -e src/postman/discourse_api_environment.json
+    - newman run ./tests/postman/academy_api_collection.json -e ./tests/postman/discourse_api_environment.json
 
 deploy-dev:
   stage: staging
