@@ -65,7 +65,6 @@ test:
     - python ./src/manage.py runserver &
   script:
     - newman run ./tests/postman/academy_api_collection.json -e ./tests/postman/discourse_api_environment.json
-  when: always
 
 deploy-dev:
   stage: staging
