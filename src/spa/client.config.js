@@ -79,7 +79,7 @@ var config = {
       MAINTENANCE_MODE: 'false'
     }),
     new HtmlWebpackPlugin({
-      template: './template.html'
+      template: './public/index.html'
     })
   ]
 }
