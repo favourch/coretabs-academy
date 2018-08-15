@@ -62,7 +62,7 @@ test:
     - python ./src/manage.py migrate
     - python ./src/manage.py populate 10 4 3 2
     - npm i newman -g
-    - python ./src/manage.py runserver
+    - python ./src/manage.py runserver &
   script:
     - newman run ./src/postman/academy_api_collection.json -e ./src/postman/discourse_api_environment.json
   when: always
