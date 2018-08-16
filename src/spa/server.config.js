@@ -1,10 +1,11 @@
-var path = require('path')
-var merge = require('webpack-merge')
-var VueConfig = require('./client.config')
+const path = require('path')
+const merge = require('webpack-merge')
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+let VueConfig = require('./client.config')
 
 delete VueConfig.module
 
-var ServerConfig = merge(VueConfig, {
+let ServerConfig = merge(VueConfig, {
   target: 'node',
   entry: {
     app: './src/server-entry.js'
@@ -37,5 +38,8 @@ var ServerConfig = merge(VueConfig, {
   externals: Object.keys(require('./package.json').dependencies)
 })
 
-ServerConfig.plugins = [ServerConfig.plugins.shift()]
+ServerConfig.plugins = [
+  ServerConfig.plugins.shift(),
+  new VueSSRServerPlugin()
+]
 module.exports = ServerConfig

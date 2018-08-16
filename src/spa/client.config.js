@@ -8,7 +8,7 @@ const path = require('path')
 
 console.log('========= ENV', process.env.NODE_ENV)
 
-var config = {
+let config = {
   mode: 'development',
   entry: './src/client-entry.js',
   output: {
