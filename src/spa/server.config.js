@@ -26,17 +26,10 @@ var ServerConfig = merge(VueConfig, {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|ttf|woff2)$/,
         loader: 'file-loader',
         options: {
-          name: 'images/[name].[ext]?[hash]'
-        }
-      },
-      {
-        test: /\.(ttf|woff2)$/,
-        loader: 'file-loader',
-        options: {
-          name: 'fonts/[name].[ext]?[hash]'
+          emitFile: false
         }
       }
     ]
