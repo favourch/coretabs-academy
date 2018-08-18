@@ -2,16 +2,13 @@ import base64
 import hmac
 import hashlib
 import requests
-import os
+
 from urllib import parse
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse, HttpResponseNotFound
 from django.conf import settings
-from django.views.generic import View
 
-
-from rest_framework.response import Response
 from rest_framework import status
 
 
@@ -67,7 +64,12 @@ def sso(request):
 def notifications(request):
 
     username = request.user
-    discourse_notifications_url = f'{settings.DISCOURSE_BASE_URL}/notifications.json?api_key={settings.DISCOURSE_API_KEY}&api_username={settings.DISCOURSE_API_USERNAME}&username={username}'
-    user_notifications = requests.get(discourse_notifications_url).json()
+    discourse_notifications_url = f'{settings.DISCOURSE_BASE_URL}/notifications.json?recent=true&limit=5&api_key={settings.DISCOURSE_API_KEY}&api_username={settings.DISCOURSE_API_USERNAME}&username={username}'
+    user_notifications = requests.get(discourse_notifications_url)
 
-    return JsonResponse(user_notifications, status=status.HTTP_200_OK)
+    if user_notifications.status_code == 200:
+        response = JsonResponse(user_notifications.json(), status=status.HTTP_200_OK)
+    else:
+        response = HttpResponseNotFound()
+
+    return response
