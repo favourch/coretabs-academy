@@ -17,10 +17,8 @@ Including another URLconf
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from hacks.views import logout_view, user_details_view, resend_confirmation_view, verify_email
 from avatars.views import upload_avatar_view
 from contact.views import contact_view
-from discourse import views as discourse_views
 from .admin import site
 
 import debug_toolbar
@@ -30,25 +28,19 @@ site.site_title = 'Coretabs Admin'
 site.index_title = 'Coretabs Admin'
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    
+    path('', include('discourse.urls')),
+    path('', include('contact.urls')),
+    path('', include('avatars.urls')),
+
     path('admin/', site.urls),
     path('avatar/', include('avatar.urls')),
 
-    path('api/v1/contact/', contact_view),
-
-    path('api/v1/auth/logout/', logout_view),
-    path('api/v1/auth/user/', user_details_view),
-    path('api/v1/auth/user/notifications/',
-         discourse_views.notifications),
-    path('api/v1/auth/user/avatar/', upload_avatar_view),
-    path('api/v1/auth/confirmation/', resend_confirmation_view),
-    path('api/v1/auth/registration/verify-email/', verify_email),
+    path('api/v1/', include('library.urls')),
+    path('api/v1/auth/', include('hacks.urls')),
     path('api/v1/auth/', include('rest_auth.urls')),
     path('api/v1/auth/registration/', include('rest_auth.registration.urls')),
-    path('discourse/sso', discourse_views.sso),
-
-    path('api/v1/', include('library.urls')),
-
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
 
     path('__debug__/', include(debug_toolbar.urls)),
 
