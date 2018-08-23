@@ -228,38 +228,51 @@ class UserDetailsSerializer(serializers.ModelSerializer):
                 _('A user is already registered with this e-mail address.'))
         return email
 
+    def _update_profile(self, instance, profile):
+        new_track = profile.get('track')
+        track = Track.objects.get(slug=new_track.slug)
+        is_track_updated = instance.profile.track != new_track
+        instance.profile.track = track
+        instance.profile.last_opened_lesson = profile.get(
+            'last_opened_lesson', instance.profile.last_opened_lesson)
+        if is_track_updated:
+            instance.profile.last_opened_lesson = None
+
+    def _update_email(self, instance, request, email):
+        adapter = get_adapter()
+        adapter.send_mail('account/email/email_change', instance.email, {})
+        email_address = EmailAddress.objects.get(
+            user=instance, verified=True)
+        email_address.change(request, email, True)
+        instance.email = email
+
+    def _update_avatar(self, instance, request):
+        avatar = Avatar(user=instance, primary=True)
+        image_file = request.FILES['avatar']
+        avatar.avatar.save(image_file.name, image_file)
+        avatar.save()
+        avatar_updated.send(sender=Avatar, user=instance, avatar=avatar)
+
     def update(self, instance, validated_data):
         request = self.context.get('request')
-
         profile = validated_data.get('profile', None)
-        instance.username = validated_data.get('username', instance.username)
-        instance.first_name = validated_data.get(
-            'first_name', instance.first_name)
-        if profile:
-            new_track = profile.get('track')
-            track = Track.objects.get(slug=new_track.slug)
-            is_track_updated = instance.profile.track != new_track
-            instance.profile.track = track
-            instance.profile.last_opened_lesson = profile.get(
-                'last_opened_lesson', instance.profile.last_opened_lesson)
-            if is_track_updated:
-                instance.profile.last_opened_lesson = None
-
         email = validated_data.get('email', None)
-        if email and email != instance.email:
-            adapter = get_adapter()
-            adapter.send_mail('account/email/email_change', instance.email, {})
-            email_address = EmailAddress.objects.get(
-                user=instance, verified=True)
-            email_address.change(request, email, True)
-            instance.email = email
 
+        # Update user
+        instance.username = validated_data.get('username', instance.username)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+
+        # Update profile
+        if profile:
+            self._update_profile(instance, profile)
+
+        # Update email
+        if email and email != instance.email:
+            self._update_email(instance, request, email)
+
+        # Update avatar
         if 'avatar' in request.FILES:
-            avatar = Avatar(user=instance, primary=True)
-            image_file = request.FILES['avatar']
-            avatar.avatar.save(image_file.name, image_file)
-            avatar.save()
-            avatar_updated.send(sender=Avatar, user=instance, avatar=avatar)
+            self._update_avatar(instance, request)
 
         instance.save()
 
