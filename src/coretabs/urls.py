@@ -19,7 +19,6 @@ from django.views.generic import TemplateView
 
 from avatars.views import upload_avatar_view
 from contact.views import contact_view
-from discourse import views as discourse_views
 from .admin import site
 
 import debug_toolbar
@@ -31,11 +30,12 @@ site.index_title = 'Coretabs Admin'
 urlpatterns = [
     path('admin/', site.urls),
     path('api/v1/auth/', include('accounts.urls')),
+    path('', include('discourse.urls')),
+
     path('api/v1/contact/', contact_view),
     path('api/v1/auth/user/avatar/', upload_avatar_view),
 
-    path('api/v1/auth/user/notifications/', discourse_views.notifications),
-    path('discourse/sso', discourse_views.sso),
+
 
     path('api/v1/', include('library.urls')),
 
