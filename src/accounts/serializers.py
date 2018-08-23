@@ -276,16 +276,7 @@ class PasswordChangeSerializer(serializers.Serializer):
     set_password_form_class = SetPasswordForm
 
     def __init__(self, *args, **kwargs):
-        self.old_password_field_enabled = getattr(
-            settings, 'OLD_PASSWORD_FIELD_ENABLED', False
-        )
-        self.logout_on_password_change = getattr(
-            settings, 'LOGOUT_ON_PASSWORD_CHANGE', False
-        )
         super(PasswordChangeSerializer, self).__init__(*args, **kwargs)
-
-        if not self.old_password_field_enabled:
-            self.fields.pop('old_password')
 
         self.request = self.context.get('request')
         self.user = getattr(self.request, 'user', None)

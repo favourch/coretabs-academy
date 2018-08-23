@@ -155,16 +155,6 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-OLD_PASSWORD_FIELD_ENABLED = True
-
-REST_AUTH_SERIALIZERS = {
-    'LOGIN_SERIALIZER': 'hacks.serializers.LoginSerializer',
-    'USER_DETAILS_SERIALIZER': 'hacks.serializers.UserDetailsSerializer',
-    'PASSWORD_RESET_SERIALIZER': 'hacks.serializers.PasswordResetSerializer',
-    'PASSWORD_RESET_CONFIRM_SERIALIZER': 'hacks.serializers.PasswordResetConfirmSerializer',
-    'TOKEN_SERIALIZER': 'hacks.serializers.TokenSerializer'
-}
-
 
 # Mock server 
 DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io'
