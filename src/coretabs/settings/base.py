@@ -20,8 +20,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
-    'rest_auth.registration',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -146,7 +145,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_MIN_LENGTH = 3
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
-ACCOUNT_ADAPTER = 'hacks.adapter.MyAccountAdapter'
+ACCOUNT_ADAPTER = 'accounts.adapter.MyAccountAdapter'
 ACCOUNT_USERNAME_BLACKLIST = ['system', ]
 
 SITE_ID = 1
@@ -156,16 +155,6 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-OLD_PASSWORD_FIELD_ENABLED = True
-
-REST_AUTH_SERIALIZERS = {
-    'LOGIN_SERIALIZER': 'hacks.serializers.LoginSerializer',
-    'USER_DETAILS_SERIALIZER': 'hacks.serializers.UserDetailsSerializer',
-    'PASSWORD_RESET_SERIALIZER': 'hacks.serializers.PasswordResetSerializer',
-    'PASSWORD_RESET_CONFIRM_SERIALIZER': 'hacks.serializers.PasswordResetConfirmSerializer',
-    'TOKEN_SERIALIZER': 'hacks.serializers.TokenSerializer'
-}
-
 
 # Mock server 
 DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io'
@@ -173,12 +162,13 @@ DISCOURSE_API_KEY = 'anilliqnmsakmcnahojdwklaklsa'
 DISCOURSE_API_USERNAME = 'discourse_mock'
 DISCOURSE_SSO_SECRET = 'd836444a9e4084d5b224a60c208dce14'
 
-REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'hacks.serializers.RegisterSerializer',
-}
-
 AVATAR_CLEANUP_DELETED = True
 AVATAR_MAX_AVATARS_PER_USER = 1
+AVATAR_DEFAULT_URL = 'https://forums.coretabs.net/uploads/default/original/1X/5e58d0cbc2836c682d2eaecfe601bf02c821c4dd.png'
+AVATAR_PROVIDERS = (
+    'avatar.providers.PrimaryAvatarProvider',
+    'avatar.providers.DefaultAvatarProvider',
+)
 
 EMAIL_SUBJECT_PREFIX = ''
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''

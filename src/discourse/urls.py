@@ -1,8 +1,7 @@
 from django.urls import path
-from . import views
+from .views import sso, notifications
 
 urlpatterns = [
-    path('discourse/sso/', views.sso),
-    path('api/v1/auth/user/notifications/',
-         discourse_views.notifications),
+    path('api/v1/auth/user/notifications/', notifications),
+    path('discourse/sso', sso),
 ]

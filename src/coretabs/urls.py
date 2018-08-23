@@ -30,17 +30,14 @@ site.index_title = 'Coretabs Admin'
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     
+    path('admin/', site.urls),
+
     path('', include('discourse.urls')),
     path('', include('contact.urls')),
     path('', include('avatars.urls')),
 
-    path('admin/', site.urls),
-    path('avatar/', include('avatar.urls')),
-
     path('api/v1/', include('library.urls')),
-    path('api/v1/auth/', include('hacks.urls')),
-    path('api/v1/auth/', include('rest_auth.urls')),
-    path('api/v1/auth/registration/', include('rest_auth.registration.urls')),
+    path('api/v1/auth/', include('accounts.urls')),
 
     path('__debug__/', include(debug_toolbar.urls)),
 
