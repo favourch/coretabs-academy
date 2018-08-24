@@ -34,24 +34,28 @@ export default {
   }),
   created() {
     this.setHeader()
-    this.drawer.width = window.innerWidth
+    if (typeof window !== 'undefined') { this.drawer.width = window.innerWidth }
     this.drawer.isRight = this.$store.state.direction === 'rtl'
     this.i18n = this.$store.state.i18n.header[this.role]
   },
   watch: {
     $route() {
       this.setHeader()
+      if (typeof document !== 'undefined') {
+        let el = document.querySelector('main.content')
+        el.className = ''
+        el.classList.add('content')
+        el.classList.add(this.currentClass)
+      }
+    }
+  },
+  mounted() {
+    if (typeof document !== 'undefined') {
       let el = document.querySelector('main.content')
       el.className = ''
       el.classList.add('content')
       el.classList.add(this.currentClass)
     }
-  },
-  mounted() {
-    let el = document.querySelector('main.content')
-    el.className = ''
-    el.classList.add('content')
-    el.classList.add(this.currentClass)
   },
   methods: {
     setHeader() {
