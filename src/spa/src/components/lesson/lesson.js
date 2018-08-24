@@ -119,8 +119,8 @@ export default {
     },
     parser() {
       document.querySelectorAll('.lesson-markdown img').forEach((img) => {
-        let src = img.src.replace(/^.*[\\/]/, '')
-        src = `${this.$parent.current.lesson.markdown.replace(/[a-zA-Z-]+\.md/, '')}assets/${src}`
+        let src = img.src.replace(/^.*[\\/]/, 'assets/')
+        src = `${this.$parent.current.lesson.markdown.replace(/[a-zA-Z-]+\.md/, '')}${src}`
         img.src = src
       })
   
