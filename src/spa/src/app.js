@@ -54,8 +54,10 @@ export default {
     })
 
     this.$store.state.css.workshops.drawerWidth = 350
-    document.querySelector('html').setAttribute('lang', this.i18n.lang)
-    document.querySelector('html').setAttribute('dir', this.i18n.direction)
+    if (typeof document !== 'undefined') {
+      document.querySelector('html').setAttribute('lang', this.i18n.lang)
+      document.querySelector('html').setAttribute('dir', this.i18n.direction)
+    }
   },
   mounted() {
     window.addEventListener('scroll', this.updateHeader)
