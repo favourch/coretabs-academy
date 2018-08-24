@@ -1,5 +1,5 @@
 /* eslint-disable */
-import '../../assets/vendor/highlight.min.js'
+const hljs = require('highlight.js')
 export default {
   name: 'LessonComponent',
   data: () => ({
