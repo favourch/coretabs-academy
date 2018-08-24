@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve --no-clean",
+    "build": "vue-cli-service build --no-clean",
     "lint": "vue-cli-service lint",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config client.config.js --hot --inline",
     "client": "cross-env NODE_ENV=production webpack --config client.config.js --progress --hide-modules",
