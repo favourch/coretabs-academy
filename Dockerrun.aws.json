@@ -1,0 +1,157 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/var/academy-db"
+            },
+            "name": "VarAcademy-Db"
+        },
+        {
+            "host": {
+                "sourcePath": "/var/academy-media"
+            },
+            "name": "VarAcademy-Media"
+        }
+    ],
+    "containerDefinitions": [
+        {
+            "image": "yaseralnajjar/academy_api",
+            "command": [
+                "sh",
+                "-c",
+                "memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
+            ],
+            "memory": 700,
+            "environment": [
+                {
+                    "name": "HOST_ENV",
+                    "value": "$HOST_ENV"
+                },
+                {
+                    "name": "API_BASE_URL",
+                    "value": "$API_BASE_URL"
+                },
+                {
+                    "name": "SPA_BASE_URL",
+                    "value": "$SPA_BASE_URL"
+                },
+                {
+                    "name": "DATABASE_URL",
+                    "value": "$DATABASE_URL"
+                },
+                {
+                    "name": "DEFAULT_FROM_EMAIL",
+                    "value": "$DEFAULT_FROM_EMAIL"
+                },
+                {
+                    "name": "DISCOURSE_API_KEY",
+                    "value": "$DISCOURSE_API_KEY"
+                },
+                {
+                    "name": "DISCOURSE_API_USERNAME",
+                    "value": "$DISCOURSE_API_USERNAME"
+                },
+                {
+                    "name": "DISCOURSE_BASE_URL",
+                    "value": "$DISCOURSE_BASE_URL"
+                },
+                {
+                    "name": "DISCOURSE_SSO_SECRET",
+                    "value": "$DISCOURSE_SSO_SECRET"
+                },
+                {
+                    "name": "EMAIL_HOST",
+                    "value": "$EMAIL_HOST"
+                },
+                {
+                    "name": "EMAIL_HOST_PASSWORD",
+                    "value": "$EMAIL_HOST_PASSWORD"
+                },
+                {
+                    "name": "EMAIL_HOST_USER",
+                    "value": "$EMAIL_HOST_USER"
+                },
+                {
+                    "name": "MANAGERS_EMAILS",
+                    "value": "$MANAGERS_EMAILS"
+                },
+                {
+                    "name": "SECRET_KEY",
+                    "value": "$SECRET_KEY"
+                },
+                {
+                    "name": "SENTRY_DSN",
+                    "value": "$SENTRY_DSN"
+                }
+            ],
+            "essential": true,
+            "links": [
+                "db:db"
+            ],
+            "mountPoints": [
+                {
+                    "containerPath": "/djangoapp/media",
+                    "sourceVolume": "VarAcademy-Media"
+                }
+            ],
+            "name": "api",
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000
+                }
+            ]
+        },
+        {
+            "environment": [
+                {
+                    "name": "POSTGRES_DB",
+                    "value": "$POSTGRES_DB"
+                },
+                {
+                    "name": "POSTGRES_USER",
+                    "value": "$POSTGRES_USER"
+                },
+                {
+                    "name": "POSTGRES_PASSWORD",
+                    "value": "$POSTGRES_PASSWORD"
+                }
+            ],
+            "essential": true,
+            "image": "postgres:10.5",
+            "mountPoints": [
+                {
+                    "containerPath": "/var/lib/postgresql/data",
+                    "sourceVolume": "VarAcademy-Db"
+                }
+            ],
+            "name": "db",
+            "memory": 700,
+            "portMappings": [
+                {
+                    "containerPort": 5432,
+                    "hostPort": 5432
+                }
+            ]
+        },
+        {
+            "image": "yaseralnajjar/academy_spa",
+            "memory": 700,
+            "command": [
+                "sh",
+                "-c",
+                "npm start"
+            ],
+            "essential": true,
+            "name": "spa",
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 8001
+                }
+            ]
+        }
+    ],
+    "family": ""
+}
