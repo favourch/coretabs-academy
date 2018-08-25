@@ -15,11 +15,13 @@
         <v-card>
           <v-list>
             <v-list-tile avatar>
-              <v-list-tile-avatar>
-                <img v-if="avatar_url" :src="avatar_url" />
-                <span v-else v-html="avatar_letter"></span>
-              </v-list-tile-avatar>
-              <v-list-tile-title v-html="$store.getters.user('name')"></v-list-tile-title>
+              <a :href="summary" target="_blank">
+                <v-list-tile-avatar>
+                  <img v-if="avatar_url" :src="avatar_url" />
+                  <span v-else v-html="avatar_letter"></span>
+                </v-list-tile-avatar>
+                <v-list-tile-title v-html="$store.getters.user('name')"></v-list-tile-title>
+              </a>
             </v-list-tile>
           </v-list>
           <v-list v-if="notifications">
