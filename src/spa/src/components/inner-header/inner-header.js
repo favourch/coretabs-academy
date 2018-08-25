@@ -12,6 +12,16 @@ export default {
     async $route() {
       var root = this
       this.unread = await this.$auth.get_notifications(root)
+    },
+    menu() {
+      let lessonVideo = document.querySelector('.lesson-video')
+      if (lessonVideo) {
+        if (this.menu) {
+          lessonVideo.classList.add('disabled')
+        } else {
+          lessonVideo.classList.remove('disabled')
+        }
+      }
     }
   },
   methods: {
