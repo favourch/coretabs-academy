@@ -22,7 +22,7 @@
                 "-c",
                 "memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
             ],
-            "memory": 700,
+            "memory": 300,
             "environment": [
                 {
                     "name": "HOST_ENV",
@@ -127,7 +127,7 @@
                 }
             ],
             "name": "db",
-            "memory": 700,
+            "memory": 300,
             "portMappings": [
                 {
                     "containerPort": 5432,
@@ -137,7 +137,7 @@
         },
         {
             "image": "yaseralnajjar/academy_spa",
-            "memory": 700,
+            "memory": 300,
             "command": [
                 "sh",
                 "-c",
