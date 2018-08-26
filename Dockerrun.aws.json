@@ -26,63 +26,63 @@
             "environment": [
                 {
                     "name": "HOST_ENV",
-                    "value": "$HOST_ENV"
+                    "value": "HOST_ENV"
                 },
                 {
                     "name": "API_BASE_URL",
-                    "value": "$API_BASE_URL"
+                    "value": "API_BASE_URL"
                 },
                 {
                     "name": "SPA_BASE_URL",
-                    "value": "$SPA_BASE_URL"
+                    "value": "SPA_BASE_URL"
                 },
                 {
                     "name": "DATABASE_URL",
-                    "value": "$DATABASE_URL"
+                    "value": "DATABASE_URL"
                 },
                 {
                     "name": "DEFAULT_FROM_EMAIL",
-                    "value": "$DEFAULT_FROM_EMAIL"
+                    "value": "DEFAULT_FROM_EMAIL"
                 },
                 {
                     "name": "DISCOURSE_API_KEY",
-                    "value": "$DISCOURSE_API_KEY"
+                    "value": "DISCOURSE_API_KEY"
                 },
                 {
                     "name": "DISCOURSE_API_USERNAME",
-                    "value": "$DISCOURSE_API_USERNAME"
+                    "value": "DISCOURSE_API_USERNAME"
                 },
                 {
                     "name": "DISCOURSE_BASE_URL",
-                    "value": "$DISCOURSE_BASE_URL"
+                    "value": "DISCOURSE_BASE_URL"
                 },
                 {
                     "name": "DISCOURSE_SSO_SECRET",
-                    "value": "$DISCOURSE_SSO_SECRET"
+                    "value": "DISCOURSE_SSO_SECRET"
                 },
                 {
                     "name": "EMAIL_HOST",
-                    "value": "$EMAIL_HOST"
+                    "value": "EMAIL_HOST"
                 },
                 {
                     "name": "EMAIL_HOST_PASSWORD",
-                    "value": "$EMAIL_HOST_PASSWORD"
+                    "value": "EMAIL_HOST_PASSWORD"
                 },
                 {
                     "name": "EMAIL_HOST_USER",
-                    "value": "$EMAIL_HOST_USER"
+                    "value": "EMAIL_HOST_USER"
                 },
                 {
                     "name": "MANAGERS_EMAILS",
-                    "value": "$MANAGERS_EMAILS"
+                    "value": "MANAGERS_EMAILS"
                 },
                 {
                     "name": "SECRET_KEY",
-                    "value": "$SECRET_KEY"
+                    "value": "SECRET_KEY"
                 },
                 {
                     "name": "SENTRY_DSN",
-                    "value": "$SENTRY_DSN"
+                    "value": "SENTRY_DSN"
                 }
             ],
             "essential": true,
@@ -107,15 +107,15 @@
             "environment": [
                 {
                     "name": "POSTGRES_DB",
-                    "value": "$POSTGRES_DB"
+                    "value": "POSTGRES_DB"
                 },
                 {
                     "name": "POSTGRES_USER",
-                    "value": "$POSTGRES_USER"
+                    "value": "POSTGRES_USER"
                 },
                 {
                     "name": "POSTGRES_PASSWORD",
-                    "value": "$POSTGRES_PASSWORD"
+                    "value": "POSTGRES_PASSWORD"
                 }
             ],
             "essential": true,
