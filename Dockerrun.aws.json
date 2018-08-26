@@ -87,7 +87,7 @@
             ],
             "essential": true,
             "links": [
-                "db:db"
+                "db"
             ],
             "mountPoints": [
                 {
