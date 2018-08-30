@@ -19,7 +19,9 @@ DATABASES = {
 ALLOWED_HOSTS = [
     'www.coretabs.net',
     '.coretabs.net',
-    '0.0.0.0'
+    '0.0.0.0',
+    '.compute.amazonaws.com',
+    '.elasticbeanstalk.com' 
 ]
 
 
