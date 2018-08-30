@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'contact',
     'avatar',
     'library',
+    'accounts',
+    'avatars',
 
     'adminsortable2',
     'debug_toolbar',
@@ -36,7 +38,8 @@ INSTALLED_APPS = [
     'django_logging',
     'raven.contrib.django.raven_compat',
 
-    'corsheaders'
+    'corsheaders',
+    'djcelery_email',
 ]
 
 MIDDLEWARE = [

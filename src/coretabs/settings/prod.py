@@ -1,5 +1,6 @@
 from .base import *
 import dj_database_url
+from urllib.parse import quote_plus
 
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -41,7 +42,7 @@ CSRF_COOKIE_DOMAIN = '.coretabs.net'
 
 
 # EMAIL config
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -85,6 +86,12 @@ REST_FRAMEWORK.update({
         'rest_framework.renderers.JSONRenderer',
     )
 })
+
+
+# Celery
+AWS_ACCESS_KEY_ID = quote_plus(os.environ.get('AWS_ACCESS_KEY_ID'))
+AWS_SECRET_ACCESS_KEY = quote_plus(os.environ.get('AWS_SECRET_ACCESS_KEY'))
+CELERY_BROKER_URL = "sqs://{}:{}@".format(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 
 
 # Media Settings

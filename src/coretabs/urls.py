@@ -16,9 +16,6 @@ Including another URLconf
 
 from django.urls import path, include
 from django.views.generic import TemplateView
-
-from avatars.views import upload_avatar_view
-from contact.views import contact_view
 from .admin import site
 
 import debug_toolbar

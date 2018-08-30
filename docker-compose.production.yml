@@ -16,7 +16,7 @@ services:
     build:
       context: .
       dockerfile: ./production.api.dockerfile
-    command: sh -c "memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
+    command: sh -c "celery multi start worker1 -A coretabs && memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
 
     volumes:
       - /var/academy-media:/djangoapp/media
