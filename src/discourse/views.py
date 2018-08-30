@@ -64,7 +64,7 @@ def sso(request):
 def notifications(request):
 
     username = request.user
-    discourse_notifications_url = f'{settings.DISCOURSE_BASE_URL}/notifications.json?recent=true&limit=5&api_key={settings.DISCOURSE_API_KEY}&api_username={settings.DISCOURSE_API_USERNAME}&username={username}'
+    discourse_notifications_url = f'{settings.DISCOURSE_BASE_URL}/notifications.json?recent=true&limit=5&api_key={settings.DISCOURSE_API_KEY}&api_username={username}'
     user_notifications = requests.get(discourse_notifications_url)
 
     if user_notifications.status_code == 200:
