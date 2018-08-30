@@ -20,6 +20,9 @@ from .admin import site
 
 import debug_toolbar
 
+from . import views
+
+
 site.site_header = 'Coretabs Admin'
 site.site_title = 'Coretabs Admin'
 site.index_title = 'Coretabs Admin'
@@ -38,6 +41,7 @@ urlpatterns = [
 
     path('__debug__/', include(debug_toolbar.urls)),
 
+    path('health/', views.health, name='health')
 ]
 
 from django.conf import settings
