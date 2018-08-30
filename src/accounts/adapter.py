@@ -4,7 +4,6 @@ import os
 from allauth.account.adapter import DefaultAccountAdapter
 
 from django.http import HttpResponseRedirect
-from django.shortcuts import reverse
 from django.conf import settings
 
 

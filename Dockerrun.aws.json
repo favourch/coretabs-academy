@@ -1,0 +1,81 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/var/academy-db"
+            },
+            "name": "VarAcademy-Db"
+        },
+        {
+            "host": {
+                "sourcePath": "/var/academy-media"
+            },
+            "name": "VarAcademy-Media"
+        }
+    ],
+    "containerDefinitions": [
+        {
+            "image": "yaseralnajjar/academy_api",
+            "command": [
+                "sh",
+                "-c",
+                "memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
+            ],
+            "memory": 300,
+            "essential": true,
+            "links": [
+                "db"
+            ],
+            "mountPoints": [
+                {
+                    "containerPath": "/djangoapp/media",
+                    "sourceVolume": "VarAcademy-Media"
+                }
+            ],
+            "name": "api",
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000
+                }
+            ]
+        },
+        {
+            "essential": true,
+            "image": "postgres:10.5",
+            "mountPoints": [
+                {
+                    "containerPath": "/var/lib/postgresql/data",
+                    "sourceVolume": "VarAcademy-Db"
+                }
+            ],
+            "name": "db",
+            "memory": 300,
+            "portMappings": [
+                {
+                    "containerPort": 5432,
+                    "hostPort": 5433
+                }
+            ]
+        },
+        {
+            "image": "yaseralnajjar/academy_spa",
+            "memory": 300,
+            "command": [
+                "sh",
+                "-c",
+                "npm start"
+            ],
+            "essential": true,
+            "name": "spa",
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 8001
+                }
+            ]
+        }
+    ],
+    "family": ""
+}
