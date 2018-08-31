@@ -299,6 +299,15 @@ $markdown-em-spacer-6: 0.75em !default;
       color: #5c6c7c;
       @include rfs(18);
       padding: 10px 24px 40px;
+      font-weight: bold;
+
+      br {
+        line-height: 40px;
+      }
+
+      code {
+        direction: ltr;
+      }
     }
 
     .question-num {

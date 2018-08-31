@@ -57,7 +57,7 @@
                 </v-card>
                 <template v-for="(question, qIndex) in quiz.questions">
                   <v-stepper-content :step="qIndex + 1" :key="qIndex" :class="{checkboxes : (question.correct.length > 1) }">
-                    <h3 class="question-content">{{question.text}}</h3>
+                    <div class="question-content" v-html="previewMarkdowText(question.text)"></div>
                     <v-card color="grey lighten-1" flat>
                       <v-list three-line subheader>
                         <template v-for="(answer, aIndex) in question.answers">
