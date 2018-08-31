@@ -308,6 +308,23 @@ $markdown-em-spacer-6: 0.75em !default;
       code {
         direction: ltr;
       }
+
+      pre {
+        overflow: hidden;
+
+        .code-action {
+          display: none;
+        }
+
+        code {
+          float: left;
+          width: 100%;
+
+          &:before, &:after {
+            content: ''
+          }
+        }
+      }
     }
 
     .question-num {
