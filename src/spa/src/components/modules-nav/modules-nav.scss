@@ -100,7 +100,7 @@ html[dir='rtl'] {
       height: calc(100vh - #{$inner-header-height}) !important;
 
       @media (max-width: 960px) {
-        height: auto !important;
+        //height: auto !important;
       }
 
       &::-webkit-scrollbar {
