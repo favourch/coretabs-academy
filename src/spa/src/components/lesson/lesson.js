@@ -30,6 +30,7 @@ export default {
   watch: {
     $route() {
       this.getLesson()
+      this.quiz.currentQuestion = 1
     },
     'quiz.questions': {
       handler: function (after, before) {
