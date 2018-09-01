@@ -449,7 +449,16 @@ $markdown-em-spacer-6: 0.75em !default;
       &.youtube {
       height: 720px !important;
       }
+      @media (max-width: 479px) {
+        height: 80% !important;
+      }
     }
+    @media (max-width: 479px) {
+      #youtube-iframe{
+        height: 40% !important;
+      }
+    }
+    
 
     .tabs {
       margin: map-deep-get($lesson,'video','tab','margin') !important;
@@ -515,6 +524,10 @@ $markdown-em-spacer-6: 0.75em !default;
     max-width: 740px;
     margin: 0 auto;
     word-wrap: break-word !important;
+
+    @media (max-width: 479px) {
+      padding: 30px 20px !important;
+    }
 
     > *:first-child {
       margin-top: 0 !important;
