@@ -10,8 +10,11 @@ class AdminLocaleMiddleware:
 
         if request.path.startswith('/admin'):
             translation.activate("en")
-            request.LANGUAGE_CODE = translation.get_language()
 
+        else:
+            translation.activate("ar")
+
+        request.LANGUAGE_CODE = translation.get_language()
         response = self.process_request(request)
 
         return response
