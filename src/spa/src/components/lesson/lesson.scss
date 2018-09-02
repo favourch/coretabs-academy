@@ -297,6 +297,47 @@ $markdown-em-spacer-6: 0.75em !default;
       text-align: right;
       color: $lite_grey;
       white-space: normal;
+
+      p {
+        margin: 0;
+        padding: 5px;
+
+        code {
+          direction: ltr;
+          padding: 0px;
+          text-align: left;
+        }
+      }
+
+      br {
+        line-height: 40px;
+
+        & + code {
+          width: 100%;
+          padding: 5px;
+        }
+      }
+
+      pre {
+        overflow: hidden;
+        padding: 5px;
+
+        .code-action {
+          display: none;
+        }
+
+        code {
+          direction: ltr;
+          float: left;
+          width: 100%;
+          padding: 5px;
+          text-align: left;
+
+          &:before, &:after {
+            content: ''
+          }
+        }
+      }
     }
 
     .question-content {
@@ -305,24 +346,39 @@ $markdown-em-spacer-6: 0.75em !default;
       padding: 10px 24px 40px;
       font-weight: bold;
 
-      br {
-        line-height: 40px;
+      p {
+        padding: 5px;
+
+        code {
+          direction: ltr;
+          padding: 0px;
+          text-align: left;
+        }
       }
 
-      code {
-        direction: ltr;
+      br {
+        line-height: 40px;
+
+        & + code {
+          width: 100%;
+          padding: 5px;
+        }
       }
 
       pre {
         overflow: hidden;
+        padding: 5px;
 
         .code-action {
           display: none;
         }
 
         code {
+          direction: ltr;
           float: left;
           width: 100%;
+          padding: 5px;
+          text-align: left;
 
           &:before, &:after {
             content: ''

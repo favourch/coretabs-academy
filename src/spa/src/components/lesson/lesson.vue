@@ -69,7 +69,7 @@
                               </span>
                             </v-list-tile-action>
                             <v-list-tile-content>
-                              <v-list-tile-title>{{answer}}</v-list-tile-title>
+                              <v-list-tile-title v-html="previewMarkdowText(answer)"></v-list-tile-title>
                             </v-list-tile-content>
                           </v-list-tile>
                         </template>
