@@ -93,7 +93,7 @@ export default {
             })
           break
         case '3':
-          let version = lesson.markdown.replace('.md', '').substr(-3)
+          let version = lesson.markdown.replace('.md', '').substr(-2)
           version = (/^[0-9]+$/.test(version)) ? version : null
           
           axios.get(lesson.markdown)
@@ -119,7 +119,7 @@ export default {
       }
     },
     async quizParser(data, version) {
-      if (version === '001') {
+      if (version === '01') {
         let questions = []
         let question = {
           text: null,
