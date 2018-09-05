@@ -1,4 +1,4 @@
-FROM node:alpine as build-stage
+FROM node:8.11.4-alpine as build-stage
 
 WORKDIR /app
 COPY ./src/spa/ .
@@ -19,7 +19,7 @@ RUN npm run build
 
 # build finished here... ready now for production
 
-FROM node:alpine
+FROM node:8.11.4-alpine
 
 WORKDIR /app
 COPY --from=build-stage /app/static/ ./static/
