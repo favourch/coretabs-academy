@@ -30,6 +30,7 @@ export default {
   watch: {
     $route() {
       this.getLesson()
+      this.quiz.currentQuestion = 1
     },
     'quiz.questions': {
       handler: function (after, before) {
@@ -92,15 +93,18 @@ export default {
             })
           break
         case '3':
+          let version = lesson.markdown.replace('.md', '').substr(-2)
+          version = (/^[0-9]+$/.test(version)) ? version : null
+          
           axios.get(lesson.markdown)
-            .then(response => {
-              this.quiz.questions = response.data
+            .then(async (response) => {
+              this.quiz.questions = (version) ? await this.quizParser(response.data, version) : response.data
               setTimeout(() => { this.parser() }, 50)
               this.loaded = true
             }).catch(() => {
               this.$store.dispatch('progress', { error: true })
             })
-          break
+            break
         case '4':
           axios.get(lesson.markdown)
             .then(response => {
@@ -112,6 +116,63 @@ export default {
               this.$store.dispatch('progress', { error: true })
             })
           break
+      }
+    },
+    async quizParser(data, version) {
+      if (version === '01') {
+        let questions = []
+        let question = {
+          text: null,
+          answers: {},
+          correct: [],
+          hint: null,
+          choose: []
+        }
+        let property = null
+        let index = null
+
+        let lines = data.split('\n')
+        lines.forEach((line, i) => {
+          if (line.startsWith('^')) {
+            property = 'text'
+            index = 0
+            question.text = line.substr(2)
+          } else if (line.startsWith('*')) {
+            property = 'answers'
+            index += 1
+            question.answers[index] = line.substr(2)
+
+            if (line.startsWith('**')) {
+              question.answers[index] = line.substr(3)
+              question.correct.push(index.toString())
+            }
+          } else if (line.startsWith('$')) {
+            property = 'hint'
+            question.hint = line.substr(2)
+          } else if (line && !line.startsWith('-')) {
+            if (property === 'answers') {
+              question.answers[index] += '\n' + line
+            } else {
+              question[property] += '\n' + line
+            }
+          }
+
+          if (line.startsWith('-') || i === (lines.length - 1)) {
+            questions.push(question)
+            question = {
+              text: null,
+              answers: {},
+              correct: [],
+              hint: null,
+              choose: []
+            }
+            property = null
+          }
+        })
+
+        return await questions
+      } else {
+        this.$store.dispatch('progress', { error: true })
       }
     },
     previewMarkdowText(mdText) {
