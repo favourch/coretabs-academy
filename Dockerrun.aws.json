@@ -16,7 +16,7 @@
     ],
     "containerDefinitions": [
         {
-            "image": "yaseralnajjar/academy_api:beta2",
+            "image": "yaseralnajjar/academy_api:beta3",
             "command": [
                 "sh",
                 "-c",
@@ -60,7 +60,7 @@
             ]
         },
         {
-            "image": "yaseralnajjar/academy_spa:beta2",
+            "image": "yaseralnajjar/academy_spa:beta3",
             "memory": 600,
             "command": [
                 "sh",
