@@ -55,7 +55,7 @@
             "portMappings": [
                 {
                     "containerPort": 5432,
-                    "hostPort": 5433
+                    "hostPort": 5432
                 }
             ]
         },
