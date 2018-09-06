@@ -3,7 +3,7 @@
     <template v-if="['0', '1'].includes($parent.current.lesson.type)">
       <div :id="($parent.current.lesson.type === '0') ? 'lesson-youtube' : 'lesson-scrimba'"
         :class="['lesson-video', ($parent.current.lesson.type === '0') ? 'lesson-youtube' : 'lesson-scrimba']">
-        <iframe v-if="$parent.current.lesson.type === '0'" :src="content.video+'?showinfo=0&rel=0'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe v-if="$parent.current.lesson.type === '0'" :src="content.video+'?showinfo=0&rel=0'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen id="youtube-iframe"></iframe>
         <iframe v-else :src="content.video"></iframe>
         <v-tabs :id="($parent.current.lesson.type === '0') ? 'youtube-tabs' : 'scrimba-tabs'" :right="$store.state.direction === 'rtl'" icons-and-text v-model="content.tab">
           <v-tab v-for="(tab, i) in i18n.video.tabs" :key="i">
@@ -57,7 +57,7 @@
                 </v-card>
                 <template v-for="(question, qIndex) in quiz.questions">
                   <v-stepper-content :step="qIndex + 1" :key="qIndex" :class="{checkboxes : (question.correct.length > 1) }">
-                    <h3 class="question-content">{{question.text}}</h3>
+                    <div class="question-content" v-html="previewMarkdowText(question.text)"></div>
                     <v-card color="grey lighten-1" flat>
                       <v-list three-line subheader>
                         <template v-for="(answer, aIndex) in question.answers">
@@ -69,7 +69,7 @@
                               </span>
                             </v-list-tile-action>
                             <v-list-tile-content>
-                              <v-list-tile-title>{{answer}}</v-list-tile-title>
+                              <v-list-tile-title v-html="previewMarkdowText(answer)"></v-list-tile-title>
                             </v-list-tile-content>
                           </v-list-tile>
                         </template>

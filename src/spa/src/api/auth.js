@@ -78,7 +78,11 @@ const AuthAPI = {
       return false
     }).catch(() => {
       root.alert.error = true
-      root.alert.message = root.i18n.error_message_text
+      if (error.response.status === 400) {
+        root.alert.message = error.response.data.email
+      } else {
+        root.alert.message = root.i18n.error_message_text
+      }
       return false
     })
   },
