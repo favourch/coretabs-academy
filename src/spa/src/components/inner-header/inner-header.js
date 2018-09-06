@@ -12,6 +12,21 @@ export default {
     async $route() {
       var root = this
       this.unread = await this.$auth.get_notifications(root)
+    },
+    menu() {
+      let lessonVideo = document.querySelector('.lesson-video')
+      if (lessonVideo) {
+        if (this.menu) {
+          lessonVideo.classList.add('disabled')
+        } else {
+          lessonVideo.classList.remove('disabled')
+        }
+      }
+    }
+  },
+  computed: {
+    summary() {
+      return `https://forums.coretabs.net/u/${this.$store.getters.user('username')}/summary`
     }
   },
   methods: {

@@ -139,22 +139,29 @@ $toolbar-padding: 0 15px;
   
       .list__tile {
         direction: ltr;
+        
         &.list__tile--avatar {
           height: 40px;
           padding: 0 10px;
-          .avatar {
-            height: $inner-header-height - 15 !important;
-            width:  $inner-header-height - 15 !important;
+          
+          a {
+            display: flex;
+            align-items: center;
             
-            span {
-              border-radius: inherit;
-              width: 100%;
-              height: 100%;
-              background-color: $primary-color !important;
-              line-height: 32px;
-              color: $white-color;
+            .avatar {
+              height: $inner-header-height - 15 !important;
+              width:  $inner-header-height - 15 !important;
+              
+              span {
+                border-radius: inherit;
+                width: 100%;
+                height: 100%;
+                background-color: $primary-color !important;
+                line-height: 32px;
+                color: $white-color;
+              }
             }
-          } 
+          }
         }
       }
       .notification {

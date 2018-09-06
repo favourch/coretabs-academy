@@ -41,3 +41,8 @@ def sync_sso(user):
     url = f'{settings.DISCOURSE_BASE_URL}/admin/users/sync_sso/?{query_string}'
 
     r = requests.post(url, data=data)
+
+
+def create_token(token_model, user, serializer):
+    token, _ = token_model.objects.get_or_create(user=user)
+    return token

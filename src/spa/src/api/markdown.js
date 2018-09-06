@@ -3,7 +3,7 @@ import showdown from 'showdown'
 
 showdown.setFlavor('github')
 const markdown = new showdown.Converter({
-   emoji: false,
+   emoji: true,
    tables: true,
    underline: true,
    tasklists: true,

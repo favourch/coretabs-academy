@@ -1,4 +1,4 @@
-FROM python:alpine3.7
+FROM python:3.6.6-alpine3.8
 
 # Install libraries
 
@@ -16,9 +16,16 @@ RUN apk add jpeg-dev \
     tk-dev \
     tcl-dev \
     harfbuzz-dev \
-    fribidi-dev
+    fribidi-dev \
+    libcurl
 
+# Needed for pycurl
+ENV PYCURL_SSL_LIBRARY=openssl
 
+# Install packages only needed for building, install and clean on a single layer
+RUN apk add --no-cache --virtual .build-dependencies build-base curl-dev \
+    && pip install pycurl \
+    && apk del .build-dependencies
 
 #RUN PATH=$PATH:/opt/local/lib/postgresql91/bin/
 
