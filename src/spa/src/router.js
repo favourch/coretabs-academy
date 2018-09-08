@@ -25,6 +25,7 @@ import WorkshopComponent from './components/workshop/workshop.vue'
 import NotFoundComponent from './components/not-found/not-found.vue'
 import WorkshopsComponent from './components/workshops/workshops.vue'
 import maintenanceComponent from './components/maintenance/maintenance.vue'
+import ApplicationSubmitted from './components/application-submitted/application-submitted.vue'
 
 import i18n from './i18n/ar/i18n'
 
@@ -157,6 +158,10 @@ const router = new Router({
       component: LessonComponent
     }],
     beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'application-submitted',
+    path: '/application-submitted',
+    component: ApplicationSubmitted
   }]
 })
 
