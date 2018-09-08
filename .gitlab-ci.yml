@@ -53,8 +53,8 @@ build:
     - sudo docker build . -t $REPO
     - sudo docker push $REPO
     - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
-    - sudo docker build . -t $REPO
-    - sudo docker push $REPO
+    - docker build . -t $REPO
+    - docker push $REPO
 
 test:
   variables:
