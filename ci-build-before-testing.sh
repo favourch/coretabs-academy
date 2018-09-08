@@ -25,12 +25,12 @@ export PYCURL_SSL_LIBRARY=openssl
 # Install packages only needed for building, install and clean on a single layer
 apk add --no-cache --virtual .build-dependencies build-base curl-dev \
     && pip install pycurl \
-    && apk del .build-dependencies
 
 virtualenv venv
 source ./venv/bin/activate
 pip install -r ./src/requirements.txt
 apk del build-deps
+apk del .build-dependencies
 python ./src/manage.py migrate
 python ./src/manage.py populate 10 4 3 2
 npm i newman -g
