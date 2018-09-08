@@ -1,0 +1,33 @@
+apk update
+apk upgrade
+apk add memcached
+apk add --virtual deps gcc python-dev linux-headers musl-dev postgresql-dev
+apk add --no-cache libpq
+apk add jpeg-dev \
+    zlib-dev \
+    freetype-dev \
+    lcms2-dev \
+    openjpeg-dev \
+    tiff-dev \
+    tk-dev \
+    tcl-dev \
+    harfbuzz-dev \
+    fribidi-dev \
+    libcurl
+
+# Needed for pycurl
+PYCURL_SSL_LIBRARY=openssl
+
+# Install packages only needed for building, install and clean on a single layer
+apk add --no-cache --virtual .build-dependencies build-base curl-dev \
+    && pip install pycurl \
+    && apk del .build-dependencies
+
+virtualenv venv
+source ./venv/bin/activate
+pip install -r ./src/requirements.txt
+apk del build-deps
+python ./src/manage.py migrate
+python ./src/manage.py populate 10 4 3 2
+npm i newman -g
+python ./src/manage.py runserver &
