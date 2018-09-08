@@ -19,7 +19,7 @@ apk add jpeg-dev \
     libcurl
 
 # Needed for pycurl
-PYCURL_SSL_LIBRARY=openssl
+export PYCURL_SSL_LIBRARY=openssl
 
 # Install packages only needed for building, install and clean on a single layer
 apk add --no-cache --virtual .build-dependencies build-base curl-dev \
