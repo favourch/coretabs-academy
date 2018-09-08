@@ -21,6 +21,8 @@ variables:
   # improved performance.
   DOCKER_DRIVER: overlay2
   HOST_ENV: production
+  DOCKER_HOST: tcp://docker:2375
+
 
 services:
 - docker:dind
