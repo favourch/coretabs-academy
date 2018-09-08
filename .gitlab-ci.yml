@@ -50,10 +50,10 @@ build:
   script:
     - $(aws ecr get-login --no-include-email --region us-east-2)
     - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
-    - docker build . -t $REPO
+    - docker build . -t $REPO -f production.api.dockerfile
     - docker push $REPO
     - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
-    - docker build . -t $REPO
+    - docker build . -t $REPO -f production.spa.dockerfile
     - docker push $REPO
 
 test:
