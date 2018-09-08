@@ -28,9 +28,7 @@ services:
 # We tell GitLab to install all the packages
 # before running anything.
 before_script:  
-  - apk add --no-cache python py2-pip
-  - pip install --no-cache-dir docker-compose
-  - docker-compose -v
+  - apk add --no-cache python py2-pi
   - docker info
 
 # You specify the stages. Those are the steps that GitLab will go through 
@@ -42,9 +40,19 @@ stages:
   - production
 
 build:
+  only:
+    - master
+    - develop
   stage: build
+  image: ekino/docker-buildbox:latest-dind-aws
   script:
-    - docker-compose -f docker-compose.production.yml build
+    - $(aws ecr get-login --no-include-email --region us-east-2)
+    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
+    - sudo docker build . -t $REPO
+    - sudo docker push $REPO
+    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
+    - sudo docker build . -t $REPO
+    - sudo docker push $REPO
 
 test:
   variables:
