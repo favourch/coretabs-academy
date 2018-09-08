@@ -54,3 +54,11 @@ services:
     command: sh -c "npm start"
     ports:
       - "8001:3000"
+
+  nginx:
+    image: nginx:1.15.3-alpine
+    container_name: production_nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./conf.d/academy.conf:/etc/nginx/conf.d/academy.conf

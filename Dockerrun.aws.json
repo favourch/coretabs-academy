@@ -12,6 +12,12 @@
                 "sourcePath": "/var/academy-media"
             },
             "name": "VarAcademy-Media"
+        },
+        {
+            "host": {
+                "sourcePath": "/var/app/current/conf.d"
+            },
+            "name": "Nginx-Conf"
         }
     ],
     "containerDefinitions": [
@@ -74,6 +80,28 @@
                     "containerPort": 3000,
                     "hostPort": 8001
                 }
+            ]
+        },
+        {
+            "image": "nginx:1.15.3-alpine",
+            "memory": 128,
+            "essential": true,
+            "mountPoints": [
+                {
+                    "containerPath": "/etc/nginx/conf.d",
+                    "sourceVolume": "Nginx-Conf"
+                }
+            ],
+            "name": "reverse_proxy",
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80
+                }
+            ],
+            "links": [
+                "spa",
+                "api"
             ]
         }
     ],
