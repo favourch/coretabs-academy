@@ -16,7 +16,8 @@ apk add jpeg-dev \
     tcl-dev \
     harfbuzz-dev \
     fribidi-dev \
-    libcurl
+    libcurl \
+    libressl-dev
 
 # Needed for pycurl
 export PYCURL_SSL_LIBRARY=openssl
