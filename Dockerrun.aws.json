@@ -90,9 +90,14 @@
                 {
                     "containerPath": "/etc/nginx/conf.d",
                     "sourceVolume": "Nginx-Conf"
+                },
+                {
+                    "containerPath": "/var/academy-media",
+                    "sourceVolume": "VarAcademy-Media",
+                    "readOnly": true
                 }
             ],
-            "name": "reverse_proxy",
+            "name": "reverse-proxy",
             "portMappings": [
                 {
                     "containerPort": 80,
