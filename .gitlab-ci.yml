@@ -36,9 +36,9 @@ before_script:
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters. 
 stages:
+  - staging
   - test
   - build
-  - staging
   - production
 
 build:
