@@ -330,8 +330,9 @@ $markdown-em-spacer-6: 0.75em !default;
           direction: ltr;
           float: left;
           width: 100%;
-          padding: 5px;
+          padding: 5px 10px;
           text-align: left;
+          color: #666 !important;
 
           &:before, &:after {
             content: ''
@@ -788,10 +789,11 @@ $markdown-em-spacer-6: 0.75em !default;
       word-wrap: normal !important;
       max-height: 400px !important;
       height: fit-content !important;
-      background: #f9f9f9 !important;
+      background: #f6f8fa !important;
       padding: $markdown-spacer-3 !important;
       margin: $markdown-spacer-4 auto !important;
       font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace !important;
+      box-shadow: none !important;
       
       span{
         font-family:  inherit;
