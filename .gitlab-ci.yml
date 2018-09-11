@@ -72,6 +72,7 @@ deploy-dev:
   stage: staging
   script:
     - pip install awsebcli
+    - eb init coretabs-academy -r us-east-2
     - eb use staging
     - eb deploy   
 
