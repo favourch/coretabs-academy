@@ -36,10 +36,11 @@ before_script:
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters. 
 stages:
+  - production
   - staging
   - test
   - build
-  - production
+  
 
 build:
   only:
@@ -78,22 +79,13 @@ deploy-dev:
     - eb deploy   
 
 deploy-prod:
-  stage: production
-  before_script:
-    # Generates to connect to the AWS unit the SSH key.
-    - mkdir -p ~/.ssh
-    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    # Sets the permission to 600 to prevent a problem with AWS
-    # that it's too unprotected.
-    - chmod 600  ~/.ssh/id_rsa
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - apk add --no-cache bash openssh-client
-  script:     
-    - bash ./gitlab-deploy/.gitlab-deploy.prod.sh   
-  environment:     
-    name: production     
-    # Exposes a button that when clicked take you to the defined URL:
-    url: $DEPLOY_SERVER_URL
   only:
     - master
+  stage: production
+  script:
+    - pip install awsebcli
+    - git checkout master
+    - eb init coretabs-academy -r us-east-2 -p "arn:aws:elasticbeanstalk:us-east-2::platform/Multi-container Docker running on 64bit Amazon Linux/2.11.2"
+    - eb use production
+    - eb deploy
   when: manual
