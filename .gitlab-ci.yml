@@ -40,7 +40,6 @@ stages:
   - staging
   - test
   - build
-  
 
 build:
   only:
