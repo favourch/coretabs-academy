@@ -37,6 +37,7 @@ $markdown-em-spacer-6: 0.75em !default;
       width: 50px;
     }
   }
+
   .lesson-quiz {
     $check_color: #5955e9;
     $lite_grey: #727272;
@@ -330,8 +331,9 @@ $markdown-em-spacer-6: 0.75em !default;
           direction: ltr;
           float: left;
           width: 100%;
-          padding: 5px;
+          padding: 5px 10px;
           text-align: left;
+          color: #666 !important;
 
           &:before, &:after {
             content: ''
@@ -455,6 +457,173 @@ $markdown-em-spacer-6: 0.75em !default;
       .checkbox_inner::after {
         background: #57c881 !important;
       }
+    }
+
+    
+
+    pre {
+      overflow: auto !important;
+      direction: ltr !important;
+      text-align: left !important;
+      line-height: normal !important;
+      word-wrap: normal !important;
+      max-height: 400px !important;
+      height: fit-content !important;
+      background: #f6f8fa !important;
+      padding: $markdown-spacer-3 !important;
+      margin: $markdown-spacer-4 auto !important;
+      font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace !important;
+      box-shadow: none !important;
+      
+      span{
+        font-family:  inherit;
+      }
+
+      .code-action{
+        display: none;
+      }
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #d5d5d5 !important; 
+      }
+
+      pre {
+        border: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+        overflow: visible !important;
+        box-shadow: none !important;
+        max-height: none !important;
+      }
+
+      > code {
+        box-shadow: none !important;
+        word-break: normal !important;
+      }
+
+      code,
+      tt {
+        margin: 0 !important;
+        border: 0 !important;
+        padding: 0 !important;
+        display: inline !important;
+        font-size: 14px !important;
+        max-width: 100% !important;
+        font-weight: 700 !important;
+        line-height: 1.5 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        word-wrap: normal !important;
+        line-height: inherit !important;
+        background-color: transparent !important;
+      }
+    }
+
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+      line-height: 20px;
+    }
+
+    .hljs.python pre {
+      padding-left: 30px;
+    }
+
+    .hljs.python .hljs-function {
+      display: inline-block;
+      padding-top: 20px;
+    }
+
+    .hljs-comment,
+    .hljs-quote {
+      color: #998;
+      font-style: italic;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+      color: #333;
+      font-weight: 700;
+    }
+
+    .hljs-literal,
+    .hljs-number,
+    .hljs-tag .hljs-attr,
+    .hljs-template-variable,
+    .hljs-variable {
+      color: teal;
+    }
+
+    .hljs-doctag,
+    .hljs-string {
+      color: #d14;
+    }
+
+    .hljs-section,
+    .hljs-selector-id,
+    .hljs-title {
+      color: #900;
+      font-weight: 700;
+    }
+
+    .hljs-subst {
+      font-weight: 400;
+    }
+
+    .hljs-class .hljs-title,
+    .hljs-type {
+      color: #458;
+      font-weight: 700;
+    }
+
+    .hljs-attribute,
+    .hljs-name,
+    .hljs-tag {
+      color: navy;
+      font-weight: 400;
+    }
+
+    .hljs-meta,
+    .hljs-strong {
+      font-weight: 700;
+    }
+
+    .hljs-link,
+    .hljs-regexp {
+      color: #009926;
+    }
+
+    .hljs-bullet,
+    .hljs-symbol {
+      color: #990073;
+    }
+
+    .hljs-built_in,
+    .hljs-builtin-name {
+      color: #0086b3;
+    }
+
+    .hljs-meta {
+      color: #999;
+    }
+
+    .hljs-deletion {
+      background: #fdd;
+    }
+
+    .hljs-addition {
+      background: #dfd;
+    }
+
+    .hljs-emphasis {
+      font-style: italic;
     }
   }
 
@@ -788,10 +957,11 @@ $markdown-em-spacer-6: 0.75em !default;
       word-wrap: normal !important;
       max-height: 400px !important;
       height: fit-content !important;
-      background: #f9f9f9 !important;
+      background: #f6f8fa !important;
       padding: $markdown-spacer-3 !important;
       margin: $markdown-spacer-4 auto !important;
       font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace !important;
+      box-shadow: none !important;
       
       span{
         font-family:  inherit;
