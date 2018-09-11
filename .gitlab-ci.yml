@@ -30,7 +30,7 @@ services:
 # We tell GitLab to install all the packages
 # before running anything.
 before_script:  
-  - apk add --no-cache python py2-pip
+  - apk add --no-cache python py2-pip bash git openssh
   - docker info
 
 # You specify the stages. Those are the steps that GitLab will go through 
