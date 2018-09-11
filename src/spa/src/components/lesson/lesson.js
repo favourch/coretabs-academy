@@ -185,7 +185,7 @@ export default {
         img.src = src
       })
   
-      document.querySelectorAll('.lesson-markdown pre code').forEach((code) => {
+      document.querySelectorAll('.lesson-markdown pre code, .lesson-quiz pre code').forEach((code) => {
         hljs.highlightBlock(code)
       })
     },
