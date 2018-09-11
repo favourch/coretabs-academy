@@ -70,7 +70,6 @@ deploy-dev:
   only:
     - develop
   stage: staging
-  image: miirage/python3-pip-ansible
   script:
     - pip install awsebcli
     - eb use staging
