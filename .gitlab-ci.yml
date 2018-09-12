@@ -80,6 +80,8 @@ deploy-dev:
 deploy-prod:
   only:
     - master
+  variables:
+    API_BASE_URL: api.coretabs.net
   stage: production
   script:
     - pip install awsebcli
