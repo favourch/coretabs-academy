@@ -56,15 +56,15 @@ build:
     - docker build . -t $REPO -f production.spa.dockerfile
     - docker push $REPO
 
-test:
-  variables:
-    HOST_ENV: dev
-  stage: test
-  before_script:
-    - apk add --no-cache bash
-    - bash ./ci-build-before-testing.sh
-  script:
-    - newman run ./tests/postman/academy_api_collection.json -e ./tests/postman/discourse_api_environment.json
+#test:
+#  variables:
+#    HOST_ENV: dev
+#  stage: test
+#  before_script:
+#    - apk add --no-cache bash
+#    - bash ./ci-build-before-testing.sh
+#  script:
+#    - newman run ./tests/postman/academy_api_collection.json -e ./tests/postman/discourse_api_environment.json
 
 deploy-dev:
   only:
