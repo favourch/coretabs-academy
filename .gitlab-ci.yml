@@ -36,7 +36,7 @@ before_script:
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters. 
 stages:
-  - test
+#  - test
   - build
   - staging
   - production
@@ -69,6 +69,8 @@ test:
 deploy-dev:
   only:
     - develop
+  variables:
+    API_BASE_URL: api-dev.coretabs.net
   stage: staging
   script:
     - pip install awsebcli
