@@ -28,7 +28,7 @@
                 "-c",
                 "celery multi start worker1 -A coretabs && memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
             ],
-            "memory": 600,
+            "memory": 100,
             "essential": true,
             "links": [
                 "db"
@@ -57,7 +57,7 @@
                 }
             ],
             "name": "db",
-            "memory": 600,
+            "memory": 100,
             "portMappings": [
                 {
                     "containerPort": 5432,
@@ -67,7 +67,7 @@
         },
         {
             "image": "619000622287.dkr.ecr.us-east-2.amazonaws.com/academy_spa",
-            "memory": 600,
+            "memory": 100,
             "command": [
                 "sh",
                 "-c",
