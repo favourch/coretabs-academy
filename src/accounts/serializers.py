@@ -410,18 +410,21 @@ class ApproveUserSerializer(serializers.Serializer):
     uid = serializers.CharField(required=True)
     key = serializers.CharField(required=True)
 
-    def validate_uid(self, uid):
+    def validate(self, data):
+        uid = data['uid']
+        key = data['key']
+
         try:
             pk = url_str_to_user_pk(uid)
             self.user = UserModel.objects.get(pk=pk)
+
+            if self.user and not approve_user_token_generator.check_token(self.user, key):
+                raise serializers.ValidationError(_('bad token'))
+
+            return data
+
         except (ValueError, UserModel.DoesNotExist):
             raise serializers.ValidationError(_('bad token'))
-        return uid
-
-    def validate_key(self, key):
-        if not approve_user_token_generator.check_token(self.user, key):
-            raise serializers.ValidationError(_('bad token'))
-        return key
 
     def save(self, **kwargs):
         self.user.is_approved = True
