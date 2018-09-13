@@ -3,11 +3,6 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import reverse
 from django.views.decorators.cache import never_cache
 
-from rest_framework.authtoken.admin import Token, TokenAdmin
-from allauth.account.admin import EmailAddress, EmailAddressAdmin
-from django.contrib.auth.admin import User, UserAdmin
-from django.contrib.sites.admin import Site, SiteAdmin
-
 from functools import update_wrapper
 from django.views.decorators.csrf import csrf_protect
 
@@ -39,10 +34,3 @@ class MyAdminSite(AdminSite):
 
 
 site = MyAdminSite()
-
-
-# Register Models
-site.register(Token, TokenAdmin)
-site.register(EmailAddress, EmailAddressAdmin)
-site.register(User, UserAdmin)
-site.register(Site, SiteAdmin)
