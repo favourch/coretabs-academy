@@ -36,7 +36,6 @@ before_script:
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters. 
 stages:
-  - build
   - staging
   - production
 
@@ -56,6 +55,15 @@ deploy-dev:
   variables:
     API_BASE_URL: api-dev.coretabs.net
   stage: staging
+  before_script:
+    - pip install aws
+    - $(aws ecr get-login --no-include-email --region us-east-2)
+    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
+    - docker build . -t $REPO -f production.api.dockerfile --no-cache
+    - docker push $REPO
+    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
+    - docker build . -t $REPO -f production.spa.dockerfile --build-arg API_BASE_URL="api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker push $REPO
   script:
     - pip install awsebcli
     - git checkout develop
@@ -67,6 +75,15 @@ deploy-prod:
   only:
     - master
   stage: production
+  before_script:
+    - pip install aws
+    - $(aws ecr get-login --no-include-email --region us-east-2)
+    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
+    - docker build . -t $REPO -f production.api.dockerfile --no-cache
+    - docker push $REPO
+    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
+    - docker build . -t $REPO -f production.spa.dockerfile --build-arg API_BASE_URL="api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker push $REPO
   script:
     - pip install awsebcli
     - git checkout master
