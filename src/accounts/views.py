@@ -21,7 +21,7 @@ from .serializers import (
     TokenSerializer, UserDetailsSerializer, LoginSerializer,
     PasswordResetSerializer, PasswordResetConfirmSerializer,
     PasswordChangeSerializer, RegisterSerializer, VerifyEmailSerializer,
-    ResendConfirmSerializer,
+    ResendConfirmSerializer, ApproveUserSerializer
 )
 from .utils import create_token
 
@@ -221,7 +221,6 @@ class RegisterView(CreateAPIView):
 class VerifyEmailView(APIView, ConfirmEmailView):
     permission_classes = (AllowAny,)
     allowed_methods = ('POST', 'OPTIONS', 'HEAD')
-    token_model = Token
 
     def get_serializer(self, *args, **kwargs):
         return VerifyEmailSerializer(*args, **kwargs)
@@ -232,24 +231,23 @@ class VerifyEmailView(APIView, ConfirmEmailView):
         self.kwargs['key'] = self.serializer.validated_data['key']
         confirmation = self.get_object()
         confirmation.confirm(self.request)
-        self.login_on_confirm(confirmation)
-        return self.get_response()
+        return Response({"detail": _("Email Confirmed")}, status=status.HTTP_200_OK)
 
-    def login_on_confirm(self, confirmation):
-        self.user = confirmation.email_address.user
-        if self.user and self.request.user.is_anonymous:
-            return perform_login(self.request,
-                                 self.user,
-                                 'none')
-
-    def get_response(self):
-        token = create_token(self.token_model, self.user, self.serializer)
-        serializer_class = TokenSerializer
-
-        serializer = serializer_class(instance=token,
-                                      context={'request': self.request})
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    # def login_on_confirm(self, confirmation):
+    #     self.user = confirmation.email_address.user
+    #     if self.user and self.request.user.is_anonymous:
+    #         return perform_login(self.request,
+    #                              self.user,
+    #                              'none')
+    #
+    # def get_response(self):
+    #     token = create_token(self.token_model, self.user, self.serializer)
+    #     serializer_class = TokenSerializer
+    #
+    #     serializer = serializer_class(instance=token,
+    #                                   context={'request': self.request})
+    #
+    #     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ResendConfirmView(GenericAPIView):
@@ -267,3 +265,16 @@ class ResendConfirmView(GenericAPIView):
             {'detail': _("تم ارسال بريد التفعيل")},
             status=status.HTTP_200_OK
         )
+
+
+class ApproveUserView(GenericAPIView):
+    permission_classes = (AllowAny,)
+    allowed_methods = ('POST', 'OPTIONS', 'HEAD')
+    serializer_class = ApproveUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({"detail": _("User approved.")})

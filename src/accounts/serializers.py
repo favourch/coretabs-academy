@@ -33,6 +33,9 @@ from django.template.defaultfilters import filesizeformat
 
 from rest_framework.authtoken.models import Token
 
+from .tokens import approve_user_token_generator
+from allauth.account.utils import url_str_to_user_pk
+
 UserModel = get_user_model()
 
 
@@ -65,6 +68,9 @@ class LoginSerializer(serializers.Serializer):
         if user:
             if not user.is_active:
                 msg = _('User account is disabled.')
+                raise exceptions.ValidationError(msg)
+            if not user.is_approved:
+                msg = _('We will Email you soon.')
                 raise exceptions.ValidationError(msg)
         else:
             msg = _('Unable to log in with provided credentials.')
@@ -398,3 +404,25 @@ class RegisterSerializer(serializers.Serializer):
 
 class VerifyEmailSerializer(serializers.Serializer):
     key = serializers.CharField()
+
+
+class ApproveUserSerializer(serializers.Serializer):
+    uid = serializers.CharField(required=True)
+    key = serializers.CharField(required=True)
+
+    def validate_uid(self, uid):
+        try:
+            pk = url_str_to_user_pk(uid)
+            self.user = UserModel.objects.get(pk=pk)
+        except (ValueError, UserModel.DoesNotExist):
+            raise serializers.ValidationError(_('bad token'))
+        return uid
+
+    def validate_key(self, key):
+        if not approve_user_token_generator.check_token(self.user, key):
+            raise serializers.ValidationError(_('bad token'))
+        return key
+
+    def save(self, **kwargs):
+        self.user.is_approved = True
+        self.user.save()
