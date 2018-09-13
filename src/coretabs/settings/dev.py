@@ -52,6 +52,10 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 MANAGERS_EMAILS = ['one@gmail.com', 'two@gmail.com']
 
+# To use SMTP run "python -m smtpd -n -c DebuggingServer localhost:1025"
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+
 
 # Logging settings
 RAVEN_CONFIG = {
@@ -69,6 +73,4 @@ DISCOURSE_SSO_SECRET = 'd836444a9e4084d5b224a60c208dce14'
 # Celery
 # CELERY_BROKER_URL = "amqp://"
 # EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-# run "python -m smtpd -n -c DebuggingServer localhost:1025"
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 1025
+
