@@ -56,7 +56,7 @@ deploy-dev:
     API_BASE_URL: api-dev.coretabs.net
   stage: staging
   before_script:
-    - pip install aws
+    - pip install awscli
     - $(aws ecr get-login --no-include-email --region us-east-2)
     - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
     - docker build . -t $REPO -f production.api.dockerfile --no-cache
@@ -76,7 +76,7 @@ deploy-prod:
     - master
   stage: production
   before_script:
-    - pip install aws
+    - pip install awscli
     - $(aws ecr get-login --no-include-email --region us-east-2)
     - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
     - docker build . -t $REPO -f production.api.dockerfile --no-cache
