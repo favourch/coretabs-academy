@@ -36,25 +36,9 @@ before_script:
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters. 
 stages:
-#  - test
   - build
   - staging
   - production
-
-build:
-  only:
-    - master
-    - develop
-  stage: build
-  image: ekino/docker-buildbox:latest-dind-aws
-  script:
-    - $(aws ecr get-login --no-include-email --region us-east-2)
-    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
-    - docker build . -t $REPO -f production.api.dockerfile --no-cache
-    - docker push $REPO
-    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
-    - docker build . -t $REPO -f production.spa.dockerfile --no-cache
-    - docker push $REPO
 
 #test:
 #  variables:
