@@ -21,6 +21,8 @@ variables:
   # improved performance.
   DOCKER_DRIVER: overlay2
   HOST_ENV: production
+  DOCKER_HOST: tcp://docker:2375
+
 
 services:
 - docker:dind
@@ -28,81 +30,65 @@ services:
 # We tell GitLab to install all the packages
 # before running anything.
 before_script:  
-  - apk add --no-cache python py2-pip
-  - pip install --no-cache-dir docker-compose
-  - docker-compose -v
+  - apk add --no-cache python py2-pip bash git openssh
   - docker info
 
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters. 
 stages:
+#  - test
   - build
-  - test
   - staging
   - production
 
 build:
-  stage: build
-  script:
-    - docker-compose -f docker-compose.production.yml build
-
-test:
-  variables:
-    HOST_ENV: dev
-  stage: test
-  before_script:
-    - apk update
-    - apk add --virtual build-deps gcc python3-dev musl-dev
-    - apk add --no-cache py3-virtualenv postgresql-dev nodejs nodejs-npm jpeg-dev
-    - apk add --no-cache zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev harfbuzz-dev fribidi-dev
-    - virtualenv venv
-    - source ./venv/bin/activate
-    - pip install -r ./src/requirements.txt
-    - apk del build-deps
-    - python ./src/manage.py migrate
-    - python ./src/manage.py populate 10 4 3 2
-    - npm i newman -g
-    - python ./src/manage.py runserver &
-  script:
-    - newman run ./tests/postman/academy_api_collection.json -e ./tests/postman/discourse_api_environment.json
-
-deploy-dev:
-  stage: staging
-  before_script:
-    # Generates to connect to the AWS unit the SSH key.
-    - mkdir -p ~/.ssh
-    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    # Sets the permission to 600 to prevent a problem with AWS
-    # that it's too unprotected.
-    - chmod 600  ~/.ssh/id_rsa
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - apk add --no-cache bash openssh-client
-  script:     
-    - bash ./gitlab-deploy/.gitlab-deploy.staging.sh
-  environment:     
-    name: staging     
-    # Exposes a button that when clicked take you to the defined URL:
-    url: $DEV_DEPLOY_SEVER_URL   
-  only:
-    - develop
-
-deploy-prod:
-  stage: production
-  before_script:
-    # Generates to connect to the AWS unit the SSH key.
-    - mkdir -p ~/.ssh
-    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    # Sets the permission to 600 to prevent a problem with AWS
-    # that it's too unprotected.
-    - chmod 600  ~/.ssh/id_rsa
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - apk add --no-cache bash openssh-client
-  script:     
-    - bash ./gitlab-deploy/.gitlab-deploy.prod.sh   
-  environment:     
-    name: production     
-    # Exposes a button that when clicked take you to the defined URL:
-    url: $DEPLOY_SERVER_URL
   only:
     - master
+    - develop
+  stage: build
+  image: ekino/docker-buildbox:latest-dind-aws
+  script:
+    - $(aws ecr get-login --no-include-email --region us-east-2)
+    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
+    - docker build . -t $REPO -f production.api.dockerfile
+    - docker push $REPO
+    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
+    - docker build . -t $REPO -f production.spa.dockerfile
+    - docker push $REPO
+
+#test:
+#  variables:
+#    HOST_ENV: dev
+#  stage: test
+#  before_script:
+#    - apk add --no-cache bash
+#    - bash ./ci-build-before-testing.sh
+#  script:
+#    - newman run ./tests/postman/academy_api_collection.json -e ./tests/postman/discourse_api_environment.json
+
+deploy-dev:
+  only:
+    - develop
+  variables:
+    API_BASE_URL: api-dev.coretabs.net
+  stage: staging
+  script:
+    - pip install awsebcli
+    - git checkout develop
+    - eb init coretabs-academy -r us-east-2 -p "arn:aws:elasticbeanstalk:us-east-2::platform/Multi-container Docker running on 64bit Amazon Linux/2.11.2"
+    - eb use staging
+    - eb deploy   
+
+deploy-prod:
+  only:
+    - master
+  variables:
+    API_BASE_URL: api.coretabs.net
+  stage: production
+  script:
+    - pip install awsebcli
+    - git checkout master
+    - eb init coretabs-academy -r us-east-2 -p "arn:aws:elasticbeanstalk:us-east-2::platform/Multi-container Docker running on 64bit Amazon Linux/2.11.2"
+    - eb use production
+    - eb deploy
   when: manual

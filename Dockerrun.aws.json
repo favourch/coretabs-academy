@@ -12,17 +12,23 @@
                 "sourcePath": "/var/academy-media"
             },
             "name": "VarAcademy-Media"
+        },
+        {
+            "host": {
+                "sourcePath": "/var/app/current/conf.d"
+            },
+            "name": "Nginx-Conf"
         }
     ],
     "containerDefinitions": [
         {
-            "image": "yaseralnajjar/academy_api:beta4",
+            "image": "619000622287.dkr.ecr.us-east-2.amazonaws.com/academy_api",
             "command": [
                 "sh",
                 "-c",
                 "celery multi start worker1 -A coretabs && memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
             ],
-            "memory": 600,
+            "memory": 100,
             "essential": true,
             "links": [
                 "db"
@@ -51,7 +57,7 @@
                 }
             ],
             "name": "db",
-            "memory": 600,
+            "memory": 100,
             "portMappings": [
                 {
                     "containerPort": 5432,
@@ -60,8 +66,8 @@
             ]
         },
         {
-            "image": "yaseralnajjar/academy_spa:beta4",
-            "memory": 600,
+            "image": "619000622287.dkr.ecr.us-east-2.amazonaws.com/academy_spa",
+            "memory": 100,
             "command": [
                 "sh",
                 "-c",
@@ -74,6 +80,33 @@
                     "containerPort": 3000,
                     "hostPort": 8001
                 }
+            ]
+        },
+        {
+            "image": "nginx:1.15.3-alpine",
+            "memory": 128,
+            "essential": true,
+            "mountPoints": [
+                {
+                    "containerPath": "/etc/nginx/conf.d",
+                    "sourceVolume": "Nginx-Conf"
+                },
+                {
+                    "containerPath": "/var/academy-media",
+                    "sourceVolume": "VarAcademy-Media",
+                    "readOnly": true
+                }
+            ],
+            "name": "reverse-proxy",
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80
+                }
+            ],
+            "links": [
+                "spa",
+                "api"
             ]
         }
     ],
