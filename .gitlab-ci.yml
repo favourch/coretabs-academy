@@ -52,8 +52,6 @@ stages:
 deploy-dev:
   only:
     - develop
-  variables:
-    API_BASE_URL: api-dev.coretabs.net
   stage: staging
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
@@ -63,7 +61,7 @@ deploy-dev:
     - docker build . -t $REPO -f production.api.dockerfile --no-cache
     - docker push $REPO
     - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
-    - docker build . -t $REPO -f production.spa.dockerfile --build-arg API_BASE_URL="api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker build . -t $REPO -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
     - docker push $REPO
   script:
     - pip install awsebcli
