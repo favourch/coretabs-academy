@@ -73,17 +73,17 @@ export default {
   created() {
     this.fnRules = [
       v => !!v || '',
-      v => (v && v.length <= 20) || this.form.fullname_length_error
+      v => (v && v.trim().length <= 20) || this.form.fullname_length_error
     ]
 
     this.emRules = [
       v => !!v || '',
-      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.form.email_validator_error
+      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v.trim()) || this.form.email_validator_error
     ]
 
     this.unRules = [
       v => !!v || '',
-      v => (v && v.length <= 20) || this.form.username_length_error
+      v => (v && v.trim().length <= 20) || this.form.username_length_error
     ]
 
     this.pwRules = [
