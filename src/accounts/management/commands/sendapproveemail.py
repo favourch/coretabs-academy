@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth import get_user_model
-from allauth.account.utils import user_pk_to_url_str
-from accounts.tokens import approve_user_token_generator
+from accounts.models import Batch
 from django.core import mail
 from django.template.loader import render_to_string
 
@@ -15,8 +14,8 @@ class Command(BaseCommand):
         parser.add_argument('batch', type=str)
 
     def handle(self, *args, **options):
-        batch = options['batch']
-        users = User.objects.filter(groups__name=batch)
+        batch_name = options['batch']
+        users = User.objects.filter(groups__name=batch_name)
 
         if not users:
             raise CommandError('No users to email or bad batch name.')
@@ -24,13 +23,11 @@ class Command(BaseCommand):
         with mail.get_connection(backend='django.core.mail.backends.smtp.EmailBackend') as connection:
 
             for user in users:
-                uid = user_pk_to_url_str(user)
-                key = approve_user_token_generator.make_token(user)
                 email = user.email
+                batch = Batch.objects.filter(group__name=batch_name).first()
 
-                url = f'https://coretabs.net/approve-user/{uid}/{key}'
                 context = {'user': user,
-                           'url': url}
+                           'start_date': batch.start_date}
 
                 msg = self.render_mail(
                     'account/email/approve_user',

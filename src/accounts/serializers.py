@@ -33,9 +33,6 @@ from django.template.defaultfilters import filesizeformat
 
 from rest_framework.authtoken.models import Token
 
-from .tokens import approve_user_token_generator
-from allauth.account.utils import url_str_to_user_pk
-
 UserModel = get_user_model()
 
 
@@ -68,9 +65,6 @@ class LoginSerializer(serializers.Serializer):
         if user:
             if not user.is_active:
                 msg = _('User account is disabled.')
-                raise exceptions.ValidationError(msg)
-            if not user.is_approved:
-                msg = _('We will Email you soon.')
                 raise exceptions.ValidationError(msg)
         else:
             msg = _('Unable to log in with provided credentials.')
@@ -178,6 +172,7 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 class UserDetailsSerializer(serializers.ModelSerializer):
     email_status = serializers.SerializerMethodField()
     avatar_url = serializers.SerializerMethodField()
+    batch_status = serializers.SerializerMethodField()
     profile = ProfileSerializer()
     avatar = serializers.ImageField(write_only=True, required=False)
     name = serializers.CharField(source='first_name',
@@ -187,11 +182,14 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ('username', 'email', 'email_status',
-                  'name', 'profile', 'avatar', 'avatar_url')
+                  'name', 'profile', 'avatar', 'avatar_url', 'batch_status')
 
     def get_email_status(self, obj):
         email_address = EmailAddress.objects.get(user=obj)
         return email_address.verified
+
+    def get_batch_status(self, obj):
+        return obj.has_perm('accounts.access_workshops')
 
     def get_avatar_url(self, obj, size=settings.AVATAR_DEFAULT_SIZE):
         for provider_path in settings.AVATAR_PROVIDERS:
@@ -404,28 +402,3 @@ class RegisterSerializer(serializers.Serializer):
 
 class VerifyEmailSerializer(serializers.Serializer):
     key = serializers.CharField()
-
-
-class ApproveUserSerializer(serializers.Serializer):
-    uid = serializers.CharField(required=True)
-    key = serializers.CharField(required=True)
-
-    def validate(self, data):
-        uid = data['uid']
-        key = data['key']
-
-        try:
-            pk = url_str_to_user_pk(uid)
-            self.user = UserModel.objects.get(pk=pk)
-
-            if self.user and not approve_user_token_generator.check_token(self.user, key):
-                raise serializers.ValidationError(_('bad token'))
-
-            return data
-
-        except (ValueError, UserModel.DoesNotExist):
-            raise serializers.ValidationError(_('bad token'))
-
-    def save(self, **kwargs):
-        self.user.is_approved = True
-        self.user.save()

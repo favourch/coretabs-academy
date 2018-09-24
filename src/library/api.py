@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from .permissions import IsApproved
 
 from . import serializers
 from . import models
@@ -20,7 +21,7 @@ class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = models.BaseLesson.objects
     serializer_class = serializers.BaseLessonSerializer
     lookup_field = 'slug'
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsApproved)
 
     def get_queryset(self):
         return self.queryset.with_is_shown(self.request.user).select_subclasses().filter(
@@ -83,7 +84,7 @@ class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
     queryset = models.Workshop.objects
     lookup_field = 'slug'
     serializer_class = serializers.WorkshopSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsApproved)
 
     def get_queryset(self):
         user = self.request.user

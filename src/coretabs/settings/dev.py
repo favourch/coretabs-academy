@@ -41,7 +41,7 @@ CSRF_COOKIE_DOMAIN = '127.0.0.1'
 
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 MANAGERS_EMAILS = ['one@gmail.com', 'two@gmail.com']
 
 # To use SMTP run "python -m smtpd -n -c DebuggingServer localhost:1025"
