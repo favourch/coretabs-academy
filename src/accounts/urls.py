@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     LoginView, LogoutView, UserDetailsView, PasswordChangeView,
     PasswordResetView, PasswordResetConfirmView, ResendConfirmView,
-    RegisterView, VerifyEmailView, ApproveUserView
+    RegisterView, VerifyEmailView,
 )
 
 urlpatterns = [
@@ -11,7 +11,6 @@ urlpatterns = [
     path('password/reset/confirm/', PasswordResetConfirmView.as_view(), name='rest_password_reset_confirm'),
     path('login/', LoginView.as_view(), name='rest_login'),
     path('confirmation/', ResendConfirmView.as_view(), name='resend_confirm_view'),
-    path('approve-user/', ApproveUserView.as_view(), name='approve_user_view'),
 
     # URLs that require a user to be logged in with a valid session / token.
     path('logout/', LogoutView.as_view(), name='rest_logout'),

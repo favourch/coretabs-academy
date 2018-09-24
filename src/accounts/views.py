@@ -21,7 +21,7 @@ from .serializers import (
     TokenSerializer, UserDetailsSerializer, LoginSerializer,
     PasswordResetSerializer, PasswordResetConfirmSerializer,
     PasswordChangeSerializer, RegisterSerializer, VerifyEmailSerializer,
-    ResendConfirmSerializer, ApproveUserSerializer
+    ResendConfirmSerializer,
 )
 from .utils import create_token
 
@@ -265,16 +265,3 @@ class ResendConfirmView(GenericAPIView):
             {'detail': _("تم ارسال بريد التفعيل")},
             status=status.HTTP_200_OK
         )
-
-
-class ApproveUserView(GenericAPIView):
-    permission_classes = (AllowAny,)
-    allowed_methods = ('POST', 'OPTIONS', 'HEAD')
-    serializer_class = ApproveUserSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({"detail": _("User approved.")})

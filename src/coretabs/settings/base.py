@@ -145,7 +145,6 @@ CACHES = {
 
 # Account Settings
 
-AUTH_USER_MODEL = 'accounts.User'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
