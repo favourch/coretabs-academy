@@ -57,9 +57,8 @@ const AuthAPI = {
     }, {
       withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
-    }).then((response) => {
-      this.storeUser(root.$store, response.data)
-      root.$router.push('/account-confirmed')
+    }).then(() => {
+      root.$router.push('/application-submitted')
     }).catch(() => {
       root.$router.push('/404')
     })

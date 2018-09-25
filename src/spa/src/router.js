@@ -9,6 +9,7 @@ import PageComponent from './components/page/page.vue'
 import SignUpComponent from './components/signup/signup.vue'
 import CongratulationsComponent from './components/congratulations/congratulations.vue'
 import ConfirmAccountComponent from './components/confirm-account/confirm-account.vue'
+import ApplicationSubmitted from './components/application-submitted/application-submitted.vue'
 import AccountConfirmedComponent from './components/account-confirmed/account-confirmed.vue'
 import ResetPasswordComponent from './components/reset-password/reset-password.vue'
 import ForgotPasswordComponent from './components/forgot-password/forgot-password.vue'
@@ -25,7 +26,6 @@ import WorkshopComponent from './components/workshop/workshop.vue'
 import NotFoundComponent from './components/not-found/not-found.vue'
 import WorkshopsComponent from './components/workshops/workshops.vue'
 import maintenanceComponent from './components/maintenance/maintenance.vue'
-import ApplicationSubmitted from './components/application-submitted/application-submitted.vue'
 
 import i18n from './i18n/ar/i18n'
 
@@ -71,6 +71,11 @@ const router = new Router({
     name: 'confirm-account',
     path: '/confirm-account/:key',
     component: ConfirmAccountComponent,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'application-submitted',
+    path: '/application-submitted',
+    component: ApplicationSubmitted,
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'account-confirmed',
@@ -158,10 +163,6 @@ const router = new Router({
       component: LessonComponent
     }],
     beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
-  }, {
-    name: 'application-submitted',
-    path: '/application-submitted',
-    component: ApplicationSubmitted
   }]
 })
 
