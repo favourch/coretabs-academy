@@ -10,6 +10,7 @@ import SignUpComponent from './components/signup/signup.vue'
 import CongratulationsComponent from './components/congratulations/congratulations.vue'
 import ConfirmAccountComponent from './components/confirm-account/confirm-account.vue'
 import ApplicationSubmitted from './components/application-submitted/application-submitted.vue'
+import BatchNotStarted from './components/batch-not-started/batch-not-started.vue'
 import AccountConfirmedComponent from './components/account-confirmed/account-confirmed.vue'
 import ResetPasswordComponent from './components/reset-password/reset-password.vue'
 import ForgotPasswordComponent from './components/forgot-password/forgot-password.vue'
@@ -76,6 +77,11 @@ const router = new Router({
     name: 'application-submitted',
     path: '/application-submitted',
     component: ApplicationSubmitted,
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'batch-not-started',
+    path: '/batch-not-started',
+    component: BatchNotStarted,
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'account-confirmed',
