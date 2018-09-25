@@ -2,7 +2,7 @@
   <div class="modules-nav">
     <v-list class="py-0">
       <v-stepper v-model="current.module.index" vertical class="py-0">
-        <v-list-group  v-for="module in modules" :key="`step-${module.index}`" v-model="module.active" :class="isComplete(module) ? 'complete-state' : 'active-state'">
+        <v-list-group  v-for="module in modules" :key="`step-${module.index}`" :value="last_module === module.index" :class="isComplete(module) ? 'complete-state' : 'active-state'">
           <v-list-tile slot="activator">
             <v-stepper-step :step="module.index" :complete="isComplete(module)"><span>{{module.title}}</span></v-stepper-step>
           </v-list-tile>
