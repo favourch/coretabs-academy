@@ -117,15 +117,19 @@ const AuthAPI = {
       withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
-      this.storeUser(root.$store, response.data)
-      if (root.$route.query.next) {
-        window.location = root.$route.query.next
-      } else {
-        if (root.$store.getters.profile('track')) {
-          root.$router.push(`/classroom/${root.$store.getters.profile('track')}/`)
+      if (response.data.user.batch_status) {
+        this.storeUser(root.$store, response.data)
+        if (root.$route.query.next) {
+          window.location = root.$route.query.next
         } else {
-          root.$router.push('/select-track')
+          if (root.$store.getters.profile('track')) {
+            root.$router.push(`/classroom/${root.$store.getters.profile('track')}/`)
+          } else {
+            root.$router.push('/account-confirmed')
+          }
         }
+      } else {
+        root.$router.push('/batch-not-started')
       }
     }).catch((error) => {
       if (error.response) {
