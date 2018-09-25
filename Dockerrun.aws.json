@@ -29,6 +29,7 @@
                 "celery multi start worker1 -A coretabs && memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
             ],
             "essential": true,
+            "memoryReservation": 200,
             "links": [
                 "db"
             ],
@@ -48,6 +49,7 @@
         },
         {
             "essential": true,
+            "memoryReservation": 200,
             "image": "postgres:10.5",
             "mountPoints": [
                 {
@@ -71,6 +73,7 @@
                 "npm start"
             ],
             "essential": true,
+            "memoryReservation": 200,
             "name": "spa",
             "portMappings": [
                 {
@@ -82,6 +85,7 @@
         {
             "image": "nginx:1.15.3-alpine",
             "essential": true,
+            "memoryReservation": 200,
             "mountPoints": [
                 {
                     "containerPath": "/etc/nginx/conf.d",
