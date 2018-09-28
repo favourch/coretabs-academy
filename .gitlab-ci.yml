@@ -49,15 +49,13 @@ stages:
 #  script:
 #    - newman run ./tests/postman/academy_api_collection.json -e ./tests/postman/discourse_api_environment.json
 
-before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-
 deploy-dev:
   only:
     - develop
   stage: staging
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
     - docker push yaseralnajjar/academy_api
     - docker build . -t yaseralnajjar/academy_spa -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
@@ -75,6 +73,7 @@ deploy-prod:
   stage: production
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
     - docker push yaseralnajjar/academy_api
     - docker build . -t yaseralnajjar/academy_sp -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
