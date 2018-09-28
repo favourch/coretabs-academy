@@ -66,7 +66,7 @@ deploy-dev:
   script:
     - pip install awsebcli
     - git checkout develop
-    - eb init coretabs-academy -r us-east-2 -p "arn:aws:elasticbeanstalk:us-east-2::platform/Multi-container Docker running on 64bit Amazon Linux/2.11.2"
+    - eb init coretabs-academy -r us-east-2 -p EB_PLATFORM
     - eb use staging
     - eb deploy   
 
@@ -87,7 +87,7 @@ deploy-prod:
   script:
     - pip install awsebcli
     - git checkout master
-    - eb init coretabs-academy -r us-east-2 -p "arn:aws:elasticbeanstalk:us-east-2::platform/Multi-container Docker running on 64bit Amazon Linux/2.11.2"
+    - eb init coretabs-academy -r us-east-2 -p EB_PLATFORM
     - eb use production
     - eb deploy
   when: manual
