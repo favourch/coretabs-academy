@@ -58,10 +58,10 @@ deploy-dev:
   stage: staging
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
-    - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
-    - docker push yaseralnajjar/academy_api
-    - docker build . -t yaseralnajjar/academy_spa -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
-    - docker push yaseralnajjar/academy_spa
+    - docker build . -t CI_REGISTRY_SPA_IMAGE -f production.api.dockerfile --no-cache
+    - docker push CI_REGISTRY_API_IMAGE
+    - docker build . -t CI_REGISTRY_SPA_IMAGE -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker push CI_REGISTRY_SPA_IMAGE
   script:
     - pip install awsebcli
     - git checkout develop
@@ -75,10 +75,10 @@ deploy-prod:
   stage: production
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
-    - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
-    - docker push yaseralnajjar/academy_api
-    - docker build . -t yaseralnajjar/academy_spa -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
-    - docker push yaseralnajjar/academy_spa
+    - docker build . -t CI_REGISTRY_API_IMAGE -f production.api.dockerfile --no-cache
+    - docker push CI_REGISTRY_API_IMAGE
+    - docker build . -t CI_REGISTRY_SPA_IMAGE -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker push CI_REGISTRY_SPA_IMAGE
   script:
     - pip install awsebcli
     - git checkout master
