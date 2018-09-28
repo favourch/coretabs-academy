@@ -59,10 +59,8 @@ deploy-dev:
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
     - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
-    - docker tag academy_api yaseralnajjar/academy_api
     - docker push yaseralnajjar/academy_api
     - docker build . -t yaseralnajjar/academy_spa -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
-    - docker tag academy_spa yaseralnajjar/academy_spa
     - docker push yaseralnajjar/academy_spa
   script:
     - pip install awsebcli
@@ -78,10 +76,8 @@ deploy-prod:
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
     - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
-    - docker tag academy_api yaseralnajjar/academy_api
     - docker push yaseralnajjar/academy_api
     - docker build . -t yaseralnajjar/academy_sp -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
-    - docker tag academy_spa yaseralnajjar/academy_spa
     - docker push yaseralnajjar/academy_spa
   script:
     - pip install awsebcli
