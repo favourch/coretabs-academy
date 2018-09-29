@@ -55,18 +55,15 @@ deploy-dev:
   stage: staging
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
-    - pip install awscli
-    - $(aws ecr get-login --no-include-email --region us-east-2)
-    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
-    - docker build . -t $REPO -f production.api.dockerfile --no-cache
-    - docker push $REPO
-    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
-    - docker build . -t $REPO -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
-    - docker push $REPO
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
+    - docker push yaseralnajjar/academy_api
+    - docker build . -t yaseralnajjar/academy_spa -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker push yaseralnajjar/academy_spa
   script:
     - pip install awsebcli
     - git checkout develop
-    - eb init coretabs-academy -r us-east-2 -p "arn:aws:elasticbeanstalk:us-east-2::platform/Multi-container Docker running on 64bit Amazon Linux/2.11.2"
+    - eb init coretabs-academy -r us-east-2 -p "$EB_PLATFORM"
     - eb use staging
     - eb deploy   
 
@@ -76,18 +73,15 @@ deploy-prod:
   stage: production
   before_script:
     - apk add --no-cache python py2-pip bash git openssh
-    - pip install awscli
-    - $(aws ecr get-login --no-include-email --region us-east-2)
-    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_api
-    - docker build . -t $REPO -f production.api.dockerfile --no-cache
-    - docker push $REPO
-    - REPO=$AWS_NUM.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/academy_spa
-    - docker build . -t $REPO -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
-    - docker push $REPO
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
+    - docker push yaseralnajjar/academy_api
+    - docker build . -t yaseralnajjar/academy_sp -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker push yaseralnajjar/academy_spa
   script:
     - pip install awsebcli
     - git checkout master
-    - eb init coretabs-academy -r us-east-2 -p "arn:aws:elasticbeanstalk:us-east-2::platform/Multi-container Docker running on 64bit Amazon Linux/2.11.2"
+    - eb init coretabs-academy -r us-east-2 -p "$EB_PLATFORM"
     - eb use production
     - eb deploy
   when: manual

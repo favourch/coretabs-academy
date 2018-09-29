@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'djcelery_email',
+
+    'storages',
 ]
 
 MIDDLEWARE = [

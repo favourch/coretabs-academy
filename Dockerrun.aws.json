@@ -22,12 +22,13 @@
     ],
     "containerDefinitions": [
         {
-            "image": "619000622287.dkr.ecr.us-east-2.amazonaws.com/academy_api",
+            "image": "yaseralnajjar/academy_api",
             "command": [
                 "sh",
                 "-c",
                 "celery multi start worker1 -A coretabs && memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
             ],
+            "memoryReservation": 100,
             "essential": true,
             "memoryReservation": 100,
             "links": [
@@ -58,6 +59,7 @@
                 }
             ],
             "name": "db",
+            "memoryReservation": 100,
             "portMappings": [
                 {
                     "containerPort": 5432,
@@ -66,7 +68,8 @@
             ]
         },
         {
-            "image": "619000622287.dkr.ecr.us-east-2.amazonaws.com/academy_spa",
+            "image": "yaseralnajjar/academy_spa",
+            "memoryReservation": 100,
             "command": [
                 "sh",
                 "-c",
@@ -84,6 +87,7 @@
         },
         {
             "image": "nginx:1.15.3-alpine",
+            "memoryReservation": 128,
             "essential": true,
             "memoryReservation": 100,
             "mountPoints": [
