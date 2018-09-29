@@ -42,4 +42,6 @@ RUN pip install -r requirements.txt
 
 RUN apk del deps
 
+RUN mkdir static
+
 RUN python manage.py collectstatic
