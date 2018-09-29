@@ -76,7 +76,6 @@ const WorkshopsAPI = {
       }
       response.data.modules.forEach((module, moduleIndex) => {
         workshop.modules.push({
-          active: true,
           title: module.title,
           index: moduleIndex + 1,
           url: {

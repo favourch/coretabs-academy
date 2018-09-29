@@ -6,6 +6,16 @@ export default {
     }
   }),
   props: ['modules'],
+  computed: {
+    last_module() {
+      let module = this.modules.find(module => {
+        return module.lessons.find(lesson => {
+          return lesson.index === this.$store.getters.profile('last_opened_lesson')
+        })
+      })
+      return module.index
+    }
+  },
   created() {
     if (typeof this.$route.params.module !== 'undefined') {
       this.current.module = this.$api.getModuleId(this.modules)

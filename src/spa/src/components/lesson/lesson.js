@@ -184,6 +184,10 @@ export default {
         src = `${this.$parent.current.lesson.markdown.replace(/[a-zA-Z-]+\.md/, '')}${src}`
         img.src = src
       })
+
+      document.querySelectorAll('.lesson-markdown a').forEach((link) => {
+        link.setAttribute('target', '_blank')
+      })
   
       document.querySelectorAll('.lesson-markdown pre code, .lesson-quiz pre code').forEach((code) => {
         hljs.highlightBlock(code)
