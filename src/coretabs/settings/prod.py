@@ -32,8 +32,8 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 # CSRF and Session
-SESSION_COOKIE_DOMAIN = os.environ.get('COOKIE_DOMAINS').split(';')
-CSRF_COOKIE_DOMAIN = os.environ.get('COOKIE_DOMAINS').split(';')
+SESSION_COOKIE_DOMAIN = os.environ.get('COOKIE_DOMAIN')
+CSRF_COOKIE_DOMAIN = os.environ.get('COOKIE_DOMAIN')
 
 
 # EMAIL config
