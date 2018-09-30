@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'storages',
 ]
 
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'coretabs.middleware.CrossDomainSessionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -161,7 +163,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-# Mock server 
+# Mock server
 DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io'
 DISCOURSE_API_KEY = 'anilliqnmsakmcnahojdwklaklsa'
 DISCOURSE_API_USERNAME = 'discourse_mock'
@@ -177,3 +179,8 @@ AVATAR_PROVIDERS = (
 
 EMAIL_SUBJECT_PREFIX = ''
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+
+# CSRF and Session
+DEFAULT_COOKIE_DOMAIN = 'default_cookie_domain'
+SESSION_COOKIE_DOMAIN = DEFAULT_COOKIE_DOMAIN
+CSRF_COOKIE_DOMAIN = DEFAULT_COOKIE_DOMAIN

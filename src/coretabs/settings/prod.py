@@ -31,9 +31,10 @@ CORS_ORIGIN_WHITELIST = os.environ.get('CORS_ORIGIN_WHITELIST').split(';')
 CORS_ALLOW_CREDENTIALS = True
 
 
-# CSRF and Session
-SESSION_COOKIE_DOMAIN = os.environ.get('COOKIE_DOMAIN')
-CSRF_COOKIE_DOMAIN = os.environ.get('COOKIE_DOMAIN')
+# CSRF & Session Domains
+# Sample env var: 'coretabs.net = .coretabs.net; 127.0.0.1 = 127.0.0.1'
+COOKIE_DOMAINS = dict((host, target) for host, target in (a.split('=')
+                                                          for a in os.environ.get('COOKIE_DOMAINS').split(';')))
 
 
 # EMAIL config
