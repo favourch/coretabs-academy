@@ -35,13 +35,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 
-# CSRF and Session
-SESSION_COOKIE_DOMAIN = '127.0.0.1'
-CSRF_COOKIE_DOMAIN = '127.0.0.1'
+# CSRF & Session Domains
+COOKIE_DOMAINS = {
+    'coretabs.net': '.coretabs.net',
+    '127.0.0.1': '127.0.0.1',
+    'localhost': '127.0.0.1'
+}
 
 
 # Email settings
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+
 
 # run "python -m smtpd -n -c DebuggingServer localhost:1025"
 EMAIL_HOST = 'localhost'
@@ -55,7 +59,7 @@ RAVEN_CONFIG = {
 }
 
 # Discourse Settings
-# Mock server 
+# Mock server
 DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io'
 DISCOURSE_API_KEY = 'anilliqnmsakmcnahojdwklaklsa'
 DISCOURSE_API_USERNAME = 'discourse_mock'

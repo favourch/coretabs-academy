@@ -1,7 +1,6 @@
-FROM python:3.6.6-alpine3.8
+FROM python:3.6.6-alpine3.8 as base
 
 # Install libraries
-
 RUN apk update
 RUN apk upgrade
 RUN apk add memcached
@@ -27,19 +26,25 @@ RUN apk add --no-cache --virtual .build-dependencies build-base curl-dev \
     && pip install pycurl \
     && apk del .build-dependencies
 
-#RUN PATH=$PATH:/opt/local/lib/postgresql91/bin/
-
-# Copy from current folder
-
-COPY ./src/ ./djangoapp
+# Copy requirements
+COPY ./src/requirements.txt ./djangoapp/requirements.txt
 WORKDIR ./djangoapp
 
 # Intall dependencies 
-
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
 RUN pip install -r requirements.txt
 
+# Dependencies ready, now let's copy the source code
+FROM base
+
+# Copy source code
+COPY ./src/ ./djangoapp
+WORKDIR ./djangoapp
+
+# Clean up
 RUN apk del deps
 
+# Collect static files
+RUN mkdir static
 RUN python manage.py collectstatic

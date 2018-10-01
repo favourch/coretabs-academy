@@ -16,13 +16,7 @@ DATABASES = {
 
 
 # Hosts
-ALLOWED_HOSTS = [
-    'www.coretabs.net',
-    '.coretabs.net',
-    '0.0.0.0',
-    '.compute.amazonaws.com',
-    '.elasticbeanstalk.com' 
-]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(';')
 
 
 # URLs
@@ -33,14 +27,14 @@ LOGIN_URL = SPA_BASE_URL + '/signin'
 
 # Cors Settings
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = (
-    'spa.coretabs.net', 'www.coretabs.net', 'coretabs.net')
+CORS_ORIGIN_WHITELIST = os.environ.get('CORS_ORIGIN_WHITELIST').split(';')
 CORS_ALLOW_CREDENTIALS = True
 
 
-# CSRF and Session
-SESSION_COOKIE_DOMAIN = '.coretabs.net'
-CSRF_COOKIE_DOMAIN = '.coretabs.net'
+# CSRF & Session Domains
+# Sample env var: 'coretabs.net = .coretabs.net; 127.0.0.1 = 127.0.0.1'
+COOKIE_DOMAINS = dict((host, target) for host, target in (a.split('=')
+                                                          for a in os.environ.get('COOKIE_DOMAINS').split(';')))
 
 
 # EMAIL config
@@ -93,7 +87,8 @@ REST_FRAMEWORK.update({
 # Celery
 AWS_ACCESS_KEY_ID = quote_plus(os.environ.get('AWS_ACCESS_KEY_ID'))
 AWS_SECRET_ACCESS_KEY = quote_plus(os.environ.get('AWS_SECRET_ACCESS_KEY'))
-CELERY_BROKER_URL = "sqs://{}:{}@".format(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+CELERY_BROKER_URL = "sqs://{}:{}@".format(
+    AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 
 
 # Media Settings
@@ -101,26 +96,29 @@ MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware', ]
 
 # set S3 as the place to store your files.
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = os.environ.get('S3_AWS_ACCESS_KEY_ID', '')
 AWS_SECRET_ACCESS_KEY = os.environ.get('S3_AWS_SECRET_ACCESS_KEY', '')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
 
-AWS_QUERYSTRING_AUTH = False # This will make sure that the file URL does not have unnecessary parameters like your access key.
+# This will make sure that the file URL does not have unnecessary parameters like your access key.
+AWS_QUERYSTRING_AUTH = False
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-#static media settings
+# static media settings
 
-STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
-MEDIA_URL = STATIC_URL + 'media/'
-STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), )
+STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static'
+STATICFILES_DIRS = ( 
+    os.path.join(BASE_DIR, 'static')
+)
 STATIC_ROOT = 'static_root'
 ADMIN_MEDIA_PREFIX = f'{STATIC_URL}admin/'
 
 STATICFILES_FINDERS = (
-'django.contrib.staticfiles.finders.FileSystemFinder',
-'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+DEFAULT_FILE_STORAGE = 'coretabs.storage_backends.MediaStorage'
