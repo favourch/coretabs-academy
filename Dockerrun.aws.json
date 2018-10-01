@@ -26,7 +26,7 @@
             "command": [
                 "sh",
                 "-c",
-                "celery multi start worker1 -A coretabs && memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --error-logfile /var/log/gunicorn/error.log --capture-output --log-level=DEBUG"
+                "celery multi start worker1 -A coretabs && memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
             ],
             "memoryReservation": 100,
             "essential": true,
