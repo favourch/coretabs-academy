@@ -76,7 +76,7 @@ deploy-prod:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker build . -t yaseralnajjar/academy_api -f production.api.dockerfile --no-cache
     - docker push yaseralnajjar/academy_api
-    - docker build . -t yaseralnajjar/academy_sp -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker build . -t yaseralnajjar/academy_spa -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
     - docker push yaseralnajjar/academy_spa
   script:
     - pip install awsebcli
