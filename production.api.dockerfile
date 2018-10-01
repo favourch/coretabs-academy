@@ -27,8 +27,8 @@ RUN apk add --no-cache --virtual .build-dependencies build-base curl-dev \
     && apk del .build-dependencies
 
 # Copy requirements
-COPY ./src/requirements.txt ./djangoapp/requirements.txt
-WORKDIR ./djangoapp
+COPY ./src/requirements.txt /var/djangoapp/requirements.txt
+WORKDIR /var/djangoapp
 
 # Intall dependencies 
 RUN pip install --upgrade pip
@@ -39,8 +39,8 @@ RUN pip install -r requirements.txt
 FROM base
 
 # Copy source code
-COPY ./src/ ./djangoapp
-WORKDIR ./djangoapp
+COPY ./src/ /var/djangoapp
+WORKDIR /var/djangoapp
 
 # Clean up
 RUN apk del deps
