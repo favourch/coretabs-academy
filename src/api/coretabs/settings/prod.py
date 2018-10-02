@@ -110,9 +110,9 @@ AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 # static media settings
 
 STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static'
-STATICFILES_DIRS = ( 
+STATICFILES_DIRS = [(
     os.path.join(BASE_DIR, 'static')
-)
+)]
 STATIC_ROOT = 'static_root'
 ADMIN_MEDIA_PREFIX = f'{STATIC_URL}admin/'
 
