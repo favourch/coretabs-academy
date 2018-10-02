@@ -75,10 +75,10 @@ const AuthAPI = {
       root.alert.success = true
       root.alert.message = root.i18n.success_message_text
       return false
-    }).catch(() => {
+    }).catch((error) => {
       root.alert.error = true
       if (error.response.status === 400) {
-        root.alert.message = error.response.data.email
+        root.alert.message = error.response.data.email[0]
       } else {
         root.alert.message = root.i18n.error_message_text
       }
