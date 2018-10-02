@@ -29,7 +29,7 @@ class CrossDomainSessionMiddleware:
     def __call__(self, request):
         response = self.process_request(request)
         if response.cookies:
-            host = request.get_host().split(':')[0]
+            host = request.META['HTTP_ORIGIN']
             # check if it's a different domain
             if host in settings.COOKIE_DOMAINS:
                 for cookie in response.cookies:
