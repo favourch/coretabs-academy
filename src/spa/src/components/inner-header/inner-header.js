@@ -64,8 +64,10 @@ export default {
     if (this.avatar_url.slice(0, 4) !== 'http') {
       this.avatar_url = `${process.env.API_BASE_URL || ''}${this.$store.getters.user('avatar_url')}`
     } else {
-      this.avatar_url = null
-      this.avatar_letter = this.$store.getters.user('name')[0]
+      if (this.avatar_url.search(/coretabs-academy-media/) === -1) {
+        this.avatar_url = null
+        this.avatar_letter = this.$store.getters.user('name')[0]
+      }
     }
   },
   async mounted() {
