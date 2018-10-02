@@ -1,7 +1,7 @@
 FROM coretabsacademy/academy_api_base
 
 # Copy source code
-COPY ./src/ /var/djangoapp
+COPY ./src/api/ /var/djangoapp
 WORKDIR /var/djangoapp
 
 # Clean up

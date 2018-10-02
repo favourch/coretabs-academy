@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: ./development.api.dockerfile
     volumes:
-      - ./src/:/djangoapp/
+      - ./src/api/:/djangoapp/
       - /djangoapp/venv/
     ports:
       - "8000:8000"

@@ -20,7 +20,7 @@ services:
 
     volumes:
       - /var/academy-media:/djangoapp/media
-    #  - ./src/venv/:/djangoapp/venv/
+    #  - ./src/api/venv/:/djangoapp/venv/
     environment:
       HOST_ENV: $HOST_ENV
       API_BASE_URL: $API_BASE_URL
