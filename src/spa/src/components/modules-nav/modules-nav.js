@@ -13,7 +13,8 @@ export default {
           return lesson.index === this.$store.getters.profile('last_opened_lesson')
         })
       })
-      return module.index
+      
+      return module ? module.index : this.modules[0].lessons[0].index
     }
   },
   created() {
