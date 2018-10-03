@@ -1,4 +1,4 @@
-FROM coretabsacademy/academy_spa_base as build-stage
+FROM coretabsacademy/academy_spa_builder as build-stage
 
 ARG API_BASE_URL
 ARG MAINTENANCE_MODE
@@ -11,11 +11,8 @@ RUN npm run build
 
 # build finished here... ready now for production
 
-FROM node:8.11.4-alpine
+FROM coretabsacademy/academy_spa_launcher
 
 WORKDIR /app
 COPY --from=build-stage /app/static/ ./static/
 COPY --from=build-stage /app/express.js ./express.js
-COPY --from=build-stage /app/package.express.json ./package.json
-
-RUN npm install
