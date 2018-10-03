@@ -58,10 +58,8 @@ build-base:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker build . -t coretabsacademy/academy_api_base -f production.api.base.dockerfile --no-cache
     - docker push coretabsacademy/academy_api_base
-    - docker build . -t coretabsacademy/academy_spa_builder -f production.spa.builder.dockerfile --no-cache
-    - docker push coretabsacademy/academy_spa_builder
-    - docker build . -t coretabsacademy/academy_spa_launcher -f production.spa.launcher.dockerfile --no-cache
-    - docker push coretabsacademy/academy_spa_launcher
+    - docker build . -t coretabsacademy/academy_spa_base -f production.spa.base.dockerfile --no-cache
+    - docker push coretabsacademy/academy_spa_base
 
 deploy-dev:
   only:
