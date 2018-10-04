@@ -186,7 +186,9 @@ export default {
       })
 
       document.querySelectorAll('.lesson-markdown a').forEach((link) => {
-        link.setAttribute('target', '_blank')
+        if(!link.getAttribute('target')) {
+          link.setAttribute('target', '_blank')
+        }
       })
   
       document.querySelectorAll('.lesson-markdown pre code, .lesson-quiz pre code').forEach((code) => {
