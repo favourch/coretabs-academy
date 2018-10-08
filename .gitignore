@@ -5,6 +5,7 @@ db.sqlite3
 secrets.api.env
 secrets.db.env
 .env
+dev_secrets.py
 
 # dependencies
 node_modules
