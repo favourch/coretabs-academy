@@ -1,13 +1,17 @@
 from django.contrib.admin import ModelAdmin
-from coretabs.admin import site
-from rest_framework.authtoken.admin import Token, TokenAdmin
-from allauth.account.admin import EmailAddress, EmailAddressAdmin
 from django.contrib.auth.admin import Group, GroupAdmin, User, UserAdmin
 from django.contrib.sites.admin import Site, SiteAdmin
-from .models import Batch
 
 from django.core import mail
 from django.template.loader import render_to_string
+
+from rest_framework.authtoken.admin import Token, TokenAdmin
+from allauth.account.admin import EmailAddress, EmailAddressAdmin
+
+from coretabs.admin import site
+from coretabs import settings
+
+from .models import Batch
 
 
 class BatchAdmin(ModelAdmin):
