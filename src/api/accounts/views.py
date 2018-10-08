@@ -231,6 +231,11 @@ class VerifyEmailView(APIView, ConfirmEmailView):
         self.kwargs['key'] = self.serializer.validated_data['key']
         confirmation = self.get_object()
         confirmation.confirm(self.request)
+
+        requests.post(f'https://api.mailgun.net/v3/lists/{settings.MAILGUN_MEMBERS_LIST}/members',
+                        auth=('api', settings.MAILGUN_API_KEY),
+                        data={'address': confirmation.email_address.email})
+
         return Response({"detail": _("Email Confirmed")}, status=status.HTTP_200_OK)
 
     # def login_on_confirm(self, confirmation):

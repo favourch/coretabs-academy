@@ -48,6 +48,9 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 MANAGERS_EMAILS = os.environ.get('MANAGERS_EMAILS').split(';')
 
+MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY')
+MAILGUN_MEMBERS_LIST = os.environ.get('MAILGUN_MEMBERS_LIST')
+
 
 # Discourse Settings
 DISCOURSE_BASE_URL = os.environ.get('DISCOURSE_BASE_URL')
