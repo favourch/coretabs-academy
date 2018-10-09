@@ -13,28 +13,21 @@ from coretabs import settings
 
 from .models import Batch
 
-
 class BatchAdmin(ModelAdmin):
     actions = ['send_approval_emails']
 
     def send_approval_emails(self, request, queryset):
         for batch in queryset:
-            name = batch.group.name
-            users = User.objects.filter(groups__name=name)
+            context = {'start_date': batch.start_date,}
 
-            with mail.get_connection(backend='django.core.mail.backends.smtp.EmailBackend') as connection:
-                for user in users:
-                    email = user.email
-                    context = {'username': user.username,
-                               'start_date': batch.start_date}
-                    msg = self.render_mail(
+            msg = self.render_mail(
                         'account/email/approve_user',
-                        email,
-                        context,
-                        connection)
-                    msg.send()
+                        f'{batch.group.name}@{settings.API_BASE_URL}',
+                        context)
+            msg.send()
+                    
 
-    def render_mail(self, template_prefix, email, context, connection):
+    def render_mail(self, template_prefix, email, context):
         subject = render_to_string('{0}_subject.txt'.format(template_prefix),
                                    context)
         # remove superfluous line breaks
@@ -46,8 +39,7 @@ class BatchAdmin(ModelAdmin):
 
         msg = mail.EmailMessage(subject=subject,
                                 body=body,
-                                to=[email],
-                                connection=connection)
+                                to=[email])
         msg.content_subtype = 'html'
         return msg
 

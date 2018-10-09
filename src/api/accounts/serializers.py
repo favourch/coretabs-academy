@@ -402,3 +402,11 @@ class RegisterSerializer(serializers.Serializer):
 
 class VerifyEmailSerializer(serializers.Serializer):
     key = serializers.CharField()
+
+class MailingListSerializer(serializers.ModelSerializer):
+    address = serializers.EmailField(source='email')
+    name = serializers.CharField(source='first_name')
+
+    class Meta:
+        model = UserModel
+        fields = ('address', 'name')
