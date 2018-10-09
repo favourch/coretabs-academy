@@ -51,6 +51,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 MANAGERS_EMAILS = ['one@gmail.com', 'two@gmail.com']
+MAILGUN_LIST_DOMAIN = 'api.coretabs.net'
 
 
 # Logging settings

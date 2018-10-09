@@ -66,7 +66,7 @@ class Batch(models.Model):
 
     def prepare_mailing_list(self):
         group_name = self.group.name
-        mailing_list = f'{group_name}@{settings.API_BASE_URL}'
+        mailing_list = f'{group_name}@{settings.MAILGUN_LIST_DOMAIN}'
         
         self._create_mailing_list(mailing_list)
         self._add_group_into_mailing_list(group_name, mailing_list)
@@ -95,7 +95,7 @@ class Batch(models.Model):
 
 @receiver(post_delete, sender=Batch, dispatch_uid = 'delete_batch')
 def delete_batch_group_with_mailing_list(sender, instance, **kwargs):
-    requests.delete(f'https://api.mailgun.net/v3/lists/{instance.group.name}@{settings.API_BASE_URL}',
+    requests.delete(f'https://api.mailgun.net/v3/lists/{instance.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
                         auth=('api', settings.MAILGUN_API_KEY))
 
     instance.group.delete()

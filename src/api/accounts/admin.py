@@ -22,7 +22,7 @@ class BatchAdmin(ModelAdmin):
 
             msg = self.render_mail(
                         'account/email/approve_user',
-                        f'{batch.group.name}@{settings.API_BASE_URL}',
+                        f'{batch.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
                         context)
             msg.send()
                     

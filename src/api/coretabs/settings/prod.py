@@ -50,6 +50,7 @@ MANAGERS_EMAILS = os.environ.get('MANAGERS_EMAILS').split(';')
 
 MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY')
 MAILGUN_MEMBERS_LIST = os.environ.get('MAILGUN_MEMBERS_LIST')
+MAILGUN_LIST_DOMAIN = os.environ.get('MAILGUN_LIST_DOMAIN')
 
 
 # Discourse Settings
