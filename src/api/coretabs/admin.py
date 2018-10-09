@@ -6,6 +6,8 @@ from django.views.decorators.cache import never_cache
 from functools import update_wrapper
 from django.views.decorators.csrf import csrf_protect
 
+from coretabs import settings
+
 
 class MyAdminSite(AdminSite):
 
@@ -33,4 +35,7 @@ class MyAdminSite(AdminSite):
         return update_wrapper(inner, view)
 
 
-site = MyAdminSite()
+if settings.is_production:
+    site = MyAdminSite()
+else:
+    site = AdminSite()
