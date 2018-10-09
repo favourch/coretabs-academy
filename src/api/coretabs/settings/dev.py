@@ -37,14 +37,15 @@ CORS_ALLOW_CREDENTIALS = True
 
 # CSRF & Session Domains
 COOKIE_DOMAINS = {
-    'coretabs.net': '.coretabs.net',
-    '127.0.0.1': '127.0.0.1',
-    'localhost': '127.0.0.1'
+    'https://coretabs.net': '.coretabs.net',
+    'http://127.0.0.1:8000': '127.0.0.1',
+    'http://127.0.0.1:8080': '127.0.0.1',
+    'http://localhost:8080': '127.0.0.1'
 }
 
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # run "python -m smtpd -n -c DebuggingServer localhost:1025"
 EMAIL_HOST = 'localhost'
