@@ -50,7 +50,7 @@ class Batch(models.Model):
 
     def _add_group_into_mailing_list(self, group_name, mailing_list):
         offset = 0
-        emails_per_call = 2
+        emails_per_call = 900
         group_users = User.objects.filter(groups__name=group_name)
 
         current_members = group_users.values('email', 'first_name')[offset:offset + emails_per_call]
