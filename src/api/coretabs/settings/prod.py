@@ -89,8 +89,8 @@ REST_FRAMEWORK.update({
 
 
 # Celery
-AWS_ACCESS_KEY_ID = quote_plus(os.environ.get('AWS_ACCESS_KEY_ID'))
-AWS_SECRET_ACCESS_KEY = quote_plus(os.environ.get('AWS_SECRET_ACCESS_KEY'))
+AWS_ACCESS_KEY_ID = quote_plus(os.environ.get('CELERY_AWS_ACCESS_KEY_ID'))
+AWS_SECRET_ACCESS_KEY = quote_plus(os.environ.get('CELERY_AWS_SECRET_ACCESS_KEY'))
 CELERY_BROKER_URL = "sqs://{}:{}@".format(
     AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 
