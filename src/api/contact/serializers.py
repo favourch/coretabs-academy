@@ -13,7 +13,7 @@ class ContactSerializer(serializers.Serializer):
     def render_mail(self, template_prefix, emails, context):
         subject = render_to_string(f'{template_prefix}_subject.txt', context)
         subject = ''.join(subject.splitlines()).strip()
-        from_email = settings.DEFAULT_FROM_EMAIL
+        from_email = settings.EMAIL_DEFAULT_FROM
         template_name = f'{template_prefix}_message.html'
         body = render_to_string(template_name, context)
         msg = EmailMessage(subject, body, from_email, emails)
@@ -26,5 +26,5 @@ class ContactSerializer(serializers.Serializer):
             'email': self.validated_data['email'],
             'body': self.validated_data['body'],
         }
-        to_emails = settings.MANAGERS_EMAILS + [self.validated_data['email']]
+        to_emails = settings.EMAILS_MANAGERS + [self.validated_data['email']]
         self.render_mail('contact/email/contact_email', to_emails, ctx)

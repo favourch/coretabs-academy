@@ -50,7 +50,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # run "python -m smtpd -n -c DebuggingServer localhost:1025"
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
-MANAGERS_EMAILS = ['one@gmail.com', 'two@gmail.com']
+EMAILS_MANAGERS = ['one@gmail.com', 'two@gmail.com']
 MAILGUN_LIST_DOMAIN = 'api.coretabs.net'
 
 
