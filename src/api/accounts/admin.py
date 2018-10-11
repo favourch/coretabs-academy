@@ -14,7 +14,17 @@ from coretabs import settings
 from .models import Batch
 
 class BatchAdmin(ModelAdmin):
-    actions = ['send_approval_emails']
+    actions = ['send_approval_emails','send_starting_batch_details']
+
+    def send_starting_batch_details(self, request, queryset):
+        for batch in queryset:
+            context = {'start_date': batch.start_date,}
+
+            msg = self.render_mail(
+                        'account/email/starting_batch_details',
+                        f'{batch.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
+                        context)
+            msg.send()
 
     def send_approval_emails(self, request, queryset):
         for batch in queryset:
