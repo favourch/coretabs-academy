@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Approvement Email{% endblocktrans %}
+{% blocktrans %}تهانينا تم قبولك{% endblocktrans %}
 {% endautoescape %}
