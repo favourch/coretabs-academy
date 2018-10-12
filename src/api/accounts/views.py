@@ -29,6 +29,8 @@ from allauth.account.views import ConfirmEmailView
 from allauth.account.utils import complete_signup, perform_login
 from allauth.account import app_settings as allauth_settings
 
+from .tasks import discourse_logout
+
 sensitive_post_parameters_m = method_decorator(
     sensitive_post_parameters(
         'password', 'old_password', 'new_password1', 'new_password2'
@@ -96,27 +98,12 @@ class LogoutView(APIView):
             pass
 
         if request.user.id:
-            self.discourse_logout(request)
+            discourse_logout.delay(request.user.id)
 
         django_logout(request)
 
         return Response({'detail': _("تم تسجيل الخروج بنجاح")},
                         status=status.HTTP_200_OK)
-
-    ## TODO: move this to utils
-    def discourse_logout(self, request):
-        data = {'api_key': settings.DISCOURSE_API_KEY,
-                'api_username': settings.DISCOURSE_API_USERNAME}
-
-        user = requests.get(settings.DISCOURSE_BASE_URL +
-                            f'/users/by-external/{request.user.id}.json', data=data)
-
-        user = user.json()
-        user_id = user['user']['id']
-
-        url = settings.DISCOURSE_BASE_URL + f'/admin/users/{user_id}/log_out/'
-
-        r = requests.post(url, data=data)
 
 
 class UserDetailsView(RetrieveUpdateAPIView):
@@ -237,22 +224,6 @@ class VerifyEmailView(APIView, ConfirmEmailView):
                         data={'address': confirmation.email_address.email})
 
         return Response({"detail": _("Email Confirmed")}, status=status.HTTP_200_OK)
-
-    # def login_on_confirm(self, confirmation):
-    #     self.user = confirmation.email_address.user
-    #     if self.user and self.request.user.is_anonymous:
-    #         return perform_login(self.request,
-    #                              self.user,
-    #                              'none')
-    #
-    # def get_response(self):
-    #     token = create_token(self.token_model, self.user, self.serializer)
-    #     serializer_class = TokenSerializer
-    #
-    #     serializer = serializer_class(instance=token,
-    #                                   context={'request': self.request})
-    #
-    #     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ResendConfirmView(GenericAPIView):

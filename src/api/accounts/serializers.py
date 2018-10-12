@@ -6,8 +6,6 @@ from django.contrib.auth.forms import SetPasswordForm
 from django.conf import settings
 from django.utils.module_loading import import_string
 
-from .utils import sync_sso
-
 from rest_framework import serializers, exceptions
 from allauth.account.forms import ResetPasswordForm, default_token_generator
 
@@ -32,6 +30,8 @@ from avatar.signals import avatar_updated
 from django.template.defaultfilters import filesizeformat
 
 from rest_framework.authtoken.models import Token
+
+from .tasks import discourse_sync_sso
 
 UserModel = get_user_model()
 
@@ -279,9 +279,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             self._update_avatar(instance, request)
 
         instance.save()
-
-        sync_sso(instance)
-
+        discourse_sync_sso.delay(instance.id)
         return instance
 
 
@@ -379,9 +377,6 @@ class RegisterSerializer(serializers.Serializer):
             raise serializers.ValidationError(_("The two password fields didn't match."))
         return data
 
-    def custom_signup(self, request, user):
-        sync_sso(user)
-
     def get_cleaned_data(self):
         return {
             'username': self.validated_data.get('username', ''),
@@ -395,13 +390,14 @@ class RegisterSerializer(serializers.Serializer):
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
         adapter.save_user(request, user, self)
-        self.custom_signup(request, user)
         setup_user_email(request, user, [])
+        discourse_sync_sso.delay(user.id)
         return user
 
 
 class VerifyEmailSerializer(serializers.Serializer):
     key = serializers.CharField()
+
 
 class MailingListSerializer(serializers.ModelSerializer):
     address = serializers.EmailField(source='email')
