@@ -11,7 +11,7 @@ from django.dispatch import receiver
 
 from rest_framework.renderers import JSONRenderer
 
-from accounts.serializers import MailingListSerializer
+from .serializers import MailingListSerializer
 
 from coretabs import settings
 
