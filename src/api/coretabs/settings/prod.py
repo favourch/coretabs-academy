@@ -37,6 +37,10 @@ COOKIE_DOMAINS = dict((host, target) for host, target in (a.split('=')
                                                           for a in os.environ.get('COOKIE_DOMAINS').split(';')))
 
 
+DEFAULT_COOKIE_DOMAIN = '127.0.0.1'
+SESSION_COOKIE_DOMAIN = DEFAULT_COOKIE_DOMAIN
+CSRF_COOKIE_DOMAIN = DEFAULT_COOKIE_DOMAIN
+
 # EMAIL config
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
