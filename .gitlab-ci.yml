@@ -70,8 +70,8 @@ deploy-dev:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker build . -t coretabsacademy/academy_api -f production.api.dockerfile --no-cache
     - docker push coretabsacademy/academy_api
-    - docker build . -t coretabsacademy/academy_spa -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
-    - docker push coretabsacademy/academy_spa
+    - docker build . -t coretabsacademy/academy_spa_staging -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
+    - docker push coretabsacademy/academy_spa_staging
   script:
     - pip install awsebcli
     - git checkout develop
@@ -93,7 +93,10 @@ deploy-prod:
   script:
     - pip install awsebcli
     - git checkout master
+    - cp Dockerrun.aws.production.json Dockerrun.aws.json
+    - rm Dockerrun.aws.production.json
+    - git add .
     - eb init coretabs-academy -r us-east-2 -p "$EB_PLATFORM"
     - eb use production
-    - eb deploy
+    - eb deploy --staged
   when: manual
