@@ -1,4 +1,6 @@
 from django.contrib.admin import AdminSite
+from django.contrib.admin.helpers import ActionForm
+from django.forms import CharField
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import reverse
 from django.views.decorators.cache import never_cache
@@ -7,6 +9,10 @@ from functools import update_wrapper
 from django.views.decorators.csrf import csrf_protect
 
 from coretabs import settings
+
+
+class MyActionForm(ActionForm):
+    x = CharField(required=False)
 
 
 class MyAdminSite(AdminSite):

@@ -1,3 +1,7 @@
+import requests
+from .serializers import MailingListSerializer
+from rest_framework.renderers import JSONRenderer
+
 from django.contrib.admin import ModelAdmin
 from django.contrib.auth.admin import Group, GroupAdmin, User, UserAdmin
 from django.contrib.sites.admin import Site, SiteAdmin
@@ -8,10 +12,45 @@ from django.template.loader import render_to_string
 from rest_framework.authtoken.admin import Token, TokenAdmin
 from allauth.account.admin import EmailAddress, EmailAddressAdmin
 
-from coretabs.admin import site
+from coretabs.admin import site, MyActionForm
 from coretabs import settings
 
 from .models import Batch
+
+
+class MyUserAdmin(UserAdmin):
+    action_form = MyActionForm
+    actions = ['add_or_change_batch', 'remove_batch', ]
+
+    def _add_user_into_mailing_list(self, user, mailing_list):
+        json_member = JSONRenderer().render(MailingListSerializer(user, many=True).data)
+        requests.post(f'https://api.mailgun.net/v3/lists/{mailing_list}/members.json',
+                      auth=('api', settings.MAILGUN_API_KEY),
+                      data={'members': json_member})
+
+    def _remove_user_from_mailing_list(self, user, mailing_list):
+        json_member = JSONRenderer().render(MailingListSerializer(user, many=True).data)
+        requests.delete(f'https://api.mailgun.net/v3/lists/{mailing_list}/members.json',
+                        auth=('api', settings.MAILGUN_API_KEY),
+                        data={'members': json_member})
+
+    def add_or_change_batch(self, request, queryset):
+        group_name = request.POST['x']
+        group = Group.objects.filter(name=group_name).first()
+
+        for user in queryset:
+            for gr in user.groups.filter(name__startswith='batch'):
+                user.groups.remove(gr)
+                self._remove_user_from_mailing_list(user, gr.name)
+
+            user.groups.add(group)
+            self._add_user_into_mailing_list(user, group.name)
+
+    def remove_batch(self, request, queryset):
+        for user in queryset:
+            for gr in user.groups.filter(name__startswith='batch'):
+                user.groups.remove(gr)
+                self._remove_user_from_mailing_list(user, gr.name)
 
 
 class BatchAdmin(ModelAdmin):
@@ -71,7 +110,7 @@ class BatchAdmin(ModelAdmin):
 
 site.register(Token, TokenAdmin)
 site.register(EmailAddress, EmailAddressAdmin)
-site.register(User, UserAdmin)
+site.register(User, MyUserAdmin)
 site.register(Group, GroupAdmin)
 site.register(Site, SiteAdmin)
 site.register(Batch, BatchAdmin)
