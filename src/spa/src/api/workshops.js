@@ -89,6 +89,7 @@ const WorkshopsAPI = {
         module.lessons.forEach((lesson, lessonIndex) => {
           workshop.modules[moduleIndex].lessons.push({
             index: lessonIndex + 1,
+            slug: lesson.slug,
             url: {
               name: 'lessons',
               params: {
