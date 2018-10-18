@@ -72,6 +72,4 @@ DISCOURSE_SSO_SECRET = 'd836444a9e4084d5b224a60c208dce14'
 
 
 # Celery
-# CELERY_BROKER_URL = "amqp://"
-# EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-
+CELERY_BROKER_URL = "amqp://guest:guest@127.0.0.1:5672//"

@@ -50,7 +50,7 @@ def discourse_sync_sso(user_id):
     url = f'{settings.DISCOURSE_BASE_URL}/admin/users/sync_sso/?{query_string}'
 
     # Send Post Request
-    r = requests.post(url, data=data)
+    requests.post(url, data=data)
 
 
 @app.task
@@ -66,4 +66,4 @@ def discourse_logout(user_id):
 
     url = settings.DISCOURSE_BASE_URL + f'/admin/users/{user_id}/log_out/'
 
-    r = requests.post(url, data=data)
+    requests.post(url, data=data)

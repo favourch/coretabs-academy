@@ -22,17 +22,19 @@ class MyUserAdmin(UserAdmin):
     action_form = MyActionForm
     actions = ['add_or_change_batch', 'remove_batch', ]
 
-    def _add_user_into_mailing_list(self, user, mailing_list):
-        json_member = JSONRenderer().render(MailingListSerializer(user, many=True).data)
-        requests.post(f'https://api.mailgun.net/v3/lists/{mailing_list}/members.json',
-                      auth=('api', settings.MAILGUN_API_KEY),
-                      data={'members': json_member})
+    def _add_user_into_mailing_list(self, user, mailing_list_name):
+        json_member = MailingListSerializer(user).data
+        mailing_list = f'{mailing_list_name}@{settings.MAILGUN_LIST_DOMAIN}'
 
-    def _remove_user_from_mailing_list(self, user, mailing_list):
-        json_member = JSONRenderer().render(MailingListSerializer(user, many=True).data)
-        requests.delete(f'https://api.mailgun.net/v3/lists/{mailing_list}/members.json',
-                        auth=('api', settings.MAILGUN_API_KEY),
-                        data={'members': json_member})
+        requests.post(f'https://api.mailgun.net/v3/lists/{mailing_list}/members',
+                      auth=('api', settings.MAILGUN_API_KEY),
+                      data=json_member)
+
+    def _remove_user_from_mailing_list(self, user, mailing_list_name):
+        mailing_list = f'{mailing_list_name}@{settings.MAILGUN_LIST_DOMAIN}'
+
+        requests.delete(f'https://api.mailgun.net/v3/lists/{mailing_list}/members/{user.email}',
+                        auth=('api', settings.MAILGUN_API_KEY))
 
     def add_or_change_batch(self, request, queryset):
         group_name = request.POST['x']
