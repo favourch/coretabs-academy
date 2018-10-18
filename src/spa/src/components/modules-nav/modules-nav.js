@@ -10,11 +10,11 @@ export default {
     last_module() {
       let module = this.modules.find(module => {
         return module.lessons.find(lesson => {
-          return lesson.index === this.$store.getters.profile('last_opened_lesson')
+          return lesson.slug === this.$store.getters.profile('last_opened_lesson_slug')
         })
       })
       
-      return module ? module.index : this.modules[0].lessons[0].index
+      return module ? module.index : this.modules[0].index
     }
   },
   created() {
