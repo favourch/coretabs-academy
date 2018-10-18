@@ -2,7 +2,7 @@ import requests
 from .serializers import MailingListSerializer
 from rest_framework.renderers import JSONRenderer
 
-from django.contrib.admin import ModelAdmin
+from django.contrib.admin import ModelAdmin, SimpleListFilter
 from django.contrib.auth.admin import Group, GroupAdmin, User, UserAdmin
 from django.contrib.sites.admin import Site, SiteAdmin
 
@@ -18,9 +18,29 @@ from coretabs import settings
 from .models import Batch
 
 
+class HasBatchFilter(SimpleListFilter):
+    title = 'Batch'
+
+    parameter_name = 'groups'
+
+    def lookups(self, request, model_admin):
+
+        return (
+            ('t', 'has batch'),
+            ('f', 'has no batch'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 't':
+            return queryset.filter(groups__name__startswith='batch')
+        if self.value() == 'f':
+            return queryset.exclude(groups__name__startswith='batch')
+
+
 class MyUserAdmin(UserAdmin):
     action_form = MyActionForm
     actions = ['add_or_change_batch', 'remove_batch', ]
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups', HasBatchFilter)
 
     def _add_user_into_mailing_list(self, user, mailing_list_name):
         json_member = MailingListSerializer(user).data
