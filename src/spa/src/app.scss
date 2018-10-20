@@ -226,3 +226,7 @@ a {
 .container.fill-height {
   min-height: calc(100vh - #{$header-height * 2});
 }
+
+code {
+  direction: ltr;
+}
