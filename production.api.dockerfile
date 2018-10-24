@@ -12,5 +12,4 @@ RUN apk del deps
 RUN mkdir static
 RUN python manage.py collectstatic
 
-RUN apk add supervisor
 ADD ./supervisord.conf /etc/supervisord.conf

@@ -17,6 +17,7 @@ RUN apk add jpeg-dev \
     harfbuzz-dev \
     fribidi-dev \
     libcurl
+RUN apk add supervisor
 
 # Needed for pycurl
 ENV PYCURL_SSL_LIBRARY=openssl
