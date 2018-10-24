@@ -41,7 +41,7 @@ class MyAdminSite(AdminSite):
         return update_wrapper(inner, view)
 
 
-if settings.is_production:
+if settings.IS_PRODUCTION:
     site = MyAdminSite()
 else:
     site = AdminSite()

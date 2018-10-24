@@ -1,5 +1,6 @@
 FROM coretabsacademy/academy_api_base
 
+
 # Copy source code
 COPY ./src/api/ /var/djangoapp
 WORKDIR /var/djangoapp
@@ -10,3 +11,6 @@ RUN apk del deps
 # Collect static files
 RUN mkdir static
 RUN python manage.py collectstatic
+
+RUN apk add supervisor
+ADD ./supervisord.conf /etc/supervisord.conf

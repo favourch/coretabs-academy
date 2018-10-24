@@ -1,6 +1,8 @@
-from .base import *
 import dj_database_url
 from urllib.parse import quote_plus
+
+from .base import *
+
 
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -97,6 +99,12 @@ AWS_ACCESS_KEY_ID = quote_plus(os.environ.get('CELERY_AWS_ACCESS_KEY_ID'))
 AWS_SECRET_ACCESS_KEY = quote_plus(os.environ.get('CELERY_AWS_SECRET_ACCESS_KEY'))
 CELERY_BROKER_URL = "sqs://{}:{}@".format(
     AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+CELERY_BROKER_TRANSPORT_OPTIONS = {'region': os.environ.get('CELERY_AWS_REGION'),
+                                   'visibility_timeout': 3600,
+                                   'polling_interval': 10,
+                                   'queue_name_prefix': os.environ.get('CELERY_AWS_SQS_PREFIX'),
+                                   'CELERYD_PREFETCH_MULTIPLIER': 0,
+                                  }
 
 
 # Media Settings

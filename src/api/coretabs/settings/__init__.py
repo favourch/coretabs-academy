@@ -1,8 +1,8 @@
 import os
 
-is_production = os.environ.get('HOST_ENV') == 'production'
+IS_PRODUCTION = os.environ.get('HOST_ENV') == 'production'
 
-if is_production:
+if IS_PRODUCTION:
     from .prod import *
 else:
     from .dev import *

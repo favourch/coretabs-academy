@@ -29,7 +29,7 @@
             "command": [
                 "sh",
                 "-c",
-                "celery multi start worker1 -A coretabs && memcached -d -u root -s /tmp/memcached.sock && gunicorn --bind 0.0.0.0:8000 coretabs.wsgi --timeout 90 --log-level=DEBUG"
+                "memcached -d -u root -s /tmp/memcached.sock && supervisord --nodaemon --configuration /etc/supervisord.conf"
             ],
             "mountPoints": [
                 {
