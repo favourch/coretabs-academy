@@ -1,5 +1,5 @@
-# What is this ?
-This repository contains the official website of Coretabs Academy: www.coretabs.net
+# What is this?
+This repository contains the official website (www.coretabs.net) of Coretabs Academy, an online, modern, and open-source software development academy aims to provide clear learning-paths.
 
 # Contribution
 
@@ -10,7 +10,7 @@ We are following our [Code of Conduct](CODE_OF_CONDUCT.md) to keep an awesome co
 You can pick any **non-assigned** issue as follows:
 1. [From the current milestone](https://github.com/coretabs-academy/website-v2/milestones) (recommended).
 
-2. If you pick an issue **NOT from the current milestone**, please **be sure** that the solution of this issues **fits** into the academy current state (you can contact one of [our core contributors](./#core-contributors)).
+2. If you pick an issue **NOT from the current milestone**, please **be sure** that the solution of this issues **fits** into the academy current state (you can contact one of [our core contributors](#core-contributors)).
 
 3. For creating a new issue, please follow [our style-guide for writing an issue](ISSUE_STYLE_GUIDE.md).
 
