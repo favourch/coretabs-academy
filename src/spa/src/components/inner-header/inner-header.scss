@@ -56,13 +56,17 @@ $toolbar-padding: 0 15px;
             &.unread::after {
               position: absolute;
               top: 0;
-              right: 0;
-              content: '';
+              right: -8px;
+              content: attr(counter);
               display: block;
-              border-radius: 5px;
-              width: 10px;
-              height: 10px;
+              border-radius: 8px;
+              width: 16px;
+              height: 16px;
               background-color: #e74c3c;
+              color: #fff;
+              font-size: 12px;
+              line-height: 16px;
+              font-weight: 100;
             }
             
             .btn__content {
