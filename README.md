@@ -45,7 +45,7 @@ Depending on the OS you use, hosts file can be found on:
 
 4. MacOS X (v10.6 - v10.12) `/etc/hosts`
 
-[Detailed information on how to edit your hosts file can be found here](https://support.rackspace.com/how-to/modify-your-hosts-file/]
+[Detailed information on how to edit your hosts file can be found here](https://support.rackspace.com/how-to/modify-your-hosts-file/)
 
 Now that your PC can translate `local.coretabs.net` into 127.0.0.1, you can simply run:
 
