@@ -49,7 +49,6 @@
       </v-menu>
     </nav>
   </v-toolbar>
-  <v-btn id="contact-icon" to="/contact-us" round><v-icon>contact_support</v-icon></v-btn>
 </div>
 </template>
 <script src="./inner-header.js"></script>
