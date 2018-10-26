@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --no-clean",
+	"serve-api": "vue-cli-service serve --no-clean --https --host local.coretabs.net --mode api",
     "build": "vue-cli-service build --no-clean",
     "lint": "vue-cli-service lint",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config client.config.js --hot --inline",

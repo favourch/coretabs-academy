@@ -23,8 +23,6 @@ def discourse_sync_sso(user_id):
         provider = import_string(provider_path)
         avatar_url = provider.get_avatar_url(user, settings.AVATAR_DEFAULT_SIZE)
         if avatar_url:
-            if provider_path == 'avatar.providers.PrimaryAvatarProvider':
-                avatar_url = settings.API_BASE_URL + avatar_url
             break
 
     # Prepare Params
