@@ -9,6 +9,8 @@ Header Style
 }
 header {
   .navigation-drawer {
+    width: 100% !important;
+    background-color: transparent !important;
     z-index: 150 !important;
     box-shadow: none !important;
     margin-top: $header-height !important;
@@ -59,11 +61,6 @@ header {
         text-shadow: 0px 0px 8px rgba(0,0,0,0.3);
       }
     }
-  }
-
-  .navigation-drawer.navigation-drawer--open {
-    background-color:  transparent !important;
-    width: 100% !important;
   }
 
   .toolbar {
