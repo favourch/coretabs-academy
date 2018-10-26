@@ -67,12 +67,7 @@ If a participant engages in behavior violating this code of conduct, the core me
 
 ## Reporting violations
 
-If you are aware of a violation of our code of conduct. Please contact one of our core contributors such as:
-* Yaser (https://forums.coretabs.net/u/YaserAlnajjar/)
-* Mohammed (https://forums.coretabs.net/u/Alhakem)
-* Louay (https://forums.coretabs.net/u/LouayH)
-* Hichem (https://forums.coretabs.net/u/hichem2h)
-* Ahmed (https://forums.coretabs.net/u/ahmedalrifai)
+If you are aware of a violation of our code of conduct. Please contact one of our [core contributors](./README.md#core-contributors).
 
 and they will investigate as soon as possible. If you would like to remain anonymous in the report, please note this.
 
