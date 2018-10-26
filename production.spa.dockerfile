@@ -1,5 +1,8 @@
 FROM coretabsacademy/academy_spa_base as build-stage
 
+WORKDIR /app
+COPY ./src/spa/ .
+
 ARG API_BASE_URL
 ARG MAINTENANCE_MODE
 
