@@ -33,8 +33,6 @@ npm run serve
 
 If you do not want to install the dev tools on your machine, <a href="./docs/docker-development.md" >this guide provides information for running the development environment on docker.</a>
 
-* You will still need VSCode to modify the project.
-
 # Connecting to development API
 
 If you want to consume a ready-to-use API, we have it at [api-dev.coretabs.net](https://api-dev.coretabs.net)
