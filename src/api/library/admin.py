@@ -37,6 +37,7 @@ class WorkshopModuleInline(SortableInlineAdminMixin, admin.TabularInline):
 
 class WorkshopAdmin(admin.ModelAdmin):
     inlines = (WorkshopModuleInline,)
+    list_filter = [custom_filters.WorkshopByTrackListFilter]
 
 
 class TrackWorkshopInline(SortableInlineAdminMixin, admin.TabularInline):
