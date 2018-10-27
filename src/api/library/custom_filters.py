@@ -38,7 +38,6 @@ class LessonsByWorkshopListFilter(BaseLibraryListFilter):
 
     def queryset(self, request, queryset):
         obj_id = self.value()
-        print(obj_id)
         if obj_id is None: 
             return queryset
 
@@ -52,7 +51,6 @@ class LessonsByTrackListFilter(BaseLibraryListFilter):
 
     def queryset(self, request, queryset):
         obj_id = self.value()
-        print(obj_id)
         if obj_id is None: 
             return queryset
 
@@ -66,7 +64,6 @@ class ModulesByWorkshopListFilter(BaseLibraryListFilter):
 
     def queryset(self, request, queryset):
         obj_id = self.value()
-        print(obj_id)
         if obj_id is None: 
             return queryset
 
@@ -80,7 +77,6 @@ class ModuleByTrackListFilter(BaseLibraryListFilter):
 
     def queryset(self, request, queryset):
         obj_id = self.value()
-        print(obj_id)
         if obj_id is None: 
             return queryset
 
@@ -94,7 +90,6 @@ class WorkshopByTrackListFilter(BaseLibraryListFilter):
 
     def queryset(self, request, queryset):
         obj_id = self.value()
-        print(obj_id)
         if obj_id is None: 
             return queryset
 
