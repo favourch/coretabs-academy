@@ -9,7 +9,8 @@ from adminsortable2.admin import SortableInlineAdminMixin
 class LessonAdmin(admin.ModelAdmin):
     list_filter = [
         custom_filters.LessonsByModuleListFilter, 
-        custom_filters.LessonsByWorkshopListFilter
+        custom_filters.LessonsByWorkshopListFilter,
+        custom_filters.LessonsByTrackListFilter
     ]
 
 
