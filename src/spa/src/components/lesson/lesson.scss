@@ -1114,6 +1114,29 @@ $markdown-em-spacer-6: 0.75em !default;
       font-style: italic;
     }
   }
+
+  .prev_next {
+    display: flex;
+    max-width: 740px;
+    margin: 50px auto;
+    border: 1px solid #EEEEEE;
+
+    button {
+      flex: 1 1 0;
+      background: none !important;
+      border: none;
+      box-shadow: none;
+      margin: 0;
+
+      &:disabled {
+        background-color: #fff !important;
+        color: rgba(0, 0, 0, 0.87) !important;
+        border-left: 1px solid #EEEEEE;
+        border-right: 1px solid #EEEEEE;
+        text-align: center;
+      }
+    }
+  }
 }
 
 html[dir='rtl'] {
@@ -1180,4 +1203,10 @@ html[dir='rtl'] {
       }
     }
   }
+}
+
+
+  
+.theme--light .btn.btn--disabled:not(.btn--icon):not(.btn--flat) {
+  background-color: #fff !important;
 }

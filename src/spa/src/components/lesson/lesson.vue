@@ -18,6 +18,18 @@
         <v-tabs-items v-model="content.tab">
           <v-tab-item id="0" key="0">
             <div class="lesson-markdown" v-html="content.markdown"></div>
+            <div class="prev_next">
+              <v-btn @click='goPrevLesson'>
+                <i class="material-icons">keyboard_arrow_right</i>
+                السابق
+              </v-btn>
+              <v-btn disabled v-html="`${lesson.index} / ${module.lessons.length}`">
+              </v-btn>
+              <v-btn @click='goNextLesson'>
+                التالي
+                <i class="material-icons">keyboard_arrow_left</i>
+              </v-btn>
+            </div>
           </v-tab-item>
           <v-tab-item id="1" key="1">
             <v-container id="have-question no-select" fluid grid-list-xl>
@@ -39,6 +51,18 @@
     </template>
     <template v-if="$parent.current.lesson.type === '2'">
       <div class="lesson-markdown" v-html="content.markdown"></div>
+      <div class="prev_next">
+        <v-btn @click='goPrevLesson'>
+          <i class="material-icons">keyboard_arrow_right</i>
+          السابق
+        </v-btn>
+        <v-btn disabled v-html="`${lesson.index} / ${module.lessons.length}`">
+        </v-btn>
+        <v-btn @click='goNextLesson'>
+          التالي
+          <i class="material-icons">keyboard_arrow_left</i>
+        </v-btn>
+      </div>
     </template>
     <template v-if="$parent.current.lesson.type === '3'">
       <v-container id="lesson-quiz" class="lesson-quiz" fluid>
@@ -90,6 +114,18 @@
                 </v-card>
               </v-stepper-items>
             </v-stepper>
+            <div class="prev_next">
+              <v-btn @click='goNextLesson'>
+                <i class="material-icons">keyboard_arrow_left</i>
+                التالي
+              </v-btn>
+              <v-btn disabled v-html="`${lesson.index} / ${module.lessons.length}`">
+              </v-btn>
+              <v-btn @click='goPrevLesson'>
+                السابق
+                <i class="material-icons">keyboard_arrow_right</i>
+              </v-btn>
+            </div>
           </v-flex>
         </v-layout>
       </v-container>

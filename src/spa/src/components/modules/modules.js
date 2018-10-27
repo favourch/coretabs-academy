@@ -8,7 +8,6 @@ export default {
   },
   data: () => ({
     height: 0,
-    modules: [],
     loaded: false,
     drawer: {
       isOpen: true,
@@ -16,6 +15,7 @@ export default {
     },
     current: {
       lesson: {},
+      modules: [],
       workshop: {}
     }
   }),
@@ -39,14 +39,14 @@ export default {
       this.current.workshop.title = this.$route.params._workshop.title
       this.current.workshop.forums = this.$route.params._workshop.forums
 
-      this.modules = modulesData
-      this.getCurrentLesson(this.$api.getModuleId(this.modules).lessons)
+      this.current.modules = modulesData
+      this.getCurrentLesson(this.$api.getModuleId(this.current.modules).lessons)
       this.loaded = true
     }
   },
   watch: {
     $route() {
-      this.current.lesson = this.$api.getLessonId(this.$api.getModuleId(this.modules).lessons)
+      this.current.lesson = this.$api.getLessonId(this.$api.getModuleId(this.current.modules).lessons)
     }
   },
   methods: {
@@ -56,8 +56,8 @@ export default {
           this.current.workshop.title = workshop.title
           this.current.workshop.forums = workshop.workshop_forums_url
 
-          this.modules = workshop.modules
-          let module = this.$api.getModuleId(this.modules)
+          this.current.modules = workshop.modules
+          let module = this.$api.getModuleId(this.current.modules)
           if (typeof module !== 'undefined') {
             this.getCurrentLesson(module.lessons)
             this.loaded = true
