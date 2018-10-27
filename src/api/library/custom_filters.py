@@ -57,3 +57,17 @@ class LessonsByTrackListFilter(BaseLibraryListFilter):
             return queryset
 
         return queryset.filter(module__workshops__tracks=obj_id)
+
+
+class ModulesByWorkshopListFilter(BaseLibraryListFilter): 
+    title = 'Workshop'
+    parameter_name = 'by_workshop'
+    dropdown_objects = models.Workshop.objects.all()
+
+    def queryset(self, request, queryset):
+        obj_id = self.value()
+        print(obj_id)
+        if obj_id is None: 
+            return queryset
+
+        return queryset.filter(workshops=obj_id)

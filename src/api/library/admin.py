@@ -24,6 +24,9 @@ class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
 
 class ModuleAdmin(admin.ModelAdmin):
     inlines = (ModuleLessonInline,)
+    list_filter = [
+        custom_filters.ModulesByWorkshopListFilter
+    ]
 
 
 class WorkshopModuleInline(SortableInlineAdminMixin, admin.TabularInline):
