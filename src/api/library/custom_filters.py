@@ -1,13 +1,13 @@
 from django.contrib import admin
 from library import models
 
-# TODO: try to make base filter class
+
 class BaseLibraryListFilter(admin.SimpleListFilter):
     template = 'django_admin_listfilter_dropdown/dropdown_filter.html'
     title = 'BaseLibray'
     dropdown_objects = None
     action_lookup = None
-    parameter_name = 'by_module'
+    parameter_name = 'no_filter'
 
     def lookups(self, request, model_admin):
         tupleObj = ()
@@ -21,11 +21,25 @@ class BaseLibraryListFilter(admin.SimpleListFilter):
 
 class LessonsByModuleListFilter(BaseLibraryListFilter):
     title = 'Module'
+    parameter_name = 'by_module'
     dropdown_objects = models.Module.objects.all()
 
     def queryset(self, request, queryset):
-        
         obj_id = self.value()
         if obj_id is None: return queryset
 
         return queryset.filter(module=obj_id)
+
+
+class LessonsByWorkshopListFilter(BaseLibraryListFilter): 
+    title = 'Workshop'
+    parameter_name = 'by_workshop'
+    dropdown_objects = models.Workshop.objects.all()
+
+    def queryset(self, request, queryset):
+        obj_id = self.value()
+        print(obj_id)
+        if obj_id is None: 
+            return queryset
+
+        return queryset.filter(module__workshops=obj_id)

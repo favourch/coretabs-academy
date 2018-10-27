@@ -7,7 +7,10 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 
 class LessonAdmin(admin.ModelAdmin):
-    list_filter = [custom_filters.LessonsByModuleListFilter]
+    list_filter = [
+        custom_filters.LessonsByModuleListFilter, 
+        custom_filters.LessonsByWorkshopListFilter
+    ]
 
 
 class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
