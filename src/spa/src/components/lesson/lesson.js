@@ -15,6 +15,16 @@ export default {
     }
   }),
   computed: {
+    module() {
+      return this.$parent.current.modules.find(module => {
+        return module.url.params.module === this.$route.params.module
+      })
+    },
+    lesson() {
+      return this.module.lessons.find(lesson => {
+        return lesson.slug === this.$route.params.lesson
+      })
+    },
     i18n() {
       return this.$store.state.i18n.lesson
     },
@@ -49,6 +59,42 @@ export default {
     this.getLesson()
   },
   methods: {
+    goPrevLesson() {
+      let module, lesson, link
+
+      if(this.lesson.index > 1) {
+        lesson = this.module.lessons[this.lesson.index - 2]
+        link = this.module.url.params.module + '/' + lesson.slug
+      } else {
+        if (this.module.index > 1) {
+          module = this.$parent.current.modules[this.module.index - 2]
+          lesson = module.lessons[module.lessons.length - 1]
+          link = module.url.params.module + '/' + lesson.slug
+        } else {
+          link = ''
+        }
+      }
+      
+      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track +'/' + this.$parent.current.workshop.URL.params.workshop + '/' + link)
+    },
+    goNextLesson() {
+      let module, lesson, link
+
+      if(this.lesson.index < this.module.lessons.length) {
+        lesson = this.module.lessons[this.lesson.index]
+        link = this.module.url.params.module + '/' + lesson.slug
+      } else {
+        if (this.module.index < this.$parent.current.modules.length) {
+          module = this.$parent.current.modules[this.module.index]
+          lesson = module.lessons[0]
+          link = module.url.params.module + '/' + lesson.slug
+        } else {
+          link = ''
+        }
+      }
+      
+      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track +'/' + this.$parent.current.workshop.URL.params.workshop + '/' + link)
+    },
     getLesson() {
       let lesson = this.$parent.current.lesson
       let workshop = this.$parent.current.workshop      

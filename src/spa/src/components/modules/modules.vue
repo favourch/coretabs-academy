@@ -9,7 +9,7 @@
          </v-btn>
          <v-toolbar-title>{{current.workshop.title}}</v-toolbar-title>
       </v-toolbar>
-      <modules-nav-component :modules="modules"></modules-nav-component>
+      <modules-nav-component :modules="current.modules"></modules-nav-component>
    </v-navigation-drawer>
    <div class="content" v-bind:style="{ height: height + 'px' }" v-resize="onResize">
       <router-view></router-view>
