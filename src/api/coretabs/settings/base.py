@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'djcelery_email',
 
     'storages',
+
+    "django_admin_listfilter_dropdown",
 ]
 
 

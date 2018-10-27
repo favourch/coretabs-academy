@@ -1,8 +1,13 @@
 from django.contrib import admin
 from coretabs.admin import site
 from . import models
+from . import custom_filters
 
 from adminsortable2.admin import SortableInlineAdminMixin
+
+
+class LessonAdmin(admin.ModelAdmin):
+    list_filter = [custom_filters.LessonsByModuleListFilter]
 
 
 class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -37,10 +42,9 @@ class TrackAdmin(admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'user__first_name',)
 
-
-site.register(models.MarkdownLesson)
-site.register(models.QuizLesson)
-site.register(models.VideoLesson)
+site.register(models.MarkdownLesson, LessonAdmin)
+site.register(models.QuizLesson, LessonAdmin)
+site.register(models.VideoLesson, LessonAdmin)
 site.register(models.Module, ModuleAdmin)
 site.register(models.WorkshopModule)
 site.register(models.Workshop, WorkshopAdmin)
