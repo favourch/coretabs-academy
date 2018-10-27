@@ -103,19 +103,6 @@ $toolbar-padding: 0 15px;
       }
     }
   }
-  #contact-icon{
-    min-width: 40px;
-    width: 40px;
-    height: 40px;
-    background: #ccc;
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    background: #f55f44;
-    color: $white-color;
-    z-index: 2;
-    box-shadow: none;
-  }
 }
 
 .menu__content.notifications-menu {

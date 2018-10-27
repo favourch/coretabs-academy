@@ -1,11 +1,21 @@
-# What is this ?
-This repo contains the official website of coretabs academy: www.coretabs.net
+# What is this?
+This repository contains the official website (www.coretabs.net) of Coretabs Academy, an online, modern, and open-source software development academy aims to provide clear learning-paths.
 
 # Contribution
 
-We would love any **pull request** to this repository as coretabs academy is a community project.
+We would love any **pull request** to this repository as Coretabs Academy is a community project.
 
 We are following our [Code of Conduct](CODE_OF_CONDUCT.md) to keep an awesome contribution spirit!
+
+You can pick any **non-assigned** issue as follows:
+1. [From the current milestone](https://github.com/coretabs-academy/website-v2/milestones) (recommended).
+
+2. If you pick an issue **NOT from the current milestone**, please **be sure** that the solution of this issues **fits** into the academy current state (you can contact one of [our core contributors](#core-contributors)).
+
+3. For creating a new issue, please follow [our style-guide for writing an issue](ISSUE_STYLE_GUIDE.md).
+
+4. Please do **NOT** pick an **already assigned** issue as someone else is already doing it.
+
 
 # Running locally
 
@@ -22,8 +32,6 @@ npm run serve
 ```
 
 If you do not want to install the dev tools on your machine, <a href="./docs/docker-development.md" >this guide provides information for running the development environment on docker.</a>
-
-* You will still need VSCode to modify the project.
 
 # Connecting to development API
 
@@ -57,6 +65,14 @@ You can now use your spa connected to the API via https://local.coretabs.net:808
 
 # Deploying
 Docker orchestrated with docker-compose are the main tools used for deployment.
+
+# Core Contributors
+
+* Yaser (https://forums.coretabs.net/u/YaserAlnajjar/)
+* Mohammed (https://forums.coretabs.net/u/Alhakem)
+* Louay (https://forums.coretabs.net/u/LouayH)
+* Hichem (https://forums.coretabs.net/u/hichem2h)
+* Ahmed (https://forums.coretabs.net/u/ahmedalrifai)
 
 # Tech stack
 <p align="center">
