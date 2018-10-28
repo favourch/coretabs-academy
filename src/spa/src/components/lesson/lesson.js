@@ -286,5 +286,12 @@ export default {
         }
       }
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      if(document.querySelector('.lesson').clientHeight <= window.innerHeight) {
+        document.querySelector('.lesson .container').style.height = `${window.innerHeight + 50}px` 
+      }
+    }, 1000)
   }
 }
