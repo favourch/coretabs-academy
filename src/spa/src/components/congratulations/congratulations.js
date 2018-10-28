@@ -33,7 +33,7 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     if (!this.email) { this.$router.push('/') }
     let root = this
     root.waiting = true
