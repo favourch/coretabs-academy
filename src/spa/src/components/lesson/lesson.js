@@ -276,8 +276,14 @@ export default {
     lessonScroll() {
       if(document.querySelector('.lesson').scrollTop >= 200) {
         document.querySelector('.prev_next').style.bottom = '0px'
+        if(document.querySelector('#drift-widget')) {
+          document.querySelector('#drift-widget').style.bottom = '-76px'
+        }
       } else {
         document.querySelector('.prev_next').style.bottom = '-50px'
+        if(document.querySelector('#drift-widget')) {
+          document.querySelector('#drift-widget').style.bottom = '24px'
+        }
       }
     }
   }

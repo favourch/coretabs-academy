@@ -1120,6 +1120,7 @@ $markdown-em-spacer-6: 0.75em !default;
     max-width: 740px;
     margin: 75px auto 50px;
     border: 1px solid #EEEEEE;
+    z-index: 1;
 
     -webkit-transition: bottom 0.5s linear;
     -moz-transition: bottom 0.5s linear;
@@ -1147,11 +1148,19 @@ $markdown-em-spacer-6: 0.75em !default;
     .prev_next {
       position: fixed;
       bottom: -50px;
-      margin: 75px 10px 10px;
+      margin: 0 10px 10px;
       width: calc(100% - 20px);
       right: 0;
     }
   }
+}
+
+#drift-widget {
+  right: 24px !important;
+  -webkit-transition: bottom 0.5s linear !important;
+  -moz-transition: bottom 0.5s linear !important;
+  -o-transition: bottom 0.5s linear !important;
+  transition: bottom 0.5s linear !important;
 }
 
 html[dir='rtl'] {
