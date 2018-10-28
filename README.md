@@ -73,6 +73,7 @@ Docker orchestrated with docker-compose are the main tools used for deployment.
 * Louay (https://forums.coretabs.net/u/LouayH)
 * Hichem (https://forums.coretabs.net/u/hichem2h)
 * Ahmed (https://forums.coretabs.net/u/ahmedalrifai)
+* Ayman (https://forums.coretabs.net/u/Ayman97)
 
 # Tech stack
 <p align="center">
