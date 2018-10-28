@@ -39,6 +39,7 @@ export default {
   },
   watch: {
     $route() {
+      document.querySelector('.lesson').scrollTo(0,0)
       this.getLesson()
       this.quiz.currentQuestion = 1
     },
