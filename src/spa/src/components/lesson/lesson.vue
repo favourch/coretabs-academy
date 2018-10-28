@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loaded" class="lesson">
+  <div v-if="loaded" id="lesson" class="lesson" v-scroll:#lesson="lessonScroll">
     <template v-if="['0', '1'].includes($parent.current.lesson.type)">
       <div :id="($parent.current.lesson.type === '0') ? 'lesson-youtube' : 'lesson-scrimba'"
         :class="['lesson-video', ($parent.current.lesson.type === '0') ? 'lesson-youtube' : 'lesson-scrimba']">

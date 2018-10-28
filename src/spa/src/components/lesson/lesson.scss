@@ -1118,12 +1118,17 @@ $markdown-em-spacer-6: 0.75em !default;
   .prev_next {
     display: flex;
     max-width: 740px;
-    margin: 50px auto;
+    margin: 75px auto 50px;
     border: 1px solid #EEEEEE;
+
+    -webkit-transition: bottom 0.5s linear;
+    -moz-transition: bottom 0.5s linear;
+    -o-transition: bottom 0.5s linear;
+    transition: bottom 0.5s linear;
 
     button {
       flex: 1 1 0;
-      background: none !important;
+      background-color: #fff !important;
       border: none;
       box-shadow: none;
       margin: 0;
@@ -1135,6 +1140,16 @@ $markdown-em-spacer-6: 0.75em !default;
         border-right: 1px solid #EEEEEE;
         text-align: center;
       }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .prev_next {
+      position: fixed;
+      bottom: -50px;
+      margin: 75px 10px 10px;
+      width: calc(100% - 20px);
+      right: 0;
     }
   }
 }

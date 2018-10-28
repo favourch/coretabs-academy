@@ -60,40 +60,42 @@ export default {
   },
   methods: {
     goPrevLesson() {
-      let module, lesson, link
+      let module, lesson
+      let link = '/' + this.$parent.current.workshop.URL.params.workshop + '/'
 
       if(this.lesson.index > 1) {
         lesson = this.module.lessons[this.lesson.index - 2]
-        link = this.module.url.params.module + '/' + lesson.slug
+        link += this.module.url.params.module + '/' + lesson.slug
       } else {
         if (this.module.index > 1) {
           module = this.$parent.current.modules[this.module.index - 2]
           lesson = module.lessons[module.lessons.length - 1]
-          link = module.url.params.module + '/' + lesson.slug
+          link += module.url.params.module + '/' + lesson.slug
         } else {
           link = ''
         }
       }
       
-      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track +'/' + this.$parent.current.workshop.URL.params.workshop + '/' + link)
+      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track + link)
     },
     goNextLesson() {
-      let module, lesson, link
+      let module, lesson
+      let link = '/' + this.$parent.current.workshop.URL.params.workshop + '/'
 
       if(this.lesson.index < this.module.lessons.length) {
         lesson = this.module.lessons[this.lesson.index]
-        link = this.module.url.params.module + '/' + lesson.slug
+        link += this.module.url.params.module + '/' + lesson.slug
       } else {
         if (this.module.index < this.$parent.current.modules.length) {
           module = this.$parent.current.modules[this.module.index]
           lesson = module.lessons[0]
-          link = module.url.params.module + '/' + lesson.slug
+          link += module.url.params.module + '/' + lesson.slug
         } else {
           link = ''
         }
       }
       
-      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track +'/' + this.$parent.current.workshop.URL.params.workshop + '/' + link)
+      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track + link)
     },
     getLesson() {
       let lesson = this.$parent.current.lesson
@@ -268,6 +270,13 @@ export default {
       } else {
         question.result = this.i18n.quiz.results_texts.fail
         question.success = false
+      }
+    },
+    lessonScroll() {
+      if(document.querySelector('.lesson').scrollTop >= 200) {
+        document.querySelector('.prev_next').style.bottom = '0px'
+      } else {
+        document.querySelector('.prev_next').style.bottom = '-50px'
       }
     }
   }
