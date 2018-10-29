@@ -45,7 +45,7 @@ Add this line into your host file:
 
 Depending on the OS you use, hosts file can be found on:
 
-1. Windows `C:\Windows\System32\drivers\etc\host`
+1. Windows `C:\Windows\System32\drivers\etc\hosts`
 
 2. Linux `/etc/hosts`
 
