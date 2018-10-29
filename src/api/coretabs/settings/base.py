@@ -21,10 +21,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
     'contact',
     'avatar',
     'library',
@@ -142,24 +138,11 @@ CACHES = {
     }
 }
 
-
-# Account Settings
-
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_USERNAME_MIN_LENGTH = 3
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
-ACCOUNT_ADAPTER = 'accounts.adapter.MyAccountAdapter'
-ACCOUNT_USERNAME_BLACKLIST = ['system', ]
-
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    'accounts.auth_backends.AuthenticationBackend',
 )
 
 
@@ -178,7 +161,6 @@ AVATAR_PROVIDERS = (
 )
 
 EMAIL_SUBJECT_PREFIX = ''
-ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 # CSRF and Session
 DEFAULT_COOKIE_DOMAIN = '127.0.0.1'

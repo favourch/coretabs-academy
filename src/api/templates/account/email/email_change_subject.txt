@@ -1,4 +1,0 @@
-{% load i18n %}
-{% autoescape off %}
-{% blocktrans %}Your E-mail Address has been changed{% endblocktrans %}
-{% endautoescape %}

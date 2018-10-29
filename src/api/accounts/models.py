@@ -1,21 +1,98 @@
 import requests
 
+from django.conf import settings
+
+from django.utils.translation import ugettext_lazy as _
+
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 
 from django.db import models
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_save, post_delete
 from django.db import transaction
 
 from django.dispatch import receiver
 
 from rest_framework.renderers import JSONRenderer
 
-from .serializers import MailingListSerializer
+from .managers import EmailAddressManager
+from .tokens import confirm_email_token_generator
+from .utils import send_confirmation_mail
+from .helper_serializers import MailingListSerializer
+from django.utils.http import int_to_base36
 
-from coretabs import settings
+from library.models import Track, BaseLesson
 
 User = get_user_model()
+
+
+class EmailAddress(models.Model):
+
+    user = models.ForeignKey(User,
+                             verbose_name=_('user'),
+                             related_name='email_address',
+                             on_delete=models.CASCADE)
+    email = models.EmailField(unique=True,
+                              max_length=128,
+                              verbose_name=_('e-mail address'))
+    verified = models.BooleanField(verbose_name=_('verified'), default=False)
+    primary = models.BooleanField(verbose_name=_('primary'), default=False)
+
+    objects = EmailAddressManager()
+
+    class Meta:
+        verbose_name = _("email address")
+        verbose_name_plural = _("email addresses")
+
+    def __str__(self):
+        return "%s (%s)" % (self.email, self.user)
+
+    def set_as_primary(self):
+        old_primary = EmailAddress.objects.get_primary(self.user)
+        if old_primary:
+            old_primary.delete()
+        self.primary = True
+        self.save()
+        self.user.email = self.email
+        self.user.save()
+
+    def send_confirmation(self):
+        if not self.verified:
+            token = confirm_email_token_generator.make_token(self)
+            uid = int_to_base36(self.pk)
+            send_confirmation_mail(self.user, token, uid)
+
+    def confirm(self):
+        self.verified = True
+        self.set_as_primary()
+        self.save()
+
+
+class Account(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    track = models.ForeignKey(Track, on_delete=models.SET_NULL,
+                              verbose_name=_('track'), null=True)
+    last_opened_lesson = models.ForeignKey(BaseLesson,
+                                           on_delete=models.SET_NULL,
+                                           verbose_name=_('last opened lesson'), null=True)
+
+    def __str__(self):
+        return f'{self.user.first_name} ({self.user.username})'
+
+    class Meta:
+        verbose_name = _('account')
+        verbose_name_plural = _('accounts')
+
+
+@receiver(post_save, sender=User)
+def create_user_account(sender, instance, created, **kwargs):
+    if created:
+        Account.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_account(sender, instance, **kwargs):
+    instance.account.save()
 
 
 class Batch(models.Model):

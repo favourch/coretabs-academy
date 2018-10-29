@@ -1,4 +1,4 @@
-{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+{% load i18n %}{% autoescape off %}{% blocktrans %}
 
 <table style="width: 100%; direction: rtl; border-collapse: collapse;">
     <thead>
@@ -11,7 +11,7 @@
     <tbody style=" background: #fafafa; padding: 20px;">
       <tr style="padding:20px; text-align: center;">
         <td style="padding-top: 40px;">
-          <h2>مرحباً {{ user_display }}</h2>
+          <h2>مرحباً {{ user }}</h2>
           <p style="font-size: 18px; max-width: 600px; margin: 0 auto; line-height: 27px;">
             حصولك على هذا الإيميل يعني بأنك على وشك حجز مقعد من مقاعد محدودة للحصول على فرصة تدريبية لإكتساب مهارات عالية.
           </p>
