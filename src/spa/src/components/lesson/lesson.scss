@@ -1134,7 +1134,7 @@ $markdown-em-spacer-6: 0.75em !default;
       box-shadow: none;
       margin: 0;
 
-      &:disabled {
+      &.readonly {
         background-color: #fff !important;
         color: rgba(0, 0, 0, 0.87) !important;
         border-left: 1px solid #EEEEEE;

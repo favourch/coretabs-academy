@@ -4,6 +4,10 @@ export default {
   name: 'LessonComponent',
   data: () => ({
     loaded: false,
+    prev_link: null,
+    dis_prev: null,
+    next_link: null,
+    dis_next: null,
     content: {
       video: null,
       markdown: null,
@@ -41,6 +45,7 @@ export default {
     $route() {
       document.querySelector('.lesson').scrollTo(0,0)
       this.getLesson()
+      this.initNavigator()
       this.quiz.currentQuestion = 1
     },
     'quiz.questions': {
@@ -58,45 +63,49 @@ export default {
   },
   created() {
     this.getLesson()
+    this.initNavigator()
   },
   methods: {
-    goPrevLesson() {
+    initNavigator() {
       let module, lesson
-      let link = '/' + this.$parent.current.workshop.URL.params.workshop + '/'
 
       if(this.lesson.index > 1) {
         lesson = this.module.lessons[this.lesson.index - 2]
-        link += this.module.url.params.module + '/' + lesson.slug
+        this.prev_link = '/' + this.module.url.params.module + '/' + lesson.slug
+        this.dis_prev = false
       } else {
         if (this.module.index > 1) {
           module = this.$parent.current.modules[this.module.index - 2]
           lesson = module.lessons[module.lessons.length - 1]
-          link += module.url.params.module + '/' + lesson.slug
+          this.prev_link = '/' + module.url.params.module + '/' + lesson.slug
+          this.dis_prev = false
         } else {
-          link = ''
+          this.prev_link = ''
+          this.dis_prev = true
         }
       }
-      
-      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track + link)
-    },
-    goNextLesson() {
-      let module, lesson
-      let link = '/' + this.$parent.current.workshop.URL.params.workshop + '/'
-
+  
       if(this.lesson.index < this.module.lessons.length) {
         lesson = this.module.lessons[this.lesson.index]
-        link += this.module.url.params.module + '/' + lesson.slug
+        this.next_link = '/' + this.module.url.params.module + '/' + lesson.slug
+        this.dis_next = false
       } else {
         if (this.module.index < this.$parent.current.modules.length) {
           module = this.$parent.current.modules[this.module.index]
           lesson = module.lessons[0]
-          link += module.url.params.module + '/' + lesson.slug
+          this.next_link = '/' + module.url.params.module + '/' + lesson.slug
+          this.dis_next = false
         } else {
-          link = ''
+          this.next_link = ''
+          this.dis_next = true
         }
       }
-      
-      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track + link)
+    },
+    goPrevLesson() {
+      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track + '/' + this.$parent.current.workshop.URL.params.workshop + this.prev_link)
+    },
+    goNextLesson() {
+      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track + '/' + this.$parent.current.workshop.URL.params.workshop + this.next_link)
     },
     getLesson() {
       let lesson = this.$parent.current.lesson
@@ -289,8 +298,8 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      if(document.querySelector('.lesson').clientHeight <= window.innerHeight) {
-        document.querySelector('.lesson .container').style.height = `${window.innerHeight + 50}px` 
+      if(window.innerWidth < 600 && document.querySelector('.lesson').clientHeight <= window.innerHeight) {
+        document.querySelector('.lesson > .container, .lesson > .lesson-markdown').style.height = `${window.innerHeight + 150}px` 
       }
     }, 1000)
   }
