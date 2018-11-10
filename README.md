@@ -1,5 +1,5 @@
 # What is this?
-This repository contains the official website (www.coretabs.net) of Coretabs Academy, an online, modern, and open-source software development academy aims to provide clear learning-paths.
+This repository contains the official website (www.coretabs.net) of Coretabs Academy, an online, innovative, and open-source software development academy aims to provide clear learning-paths.
 
 # Contribution
 
