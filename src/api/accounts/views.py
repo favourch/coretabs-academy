@@ -20,9 +20,6 @@ from .serializers import (
     PasswordChangeSerializer, RegisterSerializer, VerifyEmailSerializer,
     ResendConfirmSerializer,
 )
-from .utils import create_token
-
-from .tasks import discourse_logout
 
 sensitive_post_parameters_m = method_decorator(
     sensitive_post_parameters(
@@ -34,9 +31,9 @@ sensitive_post_parameters_m = method_decorator(
 class LoginView(GenericAPIView):
 
     permission_classes = (AllowAny,)
+    allowed_methods = ('POST', 'OPTIONS', 'HEAD')
     serializer_class = LoginSerializer
     response_serializer_class = TokenSerializer
-    token_model = Token
 
     @sensitive_post_parameters_m
     def dispatch(self, *args, **kwargs):
@@ -53,29 +50,27 @@ class LoginView(GenericAPIView):
         user = serializer.validated_data['user']
 
         django_login(request, user)
-        token = create_token(self.token_model, user)
+
+        token, created = Token.objects.get_or_create(user=user)
 
         return self.get_response(request, token)
 
 
 class LogoutView(APIView):
 
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
+    allowed_methods = ('POST', 'OPTIONS', 'HEAD')
 
     def post(self, request, *args, **kwargs):
         self.logout(request)
 
-        # TODO: use locale instead
-        return Response({'detail': _("تم تسجيل الخروج بنجاح")}, status=status.HTTP_200_OK)
+        return Response({'detail': _("Successfully logged out.")}, status=status.HTTP_200_OK)
 
     def logout(self, request):
         try:
             request.user.auth_token.delete()
         except (AttributeError, ObjectDoesNotExist):
             pass
-
-        if request.user.id:
-            discourse_logout.delay(request.user.id)
 
         django_logout(request)
 
@@ -91,8 +86,9 @@ class UserDetailsView(RetrieveUpdateAPIView):
 
 class PasswordResetView(GenericAPIView):
 
-    serializer_class = PasswordResetSerializer
     permission_classes = (AllowAny,)
+    allowed_methods = ('POST', 'OPTIONS', 'HEAD')
+    serializer_class = PasswordResetSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -104,8 +100,9 @@ class PasswordResetView(GenericAPIView):
 
 class PasswordResetConfirmView(GenericAPIView):
 
-    serializer_class = PasswordResetConfirmSerializer
     permission_classes = (AllowAny,)
+    allowed_methods = ('POST', 'OPTIONS', 'HEAD')
+    serializer_class = PasswordResetConfirmSerializer
 
     @sensitive_post_parameters_m
     def dispatch(self, *args, **kwargs):
@@ -123,8 +120,9 @@ class PasswordResetConfirmView(GenericAPIView):
 
 class PasswordChangeView(GenericAPIView):
 
-    serializer_class = PasswordChangeSerializer
     permission_classes = (IsAuthenticated,)
+    allowed_methods = ('POST', 'OPTIONS', 'HEAD')
+    serializer_class = PasswordChangeSerializer
 
     @sensitive_post_parameters_m
     def dispatch(self, *args, **kwargs):
@@ -142,7 +140,6 @@ class PasswordChangeView(GenericAPIView):
 class RegisterView(CreateAPIView):
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny, ]
-    token_model = Token
 
     @sensitive_post_parameters_m
     def dispatch(self, *args, **kwargs):
@@ -151,8 +148,7 @@ class RegisterView(CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        create_token(self.token_model, user)
+        serializer.save()
 
         return Response({"detail": _("Verification e-mail sent.")},
                         status=status.HTTP_201_CREATED)

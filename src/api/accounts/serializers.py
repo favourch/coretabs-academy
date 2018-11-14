@@ -8,8 +8,10 @@ from django.utils.module_loading import import_string
 
 from rest_framework import serializers, exceptions
 
+from .signals import user_updated
+
 from .models import EmailAddress, Account
-from .utils import create_user, setup_user_email, send_password_reset_mail
+from .utils import send_password_reset_mail
 
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.auth.password_validation import validate_password
@@ -25,8 +27,6 @@ from django.contrib.auth.tokens import default_token_generator as password_reset
 from django.utils.http import base36_to_int, int_to_base36
 
 from django.contrib.auth import update_session_auth_hash
-
-from .tasks import discourse_sync_sso
 
 from library.models import Track
 
@@ -68,7 +68,7 @@ class LoginSerializer(serializers.Serializer):
             raise exceptions.ValidationError(msg)
 
         # Is the email verified?
-        email_address = user.email_address.get(email=user.email)
+        email_address = EmailAddress.objects.get_primary(user)
         if not email_address.verified:
             raise exceptions.PermissionDenied('not verified')
 
@@ -115,7 +115,6 @@ class AccountSerializer(serializers.ModelSerializer):
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
-    email_status = serializers.SerializerMethodField()
     avatar_url = serializers.SerializerMethodField()
     batch_status = serializers.SerializerMethodField()
     account = AccountSerializer()
@@ -126,12 +125,8 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'email_status',
-                  'name', 'account', 'avatar', 'avatar_url', 'batch_status')
-
-    def get_email_status(self, obj):
-        email_address = EmailAddress.objects.get(user=obj, primary=True)
-        return email_address.verified
+        fields = ('username', 'email', 'name', 'account',
+                  'avatar', 'avatar_url', 'batch_status')
 
     def get_batch_status(self, obj):
         return obj.has_perm('accounts.access_workshops')
@@ -186,7 +181,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         if is_track_updated:
             instance.account.last_opened_lesson = None
 
-    def _update_email(self, instance, request, email):
+    def _update_email(self, instance, email):
         EmailAddress.objects.add_email(user=instance, email=email)
         # Todo: add email changed specific response
 
@@ -209,17 +204,18 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         # Update account
         if account:
             self._update_account(instance, account)
+            instance.account.save()
 
         # Update email
         if email and email != instance.email:
-            self._update_email(instance, request, email)
+            self._update_email(instance, email)
 
         # Update avatar
         if 'avatar' in request.FILES:
             self._update_avatar(instance, request)
 
         instance.save()
-        discourse_sync_sso.delay(instance.id)
+        user_updated.send(sender=User, user=instance)
         return instance
 
 
@@ -376,10 +372,10 @@ class RegisterSerializer(serializers.Serializer):
         }
 
     def save(self):
-        user = create_user(self.get_cleaned_data())
-        email = setup_user_email(user)
-        email.send_confirmation()
-        discourse_sync_sso.delay(user.id)
+        cd = self.get_cleaned_data()
+        user = User.objects.create_user(cd['username'], cd['email'],
+                                        cd['password1'], first_name=cd['first_name'])
+        user.email_addresses.get(primary=True).send_confirmation()
         return user
 
 

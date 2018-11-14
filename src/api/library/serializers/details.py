@@ -7,6 +7,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 
+# TODO: clean this
 class AuthorSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField()
     role = serializers.SerializerMethodField()

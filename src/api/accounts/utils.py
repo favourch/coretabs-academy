@@ -4,27 +4,6 @@ from django.core import mail
 from django.template.loader import render_to_string
 
 
-def create_token(token_model, user):
-    token, created = token_model.objects.get_or_create(user=user)
-    return token
-
-
-def create_user(cd):
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
-
-    user = User.objects.create_user(cd['username'], cd['email'], cd['password1'], first_name=cd['first_name'])
-    return user
-
-
-def setup_user_email(user):
-    from .models import EmailAddress
-
-    assert not EmailAddress.objects.filter(user=user).exists()
-    email = EmailAddress.objects.create(user=user, email=user.email, primary=True, verified=False)
-    return email
-
-
 def send_password_reset_mail(user, token, uid):
     password_reset_url = f'{settings.SPA_BASE_URL}/reset-password/{uid}/{token}'
     ctx = {

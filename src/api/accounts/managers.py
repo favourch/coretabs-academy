@@ -10,3 +10,9 @@ class EmailAddressManager(models.Manager):
 
         email_address.send_confirmation()
         return email_address
+
+    def get_primary(self, user):
+        try:
+            return self.get(user=user, primary=True)
+        except self.model.DoesNotExist:
+            return None

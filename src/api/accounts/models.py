@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
+from rest_framework.authtoken.models import Token
 
 from django.db import models
 from django.db.models.signals import post_save, post_delete
@@ -30,7 +31,7 @@ class EmailAddress(models.Model):
 
     user = models.ForeignKey(User,
                              verbose_name=_('user'),
-                             related_name='email_address',
+                             related_name='email_addresses',
                              on_delete=models.CASCADE)
     email = models.EmailField(unique=True,
                               max_length=128,
@@ -69,7 +70,7 @@ class EmailAddress(models.Model):
 
 
 class Account(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name='account', on_delete=models.CASCADE)
     track = models.ForeignKey(Track, on_delete=models.SET_NULL,
                               verbose_name=_('track'), null=True)
     last_opened_lesson = models.ForeignKey(BaseLesson,
@@ -85,14 +86,11 @@ class Account(models.Model):
 
 
 @receiver(post_save, sender=User)
-def create_user_account(sender, instance, created, **kwargs):
+def create_user_account_email_token(sender, instance, created, **kwargs):
     if created:
+        EmailAddress.objects.create(user=instance, email=instance.email, primary=True, verified=False)
         Account.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_account(sender, instance, **kwargs):
-    instance.account.save()
+        Token.objects.create(user=instance)
 
 
 class Batch(models.Model):
