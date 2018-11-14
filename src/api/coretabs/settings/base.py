@@ -16,8 +16,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'discourse',
-
     'rest_framework',
     'rest_framework.authtoken',
 
@@ -26,6 +24,8 @@ INSTALLED_APPS = [
     'library',
     'accounts',
     'avatars',
+    'discourse',
+    'profiles',
 
     'adminsortable2',
     'debug_toolbar',
@@ -146,12 +146,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-# Mock server
-DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io'
-DISCOURSE_API_KEY = 'anilliqnmsakmcnahojdwklaklsa'
-DISCOURSE_API_USERNAME = 'discourse_mock'
-DISCOURSE_SSO_SECRET = 'd836444a9e4084d5b224a60c208dce14'
-
 AVATAR_CLEANUP_DELETED = True
 AVATAR_MAX_AVATARS_PER_USER = 1
 AVATAR_DEFAULT_URL = 'https://forums.coretabs.net/uploads/default/original/1X/5e58d0cbc2836c682d2eaecfe601bf02c821c4dd.png'
@@ -161,8 +155,3 @@ AVATAR_PROVIDERS = (
 )
 
 EMAIL_SUBJECT_PREFIX = ''
-
-# CSRF and Session
-DEFAULT_COOKIE_DOMAIN = '127.0.0.1'
-SESSION_COOKIE_DOMAIN = DEFAULT_COOKIE_DOMAIN
-CSRF_COOKIE_DOMAIN = DEFAULT_COOKIE_DOMAIN
