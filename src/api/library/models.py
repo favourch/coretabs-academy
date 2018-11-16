@@ -38,6 +38,7 @@ class AutoSlugModel(models.Model):
 
 
 class Module(CachingMixin, AutoSlugModel):
+    is_hidden = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _('module')
@@ -119,7 +120,7 @@ class Workshop(CachingMixin, AutoSlugModel):
         User, related_name='workshops', verbose_name=_('authors'))
     modules = models.ManyToManyField(
         Module, through='WorkshopModule', related_name='workshops', verbose_name=_('modules'))
-
+    is_hidden = models.BooleanField(default=False)
     objects = managers.WorkshopManager()
 
     class Meta:
