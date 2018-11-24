@@ -1,18 +1,16 @@
-from django.db import models
-from django.db.models.signals import post_save
-
-from django.contrib.auth import get_user_model
-from django.contrib.contenttypes.models import ContentType
-
-from django.dispatch import receiver
-from django.utils.translation import ugettext_lazy as _
-
-from library.utils import get_unique_slug
-
+from time import timezone
 
 from . import managers
-
 from caching.base import CachingManager, CachingMixin
+from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+from library.utils import get_unique_slug
+
 
 User = get_user_model()
 
@@ -39,8 +37,8 @@ class AutoSlugModel(models.Model):
 
 class Module(CachingMixin, AutoSlugModel):
     is_hidden = models.BooleanField(default=False)
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'))
-    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
         
     class Meta:
         verbose_name = _('module')
@@ -71,8 +69,8 @@ class BaseLesson(CachingMixin, AutoSlugModel):
     shown_users = models.ManyToManyField(
         User, related_name='lessons', verbose_name=_('shown users'), blank=True)
     order = models.IntegerField(verbose_name=_('Order'), default=0)
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'))
-    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
     objects = managers.BaseLessonManager()
 
     class Meta:
@@ -107,8 +105,8 @@ class Workshop(CachingMixin, AutoSlugModel):
 
     level = models.CharField(
         max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('type'))
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'))
-    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
     duration = models.DecimalField(
         max_digits=3, decimal_places=1, verbose_name=_('duration'))
     description = models.CharField(
@@ -150,7 +148,7 @@ class WorkshopModule(models.Model):
 class Track(CachingMixin, AutoSlugModel):
     workshops = models.ManyToManyField(
         Workshop, through='TrackWorkshop', related_name='tracks', verbose_name=_('workshops'))
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
     objects = CachingManager()
 
     class Meta:
