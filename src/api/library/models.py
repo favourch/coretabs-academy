@@ -39,7 +39,9 @@ class AutoSlugModel(models.Model):
 
 class Module(CachingMixin, AutoSlugModel):
     is_hidden = models.BooleanField(default=False)
-
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'))
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'))
+        
     class Meta:
         verbose_name = _('module')
         verbose_name_plural = _('modules')
@@ -69,7 +71,8 @@ class BaseLesson(CachingMixin, AutoSlugModel):
     shown_users = models.ManyToManyField(
         User, related_name='lessons', verbose_name=_('shown users'), blank=True)
     order = models.IntegerField(verbose_name=_('Order'), default=0)
-
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'))
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'))
     objects = managers.BaseLessonManager()
 
     class Meta:
@@ -104,8 +107,8 @@ class Workshop(CachingMixin, AutoSlugModel):
 
     level = models.CharField(
         max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('type'))
-    last_update_date = models.DateTimeField(
-        verbose_name=_('last update date'))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'))
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'))
     duration = models.DecimalField(
         max_digits=3, decimal_places=1, verbose_name=_('duration'))
     description = models.CharField(
@@ -147,6 +150,7 @@ class WorkshopModule(models.Model):
 class Track(CachingMixin, AutoSlugModel):
     workshops = models.ManyToManyField(
         Workshop, through='TrackWorkshop', related_name='tracks', verbose_name=_('workshops'))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'))
     objects = CachingManager()
 
     class Meta:
