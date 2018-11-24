@@ -12,6 +12,7 @@ class LessonAdmin(admin.ModelAdmin):
         custom_filters.LessonsByWorkshopListFilter,
         custom_filters.LessonsByTrackListFilter
     ]
+    ordering = ['-last_update_date']
 
 
 class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -28,6 +29,7 @@ class ModuleAdmin(admin.ModelAdmin):
         custom_filters.ModulesByWorkshopListFilter,
         custom_filters.ModuleByTrackListFilter
     ]
+    ordering = ['-last_update_date']
 
 
 class WorkshopModuleInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -38,6 +40,7 @@ class WorkshopModuleInline(SortableInlineAdminMixin, admin.TabularInline):
 class WorkshopAdmin(admin.ModelAdmin):
     inlines = (WorkshopModuleInline,)
     list_filter = [custom_filters.WorkshopByTrackListFilter]
+    ordering = ['-last_update_date']
 
 
 class TrackWorkshopInline(SortableInlineAdminMixin, admin.TabularInline):
