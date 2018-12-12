@@ -27,6 +27,9 @@ import WorkshopComponent from './components/workshop/workshop.vue'
 import NotFoundComponent from './components/not-found/not-found.vue'
 import WorkshopsComponent from './components/workshops/workshops.vue'
 import maintenanceComponent from './components/maintenance/maintenance.vue'
+import ProfileComponent from './components/profile/profile.vue'
+import ProfileAboutComponent from './components/profile/profile-about/profile-about.vue'
+import ProfileCertificatesComponent from './components/profile/profile-certificates/profile-certificates.vue'
 
 import i18n from './i18n/ar/i18n'
 
@@ -104,6 +107,21 @@ const router = new Router({
     component: SignInComponent,
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
+    name: 'profile',
+    path: '/user/:id',
+    component: ProfileComponent,
+    children: [{
+      name: 'profile-about',
+      path: 'about',
+      component: ProfileAboutComponent
+    },
+    {
+      name: 'profile-certificates',
+      path: 'certificates',
+      component: ProfileCertificatesComponent
+    }],
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }, {
     name: 'select-track',
     path: '/select-track',
     component: SelectTrackComponent,
@@ -172,7 +190,7 @@ const router = new Router({
   }]
 })
 
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (typeof window !== 'undefined') {
     if (window.localStorage.getItem('token') && !store.getters.isLogin) {
       await Vue.prototype.$auth.checkUser(store)

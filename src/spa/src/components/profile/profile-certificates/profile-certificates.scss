@@ -1,0 +1,49 @@
+@import '../../../assets/styles/vars';
+@import '../../../../node_modules/rfs/scss/_rfs';
+/*=====================================
+Profile Certificates
+=======================================*/
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 2rem;
+  margin: 0 3rem 3rem;
+  
+  .card__title .card-title {
+    min-height: 60px;
+  }
+  
+  .card-title {
+    color: #7d7d7d;
+    font-weight: normal;
+  }
+  
+  .card-meta {
+    display: flex;
+    align-items: center;
+  }
+  
+  .card-date-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .card-icon,
+  .card-date {
+    color: #88919b !important;
+  }
+  
+  .card-icon {
+    font-size: 1.25rem;
+  }
+  
+  .card-date-wrapper .card-icon {
+    margin-left: 0.5rem;
+  }
+  
+  .card-icon ~ .card-icon {
+    margin-right: 1rem;
+  }
+}
+
