@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -65,6 +66,34 @@ class SocialLink(models.Model):
 
     def __str__(self):
         return f'{self.profile.user.username} ({self.link})'
+
+
+class Certificate(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='certificates')
+    full_name = models.CharField(max_length=126, verbose_name='full name')
+    date = models.DateField(auto_now=True)
+    template = models.ForeignKey('CertificateTemplate', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.template}: {self.full_name}'
+
+
+class CertificateTemplate(models.Model):
+    heading = models.CharField(max_length=126)
+    body = models.CharField(max_length=512)
+    signature = models.ForeignKey('CertificateSignature', null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.heading
+
+
+class CertificateSignature(models.Model):
+    name = models.CharField(max_length=126)
+    photo = models.ImageField(upload_to='signatures/')
+
+    def __str__(self):
+        return self.name
 
 
 @receiver(post_save, sender=User)
