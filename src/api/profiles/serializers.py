@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile, Team
+from .models import Profile, Team, Certificate
 
 
 class TeamSerializer(serializers.ModelSerializer):
@@ -16,4 +16,14 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('username', 'name', 'role', 'level', 'description', 'available_for_work',
-                  'country', 'city', 'bio', 'skills', 'preferred_skills', 'languages', 'team')
+                  'country', 'city', 'bio', 'skills', 'preferred_skills', 'languages', 'team', 'certificates')
+
+
+class CertificateSerializer(serializers.ModelSerializer):
+    heading = serializers.CharField(source='template.heading', read_only=True)
+    body = serializers.CharField(source='template.body', read_only=True)
+    signature = serializers.CharField(source='template.signature.photo.url', read_only=True)
+
+    class Meta:
+        model = Certificate
+        fields = ('full_name', 'date', 'heading', 'body', 'signature')

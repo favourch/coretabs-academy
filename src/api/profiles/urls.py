@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import ProfileView
+from .views import ProfileView, CertificateView
 
 urlpatterns = [
-    path('<username>', ProfileView.as_view(), name='profile'),
+    path('profiles/<username>', ProfileView.as_view(), name='profile'),
+    path('certificates/<uuid>', CertificateView.as_view(), name='certificate'),
 ]
