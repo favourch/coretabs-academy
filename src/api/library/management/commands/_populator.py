@@ -2,20 +2,10 @@ import factory
 from django.db import transaction
 
 from django.contrib.auth import get_user_model
-from allauth.account.models import EmailAddress
+
 from library.models import Workshop, Track, TrackWorkshop, Module, WorkshopModule, MarkdownLesson
 
 User = get_user_model()
-
-
-class EmailFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = EmailAddress
-
-    user = ''
-    email = factory.Sequence(lambda n: 'user%d@email.com' % n)
-    primary = True
-    verified = True
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -106,7 +96,6 @@ def create_users(track, users=1000):
         user = UserFactory(lessons=lessons)
         user.profile.track = track
         user.save()
-        EmailFactory(user=user, email=user.email)
         print(f'{i + 1} users created')
 
 

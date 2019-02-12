@@ -15,7 +15,6 @@ Including another URLconf
 '''
 
 from django.urls import path, include
-from django.views.generic import TemplateView
 from .admin import site
 
 import debug_toolbar
@@ -28,8 +27,7 @@ site.site_title = 'Coretabs Admin'
 site.index_title = 'Coretabs Admin'
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    
+
     path('admin/', site.urls),
 
     path('', include('discourse.urls')),
@@ -38,6 +36,7 @@ urlpatterns = [
 
     path('api/v1/', include('library.urls')),
     path('api/v1/auth/', include('accounts.urls')),
+    path('api/v1/', include('profiles.urls')),
 
     path('__debug__/', include(debug_toolbar.urls)),
 

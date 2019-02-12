@@ -1,21 +1,17 @@
 import requests
-from .serializers import MailingListSerializer
-from rest_framework.renderers import JSONRenderer
+from .helper_serializers import MailingListSerializer
 
 from django.contrib.admin import ModelAdmin, SimpleListFilter
 from django.contrib.auth.admin import Group, GroupAdmin, User, UserAdmin
 from django.contrib.sites.admin import Site, SiteAdmin
 
-from django.core import mail
-from django.template.loader import render_to_string
-
 from rest_framework.authtoken.admin import Token, TokenAdmin
-from allauth.account.admin import EmailAddress, EmailAddressAdmin
 
 from coretabs.admin import site, MyActionForm
 from coretabs import settings
 
-from .models import Batch
+from .models import Batch, EmailAddress, Account
+from .utils import render_mail
 
 
 class HasBatchFilter(SimpleListFilter):
@@ -97,8 +93,8 @@ class BatchAdmin(ModelAdmin):
         for batch in queryset:
             context = {'start_date': batch.start_date, }
 
-            msg = self.render_mail(
-                        'account/email/starting_batch_details',
+            msg = render_mail(
+                        'accounts/email/starting_batch_details',
                         f'{batch.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
                         context)
             msg.send()
@@ -107,33 +103,22 @@ class BatchAdmin(ModelAdmin):
         for batch in queryset:
             context = {'start_date': batch.start_date, }
 
-            msg = self.render_mail(
-                        'account/email/approve_user',
+            msg = render_mail(
+                        'accounts/email/approve_user',
                         f'{batch.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
                         context)
             msg.send()
 
-    def render_mail(self, template_prefix, email, context):
-        subject = render_to_string('{0}_subject.txt'.format(template_prefix),
-                                   context)
-        # remove superfluous line breaks
-        subject = " ".join(subject.splitlines()).strip()
 
-        template_name = '{0}_message.{1}'.format(template_prefix, 'html')
-        body = render_to_string(template_name,
-                                context).strip()
-
-        msg = mail.EmailMessage(subject=subject,
-                                body=body,
-                                to=[email])
-        msg.content_subtype = 'html'
-        return msg
+class AccountAdmin(ModelAdmin):
+    search_fields = ('user__username', 'user__first_name',)
 
 
 site.register(Token, TokenAdmin)
-site.register(EmailAddress, EmailAddressAdmin)
+site.register(EmailAddress)
 site.register(User, MyUserAdmin)
 site.register(Group, GroupAdmin)
 site.register(Site, SiteAdmin)
 site.register(Batch, BatchAdmin)
+site.register(Account, AccountAdmin)
 
