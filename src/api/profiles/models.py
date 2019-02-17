@@ -10,14 +10,6 @@ from django.dispatch import receiver
 User = get_user_model()
 
 
-class Team(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    # More info
-
-    def __str__(self):
-        return self.name
-
-
 class Profile(models.Model):
     ROLE_CHOICES = (
         ('0', _('Student')),
@@ -30,42 +22,27 @@ class Profile(models.Model):
         ('1', _('Intermediate')),
         ('2', _('Advanced')),
     )
+    COUNTRY_CHOICES = (
+        ('', ''),
+        ('DZ', _('Algeria')),
+        ('TN', _('Tunisia')),
+    )
+    LANGUAGES_CHOICES = ['العربية', 'Français', 'English', 'español']
 
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    # name and join date come from user
-
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='0')
     level = models.CharField(max_length=10, choices=LEVEL_CHOICES, default='0')
     description = models.CharField(max_length=50, blank=True)
-    available_for_work = models.BooleanField(default=False, verbose_name='available for work')
-    country = models.CharField(max_length=50, blank=True)
-    city = models.CharField(max_length=50, blank=True)
+    country = models.CharField(max_length=50, blank=True, choices=COUNTRY_CHOICES)
     bio = models.CharField(max_length=1000, blank=True)
-    skills = models.CharField(max_length=100, blank=True)
-    preferred_skills = models.CharField(max_length=100, blank=True)
     languages = models.CharField(max_length=100, blank=True)
-    team = models.ForeignKey(Team, blank=True, null=True,
-                             related_name='members', on_delete=models.SET_NULL)
+    facebook_link = models.CharField(max_length=100, blank=True)
+    twitter_link = models.CharField(max_length=100, blank=True)
+    linkedin_link = models.CharField(max_length=100, blank=True)
+    website_link = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return f'{self.user.first_name} ({self.user.username})'
-
-
-class SocialLink(models.Model):
-    APP_CHOICES = (
-        ('0', _('Facebook')),
-        ('1', _('Twitter')),
-        ('2', _('LinkedIn')),
-        ('3', _('Google')),
-        ('4', _('Personal website'))
-    )
-
-    profile = models.ForeignKey(Profile, related_name='social_links', on_delete=models.CASCADE)
-    social_app = models.CharField(max_length=10, choices=APP_CHOICES)
-    link = models.URLField()
-
-    def __str__(self):
-        return f'{self.profile.user.username} ({self.link})'
 
 
 class Certificate(models.Model):
