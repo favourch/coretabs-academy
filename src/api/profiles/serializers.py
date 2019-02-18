@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from .models import Profile, Certificate
@@ -67,10 +69,19 @@ class ProfileSerializer(serializers.ModelSerializer):
     website_link = serializers.URLField(error_messages={'invalid': links_errors['website']},
                                         allow_blank=True)
 
+    avatar_url = serializers.SerializerMethodField()
+
+    def get_avatar_url(self, obj, size=settings.AVATAR_DEFAULT_SIZE):
+        for provider_path in settings.AVATAR_PROVIDERS:
+            provider = import_string(provider_path)
+            avatar_url = provider.get_avatar_url(obj.user, size)
+            if avatar_url:
+                return avatar_url
+
     class Meta:
         model = Profile
         fields = ('username', 'name', 'role', 'level', 'description',
-                  'country', 'bio', 'languages', 'certificates',
+                  'country', 'bio', 'languages', 'certificates', 'avatar_url',
                   'facebook_link', 'twitter_link', 'linkedin_link', 'website_link')
 
         read_only_fields = ('description',)
