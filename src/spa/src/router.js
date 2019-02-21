@@ -30,6 +30,7 @@ import maintenanceComponent from './components/maintenance/maintenance.vue'
 import ProfileComponent from './components/profile/profile.vue'
 import ProfileAboutComponent from './components/profile/profile-about/profile-about.vue'
 import ProfileCertificatesComponent from './components/profile/profile-certificates/profile-certificates.vue'
+import TracksComponent from './components/tracks/tracks.vue'
 
 import i18n from './i18n/ar/i18n'
 
@@ -60,6 +61,10 @@ const router = new Router({
     name: 'page',
     path: '/page/:page',
     component: PageComponent
+  }, {
+    name: 'tracks',
+    path: '/tracks',
+    component: TracksComponent
   }, {
     name: 'signup',
     path: '/signup',
