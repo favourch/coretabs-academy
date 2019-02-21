@@ -57,12 +57,11 @@
             </v-card>
 
           </v-flex>
-         
         </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
-<script src="./tracks.js"></script> 
-<style src="./tracks.scss" lang="scss"></style> 
+<script src="./tracks.js"></script>
+<style src="./tracks.scss" lang="scss"></style>
