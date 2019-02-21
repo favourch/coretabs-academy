@@ -1,9 +1,9 @@
 <template>
   <v-container id="tracks" fluid grid-list-xl fill-height>
     <v-layout justify-center wrap align-center>
-      <v-flex xs12 sm8>
+      <v-flex xs12 lg10>
         <v-layout class="tracks-items" justify-center wrap>
-          <v-flex xs10 sm12 md6>
+          <v-flex xs10 md4>
             <v-card height="100%">
               <div class="pic-container">
                 <img
@@ -30,8 +30,7 @@
             </v-card>
 
           </v-flex>
-          
-          <v-flex xs10 sm12 md6>
+          <v-flex xs10 md4>
             <v-card height="100%">
               <div class="pic-container">
                 <img
