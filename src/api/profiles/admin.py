@@ -3,19 +3,13 @@ from django.conf import settings
 from coretabs.admin import site, MyActionForm
 
 from django.contrib.admin import ModelAdmin, TabularInline
-from .models import Profile, SocialLink, Team, Certificate, CertificateTemplate, CertificateSignature
+from .models import Profile, Certificate, CertificateTemplate, CertificateSignature
 
 from .utils import render_mail
 
 
-class SocialLinkInline(TabularInline):
-    model = SocialLink
-    extra = 1
-
-
 class ProfileAdmin(ModelAdmin):
     action_form = MyActionForm
-    inlines = (SocialLinkInline,)
     actions = ['generate_and_send_certificates']
 
     def _send_certificate_email(self, certificate, email):
@@ -39,8 +33,6 @@ class ProfileAdmin(ModelAdmin):
 
 
 site.register(Profile, ProfileAdmin)
-site.register(SocialLink)
-site.register(Team)
 site.register(Certificate)
 site.register(CertificateTemplate)
 site.register(CertificateSignature)
