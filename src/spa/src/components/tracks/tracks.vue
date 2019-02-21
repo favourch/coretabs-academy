@@ -1,6 +1,6 @@
 <template>
-  <v-container id="tracks" fluid grid-list-xl>
-    <v-layout justify-center wrap>
+  <v-container id="tracks" fluid grid-list-xl fill-height>
+    <v-layout justify-center wrap align-center>
       <v-flex xs12 sm8>
         <v-layout class="tracks-items" justify-center wrap>
           <v-flex xs10 sm12 md6>
