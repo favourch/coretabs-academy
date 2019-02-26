@@ -78,7 +78,7 @@ const router = new Router({
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'confirm-account',
-    path: '/confirm-account/:key',
+    path: '/confirm-account/:uid/:key',
     component: ConfirmAccountComponent,
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {

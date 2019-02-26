@@ -53,6 +53,7 @@ const AuthAPI = {
   },
   verifyEmail(root) {
     axios.post('/api/v1/auth/registration/verify-email/', {
+      uid: root.$route.params.uid,
       key: root.$route.params.key
     }, {
       withCredentials: true,
