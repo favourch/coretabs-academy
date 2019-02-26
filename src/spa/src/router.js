@@ -195,7 +195,7 @@ const router = new Router({
   }]
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   if (typeof window !== 'undefined') {
     if (window.localStorage.getItem('token') && !store.getters.isLogin) {
       await Vue.prototype.$auth.checkUser(store)

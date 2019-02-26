@@ -17,7 +17,7 @@
             <h2 class="mb-4 title">اللغات التي أتحدث بها</h2>
 
             <div class="lang-items">
-              <div class="lang-item" v-for="num in 3">
+              <div class="lang-item" v-for="num in 3" :key="num">
                 <div class="lang-img-wrapper">Ar</div>
                 <span class="lang-title">اللغة العربية</span>
               </div>
@@ -27,7 +27,7 @@
           <div class="mb-5">
             <h2 class="mb-4 title">مهاراتي</h2>
 
-            <v-chip small label outline v-for="n in 3">Tag {{ n}}</v-chip>
+            <v-chip small label outline v-for="n in 3" :key="n">Tag {{ n}}</v-chip>
           </div>
         </v-flex>
 
@@ -52,7 +52,7 @@
                   v-for="(icon, i) in icons"
                   :key="i"
                 ></span>
-                
+
               </v-card-actions>
 
             </div>
@@ -64,5 +64,5 @@
   </div>
 </template>
 
-<script src="./profile-about.js"></script> 
-<style src="./profile-about.scss" lang="scss"></style> 
+<script src="./profile-about.js"></script>
+<style src="./profile-about.scss" lang="scss"></style>
