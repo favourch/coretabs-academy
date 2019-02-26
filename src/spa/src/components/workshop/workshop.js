@@ -40,8 +40,8 @@ export default {
       return url
     },
     getContinueURL(workshop) {
-      let module = this.$store.getters.profile('last_opened_module_slug')
-      let lesson = this.$store.getters.profile('last_opened_lesson_slug')
+      let module = this.$store.getters.account('last_opened_module_slug')
+      let lesson = this.$store.getters.account('last_opened_lesson_slug')
 
       workshop.modules.forEach((m) => {
         if (m.url.params.module === module) {

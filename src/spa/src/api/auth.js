@@ -122,8 +122,8 @@ const AuthAPI = {
         if (root.$route.query.next) {
           window.location = root.$route.query.next
         } else {
-          if (root.$store.getters.profile('track')) {
-            root.$router.push(`/classroom/${root.$store.getters.profile('track')}/`)
+          if (root.$store.getters.account('track')) {
+            root.$router.push(`/classroom/${root.$store.getters.account('track')}/`)
           } else {
             root.$router.push('/account-confirmed')
           }
@@ -239,14 +239,14 @@ const AuthAPI = {
   },
   async selectTrack(root) {
     return await axios.patch('/api/v1/auth/user/', {
-      profile: {
+      account: {
         track: root.track_selected
       }
     }, {
       withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
-      return root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
+      return root.$store.dispatch('account', { prop: 'track', data: response.data.account.track })
         .then((response) => {
           return response
         })

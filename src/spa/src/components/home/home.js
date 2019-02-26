@@ -39,8 +39,8 @@ export default {
   },
   created() {
     if (this.$store.getters.isLogin) {
-      if (this.$store.getters.profile('track')) {
-        this.$router.push(`/classroom/${this.$store.getters.profile('track')}/`)
+      if (this.$store.getters.account('track')) {
+        this.$router.push(`/classroom/${this.$store.getters.account('track')}/`)
       } else {
         this.$router.push('/select-track')
       }

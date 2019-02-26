@@ -96,7 +96,7 @@ var i18n = `{
     "track_2_text_ar": "مسار تطوير واجهات الويب",
     "submit_btn_text": "ابدأ المسار"
   },
-  "profile": {
+  "account": {
     "titles": {
       "settings": "إعدادات الحساب",
       "personal_info": "المعلومات الشخصية",

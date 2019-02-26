@@ -24,7 +24,7 @@ export default {
     username: ''
   }),
   computed: {
-    i18n() { return this.$store.state.i18n.profile.personal_info },
+    i18n() { return this.$store.state.i18n.account.personal_info },
     form() { return this.$store.state.i18n.form }
   },
   watch: {
