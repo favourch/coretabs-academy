@@ -1,4 +1,5 @@
 from django.db import models
+from .utils import send_email_changed_mail
 
 
 class EmailAddressManager(models.Manager):
@@ -9,6 +10,8 @@ class EmailAddressManager(models.Manager):
         )
 
         email_address.send_confirmation()
+        send_email_changed_mail(user, email)
+
         return email_address
 
     def get_primary(self, user):

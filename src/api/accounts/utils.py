@@ -1,7 +1,11 @@
+import requests
+
 from django.conf import settings
 
 from django.core import mail
 from django.template.loader import render_to_string
+
+from .helper_serializers import MailingListSerializer
 
 
 def send_password_reset_mail(user, token, uid):
@@ -14,13 +18,28 @@ def send_password_reset_mail(user, token, uid):
     msg.send()
 
 
-def send_confirmation_mail(user, token, uid):
+def send_confirmation_mail(user, email, primary, token, uid):
     activate_url = f'{settings.SPA_BASE_URL}/confirm-account/{uid}/{token}'
     ctx = {
         'user': user.username,
         'activate_url': activate_url,
     }
-    email_template = 'accounts/email/email_confirmation'
+
+    if primary:
+        email_template = 'accounts/email/email_confirmation'
+    else:
+        email_template = 'accounts/email/new_email_confirmation'
+
+    msg = render_mail(email_template, email, ctx)
+    msg.send()
+
+
+def send_email_changed_mail(user, new_email):
+    ctx = {
+        'user': user.username,
+        'new_email': new_email,
+    }
+    email_template = 'accounts/email/email_changed'
     msg = render_mail(email_template, user.email, ctx)
     msg.send()
 
@@ -40,3 +59,13 @@ def render_mail(template_prefix, email, context):
                             to=[email])
     msg.content_subtype = 'html'
     return msg
+
+
+def update_email_in_mailing_lists(user, old_email):
+    json_member = MailingListSerializer(user).data
+
+    for gr in user.groups.filter(name__startswith='batch'):
+        mailing_list = f'{gr.name}@{settings.MAILGUN_LIST_DOMAIN}'
+        requests.put(f'https://api.mailgun.net/v3/lists/{mailing_list}/members/{old_email}',
+                     auth=('api', settings.MAILGUN_API_KEY),
+                     data=json_member)

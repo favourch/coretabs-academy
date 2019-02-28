@@ -166,9 +166,9 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             })
 
     def validate_email(self, email):
-        if User.objects.filter(email__iexact=email).exists():
+        if email != self.instance.email and User.objects.filter(email__iexact=email).exists():
             raise serializers.ValidationError(
-                _("A user is already registered with this e-mail address."))
+                 _("A user is already registered with this e-mail address."))
         return email
 
     def _update_account(self, instance, account):
@@ -397,7 +397,8 @@ class VerifyEmailSerializer(serializers.Serializer):
             raise serializers.ValidationError(_('bad token'))
 
     def save(self):
-        self.email.confirm()
+        is_changed = self.email.confirm()
+        return is_changed
 
 
 class ResendConfirmSerializer(serializers.Serializer):
