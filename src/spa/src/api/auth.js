@@ -53,6 +53,7 @@ const AuthAPI = {
   },
   verifyEmail(root) {
     axios.post('/api/v1/auth/registration/verify-email/', {
+      uid: root.$route.params.uid,
       key: root.$route.params.key
     }, {
       withCredentials: true,
@@ -122,8 +123,8 @@ const AuthAPI = {
         if (root.$route.query.next) {
           window.location = root.$route.query.next
         } else {
-          if (root.$store.getters.profile('track')) {
-            root.$router.push(`/classroom/${root.$store.getters.profile('track')}/`)
+          if (root.$store.getters.account('track')) {
+            root.$router.push(`/classroom/${root.$store.getters.account('track')}/`)
           } else {
             root.$router.push('/account-confirmed')
           }
@@ -199,6 +200,7 @@ const AuthAPI = {
     root.alert.error = false
     let formData = new FormData()
     formData.append('name', root.fullname)
+    formData.append('email', root.email)
     formData.append('username', root.username)
     formData.append('avatar', root.validImage.imageData)
 
@@ -210,8 +212,13 @@ const AuthAPI = {
       }
     }).then((response) => {
       root.alert.success = true
-      root.alert.message = root.i18n.success_message
+      if (root.$store.getters.user('email') !== root.email) {
+        root.alert.message = root.i18n.success_email_message
+      } else {
+        root.alert.message = root.i18n.success_message
+      }
       root.$store.dispatch('user', { prop: 'name', data: root.fullname })
+      root.$store.dispatch('user', { prop: 'email', data: root.email })
       root.$store.dispatch('user', { prop: 'username', data: root.username })
       if (root.$store.getters.user('avatar_url') !== root.avatar_url) {
         root.$store.dispatch('user', { prop: 'avatar_url', data: '/media/avatars/' + root.username + '/resized/80/' + root.validImage.imageData.name })
@@ -239,14 +246,14 @@ const AuthAPI = {
   },
   async selectTrack(root) {
     return await axios.patch('/api/v1/auth/user/', {
-      profile: {
+      account: {
         track: root.track_selected
       }
     }, {
       withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
-      return root.$store.dispatch('profile', { prop: 'track', data: response.data.profile.track })
+      return root.$store.dispatch('account', { prop: 'track', data: response.data.account.track })
         .then((response) => {
           return response
         })

@@ -36,7 +36,7 @@ class ProfileCertificateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Certificate
-        fields = ('date', 'heading')
+        fields = ('id', 'date', 'heading')
 
 
 class ProfileSerializer(serializers.ModelSerializer):

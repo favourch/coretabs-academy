@@ -10,11 +10,11 @@ export default {
     tracks: []
   }),
   computed: {
-    i18n() { return this.$store.state.i18n.profile.change_track }
+    i18n() { return this.$store.state.i18n.account.change_track }
   },
   methods: {
     async getTracks() {
-      this.track_selected = this.$store.getters.profile('track')
+      this.track_selected = this.$store.getters.account('track')
       this.tracks = await this.$auth.getTracks()
     },
     async submit() {

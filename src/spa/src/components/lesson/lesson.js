@@ -33,7 +33,7 @@ export default {
       return this.$store.state.i18n.lesson
     },
     endpoint() {
-      let track = this.$store.getters.profile('track')
+      let track = this.$store.getters.account('track')
       let workshop = this.$route.params.workshop
       let module = this.$route.params.module
       let lesson = this.$route.params.lesson

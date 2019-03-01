@@ -162,9 +162,14 @@ class VerifyEmailView(GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        is_changed = serializer.save()
 
-        return Response({"detail": _("Email Confirmed")}, status=status.HTTP_200_OK)
+        if is_changed:
+            response_code = status.HTTP_200_OK
+        else:
+            response_code = status.HTTP_201_CREATED
+
+        return Response({"detail": _("Email Confirmed")}, status=response_code)
 
 
 class ResendConfirmView(GenericAPIView):

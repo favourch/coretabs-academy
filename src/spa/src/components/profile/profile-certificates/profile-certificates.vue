@@ -18,7 +18,6 @@
             </div>
 
             <v-spacer></v-spacer>
-            
             <v-card-actions class="pa-0">
               <v-icon class="card-icon">cloud_download</v-icon>
             </v-card-actions>
@@ -29,5 +28,5 @@
   </div>
 </template>
 
-<script src="./profile-certificates.js"></script> 
-<style src="./profile-certificates.scss" lang="scss"></style> 
+<script src="./profile-certificates.js"></script>
+<style src="./profile-certificates.scss" lang="scss"></style>

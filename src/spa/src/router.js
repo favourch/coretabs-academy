@@ -83,9 +83,8 @@ const router = new Router({
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'confirm-account',
-    path: '/confirm-account/:key',
-    component: ConfirmAccountComponent,
-    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+    path: '/confirm-account/:uid/:key',
+    component: ConfirmAccountComponent
   }, {
     name: 'application-submitted',
     path: '/application-submitted',
@@ -200,7 +199,7 @@ const router = new Router({
   }]
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   if (typeof window !== 'undefined') {
     if (window.localStorage.getItem('token') && !store.getters.isLogin) {
       await Vue.prototype.$auth.checkUser(store)

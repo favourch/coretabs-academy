@@ -6,9 +6,9 @@
       <v-layout :column="$vuetify.breakpoint.smAndDown">
         <v-flex xs12 md3 class="profile">
           <div class="profile-header">
-            
+
             <v-avatar size="150" color="grey lighten-4">
-              
+
               <div class="user-badge">
                 <span class="icon"></span>
               </div>
@@ -34,7 +34,7 @@
             <v-subheader class="profile-subheader">المهارات المفضلة</v-subheader>
 
             <v-list-tile>
-              <v-chip small label outline v-for="n in 3">Tag {{ n }}</v-chip>
+              <v-chip small label outline v-for="n in 3" :key="n">Tag {{ n }}</v-chip>
             </v-list-tile>
           </v-list>
         </v-flex>
@@ -50,6 +50,5 @@
   </div>
 </template>
 
-
-<script src="./profile.js"></script> 
-<style src="./profile.scss" lang="scss"></style> 
+<script src="./profile.js"></script>
+<style src="./profile.scss" lang="scss"></style>

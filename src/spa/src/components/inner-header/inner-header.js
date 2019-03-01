@@ -46,6 +46,8 @@ export default {
           return 'reply'
         case 11:
           return 'link'
+        case 16:
+          return 'settings'
         default:
           return 'notifications'
       }

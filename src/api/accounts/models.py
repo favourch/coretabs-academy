@@ -13,12 +13,13 @@ from django.db.models.signals import post_save, post_delete
 from django.db import transaction
 
 from django.dispatch import receiver
+from .signals import user_updated
 
 from rest_framework.renderers import JSONRenderer
 
 from .managers import EmailAddressManager
 from .tokens import confirm_email_token_generator
-from .utils import send_confirmation_mail
+from .utils import send_confirmation_mail, update_email_in_mailing_lists
 from .helper_serializers import MailingListSerializer
 from django.utils.http import int_to_base36
 
@@ -51,22 +52,35 @@ class EmailAddress(models.Model):
     def set_as_primary(self):
         old_primary = EmailAddress.objects.get_primary(self.user)
         if old_primary:
+            old_email = old_primary.email
             old_primary.delete()
+
         self.primary = True
         self.save()
         self.user.email = self.email
         self.user.save()
 
+        update_email_in_mailing_lists(self.user, old_email)
+        user_updated.send(sender=User, user=self.user)
+
     def send_confirmation(self):
         if not self.verified:
             token = confirm_email_token_generator.make_token(self)
             uid = int_to_base36(self.pk)
-            send_confirmation_mail(self.user, token, uid)
+
+            send_confirmation_mail(self.user, self.email, self.primary, token, uid)
 
     def confirm(self):
+        is_changed = False
+
         self.verified = True
-        self.set_as_primary()
+
+        if not self.primary:
+            self.set_as_primary()
+            is_changed = True
+
         self.save()
+        return is_changed
 
 
 class Account(models.Model):

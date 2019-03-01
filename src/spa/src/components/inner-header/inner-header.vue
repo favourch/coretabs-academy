@@ -31,7 +31,7 @@
                   <v-icon>
                     {{ notification_icon(notification.notification_type) }}
                   </v-icon>
-                  {{ notification.data.topic_title || notification.data.badge_name }}
+                  {{ notification.data.topic_title || notification.data.badge_name || 'System Notification' }}
                 </a>
               </v-list-tile-title>
             </v-list-tile>

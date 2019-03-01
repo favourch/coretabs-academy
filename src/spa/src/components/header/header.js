@@ -81,8 +81,8 @@ export default {
             this.role = 'user_navs'
             this.i18n = this.$store.state.i18n.header[this.role]
             this.navs = this.user_navs
-            if (this.$store.getters.profile('track')) {
-              this.user_navs[0].url = `/classroom/${this.$store.getters.profile('track')}/`
+            if (this.$store.getters.account('track')) {
+              this.user_navs[0].url = `/classroom/${this.$store.getters.account('track')}/`
             }
           }
           break

@@ -20,7 +20,7 @@ export default {
     }
   }),
   computed: {
-    i18n() { return this.$store.state.i18n.profile.change_password },
+    i18n() { return this.$store.state.i18n.account.change_password },
     form() { return this.$store.state.i18n.form }
   },
   methods: {
