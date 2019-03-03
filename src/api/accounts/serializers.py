@@ -398,7 +398,7 @@ class VerifyEmailSerializer(serializers.Serializer):
 
     def save(self):
         is_changed = self.email.confirm()
-        return is_changed
+        return self.email.email, is_changed
 
 
 class ResendConfirmSerializer(serializers.Serializer):
