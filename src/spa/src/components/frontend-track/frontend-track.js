@@ -27,6 +27,9 @@ export default {
     },
     perPage: 1
   }),
+  computed: {
+    i18n() { return this.$store.state.i18n.about }
+  },
   methods: {
     showTestimonials(i, e) {
       let children = e.currentTarget.parentElement.children
