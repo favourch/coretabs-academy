@@ -11,6 +11,15 @@ export default {
   computed: {
     i18n() {
       return this.$store.state.i18n.workshop
+    },
+    durationUnit() {
+      let duration = this.workshop.duration
+      if (duration > 1 && duration < 11) {
+        return this.i18n.card1.duration.hours
+      }
+      else {
+        return this.i18n.card1.duration.hour
+      }
     }
   },
   watch: {

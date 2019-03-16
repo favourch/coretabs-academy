@@ -19,7 +19,7 @@
             <img src="../../assets/multimedia/icons/workshop/duration.svg" alt="duration icon">
             <div class="text">
               <div v-html="i18n.card1.duration.title"></div>
-              <div v-html="`${workshop.duration} ${i18n.card1.duration.unit}`"></div>
+              <div v-html="`${workshop.duration} ${this.durationUnit}`"></div>
             </div>
           </v-layout>
         </v-flex>

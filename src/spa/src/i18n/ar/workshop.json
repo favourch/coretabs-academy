@@ -1,7 +1,8 @@
 {
    "card1": {
       "duration": {
-         "unit": "ساعة",
+         "hour": "ساعة",
+         "hours": "ساعات",
          "title": "الجدول الزمني"
       },
       "last_update_date": "آخر تحديث",
