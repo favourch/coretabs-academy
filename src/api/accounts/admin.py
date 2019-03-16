@@ -36,7 +36,9 @@ class HasBatchFilter(SimpleListFilter):
 class MyUserAdmin(UserAdmin):
     action_form = MyActionForm
     actions = ['add_or_change_batch', 'remove_batch', ]
+    list_display = ('username', 'email', 'first_name', 'date_joined')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups', HasBatchFilter)
+    ordering = ('date_joined', 'username')
 
     def _add_user_into_mailing_list(self, user, mailing_list_name):
         json_member = MailingListSerializer(user).data
@@ -94,9 +96,9 @@ class BatchAdmin(ModelAdmin):
             context = {'start_date': batch.start_date, }
 
             msg = render_mail(
-                        'accounts/email/starting_batch_details',
-                        f'{batch.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
-                        context)
+                'accounts/email/starting_batch_details',
+                f'{batch.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
+                context)
             msg.send()
 
     def send_approval_emails(self, request, queryset):
@@ -104,9 +106,9 @@ class BatchAdmin(ModelAdmin):
             context = {'start_date': batch.start_date, }
 
             msg = render_mail(
-                        'accounts/email/approve_user',
-                        f'{batch.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
-                        context)
+                'accounts/email/approve_user',
+                f'{batch.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
+                context)
             msg.send()
 
 
@@ -121,4 +123,3 @@ site.register(Group, GroupAdmin)
 site.register(Site, SiteAdmin)
 site.register(Batch, BatchAdmin)
 site.register(Account, AccountAdmin)
-
