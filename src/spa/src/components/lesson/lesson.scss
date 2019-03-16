@@ -794,8 +794,8 @@ $markdown-em-spacer-6: 0.75em !default;
     h4,
     h5,
     h6{
-      margin-top: 15px !important;
-      margin-bottom: 15px !important;
+      margin-top: 25px !important;
+      margin-bottom: 25px !important;
     }
     blockquote,
     dl,
@@ -805,7 +805,7 @@ $markdown-em-spacer-6: 0.75em !default;
     table,
     ul {
       margin-top: 0 !important;
-      margin-bottom: $markdown-spacer-3 !important;
+      margin-bottom: $markdown-spacer-1 !important;
     }
     p {
       line-height: 30px;
@@ -823,7 +823,7 @@ $markdown-em-spacer-6: 0.75em !default;
       width: 100% !important;
       align-items: center !important;
       color: $black-color !important;
-      margin: $markdown-spacer-5 auto !important;
+      margin: $markdown-spacer-3 auto !important;
       border: 1px solid $secondary-color !important;
       border-left: 10px solid $secondary-color !important;
       padding: $markdown-spacer-2 $markdown-spacer-2 !important;
@@ -870,6 +870,7 @@ $markdown-em-spacer-6: 0.75em !default;
 
     ul, ol {
       list-style-position: inside;
+      margin: $markdown-spacer-4 0;
     }
 
     ol ol,
@@ -883,12 +884,15 @@ $markdown-em-spacer-6: 0.75em !default;
 
     li {
       word-wrap: break-word !important;
-      padding-top: 10px;
+      padding: 0 $markdown-spacer-3 0 0;
+      @media (max-width: 600px) {
+        padding: 0;
+      }
     }
 
     li > p {
-      margin-top: 5px !important;
-      margin-bottom: 5px !important;
+      margin-top: 0px !important;
+      margin-bottom: 0px !important;
 
       &:first-of-type {
         display: inline-block;
@@ -923,7 +927,7 @@ $markdown-em-spacer-6: 0.75em !default;
       max-width: 100% !important;
       background-color: $white-color !important;
       // @include responsive-ratio(16,9);
-      margin: $markdown-spacer-3 auto !important;
+      margin: $markdown-spacer-5 auto !important;
     }
 
     table {
