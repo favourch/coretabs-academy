@@ -14,7 +14,7 @@ class BaseLibraryListFilter(admin.SimpleListFilter):
         for obj in self.dropdown_objects:
             tupleData = None
             tupleData = (obj.id, obj.title)
-            tupleObj = tupleObj +(tupleData,)
+            tupleObj = tupleObj + (tupleData,)
 
         return tupleObj
 
@@ -26,7 +26,8 @@ class LessonsByModuleListFilter(BaseLibraryListFilter):
 
     def queryset(self, request, queryset):
         obj_id = self.value()
-        if obj_id is None: return queryset
+        if obj_id is None:
+            return queryset
 
         return queryset.filter(module=obj_id)
 
