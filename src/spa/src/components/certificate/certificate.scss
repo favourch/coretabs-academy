@@ -1,0 +1,111 @@
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
+#certificate {
+  #container{
+    background: #fff;
+    min-height: 700px;
+    @include box-shadow(0px, 15px, 34px, 0px, $shadow-color);
+    margin-top: -100px;
+    border: 25px solid #fafafa;
+    box-sizing: border-box;
+    text-align: left;
+    padding: 80px;
+    color: #2c3e50;
+    direction: ltr;
+    position: relative;
+    overflow: hidden;
+    #certificate-header{
+      h2,h3{
+        font-size: 20px;
+        margin: 3px 0;
+      }
+      h3{
+        font-weight: normal;
+        color: #6c737a;
+      }
+      h2{
+        font-weight: 600;
+      }
+    }
+    #certificate-name{
+      text-transform: uppercase;
+      font-size: 22px;
+      margin: 40px 0;
+      h1{
+        font-weight: 600;
+      }
+    }
+    #certificate-desc{
+      p,h2{
+        margin: 3px 0;
+      }
+      p{
+        font-size: 20px;
+        color: #6c737a;
+      }
+      h2{
+        text-transform: uppercase;
+        font-size: 28px;
+        font-weight: 600;
+      }
+      blockquote{
+        max-width: 520px;
+        margin-top: 30px;
+        font-size: 18px;
+        color: #6c737a;
+        line-height: 30px;
+        position: relative;
+      }
+      blockquote:after{
+        content: "\201D";
+        font-size: 150px;
+        display: block;
+        position: absolute;
+        right: 40px;
+        bottom: -80px;
+        color: #e5e5e5;
+      }
+    }
+    #certificate-footer{
+       position: absolute;
+       bottom: 20px;
+       div{
+         font-weight: 600;
+         font-size: 16px;
+         
+       }
+       p,
+       div{
+        color: #6c737a;
+       }
+    }
+
+    #certificate-ribbon{
+      width:50px;
+      height:400px;
+      background: rgb(144,66,232);
+      background: linear-gradient(180deg, rgba(144,66,232,1) 0%, rgba(42,60,217,1) 100%);
+      position:absolute;
+      right:150px;
+      top:-330px;
+      animation:drop forwards .8s 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+      &:before{
+        content: '';
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        bottom: -25px;
+        border-left: 25px solid #293cd9;
+        border-right: 25px solid #293cd9;
+        border-bottom: 25px solid transparent;
+      }
+    }
+
+    @keyframes drop{
+      0%		{ top:-350px; }
+      100%	{ top:0; }
+    }
+
+  }
+  
+}

@@ -32,6 +32,7 @@ import ProfileAboutComponent from './components/profile/profile-about/profile-ab
 import ProfileCertificatesComponent from './components/profile/profile-certificates/profile-certificates.vue'
 import TracksComponent from './components/tracks/tracks.vue'
 import FrontendTrackComponent from './components/frontend-track/frontend-track.vue'
+import CertificateComponent from './components/certificate/certificate.vue'
 
 import i18n from './i18n/ar/i18n'
 
@@ -196,6 +197,10 @@ const router = new Router({
       component: LessonComponent
     }],
     beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'certificate',
+    component: CertificateComponent,
+    path: '/certificate'
   }]
 })
 
