@@ -15,7 +15,7 @@ Profile Certificates
   }
   
   .card-title {
-    color: #7d7d7d;
+    color: #888;
     font-weight: normal;
   }
   
@@ -29,13 +29,27 @@ Profile Certificates
     align-items: center;
   }
   
-  .card-icon,
+  .download-btn,
+  .card-icon
   .card-date {
-    color: #88919b !important;
+    color: #888 !important;
+    transition-duration: .4s;
+  }
+
+  .download-btn{
+    display: flex;
+    align-items: center;
+    align-content: space-between;
   }
   
   .card-icon {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    margin-left: .3rem;
+  }
+  
+  .download-btn:hover,
+  .download-btn:hover .card-icon {
+    color: $primary-color !important;
   }
   
   .card-date-wrapper .card-icon {

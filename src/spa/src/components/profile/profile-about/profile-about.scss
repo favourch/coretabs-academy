@@ -5,11 +5,13 @@ Profile About
 =======================================*/
 
 .user-bio {
-  color: #88919b;
-  line-height: 1.8rem;
+  color: #222;
+  line-height: 2.3rem;
+  font-size: 14px;
 }
 
 .lang-items {
+  margin-top: 30px;
   display: flex;
 
   .lang-item {
@@ -34,7 +36,8 @@ Profile About
   }
   
   .lang-title {
-    color: #88919b;
+    color: #666;
+    font-weight: bold;
     font-size: 0.9rem;
   }
   
@@ -43,8 +46,17 @@ Profile About
 .profile-icon {
   background-image: url('../../../assets/multimedia/icons/css_sprites.png');
   width: 16px; height: 16px;
+  margin: 0 8px;
+  opacity: .7;
+  transition-duration: .4s;
+}
+.profile-icon:hover{
+  opacity: 1;
 }
 
+.profile-icon:first-of-type{
+  margin-right: 0;
+}
 .website-icon {
   background-position: -82px -10px;
 }

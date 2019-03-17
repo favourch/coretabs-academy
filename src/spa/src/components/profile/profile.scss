@@ -12,18 +12,27 @@ header {
     padding-top: 3.5rem !important;
 }
 
-.container {
-  background-color: $workshop-drawer-background;
-}
+
 
 .title {
   color: $heading-color;
   font-weight: 700;
 }
 
-.profile {
-  border-left: 1px solid #e2e2e2;
-  background-color: #fff;
+#profile {
+
+  .container {
+    background-color: $workshop-drawer-background;
+  }
+
+  .profile{
+    border-left: 1px solid #e2e2e2;
+    background-color: #fff;
+    min-height: calc(100vh - #{$inner-header-height});
+    @media (max-width: 600px) {
+      min-height: auto;
+    }
+  }
 
   .profile-header {
     text-align: center;
@@ -32,8 +41,8 @@ header {
     .avatar {
       position: relative;
       border-radius: 50% !important;
-      height: 200px !important;
-      width: 200px !important;
+      height: 150px !important;
+      width: 150px !important;
       align-self: center;
     }
 
@@ -43,8 +52,8 @@ header {
       width: 32px;
       height: 32px;
       position: absolute;
-      bottom: 16px;
-      right: 16px;
+      bottom: 4px;
+      right: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -107,7 +116,7 @@ header {
         font-size: 0.75rem;
         background: #2d43e7;
         margin-right: 8px;
-        top: 50%;
+        top: 55%;
         width: 16px;
         height: 16px;
       }
@@ -117,8 +126,7 @@ header {
       border: 2px solid #dadada;
       color: #88919b;
       border-radius: 5px;
-      width: 136px;
-      height: 36px;
+      padding: 4px 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;

@@ -19,7 +19,10 @@
 
             <v-spacer></v-spacer>
             <v-card-actions class="pa-0">
-              <v-icon class="card-icon">cloud_download</v-icon>
+              <a href="#" download="" class="download-btn">
+                <v-icon class="card-icon">visibility</v-icon>
+                معاينة
+              </a>
             </v-card-actions>
           </div>
         </div>

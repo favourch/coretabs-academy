@@ -128,8 +128,8 @@ const router = new Router({
       name: 'profile-certificates',
       path: 'certificates',
       component: ProfileCertificatesComponent
-    }],
-    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+    }]
+    // beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'select-track',
     path: '/select-track',
