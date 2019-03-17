@@ -14,7 +14,7 @@ class Profile(models.Model):
     ROLE_CHOICES = (
         ('0', _('Student')),
         ('1', _('Mentor')),
-        ('2', _('Author')),
+        ('2', _('Tutor')),
         ('3', _('Admin')),
     )
     LEVEL_CHOICES = (

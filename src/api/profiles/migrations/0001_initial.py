@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
             name='Profile',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('role', models.CharField(choices=[('0', 'Student'), ('1', 'Mentor'), ('2', 'Author'), ('3', 'Admin')], default='0', max_length=10)),
+                ('role', models.CharField(choices=[('0', 'Student'), ('1', 'Mentor'), ('2', 'Tutor'), ('3', 'Admin')], default='0', max_length=10)),
                 ('level', models.CharField(choices=[('0', 'Beginner'), ('1', 'Intermediate'), ('2', 'Advanced')], default='0', max_length=10)),
                 ('description', models.CharField(blank=True, max_length=50)),
                 ('country', models.CharField(blank=True, choices=[('', ''), ('DZ', 'Algeria'), ('TN', 'Tunisia')], max_length=50)),

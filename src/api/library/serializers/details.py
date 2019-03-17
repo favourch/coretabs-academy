@@ -21,7 +21,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = ('name', 'role', 'avatar_url')
 
     def get_role(self, obj):
-        return obj.profile.role
+        return obj.profile.get_role_display()
 
     def get_avatar_url(self, obj, size=settings.AVATAR_DEFAULT_SIZE):
         for provider_path in settings.AVATAR_PROVIDERS:
