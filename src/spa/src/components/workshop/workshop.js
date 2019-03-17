@@ -11,6 +11,15 @@ export default {
   computed: {
     i18n() {
       return this.$store.state.i18n.workshop
+    },
+    durationUnit() {
+      let duration = this.workshop.duration
+      if (duration > 1 && duration < 11) {
+        return this.i18n.card1.duration.hours
+      }
+      else {
+        return this.i18n.card1.duration.hour
+      }
     }
   },
   watch: {
@@ -40,8 +49,8 @@ export default {
       return url
     },
     getContinueURL(workshop) {
-      let module = this.$store.getters.profile('last_opened_module_slug')
-      let lesson = this.$store.getters.profile('last_opened_lesson_slug')
+      let module = this.$store.getters.account('last_opened_module_slug')
+      let lesson = this.$store.getters.account('last_opened_lesson_slug')
 
       workshop.modules.forEach((m) => {
         if (m.url.params.module === module) {

@@ -96,7 +96,7 @@ var i18n = `{
     "track_2_text_ar": "مسار تطوير واجهات الويب",
     "submit_btn_text": "ابدأ المسار"
   },
-  "profile": {
+  "account": {
     "titles": {
       "settings": "إعدادات الحساب",
       "personal_info": "المعلومات الشخصية",
@@ -105,6 +105,7 @@ var i18n = `{
     },
     "personal_info": {
       "success_message": "تم تغيير بياناتك الشخصية بنجاح",
+      "success_email_message": "تم إرسال رابط تفعيل البريدك الإلكتروني إلى العنوان الجديد.",
       "logout_message": "يُرجى تأكيد بريدك الإلكتروني الجديد",
       "submit_btn_text": "حفظ التغييرات"
     },

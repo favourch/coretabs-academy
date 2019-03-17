@@ -38,13 +38,27 @@ $markdown-em-spacer-6: 0.75em !default;
     }
   }
 
+  .task-btn{
+    display: block; 
+    width: 200px; 
+    background-color: #5355e8; 
+    background-image:linear-gradient(to left, #2d43e7, #9042e8); 
+    color:#fff; 
+    padding: 10px; 
+    margin: 30px auto; 
+    border-radius:100px; 
+    text-decoration: none; 
+    font-size: 18px; 
+    text-align: center;
+  }
+  
   .lesson-quiz {
     $check_color: #5955e9;
     $lite_grey: #727272;
     $hint_icon_color: #f89f2c;
     $error_color: #cc5a5a;
     margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
     .stepper__step__step {
       font-size: 0;
     }
@@ -755,7 +769,7 @@ $markdown-em-spacer-6: 0.75em !default;
     word-wrap: break-word !important;
 
     @media (max-width: 479px) {
-      padding: 30px 20px !important;
+      padding: 30px 20px 70px !important;
     }
 
     > *:first-child {
@@ -780,8 +794,8 @@ $markdown-em-spacer-6: 0.75em !default;
     h4,
     h5,
     h6{
-      margin-top: 15px !important;
-      margin-bottom: 15px !important;
+      margin-top: 25px !important;
+      margin-bottom: 25px !important;
     }
     blockquote,
     dl,
@@ -791,7 +805,7 @@ $markdown-em-spacer-6: 0.75em !default;
     table,
     ul {
       margin-top: 0 !important;
-      margin-bottom: $markdown-spacer-3 !important;
+      margin-bottom: $markdown-spacer-1 !important;
     }
     p {
       line-height: 30px;
@@ -809,7 +823,7 @@ $markdown-em-spacer-6: 0.75em !default;
       width: 100% !important;
       align-items: center !important;
       color: $black-color !important;
-      margin: $markdown-spacer-5 auto !important;
+      margin: $markdown-spacer-3 auto !important;
       border: 1px solid $secondary-color !important;
       border-left: 10px solid $secondary-color !important;
       padding: $markdown-spacer-2 $markdown-spacer-2 !important;
@@ -856,6 +870,7 @@ $markdown-em-spacer-6: 0.75em !default;
 
     ul, ol {
       list-style-position: inside;
+      margin: $markdown-spacer-4 0;
     }
 
     ol ol,
@@ -869,12 +884,15 @@ $markdown-em-spacer-6: 0.75em !default;
 
     li {
       word-wrap: break-word !important;
-      padding-top: 10px;
+      padding: 0 $markdown-spacer-3 0 0;
+      @media (max-width: 600px) {
+        padding: 0;
+      }
     }
 
     li > p {
-      margin-top: 5px !important;
-      margin-bottom: 5px !important;
+      margin-top: 0px !important;
+      margin-bottom: 0px !important;
 
       &:first-of-type {
         display: inline-block;
@@ -909,7 +927,7 @@ $markdown-em-spacer-6: 0.75em !default;
       max-width: 100% !important;
       background-color: $white-color !important;
       // @include responsive-ratio(16,9);
-      margin: $markdown-spacer-3 auto !important;
+      margin: $markdown-spacer-5 auto !important;
     }
 
     table {
@@ -1114,6 +1132,52 @@ $markdown-em-spacer-6: 0.75em !default;
       font-style: italic;
     }
   }
+
+  .prev_next {
+    display: flex;
+    max-width: 740px;
+    margin: 75px auto 50px;
+    border: 1px solid #EEEEEE;
+    z-index: 1;
+
+    -webkit-transition: bottom 0.5s linear;
+    -moz-transition: bottom 0.5s linear;
+    -o-transition: bottom 0.5s linear;
+    transition: bottom 0.5s linear;
+
+    button {
+      flex: 1 1 0;
+      background-color: #fff !important;
+      border: none;
+      box-shadow: none;
+      margin: 0;
+
+      &.readonly {
+        background-color: #fff !important;
+        color: rgba(0, 0, 0, 0.87) !important;
+        border-left: 1px solid #EEEEEE;
+        border-right: 1px solid #EEEEEE;
+        text-align: center;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .prev_next {
+      position: fixed;
+      bottom: -50px;
+      margin: 0 10px 10px;
+      width: calc(100% - 20px);
+      right: 0;
+    }
+  }
+}
+
+#drift-widget {
+  -webkit-transition: bottom 0.5s linear !important;
+  -moz-transition: bottom 0.5s linear !important;
+  -o-transition: bottom 0.5s linear !important;
+  transition: bottom 0.5s linear !important;
 }
 
 html[dir='rtl'] {
@@ -1180,4 +1244,10 @@ html[dir='rtl'] {
       }
     }
   }
+}
+
+
+  
+.theme--light .btn.btn--disabled:not(.btn--icon):not(.btn--flat) {
+  background-color: #fff !important;
 }

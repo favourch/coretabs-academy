@@ -1,5 +1,3 @@
-import re
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
@@ -9,45 +7,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    track = serializers.SlugRelatedField(
-        slug_field='slug', read_only=False, queryset=models.Track.objects)
-    last_opened_workshop_slug = serializers.SerializerMethodField()
-    last_opened_module_slug = serializers.SerializerMethodField()
-    last_opened_lesson_slug = serializers.SerializerMethodField()
-
-    class Meta:
-        model = models.Profile
-        fields = ('role',
-                  'track',
-                  'last_opened_lesson',
-                  'last_opened_workshop_slug',
-                  'last_opened_module_slug',
-                  'last_opened_lesson_slug',)
-
-    def get_last_opened_workshop_slug(self, obj):
-        result = None
-        if obj.last_opened_lesson and obj.track:
-            try:
-                result = obj.last_opened_lesson.module.workshops.filter(
-                    tracks__id=obj.track.id).first().slug
-            except AttributeError:
-                result = None
-        return result
-
-    def get_last_opened_module_slug(self, obj):
-        result = None
-        if obj.last_opened_lesson:
-            result = obj.last_opened_lesson.module.slug
-        return result
-
-    def get_last_opened_lesson_slug(self, obj):
-        result = None
-        if obj.last_opened_lesson:
-            result = obj.last_opened_lesson.slug
-        return result
-
-
+# TODO: clean this
 class AuthorSerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField()
     role = serializers.SerializerMethodField()
@@ -61,7 +21,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = ('name', 'role', 'avatar_url')
 
     def get_role(self, obj):
-        return obj.profile.role
+        return obj.profile.get_role_display()
 
     def get_avatar_url(self, obj, size=settings.AVATAR_DEFAULT_SIZE):
         for provider_path in settings.AVATAR_PROVIDERS:

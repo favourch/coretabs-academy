@@ -7,23 +7,14 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 from rest_framework import serializers, exceptions
-from allauth.account.forms import ResetPasswordForm, default_token_generator
 
-from allauth.account.utils import send_email_confirmation, user_pk_to_url_str
-from django.contrib.sites.shortcuts import get_current_site
+from .signals import user_updated
 
-from library.serializers import ProfileSerializer
-from library.models import Track
+from .models import EmailAddress, Account
+from .utils import send_password_reset_mail
 
-from allauth.account.forms import UserTokenForm
-from allauth.account.adapter import get_adapter
-
-from allauth.utils import email_address_exists
-from allauth.account.models import EmailAddress
-
-from allauth.account import app_settings as allauth_settings
-from allauth.utils import get_username_max_length
-from allauth.account.utils import setup_user_email
+from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.contrib.auth.password_validation import validate_password
 
 from avatar.models import Avatar
 from avatar.signals import avatar_updated
@@ -31,9 +22,15 @@ from django.template.defaultfilters import filesizeformat
 
 from rest_framework.authtoken.models import Token
 
-from .tasks import discourse_sync_sso
+from .tokens import confirm_email_token_generator
+from django.contrib.auth.tokens import default_token_generator as password_reset_token_generator
+from django.utils.http import base36_to_int, int_to_base36
 
-UserModel = get_user_model()
+from django.contrib.auth import update_session_auth_hash
+
+from library.models import Track
+
+User = get_user_model()
 
 
 class LoginSerializer(serializers.Serializer):
@@ -71,7 +68,7 @@ class LoginSerializer(serializers.Serializer):
             raise exceptions.ValidationError(msg)
 
         # Is the email verified?
-        email_address = user.emailaddress_set.get(email=user.email)
+        email_address = EmailAddress.objects.get_primary(user)
         if not email_address.verified:
             raise exceptions.PermissionDenied('not verified')
 
@@ -79,114 +76,57 @@ class LoginSerializer(serializers.Serializer):
         return attrs
 
 
-class PasswordResetSerializer(serializers.Serializer):
+class AccountSerializer(serializers.ModelSerializer):
+    track = serializers.SlugRelatedField(
+        slug_field='slug', read_only=False, queryset=Track.objects)
+    last_opened_workshop_slug = serializers.SerializerMethodField()
+    last_opened_module_slug = serializers.SerializerMethodField()
+    last_opened_lesson_slug = serializers.SerializerMethodField()
 
-    email = serializers.EmailField()
+    class Meta:
+        model = Account
+        fields = ('track',
+                  'last_opened_lesson',
+                  'last_opened_workshop_slug',
+                  'last_opened_module_slug',
+                  'last_opened_lesson_slug',)
 
-    def validate_email(self, email):
-        email = get_adapter().clean_email(email)
-        if not email_address_exists(email):
-            raise serializers.ValidationError(_('The e-mail address is not assigned '
-                                                'to any user account'))
-        return email
+    def get_last_opened_workshop_slug(self, obj):
+        result = None
+        if obj.last_opened_lesson and obj.track:
+            try:
+                result = obj.last_opened_lesson.module.workshops.filter(
+                    tracks__id=obj.track.id).first().slug
+            except AttributeError:
+                result = None
+        return result
 
-    def save(self, *args, **kwargs):
-        request = self.context.get('request')
+    def get_last_opened_module_slug(self, obj):
+        result = None
+        if obj.last_opened_lesson:
+            result = obj.last_opened_lesson.module.slug
+        return result
 
-        current_site = get_current_site(request)
-        email = self.validated_data['email']
-
-        user = UserModel.objects.get(email__iexact=email)
-
-        token_generator = kwargs.get(
-            'token_generator', default_token_generator)
-        temp_key = token_generator.make_token(user)
-
-        path = f'/reset-password/{user_pk_to_url_str(user)}/{temp_key}'
-        url = settings.SPA_BASE_URL + path
-        context = {'current_site': current_site,
-                   'user': user,
-                   'password_reset_url': url,
-                   'request': request}
-
-        get_adapter().send_mail(
-            'account/email/password_reset_key',
-            email,
-            context)
-
-        return email
-
-
-class ResendConfirmSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-
-    password_reset_form_class = ResetPasswordForm
-
-    def validate(self, attrs):
-        self.reset_form = self.password_reset_form_class(
-            data=self.initial_data)
-        if not self.reset_form.is_valid():
-            raise serializers.ValidationError(self.reset_form.errors)
-
-        return attrs
-
-    def save(self):
-        request = self.context.get('request')
-        User = get_user_model()
-        email = self.reset_form.cleaned_data['email']
-        user = User.objects.get(email__iexact=email)
-        send_email_confirmation(request, user, True)
-        return email
-
-
-class PasswordResetConfirmSerializer(serializers.Serializer):
-    new_password1 = serializers.CharField(max_length=128)
-    new_password2 = serializers.CharField(max_length=128)
-    uid = serializers.CharField()
-    key = serializers.CharField()
-
-    def validate_new_password1(self, password):
-        return get_adapter().clean_password(password)
-
-    def validate(self, attrs):
-        self.user_token_form = UserTokenForm(
-            data={'uidb36': attrs['uid'], 'key': attrs['key']})
-
-        if not self.user_token_form.is_valid():
-            raise serializers.ValidationError(_("التوكن غير صالح"))
-
-        if attrs['new_password1'] != attrs['new_password2']:
-            raise serializers.ValidationError(
-                _('The two password fields did not match.'))
-
-        self.password = attrs['new_password1']
-
-        return attrs
-
-    def save(self):
-        user = self.user_token_form.reset_user
-        get_adapter().set_password(user, self.password)
-        return user
+    def get_last_opened_lesson_slug(self, obj):
+        result = None
+        if obj.last_opened_lesson:
+            result = obj.last_opened_lesson.slug
+        return result
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
-    email_status = serializers.SerializerMethodField()
     avatar_url = serializers.SerializerMethodField()
     batch_status = serializers.SerializerMethodField()
-    profile = ProfileSerializer()
+    account = AccountSerializer()
     avatar = serializers.ImageField(write_only=True, required=False)
     name = serializers.CharField(source='first_name',
                                  max_length=100,
                                  min_length=5)
 
     class Meta:
-        model = UserModel
-        fields = ('username', 'email', 'email_status',
-                  'name', 'profile', 'avatar', 'avatar_url', 'batch_status')
-
-    def get_email_status(self, obj):
-        email_address = EmailAddress.objects.get(user=obj)
-        return email_address.verified
+        model = User
+        fields = ('username', 'email', 'name', 'account',
+                  'avatar', 'avatar_url', 'batch_status')
 
     def get_batch_status(self, obj):
         return obj.has_perm('accounts.access_workshops')
@@ -226,29 +166,24 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             })
 
     def validate_email(self, email):
-        email = get_adapter().clean_email(email)
-        if email and email_address_exists(email, exclude_user=self.context.get('request').user):
+        if email != self.instance.email and User.objects.filter(email__iexact=email).exists():
             raise serializers.ValidationError(
-                _('A user is already registered with this e-mail address.'))
+                _("A user is already registered with this e-mail address."))
         return email
 
-    def _update_profile(self, instance, profile):
-        new_track = profile.get('track')
+    def _update_account(self, instance, account):
+        new_track = account.get('track')
         track = Track.objects.get(slug=new_track.slug)
-        is_track_updated = instance.profile.track != new_track
-        instance.profile.track = track
-        instance.profile.last_opened_lesson = profile.get(
-            'last_opened_lesson', instance.profile.last_opened_lesson)
+        is_track_updated = instance.account.track != new_track
+        instance.account.track = track
+        instance.account.last_opened_lesson = account.get(
+            'last_opened_lesson', instance.account.last_opened_lesson)
         if is_track_updated:
-            instance.profile.last_opened_lesson = None
+            instance.account.last_opened_lesson = None
 
-    def _update_email(self, instance, request, email):
-        adapter = get_adapter()
-        adapter.send_mail('account/email/email_change', instance.email, {})
-        email_address = EmailAddress.objects.get(
-            user=instance, verified=True)
-        email_address.change(request, email, True)
-        instance.email = email
+    def _update_email(self, instance, email):
+        EmailAddress.objects.add_email(user=instance, email=email)
+        # Todo: add email changed specific response
 
     def _update_avatar(self, instance, request):
         avatar = Avatar(user=instance, primary=True)
@@ -259,28 +194,83 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         request = self.context.get('request')
-        profile = validated_data.get('profile', None)
+        account = validated_data.get('account', None)
         email = validated_data.get('email', None)
 
         # Update user
         instance.username = validated_data.get('username', instance.username)
         instance.first_name = validated_data.get('first_name', instance.first_name)
 
-        # Update profile
-        if profile:
-            self._update_profile(instance, profile)
+        # Update account
+        if account:
+            self._update_account(instance, account)
+            instance.account.save()
 
         # Update email
         if email and email != instance.email:
-            self._update_email(instance, request, email)
+            self._update_email(instance, email)
 
         # Update avatar
         if 'avatar' in request.FILES:
             self._update_avatar(instance, request)
 
         instance.save()
-        discourse_sync_sso.delay(instance.id)
+        user_updated.send(sender=User, user=instance)
         return instance
+
+
+class PasswordResetSerializer(serializers.Serializer):
+
+    email = serializers.EmailField()
+
+    def validate_email(self, email):
+        if not EmailAddress.objects.filter(email=email).exists():
+            raise serializers.ValidationError(_("The e-mail address is not assigned to any user account"))
+        return email
+
+    def save(self, *args, **kwargs):
+        email = self.validated_data['email']
+        user = EmailAddress.objects.get(email__iexact=email).user
+
+        token = password_reset_token_generator.make_token(user)
+        uid = int_to_base36(user.pk)
+
+        send_password_reset_mail(user, token, uid)
+
+        return email
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    new_password1 = serializers.CharField(max_length=128)
+    new_password2 = serializers.CharField(max_length=128)
+    uid = serializers.CharField()
+    key = serializers.CharField()
+
+    def validate_new_password1(self, password):
+        validate_password(password)
+        return password
+
+    def validate(self, data):
+        uid = data['uid']
+        key = data['key']
+
+        if data['new_password1'] != data['new_password2']:
+            raise serializers.ValidationError(_('The two password fields did not match.'))
+
+        try:
+            pk = base36_to_int(uid)
+            self.user = User.objects.get(pk=pk)
+            if not password_reset_token_generator.check_token(self.user, key):
+                raise serializers.ValidationError(_('bad token'))
+
+            return data
+        except EmailAddress.DoesNotExist:
+            raise serializers.ValidationError(_('bad token'))
+
+    def save(self):
+        password = self.validated_data['new_password1']
+        self.user.set_password(password)
+        self.user.save()
 
 
 class PasswordChangeSerializer(serializers.Serializer):
@@ -296,31 +286,25 @@ class PasswordChangeSerializer(serializers.Serializer):
         self.request = self.context.get('request')
         self.user = getattr(self.request, 'user', None)
 
-    def validate_old_password(self, value):
-        invalid_password_conditions = (
-            self.old_password_field_enabled,
-            self.user,
-            not self.user.check_password(value)
-        )
-
-        if all(invalid_password_conditions):
+    def validate_old_password(self, password):
+        if self.user and not self.user.check_password(password):
             raise serializers.ValidationError('Invalid password')
-        return value
+        return password
 
-    def validate(self, attrs):
-        self.set_password_form = self.set_password_form_class(
-            user=self.user, data=attrs
-        )
+    def validate_new_password1(self, password):
+        validate_password(password)
+        return password
 
-        if not self.set_password_form.is_valid():
-            raise serializers.ValidationError(self.set_password_form.errors)
-        return attrs
+    def validate(self, data):
+        if data['new_password1'] != data['new_password2']:
+            raise serializers.ValidationError(_('The two password fields did not match.'))
+        return data
 
     def save(self):
-        self.set_password_form.save()
-        if not self.logout_on_password_change:
-            from django.contrib.auth import update_session_auth_hash
-            update_session_auth_hash(self.request, self.user)
+        password = self.validated_data['new_password1']
+        self.user.set_password(password)
+        self.user.save()
+        update_session_auth_hash(self.request, self.user)
 
 
 class TokenSerializer(serializers.ModelSerializer):
@@ -331,15 +315,15 @@ class TokenSerializer(serializers.ModelSerializer):
         fields = ('key', 'user')
 
 
-# Registration
+# ------------------------------------- Registration --------------------------------------------------
 
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(
-        max_length=get_username_max_length(),
-        min_length=allauth_settings.USERNAME_MIN_LENGTH,
-        required=allauth_settings.USERNAME_REQUIRED
+        max_length=30,
+        min_length=3,
+        required=True
     )
-    email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
+    email = serializers.EmailField(required=True)
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
     name = serializers.CharField(
@@ -358,19 +342,21 @@ class RegisterSerializer(serializers.Serializer):
         return name
 
     def validate_username(self, username):
-        username = get_adapter().clean_username(username)
+        UnicodeUsernameValidator(username)
+        if User.objects.filter(username=username).exists():
+            raise serializers.ValidationError(
+                _("A user is already registered with this e-mail address."))
         return username
 
     def validate_email(self, email):
-        email = get_adapter().clean_email(email)
-        if allauth_settings.UNIQUE_EMAIL:
-            if email and email_address_exists(email):
-                raise serializers.ValidationError(
-                    _("A user is already registered with this e-mail address."))
+        if User.objects.filter(email__iexact=email).exists():
+            raise serializers.ValidationError(
+                _("A user is already registered with this e-mail address."))
         return email
 
     def validate_password1(self, password):
-        return get_adapter().clean_password(password)
+        validate_password(password)
+        return password
 
     def validate(self, data):
         if data['password1'] != data['password2']:
@@ -385,24 +371,44 @@ class RegisterSerializer(serializers.Serializer):
             'first_name': self.validated_data.get('name', '')
         }
 
-    def save(self, request):
-        adapter = get_adapter()
-        user = adapter.new_user(request)
-        self.cleaned_data = self.get_cleaned_data()
-        adapter.save_user(request, user, self)
-        setup_user_email(request, user, [])
-        discourse_sync_sso.delay(user.id)
+    def save(self):
+        cd = self.get_cleaned_data()
+        user = User.objects.create_user(cd['username'], cd['email'],
+                                        cd['password1'], first_name=cd['first_name'])
+        user.email_addresses.get(primary=True).send_confirmation()
         return user
 
 
 class VerifyEmailSerializer(serializers.Serializer):
-    key = serializers.CharField()
+    uid = serializers.CharField(required=True)
+    key = serializers.CharField(required=True)
+
+    def validate(self, data):
+        uid = data['uid']
+        key = data['key']
+
+        try:
+            pk = base36_to_int(uid)
+            self.email = EmailAddress.objects.get(pk=pk)
+            if not confirm_email_token_generator.check_token(self.email, key):
+                raise serializers.ValidationError(_('bad token'))
+            return data
+        except EmailAddress.DoesNotExist:
+            raise serializers.ValidationError(_('bad token'))
+
+    def save(self):
+        is_changed = self.email.confirm()
+        return self.email.email, is_changed
 
 
-class MailingListSerializer(serializers.ModelSerializer):
-    address = serializers.EmailField(source='email')
-    name = serializers.CharField(source='first_name')
+class ResendConfirmSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
 
-    class Meta:
-        model = UserModel
-        fields = ('address', 'name')
+    def validate_email(self, email):
+        if not EmailAddress.objects.filter(email=email).exists():
+            raise serializers.ValidationError(_("The e-mail address is not assigned to any user account"))
+        return email
+
+    def save(self):
+        email = self.validated_data.get('email', '')
+        EmailAddress.objects.get(email=email).send_confirmation()

@@ -4,6 +4,10 @@ export default {
   name: 'LessonComponent',
   data: () => ({
     loaded: false,
+    prev_link: null,
+    dis_prev: null,
+    next_link: null,
+    dis_next: null,
     content: {
       video: null,
       markdown: null,
@@ -15,11 +19,21 @@ export default {
     }
   }),
   computed: {
+    module() {
+      return this.$parent.current.modules.find(module => {
+        return module.url.params.module === this.$route.params.module
+      })
+    },
+    lesson() {
+      return this.module.lessons.find(lesson => {
+        return lesson.slug === this.$route.params.lesson
+      })
+    },
     i18n() {
       return this.$store.state.i18n.lesson
     },
     endpoint() {
-      let track = this.$store.getters.profile('track')
+      let track = this.$store.getters.account('track')
       let workshop = this.$route.params.workshop
       let module = this.$route.params.module
       let lesson = this.$route.params.lesson
@@ -29,7 +43,9 @@ export default {
   },
   watch: {
     $route() {
+      document.querySelector('.lesson').scrollTo(0,0)
       this.getLesson()
+      this.initNavigator()
       this.quiz.currentQuestion = 1
     },
     'quiz.questions': {
@@ -47,8 +63,50 @@ export default {
   },
   created() {
     this.getLesson()
+    this.initNavigator()
   },
   methods: {
+    initNavigator() {
+      let module, lesson
+
+      if(this.lesson.index > 1) {
+        lesson = this.module.lessons[this.lesson.index - 2]
+        this.prev_link = '/' + this.module.url.params.module + '/' + lesson.slug
+        this.dis_prev = false
+      } else {
+        if (this.module.index > 1) {
+          module = this.$parent.current.modules[this.module.index - 2]
+          lesson = module.lessons[module.lessons.length - 1]
+          this.prev_link = '/' + module.url.params.module + '/' + lesson.slug
+          this.dis_prev = false
+        } else {
+          this.prev_link = ''
+          this.dis_prev = true
+        }
+      }
+  
+      if(this.lesson.index < this.module.lessons.length) {
+        lesson = this.module.lessons[this.lesson.index]
+        this.next_link = '/' + this.module.url.params.module + '/' + lesson.slug
+        this.dis_next = false
+      } else {
+        if (this.module.index < this.$parent.current.modules.length) {
+          module = this.$parent.current.modules[this.module.index]
+          lesson = module.lessons[0]
+          this.next_link = '/' + module.url.params.module + '/' + lesson.slug
+          this.dis_next = false
+        } else {
+          this.next_link = ''
+          this.dis_next = true
+        }
+      }
+    },
+    goPrevLesson() {
+      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track + '/' + this.$parent.current.workshop.URL.params.workshop + this.prev_link)
+    },
+    goNextLesson() {
+      this.$router.push('/classroom/'+ this.$parent.current.workshop.URL.params.track + '/' + this.$parent.current.workshop.URL.params.workshop + this.next_link)
+    },
     getLesson() {
       let lesson = this.$parent.current.lesson
       let workshop = this.$parent.current.workshop      
@@ -223,6 +281,26 @@ export default {
         question.result = this.i18n.quiz.results_texts.fail
         question.success = false
       }
+    },
+    lessonScroll() {
+      if(document.querySelector('.lesson').scrollTop >= 200) {
+        document.querySelector('.prev_next').style.bottom = '0px'
+        if(document.querySelector('#drift-widget')) {
+          document.querySelector('#drift-widget').style.bottom = '-76px'
+        }
+      } else {
+        document.querySelector('.prev_next').style.bottom = '-50px'
+        if(document.querySelector('#drift-widget')) {
+          document.querySelector('#drift-widget').style.bottom = '24px'
+        }
+      }
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      if(window.innerWidth < 600 && document.querySelector('.lesson').clientHeight <= window.innerHeight) {
+        document.querySelector('.lesson > .container, .lesson > .lesson-markdown').style.height = `${window.innerHeight + 150}px` 
+      }
+    }, 1000)
   }
 }

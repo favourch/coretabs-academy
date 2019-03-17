@@ -1,18 +1,13 @@
 from django.db import models
-from django.db.models.signals import post_save
-
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
-
-from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
-from library.utils import get_unique_slug
-
-
-from . import managers
-
 from caching.base import CachingManager, CachingMixin
+
+from .utils import get_unique_slug
+from . import managers
 
 User = get_user_model()
 
@@ -38,6 +33,9 @@ class AutoSlugModel(models.Model):
 
 
 class Module(CachingMixin, AutoSlugModel):
+    is_hidden = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
 
     class Meta:
         verbose_name = _('module')
@@ -68,7 +66,8 @@ class BaseLesson(CachingMixin, AutoSlugModel):
     shown_users = models.ManyToManyField(
         User, related_name='lessons', verbose_name=_('shown users'), blank=True)
     order = models.IntegerField(verbose_name=_('Order'), default=0)
-
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
     objects = managers.BaseLessonManager()
 
     class Meta:
@@ -103,8 +102,8 @@ class Workshop(CachingMixin, AutoSlugModel):
 
     level = models.CharField(
         max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('type'))
-    last_update_date = models.DateTimeField(
-        verbose_name=_('last update date'))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
     duration = models.DecimalField(
         max_digits=3, decimal_places=1, verbose_name=_('duration'))
     description = models.CharField(
@@ -119,7 +118,7 @@ class Workshop(CachingMixin, AutoSlugModel):
         User, related_name='workshops', verbose_name=_('authors'))
     modules = models.ManyToManyField(
         Module, through='WorkshopModule', related_name='workshops', verbose_name=_('modules'))
-
+    is_hidden = models.BooleanField(default=False)
     objects = managers.WorkshopManager()
 
     class Meta:
@@ -167,34 +166,3 @@ class TrackWorkshop(models.Model):
 
     def __str__(self):
         return f'{self.track} --> {self.workshop}'
-
-
-class Profile(models.Model):
-    # S means Student
-    role = models.CharField(max_length=1000, blank=True,
-                            default='S', verbose_name=_('role'))
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    track = models.ForeignKey(
-        Track, on_delete=models.SET_NULL, verbose_name=_('track'), null=True)
-    last_opened_lesson = models.ForeignKey(BaseLesson,
-                                           on_delete=models.SET_NULL,
-                                           verbose_name=_('last opened lesson'), null=True)
-
-    def __str__(self):
-        return f'{self.user.first_name} ({self.user.username})'
-
-    class Meta:
-        verbose_name = _('profile')
-        verbose_name_plural = _('profiles')
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()

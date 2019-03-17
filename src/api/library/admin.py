@@ -1,8 +1,18 @@
 from django.contrib import admin
 from coretabs.admin import site
 from . import models
+from . import custom_filters
 
 from adminsortable2.admin import SortableInlineAdminMixin
+
+
+class LessonAdmin(admin.ModelAdmin):
+    list_filter = [
+        custom_filters.LessonsByModuleListFilter,
+        custom_filters.LessonsByWorkshopListFilter,
+        custom_filters.LessonsByTrackListFilter
+    ]
+    ordering = ['-last_update_date']
 
 
 class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -15,6 +25,11 @@ class ModuleLessonInline(SortableInlineAdminMixin, admin.TabularInline):
 
 class ModuleAdmin(admin.ModelAdmin):
     inlines = (ModuleLessonInline,)
+    list_filter = [
+        custom_filters.ModulesByWorkshopListFilter,
+        custom_filters.ModuleByTrackListFilter
+    ]
+    ordering = ['-last_update_date']
 
 
 class WorkshopModuleInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -24,6 +39,8 @@ class WorkshopModuleInline(SortableInlineAdminMixin, admin.TabularInline):
 
 class WorkshopAdmin(admin.ModelAdmin):
     inlines = (WorkshopModuleInline,)
+    list_filter = [custom_filters.WorkshopByTrackListFilter]
+    ordering = ['-last_update_date']
 
 
 class TrackWorkshopInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -34,9 +51,6 @@ class TrackWorkshopInline(SortableInlineAdminMixin, admin.TabularInline):
 class TrackAdmin(admin.ModelAdmin):
     inlines = (TrackWorkshopInline,)
 
-class ProfileAdmin(admin.ModelAdmin):
-    search_fields = ('user__username', 'user__first_name',)
-
 
 site.register(models.MarkdownLesson)
 site.register(models.QuizLesson)
@@ -46,4 +60,3 @@ site.register(models.WorkshopModule)
 site.register(models.Workshop, WorkshopAdmin)
 site.register(models.TrackWorkshop)
 site.register(models.Track, TrackAdmin)
-site.register(models.Profile, ProfileAdmin)

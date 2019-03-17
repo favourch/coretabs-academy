@@ -10,7 +10,7 @@ export default {
     last_module() {
       let module = this.modules.find(module => {
         return module.lessons.find(lesson => {
-          return lesson.slug === this.$store.getters.profile('last_opened_lesson_slug')
+          return lesson.slug === this.$store.getters.account('last_opened_lesson_slug')
         })
       })
       

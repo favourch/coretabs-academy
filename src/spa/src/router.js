@@ -27,6 +27,11 @@ import WorkshopComponent from './components/workshop/workshop.vue'
 import NotFoundComponent from './components/not-found/not-found.vue'
 import WorkshopsComponent from './components/workshops/workshops.vue'
 import maintenanceComponent from './components/maintenance/maintenance.vue'
+import ProfileComponent from './components/profile/profile.vue'
+import ProfileAboutComponent from './components/profile/profile-about/profile-about.vue'
+import ProfileCertificatesComponent from './components/profile/profile-certificates/profile-certificates.vue'
+import TracksComponent from './components/tracks/tracks.vue'
+import FrontendTrackComponent from './components/frontend-track/frontend-track.vue'
 
 import i18n from './i18n/ar/i18n'
 
@@ -58,6 +63,14 @@ const router = new Router({
     path: '/page/:page',
     component: PageComponent
   }, {
+    name: 'tracks',
+    path: '/tracks',
+    component: TracksComponent
+  }, {
+    name: 'frontend-track',
+    path: '/tracks/frontend',
+    component: FrontendTrackComponent
+  }, {
     name: 'signup',
     path: '/signup',
     component: SignUpComponent,
@@ -70,9 +83,8 @@ const router = new Router({
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'confirm-account',
-    path: '/confirm-account/:key',
-    component: ConfirmAccountComponent,
-    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+    path: '/confirm-account/:uid/:key',
+    component: ConfirmAccountComponent
   }, {
     name: 'application-submitted',
     path: '/application-submitted',
@@ -103,6 +115,21 @@ const router = new Router({
     path: '/signin',
     component: SignInComponent,
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'profile',
+    path: '/user/:id',
+    component: ProfileComponent,
+    children: [{
+      name: 'profile-about',
+      path: 'about',
+      component: ProfileAboutComponent
+    },
+    {
+      name: 'profile-certificates',
+      path: 'certificates',
+      component: ProfileCertificatesComponent
+    }],
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'select-track',
     path: '/select-track',

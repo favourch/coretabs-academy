@@ -33,8 +33,11 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     if (!this.email) { this.$router.push('/') }
+    let root = this
+    root.waiting = true
+    root.waiting = await this.$auth.confirmation(root)
     setInterval(() => {
       if (this.counter > 0) {
         this.counter -= 1

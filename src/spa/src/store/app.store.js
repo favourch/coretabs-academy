@@ -46,8 +46,8 @@ export default new Vuex.Store({
         state.user[payload.prop] = payload.data
       }
     },
-    profile(state, payload) {
-      state.user.profile[payload.prop] = payload.data
+    account(state, payload) {
+      state.user.account[payload.prop] = payload.data
     },
     unread(state, payload) {
       state.unread = payload
@@ -77,9 +77,9 @@ export default new Vuex.Store({
         resolve(true)
       })
     },
-    profile: ({commit}, payload) => {
+    account: ({commit}, payload) => {
       return new Promise((resolve, reject) => {
-        commit('profile', payload)
+        commit('account', payload)
         resolve(true)
       })
     },
@@ -107,8 +107,8 @@ export default new Vuex.Store({
         return state.user[prop]
       }
     },
-    profile: (state) => (prop) => {
-      return state.user.profile[prop]
+    account: (state) => (prop) => {
+      return state.user.account[prop]
     },
     unread: state => {
       return state.unread

@@ -16,20 +16,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'discourse',
-
     'rest_framework',
     'rest_framework.authtoken',
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
 
     'contact',
     'avatar',
     'library',
     'accounts',
     'avatars',
+    'discourse',
+    'profiles',
 
     'adminsortable2',
     'debug_toolbar',
@@ -42,6 +38,8 @@ INSTALLED_APPS = [
     'djcelery_email',
 
     'storages',
+
+    "django_admin_listfilter_dropdown",
 ]
 
 
@@ -142,32 +140,13 @@ CACHES = {
     }
 }
 
-
-# Account Settings
-
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_USERNAME_MIN_LENGTH = 3
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
-ACCOUNT_ADAPTER = 'accounts.adapter.MyAccountAdapter'
-ACCOUNT_USERNAME_BLACKLIST = ['system', ]
-
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    'accounts.auth_backends.AuthenticationBackend',
 )
 
-
-# Mock server
-DISCOURSE_BASE_URL = 'https://dc0e4c02-28ca-4dc7-8da9-cb7f696ea077.mock.pstmn.io'
-DISCOURSE_API_KEY = 'anilliqnmsakmcnahojdwklaklsa'
-DISCOURSE_API_USERNAME = 'discourse_mock'
-DISCOURSE_SSO_SECRET = 'd836444a9e4084d5b224a60c208dce14'
 
 AVATAR_CLEANUP_DELETED = True
 AVATAR_MAX_AVATARS_PER_USER = 1
@@ -178,9 +157,3 @@ AVATAR_PROVIDERS = (
 )
 
 EMAIL_SUBJECT_PREFIX = ''
-ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
-
-# CSRF and Session
-DEFAULT_COOKIE_DOMAIN = '127.0.0.1'
-SESSION_COOKIE_DOMAIN = DEFAULT_COOKIE_DOMAIN
-CSRF_COOKIE_DOMAIN = DEFAULT_COOKIE_DOMAIN

@@ -1,0 +1,66 @@
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
+
+/*=====================================
+              Tracks
+=======================================*/
+
+#tracks {
+  margin-bottom: 48px !important;
+
+  h2 {
+    text-align: right;
+    @include responsive-font-size(1.5rem,true);
+  }
+  
+  .pic-container {
+    height: 240px;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .card {
+    color: #2c3e50 !important;
+    @include box-shadow(0px, 15px, 34px, 0px, $shadow-color);
+    @include border-radius(35px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  
+    .card__body {
+      padding: 24px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: 100%;
+      
+      .card__desc {
+        line-height: 30px;
+        margin: 0;
+      }
+  
+      .card__actions {
+        display: flex;
+        justify-content: center;
+        margin: auto 0 0;
+  
+        .button {
+          background: $grading-color !important;
+          color: $white-color !important;
+          @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
+          transition: box-shadow ease-in-out 0.6s;
+        
+          &:hover{
+            box-shadow: none;
+          }
+        }
+      }
+    }  
+  }  
+}
+
+

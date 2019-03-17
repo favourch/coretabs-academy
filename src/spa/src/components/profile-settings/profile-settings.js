@@ -12,7 +12,7 @@ export default {
     }
   }),
   computed: {
-    i18n() { return this.$store.state.i18n.profile.titles }
+    i18n() { return this.$store.state.i18n.account.titles }
   },
   watch: {
     $route(to, from) {
