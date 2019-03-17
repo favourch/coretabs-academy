@@ -148,5 +148,15 @@ header {
   .tabs__bar {
     padding-right: 3rem;
     border-bottom: 1px solid #e2e2e2;
+    @media (max-width: 600px) {
+      padding-right: 0;
+    }
   }  
+
+  @media (max-width: 600px) {
+    .tabs__container{
+      background: #fdfdfd;
+      margin-top: 1.5rem;
+    }
+  }
 }
