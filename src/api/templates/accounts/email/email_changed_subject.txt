@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Your email will be changed{% endblocktrans %}
+{% blocktrans %}تغيير الإيميل{% endblocktrans %}
 {% endautoescape %}

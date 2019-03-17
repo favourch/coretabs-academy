@@ -168,7 +168,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     def validate_email(self, email):
         if email != self.instance.email and User.objects.filter(email__iexact=email).exists():
             raise serializers.ValidationError(
-                 _("A user is already registered with this e-mail address."))
+                _("A user is already registered with this e-mail address."))
         return email
 
     def _update_account(self, instance, account):

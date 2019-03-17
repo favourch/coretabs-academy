@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Confirm new email{% endblocktrans %}
+{% blocktrans %}تأكيد الحساب{% endblocktrans %}
 {% endautoescape %}
