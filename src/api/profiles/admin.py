@@ -11,6 +11,8 @@ from .utils import render_mail
 class ProfileAdmin(ModelAdmin):
     action_form = MyActionForm
     actions = ['generate_and_send_certificates']
+    search_fields = ('user__username', 'user__first_name', 'user__email')
+    ordering = ('user__date_joined', 'user_first_name',)
 
     def _send_certificate_email(self, certificate, email):
         context = {'certificate_url': f'{settings.SPA_BASE_URL}/certificates/{certificate.id}', }

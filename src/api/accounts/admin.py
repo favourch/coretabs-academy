@@ -113,11 +113,17 @@ class BatchAdmin(ModelAdmin):
 
 
 class AccountAdmin(ModelAdmin):
-    search_fields = ('user__username', 'user__first_name',)
+    search_fields = ('user__username', 'user__first_name', 'user__email')
+    ordering = ('user__date_joined', 'user__first_name',)
+
+
+class EmailAddressAdmin(ModelAdmin):
+    search_fields = ('email', 'user__username', 'user__first_name',)
+    ordering = ('user__date_joined', 'email',)
 
 
 site.register(Token, TokenAdmin)
-site.register(EmailAddress)
+site.register(EmailAddress, EmailAddressAdmin)
 site.register(User, MyUserAdmin)
 site.register(Group, GroupAdmin)
 site.register(Site, SiteAdmin)
