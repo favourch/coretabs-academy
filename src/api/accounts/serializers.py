@@ -143,7 +143,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _("تأكد أن الإسم الكامل لا يحتوي الا على حروف و مسافات."))
+                _("تأكد أن تدخل اسمك الكامل (الاسم واللقب) وأنه لا يحتوي إلا على الحروف و المسافات, سيستعمل اسمك في إنتاج شهادتك."))
 
         return name
 
@@ -337,7 +337,7 @@ class RegisterSerializer(serializers.Serializer):
         compiler = re.compile(pattern)
         if not compiler.match(name):
             raise serializers.ValidationError(
-                _("تأكد أن الإسم الكامل لا يحتوي الا على حروف و مسافات."))
+                _("تأكد أن تدخل اسمك الكامل (الاسم واللقب) وأنه لا يحتوي إلا على الحروف و المسافات, سيستعمل اسمك في إنتاج شهادتك."))
 
         return name
 
