@@ -1,7 +1,8 @@
 <template>
 <v-container id="certificate" fluid fill-height>
   <v-layout row align-center justify-center wrap>
-    <v-flex id="certificate-container" xs11 md7>
+     <!-- <img :src="output" width="1120" height="700"> -->
+    <v-flex ref="download" id="certificate-container" xs11 md7>
       <v-layout row wrap>
         <v-flex xs12 md8>
           <div id="certificate-header">
@@ -41,19 +42,18 @@
     </v-flex>
     <v-flex id="certificate-actions" sm12 md12>
 
-      <v-layout row align-center justify-center wrap>
+      <v-layout class="mb-3" row align-center justify-center wrap>
         <v-flex xs12 md2 px-3>
-          <v-btn class="mb-3" large>
+          <v-btn class="mb-3" large :loading="loading" @click="download">
             <v-icon dark>save_alt</v-icon>تنزيل
           </v-btn>
         </v-flex>
         <v-flex xs12 md2 px-3>
-          <v-btn dark color="green" large @click.stop="shareCertificate">
+          <v-btn dark color="green" large @click="shareCertificate">
             <v-icon dark>share</v-icon> مشاركة
           </v-btn>
         </v-flex>
       </v-layout>
-
       <v-dialog v-model="shareDialog" max-width="500">
         <v-card class="pa-2">
           <v-card-text v-if="!isCopied">
@@ -73,7 +73,6 @@
       </v-dialog>
 
     </v-flex>
-
   </v-layout>
 </v-container>
 </template>

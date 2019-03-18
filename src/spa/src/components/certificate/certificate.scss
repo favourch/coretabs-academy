@@ -140,7 +140,7 @@
         position: absolute;
         z-index: 2;
         left: 0;
-        bottom: -25px;
+        bottom: -24px;
         border-left: 25px solid #293cd9;
         border-right: 25px solid #293cd9;
         border-bottom: 25px solid transparent;
@@ -155,6 +155,9 @@
 
     #certificate-signature{
       position: relative;
+      @media (max-width: 600px) {
+        margin: 60px 0 20px;
+      }
       #signature-name{
         position: absolute;
         bottom: -70px;
@@ -183,8 +186,8 @@
           margin: 0 auto; 
           @media (max-width: 600px) {
             width: 100px;
-            position: relative;
-            margin-top: -50px;
+            position: absolute;
+            bottom: 20px;
           }
         }
       }
@@ -213,6 +216,7 @@
 }
 
 #certificate-link-holder{
+  word-break: break-word;
   direction: ltr;
   text-align: left;
   padding: 10px;
