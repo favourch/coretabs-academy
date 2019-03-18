@@ -94,8 +94,7 @@ const router = new Router({
   }, {
     name: 'batch-not-started',
     path: '/batch-not-started',
-    component: BatchNotStarted,
-    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+    component: BatchNotStarted
   }, {
     name: 'account-confirmed',
     path: '/account-confirmed',
@@ -186,7 +185,7 @@ const router = new Router({
       path: ':workshop',
       component: WorkshopComponent
     }],
-    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? (store.getters.user('batch_status') ? next() : location.reload()) : next('/') }
   }, {
     name: 'modules',
     component: ModulesComponent,

@@ -37,6 +37,18 @@ export default {
     if (typeof window !== 'undefined') { this.drawer.width = window.innerWidth }
     this.drawer.isRight = this.$store.state.direction === 'rtl'
     this.i18n = this.$store.state.i18n.header[this.role]
+
+    if (this.$store.getters.isLogin) {
+      if (this.$store.getters.account('track')) {
+        this.$router.push(`/classroom/${this.$store.getters.account('track')}/`)
+      } else {
+        if(!this.$store.getters.user('batch_status')) {
+          this.$router.push('/batch-not-started')
+        } else {
+          this.$router.push('/select-track')
+        }
+      }
+    }
   },
   watch: {
     $route() {

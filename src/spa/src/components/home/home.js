@@ -37,17 +37,6 @@ export default {
   computed: {
     i18n() { return this.$store.state.i18n.home }
   },
-  created() {
-    if (this.$store.getters.isLogin) {
-      if (this.$store.getters.account('track')) {
-        this.$router.push(`/classroom/${this.$store.getters.account('track')}/`)
-      } else if(!this.$store.getters.user('batch_status')) {
-        this.$router.push('/batch-not-started')
-      } else {
-        this.$router.push('/select-track')
-      }
-    }
-  },
   mounted() {
     window.addEventListener('resize', this.setIntroVideoHeight)
     this.$nextTick(function() { this.setIntroVideoHeight() })
