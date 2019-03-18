@@ -207,10 +207,18 @@
         margin-left: 5px;
       }
     }
-    .share-icon{
-      font-size: 32px;
-      padding: 30px;
-    }
+    
   }
   
+}
+
+#certificate-link-holder{
+  direction: ltr;
+  text-align: left;
+  padding: 10px;
+  background: rgb(144,66,232);
+  background: linear-gradient(90deg, rgba(144,66,232,1) 0%, rgba(42,60,217,1) 100%);
+  color: #fff;
+  cursor: pointer;
+  @include border-radius(4px);
 }
