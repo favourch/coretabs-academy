@@ -2,7 +2,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
-from .models import Profile, Certificate
+from .models import Profile, Certificate, CertificateSignature
 
 
 class ChoiceField(serializers.ChoiceField):
@@ -21,10 +21,18 @@ class MultipleChoiceField(serializers.MultipleChoiceField):
         return result
 
 
+class CertificateSignatureSerializer(serializers.ModelSerializer):
+    url = serializers.CharField(source='photo.url', read_only=True)
+
+    class Meta:
+        model = CertificateSignature
+        fields = ('name', 'url')
+
+
 class CertificateSerializer(serializers.ModelSerializer):
     heading = serializers.CharField(source='template.heading', read_only=True)
     body = serializers.CharField(source='template.body', read_only=True)
-    signature = serializers.CharField(source='template.signature.photo.url', read_only=True)
+    signature = CertificateSignatureSerializer(source='template.signature')
 
     class Meta:
         model = Certificate

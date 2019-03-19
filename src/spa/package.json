@@ -29,6 +29,7 @@
     "siema": "^1.5.1",
     "vue": "^2.5.17",
     "vue-carousel": "^0.7.3",
+    "vue-html2canvas": "0.0.4",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.17",
     "vue-youtube": "^1.2.5",

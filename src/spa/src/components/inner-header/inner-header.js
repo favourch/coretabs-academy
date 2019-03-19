@@ -27,6 +27,9 @@ export default {
   computed: {
     summary() {
       return `https://forums.coretabs.net/u/${this.$store.getters.user('username')}/summary`
+    },
+    isProfile() {
+      return !['profile-about', 'profile', 'profile-certificates'].includes(this.$route.name)
     }
   },
   methods: {

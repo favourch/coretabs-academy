@@ -1,7 +1,5 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth import get_user_model
-from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
 
 from caching.base import CachingManager, CachingMixin
@@ -35,7 +33,7 @@ class AutoSlugModel(models.Model):
 class Module(CachingMixin, AutoSlugModel):
     is_hidden = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
-    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'), null=True)
 
     class Meta:
         verbose_name = _('module')
@@ -67,7 +65,7 @@ class BaseLesson(CachingMixin, AutoSlugModel):
         User, related_name='lessons', verbose_name=_('shown users'), blank=True)
     order = models.IntegerField(verbose_name=_('Order'), default=0)
     created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
-    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
+    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'), null=True)
     objects = managers.BaseLessonManager()
 
     class Meta:
@@ -103,7 +101,7 @@ class Workshop(CachingMixin, AutoSlugModel):
     level = models.CharField(
         max_length=10, choices=LEVEL_CHOICES, default=BEGINNER, verbose_name=_('type'))
     created_date = models.DateTimeField(auto_now_add=True, verbose_name=_('created date'), null=True)
-    last_update_date = models.DateTimeField(auto_now=True, verbose_name=_('last update date'),  null=True)
+    last_update_date = models.DateTimeField(verbose_name=_('last update date'))
     duration = models.DecimalField(
         max_digits=3, decimal_places=1, verbose_name=_('duration'))
     description = models.CharField(
@@ -141,6 +139,7 @@ class WorkshopModule(models.Model):
 
     def __str__(self):
         return f'{self.workshop} --> {self.module}'
+
 
 class Track(CachingMixin, AutoSlugModel):
     workshops = models.ManyToManyField(

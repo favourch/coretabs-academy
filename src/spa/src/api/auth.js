@@ -123,8 +123,8 @@ const AuthAPI = {
       withCredentials: true,
       headers: { 'X-CSRFToken': Cookies.get('csrftoken') }
     }).then((response) => {
+      this.storeUser(root.$store, response.data)
       if (response.data.user.batch_status) {
-        this.storeUser(root.$store, response.data)
         if (root.$route.query.next) {
           window.location = root.$route.query.next
         } else {

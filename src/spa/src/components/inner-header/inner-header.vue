@@ -1,8 +1,10 @@
 <template>
 <div class="inner-header">
   <v-toolbar app class="white">
-    <v-toolbar-side-icon v-on:click="$parent.$emit('toggle-drawer')"></v-toolbar-side-icon>
-    <v-toolbar-title class="mx-auto">{{title}}</v-toolbar-title>
+    <v-toolbar-side-icon v-if="isProfile" v-on:click="$parent.$emit('toggle-drawer')"></v-toolbar-side-icon>
+    <v-toolbar-title v-if="isProfile" class="mx-auto">{{title}} {{showDrawer}}</v-toolbar-title>
+    <v-toolbar-side-icon v-if="!isProfile" v-on:click="$parent.$emit('toggle-drawer')"></v-toolbar-side-icon>
+    <v-toolbar-title v-if="!isProfile" class="mx-auto">الملف الشخصي</v-toolbar-title>
     <nav>
       <!--<router-link to="/">
         <img :src="$store.state.icon" alt="coretabs" />

@@ -9,7 +9,7 @@
             <v-form ref="form" lazy-validation>
               <h2 class="black--text mb-4" v-html="i18n.heading_title_text"></h2>
               <p v-html="i18n.description_text"></p>
-              <v-btn round id="back-home" v-html="i18n.start_btn_text" to="/"></v-btn>
+              <v-btn round id="back-home" v-html="i18n.start_btn_text" href="https://forums.coretabs.net/login"></v-btn>
             </v-form>
           </v-flex>
         </v-layout>

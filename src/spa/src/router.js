@@ -32,6 +32,7 @@ import ProfileAboutComponent from './components/profile/profile-about/profile-ab
 import ProfileCertificatesComponent from './components/profile/profile-certificates/profile-certificates.vue'
 import TracksComponent from './components/tracks/tracks.vue'
 import FrontendTrackComponent from './components/frontend-track/frontend-track.vue'
+import CertificateComponent from './components/certificate/certificate.vue'
 
 import i18n from './i18n/ar/i18n'
 
@@ -93,8 +94,7 @@ const router = new Router({
   }, {
     name: 'batch-not-started',
     path: '/batch-not-started',
-    component: BatchNotStarted,
-    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
+    component: BatchNotStarted
   }, {
     name: 'account-confirmed',
     path: '/account-confirmed',
@@ -128,14 +128,14 @@ const router = new Router({
       name: 'profile-certificates',
       path: 'certificates',
       component: ProfileCertificatesComponent
-    }],
-    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+    }]
+    // beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'select-track',
     path: '/select-track',
     component: SelectTrackComponent,
     beforeEnter: (to, from, next) => {
-      (store.getters.isLogin && (!store.getters.profile('track') || (store.getters.profile('track') === 'tour'))) ? next() : next('/')
+      (store.getters.isLogin && (!store.getters.account('track') || (store.getters.account('track') === 'tour'))) ? next() : next('/')
     }
   }, {
     path: '/profile',
@@ -185,7 +185,7 @@ const router = new Router({
       path: ':workshop',
       component: WorkshopComponent
     }],
-    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? (store.getters.user('batch_status') ? next() : location.reload()) : next('/') }
   }, {
     name: 'modules',
     component: ModulesComponent,
@@ -196,6 +196,10 @@ const router = new Router({
       component: LessonComponent
     }],
     beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
+  }, {
+    name: 'certificate',
+    component: CertificateComponent,
+    path: '/certificate'
   }]
 })
 
