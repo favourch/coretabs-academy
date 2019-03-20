@@ -12,29 +12,29 @@
           </div>
 
           <div id="certificate-name">
-            <h1>Ayman Alrifai</h1>
+            <h1>{{ certificate.full_name }}</h1>
           </div>
 
           <div id="certificate-desc">
             <p>For complated the workshop</p>
-            <h2>FRONT-End Basics</h2>
-            <blockquote cite="http://coretabs.net">Aymen has put in all the efforts to build responsive webpages projects and gained the required skills; thus, he has been qualified to get this certificate.
+            <h2>{{ certificate.heading }}</h2>
+            <blockquote cite="http://coretabs.net">{{ firstName }} {{ certificate.body }}
             </blockquote>
           </div>
 
           <div id="certificate-footer">
-            <div>21/12/2019</div>
-            <p>www.coretabs.net/certificate/71692757-ff11-45c2-97f0-8e443195fee9</p>
+            <div>{{ certificate.date }}</div>
+            <p>www.coretabs.net/certificate/{{ certificateId }}</p>
           </div>
 
         </v-flex>
         <v-flex xs12 md4 id="certificate-signature">
 
           <div id="signature-img">
-            <img src="https://gloriahesteryoga.com/wp-content/uploads/Transparent-Signature.png" alt="">
+            <img :src="certificate.signature.url" alt="">
           </div>
             <div id="signature-name">
-              mohammed alhakem
+              {{ certificate.signature.name }}
             </div>
         </v-flex>
         <div id="certificate-ribbon"></div>
