@@ -37,7 +37,7 @@
           </v-tabs>
           <v-layout>
             <v-flex xs12 md10>
-              <router-view></router-view>
+              <router-view :certificates="certificates"></router-view>
             </v-flex>
           </v-layout>
         </v-flex>
