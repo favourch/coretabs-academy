@@ -33,12 +33,12 @@ class BaseLessonRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
 
         lesson.shown_users.add(user)
 
-        user_profile = models.Profile.objects.get(id=user.profile.id)
         lesson_exist_in_track = lesson.module.workshops.filter(
-            tracks__id=user.profile.track.id).first() != None
+            tracks__id=user.account.track.id).first() is not None
+
         if lesson_exist_in_track:
-            user_profile.last_opened_lesson = lesson
-            user_profile.save()
+            user.account.last_opened_lesson = lesson
+            user.account.save()
 
         return self.partial_update(request, *args, **kwargs)
 
