@@ -40,7 +40,9 @@ export default {
 
     if (this.$store.getters.isLogin) {
       if (this.$store.getters.account('track')) {
-        this.$router.push(`/classroom/${this.$store.getters.account('track')}/`)
+        if(!this.$route.params.workshop) {
+          this.$router.push(`/classroom/${this.$store.getters.account('track')}/`)
+        }
       } else {
         if(!this.$store.getters.user('batch_status')) {
           this.$router.push('/batch-not-started')
