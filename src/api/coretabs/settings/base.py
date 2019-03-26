@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'avatar',
     'library',
     'accounts',
+    'accounts.social',
     'avatars',
     'discourse',
     'profiles',

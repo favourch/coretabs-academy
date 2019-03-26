@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (
     LoginView, LogoutView, UserDetailsView, PasswordChangeView,
     PasswordResetView, PasswordResetConfirmView, ResendConfirmView,
@@ -20,4 +20,7 @@ urlpatterns = [
     # Registration Urls
     path('registration/', RegisterView.as_view(), name='registration'),
     path('registration/verify-email/', VerifyEmailView.as_view(), name='verify_email'),
+
+    # Social auth Urls
+    path('social/', include('accounts.social.urls')),
 ]
