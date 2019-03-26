@@ -199,7 +199,8 @@ const router = new Router({
   }, {
     name: 'certificate',
     component: CertificateComponent,
-    path: '/certificate'
+    path: '/certificate/:certificateId',
+    props: true
   }]
 })
 

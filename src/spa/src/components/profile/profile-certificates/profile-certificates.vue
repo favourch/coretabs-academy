@@ -3,7 +3,7 @@
     <h2 class="mx-5 mt-5 mb-4 title">الإنجازات</h2>
 
     <div class="card-grid">
-      <v-card class="card-item">
+      <v-card class="card-item" v-for="certificate in certificates" :key="certificate.index">
         <div class="px-3">
           <v-card-title class="py-4 px-0">
             <h3 class="card-title">ورشة عمل أساسيات تطوير الويب</h3>
@@ -19,10 +19,10 @@
 
             <v-spacer></v-spacer>
             <v-card-actions class="pa-0">
-              <a href="#" download="" class="download-btn">
+              <router-link :to="{name: 'certificate', params: {certificateId: certificate.id}}"  href="#" download="" class="download-btn">
                 <v-icon class="card-icon">visibility</v-icon>
                 معاينة
-              </a>
+              </router-link>
             </v-card-actions>
           </div>
         </div>

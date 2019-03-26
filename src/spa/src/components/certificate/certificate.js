@@ -4,13 +4,16 @@ Vue.use(VueHtml2Canvas)
 
 export default {
   name: 'certificate',
+  props: ['certificateId'],
   data: () => ({
     shareDialog: false,
     certificateLink: '',
     isCopied: false,
     manualCopy: false,
     output: null,
-    loading: false
+    loading: false,
+    certificate: {},
+    firstName: ''
   }),
   methods: {
     shareCertificate() {
@@ -57,5 +60,15 @@ export default {
       link.href = this.output
       link.click()
     }
+  },
+  created() {
+    this.$profiles.getCertificate(`/api/v1/certificates/${this.certificateId}`)
+    .then(response => {
+      this.certificate = response
+      this.firstName = response.full_name.split(' ')[0]
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 }
