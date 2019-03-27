@@ -1,4 +1,5 @@
 import requests
+from rest_framework.exceptions import ParseError
 
 # from requests.adapters import HTTPAdapter
 # from requests.packages.urllib3.util.retry import Retry
@@ -21,6 +22,10 @@ import requests
 class BaseAPI:
     def request_data(self, access_token, *args, **kwargs):
         response = requests.get(url=self.API_URL, params={'access_token': access_token})
+
+        if response.status_code == 401:
+            raise ParseError('bad access token')
+
         data = response.json()
         return data
 
@@ -46,11 +51,6 @@ class GithubAPI(BaseAPI):
 class GoogleAPI(BaseAPI):
     name = 'google'
     API_URL = 'https://www.googleapis.com/oauth2/v3/userinfo'
-
-    def request_data(self, access_token, *args, **kwargs):
-        response = requests.get(url=self.API_URL, params={'access_token': access_token})
-        data = response.json()
-        return data
 
     def get_clean_data(self, access_token):
         data = self.request_data(access_token)
