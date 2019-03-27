@@ -19,9 +19,15 @@ class SocialLoginView(GenericAPIView):
     serializer_class = SocialSerializer
     response_serializer_class = TokenSerializer
 
-    def get_response(self, request, token):
+    def get_response(self, request, token, new):
         serializer = self.response_serializer_class(instance=token, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        if new:
+            response = Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            response = Response(serializer.data, status=status.HTTP_200_OK)
+
+        return response
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -30,12 +36,14 @@ class SocialLoginView(GenericAPIView):
         backend, access_token = serializer.get_data()
         social_data = backend.get_clean_data(access_token)
         social_auth = get_social_auth(social_data['uid'], backend.name)
+        new = False
 
         if social_auth is None:
             user = get_user_by_email(social_data['email'])
 
             if user is None:
                 user = create_user_social(social_data)
+                new = True
 
             social_auth = create_social_auth(user, social_data['uid'], backend.name)
 
@@ -43,9 +51,8 @@ class SocialLoginView(GenericAPIView):
             user = social_auth.user
 
         if user:
-            user.backend = backend.name
-            django_login(request, user)
+            django_login(request, user, backend='accounts.auth_backends.AuthenticationBackend')
             token, created = Token.objects.get_or_create(user=user)
-            return self.get_response(request, token)
+            return self.get_response(request, token, new)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
