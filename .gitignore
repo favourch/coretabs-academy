@@ -1,4 +1,8 @@
-# Test Database
+
+# django media
+src/api/media/
+
+# test database
 db.sqlite3
 
 # secrets
