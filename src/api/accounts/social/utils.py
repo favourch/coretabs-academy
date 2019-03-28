@@ -47,9 +47,9 @@ def clean_username(username):
     return username
 
 
-def create_social_auth(user, uid, provider):
+def create_social_auth(user, uid, provider, avatar_url):
     from .models import UserSocialAuth
 
-    social_auth = UserSocialAuth.objects.create(user=user, provider=provider, uid=uid)
+    social_auth = UserSocialAuth.objects.create(user=user, provider=provider, uid=uid, avatar_url=avatar_url)
 
     return social_auth
