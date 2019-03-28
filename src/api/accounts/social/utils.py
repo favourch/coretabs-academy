@@ -25,12 +25,26 @@ def get_user_by_email(email):
 def create_user_social(data):
     from .models import User
 
-    user = User.objects.create_user(data['username'], data['email'],
-                                    User().set_unusable_password(), first_name=data['name'])
+    username = clean_username(data['username'])
+    email = data['email']
+    password = User().set_unusable_password()
+    first_name = data['name']
 
+    user = User.objects.create_user(username, email, password, first_name=first_name)
     user.email_addresses.get(primary=True).confirm()
 
     return user
+
+
+def clean_username(username):
+    from .models import User
+    i = 1
+
+    while User.objects.filter(username=username).exists():
+        username = f'{username}{i}'
+        i += 1
+
+    return username
 
 
 def create_social_auth(user, uid, provider):
@@ -39,7 +53,3 @@ def create_social_auth(user, uid, provider):
     social_auth = UserSocialAuth.objects.create(user=user, provider=provider, uid=uid)
 
     return social_auth
-
-
-def retrieve_username_from_email(email):
-    pass
