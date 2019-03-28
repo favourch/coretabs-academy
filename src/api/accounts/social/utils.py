@@ -38,10 +38,11 @@ def create_user_social(data):
 
 def clean_username(username):
     from .models import User
+    original_username = username
     i = 1
 
     while User.objects.filter(username=username).exists():
-        username = f'{username}{i}'
+        username = f'{original_username}{i}'
         i += 1
 
     return username
