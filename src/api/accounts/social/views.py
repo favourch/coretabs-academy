@@ -45,7 +45,7 @@ class SocialLoginView(GenericAPIView):
                 user = create_user_social(social_data)
                 new = True
 
-            social_auth = create_social_auth(user, social_data['uid'], backend.name)
+            social_auth = create_social_auth(user, social_data['uid'], backend.name, social_data['avatar_url'])
 
         else:
             user = social_auth.user
