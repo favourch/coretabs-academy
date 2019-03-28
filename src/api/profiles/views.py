@@ -1,6 +1,8 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import RetrieveUpdateAPIView, RetrieveAPIView
 from django.shortcuts import get_object_or_404
+from django.http import Http404
+from uuid import UUID
 from .models import Profile, Certificate
 from .serializers import ProfileSerializer, CertificateSerializer
 
@@ -27,5 +29,11 @@ class CertificateView(RetrieveAPIView):
 
     def get_object(self):
         pk = self.kwargs['uuid']
+
+        try:
+            UUID(pk)
+        except ValueError:
+            raise Http404
+
         obj = get_object_or_404(Certificate, pk=pk)
         return obj
