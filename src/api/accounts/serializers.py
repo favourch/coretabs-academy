@@ -321,7 +321,8 @@ class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(
         max_length=30,
         min_length=3,
-        required=True
+        required=True,
+        error_messages={"min_length": _("تأكد أن اسم المستخدم يحتوي على 3 حروف على الأقل.")}
     )
     email = serializers.EmailField(required=True)
     password1 = serializers.CharField(write_only=True)
@@ -329,7 +330,8 @@ class RegisterSerializer(serializers.Serializer):
     name = serializers.CharField(
         max_length=100,
         min_length=5,
-        required=True
+        required=True,
+        error_messages={"min_length": _("تأكد أن تدخل اسمك الكامل (الاسم واللقب) وأنه لا يحتوي إلا على الحروف و المسافات, سيستعمل اسمك في إنتاج شهادتك.")}
     )
 
     def validate_name(self, name):
