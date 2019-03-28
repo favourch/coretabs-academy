@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'avatar',
     'library',
     'accounts',
+    'accounts.social',
     'avatars',
     'discourse',
     'profiles',
@@ -153,6 +154,7 @@ AVATAR_MAX_AVATARS_PER_USER = 1
 AVATAR_DEFAULT_URL = 'https://forums.coretabs.net/uploads/default/original/1X/5e58d0cbc2836c682d2eaecfe601bf02c821c4dd.png'
 AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
+    'accounts.social.avatar_providers.SocialAvatarProvider',
     'avatar.providers.DefaultAvatarProvider',
 )
 
