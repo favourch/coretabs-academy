@@ -46,7 +46,7 @@ export default {
   created() {
     this.emRules = [
       v => !!v || '',
-      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.form.email_validator_error
+      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v.trim()) || this.form.email_validator_error
     ]
 
     this.pwRules = [
