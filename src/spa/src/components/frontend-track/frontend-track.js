@@ -50,6 +50,10 @@ export default {
     },
     stopMSiema() {
       clearInterval(carouselTransitionM)
+    },
+    scrollToPricing() {
+      let pricingSection = document.getElementById('pricing')
+      pricingSection.scrollIntoView()
     }
   },
   created() {   

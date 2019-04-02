@@ -29,7 +29,9 @@ Track Style
     background: linear-gradient(#3ae577, #15ff6c) !important;
     color: $heading-color !important;
     font-weight: bold;
-    padding: 24px 32px !important;
+    width: 200px;
+    height: 50px;
+    font-size: 18px;
   }
 
   &:hover {
@@ -37,12 +39,32 @@ Track Style
   }
 }
 
-.card {
+#other-tracks__card{
+  color: $white-color !important;
+  @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
+  @include border-radius(35px);
+  overflow: hidden;
+ 
+  p{
+    color: #666;
+  }
+  .card__img{
+    img{
+      width: 100%;
+      max-height: 360px;
+    }
+  }
+}
+
+.card__edges{
   @include box-shadow(0px, 15px, 34px, 0px, $shadow-color);
   @include border-radius(35px);
+}
+.card {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  
 
   &--horizontal {
     flex-direction: row;
@@ -158,12 +180,10 @@ Track Style
 
   /* hero */
   .hero-container {
-    height: calc(100vh - 100px); // header's height is 100px 
-    margin-top: -60px;
-    
-    @media(max-width: 640px) {
-      margin-top: 0;
-    }
+    min-height: calc(100vh - 100px);   
+    @media(max-width: 600px) {
+      padding-bottom: 80px;
+    }  
     > .flex {
       margin: auto;
     }
@@ -223,6 +243,11 @@ Track Style
         
       }
     }  
+    margin-top: -60px;
+    
+    @media(max-width: 640px) {
+      margin-top: 0;
+    }
   }
 
 
@@ -232,19 +257,22 @@ Track Style
   } 
 
   #presentation {
-
+      margin: 50px 0 200px;
     .quote {
       text-align: center;
-      margin: 72px 0;
-      font-size: 18px !important;
+      margin: 70px 0 50px;
+      padding: 0 30px;
+      font-size: 22px !important;
+      font-weight: 600;
       color: $heading-color;
       align-self: center;
       position: relative;
-      width: 85%;
+      @media(max-width: 600px) {
+        font-size: 18px !important;
+        padding: 0 10px;
+      }
     }
 
-
-    @media screen and (min-width: 500px) {
 
       .quote {
         quotes: "\201d" "\201c";
@@ -257,24 +285,28 @@ Track Style
         font-family: Georgia, 'Times New Roman', Times, serif;
         color: $secondary-color;
         display: inline-block;
-        vertical-align: top;
-        height: 120px;
-        line-height: 1.5;
+        height: 80px;
+        line-height: 80px;
         font-size: 120px;
       }
       .quote::before {
         content: open-quote;
-        bottom: 0;
         transform: translateY(20px);
-        right: -60px;
+        right: -10px;
+        top: 5px;
+        @media(max-width: 600px) {
+          top: -70px;
+        }
       }
       .quote::after {
         content: close-quote;
-        left: 0;
-        top: 0;    
-        left: -60px;
+        left: -10px;
+        bottom: 0;
+        @media(max-width: 600px) {
+          bottom: -90px;
+        }
       }
-    }
+    
 
     .section__body {
       display: flex;
@@ -284,53 +316,47 @@ Track Style
         order: 0;
       }
 
-      #desc-box {
-        order: 1;
-        &:nth-of-type(-n+2) {
-          order: -1;
-        }
-      } 
+     
     }
 
-    #desc-box {
-      display: flex;
+    .desc-box {
       max-width: 1100px;
-      min-width: 470px;
-      margin: 0px auto;
-      min-height: 80vh;
+      //min-width: 470px;
+      margin: 100px auto 0;
       align-items: center;
 
-      .description {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        order: 2;
+      .desc-text {
+        color: #2c3e50;
+        line-height: 30px;
 
-        .desc-text {
-          padding-right: 60px;
-          color: #2c3e50;
-          line-height: 30px;
-
-          h2 {
-            margin: 20px auto;
-          }
+        h2 {
+          margin: 20px auto;
+        }
+      }
+      .desc-text__right{
+        padding-right: 60px;
+        @media(max-width: 640px) {
+          padding-right: 0;
+        }
+      }
+      .desc-text__left{
+        padding-left: 60px;
+        @media(max-width: 640px) {
+          padding-left: 0;
         }
       }
 
       .desc-image {
         background-color: $white-color;
-        flex: 1;
         @include border-radius(40px);
-        height: 400px;
+        height: 350px;
         overflow: hidden;
         @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
-        order: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
         img {
           max-height: 300px;
+        }
+        @media(max-width: 640px) {
+          margin-bottom: 50px;
         }
       }
     }
@@ -390,7 +416,7 @@ Track Style
           height: 300px;
           width: 460px;
           margin: auto auto 30px;
-
+          
           img {
             width: 80%;
             height: 80%;
@@ -421,6 +447,16 @@ Track Style
               height: 80%;
             }
         }
+      }
+    }
+  }
+
+  /* work-preview */
+  #work-preview {
+    min-height: 100vh;
+    .track-works {
+      .flex {
+        padding: 16px;
       }
     }
   }
@@ -741,7 +777,7 @@ Track Style
     
     .expansion-panel__header {
       counter-increment: tuts-counter;
-      padding: 48px 0 48px 48px !important;
+      padding: 35px 0 35px 24px !important;
       
       @media(max-width: 700px) {
         align-items: flex-start !important;
@@ -779,7 +815,7 @@ Track Style
         
 
         &__title {
-          margin-bottom: 24px !important;
+          margin-bottom: 10px !important;
         }
 
         &__desc {
@@ -853,11 +889,12 @@ Track Style
   /* Pricing */
   #pricing {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.025), transparent);
-    
+    min-height: 100vh;
     .card {
       position: relative;
       text-align: center;
-
+      padding-bottom: 20px; 
+      
       .card__body {
         margin: auto;
         
@@ -869,14 +906,14 @@ Track Style
           
           &--prev {
             text-decoration: line-through;
-            color: $secondary-color;
+            color: #999;
             font-size: 36px;
           }
 
           &--current {
             font-size: 72px;
             color: $heading-color;
-            margin: 32px 0 72px;
+            margin: 32px 0 50px;
           }
         }
 
@@ -889,8 +926,8 @@ Track Style
 
     #right-icon {
       position: absolute;
-      height: 75px;
-      width: 75px;
+      height: 100px;
+      width: 100px;
       background: linear-gradient(to left, #58cf18, #c5e154);
       clip-path: polygon(0 0, 0% 100%, 100% 0);
       left: 0;
@@ -901,11 +938,13 @@ Track Style
         position: absolute;
         top: 15px;
         left: 15px;
+        font-size: 35px;
       }
     }
 
   }
   #other-tracks {
+    margin-bottom: 80px;
     .card__actions {
       justify-content: flex-end;
     }
