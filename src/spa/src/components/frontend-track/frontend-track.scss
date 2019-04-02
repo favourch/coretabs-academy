@@ -102,7 +102,7 @@ Track Style
 
   &--dark {
     .section__heading {
-      color: white ;  
+      color: white;  
     }
   }
 
@@ -157,6 +157,21 @@ Track Style
   }
 
   /* hero */
+  .hero-container {
+    height: calc(100vh - 100px); // header's height is 100px 
+    margin-top: -60px;
+    
+    @media(max-width: 640px) {
+      margin-top: 0;
+    }
+    > .flex {
+      margin: auto;
+    }
+    .section__heading {
+      color: #fff !important;
+    }
+  }
+
   .hero {
     background: none !important;
     color: $white-color !important;
@@ -174,7 +189,15 @@ Track Style
     }
 
     .hero__countdown {
+
+      &-text {
+        font-weight: bold;  
+        margin-bottom: 25px;
+      }
+
       .vuejs-countdown {
+        max-width: 420px;
+        margin: 0 auto;
         display: flex;
         flex-direction: row-reverse;
         justify-items: center;
@@ -191,7 +214,7 @@ Track Style
         .digit {
           font-size: 28px;
           font-weight: bold;
-          color: #15ff6c;  
+          color: #55fbdb;  
         }
       
         .text {
