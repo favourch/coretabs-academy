@@ -46,7 +46,7 @@ def send_email_changed_mail(user, new_email):
 
 def render_mail(template_prefix, email, context):
     subject = render_to_string('{0}_subject.txt'.format(template_prefix),
-                                   context)
+                               context)
     # remove superfluous line breaks
     subject = " ".join(subject.splitlines()).strip()
 

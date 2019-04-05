@@ -12,6 +12,7 @@ from coretabs import settings
 
 from .models import Batch, EmailAddress, Account
 from .utils import render_mail
+from .actions import send_email, SendUserEmails
 
 
 class HasBatchFilter(SimpleListFilter):
@@ -35,10 +36,21 @@ class HasBatchFilter(SimpleListFilter):
 
 class MyUserAdmin(UserAdmin):
     action_form = MyActionForm
-    actions = ['add_or_change_batch', 'add_or_change_batch_and_send_email', 'remove_batch', ]
+    actions = ['add_or_change_batch', 'add_or_change_batch_and_send_email', 'remove_batch', send_email]
     list_display = ('username', 'email', 'first_name', 'date_joined')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups', HasBatchFilter)
     ordering = ('date_joined', 'username')
+
+    def get_urls(self):
+        from django.urls import path
+
+        urls = super().get_urls()
+        print(urls)
+        my_urls = [
+            path('action/send_email', SendUserEmails.as_view(), name='send_email')
+        ]
+
+        return my_urls + urls
 
     def _add_user_into_mailing_list(self, user, mailing_list_name):
         json_member = MailingListSerializer(user).data
