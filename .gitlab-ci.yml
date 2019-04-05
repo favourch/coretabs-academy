@@ -73,7 +73,7 @@ deploy-dev:
     - docker build . -t coretabsacademy/academy_spa_staging -f production.spa.dockerfile --build-arg API_BASE_URL="https://api-dev.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
     - docker push coretabsacademy/academy_spa_staging
   script:
-    - pip install awsebcli
+    - pip install awsebcli --upgrade
     - git checkout develop
     - eb init coretabs-academy -r us-east-2 -p "$EB_PLATFORM"
     - eb use staging
@@ -91,7 +91,7 @@ deploy-prod:
     - docker build . -t coretabsacademy/academy_spa -f production.spa.dockerfile --build-arg API_BASE_URL="https://api.coretabs.net" --build-arg MAINTENANCE_MODE=false --no-cache
     - docker push coretabsacademy/academy_spa
   script:
-    - pip install awsebcli
+    - pip install awsebcli --upgrade
     - git checkout master
     - cp Dockerrun.aws.production.json Dockerrun.aws.json
     - rm Dockerrun.aws.production.json
