@@ -93,10 +93,11 @@ REST_FRAMEWORK.update({
     )
 })
 
+# AWS Credentials
+AWS_ACCESS_KEY_ID = quote_plus(os.environ.get('AWS_ACCESS_KEY_ID'))
+AWS_SECRET_ACCESS_KEY = quote_plus(os.environ.get('AWS_SECRET_ACCESS_KEY'))
 
 # Celery
-AWS_ACCESS_KEY_ID = quote_plus(os.environ.get('CELERY_AWS_ACCESS_KEY_ID'))
-AWS_SECRET_ACCESS_KEY = quote_plus(os.environ.get('CELERY_AWS_SECRET_ACCESS_KEY'))
 CELERY_BROKER_URL = "sqs://{}:{}@".format(
     AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 CELERY_BROKER_TRANSPORT_OPTIONS = {'region': os.environ.get('CELERY_AWS_REGION'),
@@ -114,8 +115,6 @@ MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware', ]
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = os.environ.get('S3_AWS_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = os.environ.get('S3_AWS_SECRET_ACCESS_KEY', '')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
 
 # This will make sure that the file URL does not have unnecessary parameters like your access key.

@@ -35,7 +35,7 @@ class HasBatchFilter(SimpleListFilter):
 
 class MyUserAdmin(UserAdmin):
     action_form = MyActionForm
-    actions = ['add_or_change_batch', 'remove_batch', ]
+    actions = ['add_or_change_batch', 'add_or_change_batch_and_send_email', 'remove_batch', ]
     list_display = ('username', 'email', 'first_name', 'date_joined')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups', HasBatchFilter)
     ordering = ('date_joined', 'username')
@@ -65,6 +65,24 @@ class MyUserAdmin(UserAdmin):
 
             user.groups.add(group)
             self._add_user_into_mailing_list(user, group.name)
+
+    def add_or_change_batch_and_send_email(self, request, queryset):
+        group_name = request.POST['x']
+        group = Group.objects.filter(name=group_name).first()
+        context = {'start_date': group.batch_details.start_date, }
+
+        for user in queryset:
+            for gr in user.groups.filter(name__startswith='batch'):
+                user.groups.remove(gr)
+                self._remove_user_from_mailing_list(user, gr.name)
+
+            user.groups.add(group)
+            self._add_user_into_mailing_list(user, group.name)
+            msg = render_mail(
+                'accounts/email/starting_batch_details',
+                user.email,
+                context)
+            msg.send()
 
     def remove_batch(self, request, queryset):
         for user in queryset:

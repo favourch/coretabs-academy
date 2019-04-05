@@ -134,8 +134,8 @@ class Batch(models.Model):
 
     def _create_mailing_list(self, mailing_list):
         requests.post(f'https://api.mailgun.net/v3/lists',
-                        auth=('api', settings.MAILGUN_API_KEY),
-                        data={'address': mailing_list})
+                      auth=('api', settings.MAILGUN_API_KEY),
+                      data={'address': mailing_list})
 
     def _add_group_into_mailing_list(self, group_name, mailing_list):
         offset = 0
@@ -147,8 +147,8 @@ class Batch(models.Model):
             json_members = JSONRenderer().render(MailingListSerializer(current_members, many=True).data)
 
             requests.post(f'https://api.mailgun.net/v3/lists/{mailing_list}/members.json',
-                        auth=('api', settings.MAILGUN_API_KEY),
-                        data={'members': json_members})
+                          auth=('api', settings.MAILGUN_API_KEY),
+                          data={'members': json_members})
 
             offset += emails_per_call
             current_members = group_users.values('email', 'first_name')[offset:offset + emails_per_call]
@@ -156,7 +156,7 @@ class Batch(models.Model):
     def prepare_mailing_list(self):
         group_name = self.group.name
         mailing_list = f'{group_name}@{settings.MAILGUN_LIST_DOMAIN}'
-        
+
         self._create_mailing_list(mailing_list)
         self._add_group_into_mailing_list(group_name, mailing_list)
 
@@ -182,9 +182,9 @@ class Batch(models.Model):
         return self.name
 
 
-@receiver(post_delete, sender=Batch, dispatch_uid = 'delete_batch')
+@receiver(post_delete, sender=Batch, dispatch_uid='delete_batch')
 def delete_batch_group_with_mailing_list(sender, instance, **kwargs):
     requests.delete(f'https://api.mailgun.net/v3/lists/{instance.group.name}@{settings.MAILGUN_LIST_DOMAIN}',
-                        auth=('api', settings.MAILGUN_API_KEY))
+                    auth=('api', settings.MAILGUN_API_KEY))
 
     instance.group.delete()
