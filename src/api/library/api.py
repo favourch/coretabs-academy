@@ -77,7 +77,7 @@ class WorkshopListAPIView(generics.ListAPIView):
             'modules', queryset=models.Module.objects.prefetch_related(lessons).all())
 
         return self.queryset.with_shown_percentage(user).prefetch_related(modules).filter(
-            tracks__slug=self.kwargs.get('track_slug'))
+            tracks__slug=self.kwargs.get('track_slug')).exclude(is_hidden=True)
 
 
 class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
