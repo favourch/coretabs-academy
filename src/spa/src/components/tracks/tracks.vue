@@ -1,7 +1,7 @@
 <template>
   <v-container id="tracks" fluid grid-list-xl fill-height>
     <v-layout justify-center wrap align-center>
-      <v-flex xs12 lg10>
+      <v-flex xs12 md12 lg10 xl8>
         <v-layout class="tracks-items" justify-center wrap>
           <v-flex xs10 md4>
             <v-card height="100%">
@@ -15,7 +15,7 @@
               <div class="card__body">
                 <v-card-title primary-title>
                   <div>
-                    <h2 class="mb-0 ">مسار تطوير النظم الخلفية</h2>
+                    <h2 class="mb-0">تطوير النظم الخلفية</h2>
                   </div>
                 </v-card-title>
 
@@ -42,12 +42,12 @@
               <div class="card__body">
                 <v-card-title primary-title>
                   <div>
-                    <h2 class="mb-0 ">مسار تطوير واجهات الويب</h2>
+                    <h2 class="mb-0 ">تطوير واجهات الويب</h2>
                   </div>
                 </v-card-title>
 
                 <v-card-text>
-                    <p class="card__desc">في هذا المسار ستقوم بتطوير واجهات جميلة للمواقع الإلكترونية والتي من خلالها سيتفاعل المستخدمين مع التطبيق.</p>
+                    <p class="card__desc">في هذا المسار ستقوم بتطوير واجهات المستخدم والتي من خلالها سيتفاعل المستخدمين مع التطبيق.</p>
                 </v-card-text>
 
                 <v-card-actions>
@@ -64,4 +64,4 @@
 </template>
 
 <script src="./tracks.js"></script>
-<style src="./tracks.scss" lang="scss"></style>
+<style src="./tracks.scss" lang="scss" scoped></style>
