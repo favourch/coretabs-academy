@@ -12,6 +12,9 @@ export default {
       }, {
         url: '/about',
         dropdown: false
+      }, {
+        url: '/tracks',
+        dropdown: false
       }
     ],
     user_navs: [
@@ -20,6 +23,9 @@ export default {
         radius: true
       }, {
         url: '/about',
+        dropdown: false
+      }, {
+        url: '/tracks',
         dropdown: false
       }
     ],
