@@ -26,7 +26,7 @@ export default {
         root.alert.success = true
         root.alert.message = root.i18n.success_message
         root.waiting = false
-        setTimeout(() => this.$router.push('/'), 3000)
+        setTimeout(() => this.$router.push('/classroom/' + this.$store.getters.account('track')), 3000)
       } else {
         root.alert.error = true
         root.alert.message = root.i18n.error_message
