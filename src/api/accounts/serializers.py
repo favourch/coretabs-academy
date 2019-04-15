@@ -223,21 +223,18 @@ class PasswordResetSerializer(serializers.Serializer):
 
     email = serializers.EmailField()
 
-    def validate_email(self, email):
-        if not EmailAddress.objects.filter(email=email).exists():
+    def validate_email(self, email_address):
+        try:
+            self.email = EmailAddress.objects.get(email__iexact=email_address)   
+            return email_address
+        except EmailAddress.DoesNotExist:
             raise serializers.ValidationError(_("The e-mail address is not assigned to any user account"))
-        return email
 
     def save(self, *args, **kwargs):
-        email = self.validated_data['email']
-        user = EmailAddress.objects.get(email__iexact=email).user
-
+        user = self.email.user
         token = password_reset_token_generator.make_token(user)
         uid = int_to_base36(user.pk)
-
         send_password_reset_mail(user, token, uid)
-
-        return email
 
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
