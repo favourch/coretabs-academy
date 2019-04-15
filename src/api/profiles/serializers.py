@@ -12,7 +12,8 @@ class ChoiceField(serializers.ChoiceField):
 
 class MultipleChoiceField(serializers.MultipleChoiceField):
     def to_representation(self, value):
-        result = value.split(',')
+        data = value.split(',')
+        result = [lang for lang in Profile.LANGUAGES_CHOICES if lang[0] in data]
         return result
 
     def to_internal_value(self, data):
@@ -60,10 +61,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     role = ChoiceField(Profile.ROLE_CHOICES, read_only=True)
     level = ChoiceField(Profile.LEVEL_CHOICES, read_only=True)
     country = ChoiceField(Profile.COUNTRY_CHOICES)
-
     languages = MultipleChoiceField(Profile.LANGUAGES_CHOICES)
-
     certificates = ProfileCertificateSerializer(many=True, read_only=True)
+    date_joined = serializers.DateTimeField(source='user.date_joined')
 
     facebook_link = serializers.RegexField(regex=r'http(s)?://(www\.)?(facebook|fb)\.com/[A-z0-9_\-\.]+/?',
                                            error_messages={'invalid': links_errors['facebook']},
@@ -90,6 +90,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('username', 'name', 'role', 'level', 'description',
                   'country', 'bio', 'languages', 'certificates', 'avatar_url',
-                  'facebook_link', 'twitter_link', 'linkedin_link', 'website_link')
+                  'facebook_link', 'twitter_link', 'linkedin_link', 'website_link', 'date_joined')
 
         read_only_fields = ('description',)

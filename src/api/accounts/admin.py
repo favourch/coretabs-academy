@@ -45,7 +45,6 @@ class MyUserAdmin(UserAdmin):
         from django.urls import path
 
         urls = super().get_urls()
-        print(urls)
         my_urls = [
             path('action/send_email', SendUserEmails.as_view(), name='send_email')
         ]

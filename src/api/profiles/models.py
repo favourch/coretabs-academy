@@ -27,7 +27,7 @@ class Profile(models.Model):
         ('DZ', _('Algeria')),
         ('TN', _('Tunisia')),
     )
-    LANGUAGES_CHOICES = ['العربية', 'Français', 'English', 'español']
+    LANGUAGES_CHOICES = [('ar', 'العربية'), ('fr', 'Français'), ('en', 'English'), ('es', 'español')]
 
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='0')
