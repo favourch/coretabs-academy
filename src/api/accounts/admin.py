@@ -81,17 +81,18 @@ class MyUserAdmin(UserAdmin):
     def add_or_change_batch_and_send_email(self, request, queryset):
         group_name = request.POST['x']
         group = Group.objects.filter(name=group_name).first()
-        context = {'start_date': group.batch_details.start_date, }
 
         for user in queryset:
             for gr in user.groups.filter(name__startswith='batch'):
                 user.groups.remove(gr)
                 self._remove_user_from_mailing_list(user, gr.name)
 
+            context = {'start_date': group.batch_details.start_date,
+                       'user': user.first_name}
             user.groups.add(group)
             self._add_user_into_mailing_list(user, group.name)
             msg = render_mail(
-                'accounts/email/starting_batch_details',
+                'accounts/email/starting_batch_details_action',
                 user.email,
                 context)
             msg.send()
