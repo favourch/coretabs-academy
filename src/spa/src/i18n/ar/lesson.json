@@ -1,5 +1,9 @@
 {
   "video": {
+    "overlay": {
+      "finishNote": "لقد انتهيت من مشاهدة ",
+      "scrollNote": "سيتم نقلك إلى الملاحظات خلال "
+    },
     "tabs": [{
       "icon": "description",
       "text": "ملاحظات الدرس"

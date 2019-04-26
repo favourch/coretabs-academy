@@ -1,5 +1,9 @@
 /* eslint-disable */
+import Vue from 'vue'
+import VueYoutube from 'vue-youtube'
+Vue.use(VueYoutube)
 const hljs = require('highlight.js')
+
 export default {
   name: 'LessonComponent',
   data: () => ({
@@ -16,6 +20,11 @@ export default {
     quiz: {
       currentQuestion: 1,
       questions: null
+    },
+    playerVars: {
+      showinfo: 0,
+      rel: 0,
+      countdown: 5
     }
   }),
   computed: {
@@ -294,6 +303,19 @@ export default {
           document.querySelector('#drift-widget').style.bottom = '24px'
         }
       }
+    },
+    onPlayerStateChange() {
+      document.querySelector('#overlay').style.display = 'flex'
+      const interval = setInterval(() => {
+        if(this.playerVars.countdown > 0) {
+          this.playerVars.countdown--
+        } else {
+          clearInterval(interval)
+          document.querySelector('#overlay').style.display = 'none'
+          document.querySelector('#youtube-tabs').scrollIntoView()
+          this.playerVars.countdown = 5
+        }
+      }, 1000);
     }
   },
   mounted() {
