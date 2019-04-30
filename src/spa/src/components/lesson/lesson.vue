@@ -11,7 +11,9 @@
             {{ this.i18n.video.overlay.scrollNote }} {{ playerVars.countdown}}
           </div>
         </div>
-        <youtube v-if="$parent.current.lesson.type === '0'" :video-id="content.video.split('/')[4]" id="youtube-iframe" ref="youtube" :player-vars="playerVars" @ended="onPlayerStateChange"></youtube>
+        <div v-if="$parent.current.lesson.type === '0'" id="youtube-iframe">
+          <youtube :video-id="content.video.split('/')[4]" ref="youtube" :player-vars="playerVars" @ended="onPlayerStateChange"></youtube>
+        </div>
         <iframe v-else :src="content.video"></iframe>
         <v-tabs :id="($parent.current.lesson.type === '0') ? 'youtube-tabs' : 'scrimba-tabs'" :right="$store.state.direction === 'rtl'" icons-and-text v-model="content.tab">
           <v-tab v-for="(tab, i) in i18n.video.tabs" :key="i">

@@ -658,6 +658,12 @@ $markdown-em-spacer-6: 0.75em !default;
   .lesson-video {
     height: 88% !important;
 
+    & > #youtube-iframe {
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+    }
+
     &.lesson-scrimba {
 
       #scrimba-tabs{
