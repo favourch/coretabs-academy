@@ -36,7 +36,8 @@ class HasBatchFilter(SimpleListFilter):
 
 class MyUserAdmin(UserAdmin):
     action_form = MyActionForm
-    actions = ['add_or_change_batch', 'add_or_change_batch_and_send_email', 'remove_batch', send_email]
+    actions = ['add_or_change_batch', 'add_or_change_batch_and_send_email', 'remove_batch',
+               'send_complete_content_email', send_email]
     list_display = ('username', 'email', 'first_name', 'date_joined')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups', HasBatchFilter)
     ordering = ('date_joined', 'username')
@@ -101,6 +102,52 @@ class MyUserAdmin(UserAdmin):
             for gr in user.groups.filter(name__startswith='batch'):
                 user.groups.remove(gr)
                 self._remove_user_from_mailing_list(user, gr.name)
+
+    def _calcute_percentage(self, user, track):
+        percentage = 0
+        workshops = track.workshops.with_shown_percentage(user=user).filter(tracks=track)
+
+        for workshop in workshops:
+            percentage += workshop.shown_percentage
+
+        return percentage / workshops.count()
+
+    def send_complete_content_email(self, request, queryset):
+        tracks = {
+            'Backend': ('ياسر', 'الباكند'),
+            'Frontend': ('محمد', 'الفرونت')
+        }
+
+        for user in queryset:
+
+            track = user.account.track
+
+            template_name = 'accounts/email/start_content_action'
+            context = {
+                'user': user.first_name,
+                'track_author': tracks['Backend'][0]
+            }
+
+            if track is not None and track.title in tracks.keys():
+                percentage = self._calcute_percentage(user, track)
+
+                if percentage > 0:
+
+                    if percentage == 100:
+                        continue
+
+                    if percentage < 25:
+                        percentage = 25
+
+                    template_name = 'accounts/email/complete_content_action'
+
+                    context = {'percentage': int(percentage),
+                               'track_author': tracks[track.title][0],
+                               'track_name': tracks[track.title][1],
+                               'user': user.first_name}
+
+            msg = render_mail(template_name, user.email, context)
+            msg.send()
 
 
 class BatchAdmin(ModelAdmin):

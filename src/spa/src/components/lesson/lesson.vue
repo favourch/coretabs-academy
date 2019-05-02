@@ -3,7 +3,17 @@
     <template v-if="['0', '1'].includes($parent.current.lesson.type)">
       <div :id="($parent.current.lesson.type === '0') ? 'lesson-youtube' : 'lesson-scrimba'"
         :class="['lesson-video', ($parent.current.lesson.type === '0') ? 'lesson-youtube' : 'lesson-scrimba']">
-        <iframe v-if="$parent.current.lesson.type === '0'" :src="content.video+'?showinfo=0&rel=0'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen id="youtube-iframe"></iframe>
+        <div id="overlay">
+          <p>
+            {{ this.i18n.video.overlay.finishNote }} "{{ lesson.title }}"
+          </p>
+          <div>
+            {{ this.i18n.video.overlay.scrollNote }} {{ playerVars.countdown}}
+          </div>
+        </div>
+        <div v-if="$parent.current.lesson.type === '0'" id="youtube-iframe">
+          <youtube :video-id="content.video.split('/')[4]" ref="youtube" :player-vars="playerVars" @ended="onPlayerStateChange"></youtube>
+        </div>
         <iframe v-else :src="content.video"></iframe>
         <v-tabs :id="($parent.current.lesson.type === '0') ? 'youtube-tabs' : 'scrimba-tabs'" :right="$store.state.direction === 'rtl'" icons-and-text v-model="content.tab">
           <v-tab v-for="(tab, i) in i18n.video.tabs" :key="i">

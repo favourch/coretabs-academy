@@ -31,6 +31,8 @@ $markdown-em-spacer-5: 0.5em !default;
 $markdown-em-spacer-6: 0.75em !default;
 
 .lesson {
+  scroll-behavior: smooth;
+  
   #have-question {
     img {
       margin: 25px 0 25px 25px;
@@ -641,8 +643,26 @@ $markdown-em-spacer-6: 0.75em !default;
     }
   }
 
+  #overlay {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    height: 88% !important;
+    background: rgba(28, 28, 90, 0.9);
+    color: #fff;
+  }
+
   .lesson-video {
     height: 88% !important;
+
+    & > #youtube-iframe {
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+    }
 
     &.lesson-scrimba {
 
