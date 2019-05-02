@@ -1,24 +1,25 @@
 <template>
-  <div id="profile">
+  <div v-if="loaded" id="profile">
     <inner-header-component></inner-header-component>
 
     <v-container fluid class="pa-0">
       <v-layout :column="$vuetify.breakpoint.smAndDown">
-        <v-flex xs12 md2 class="profile">
+        <v-flex xs12 md3 class="profile">
           <div class="profile-header">
             <v-avatar size="150" color="grey lighten-4">
-              <div class="user-badge">
+              <div class="user-badge" v-if="profile.role && profile.role !== 'Student'">
                 <span class="icon"></span>
               </div>
-              <img src="https://via.placeholder.com/150" alt="user">
+              <img v-if="avatar_url" :src="avatar_url" :alt="profile.name">
+              <span v-else v-html="avatar_letter"></span>
             </v-avatar>
 
-            <h2 class="mt-4 mb-2 profile-username profile-badge profile-badge-verified">أيمن الرفاعي</h2>
-            <h3 class="profile-subheading">مطور واجهات ويب</h3>
-            <div class="my-4 user-level">مستوى متوسط</div>
-            <div class="profile-location">
+            <h2 class="mt-4 mb-2 profile-username" :class="{'profile-badge profile-badge-verified': profile.role && profile.role !== 'Student'}">{{ profile.name }}</h2>
+            <h3 class="profile-subheading" v-if="profile.description">{{ profile.description }}</h3>
+            <div class="my-4 user-level" v-if="profile.level">{{ profile.level }}</div>
+            <div class="profile-location" v-if="profile.country">
               <v-icon right small>place</v-icon>
-              <span class="profile-location-title">ليبيا - الخمس</span>
+              <span class="profile-location-title">{{ profile.country }}</span>
             </div>
           </div>
 
@@ -33,14 +34,22 @@
 
         <v-flex xs12>
           <v-tabs>
-            <v-tab v-for="tab in tabs" :key="tab.name" ripple :to="tab.path">{{ tab.text }}</v-tab>
+            <v-tab v-for="tab in tabs" :key="tab.name" ripple :to="{name: tab.name}">{{ tab.text }}</v-tab>
           </v-tabs>
-          <v-layout>
-            <v-flex xs12 md10>
-              <router-view :certificates="certificates"></router-view>
-            </v-flex>
-          </v-layout>
+          <div class="profile-sub-page">
+              <router-view></router-view>            
+          </div>
         </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
+
+  <div v-else class="progress-container">
+    <v-container fluid fill-height>
+      <v-layout column align-center justify-center>
+        <v-progress-circular indeterminate :size="$store.state.progress.size" :width="$store.state.progress.width" v-if="!$store.state.progress.error"></v-progress-circular>
+        <div class="error text-center" v-else>!</div>
+        <div class="text text-center">{{$store.state.progress.text}}</div>
       </v-layout>
     </v-container>
   </div>

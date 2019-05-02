@@ -4,6 +4,8 @@
 Profile
 =======================================*/
 
+$content-padding: 50px;
+
 header {
     display: none;    
 }
@@ -13,7 +15,6 @@ header {
 }
 
 
-
 .title {
   color: $heading-color;
   font-weight: 700;
@@ -21,15 +22,37 @@ header {
 
 #profile {
 
-  .container {
-    background-color: $workshop-drawer-background;
+  .profile-sub-page {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-left: 0 !important;
+    transition: none !important;
+    overflow: hidden !important;
+    background: $workshop-content-background !important;
+    height: 100%;
+
+    > div {
+      width: 100% !important;
+      height: 100% !important;
+      transition: none !important;
+      overflow-x: hidden !important;
+      user-select: text !important;
+      padding: $content-padding !important;
+      @media (max-width: 600px) {
+        padding: 5% !important;
+      }
+
+      &::-webkit-scrollbar {
+        background: $workshop-content-background !important;
+      }
+    }
   }
 
   .profile{
     border-left: 1px solid #e2e2e2;
     background-color: #fff;
     min-height: calc(100vh - #{$inner-header-height});
-    @media (max-width: 600px) {
+    @media (max-width: 960px) {
       min-height: auto;
     }
   }
@@ -44,6 +67,18 @@ header {
       height: 150px !important;
       width: 150px !important;
       align-self: center;
+      overflow: hidden;
+      
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: $primary-color !important;
+        color: $white-color;
+        font-size: 3rem;
+      }
     }
 
     .user-badge {
@@ -155,7 +190,6 @@ header {
 
   @media (max-width: 600px) {
     .tabs__container{
-      background: #fdfdfd;
       margin-top: 1.5rem;
     }
   }

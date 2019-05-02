@@ -3,11 +3,53 @@
 /*=====================================
 Profile About
 =======================================*/
+$card: (
+  max-width: 1080px,
+  height: auto,
+  icon-size: 38px,
+  margin-bottom: 40px,
+  padding: 8px 0,
+  background: $white-color   
+);
+
+$card1: (
+  text: (margin: 0 10px 0 0, ar-margin: 0 0 0 10px, font-size:1em)
+);
+
+.card {
+  overflow: hidden !important;
+  border-radius: 15px !important;
+  max-width: map-deep-get($card,'max-width') !important;
+  height: map-deep-get($card,'height') !important;
+  margin-bottom: map-deep-get($card,'margin-bottom') !important;
+  margin-left: auto;
+  margin-right: auto;
+  background: map-deep-get($card,'background') !important;
+  @include box-shadow(0px, 5px, 20px, 0px, $shadow-color,true);
+
+
+  &:nth-child(1) {
+    .flex {
+      padding: 40px !important;
+      
+      &:first-of-type {
+        border-left: 1px solid $shadow-color;
+        
+        @media (max-width: 960px) {
+          border-left: none;
+          border-bottom: 1px solid $shadow-color;;
+        }
+      }
+    }
+  }
+}
+
 
 .user-bio {
-  color: #222;
+  color: #88919b;
   line-height: 2.3rem;
   font-size: 14px;
+  margin: 0;
 }
 
 .lang-items {
@@ -30,49 +72,75 @@ Profile About
     align-items: center;
     border-radius: 50%;
     background: #e2e2e2;
+    color: #88919b;
     width: 48px;
     height: 48px;
     margin-bottom: 0.78rem;
   }
   
   .lang-title {
-    color: #666;
-    font-weight: bold;
+    color: #88919b;
     font-size: 0.9rem;
   }
   
 }
 
-.profile-icon {
-  background-image: url('../../../assets/multimedia/icons/css_sprites.png');
-  width: 16px; height: 16px;
-  margin: 0 8px;
-  opacity: .7;
-  transition-duration: .4s;
-}
-.profile-icon:hover{
-  opacity: 1;
-}
-
-.profile-icon:first-of-type{
-  margin-right: 0;
-}
-.website-icon {
-  background-position: -82px -10px;
+.flex {
+  .about-item {
+    &__title {
+      margin-bottom: 16px;
+    }
+  }
+  
+  > .about-item:not(:last-child) {
+    margin-bottom: 24px;
+  }
 }
 
-.linkedin-icon {
-  background-position: -10px -10px;
-}
 
-.twitter-icon {
-  background-position: -10px -46px;
-}
+.other-info {
 
-.facebook-icon {
-  background-position: -46px -46px;
-}
+  .links {
+    display: flex;
+    list-style-type: none;
+    margin-top: 32px;
 
-.google-plus-icon {
-  background-position: -82px -46px;
+    &__item {
+      display: flex;   
+  
+      .profile-icon {
+        background-image: url('../../../assets/multimedia/icons/css_sprites.png');
+        width: 16px; height: 16px;
+        margin: 0 12px;
+        opacity: .7;
+        transition-duration: .4s;
+      }
+      .profile-icon:hover{
+        opacity: 1;
+      }
+      
+      .profile-icon:first-of-type{
+        margin-right: 0;
+      }
+      .website-icon {
+        background-position: -82px -10px;
+      }
+      
+      .linkedin-icon {
+        background-position: -10px -10px;
+      }
+      
+      .twitter-icon {
+        background-position: -10px -46px;
+      }
+      
+      .facebook-icon {
+        background-position: -46px -46px;
+      }
+      
+      .google-plus-icon {
+        background-position: -82px -46px;
+      }
+    }
+  }
 }

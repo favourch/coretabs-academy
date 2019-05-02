@@ -48,6 +48,8 @@ const ProfilesAPI = {
         },
         username: response.data.username,
         name: response.data.name,
+        country: response.data.country,
+        date_joined: Vue.prototype.$date.get(new Date(response.data.date_joined)),
         role: response.data.role,
         level: response.data.level,
         description: response.data.description,

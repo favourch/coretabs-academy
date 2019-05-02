@@ -1,58 +1,68 @@
 <template>
-  <div class="about mt-5 pa-0">
-      <v-layout row wrap justify-space-between>
-        <v-flex xs12 md6 class="mx-5">
-          <div class="mb-5">
-            <h2 class="mb-4 title">نبذة عني</h2>
-            <p class="user-bio">
-                هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها.
-            </p>
-          </div>
-
-          <div class="mb-5">
-            <h2 class="mb-4 title">اللغات التي أتحدث بها</h2>
-
-            <div class="lang-items">
-              <div class="lang-item" v-for="num in 3" :key="num">
-                <div class="lang-img-wrapper">Ar</div>
-                <span class="lang-title">العربية</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- <div class="mb-5">
-            <h2 class="mb-4 title">مهاراتي</h2>
-
-            <v-chip small label outline v-for="n in 3" :key="n">Tag {{ n}}</v-chip>
-          </div> -->
-        </v-flex>
-
-        <v-flex xs12 md3 class="mx-5 mb-5">
-          <v-card>
-            <div class="px-4">
-              <div class="py-4">
-                <v-card-title class="pa-0 pb-2">
-                  <h4 class="mb-2 font-weight-bold">تاريخ الإنضمام</h4>
-                </v-card-title>
-
-                <v-card-text class="pa-0">
-                  <div>1/1/2018</div>
-                </v-card-text>
-              </div>
-
-              <v-divider></v-divider>
-
-              <v-card-actions class="py-4">
-                <a :class="`profile-icon ${icon.name}-icon`" :href="icon.url" target="_blank" v-for="(icon, i) in icons"
-                  :key="i"></a>
-              </v-card-actions>
+  <div v-if="loaded" class="about">
+    
+    <v-card class="elevation-0">
+      <v-container class="no-select" fluid>
+        <v-layout row wrap>
+          <v-flex xs12 sm12 md8>
+            
+            <div class="about-item">
+              <h2 class="about-item__title">نبذة عني</h2>
+              <p class="user-bio">
+                {{ bio }}
+              </p>
 
             </div>
-          </v-card>
-        </v-flex>
-      </v-layout>
+
+            <div class="about-item" v-if="profile.languages.length > 0">
+              <h2 class="about-item__title">اللغات التي أتحدث بها</h2>
+
+              <div class="lang-items">
+                <div class="lang-item" v-for="(lang, index) in profile.languages" :key="index">
+                  <div class="lang-img-wrapper">{{ lang[0] }}</div>
+                  <span class="lang-title">{{ lang[1] }}</span>
+                </div>
+              </div>
+            </div>
+          </v-flex>
+          <v-flex xs12 sm12 md4 v-if="profile.date_joined">
+            <section class="other-info">
+              <div class="about-item">
+                <h4 class="about-item__title">تاريخ الإنضمام</h4>
+                <span>
+                  {{ profile.date_joined }}
+                </span>
+              </div>
+
+              <ul class="links info-item">
+                <li v-for="(icon, i) in icons" :key="i" class="links__item">
+                  <a 
+                  :class="`profile-icon ${icon.name}-icon`" 
+                  :title="icon.name" 
+                  :href="icon.url" 
+                  target="_blank"
+                  ></a>
+                </li>
+              </ul>
+
+            </section>
+
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card>
 
   </div>
+  <div v-else class="progress-container contrast">
+    <v-container fluid fill-height>
+      <v-layout column align-center justify-center>
+        <v-progress-circular indeterminate :size="$store.state.progress.size" :width="$store.state.progress.width" v-if="!$store.state.progress.error"></v-progress-circular>
+        <div class="error text-center" v-else>!</div>
+        <div class="text text-center">{{$store.state.progress.text}}</div>
+      </v-layout>
+    </v-container>
+  </div>
+
 </template>
 
 <script src="./profile-about.js"></script>
