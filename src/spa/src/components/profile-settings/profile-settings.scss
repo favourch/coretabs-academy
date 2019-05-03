@@ -13,13 +13,13 @@ main.change-password-main-content,
 main.change-track-main-content,
 main.personal-info-main-content,
 main.settings-main-content {
-  padding-top: $inner-header-height !important;
+  padding-top: 0 !important;
   background: $workshop-content-background !important;
 }
 
 html[dir='rtl'] {
   .settings {
-    > .navigation-drawer {
+    #sidenav.navigation-drawer {
       .toolbar {
         padding: 0 $scrollbar-width 0 0 !important;
 
@@ -82,7 +82,7 @@ html[dir='rtl'] {
   position: relative !important;
   background: $white-color !important;
 
-  > .navigation-drawer {
+  #sidenav.navigation-drawer {
     height: 100vh !important;
     overflow: hidden !important;
     background: $workshop-drawer-background !important;
@@ -98,6 +98,10 @@ html[dir='rtl'] {
           }
         }
       }
+    }
+
+    &.navigation-drawer--close {
+      width: 0 !important;
     }
 
     .navigation-drawer__border {
@@ -144,6 +148,10 @@ html[dir='rtl'] {
       background: $workshop-drawer-background !important;
       height: calc(100vh - #{$inner-header-height}) !important;
     }
+
+    @media (max-width: 1263px) {
+      position: absolute;
+    }
   }
 
   .content {
@@ -153,7 +161,6 @@ html[dir='rtl'] {
     transition: none !important;
     overflow: hidden !important;
     @include center(false,true);
-    position: absolute !important;
     position: relative !important;
     background: $workshop-content-background !important;
 

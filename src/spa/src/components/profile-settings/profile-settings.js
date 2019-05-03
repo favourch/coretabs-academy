@@ -1,15 +1,22 @@
 import InnerHeaderComponent from '../inner-header/inner-header.vue'
+import NavigatorDrawerComponent from '../navigator-drawer/navigator-drawer.vue'
 export default {
   name: 'ProfileSettingsComponent',
   components: {
-    InnerHeaderComponent
+    InnerHeaderComponent,
+    NavigatorDrawerComponent
   },
   data: () => ({
     header: '',
     drawer: {
       isOpen: null,
       isRight: false
-    }
+    },
+    items: [
+      { title: 'Classrome', icon: 'dashboard' },
+      { title: 'About', icon: 'question_answer' }
+    ],
+    mini: true,
   }),
   computed: {
     i18n() { return this.$store.state.i18n.account.titles }
