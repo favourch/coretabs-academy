@@ -9,13 +9,13 @@ $ar-padding: 0 15px 0 0;
 
 main.lessons-main-content,
 main.modules-main-content {
-  padding-top: $inner-header-height !important;
+  padding-top: 0 !important;
   background: $workshop-content-background !important;
 }
 
 html[dir='rtl'] {
   .modules {
-    .navigation-drawer {
+    #sidenav.navigation-drawer {
       .toolbar {
         padding: $ar-padding !important;
       }
@@ -29,7 +29,7 @@ html[dir='rtl'] {
   position: relative !important;
   background: $white-color !important;
 
-  .navigation-drawer {
+  #sidenav.navigation-drawer {
     height: 100vh !important;
     overflow: hidden !important;
     background: $workshop-drawer-background !important;

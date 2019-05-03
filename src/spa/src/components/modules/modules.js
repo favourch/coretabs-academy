@@ -1,10 +1,12 @@
 import ModulesNavComponent from '../modules-nav/modules-nav.vue'
 import InnerHeaderComponent from '../inner-header/inner-header.vue'
+import NavigatorDrawerComponent from '../navigator-drawer/navigator-drawer.vue'
 export default {
   name: 'ModulesComponent',
   components: {
     ModulesNavComponent,
-    InnerHeaderComponent
+    InnerHeaderComponent,
+    NavigatorDrawerComponent
   },
   data: () => ({
     height: 0,
@@ -83,7 +85,7 @@ export default {
       }
     },
     onResize() {
-      let selector = '.modules >.inner-header >.toolbar'
+      let selector = '.modules .inner-header .toolbar'
       if (document.querySelector(selector) !== null) {
         this.height = window.innerHeight - document.querySelector(selector).offsetHeight
       } else {
