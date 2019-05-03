@@ -1,6 +1,6 @@
 <template>
 <div class="inner-header">
-  <v-toolbar app class="white">
+  <v-toolbar class="white">
     <v-toolbar-side-icon v-if="isProfile" v-on:click="$parent.$emit('toggle-drawer')"></v-toolbar-side-icon>
     <v-toolbar-title v-if="isProfile" class="mx-auto">{{title}}</v-toolbar-title>
     <v-toolbar-side-icon v-if="!isProfile" v-on:click="$parent.$emit('toggle-drawer')"></v-toolbar-side-icon>
@@ -17,7 +17,7 @@
         <v-card>
           <v-list>
             <v-list-tile avatar>
-              <!-- 
+              <!--
                 <a :href="summary" target="_blank">
                 <v-list-tile-avatar>
                   <img v-if="avatar_url" :src="avatar_url" />
