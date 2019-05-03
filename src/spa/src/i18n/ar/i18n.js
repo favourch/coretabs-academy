@@ -96,6 +96,13 @@ var i18n = `{
     "track_2_text_ar": "مسار تطوير واجهات الويب",
     "submit_btn_text": "ابدأ المسار"
   },
+  "navigation_drawer": {
+    "profile": "الملف الشخصي",
+    "classroom": "ورش العمل",
+    "forum": "المنتدى",
+    "settings": "الإعدادات",
+    "logout": "تسجيل خروج"
+  },
   "account": {
     "titles": {
       "settings": "إعدادات الحساب",

@@ -169,7 +169,11 @@ a {
 }
 
 .progress-container {
-  height: 100vh !important;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
   margin-top: $inner-header-height * -1 !important;
   background: map-deep-get($loader,'container-background') !important;
 
@@ -237,4 +241,28 @@ code {
   font-size: 14px;
   margin: 0 3px;
   font-weight: 500;
+}
+
+section#row-flexed {
+  display: flex;
+}
+
+section#column-flexed {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#drift-widget {
+  left: 24px !important;
+  right: auto !important;
+}
+
+main.content {
+  padding-top: $inner-header-height !important;
+  padding-right: 60px !important;
+}
+
+main.content.navigator-drawer-opened {
+  padding-right: 200px !important;
 }
