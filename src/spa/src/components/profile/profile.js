@@ -1,8 +1,10 @@
 import InnerHeaderComponent from '../inner-header/inner-header.vue'
+import NavigatorDrawerComponent from '../navigator-drawer/navigator-drawer.vue'
 export default {
   name: 'ProfileComponent',
   components: {
-    InnerHeaderComponent
+    InnerHeaderComponent,
+    NavigatorDrawerComponent
   },
   data() {
     return {
