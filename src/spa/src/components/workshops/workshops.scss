@@ -11,13 +11,13 @@ $drawer-group-height: 60px;
 
 main.workshop-main-content,
 main.workshops-main-content {
-  padding-top: $inner-header-height !important;
+  padding-top: 0 !important;
   background: $workshop-content-background !important;
 }
 
 html[dir='rtl'] {
   .workshops {
-    > .navigation-drawer {
+    #sidenav.navigation-drawer {
       .toolbar {
         padding: 0 $scrollbar-width 0 0 !important;
 
@@ -72,7 +72,7 @@ html[dir='rtl'] {
   position: relative !important;
   background: $white-color !important;
 
-  > .navigation-drawer {
+  #sidenav.navigation-drawer {
     height: 100vh !important;
     overflow: hidden !important;
     background: $workshop-drawer-background !important;
@@ -88,6 +88,10 @@ html[dir='rtl'] {
           }
         }
       }
+    }
+
+    &.navigation-drawer--close {
+      width: 0 !important;
     }
 
     .navigation-drawer__border {
@@ -271,6 +275,10 @@ html[dir='rtl'] {
           }
         }
       }
+    }
+
+    @media (max-width: 1263px) {
+      position: absolute;
     }
   }
 

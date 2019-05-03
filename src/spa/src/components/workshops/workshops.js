@@ -1,8 +1,10 @@
 import InnerHeaderComponent from '../inner-header/inner-header.vue'
+import NavigatorDrawerComponent from '../navigator-drawer/navigator-drawer.vue'
 export default {
   name: 'WorkshopsComponent',
   components: {
-    InnerHeaderComponent
+    InnerHeaderComponent,
+    NavigatorDrawerComponent
   },
   data: () => ({
     height: 0,
@@ -23,8 +25,8 @@ export default {
     }
   },
   watch: {
-    $route(to, from) {
-      this.current.workshop = this.$api.getWorkshopId(this.workshops)
+    $route() {
+      this.getWorkshops()
     }
   },
   methods: {
@@ -36,7 +38,7 @@ export default {
       }
     },
     onResize() {
-      let selector = '.workshops >.inner-header >.toolbar'
+      let selector = '.workshops .inner-header .toolbar'
       if (document.querySelector(selector) !== null) {
         this.height = window.innerHeight - document.querySelector(selector).offsetHeight
       } else {
@@ -59,18 +61,9 @@ export default {
         gradient = `linear-gradient(${nextdeg}deg, var(--workshop-complete-state) 50%, transparent 50%, transparent),linear-gradient(270deg, var(--workshop-complete-state) 50%, var(--workshop-normal-state) 50%, var(--workshop-normal-state))`
       }
       return gradient
-    }
-  },
-  created() {
-    this.$on('toggle-drawer', function(data) {
-      this.drawer.isOpen = !this.drawer.isOpen
-    })
-    this.$on('clearTimeout', function(data) {
-      clearTimeout(this.timeout)
-    })
-    this.drawer.isRight = this.$store.state.direction === 'rtl'
-
-    this.$api.getWorkshops(`/api/v1/tracks/${this.$route.params.track}/workshops/`)
+    },
+    getWorkshops() {
+      this.$api.getWorkshops(`/api/v1/tracks/${this.$route.params.track}/workshops/`)
       .then(async(data) => {
         this.workshops = await data
         if (typeof this.$route.params.workshop === 'undefined') {
@@ -87,6 +80,18 @@ export default {
       }).catch(() => {
         this.$store.dispatch('progress', { error: true })
       })
+    }
+  },
+  created() {
+    this.$on('toggle-drawer', function(data) {
+      this.drawer.isOpen = !this.drawer.isOpen
+    })
+    this.$on('clearTimeout', function(data) {
+      clearTimeout(this.timeout)
+    })
+    this.drawer.isRight = this.$store.state.direction === 'rtl'
+
+    this.getWorkshops()
   },
   updated() {
     document.querySelectorAll('#sidenav .stepper__step__step').forEach((stepper, index) => {
