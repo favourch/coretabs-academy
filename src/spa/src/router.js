@@ -117,9 +117,9 @@ const router = new Router({
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
   }, {
     name: 'profile',
-    path: '/:username',
+    path: '/user/:username',
     component: ProfileComponent,
-    redirect: '/:username/about',
+    redirect: '/user/:username/about',
     children: [{
       name: 'profile-about',
       path: 'about',
