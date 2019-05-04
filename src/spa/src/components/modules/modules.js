@@ -12,7 +12,7 @@ export default {
     height: 0,
     loaded: false,
     drawer: {
-      isOpen: true,
+      isOpen: null,
       isRight: false
     },
     current: {
@@ -22,10 +22,11 @@ export default {
     }
   }),
   created() {
-    this.$on('toggle-drawer', function(data) {
+    this.drawer.isRight = this.$store.state.direction === 'rtl'
+
+    this.$on('toggle-drawer', function() {
       this.drawer.isOpen = !this.drawer.isOpen
     })
-    this.drawer.isRight = this.$store.state.direction === 'rtl'
 
     this.current.workshop.URL = {
       name: 'workshop',
@@ -52,6 +53,13 @@ export default {
     }
   },
   methods: {
+    initMenu() {
+      if (document.documentElement.clientWidth < 1264) {
+        this.drawer.isOpen = false
+      } else {
+        this.drawer.isOpen = true
+      }
+    },
     getModules() {
       this.$api.getWorkshop(`/api/v1/tracks/${this.$route.params.track}/workshops/${this.$route.params.workshop}`)
         .then(workshop => {
@@ -95,5 +103,10 @@ export default {
         }, 100)
       }
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.initMenu()
+    })
   }
 }

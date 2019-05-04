@@ -35,9 +35,7 @@ html[dir='rtl'] {
         }
 
       }
-      @media (max-width: 360px) {
-        width: 310px !important;
-      }
+      
       .list {
         direction: rtl !important;
         a {
@@ -148,7 +146,11 @@ html[dir='rtl'] {
       background: $workshop-drawer-background !important;
       height: calc(100vh - #{$inner-header-height}) !important;
     }
-
+    
+    @media (max-width: 480px) {
+      max-width: 80% !important;
+    }
+    
     @media (max-width: 1263px) {
       position: absolute;
     }

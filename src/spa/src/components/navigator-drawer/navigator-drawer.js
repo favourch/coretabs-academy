@@ -30,8 +30,6 @@ export default {
       throw new Error(error.message)
     })
 
-    console.log(`/user/${this.$store.getters.user('username')}/`)
-
     this.items.push({ route: `/${this.$store.getters.user('username')}/`, icon: 'person', title: this.i18n.profile,  })
     this.items.push({ route: `/classroom/${this.$store.getters.account('track')}/`, icon: 'school', title: this.i18n.classroom })
     this.items.push({ link: 'https://forums.coretabs.net', icon: 'forum', title: this.i18n.forum, separator: true })

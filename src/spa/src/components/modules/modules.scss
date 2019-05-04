@@ -34,13 +34,15 @@ html[dir='rtl'] {
     overflow: hidden !important;
     background: $workshop-drawer-background !important;
     @include box-shadow(0px, 15px, 34px, 0px, $shadow-color,true);
-    
-    @media (max-width: 360px) {
-      width: 310px !important;
+
+    &.navigation-drawer--close {
+      width: 0 !important;
     }
+    
     .navigation-drawer__border {
       display: none !important;
     }
+
     .toolbar {
       height: auto !important;
       padding: $padding !important;
@@ -57,6 +59,7 @@ html[dir='rtl'] {
           width: 25px !important;
           height: 25px !important;
           background: #393ba8 !important;
+          flex-shrink: 0;
 
           .icon {
             width: 25px !important;
@@ -72,6 +75,14 @@ html[dir='rtl'] {
           margin-right: 0px;
         }
       }
+    }
+    
+    @media (max-width: 480px) {
+      max-width: 80% !important;
+    }
+
+    @media (max-width: 1263px) {
+      position: absolute;
     }
   }
 
