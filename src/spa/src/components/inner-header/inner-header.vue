@@ -1,10 +1,9 @@
 <template>
 <div class="inner-header">
   <v-toolbar class="white">
-    <v-toolbar-side-icon v-if="isProfile" v-on:click="$parent.$emit('toggle-drawer')"></v-toolbar-side-icon>
-    <v-toolbar-title v-if="isProfile" class="mx-auto">{{title}}</v-toolbar-title>
     <v-toolbar-side-icon v-if="!isProfile" v-on:click="$parent.$emit('toggle-drawer')"></v-toolbar-side-icon>
-    <v-toolbar-title v-if="!isProfile" class="mx-auto">الملف الشخصي</v-toolbar-title>
+    <v-toolbar-title v-if="!isProfile" class="mx-auto">{{title}}</v-toolbar-title>
+    <v-toolbar-title v-else class="mx-auto">الملف الشخصي</v-toolbar-title>
     <nav>
       <!--<router-link to="/">
         <img :src="$store.state.icon" alt="coretabs" />
