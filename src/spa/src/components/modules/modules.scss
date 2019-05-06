@@ -10,6 +10,7 @@ $ar-padding: 0 15px 0 0;
 main.lessons-main-content,
 main.modules-main-content {
   padding-top: 0 !important;
+  padding-right: $navigator-drawer-width !important;
   background: $workshop-content-background !important;
 }
 

@@ -12,6 +12,7 @@ $drawer-group-height: 60px;
 main.workshop-main-content,
 main.workshops-main-content {
   padding-top: 0 !important;
+  padding-right: $navigator-drawer-width !important;
   background: $workshop-content-background !important;
 }
 
