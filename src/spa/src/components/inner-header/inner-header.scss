@@ -6,6 +6,8 @@ Inner Header Style
 $toolbar-padding: 0 15px;
 
 .inner-header {
+  z-index: 99;
+  
   > .toolbar {
     height: $inner-header-height !important;
     line-height: $inner-header-height !important;
