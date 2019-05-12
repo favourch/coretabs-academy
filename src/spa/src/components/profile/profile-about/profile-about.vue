@@ -66,4 +66,4 @@
 </template>
 
 <script src="./profile-about.js"></script>
-<style src="./profile-about.scss" lang="scss"></style>
+<style src="./profile-about.scss" lang="scss" scoped></style>
