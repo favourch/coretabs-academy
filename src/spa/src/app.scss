@@ -251,6 +251,7 @@ section#column-flexed {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  width: 100%;
 }
 
 #drift-widget {
@@ -260,7 +261,6 @@ section#column-flexed {
 
 main.content {
   padding-top: $inner-header-height !important;
-  padding-right: 60px !important;
 }
 
 main.content.navigator-drawer-opened {
