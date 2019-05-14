@@ -271,8 +271,8 @@ html[dir='rtl'] {
               height: map-deep-get($card2,'part2','toolbar','height') !important;
               min-height: map-deep-get($card2,'part2','toolbar','height') !important;
               max-height: map-deep-get($card2,'part2','toolbar','height') !important;
-
-              progress {
+              
+              progress{
                   width: 100% !important;
                   height: 100% !important;
                   direction: ltr !important;

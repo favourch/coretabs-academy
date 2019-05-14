@@ -6,7 +6,9 @@ export default {
   },
   data: () => ({
     loaded: false,
-    workshop: {}
+    workshop: {},
+    interval: {},
+    progressValue: 0
   }),
   computed: {
     i18n() {
@@ -82,12 +84,24 @@ export default {
   },
   mounted() {
     window.addEventListener('resize', this.toggleAvatar)
-
     this.$nextTick(function() {
       this.toggleAvatar()
     })
+
+    setTimeout(() => {
+      this.interval = setInterval(() => {
+        if (this.progressValue > this.workshop.shown_percentage) {
+          this.progressValue--
+        }
+        if (this.progressValue < this.workshop.shown_percentage) {
+          this.progressValue++
+        }
+        return this.progressValue
+      }, 5)
+     }, 1000)
   },
   beforeDestroy() {
+    clearInterval(this.interval)
     window.removeEventListener('resize', this.onResize)
   }
 }
