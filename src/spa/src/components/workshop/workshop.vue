@@ -86,6 +86,7 @@
     </v-container>
   </v-card>
   <v-card class="elevation-0" v-if="workshop.workshop_forums_url">
+    <a :href="workshop.workshop_forums_url" target="_blank">
     <v-container class="no-select" fluid grid-list-xl>
       <v-layout row wrap align-center justify-center>
         <v-flex xs11 sm11 md11>
@@ -93,12 +94,13 @@
             <img :src="$store.state.forumLogo" alt="forum-logo icon">
             <div class="text">
               <div v-html="i18n.card3.title"></div>
-              <div>{{i18n.card3.text}} <a :href="workshop.workshop_forums_url" target="_blank">{{i18n.card3.here}}</a></div>
+              <div>{{i18n.card3.text}} <span class="link-decoration">{{i18n.card3.here}}</span></div>
             </div>
           </v-layout>
         </v-flex>
       </v-layout>
     </v-container>
+     </a>
   </v-card>
 </div>
 <div v-else class="progress-container contrast">
