@@ -106,40 +106,24 @@ $card1: (
     margin-top: 32px;
 
     &__item {
-      display: flex;   
+      &:not(:last-child) {
+        margin-inline-end: 8px;
+      }
+      
+      font-size: 16px;
+      opacity: 0.6;
+      position: relative;
+      transition: opacity 0.3s ease;
   
-      .profile-icon {
-        background-image: url('../../../assets/multimedia/icons/css_sprites.png');
-        width: 16px; height: 16px;
-        margin: 0 12px;
-        opacity: .7;
-        transition-duration: .4s;
+      a {
+        position: absolute;
+        width: 100%;
+        height: 100%;
       }
-      .profile-icon:hover{
+  
+      &:hover {
         opacity: 1;
-      }
-      
-      .profile-icon:first-of-type{
-        margin-right: 0;
-      }
-      .website-icon {
-        background-position: -82px -10px;
-      }
-      
-      .linkedin-icon {
-        background-position: -10px -10px;
-      }
-      
-      .twitter-icon {
-        background-position: -10px -46px;
-      }
-      
-      .facebook-icon {
-        background-position: -46px -46px;
-      }
-      
-      .google-plus-icon {
-        background-position: -82px -46px;
+        transition: opacity 0.3s ease;
       }
     }
   }

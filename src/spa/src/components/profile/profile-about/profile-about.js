@@ -14,12 +14,16 @@ export default {
         return this.profile.bio;
       }
     },
-    icons() {
+    links() {
       if (this.profile) {
         return [
           {
             name: 'website',
             url: this.profile.website_link
+          },
+          {
+            name: 'github',
+            url: this.profile.github_link
           },
           {
             name: 'linkedin',
@@ -33,9 +37,9 @@ export default {
             name: 'facebook',
             url: this.profile.facebook_link
           }
-        ]
+        ].filter(link => link.url)
       }
-    }
+    },
   },
   created() {
     this.$parent.getProfileData()

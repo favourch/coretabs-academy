@@ -34,14 +34,10 @@
                 </span>
               </div>
 
-              <ul class="links info-item">
-                <li v-for="(icon, i) in icons" :key="i" class="links__item">
-                  <a 
-                  :class="`profile-icon ${icon.name}-icon`" 
-                  :title="icon.name" 
-                  :href="icon.url" 
-                  target="_blank"
-                  ></a>
+              <ul class="links info-item" v-if="links.length > 0">
+                <li v-for="(link, i) in links" :key="i" class="links__item icon">
+                  <a :href="link.url" :title="link.name" target="_blank"></a>
+                  <i :class="`icon-${link.name}`"></i>
                 </li>
               </ul>
 
