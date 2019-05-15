@@ -41,6 +41,17 @@ Global Style
   @include font-family('ar');
 }
 
+button{
+  &:focus{
+    outline: 2px solid $shadow-color ;
+  }
+}
+
+a{
+  &:focus{
+    color: $primary-color;
+  }
+}
 ::selection {
   color: $white-color;
   background: $primary-color;
