@@ -77,6 +77,7 @@ var i18n = `{
   "form": {
     "fullname_label": "اسمك الكامل",
     "fullname_length_error": "اسم المستخدم لا يجب أن يتجاوز 20 حرفًا",
+    "fullname_format_error": "إسمك الأول مسافة اللقب",
     "email_label": "البريد الإلكتروني",
     "email_validator_error": "البريد الإلكتروني غير صالح",
     "username_label": "اسم المستخدم",
