@@ -77,7 +77,10 @@
         <v-flex xs12 sm12 md5>
           <div class="navigation">
             <v-toolbar flat>
-              <progress :value="progressValue" max="100" :data-value="progressValue + '%'"></progress>
+              <div class="progress">
+                <div id="progress-bar" :style="{ width: progressValue + '%' }" :data-value="progressValue + '%'">
+                </div>
+              </div>
             </v-toolbar>
             <modules-nav-component v-if="workshop.modules" :modules="workshop.modules"></modules-nav-component>
           </div>

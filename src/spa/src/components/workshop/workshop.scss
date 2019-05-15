@@ -196,7 +196,7 @@ html[dir='rtl'] {
 
             .info {
               float: right;
-              background-color: unset !important;
+              background-color: #fff !important;
               border-color: unset !important;
               margin: 6px auto 20px;
 
@@ -272,34 +272,36 @@ html[dir='rtl'] {
               min-height: map-deep-get($card2,'part2','toolbar','height') !important;
               max-height: map-deep-get($card2,'part2','toolbar','height') !important;
               
-              progress{
+              .progress{
                   width: 100% !important;
                   height: 100% !important;
                   direction: ltr !important;
                   position: relative !important;
-                  @include appearance(none,true);
-
-                  &::after {
-                    content: attr(data-value);
-                    font-size: 14px !important;
-                    @include center(false,true);
-                    font-weight: 600 !important;
-                    position: absolute !important;
-                    color: $black-color !important;
-                    @include font-family('ar',true);
-                  }
-                  // &::-moz-progress-bar,
-                  &::-webkit-progress-bar {
-                    box-shadow: 0 2px 3px $shadow-color inset !important;
-                    background-color: $workshop-drawer-background !important;
-                    border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
-                  }
-
-                  &::-webkit-progress-value {
+                  box-shadow: 0 2px 3px $shadow-color inset !important;
+                  background-color: $workshop-drawer-background !important;
+                  border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
+                  overflow: hidden;
+                  #progress-bar{
+                    height: 100% !important;
                     box-shadow: 0 2px 4px $shadow-color inset !important;
                     background-color: var(--workshop-active-state) !important;
                     border-radius: map-deep-get($card2,'part2','toolbar','progress-border-raduis') !important;
+                    line-height: 30px;
+                    text-align: center;
+                    transition-property: width;
+                    transition-timing-function: cubic-bezier(0.02, 0.52, 0, 0.92);
+                    &::after {
+                      content: attr(data-value);
+                      font-size: 14px !important;
+                      @include center(false,true);
+                      font-weight: 600 !important;
+                      position: absolute !important;
+                      color: $black-color !important;
+                      @include font-family('ar',true);
+                      top: 52% !important;
+                    }
                   }
+                  
               }
             }
         }

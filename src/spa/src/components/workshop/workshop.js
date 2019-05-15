@@ -87,18 +87,15 @@ export default {
     this.$nextTick(function() {
       this.toggleAvatar()
     })
-
-    setTimeout(() => {
-      this.interval = setInterval(() => {
-        if (this.progressValue > this.workshop.shown_percentage) {
-          this.progressValue--
-        }
-        if (this.progressValue < this.workshop.shown_percentage) {
-          this.progressValue++
-        }
-        return this.progressValue
-      }, 5)
-     }, 1000)
+    this.interval = setInterval(() => {
+      if (this.progressValue > this.workshop.shown_percentage && this.progressValue >= 0) {
+        this.progressValue--
+      }
+      if (this.progressValue < this.workshop.shown_percentage && this.progressValue <= 100) {
+        this.progressValue++
+      }
+      return this.progressValue
+    }, 4)
   },
   beforeDestroy() {
     clearInterval(this.interval)
