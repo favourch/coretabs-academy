@@ -3,6 +3,7 @@ import auth from './auth'
 import about from './about'
 import workshop from './workshop'
 import lesson from './lesson'
+import tracks from './tracks'
 
 var i18n = `{
   "app": {
@@ -72,6 +73,7 @@ var i18n = `{
   "workshops": {
     "title": "قائمة ورش العمل"
   },
+  "tracks": ${JSON.stringify(tracks)},
   "workshop": ${JSON.stringify(workshop)},
   "lesson": ${JSON.stringify(lesson)},
   "form": {

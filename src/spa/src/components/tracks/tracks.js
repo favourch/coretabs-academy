@@ -18,5 +18,8 @@ export default {
     }).catch(error => {
       throw new Error(error.message)
     })
+  },
+  computed: {
+    tracks() { return this.$store.state.i18n.tracks }
   }
 }

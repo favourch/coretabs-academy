@@ -8,23 +8,23 @@
               <div class="pic-container">
                 <img
                   :src="backendImg"
-                  alt="مسار تطوير النظم الخلفية"
+                  :alt="tracks.track.backend.heading"
                 >
               </div>
 
               <div class="card__body">
                 <v-card-title primary-title>
                   <div>
-                    <h2 class="mb-0">تطوير النظم الخلفية</h2>
+                    <h2 class="mb-0" v-html="tracks.track.backend.heading"></h2>
                   </div>
                 </v-card-title>
 
                 <v-card-text>
-                    <p class="card__desc">في هذا المسار ستقوم ببناء الأنظمة الخلفية للمواقع الإلكترونية وتصميم قواعد البيانات الخاصة بها.</p>
+                    <p class="card__desc" v-html="tracks.track.backend.description"></p>
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn depressed round class="button" to="/not-ready">استكشف المسار</v-btn>
+                  <v-btn depressed round class="button" to="/not-ready"> {{tracks.track.discover_btn}} </v-btn>
                 </v-card-actions>
               </div>
             </v-card>
@@ -35,23 +35,23 @@
               <div class="pic-container">
                 <img
                   :src="frontendImg"
-                  alt="مسار تطوير واجهات الويب"
+                  :alt="tracks.track.frontend.heading"
                 >
               </div>
 
               <div class="card__body">
                 <v-card-title primary-title>
                   <div>
-                    <h2 class="mb-0 ">تطوير واجهات الويب</h2>
+                    <h2 class="mb-0 " v-html="tracks.track.frontend.heading"></h2>
                   </div>
                 </v-card-title>
 
                 <v-card-text>
-                    <p class="card__desc">في هذا المسار ستقوم بتطوير واجهات المستخدم والتي من خلالها سيتفاعل المستخدمين مع التطبيق.</p>
+                    <p class="card__desc" v-html="tracks.track.frontend.description"></p>
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn depressed round class="button" to="/not-ready">استكشف المسار</v-btn>
+                  <v-btn depressed round class="button" to="/not-ready">{{tracks.track.discover_btn}}</v-btn>
                 </v-card-actions>
               </div>
             </v-card>

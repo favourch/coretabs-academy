@@ -6,13 +6,20 @@
 =======================================*/
 
 #tracks {
-  margin-bottom: 48px !important;
+  margin-bottom: 68px !important;
   margin-top: -60px;
   @media(max-width: 640px) {
     margin-top: 0;
   }
+  .tracks-items{
+    &> .flex{
+      padding:0 20px;
+      @media(max-width: 640px) {
+        padding:0 0 40px;
+      }
+    }
+  }
   h2 {
-    text-align: right;
     @include responsive-font-size(1.5rem,true);
   }
   
@@ -33,15 +40,23 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    transition: transform .4s cubic-bezier(.49,-0.42,.38,1.41);
     
+    &:hover{
+      transform: scale(1.1);
+    }
+
     .card__body {
-      padding: 24px 24px 32px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
       height: 100%;
-      
-
+      @media (max-width: 600px) {
+        padding: 20px 20px 15px;
+      }
+     
       .card__title--primary{
         padding: 10px 12px;
       }
@@ -54,16 +69,22 @@
       }
   
       .card__actions {
-        display: flex;
-        justify-content: center;
         margin: 15px 0 5px;
-  
+        @media (max-width: 600px) {
+          margin: 5px 0;
+        }
+
         .button {
           background: $grading-color !important;
           color: $white-color !important;
           @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
           transition: box-shadow ease-in-out 0.6s;
-          padding: 20px 12px;
+          padding: 22px 18px;
+          @media (max-width: 600px) {
+            width: 100%;
+            padding: 26px 15px;
+            font-size: 16px;
+          }
           &:hover{
             box-shadow: none;
           }
