@@ -46,7 +46,7 @@ export default {
 
     if (this.$store.getters.isLogin) {
       if (this.$store.getters.account('track')) {
-        if(!this.$route.params.workshop) {
+        if(this.$route.path.includes('classroom') && !this.$route.params.workshop) {
           this.$router.push(`/classroom/${this.$store.getters.account('track')}/`)
         }
       } else {
