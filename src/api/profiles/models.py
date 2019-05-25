@@ -24,10 +24,15 @@ class Profile(models.Model):
     )
     COUNTRY_CHOICES = (
         ('', ''),
-        ('DZ', _('Algeria')),
-        ('TN', _('Tunisia')),
+        ('dz', _('Algeria')),
+        ('tn', _('Tunisia')),
     )
-    LANGUAGES_CHOICES = [('ar', 'العربية'), ('fr', 'Français'), ('en', 'English'), ('es', 'español')]
+    LANGUAGES_CHOICES = (
+        ('ar', _('Arabic')),
+        ('fr', _('French')),
+        ('en', _('English')),
+        ('es', _('Spanish')),
+    )
 
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='0')
@@ -39,6 +44,7 @@ class Profile(models.Model):
     facebook_link = models.CharField(max_length=100, blank=True)
     twitter_link = models.CharField(max_length=100, blank=True)
     linkedin_link = models.CharField(max_length=100, blank=True)
+    github_link = models.CharField(max_length=100, blank=True)
     website_link = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
