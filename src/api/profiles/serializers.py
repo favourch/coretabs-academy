@@ -10,10 +10,20 @@ class ChoiceField(serializers.ChoiceField):
         return self._choices[obj]
 
 
-class MultipleChoiceField(serializers.MultipleChoiceField):
+class CountryField(serializers.ChoiceField):
+    def to_representation(self, obj):
+        if obj:
+            return {'text': self._choices[obj], 'value': obj}
+
+
+class SkillsField(serializers.MultipleChoiceField):
     def to_representation(self, value):
         data = value.split(',')
-        result = [lang for lang in Profile.LANGUAGES_CHOICES if lang[0] in data]
+        result = [
+            {'text': lang[1], 'value': lang[0]}
+            for lang in Profile.SKILLS_CHOICES if lang[0] in data
+        ]
+
         return result
 
     def to_internal_value(self, data):
@@ -53,6 +63,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         'facebook': _('Invalid Facebook url'),
         'twitter': _('Invalid Twitter url'),
         'linkedin': _('Invalid LinkedIn url'),
+        'github': _('Invalid Github url'),
         'website': _('Invalid Website url'),
     }
 
@@ -60,20 +71,23 @@ class ProfileSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='user.first_name', read_only=True)
     role = ChoiceField(Profile.ROLE_CHOICES, read_only=True)
     level = ChoiceField(Profile.LEVEL_CHOICES, read_only=True)
-    country = ChoiceField(Profile.COUNTRY_CHOICES)
-    languages = MultipleChoiceField(Profile.LANGUAGES_CHOICES)
+    country = CountryField(Profile.COUNTRY_CHOICES)
+    skills = SkillsField(Profile.SKILLS_CHOICES)
     certificates = ProfileCertificateSerializer(many=True, read_only=True)
     date_joined = serializers.DateTimeField(source='user.date_joined')
 
     facebook_link = serializers.RegexField(regex=r'http(s)?://(www\.)?(facebook|fb)\.com/[A-z0-9_\-\.]+/?',
                                            error_messages={'invalid': links_errors['facebook']},
                                            allow_blank=True)
-    twitter_link = serializers.RegexField(regex=r'http(s)?://(.*\.)?twitter\.com\/[A-z0-9_]+/?',
+    twitter_link = serializers.RegexField(regex=r'http(s)?://(www\.)?twitter\.com\/[A-z0-9_]+/?',
                                           error_messages={'invalid': links_errors['twitter']},
                                           allow_blank=True)
-    linkedin_link = serializers.RegexField(regex=r'http(s)?://([\w]+\.)?linkedin\.com/in/[A-z0-9_-]+/?',
+    linkedin_link = serializers.RegexField(regex=r'http(s)?://(www\.)?linkedin\.com/in/[A-z0-9_-]+/?',
                                            error_messages={'invalid': links_errors['linkedin']},
                                            allow_blank=True)
+    github_link = serializers.RegexField(regex=r'http(s)?://(www\.)?github\.com/[A-z0-9_-]+/?',
+                                         error_messages={'invalid': links_errors['github']},
+                                         allow_blank=True)
     website_link = serializers.URLField(error_messages={'invalid': links_errors['website']},
                                         allow_blank=True)
 
@@ -89,7 +103,6 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('username', 'name', 'role', 'level', 'description',
-                  'country', 'bio', 'languages', 'certificates', 'avatar_url',
-                  'facebook_link', 'twitter_link', 'linkedin_link', 'website_link', 'date_joined')
-
-        read_only_fields = ('description',)
+                  'country', 'bio', 'skills', 'certificates', 'avatar_url',
+                  'facebook_link', 'twitter_link', 'linkedin_link', 'github_link',
+                  'website_link', 'date_joined')
