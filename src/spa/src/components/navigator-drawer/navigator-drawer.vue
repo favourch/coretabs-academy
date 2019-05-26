@@ -4,11 +4,15 @@
       <v-list class="pa-0">
         <v-list-tile avatar>
           <v-list-tile-avatar v-if="mini">
-            <img :src="avatar.close">
+            <router-link to="/">
+              <img :src="avatar.close">
+            </router-link>
           </v-list-tile-avatar>
 
           <v-list-tile-content v-else>
-            <img :src="avatar.open">
+            <router-link to="/">
+              <img :src="avatar.open">
+            </router-link>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>

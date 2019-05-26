@@ -29,14 +29,19 @@ html[dir='rtl'] {
 
   .list__tile--avatar {
     height: 48px;
+
+    a {
+      width: auto;
+      height: 100%;
+
+      img {
+        width: auto;
+        height: 100%;
+      }
+    }
   }
   .list__tile--avatar .list__tile__content {
     align-items: center;
-
-    img {
-      width: auto;
-      height: 100%;
-    }
   }
 
   .list {
