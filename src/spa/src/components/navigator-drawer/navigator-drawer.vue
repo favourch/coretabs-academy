@@ -17,16 +17,29 @@
     <v-list class="pt-0" dense>
       <v-divider></v-divider>
       <v-list-tile v-for="item in items" :key="item.title" :class="{separator: item.separator}" >
-        <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-tile-action>
+        <a v-if="item.link" :href="item.link" target="_blank">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>
-            <router-link v-if="item.route" :to="item.route">{{ item.title }}</router-link>
-            <a v-if="item.link" :href="item.link" target="_blank">{{ item.title }}</a>
-          </v-list-tile-title>
-        </v-list-tile-content>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              {{ item.title }}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </a>
+
+        <router-link v-if="item.route" :to="item.route">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+            <v-list-tile-title>
+              {{ item.title }}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </router-link>
       </v-list-tile>
     </v-list>
   </v-navigation-drawer>

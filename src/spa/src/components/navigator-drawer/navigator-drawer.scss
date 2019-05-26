@@ -54,10 +54,12 @@ html[dir='rtl'] {
 
     .list__tile {
       padding: 0 10px;
-    }
-
-    .list__tile__title a {
-      color: #757575;
+      
+      a {
+        display: flex;
+        align-items: center;
+        color: #757575;
+      }
     }
 
     & > div:last-child {
