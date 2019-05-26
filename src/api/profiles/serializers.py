@@ -12,15 +12,16 @@ class ChoiceField(serializers.ChoiceField):
 
 class CountryField(serializers.ChoiceField):
     def to_representation(self, obj):
-        return {'text': self._choices[obj], 'value': obj}
+        if obj:
+            return {'text': self._choices[obj], 'value': obj}
 
 
-class LanguagesField(serializers.MultipleChoiceField):
+class SkillsField(serializers.MultipleChoiceField):
     def to_representation(self, value):
         data = value.split(',')
         result = [
             {'text': lang[1], 'value': lang[0]}
-            for lang in Profile.LANGUAGES_CHOICES if lang[0] in data
+            for lang in Profile.SKILLS_CHOICES if lang[0] in data
         ]
 
         return result
@@ -71,7 +72,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     role = ChoiceField(Profile.ROLE_CHOICES, read_only=True)
     level = ChoiceField(Profile.LEVEL_CHOICES, read_only=True)
     country = CountryField(Profile.COUNTRY_CHOICES)
-    languages = LanguagesField(Profile.LANGUAGES_CHOICES)
+    skills = SkillsField(Profile.SKILLS_CHOICES)
     certificates = ProfileCertificateSerializer(many=True, read_only=True)
     date_joined = serializers.DateTimeField(source='user.date_joined')
 
@@ -102,6 +103,6 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('username', 'name', 'role', 'level', 'description',
-                  'country', 'bio', 'languages', 'certificates', 'avatar_url',
+                  'country', 'bio', 'skills', 'certificates', 'avatar_url',
                   'facebook_link', 'twitter_link', 'linkedin_link', 'github_link',
                   'website_link', 'date_joined')

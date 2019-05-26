@@ -24,14 +24,36 @@ class Profile(models.Model):
     )
     COUNTRY_CHOICES = (
         ('', ''),
-        ('dz', _('Algeria')),
-        ('tn', _('Tunisia')),
+        ('dz', 'الجزائر'),
+        ('tn', 'تونس'),
+        ('eg', 'مصر'),
+        ('sd', 'السودان'),
+        ('iq', 'العراق'),
+        ('ma', 'المغرب'),
+        ('sa', 'السعودية'),
+        ('ye', 'اليمن'),
+        ('sy', 'سوريا'),
+        ('so', 'الصومال'),
+        ('jo', 'الأردن'),
+        ('ae', 'الإمارات'),
+        ('ly', 'ليبيا'),
+        ('lb', 'لبنان'),
+        ('ps', 'فلسطين'),
+        ('om', 'عمان'),
+        ('kw', 'الكويت'),
+        ('mr', 'موريطانيا'),
+        ('qa', 'قطر'),
+        ('bh', 'البحرين'),
+        ('dj', 'جيبوتي'),
+        ('km', 'جزر القمر'),
+        ('er', 'إريتيريا'),
+        ('eh', 'الصحراء الغربية'),
     )
-    LANGUAGES_CHOICES = (
-        ('ar', _('Arabic')),
-        ('fr', _('French')),
-        ('en', _('English')),
-        ('es', _('Spanish')),
+    SKILLS_CHOICES = (
+        ('html', 'مطور HTML'),
+        ('css', 'مطور CSS'),
+        ('javascript', 'مطور Javascript'),
+        ('vuejs', 'مطور VueJS'),
     )
 
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
@@ -40,7 +62,7 @@ class Profile(models.Model):
     description = models.CharField(max_length=50, blank=True)
     country = models.CharField(max_length=50, blank=True, choices=COUNTRY_CHOICES)
     bio = models.CharField(max_length=1000, blank=True)
-    languages = models.CharField(max_length=100, blank=True)
+    skills = models.CharField(max_length=100, blank=True)
     facebook_link = models.CharField(max_length=100, blank=True)
     twitter_link = models.CharField(max_length=100, blank=True)
     linkedin_link = models.CharField(max_length=100, blank=True)
