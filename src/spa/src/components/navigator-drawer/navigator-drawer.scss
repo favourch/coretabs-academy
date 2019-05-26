@@ -44,13 +44,17 @@ html[dir='rtl'] {
     align-items: center;
   }
 
+  .divider {
+    flex-grow: 0;
+  }
+
   .list {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-
-    .divider {
-      flex-grow: 0;
+    
+    &#nav-items {
+      margin: 16px 0;
     }
 
     .separator {
@@ -66,14 +70,10 @@ html[dir='rtl'] {
         color: #757575;
       }
     }
-
-    & > div:last-child {
-      margin-bottom: 50px;
-    }
   }
 
   .list--dense .list__tile:not(.list__tile--avatar) {
-    height: 36px;
+    height: 40px;
   }
 }
 

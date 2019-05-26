@@ -18,8 +18,9 @@
       </v-list>
     </v-toolbar>
 
-    <v-list class="pt-0" dense>
-      <v-divider></v-divider>
+    <v-divider></v-divider>
+    
+    <v-list class="pt-0" dense id="nav-items">
       <v-list-tile v-for="item in items" :key="item.title" :class="{separator: item.separator}" >
         <a v-if="item.link" :href="item.link" target="_blank">
           <v-list-tile-action>
