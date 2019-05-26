@@ -46,15 +46,7 @@
               </v-list-tile-title>
             </v-list-tile>
           </v-list>
-          <v-card-actions>
-            <router-link to="/profile" @click="menu=false">
-              <v-icon>settings</v-icon>
-              إعدادات الحساب
-            </router-link>
-            <router-link to="/logout" @click="menu=false">
-              <v-icon>exit_to_app</v-icon> تسجيل خروج
-            </router-link>
-          </v-card-actions>
+
         </v-card>
       </v-menu>
     </nav>
