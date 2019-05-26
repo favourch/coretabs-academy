@@ -184,20 +184,7 @@ Track Style
     min-height: calc(100vh - 100px);   
     position: relative;
 
-    .scroll-down{
-      position: absolute;
-      bottom: 50px;
-      a{
-        display: block;
-        padding: 15px;
-      }
-      .icon{
-        color: #bbb;
-      }
-      :hover .icon{
-        transform: translateY(10px)
-      }
-    }
+   
 
     @media(max-width: 600px) {
       padding-bottom: 80px;
@@ -266,9 +253,48 @@ Track Style
     @media(max-width: 640px) {
       margin-top: 0;
     }
+
+
   }
 
+  
+  #why-this-track,
+  #direct-path{
+    height: 100vh;
+    min-height: 600px;
+    padding: 80px 0;
+  }
 
+  #why-this-track{
+    background: #fafbfb;
+  }
+  
+  #direct-path{
+    background: #fff;
+  }
+
+  .paragraph{
+    max-width: 769px;
+    margin: 0 auto;
+    line-height: 36px;
+  }
+  section{
+    position: relative;
+  }
+  .scroll-down{
+    position: absolute;
+    bottom: 50px;
+    a{
+      display: block;
+      padding: 15px;
+    }
+    .icon{
+      color: #bbb;
+    }
+    :hover .icon{
+      transform: translateY(10px)
+    }
+  }
   #frontend-hero {
     background:linear-gradient(to left, rgba(43, 10, 62, 0.8), rgba(79, 44, 119, 0.8)),
     url('https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&h=650&w=940')  center center / cover no-repeat !important;
@@ -325,11 +351,7 @@ Track Style
           bottom: -90px;
         }
       }
-    
-      .paragraph{
-        max-width: 700px;
-        margin: 0 auto;
-      }
+   
     .section__body {
       display: flex;
       flex-direction: column;
@@ -370,8 +392,8 @@ Track Style
 
       .desc-image {
         background-color: $white-color;
-        @include border-radius(40px);
-        height: 350px;
+        @include border-radius(30px);
+        height: 300px;
         overflow: hidden;
         @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
         img {

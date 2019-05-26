@@ -18,7 +18,7 @@
           <div class="hero__countdown">
             <p class="hero__countdown-text">باب التقديم للدفعة القادمة يغلق خلال</p>
 
-            <Countdown deadline="April 18, 2019" labels="أيام-ساعة-دقيقة-ثانية"></Countdown>
+            <Countdown deadline="may 30, 2019" labels="أيام-ساعة-دقيقة-ثانية"></Countdown>
           </div>
         </div>
 
@@ -26,82 +26,106 @@
 
     </v-flex>
     <div class="scroll-down">
-      <a href="#presentation"><v-icon large>expand_more</v-icon></a>
+      <a href="#why-this-track"><v-icon large>expand_more</v-icon></a>
     </div>
   </v-layout>
 
-  <section id="presentation">
-
-    <v-layout justify-center wrap>
-      <v-flex xs10 lg10 xl6 class="text-xs-center">
-        <h1 class="mb-4">لماذا يجب عليك تعلم تطوير واجهات الويب</h1>
+  <section id="why-this-track">
+    <v-layout justify-center wrap align-center>
+      <v-flex xs10 lg10 xl6 class="text-xs-center mt-5">
+        <h1 class="mb-4">لماذا يجب عليك تعلم تطوير واجهات الويب؟</h1>
         <p class="paragraph">
-        تطوير واجهات الويب من أبرز المهن المطلوبة في عصرنا فلا يوجد مشروع مرتبط بالإنترنت إلا ويلعب فية مطور الواجهات دور أساسي فهو المسؤول عن بناء الواجهات التي يتفاعل معها المستخدمين.
+          تطوير واجهات الويب من أبرز المهن المطلوبة في عصرنا فلا يوجد مشروع مرتبط بالإنترنت إلا ويلعب فية مطور الواجهات دور أساسي فهو المسؤول عن بناء الواجهات التي يتفاعل معها المستخدمين.
         </p>
+      </v-flex>
+      <div class="scroll-down">
+        <a href="#direct-path"><v-icon large>expand_more</v-icon></a>
+      </div>
+    </v-layout>
+  </section>
+
+  <section id="direct-path">
+    <v-layout justify-center wrap align-center>
+      <v-flex xs10 lg10 xl6 class="text-xs-center mt-5">
+        <h1 class="mb-4">لماذا تحتاج لأكاديمية كورتابز؟</h1>
+        <p class="paragraph">
+          أقرب طريق من النقطة (أ) إلى النقطة (ي) هي خط مستقيم، معرفة ذلك الخط يتطلب سنوات من الخبرة لذا فنحن نعرف هذا الخط جيداً وسنأخذ بيدك خطوة بخطوة من خلالة. إذا كنت مستعداً لاختصار الوقت لتحقيق أهدافك فأنت في المكان الصحيح.
+        </p>
+      </v-flex>
+      <div class="scroll-down">
+        <a href="#presentation"><v-icon large>expand_more</v-icon></a>
+      </div>
+    </v-layout>
+  </section>
+
+  <section id="presentation">
+      
+    <v-layout justify-center wrap align-center>
+      <v-flex xs10 lg10 xl6 class="text-xs-center mt-5">
+        <h1 class="mb-4">المميزات التي تحصل عليها</h1>
       </v-flex>
     </v-layout>
 
     <v-layout justify-center wrap>
-      <v-flex xs10 lg10 xl6>
+       
+      <v-layout class="desc-box" wrap row>
+        <v-flex xs12 md5>
+          <div class="desc-image"></div>
+        </v-flex>
+        <v-flex class="desc-text desc-text__right" x12 md7>
+          <h2>ابدأ بمشاريع حقيقية </h2>
+          <p>مئات الكورسات في الإنترنت تدربك على البرمجة ولكن بمجرد أن تنتهي من الكورس <strong>ستتساءل</strong> إذا كنت قادراً على عمل مشروع فعلي؟
+            أو إذا كنت مؤهلاً للحصول على وظيفة مبرمج.
+          </p>
+          <p>ولكن معنا ستتعلم البرمجة بشكل مختلف تماماً, حيث ستقوم ببناء <strong>مشاريع حقيقية</strong> في كل ورشة عمل.
+          </p>
+        </v-flex>
+      </v-layout>
 
-        <v-layout class="desc-box" wrap row>
-          <v-flex xs12 md5>
-            <div class="desc-image"></div>
-          </v-flex>
-          <v-flex class="desc-text desc-text__right" x12 md7>
-            <h2>ابدأ بمشاريع حقيقية </h2>
-            <p>مئات الكورسات في الإنترنت تدربك على البرمجة ولكن بمجرد أن تنتهي من الكورس <strong>ستتساءل</strong> إذا كنت قادراً على عمل مشروع فعلي؟
-              أو إذا كنت مؤهلاً للحصول على وظيفة مبرمج.
-            </p>
-            <p>ولكن معنا ستتعلم البرمجة بشكل مختلف تماماً, حيث ستقوم ببناء <strong>مشاريع حقيقية</strong> في كل ورشة عمل.
-            </p>
-          </v-flex>
-        </v-layout>
+      <v-layout class="desc-box" wrap row reverse>
+        <v-flex xs12 md5>
+          <div class="desc-image"></div>
+        </v-flex>
+        <v-flex class="desc-text desc-text__left" x12 md7>
+          <h2>تدرب على أيدي مدربين خبراء</h2>
+          <p>نعلم تماماً أنك تريد التعلم على يد أفضل المدربين، لهذا سيقوم بتدريبك خبراء تم اختيارهم من ضمن <strong>أفضل عشرة</strong> مدربين في الشرق الأوسط من قبل مؤسسة دبي للمستقبل ولديهم خبرة تزيد على 8 سنوات في المجال.
+          </p>
+        </v-flex>
+      </v-layout>
 
-        <v-layout class="desc-box" wrap row reverse>
-          <v-flex xs12 md5>
-            <div class="desc-image"></div>
-          </v-flex>
-          <v-flex class="desc-text desc-text__left" x12 md7>
-            <h2>تدرب على أيدي مدربين خبراء</h2>
-            <p>نعلم تماماً أنك تريد التعلم على يد أفضل المدربين، لهذا سيقوم بتدريبك خبراء تم اختيارهم من ضمن <strong>أفضل عشرة</strong> مدربين في الشرق الأوسط من قبل مؤسسة دبي للمستقبل ولديهم خبرة تزيد على 8 سنوات في المجال.
-            </p>
-          </v-flex>
-        </v-layout>
+      <v-layout class="desc-box" wrap row reverse>
+        <v-flex xs12>
+          <blockquote class="quote">
+            نحن نؤمن أن الطريقة المثلى للتعلم, هي تطبيق ما تتعلمه بشكل مستمر.
+          </blockquote>
+        </v-flex>
+      </v-layout>
 
-        <v-layout class="desc-box" wrap row reverse>
-          <v-flex xs12>
-            <blockquote class="quote">
-              نحن نؤمن دائماً أن الطريقة المثلى للتعلم, هي تطبيق ما تتعلمه بشكل مستمر.
-            </blockquote>
-          </v-flex>
-        </v-layout>
+      <v-layout class="desc-box" wrap row>
+        <v-flex xs12 md5>
+          <div class="desc-image"></div>
+        </v-flex>
+        <v-flex class="desc-text desc-text__right" x12 md7>
+          <h2>حقق أحلامك الريادية!</h2>
+          <p>نحن متأكدين أن لديك مشاريع ريادية وأفكار رائعة، في الحقيقة العديد من التطبيقات جعلت أصحابها من <strong>أثرياء العالم</strong>! من يدري قد يكون مشروعك هو المشروع الثوري التالي.
+          </p>
+          <p>معنا ستتعلم <strong>المهارات اللازمة</strong> لعمل تطبيقات ومشاريع ريادية ناجحة، لست بحاجة لأي معرفة سابقة أو شهادة جامعية، كل ماتحتاجه هو لابتوب وخط إنترنت.
+          </p>
+        </v-flex>
+      </v-layout>
 
-        <v-layout class="desc-box" wrap row>
-          <v-flex xs12 md5>
-            <div class="desc-image"></div>
-          </v-flex>
-          <v-flex class="desc-text desc-text__right" x12 md7>
-            <h2>حقق أحلامك الريادية!</h2>
-            <p>نحن متأكدين أن لديك مشاريع ريادية وأفكار رائعة، في الحقيقة العديد من التطبيقات جعلت أصحابها من <strong>أثرياء العالم</strong>! من يدري قد يكون مشروعك هو المشروع الثوري التالي.
-            </p>
-            <p>معنا ستتعلم <strong>المهارات اللازمة</strong> لعمل تطبيقات ومشاريع ريادية ناجحة، لست بحاجة لأي معرفة سابقة أو شهادة جامعية، كل ماتحتاجه هو لابتوب وخط إنترنت.
-            </p>
-          </v-flex>
-        </v-layout>
-
-        <v-layout class="desc-box" wrap row reverse>
-          <v-flex xs12 md5>
-            <div class="desc-image"></div>
-          </v-flex>
-          <v-flex class="desc-text desc-text__left" x12 md7>
-            <h2>سنراجع معك مشاريعك التي تطبقها معنا</h2>
-            <p>ستواجهك العديد من المشاكل أثناء تعلم البرمجة لكن ليس هناك أسوأ من مواجهتها لوحدك, فربما تأخذ منك أسبوع لحل المشكلة, وربما تجد حلاً بطريقة خاطئة ولا أحد يوجهك للطريق الصحيح!
-            </p>
-            <p>لكن لا تقلق أبداً, سيكون لديك في مجتمع كورتابز العديد من المدربين والطلاب الذين سيساعدوك على تخطي هذه العقبات بسهولة بتوجيهك بشكل مستمر ومساعدتك على فهم التعقيدات.
-            </p>
-          </v-flex>
-        </v-layout>
+      <v-layout class="desc-box" wrap row reverse>
+        <v-flex xs12 md5>
+          <div class="desc-image"></div>
+        </v-flex>
+        <v-flex class="desc-text desc-text__left" x12 md7>
+          <h2>سنراجع معك مشاريعك التي تطبقها معنا</h2>
+          <p>ستواجهك العديد من المشاكل أثناء تعلم البرمجة لكن ليس هناك أسوأ من مواجهتها لوحدك, فربما تأخذ منك أسبوع لحل المشكلة, وربما تجد حلاً بطريقة خاطئة ولا أحد يوجهك للطريق الصحيح!
+          </p>
+          <p>لكن لا تقلق أبداً, سيكون لديك في مجتمع كورتابز العديد من المدربين والطلاب الذين سيساعدوك على تخطي هذه العقبات بسهولة بتوجيهك بشكل مستمر ومساعدتك على فهم التعقيدات.
+          </p>
+        </v-flex>
+      </v-layout>
 
       </v-flex>
 
