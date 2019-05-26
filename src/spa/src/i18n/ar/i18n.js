@@ -101,7 +101,7 @@ var i18n = `{
   "navigation_drawer": {
     "profile": "الملف الشخصي",
     "classroom": "ورش العمل",
-    "forum": "المنتدى",
+    "forum": "المجتمع",
     "settings": "الإعدادات",
     "logout": "تسجيل خروج"
   },
