@@ -249,7 +249,7 @@ const AuthAPI = {
     root.alert.error = false
     let formData = new FormData()
     let country = typeof root.userCountry === "string" ? root.userCountry : root.userCountry.value
-    let skills = root.userSkills.every(function(s){ return typeof s === "string" }) ? JSON.stringify(root.userSkills) : root.userSkills.map(s => s.value)
+    let skills = root.userSkills.every(function(s){ return typeof s === "string" }) ? root.userSkills : root.userSkills.map(s => s.value)
 
     formData.append('description', root.description)
     formData.append('bio', root.bio)
