@@ -39,6 +39,9 @@ export default {
         case 'personal-info':
           this.header = this.i18n.personal_info
           break
+        case 'profile-info':
+          this.header = this.i18n.profile_info
+          break
         case 'change-track':
           this.header = this.i18n.change_track
           break

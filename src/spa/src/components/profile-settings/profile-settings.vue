@@ -21,6 +21,16 @@
               </v-list-tile-content>
             </v-list-tile>
           </router-link>
+          <router-link to="/profile/profile-info" replace>
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon :color="`grey`">person</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title v-html="i18n.profile_info"></v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </router-link>
           <v-divider></v-divider>
           <router-link to="/profile/change-track" replace>
             <v-list-tile>
