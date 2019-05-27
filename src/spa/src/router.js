@@ -18,6 +18,7 @@ import SignInComponent from './components/signin/signin.vue'
 import SelectTrackComponent from './components/select-track/select-track.vue'
 import ProfileSettingsComponent from './components/profile-settings/profile-settings.vue'
 import EditPersonalInfoComponent from './components/profile-settings/edit-personal-info/edit-personal-info.vue'
+import EditProfileInfoComponent from './components/profile-settings/edit-profile-info/edit-profile-info.vue'
 import ChangeTrackComponent from './components/profile-settings/change-track/change-track.vue'
 import ChangePasswordComponent from './components/profile-settings/change-password/change-password.vue'
 import LogoutComponent from './components/logout/logout.vue'
@@ -150,6 +151,10 @@ const router = new Router({
       name: 'personal-info',
       path: '/profile/personal-info',
       component: EditPersonalInfoComponent
+    }, {
+      name: 'profile-info',
+      path: '/profile/profile-info',
+      component: EditProfileInfoComponent
     }, {
       name: 'change-track',
       path: '/profile/change-track',
