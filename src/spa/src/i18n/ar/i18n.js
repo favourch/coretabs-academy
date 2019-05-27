@@ -81,7 +81,15 @@ var i18n = `{
     "password_length_error": "كلمة السر يجب أن تتكون من 8 أحرف على الأقل",
     "message_label": "أدخل رسالتك هنا",
     "message_length_error": "الرسالة قصيرة جدًا",
-    "message_endpoint_error": "خطأ.. حاول مرة أخرى!"
+    "message_endpoint_error": "خطأ.. حاول مرة أخرى!",
+    "description": "الوصف",
+    "bio": "السيرة الذاتية",
+    "country": "البلد",
+    "skills": "المهارات البرمجية",
+    "linkedin_link": "رابط لينكد إن",
+    "facebook_link": "رابط فيسبوك",
+    "twitter_link": "رابط تويتر",
+    "website_link": "رابط الموقع الشخصي"
   },
   "contact": {
     "forums_text": "تذكر في حال احتجت إلى مساعدة بإمكانك بدء نقاش مع زملائك والموجهين من خلال المنتدى <a href='http://forums.coretabs.net' target='_blank'>من هنا</a>",
@@ -109,6 +117,7 @@ var i18n = `{
     "titles": {
       "settings": "إعدادات الحساب",
       "personal_info": "المعلومات الشخصية",
+      "profile_info": "بيانات البروفايل",
       "change_track": "تغيير المسار",
       "change_password": "تغيير كلمة السر"
     },
