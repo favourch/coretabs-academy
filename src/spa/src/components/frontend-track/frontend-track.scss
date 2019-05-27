@@ -262,15 +262,40 @@ Track Style
   #direct-path{
     height: 100vh;
     min-height: 600px;
-    padding: 80px 0;
+    
   }
 
   #why-this-track{
     background: #fdfdfd;
+    padding: 80px 0;
   }
   
   #direct-path{
-    background: #fff;
+    position: relative;
+    #maze-video{
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      min-width: 100%; 
+      min-height: 100%;
+      opacity: 0.08;
+      filter: alpha(opacity=10);
+      z-index: 1;
+    }
+    .maze-text{
+      position: relative;
+      z-index: 2;
+    }
+    .btn {
+      background: $grading-color !important;
+      @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
+      transition: box-shadow ease-in-out 0.6s;
+      font-weight: bold;
+      padding: 25px 30px !important;
+      &:hover{
+        box-shadow: none;
+      }
+   }
   }
 
   .paragraph{
@@ -285,6 +310,7 @@ Track Style
   .scroll-down{
     position: absolute;
     bottom: 50px;
+    z-index: 2;
     a{
       display: block;
       padding: 15px;
@@ -298,7 +324,7 @@ Track Style
   }
   #frontend-hero {
     background:linear-gradient(to left, rgba(43, 10, 62, 0.8), rgba(79, 44, 119, 0.8)),
-    url('https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&h=650&w=940')  center center / cover no-repeat !important;
+    url('../../assets/multimedia/images/track/frontend/hero-img.jpg')  center center / cover no-repeat !important;
   } 
 
   #presentation {
@@ -387,12 +413,12 @@ Track Style
           background: linear-gradient(60deg , rgba(45,67,231,.4), rgba(144,66,232,.4)), url('../../assets/multimedia/images/track/tutors.jpg');
         }
       }
-      &:nth-child(4){
+      &:nth-child(5){
         .desc-image{
           background: linear-gradient(60deg , rgba(45,67,231,.4), rgba(144,66,232,.4)), url('../../assets/multimedia/images/track/dreams.jpg');
         }
       }
-      &:nth-child(5){
+      &:nth-child(4){
         .desc-image{
           background: linear-gradient(60deg , rgba(45,67,231,.4), rgba(144,66,232,.4)), url('../../assets/multimedia/images/track/mentoring.jpg');
         }
@@ -402,7 +428,8 @@ Track Style
         line-height: 30px;
 
         h2 {
-          margin: 20px auto;
+          margin: 10px auto 30px;
+          font-size: 24px !important;
         }
       }
       .desc-text__right{
@@ -1046,4 +1073,5 @@ Track Style
       }
     }
   }
+ 
 }
