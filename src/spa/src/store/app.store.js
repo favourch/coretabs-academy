@@ -16,6 +16,39 @@ export default new Vuex.Store({
     header: true,
     isLogin: false,
     user: {},
+    profile: {},
+    countries: [
+      {value: 'ae', text: 'الإمارات'},
+      {value: 'jo', text: 'الأردن'},
+      {value: 'bh', text: 'البحرين'},
+      {value: 'dz', text: 'الجزائر'},
+      {value: 'sa', text: 'السعودية'},
+      {value: 'sd', text: 'السودان'},
+      {value: 'eh', text: 'الصحراء الغربية'},
+      {value: 'so', text: 'الصومال'},
+      {value: 'iq', text: 'العراق'},
+      {value: 'kw', text: 'الكويت'},
+      {value: 'ma', text: 'المغرب'},
+      {value: 'ye', text: 'اليمن'},
+      {value: 'er', text: 'إريتيريا'},
+      {value: 'tn', text: 'تونس'},
+      {value: 'km', text: 'جزر القمر'},
+      {value: 'dj', text: 'جيبوتي'},
+      {value: 'sy', text: 'سوريا'},
+      {value: 'ps', text: 'فلسطين'},
+      {value: 'qa', text: 'قطر'},
+      {value: 'om', text: 'عمان'},
+      {value: 'lb', text: 'لبنان'},
+      {value: 'ly', text: 'ليبيا'},
+      {value: 'eg', text: 'مصر'},
+      {value: 'mr', text: 'موريتانيا'}
+    ],
+    skills: [
+      {value: 'html', text: 'مطور HTML'},
+      {value: 'css', text: 'مطور CSS'},
+      {value: 'javascript', text: 'مطور Javascript'},
+      {value: 'vuejs', text: 'مطور VueJS'}
+    ],
     unread: null,
     progress: {
       width: 5,
@@ -48,6 +81,13 @@ export default new Vuex.Store({
     },
     account(state, payload) {
       state.user.account[payload.prop] = payload.data
+    },
+    profile(state, payload) {
+      if (payload.prop === null) {
+        state.profile = payload.data
+      } else {
+        state.profile[payload.prop] = payload.data
+      }
     },
     unread(state, payload) {
       state.unread = payload
@@ -83,6 +123,12 @@ export default new Vuex.Store({
         resolve(true)
       })
     },
+    profile: ({commit}, payload) => {
+      return new Promise((resolve, reject) => {
+        commit('profile', payload)
+        resolve(true)
+      })
+    },
     unread: ({commit}, payload) => {
       return new Promise((resolve, reject) => {
         commit('unread', payload)
@@ -109,6 +155,19 @@ export default new Vuex.Store({
     },
     account: (state) => (prop) => {
       return state.user.account[prop]
+    },
+    profile: (state) => (prop) => {
+      if (prop === null) {
+        return state.profile
+      } else {
+        return state.profile[prop]
+      }
+    },
+    countries: state => {
+      return state.countries
+    },
+    skills: state => {
+      return state.skills
     },
     unread: state => {
       return state.unread

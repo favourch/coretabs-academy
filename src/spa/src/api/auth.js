@@ -244,6 +244,56 @@ const AuthAPI = {
       }
     })
   },
+  async changeProfile(root) {
+    root.alert.success = false
+    root.alert.error = false
+    let formData = new FormData()
+    let country = typeof root.userCountry === "string" ? root.userCountry : root.userCountry.value
+    let skills = root.userSkills.every(function(s){ return typeof s === "string" }) ? JSON.stringify(root.userSkills) : root.userSkills.map(s => s.value)
+
+    formData.append('description', root.description)
+    formData.append('bio', root.bio)
+    formData.append('country', country)
+    formData.append('skills', skills)
+    formData.append('linkedin_link', root.linkedin_link)
+    formData.append('facebook_link', root.facebook_link)
+    formData.append('twitter_link', root.twitter_link)
+    formData.append('website_link', root.website_link)
+
+    return await axios.patch('/api/v1/profile', formData, {
+      withCredentials: true,
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then((response) => {
+      root.alert.success = true
+      root.alert.message = root.i18n.success_message
+
+      root.$store.dispatch('profile', { prop: 'description', data: response.description })
+      root.$store.dispatch('profile', { prop: 'bio', data: response.bio })
+      root.$store.dispatch('profile', { prop: 'country', data: response.country })
+      root.$store.dispatch('profile', { prop: 'skills', data: response.skills })
+      root.$store.dispatch('profile', { prop: 'linkedin_link', data: response.linkedin_link })
+      root.$store.dispatch('profile', { prop: 'facebook_link', data: response.facebook_link })
+      root.$store.dispatch('profile', { prop: 'twitter_link', data: response.twitter_link })
+      root.$store.dispatch('profile', { prop: 'website_link', data: response.website_link })
+      
+    }).catch((error) => {
+      if (error.response) {
+        root.alert.error = true
+        if (error.response.status === 400) {
+          for (var err in error.response.data) {
+            root.alert.message = error.response.data[err][0]
+            break
+          }
+        } else {
+          root.alert.message = root.form.message_endpoint_error
+        }
+        return false
+      }
+    })
+  },
   getTracks() {
     return axios.get('/api/v1/tracks/').then((response) => {
       return response.data
@@ -352,6 +402,18 @@ const AuthAPI = {
   removeUser(store) {
     window.localStorage.removeItem('token')
     return store.dispatch('user', { prop: null, data: null })
+      .then((response) => {
+        return response
+      })
+  },
+  storeProfile(store, data) {
+    return store.dispatch('profile', { prop: null, data: data })
+      .then((response) => {
+        return response
+      })
+  },
+  removeProfile(store) {
+    return store.dispatch('profile', { prop: null, data: null })
       .then((response) => {
         return response
       })
