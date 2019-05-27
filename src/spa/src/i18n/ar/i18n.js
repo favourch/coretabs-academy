@@ -89,7 +89,7 @@ var i18n = `{
     "password_length_error": "كلمة السر يجب أن تتكون من 8 أحرف على الأقل",
     "message_label": "أدخل رسالتك هنا",
     "message_length_error": "الرسالة قصيرة جدًا",
-    "userName_format_error" : "الأحرف العربية، المسافات والأحرف المميزة غير مسموح بها"
+    "userName_format_error" : "الأحرف العربية، المسافات والأحرف المميزة غير مسموح بها",
     "message_endpoint_error": "خطأ.. حاول مرة أخرى!",
     "description": "الوصف",
     "bio": "السيرة الذاتية",

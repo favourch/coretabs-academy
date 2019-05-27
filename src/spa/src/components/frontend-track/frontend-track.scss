@@ -266,7 +266,7 @@ Track Style
   }
 
   #why-this-track{
-    background: #fafbfb;
+    background: #fdfdfd;
   }
   
   #direct-path{
@@ -274,9 +274,10 @@ Track Style
   }
 
   .paragraph{
-    max-width: 769px;
+    max-width: 800px;
     margin: 0 auto;
-    line-height: 36px;
+    font-size: 18px;
+    line-height: 38px;
   }
   section{
     position: relative;
@@ -301,20 +302,26 @@ Track Style
   } 
 
   #presentation {
-      margin: 50px 0 200px;
+    background: #fff;
+      margin: 50px 0 0;
       padding-top: 80px;
+      padding-bottom: 200px;
     .quote {
       text-align: center;
       margin: 70px 0 50px;
-      padding: 0 30px;
+      padding: 12px 80px;
+      max-width: 1000px;
+      border-radius: 6px;
       font-size: 22px !important;
       font-weight: 600;
       color: $heading-color;
+      background: #fafafa;
       align-self: center;
       position: relative;
       @media(max-width: 600px) {
         font-size: 18px !important;
-        padding: 0 10px;
+        padding: 12px;
+        line-height: 36px;
       }
     }
 
@@ -328,7 +335,7 @@ Track Style
       .quote::after {
         position: absolute;
         font-family: Georgia, 'Times New Roman', Times, serif;
-        color: $secondary-color;
+        color: #8855ea;
         display: inline-block;
         height: 80px;
         line-height: 80px;
@@ -338,17 +345,19 @@ Track Style
         content: open-quote;
         transform: translateY(20px);
         right: -10px;
-        top: 5px;
+        top: 10px;
         @media(max-width: 600px) {
           top: -70px;
+          right: 0;
         }
       }
       .quote::after {
         content: close-quote;
         left: -10px;
-        bottom: 0;
+        bottom: -25px;
         @media(max-width: 600px) {
           bottom: -90px;
+          left: 0px;
         }
       }
    
@@ -368,7 +377,26 @@ Track Style
       //min-width: 470px;
       margin: 100px auto 0;
       align-items: center;
-
+      &:nth-child(1){
+        .desc-image{
+          background: linear-gradient(60deg , rgba(45,67,231,.4), rgba(144,66,232,.4)), url('../../assets/multimedia/images/track/real-projects.jpg');
+        }
+      }
+      &:nth-child(2){
+        .desc-image{
+          background: linear-gradient(60deg , rgba(45,67,231,.4), rgba(144,66,232,.4)), url('../../assets/multimedia/images/track/tutors.jpg');
+        }
+      }
+      &:nth-child(4){
+        .desc-image{
+          background: linear-gradient(60deg , rgba(45,67,231,.4), rgba(144,66,232,.4)), url('../../assets/multimedia/images/track/dreams.jpg');
+        }
+      }
+      &:nth-child(5){
+        .desc-image{
+          background: linear-gradient(60deg , rgba(45,67,231,.4), rgba(144,66,232,.4)), url('../../assets/multimedia/images/track/mentoring.jpg');
+        }
+      }
       .desc-text {
         color: #2c3e50;
         line-height: 30px;
@@ -391,10 +419,8 @@ Track Style
       }
 
       .desc-image {
-        background-color: $white-color;
-        @include border-radius(30px);
+        @include border-radius(40px);
         height: 300px;
-        overflow: hidden;
         @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
         img {
           max-height: 300px;
@@ -402,6 +428,13 @@ Track Style
         @media(max-width: 640px) {
           margin-bottom: 50px;
         }
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        background-size: cover !important;
+      }
+      p{
+        font-size: 18px;
+        line-height: 38px;
       }
     }
 

@@ -49,7 +49,7 @@
       <v-flex xs10 lg10 xl6 class="text-xs-center mt-5">
         <h1 class="mb-4">لماذا تحتاج لأكاديمية كورتابز؟</h1>
         <p class="paragraph">
-          أقرب طريق من النقطة (أ) إلى النقطة (ي) هي خط مستقيم، معرفة ذلك الخط يتطلب سنوات من الخبرة لذا فنحن نعرف هذا الخط جيداً وسنأخذ بيدك خطوة بخطوة من خلالة. إذا كنت مستعداً لاختصار الوقت لتحقيق أهدافك فأنت في المكان الصحيح.
+          أقرب طريق من النقطة (أ) إلى النقطة (ب) هي خط مستقيم، معرفة ذلك الخط يتطلب سنوات من الخبرة لذا فنحن نعرف هذا الخط جيداً وسنأخذ بيدك خطوة بخطوة من خلالة. إذا كنت مستعداً لاختصار الوقت لتحقيق أهدافك فأنت في المكان الصحيح.
         </p>
       </v-flex>
       <div class="scroll-down">
@@ -59,35 +59,32 @@
   </section>
 
   <section id="presentation">
-      
     <v-layout justify-center wrap align-center>
       <v-flex xs10 lg10 xl6 class="text-xs-center mt-5">
         <h1 class="mb-4">المميزات التي تحصل عليها</h1>
       </v-flex>
     </v-layout>
 
-    <v-layout justify-center wrap>
-       
+    <v-layout justify-center wrap column>
       <v-layout class="desc-box" wrap row>
-        <v-flex xs12 md5>
+        <v-flex x12 sm5>
           <div class="desc-image"></div>
         </v-flex>
-        <v-flex class="desc-text desc-text__right" x12 md7>
-          <h2>ابدأ بمشاريع حقيقية </h2>
-          <p>مئات الكورسات في الإنترنت تدربك على البرمجة ولكن بمجرد أن تنتهي من الكورس <strong>ستتساءل</strong> إذا كنت قادراً على عمل مشروع فعلي؟
-            أو إذا كنت مؤهلاً للحصول على وظيفة مبرمج.
+        <v-flex class="desc-text desc-text__right" x12 sm7>
+          <h2>العمل على مشاريع حقيقة</h2>
+          <p>مئات الكورسات على الإنترنت تدربك على البرمجة ولكن بمجرد أن تنتهي من الكورس ستتساءل إذا كنت قادراً على عمل <strong>مشروع فعلي</strong>؟
           </p>
-          <p>ولكن معنا ستتعلم البرمجة بشكل مختلف تماماً, حيث ستقوم ببناء <strong>مشاريع حقيقية</strong> في كل ورشة عمل.
+          <p>لكن معنا ستتعلم البرمجة بشكل مختلف تماماً، حيث ستقوم ببناء مشاريع حقيقية خلال ورش العمل.
           </p>
         </v-flex>
       </v-layout>
 
       <v-layout class="desc-box" wrap row reverse>
-        <v-flex xs12 md5>
+        <v-flex x12 sm5>
           <div class="desc-image"></div>
         </v-flex>
-        <v-flex class="desc-text desc-text__left" x12 md7>
-          <h2>تدرب على أيدي مدربين خبراء</h2>
+        <v-flex class="desc-text desc-text__left" x12 sm7>
+          <h2>تدرّب على أيدي مدربين خبراء</h2>
           <p>نعلم تماماً أنك تريد التعلم على يد أفضل المدربين، لهذا سيقوم بتدريبك خبراء تم اختيارهم من ضمن <strong>أفضل عشرة</strong> مدربين في الشرق الأوسط من قبل مؤسسة دبي للمستقبل ولديهم خبرة تزيد على 8 سنوات في المجال.
           </p>
         </v-flex>
@@ -96,42 +93,68 @@
       <v-layout class="desc-box" wrap row reverse>
         <v-flex xs12>
           <blockquote class="quote">
-            نحن نؤمن أن الطريقة المثلى للتعلم, هي تطبيق ما تتعلمه بشكل مستمر.
+            نحن نؤمن أن الطريقة المثلى للتعلم، هي تطبيق ما تتعلمه بشكل مستمر.
           </blockquote>
         </v-flex>
       </v-layout>
 
       <v-layout class="desc-box" wrap row>
-        <v-flex xs12 md5>
+        <v-flex x12 sm5>
           <div class="desc-image"></div>
         </v-flex>
-        <v-flex class="desc-text desc-text__right" x12 md7>
-          <h2>حقق أحلامك الريادية!</h2>
+        <v-flex class="desc-text desc-text__right" x12 sm7>
+          <h2>حقّق أحلامك الريادية!</h2>
           <p>نحن متأكدين أن لديك مشاريع ريادية وأفكار رائعة، في الحقيقة العديد من التطبيقات جعلت أصحابها من <strong>أثرياء العالم</strong>! من يدري قد يكون مشروعك هو المشروع الثوري التالي.
           </p>
-          <p>معنا ستتعلم <strong>المهارات اللازمة</strong> لعمل تطبيقات ومشاريع ريادية ناجحة، لست بحاجة لأي معرفة سابقة أو شهادة جامعية، كل ماتحتاجه هو لابتوب وخط إنترنت.
+          <p>معنا ستتعلم <strong>المهارات التقنية اللازمة </strong> لإخراج مشروعك للحياة، لست بحاجة لأي معرفة سابقة كل ماتحتاجه هو لابتوب وخط إنترنت.
           </p>
         </v-flex>
       </v-layout>
 
       <v-layout class="desc-box" wrap row reverse>
-        <v-flex xs12 md5>
+        <v-flex xs12 sm5>
           <div class="desc-image"></div>
         </v-flex>
-        <v-flex class="desc-text desc-text__left" x12 md7>
-          <h2>سنراجع معك مشاريعك التي تطبقها معنا</h2>
-          <p>ستواجهك العديد من المشاكل أثناء تعلم البرمجة لكن ليس هناك أسوأ من مواجهتها لوحدك, فربما تأخذ منك أسبوع لحل المشكلة, وربما تجد حلاً بطريقة خاطئة ولا أحد يوجهك للطريق الصحيح!
-          </p>
-          <p>لكن لا تقلق أبداً, سيكون لديك في مجتمع كورتابز العديد من المدربين والطلاب الذين سيساعدوك على تخطي هذه العقبات بسهولة بتوجيهك بشكل مستمر ومساعدتك على فهم التعقيدات.
+        <v-flex class="desc-text desc-text__left" x12 sm7>
+          <h2>إرشاد شخصي</h2>
+          <p>أثناء رحلتك التدريبية على كورتابز ستحصل على توجية شخصي من قبل مدربينا حيث سيتم <strong>مراجعة مشاريعك</strong> ومساعدتك على تجاوز المشاكل والعقبات حال ما إن واجهتها.
           </p>
         </v-flex>
       </v-layout>
-
-      </v-flex>
-
     </v-layout>
   </section>
 
+
+    <div id="testimonials">
+    <div class="skew-box">
+      <div class="particles"></div>
+      <h1 v-html="i18n.testimonials.title"></h1>
+      <p v-html="i18n.testimonials.description"></p>
+    </div>
+    <div class="testimonials-carousel">
+      <div class="testimonials-carousel-item" v-for="(testimonial, i) in i18n.testimonials.carousel" :key="i" @mouseenter="stopTSiema()" @mouseleave="playTSiema()">
+        <img class="quotation" :src="quotationIcon" />
+        <div class="avatar" :style="{ backgroundImage: 'linear-gradient(rgba(84, 0, 255, 0.4), rgba(202, 62, 75, 0.4)), url(' + testimonialsImages[i] + ')' }"></div>
+        <div class="testimonial">
+          <h3 class="name">
+            {{ testimonial.name }}
+            <span class="description"> - {{ testimonial.description }}</span>
+          </h3>
+          <p class="quote" v-html="testimonial.quote"></p>
+          <div class="rating">
+            <img v-for="i in 5" :key="i" :src="calc(i, testimonial.rating)" />
+            </div>
+            <div class="navigation">
+              <img class="left" :src="navigation.left" @click="testimonialsSiema.next(1)">
+              <img class="right" :src="navigation.right" @click="testimonialsSiema.prev(1)">
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="controls t" ref="controlsT">
+          <button v-for="(button, i) in i18n.testimonials.carousel.length" type="button" name="button" @click="showTestimonials(button - 1, $event)" :key="i"></button>
+        </div>
+      </div>
   <v-layout justify-center class="gray-bg">
     <v-flex xs10 md6>
       <div id="tracks-content" class="section section--light">
@@ -258,36 +281,7 @@
     </v-container>
   </div>
 
-  <div id="testimonials">
-    <div class="skew-box">
-      <div class="particles"></div>
-      <h1 v-html="i18n.testimonials.title"></h1>
-      <p v-html="i18n.testimonials.description"></p>
-    </div>
-    <div class="testimonials-carousel">
-      <div class="testimonials-carousel-item" v-for="(testimonial, i) in i18n.testimonials.carousel" :key="i" @mouseenter="stopTSiema()" @mouseleave="playTSiema()">
-        <img class="quotation" :src="quotationIcon" />
-        <div class="avatar" :style="{ backgroundImage: 'linear-gradient(rgba(84, 0, 255, 0.4), rgba(202, 62, 75, 0.4)), url(' + testimonialsImages[i] + ')' }"></div>
-        <div class="testimonial">
-          <h3 class="name">
-            {{ testimonial.name }}
-            <span class="description"> - {{ testimonial.description }}</span>
-          </h3>
-          <p class="quote" v-html="testimonial.quote"></p>
-          <div class="rating">
-            <img v-for="i in 5" :key="i" :src="calc(i, testimonial.rating)" />
-            </div>
-            <div class="navigation">
-              <img class="left" :src="navigation.left" @click="testimonialsSiema.next(1)">
-              <img class="right" :src="navigation.right" @click="testimonialsSiema.prev(1)">
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="controls t" ref="controlsT">
-          <button v-for="(button, i) in i18n.testimonials.carousel.length" type="button" name="button" @click="showTestimonials(button - 1, $event)" :key="i"></button>
-        </div>
-      </div>
+  
 
       <div id="pricing" class="section section--light">
         <div class="section__header section__header--desc">
