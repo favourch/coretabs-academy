@@ -14,7 +14,7 @@ export default {
       avatar_letter: null,
       tabs: [
         { name: 'profile-about', text: 'حول' },
-        { name: 'profile-certificates', text: 'الشهادات' }
+        { name: 'profile-certificates', text: 'الإنجازات' }
       ]
     }
   },
