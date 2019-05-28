@@ -20,7 +20,7 @@
               <div class="my-4 user-level" v-if="profile.level">{{ profile.level }}</div>
               <div class="profile-location" v-if="profile.country">
                 <v-icon right small>place</v-icon>
-                <span class="profile-location-title">{{ profile.country }}</span>
+                <span class="profile-location-title">{{ profile.country.text }}</span>
               </div>
             </div>
 
