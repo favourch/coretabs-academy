@@ -41,12 +41,16 @@ export default {
       }
     },
   },
-  created() {
-    this.$parent.getProfileData()
+  async created() {
+    await this.$parent.getProfileData()
     .then(profile => {
       this.loaded = true;
       this.profile = profile;
     });
+
+    console.log(this.profile)
+    console.log(this.profile.skills)
+    console.log(this.profile.skills.length)
   },
   watch: {
     $route() {

@@ -59,7 +59,7 @@ const ProfilesAPI = {
         twitter_link: response.data.twitter_link,
         linkedin_link: response.data.linkedin_link,
         website_link: response.data.website_link,
-        languages: response.data.languages,
+        skills: response.data.skills,
         certificates: []
       }
       /*if (response.data.languages.length > 0) {

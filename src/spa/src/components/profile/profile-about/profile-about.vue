@@ -14,13 +14,13 @@
 
             </div>
 
-            <div class="about-item" v-if="profile.languages && profile.languages.length > 0">
-              <h2 class="about-item__title">اللغات التي أتحدث بها</h2>
+            <div class="about-item" v-if="profile.skills.length > 0">
+              <h2 class="about-item__title">المهارات البرمجية</h2>
 
               <div class="lang-items">
-                <div class="lang-item" v-for="(lang, index) in profile.languages" :key="index">
-                  <div class="lang-img-wrapper">{{ lang[0] }}</div>
-                  <span class="lang-title">{{ lang[1] }}</span>
+                <div class="lang-item" v-for="(skill, index) in profile.skills" :key="index">
+                  <div class="lang-img-wrapper">{{ skill.value }}</div>
+                  <span class="lang-title">{{ skill.text }}</span>
                 </div>
               </div>
             </div>
@@ -34,7 +34,7 @@
                 </span>
               </div>
 
-              <ul class="links info-item" v-if="links && links.length > 0">
+              <ul class="links info-item" v-if="links.length > 0">
                 <li v-for="(link, i) in links" :key="i" class="links__item icon">
                   <a :href="link.url" :title="link.name" target="_blank"></a>
                   <i :class="`icon-${link.name}`"></i>
