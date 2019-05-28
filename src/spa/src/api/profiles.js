@@ -55,6 +55,7 @@ const ProfilesAPI = {
         description: response.data.description,
         bio: response.data.bio,
         avatar_url: response.data.avatar_url,
+        github_link: response.data.github_link,
         facebook_link: response.data.facebook_link,
         twitter_link: response.data.twitter_link,
         linkedin_link: response.data.linkedin_link,
@@ -100,11 +101,12 @@ const ProfilesAPI = {
         description: response.data.description,
         bio: response.data.bio,
         avatar_url: response.data.avatar_url,
+        github_link: response.data.github_link,
         facebook_link: response.data.facebook_link,
         twitter_link: response.data.twitter_link,
         linkedin_link: response.data.linkedin_link,
         website_link: response.data.website_link,
-        languages: response.data.languages,
+        skills: response.data.skills,
         certificates: []
       }
       /*if (response.data.languages.length > 0) {

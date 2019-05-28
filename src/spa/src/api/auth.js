@@ -255,6 +255,7 @@ const AuthAPI = {
     formData.append('bio', root.bio)
     formData.append('country', country)
     formData.append('skills', skills)
+    formData.append('github_link', root.github_link)
     formData.append('linkedin_link', root.linkedin_link)
     formData.append('facebook_link', root.facebook_link)
     formData.append('twitter_link', root.twitter_link)
