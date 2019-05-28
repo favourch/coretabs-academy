@@ -12,6 +12,7 @@ export default {
     username: '',
     userCountry: {},
     userSkills: [],
+    github_link: '',
     linkedin_link: '',
     facebook_link: '',
     twitter_link: '',
@@ -42,6 +43,7 @@ export default {
     this.bio = await this.$store.getters.profile('bio')
     this.userCountry =  await this.$store.getters.profile('country')
     this.userSkills = await this.$store.getters.profile('skills')
+    this.github_link = await this.$store.getters.profile('github_link')
     this.linkedin_link = await this.$store.getters.profile('linkedin_link')
     this.facebook_link = await this.$store.getters.profile('facebook_link')
     this.twitter_link = await this.$store.getters.profile('twitter_link')

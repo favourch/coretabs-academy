@@ -86,6 +86,7 @@ var i18n = `{
     "bio": "السيرة الذاتية",
     "country": "البلد",
     "skills": "المهارات البرمجية",
+    "github_link": "رابط جيت هب",
     "linkedin_link": "رابط لينكد إن",
     "facebook_link": "رابط فيسبوك",
     "twitter_link": "رابط تويتر",
