@@ -27,8 +27,15 @@ class SkillsField(serializers.MultipleChoiceField):
         return result
 
     def to_internal_value(self, data):
-        super().to_internal_value(data)
-        result = ",".join(data)
+        data_list = data
+
+        if isinstance(data, str):
+            data_list = data.split(',')
+            result = data
+        elif isinstance(data, list):
+            result = ",".join(data)
+
+        super().to_internal_value(data_list)
         return result
 
 
