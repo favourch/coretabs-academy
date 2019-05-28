@@ -38,7 +38,7 @@
               <v-tab v-for="tab in tabs" :key="tab.name" ripple :to="{name: tab.name}">{{ tab.text }}</v-tab>
             </v-tabs>
             <div class="profile-sub-page">
-                <router-view></router-view>
+              <router-view></router-view>
             </div>
           </v-flex>
         </v-layout>

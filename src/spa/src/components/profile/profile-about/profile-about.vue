@@ -1,11 +1,11 @@
 <template>
   <div v-if="loaded" class="about">
-    
+
     <v-card class="elevation-0">
       <v-container class="no-select" fluid>
         <v-layout row wrap>
           <v-flex xs12 sm12 md8>
-            
+
             <div class="about-item">
               <h2 class="about-item__title">نبذة عني</h2>
               <p class="user-bio">
@@ -14,7 +14,7 @@
 
             </div>
 
-            <div class="about-item" v-if="profile.languages.length > 0">
+            <div class="about-item" v-if="profile.languages && profile.languages.length > 0">
               <h2 class="about-item__title">اللغات التي أتحدث بها</h2>
 
               <div class="lang-items">
@@ -34,7 +34,7 @@
                 </span>
               </div>
 
-              <ul class="links info-item" v-if="links.length > 0">
+              <ul class="links info-item" v-if="links && links.length > 0">
                 <li v-for="(link, i) in links" :key="i" class="links__item icon">
                   <a :href="link.url" :title="link.name" target="_blank"></a>
                   <i :class="`icon-${link.name}`"></i>
