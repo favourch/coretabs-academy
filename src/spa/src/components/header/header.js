@@ -87,6 +87,8 @@ export default {
         case 'profile-info':
         case 'change-track':
         case 'change-password':
+        case 'profile-about':
+        case 'profile-certificates':
         case 'lessons':
         case 'modules':
         case 'workshop':
