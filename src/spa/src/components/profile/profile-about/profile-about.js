@@ -47,10 +47,6 @@ export default {
       this.loaded = true;
       this.profile = profile;
     });
-
-    console.log(this.profile)
-    console.log(this.profile.skills)
-    console.log(this.profile.skills.length)
   },
   watch: {
     $route() {
