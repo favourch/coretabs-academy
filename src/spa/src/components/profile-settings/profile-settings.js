@@ -7,6 +7,7 @@ export default {
     NavigatorDrawerComponent
   },
   data: () => ({
+    height: 0,
     header: '',
     drawer: {
       isOpen: null,
@@ -49,7 +50,18 @@ export default {
           this.header = this.i18n.change_password
           break
       }
-    }
+    },
+    onResize() {
+      let selector = '.settings .inner-header .toolbar'
+      if (document.querySelector(selector) !== null) {
+        this.height = window.innerHeight - document.querySelector(selector).offsetHeight
+      } else {
+        let self = this
+        this.timeout = setTimeout(() => {
+          self.height = window.innerHeight - document.querySelector(selector).offsetHeight
+        }, 100)
+      }
+    },
   },
   created() {
     this.$on('toggle-drawer', function(data) {

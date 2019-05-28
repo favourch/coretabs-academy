@@ -57,7 +57,7 @@
       </v-navigation-drawer>
       <section id="column-flexed">
         <inner-header-component :title="header"></inner-header-component>
-        <div class="content">
+        <div class="content" :style="{ height: height + 'px' }" v-resize="onResize">
           <router-view ></router-view>
         </div>
       </section>

@@ -164,8 +164,6 @@ html[dir='rtl'] {
     border-left: 0 !important;
     transition: none !important;
     overflow: hidden !important;
-    @include center(false,true);
-    position: relative !important;
     background: $workshop-content-background !important;
 
     > div {
