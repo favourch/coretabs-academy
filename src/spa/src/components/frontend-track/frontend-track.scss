@@ -364,7 +364,7 @@ Track Style
     bottom: 40px;
     z-index: 2;
     @media (max-width: 600px) {
-      bottom: 10px;
+      display: none;
     }
     a {
       display: block;
