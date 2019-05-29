@@ -27,16 +27,13 @@ class SkillsField(serializers.MultipleChoiceField):
         return result
 
     def to_internal_value(self, data):
-        data_list = data
+        if isinstance(data, list):
+            data = data[0]
 
-        if isinstance(data, str):
-            data_list = data.split(',')
-            result = data
-        elif isinstance(data, list):
-            result = ",".join(data)
+        data_list = data.split(',')
 
         super().to_internal_value(data_list)
-        return result
+        return data
 
 
 class CertificateSignatureSerializer(serializers.ModelSerializer):
