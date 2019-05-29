@@ -24,7 +24,7 @@
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn depressed round class="button" to="/not-ready"> {{tracks.track.discover_btn}} </v-btn>
+                  <v-btn depressed round class="button" to="/tracks/frontend"> {{tracks.track.discover_btn}} </v-btn>
                 </v-card-actions>
               </div>
             </v-card>
@@ -51,7 +51,7 @@
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn depressed round class="button" to="/not-ready">{{tracks.track.discover_btn}}</v-btn>
+                  <v-btn depressed round class="button" to="/tracks/frontend">{{tracks.track.discover_btn}}</v-btn>
                 </v-card-actions>
               </div>
             </v-card>
