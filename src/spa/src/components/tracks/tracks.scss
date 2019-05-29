@@ -8,6 +8,7 @@
 #tracks {
   margin-bottom: 68px !important;
   margin-top: -60px;
+  min-height: 720px;
   @media(max-width: 640px) {
     margin-top: 0;
   }
