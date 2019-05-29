@@ -186,7 +186,8 @@ Track Style
 
   /* hero */
   .hero-container {
-    min-height: calc(100vh - 100px);
+    height: calc(100vh - 100px);
+    min-height: 720px;
     position: relative;
     @media (max-width: 600px) {
       padding-bottom: 60px;

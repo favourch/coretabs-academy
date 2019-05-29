@@ -36,7 +36,7 @@
             class="paragraph"
           >تطوير واجهات الويب من أبرز المهن المطلوبة في عصرنا فلا يوجد مشروع مرتبط بالإنترنت إلا ويلعب فية مطور الواجهات دور أساسي.</p>
         </v-flex>
-        <v-flex xs12 md10 xl8 class="mt-5">
+        <v-flex xs12 md10 xl8 class="my-5">
           <v-layout justify-space-between wrap row class="text-xs-right mt-5">
 
             <v-flex xs12 md4 class="pa-4">
