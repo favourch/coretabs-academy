@@ -73,7 +73,7 @@ export default {
   created() {
     this.fnRules = [
       v => !!v || '',
-      v => /^([a-zA-Z]+[ ]+[a-zA-Z]*)+$/.test(v.trim()) || this.form.fullname_format_error,
+      v => /^([\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-.]+[ ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_.]*)+$/.test(v.trim()) || this.form.fullname_format_error,
       v => (v && v.trim().length <= 20) || this.form.fullname_length_error
     ]
 
