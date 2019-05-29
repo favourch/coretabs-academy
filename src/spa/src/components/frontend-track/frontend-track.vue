@@ -80,7 +80,7 @@
             class="paragraph"
           >أقرب طريق من النقطة (أ) إلى النقطة (ب) هي خط مستقيم، معرفة ذلك الخط يتطلب سنوات من الخبرة لذا فنحن نعرف هذا الطريق جيداً وسنأخذ بيدك خطوة بخطوة من خلالة، فإذا كنت مستعداً لإختصار الوقت وتجنب المتاهه لتحقيق أهدافك فأنت في المكان الصحيح.</p>
         </v-flex>
-        <video autoplay muted loop id="maze-video">
+        <video autoplay muted loop playsinline id="maze-video">
           <source src="../../assets/multimedia/images/track/maze.mp4" type="video/mp4">
         </video>
         <div class="scroll-down">
