@@ -9,12 +9,15 @@ Header Style
 }
 header {
   .navigation-drawer {
-    width: 100% !important;
     background-color: transparent !important;
     z-index: 150 !important;
     box-shadow: none !important;
     margin-top: $header-height !important;
     max-height: calc(100vh - $header-height) !important;
+
+    &.navigation-drawer--close {
+      width: 0% !important;
+    }
 
     .list {
       margin-top: 40px;
