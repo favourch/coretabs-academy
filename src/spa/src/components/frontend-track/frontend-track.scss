@@ -189,7 +189,7 @@ Track Style
     height: calc(100vh - 100px);
     min-height: 720px;
     position: relative;
-    @media (max-width: 600px) {
+    @media (max-width: 1024px) {
       padding-bottom: 60px;
       padding-left: 15px !important;
       padding-right: 15px !important;
