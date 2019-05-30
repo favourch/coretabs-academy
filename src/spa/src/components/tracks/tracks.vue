@@ -3,7 +3,7 @@
     <v-layout justify-center wrap align-center>
       <v-flex xs12 md12 lg10 xl8>
         <v-layout class="tracks-items" justify-center wrap>
-          <v-flex xs10 md4>
+          <v-flex xs10 md4 class="tracks-card">
             <v-card height="100%">
               <div class="pic-container">
                 <img
@@ -30,7 +30,7 @@
             </v-card>
 
           </v-flex>
-          <v-flex xs10 md4>
+          <v-flex xs10 md4 class="tracks-card">
             <v-card height="100%">
               <div class="pic-container">
                 <img
