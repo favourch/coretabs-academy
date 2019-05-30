@@ -273,6 +273,12 @@ Track Style
     @media (max-width: 600px) {
       padding: 20px 0;
     }
+    .why-this-track__container{
+      margin: 60px auto;
+      @media (max-width: 600px) {
+        margin: 0;
+      }
+    }
     .why-this-track__card {
       width: 100%;
       position: relative;
@@ -394,6 +400,12 @@ Track Style
     padding-bottom: 170px;
     @media(max-width: 600px) {
       padding-bottom: 0px;
+    }
+    .presentation-heading{
+      margin-top: 50px;
+      @media(max-width: 600px) {
+        margin-top: 0px;
+      }
     }
     .quote {
       text-align: center;
@@ -1097,6 +1109,9 @@ Track Style
     min-height: 100vh;
     color: #fff;
     padding: 80px 0;
+    @media (max-width: 600px) {
+      padding: 60px 0 80px;
+    }
     .pricing-card {
       background: #fff;
       overflow: hidden;
@@ -1107,6 +1122,7 @@ Track Style
       @include border-radius(35px);
       @media (max-width: 600px) {
         height: auto;
+        margin-top: 40px;
       }
       .pricing-card__left {
         background: #fafafa;
@@ -1186,18 +1202,23 @@ Track Style
   }
   #other-tracks {
     margin-bottom: 80px;
+    @media (max-width: 600px) {
+      margin-bottom: 10px;
+    }
     .card__actions {
       justify-content: flex-end;
     }
     .track-card {
       background: #fff;
       min-height: 300px;
+      margin-top: 50px;
       @include box-shadow(0px, 15px, 34px, 0px, $shadow-color);
       @include border-radius(35px);
       overflow: hidden;
       text-align: right;
       @media (max-width: 600px) {
         text-align: center;
+        margin-top: 0;
       }
       .track-card__img {
         overflow: hidden;

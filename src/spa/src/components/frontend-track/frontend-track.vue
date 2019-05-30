@@ -36,7 +36,7 @@
             class="paragraph"
           >تطوير واجهات الويب من أبرز المهن المطلوبة في عصرنا فلا يوجد مشروع مرتبط بالإنترنت إلا ويلعب فية مطور الواجهات دور أساسي.</p>
         </v-flex>
-        <v-flex xs12 md10 xl8 class="my-5">
+        <v-flex xs12 md10 xl8 class="why-this-track__container">
           <v-layout justify-space-between wrap row class="text-xs-right mt-5">
 
             <v-flex xs12 md4 class="pa-4">
@@ -93,7 +93,7 @@
 
     <section id="presentation" class="px-4">
       <v-layout justify-center wrap align-center>
-        <v-flex xs10 lg10 xl6 class="text-xs-center mt-5">
+        <v-flex xs12 lg10 xl6 class="text-xs-center presentation-heading">
           <h1 class="mb-4">ماهي المميزات التي ستحصل عليها؟</h1>
         </v-flex>
       </v-layout>
@@ -362,7 +362,7 @@
 
     <section>
       <v-layout id="pricing" justify-center wrap row fill-height align-center>
-        <v-flex xs10 md8 xl6>
+        <v-flex xs12 md8 xl6 class="px-3">
           <h1 class="text-xs-center">ابدأ ببناء حاضرك ومستقبلك المهني</h1>
           <v-layout justify-center wrap row align-center class="pricing-card">
             <v-flex xs12 md8 class="pricing-card__right pa-5 text-xs-center">
@@ -434,10 +434,10 @@
 
     <section id="other-tracks" class="section section--light">
       <v-layout justify-center wrap row align-center>
-        <v-flex xs10 class="text-xs-center">
+        <v-flex xs12 class="text-xs-center">
           <h1 class="mb-4">مسارات أخرى</h1>
         </v-flex>
-        <v-flex xs10 class="text-xs-center mt-5">
+        <v-flex xs12 class="text-xs-center pa-3">
           <v-layout justify-center wrap row align-center>
             <v-flex xs12 md9 xl6 class="text-xs-center">
               <v-layout wrap row class="track-card">
