@@ -236,12 +236,11 @@ Track Style
         margin: 0 auto;
         display: flex;
         flex-direction: row-reverse;
-        justify-items: center;
+        justify-content: center;
         align-items: center;
 
-        /deep/li {
+        li {
           flex: 1;
-
           &:after {
             display: none !important;
           }
