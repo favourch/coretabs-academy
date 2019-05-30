@@ -44,10 +44,14 @@ export default new Vuex.Store({
       {value: 'mr', text: 'موريتانيا'}
     ],
     skills: [
-      {value: 'html', text: 'مطور HTML'},
-      {value: 'css', text: 'مطور CSS'},
-      {value: 'javascript', text: 'مطور Javascript'},
-      {value: 'vuejs', text: 'مطور VueJS'}
+      {value: 'html', text: 'HTML'},
+      {value: 'css', text: 'CSS'},
+      {value: 'javascript', text: 'Javascript'},
+      {value: 'jquery', text: 'jQuery'},
+      {value: 'vuejs', text: 'VueJS'},
+      {value: 'python', text: 'Python'},
+      {value: 'flask', text: 'Flask'},
+      {value: 'django', text: 'Django'}
     ],
     unread: null,
     progress: {
