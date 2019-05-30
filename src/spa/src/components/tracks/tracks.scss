@@ -46,10 +46,12 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.49, -0.42, 0.38, 1.41);
 
-    &:hover {
-      transform: scale(1.1);
+    @media (min-width: 1024px) {
+      transition: transform 0.4s cubic-bezier(0.49, -0.42, 0.38, 1.41);
+      &:hover {
+        transform: scale(1.1);
+      }
     }
 
     .card__body {
