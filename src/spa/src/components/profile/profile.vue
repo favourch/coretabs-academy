@@ -17,7 +17,7 @@
 
               <h2 class="mt-4 mb-2 profile-username" :class="{'profile-badge profile-badge-verified': profile.role && profile.role !== 'Student'}">{{ profile.name }}</h2>
               <h3 class="profile-subheading" v-if="profile.description">{{ profile.description }}</h3>
-              <div class="my-4 user-level" v-if="profile.level">{{ profile.level }}</div>
+              <!-- <div class="my-4 user-level" v-if="profile.level">{{ profile.level }}</div> -->
               <div class="profile-location" v-if="profile.country">
                 <v-icon right small>place</v-icon>
                 <span class="profile-location-title">{{ profile.country.text }}</span>
