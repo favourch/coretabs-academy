@@ -207,6 +207,11 @@ const router = new Router({
     component: CertificateComponent,
     path: '/certificate/:certificateId',
     props: true
+  },
+  {
+    name: 'forums',
+    path: '/forums',
+    beforeEnter() { location.href = 'http://forums.coretabs.net' }
   }]
 })
 

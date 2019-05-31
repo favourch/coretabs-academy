@@ -15,6 +15,10 @@ export default {
       }, {
         url: '/tracks',
         dropdown: false
+      },
+      {
+        url: '/forums',
+        dropdown: false
       }
     ],
     user_navs: [
@@ -26,6 +30,10 @@ export default {
         dropdown: false
       }, {
         url: '/tracks',
+        dropdown: false
+      },
+      {
+        url: '/forums',
         dropdown: false
       }
     ],
