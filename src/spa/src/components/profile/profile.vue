@@ -40,6 +40,8 @@
             <div class="profile-sub-page">
               <router-view></router-view>
             </div>
+
+            <join-invite />>
           </v-flex>
         </v-layout>
       </v-container>

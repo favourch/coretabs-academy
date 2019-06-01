@@ -1,0 +1,77 @@
+@import '../../assets/styles/vars';
+@import '../../../node_modules/rfs/scss/_rfs';
+/*=====================================
+join-invite
+=======================================*/
+
+.join-invite {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+
+  .card {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
+    transition: box-shadow ease-in-out 0.6s;
+
+    .card__title {
+      padding: 0;
+      text-align: center;
+      
+      .join-invite__title {
+        margin-bottom: 16px;
+      }
+
+      p {
+        line-height: 2;
+      }
+    }
+
+    .join-invite__actions {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+      padding: 0;
+
+      .join-invite__signup {
+         background: $grading-color !important;
+         @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
+         transition: box-shadow ease-in-out 0.6s;
+         &:hover{
+           box-shadow: none;
+         }
+      }
+  
+      .join-invite__close {
+         background: $white-color !important;
+         box-shadow: none;
+         border: 2px solid #ccc;
+         color: #717171;
+      }
+  
+      .join-invite__close,
+      .join-invite__signup {
+         font-weight: 700;
+         height: 50px;
+         width: 45%;
+         max-width: 200px;
+         
+         @media (max-width: 768px) {
+            margin: 24px 0 0 0 !important;
+            width: 100%;
+            max-width: 100%;
+            height: 55px;
+         }
+      }
+      @media (max-width: 768px) {
+         text-align: center;
+      }
+    }
+  }
+}

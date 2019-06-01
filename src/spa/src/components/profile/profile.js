@@ -1,10 +1,13 @@
 import InnerHeaderComponent from '../inner-header/inner-header.vue'
 import NavigatorDrawerComponent from '../navigator-drawer/navigator-drawer.vue'
+import JoinInvite from '../join-invite/my-component.vue'
+
 export default {
   name: 'ProfileComponent',
   components: {
     InnerHeaderComponent,
-    NavigatorDrawerComponent
+    NavigatorDrawerComponent,
+    JoinInvite
   },
   data() {
     return {
