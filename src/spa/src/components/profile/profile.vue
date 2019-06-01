@@ -41,7 +41,7 @@
               <router-view></router-view>
             </div>
 
-            <JoinInviteComponent />
+            <JoinInviteComponent v-if="!$store.getters.isLogin" />
           </v-flex>
         </v-layout>
       </v-container>
