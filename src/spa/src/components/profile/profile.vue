@@ -41,7 +41,7 @@
               <router-view></router-view>
             </div>
 
-            <join-invite />>
+            <JoinInviteComponent />
           </v-flex>
         </v-layout>
       </v-container>

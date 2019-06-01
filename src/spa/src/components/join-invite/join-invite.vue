@@ -21,5 +21,5 @@
   </v-scale-transition>
 
 </template>
-<script src="./component.js"></script>
-<style src="./component.scss" lang="scss"></style>
+<script src="./join-invite.js"></script>
+<style src="./join-invite.scss" lang="scss"></style>
