@@ -50,10 +50,14 @@ class Profile(models.Model):
         ('eh', 'الصحراء الغربية'),
     )
     SKILLS_CHOICES = (
-        ('html', 'مطور HTML'),
-        ('css', 'مطور CSS'),
-        ('javascript', 'مطور Javascript'),
-        ('vuejs', 'مطور VueJS'),
+        ('html', 'HTML'),
+        ('css', 'CSS'),
+        ('js', 'Javascript'),
+        ('jquery', 'JQuery'),
+        ('vuejs', 'VueJS'),
+        ('python', 'Python'),
+        ('flask', 'Flask'),
+        ('django', 'Django'),
     )
 
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
