@@ -46,7 +46,7 @@ export default new Vuex.Store({
     skills: [
       {value: 'html', text: 'HTML'},
       {value: 'css', text: 'CSS'},
-      {value: 'javascript', text: 'Javascript'},
+      {value: 'js', text: 'Javascript'},
       {value: 'jquery', text: 'jQuery'},
       {value: 'vuejs', text: 'VueJS'},
       {value: 'python', text: 'Python'},
