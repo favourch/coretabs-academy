@@ -52,8 +52,9 @@ export default {
       clearInterval(carouselTransitionM)
     },
     scrollToPricing() {
-      let pricingSection = document.getElementById('pricing')
-      pricingSection.scrollIntoView()
+      let pricingSection = document.getElementById('pricing-container')
+      let offset = pricingSection.offsetTop - 100
+      window.scrollTo(0, offset)
     }
   },
   created() {   

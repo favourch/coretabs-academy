@@ -147,7 +147,7 @@ header.fixed-header {
   position: fixed;
   width: 100%;
   z-index: 6;
-  @include box-shadow(0px, 2px, 20px ,0px , $shadow-color);
+  @include box-shadow(0px, 2px, 15px ,0px , $shadow-color);
 
   .toolbar__content {
     height: 60px !important;

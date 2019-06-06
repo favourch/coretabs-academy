@@ -18,13 +18,16 @@ export default {
       let isTracks = document.querySelector('#track')
       let header = document.querySelector('header')
       let brandLogo = document.querySelector('.brand-logo')
+      let burgerMenu = document.querySelector('.toolbar__side-icon')
       if (isAbout || isTracks) {
-        if (window.scrollY >= 100) {
+        if (window.scrollY >= window.innerHeight + 200) {
           header.classList.add('fixed-header')
           this.setProperty(brandLogo, 'margin', '10px')
+          this.setProperty(burgerMenu, 'margin', '0 16px 4px 0')
         } else {
           header.classList.remove('fixed-header')
           this.setProperty(brandLogo, 'margin', '25px 10px 10px 20px')
+          this.setProperty(burgerMenu, 'margin', '13px 20px 29px 10px')
         }
       } else {
         header.classList.remove('fixed-header')

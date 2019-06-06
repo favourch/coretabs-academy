@@ -16,7 +16,7 @@
             <div class="hero__countdown">
               <p class="hero__countdown-text">باب التقديم للدفعة القادمة يغلق خلال</p>
 
-              <Countdown deadline="june 2, 2019" labels="أيام-ساعة-دقيقة-ثانية"></Countdown>
+              <Countdown deadline="june 21, 2019" labels="أيام-ساعة-دقيقة-ثانية"></Countdown>
             </div>
           </div>
         </v-card>
@@ -363,7 +363,7 @@
         </v-container>
     </div>-->
 
-    <section>
+    <section id="pricing-container">
       <v-layout id="pricing" justify-center wrap row fill-height align-center>
         <v-flex xs12 md8 xl6 class="px-3">
           <h1 class="text-xs-center">ابدأ ببناء حاضرك ومستقبلك المهني</h1>
