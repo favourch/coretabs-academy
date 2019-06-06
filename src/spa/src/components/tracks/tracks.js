@@ -19,6 +19,11 @@ export default {
       throw new Error(error.message)
     })
   },
+  methods: {
+    toDetails(path) {
+      this.$router.push(path)
+    }
+  },
   computed: {
     tracks() { return this.$store.state.i18n.tracks }
   }
