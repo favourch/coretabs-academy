@@ -161,8 +161,11 @@ header.fixed-header {
     }
     .btn {
       height: 30px !important;
-      color: #624bca !important;
+      color: $heading-color !important;
       margin: 15px 0 15px 10px !important;
+      &:hover{
+        color: #624bc9 !important;
+      }
     }
     .btn.radius {
       border: 1px solid rgba(#634cc9, 0.59) !important;
