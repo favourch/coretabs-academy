@@ -211,7 +211,7 @@ const router = new Router({
   {
     name: 'forums',
     path: '/forums',
-    beforeEnter() { location.href = 'http://forums.coretabs.net' }
+    beforeEnter() { window.open('http://forums.coretabs.net', '_blank') }
   }]
 })
 
