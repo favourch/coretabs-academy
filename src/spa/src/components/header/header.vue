@@ -13,7 +13,10 @@
     <v-toolbar-items class="hidden-sm-and-down">
      <v-btn v-for="(nav, i) in navs" :key="i" flat :class="['white--text', nav.radius ? 'radius' : '']" :to="nav.url" v-html="i18n[i]"></v-btn>
     </v-toolbar-items>
-    <v-toolbar-side-icon class="white--text hidden-md-and-up" @click="toggleDrawer()"></v-toolbar-side-icon>
+    <v-toolbar-side-icon v-if="!drawer.isOpen" class="white--text drawer-icon hidden-md-and-up" @click="toggleDrawer()"></v-toolbar-side-icon>
+    <v-toolbar-side-icon v-else class="white--text drawer-icon hidden-md-and-up" @click="toggleDrawer()">
+      <v-icon>close</v-icon>
+    </v-toolbar-side-icon>
     <v-spacer></v-spacer>
     <router-link to="/" class="brand-logo">
       <img :src="$store.state.logo" alt="coretabs" />

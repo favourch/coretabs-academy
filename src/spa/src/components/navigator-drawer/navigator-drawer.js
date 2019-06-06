@@ -10,7 +10,7 @@ export default {
       close: null
     },
     items: [],
-    mini: true,
+    mini: true
   }),
   computed: {
     i18n() { return this.$store.state.i18n.navigation_drawer }

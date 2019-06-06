@@ -4,7 +4,7 @@
 Header Style
 =======================================*/
 .overlay {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(44, 23, 106, 0.3);
   z-index: 6 !important;
 }
 header {
@@ -63,8 +63,8 @@ header {
         text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
       }
     }
+   
   }
-
   .toolbar {
     //z-index: 100 !important;
     background-color: transparent !important;
@@ -173,7 +173,10 @@ header.fixed-header {
       color: #fff !important;
     }
   }
-  
+  .navigation-drawer{
+    max-height: 100vh !important;
+    height: auto !important;
+  }
 }
 
 header.slide-bottom{
