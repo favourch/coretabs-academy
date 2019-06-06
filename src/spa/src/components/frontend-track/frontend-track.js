@@ -25,7 +25,26 @@ export default {
     testimonialsSiema: {
       perPage: ''
     },
-    perPage: 1
+    perPage: 1,
+    activeProjectItem: 0,
+    projectImage: require('../../assets/multimedia/images/track/frontend/store.png'),
+    projects: [
+      {
+        title: 'تطوير واجهة متجر إلكتروني',
+        imgSrc: require('../../assets/multimedia/images/track/frontend/store.png'),
+        url: 'https://demos.coretabs.net/store-navbar-demo/'
+      },
+      {
+        title: 'تطوير واجهة موقع شخصي',
+        imgSrc: require('../../assets/multimedia/images/track/frontend/portfolio.png'),
+        url: 'https://demos.coretabs.net/portfolio2'
+      },
+      {
+        title: 'إستنساخ واجهة موقع قوقل',
+        imgSrc: require('../../assets/multimedia/images/track/frontend/google.png'),
+        url: 'https://demos.coretabs.net/google-demo'
+      }
+    ]
   }),
   computed: {
     i18n() { return this.$store.state.i18n.about }
@@ -51,10 +70,17 @@ export default {
     stopMSiema() {
       clearInterval(carouselTransitionM)
     },
-    scrollToPricing() {
-      let pricingSection = document.getElementById('pricing-container')
+    scrollTo(sectionName) {
+      let pricingSection = document.getElementById(sectionName)
       let offset = pricingSection.offsetTop - 100
       window.scrollTo(0, offset)
+    },
+    showProject(project, index) {
+      this.activeProjectItem = index
+      this.projectImage = project.imgSrc
+    },
+    showDemo(url) {
+      window.open(url, '_blank')
     }
   },
   created() {   
