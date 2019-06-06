@@ -1,10 +1,10 @@
-@import '../../assets/styles/vars';
-@import '../../../node_modules/rfs/scss/_rfs';
+@import "../../assets/styles/vars";
+@import "../../../node_modules/rfs/scss/_rfs";
 /*=====================================
 Header Style
 =======================================*/
-.overlay{
-  background-color: rgba(0,0,0,0.1);
+.overlay {
+  background-color: rgba(0, 0, 0, 0.1);
   z-index: 6 !important;
 }
 header {
@@ -24,10 +24,9 @@ header {
       .list__tile {
         margin-bottom: 10px !important;
         padding: 0px 15px !important;
-        a{
+        a {
           padding: 35px 10px !important;
         }
-        
       }
 
       .btn {
@@ -39,29 +38,29 @@ header {
         flex-wrap: wrap !important;
 
         > div:not(.list__group__header__append-icon) {
-            flex: 100% !important;
+          flex: 100% !important;
 
-            .list__tile__title {
-              text-align: center !important;
-              @include responsive-font-size(0.82rem,true);
-            }
+          .list__tile__title {
+            text-align: center !important;
+            @include responsive-font-size(0.82rem, true);
+          }
         }
 
         .list__group__header__append-icon {
-            position: absolute !important;
+          position: absolute !important;
         }
 
         .list__group__header__append-icon i,
         .list__tile__title {
-            font-weight: 700 !important;
-            color: $white-color !important;
+          font-weight: 700 !important;
+          color: $white-color !important;
         }
       }
-      .menu-link{
+      .menu-link {
         font-size: 18px !important;
         font-family: inherit;
         font-weight: normal !important;
-        text-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+        text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
       }
     }
   }
@@ -88,13 +87,13 @@ header {
 
         @media (max-width: 600px) {
           width: 180px !important;
-          margin: 25px 10px 10px 20px !important
+          margin: 25px 10px 10px 20px !important;
         }
 
         img {
-            display: block;
-            width: 100%;
-            border-radius: 0;
+          display: block;
+          width: 100%;
+          border-radius: 0;
         }
       }
 
@@ -120,7 +119,7 @@ header {
         border-radius: 20px;
 
         .btn__content {
-            padding: 0 20px;
+          padding: 0 20px;
         }
       }
 
@@ -138,7 +137,7 @@ header {
 
   .btn {
     font-weight: 700 !important;
-    @include responsive-font-size(0.82rem,true);
+    @include responsive-font-size(0.82rem, true);
   }
 }
 
@@ -147,40 +146,54 @@ header.fixed-header {
   position: fixed;
   width: 100%;
   z-index: 6;
-  @include box-shadow(0px, 2px, 15px ,0px , $shadow-color);
-
+  -webkit-transform: translateY(-60px);
+  transform: translateY(-60px);
+  @include box-shadow(0px, 1px, 5px, 0px, $shadow-color);
   .toolbar__content {
     height: 60px !important;
-
     .brand-logo {
       width: auto !important;
       height: 95% !important;
-
       img {
-          width: auto;
-          height: 100%;
+        width: auto;
+        height: 100%;
       }
     }
-
     .btn {
       height: 30px !important;
       color: #624bca !important;
       margin: 15px 0 15px 10px !important;
     }
-
     .btn.radius {
       border: 1px solid rgba(#634cc9, 0.59) !important;
       margin: 15px 20px 15px 10px !important;
     }
-
     .btn.radius:hover {
-      background: rgba(#624bc9, 0.1) !important;
-      color: rgba(#624bc9, 0.9) !important;
+      background: #624bc9 !important;
+      color: #fff !important;
+    }
+  }
+  
+}
+
+header.slide-bottom{
+  -webkit-animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  @-webkit-keyframes slide-bottom {
+    100% {
+      -webkit-transform: translateY(0px);
+      transform: translateY(0px);
+    }
+  }
+  @keyframes slide-bottom {
+    100% {
+      -webkit-transform: translateY(0px);
+      transform: translateY(0px);
     }
   }
 }
 
-[dir='ltr'] {
+[dir="ltr"] {
   header .list__group__header__append-icon {
     right: 0 !important;
   }
@@ -195,7 +208,7 @@ header.fixed-header {
       margin: 0 !important;
       width: 100% !important;
       font-weight: 700 !important;
-      @include responsive-font-size(0.82rem,true);
+      @include responsive-font-size(0.82rem, true);
     }
   }
 }
