@@ -15,9 +15,10 @@ export default {
     },
     updateHeader() {
       let isAbout = document.querySelector('#about')
+      let isTracks = document.querySelector('#track')
       let header = document.querySelector('header')
       let brandLogo = document.querySelector('.brand-logo')
-      if (isAbout) {
+      if (isAbout || isTracks) {
         if (window.scrollY >= 100) {
           header.classList.add('fixed-header')
           this.setProperty(brandLogo, 'margin', '10px')

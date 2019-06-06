@@ -54,11 +54,11 @@ export default {
 
     if (this.$store.getters.isLogin) {
       if (this.$store.getters.account('track')) {
-        if(this.$route.path.includes('classroom') && !this.$route.params.workshop) {
+        if (this.$route.path.includes('classroom') && !this.$route.params.workshop) {
           this.$router.push(`/classroom/${this.$store.getters.account('track')}/`)
         }
       } else {
-        if(!this.$store.getters.user('batch_status')) {
+        if (!this.$store.getters.user('batch_status')) {
           this.$router.push('/batch-not-started')
         } else {
           this.$router.push('/select-track')

@@ -1,7 +1,7 @@
 <template>
   <div id="track">
     <v-layout justify-center class="hero-container">
-      <v-flex xs12 lg10 xl7>
+      <v-flex xs12 lg9 xl7>
         <v-card class="hero section section--dark card__edges" id="frontend-hero">
           <div class="hero__body">
             <v-title class="section__header section__header--desc">
@@ -219,12 +219,15 @@
     </div>
 
     <section id="path-curriculum">
-      <v-layout justify-center wrap align-center>
-        <v-flex xs10 lg10 xl6 class="text-xs-center mt-5">
+      <v-layout justify-center column align-center>
+        <v-flex xs12 lg10 xl6 class="text-xs-center mt-5">
           <h1 class="mb-4">ما الذي ستنجزة خلال المسار؟</h1>
           <p
             class="paragraph"
           >خلال هذا المسار ستقوم بالعمل على مشاريع رائعة لإضافتها لمعرض أعمالك والتي ستعكس مدى الخبرة التي إكتسبتها خلال رحلتك التدريبية.</p>
+        </v-flex>
+        <v-flex xs12 lg10 xl6 class="mt-5">
+          asd
         </v-flex>
         <div class="scroll-down">
           <a href="#pricing">
