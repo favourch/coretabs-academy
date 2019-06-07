@@ -344,7 +344,7 @@ class RegisterSerializer(serializers.Serializer):
         UnicodeUsernameValidator(username)
         if User.objects.filter(username=username).exists():
             raise serializers.ValidationError(
-                _("A user is already registered with this e-mail address."))
+                _("A user is already registered with this username."))
         return username
 
     def validate_email(self, email):

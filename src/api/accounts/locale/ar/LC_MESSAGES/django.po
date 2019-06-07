@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-17 22:13+0100\n"
+"POT-Creation-Date: 2019-06-07 14:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,8 +71,10 @@ msgstr "الحساب موقف."
 msgid "Unable to log in with provided credentials."
 msgstr "تعذر تسجيل الدخول بالبيانات التي أدخلتها."
 
-#: .\serializers.py:146 .\serializers.py:340
-msgid "تأكد أن الإسم الكامل لا يحتوي الا على حروف و مسافات."
+#: .\serializers.py:146 .\serializers.py:331 .\serializers.py:339
+msgid ""
+"تأكد أن تدخل اسمك الكامل (الاسم واللقب) وأنه لا يحتوي إلا على الحروف و "
+"المسافات, سيستعمل اسمك في إنتاج شهادتك."
 msgstr ""
 
 #: .\serializers.py:155
@@ -85,24 +87,32 @@ msgstr ""
 msgid "الملف كبير جدا %(size)s, أفصى حد هو:%(max_valid_size)s"
 msgstr ""
 
-#: .\serializers.py:171 .\serializers.py:348 .\serializers.py:354
+#: .\serializers.py:171 .\serializers.py:353
 msgid "A user is already registered with this e-mail address."
 msgstr "البريد الالكتروني مستعمل."
 
-#: .\serializers.py:228 .\serializers.py:409
+#: .\serializers.py:231 .\serializers.py:408
 msgid "The e-mail address is not assigned to any user account"
 msgstr "البريد الالكتروني غير مستعمل في أي حساب."
 
-#: .\serializers.py:258 .\serializers.py:300
+#: .\serializers.py:255 .\serializers.py:297
 msgid "The two password fields did not match."
 msgstr "كلمتا السر غير متطابقتين."
 
-#: .\serializers.py:264 .\serializers.py:268 .\serializers.py:394
-#: .\serializers.py:397
+#: .\serializers.py:261 .\serializers.py:265 .\serializers.py:393
+#: .\serializers.py:396
 msgid "bad token"
 msgstr ""
 
-#: .\serializers.py:363
+#: .\serializers.py:322
+msgid "تأكد أن اسم المستخدم يحتوي على 3 حروف على الأقل."
+msgstr ""
+
+#: .\serializers.py:347
+msgid "A user is already registered with this username."
+msgstr "اسم المستخدم مستعمل."
+
+#: .\serializers.py:362
 msgid "The two password fields didn't match."
 msgstr "كلمتا السر غير متطابقتين."
 
