@@ -51,6 +51,7 @@ var i18n = `{
     "description_text_1": "الأروع من ذلك أن أكاديمية Coretabs ستقوم بتوجيهك لبدأ تعلمها عبر عمل تطبيقات من أول يوم.",
     "description_text_2": "مستعد لتغيير حياتك وتعلم مهارات جديدة؟",
     "yes_btn_text": "سجل الأن",
+    "classroom_btn_text": "الصف الدراسي",
     "explore_tracks_text": "إستكشف المسارات"
   },
   "not_ready": {
