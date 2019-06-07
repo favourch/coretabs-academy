@@ -10,6 +10,7 @@ export default {
     sectionsImages: [],
     testimonialsImages: [],
     teamImages: [],
+    contributorsImages: [],
     mentorsImages: [],
     quotationIcon: '',
     starState: {
@@ -156,6 +157,14 @@ export default {
     for (let member of this.i18n.team.members) {
       this.$store.dispatch('getImgUrl', `images/${member.src}`).then(img => {
         this.teamImages.push(img)
+      }).catch(error => {
+        throw new Error(error.message)
+      })
+    }
+
+    for (let member of this.i18n.contributors.members) {
+      this.$store.dispatch('getImgUrl', `images/${member.src}`).then(img => {
+        this.contributorsImages.push(img)
       }).catch(error => {
         throw new Error(error.message)
       })

@@ -56,7 +56,32 @@
           <div class="profile">
             <div class="profile-container">
               <h3 v-html="member.name"></h3>
-              <p class="mb" v-html="member.about"></p>
+              <p class="paragraph" v-html="member.about"></p>
+              <div class="social">
+                <div class="icon" v-for="(link, i) in member.links" v-if="link.src" :key="i">
+                  <a :href="link.src" :title="link.name" target="_blank"></a>
+                  <img :src="icons[link.name]" :alt="link.name">
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
+      </div>
+    </div>
+
+    <div id="contributors">
+      <h1 v-html="i18n.contributors.title"></h1>
+      <p v-html="i18n.contributors.description"></p>
+      <div class="flex">
+        <div class="box" v-for="(member, i) in i18n.contributors.members" :key="i">
+          <div class="image-container">
+            <img :src="contributorsImages[i]">
+          </div>
+          <div class="filter"></div>
+          <div class="profile">
+            <div class="profile-container">
+              <h3 v-html="member.name"></h3>
+              <p class="paragraph" v-html="member.about"></p>
               <div class="social">
                 <div class="icon" v-for="(link, i) in member.links" v-if="link.src" :key="i">
                   <a :href="link.src" :title="link.name" target="_blank"></a>
@@ -81,7 +106,7 @@
           <div class="profile">
             <div class="profile-container">
               <h3 v-html="member.name"></h3>
-              <p class="mb" v-html="member.about"></p>
+              <p class="paragraph" v-html="member.about"></p>
               <div class="social">
                 <div class="icon" v-for="(link, i) in member.links" v-if="link.src" :key="i">
                   <a :href="link.src" :title="link.name" target="_blank"><img :src="icons[link.name]" :alt="link.name"></a>

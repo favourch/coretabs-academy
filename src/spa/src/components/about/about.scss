@@ -435,7 +435,8 @@ About Style
     }
   }
 
-  #team {
+  #team,
+  #contributors {
     width: 80%;
     min-width: 1030px;
     margin: 100px auto 200px;
@@ -456,6 +457,12 @@ About Style
     p {
       margin: auto auto 60px;
       line-height: 30px;
+      font-size: 18px;
+      line-height: 36px;
+    }
+    
+    .mb {
+      font-size: 16px;
     }
 
     h1,
@@ -508,7 +515,7 @@ About Style
           }
         }
         .filter {
-          //background: linear-gradient(rgba(84, 0, 255, 0.8), rgba(202, 62, 75, 0.8));
+          // background: linear-gradient(150deg, rgba(84, 0, 255, 0.8), rgba(126, 26, 241, 0.8));
           background: #4448e9;
           width: 100%;
           height: 100%;
@@ -522,7 +529,7 @@ About Style
           height: 100%;
           position: relative;
           z-index: 2;
-          opacity: 0.2;
+          opacity: 0.3;
           transition: .5s ease;
 
           .profile-container {
@@ -689,6 +696,8 @@ About Style
     p {
       margin: auto auto 60px;
       line-height: 30px;
+      font-size: 18px;
+      line-height: 36px;
     }
 
     h1,

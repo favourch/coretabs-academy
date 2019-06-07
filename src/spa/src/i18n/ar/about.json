@@ -76,7 +76,7 @@
   },
   "team": {
     "title": "فريق العمل",
-    "description": "فريق عملنا يعمل على مدار الساعة ليحرص على حصولكم على الفائدة المرجوة و على أفضل تجربة خلال رحلتكم التدريبية على منصة coretabs",
+    "description": "فريق عملنا يعمل على مدار الساعة ليحرص على حصولكم على أفضل تجربة خلال رحلتكم التدريبية على منصة كورتابز.",
     "members": [{
       "name": "Louay Hamada",
       "about": "Full-stack Web Application Developer",
@@ -105,8 +105,8 @@
         "name": "github",
         "src": "https://github.com/Alhakem"
       },{
-        "name": "website",
-        "src": "http://alhakem.me"
+        "name": "linkedin",
+        "src": "https://www.linkedin.com/in/mohammed-alhakem-9b377a129/"
       },{
         "name": "twitter",
         "src": "https://twitter.com/Mo_Alhakem"
@@ -155,7 +155,13 @@
           "name": "twitter",
           "src": "https://twitter.com/Ayman97rf"
         }]
-      }, {
+      }]
+      
+  },
+  "contributors": {
+    "title": "المساهمون",
+    "description": "في كورتابز نرحب بمساهمات الجميع في تطوير المنصة بما يخدم مجتمعنا الرائع في أي وقت، التالي مساهمين نقدر جهودهم معنا.",
+    "members": [{
         "name": "Salah Eddine Lachkar",
         "about": "Front-end Web Developer & 3D Designer",
         "src": "contributors/salah.jpg",
@@ -201,34 +207,8 @@
   },
   "mentors": {
     "title": "الموجهون",
-    "description": "فريق التوجية في الأكاديمية يتألف من عدد من الأشخاص المتميزين الذي سيقوموا بمساندتك أثناء رحلتك التدريبية على منصة coretabs",
+    "description": "فريق التوجية في الأكاديمية يتألف من عدد من الأشخاص المتميزين الذي سيقوموا بمساندتك أثناء رحلتك التدريبية على منصة كورتابز",
     "members": [{
-      "name": "Hossam Hassan",
-      "about": "Front-end developer",
-      "src": "mentors/hossam-hassan.png",
-      "links": [{
-        "name": "github",
-        "src": "https://github.com/HossamHassann"
-      }, {
-        "name": "linkedin",
-        "src": "https://www.linkedin.com/in/hossam-hassan-738420145"
-      }]
-    }, {
-      "name": "Walid Adly",
-      "about": "Full-stack developer",
-      "src": "mentors/walid-adly.png",
-      "links": [{
-        "name": "github",
-        "src": "https://github.com/walidpiano"
-      }, {
-        "name": "linkedin",
-        "src": "https://www.linkedin.com/in/walid-adly/"
-      }
-      , {
-        "name": "facebook",
-        "src": "https://www.facebook.com/walidpiano"
-      }]
-    },  {
       "name": "Fethi TChi",
       "about": "Full-Stack Developer",
       "src": "mentors/fathi-tchi.png",
@@ -239,7 +219,7 @@
         "name": "facebook",
         "src": "https://www.facebook.com/fethi.tchi.5"
       }]
-    },  {
+    }, {
       "name": "Nabila Amdouni",
       "about": "Full-Stack Developer",
       "src": "mentors/nabila.png",
@@ -255,26 +235,6 @@
       }, {
         "name": "linkedin",
         "src": "https://www.linkedin.com/in/nabila-amdouni-0bb980142/"
-      }]
-    }, {
-      "name": "Thamer Al-Harbi",
-      "about": "Full-Stack Developer",
-      "src": "mentors/t.png",
-      "links": [{
-        "name": "github",
-        "src": "https://github.com/thxa"
-      }]
-    }, {
-      "name": "Rakan Ali",
-      "about": "Front-end Developer",
-      "src": "mentors/rakan-ali2.png",
-      "links": [{
-        "name": "facebook",
-        "src": "https://www.facebook.com/profile.php?id=100014538182322"
-      },
-      {
-        "name": "linkedin",
-        "src": "https://www.linkedin.com/in/rakan-ali-pmp®-0788bb96/"
       }]
     }, {
       "name": "Malek Salem",
@@ -294,33 +254,10 @@
       "src": "mentors/makhloufi-smail.png",
       "links": []
     }, {
-      "name": "Ahmed Alakbari",
+      "name": "Amjed Osama",
       "about": "Front-End Developer",
-      "src": "mentors/ahmed-alakbari.png",
-      "links": [{
-        "name": "github",
-        "src": "https://github.com/roabaot"
-      },
-      {
-        "name": "facebook",
-        "src": "https://www.facebook.com/profile.php?id=100006510944126"
-      }]
-    }, {
-      "name": "abdelhadi Mohammed",
-      "about": "Front-End Developer",
-      "src": "mentors/abdelhadi.png",
-      "links": [{
-        "name": "github",
-        "src": "https://github.com/thegeeko"
-      },
-      {
-        "name": "twitter",
-        "src": "https://twitter.com/TheGeek12353"
-      },
-      {
-        "name": "facebook",
-        "src": "https://www.facebook.com/profile.php?id=100004737486157"
-      }]
+      "src": "mentors/amjed.png",
+      "links": []
     }]
     
   },
