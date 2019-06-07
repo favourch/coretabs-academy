@@ -109,6 +109,10 @@ export default {
         }
       }
       mentorsSiema.next(mentorsSiema.perPage)
+    },
+    scrollTo(i) {
+      i += 1
+      return '#desc' + i
     }
   },
   created() {
