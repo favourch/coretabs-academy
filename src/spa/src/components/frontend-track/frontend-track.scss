@@ -732,11 +732,7 @@ Track Style
         h2 {
           color: $heading-color !important;
           &::before {
-            background: linear-gradient(
-              to right,
-              #df9012,
-              #e6570f
-            );
+            background: $grading-color;
           }
         }
       }
@@ -758,7 +754,7 @@ Track Style
     margin-top: 200px;
     padding-bottom: 150px;
     height: calc(100vh - 200px);
-    min-height: 500px;
+    min-height: 750px;
     .skew-box {
       position: relative;
       text-align: center;

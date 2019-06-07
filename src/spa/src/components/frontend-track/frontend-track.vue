@@ -196,12 +196,11 @@
           :key="i"
         ></button>
         </div>
-
         <div class="scroll-down">
-          <a href="#path-projects">
+      <a href="#path-projects">
           <v-icon large>expand_more</v-icon>
         </a>
-        </div>
+    </div>
       </div>
 
       <section id="path-projects">
@@ -217,8 +216,8 @@
                   <v-flex xs11 md8 class="project-card mt-4">
                     <div v-for="(project,i) in projects" :key="i" class="project-item" :class="{'project-item__active' : activeProjectItem === i}" @click="showProject(project,i)">
                       <h2>{{project.title}}</h2>
-                      <v-btn round depressed v-show="activeProjectItem === i" @click="showDemo(project.url)">
-                        <v-icon class="grey--text" small>open_in_new</v-icon>
+                      <v-btn round depressed @click="showDemo(project.url)">
+                        <v-icon class="grey--text ml-1" small>open_in_new</v-icon>
                         مشاهدة حية</v-btn>
                     </div>
                   </v-flex>
