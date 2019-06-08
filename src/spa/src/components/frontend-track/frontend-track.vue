@@ -272,45 +272,6 @@
         </v-layout>
       </section>
 
-      <!-- <div id="pricing" class="section section--light">
-      <div class="section__header section__header--desc">
-        <h1 class="section__heading">ابدأ ببناء حاضرك ومستقبلك المهني</h1>
-        <p>مشاريع رائعة لمعرض أعمالك تعكس الخبرات التي اكتسبتها خلال رحلتك التدريبية</p>
-      </div>
-
-      <v-layout justify-center wrap align-center>
-        <v-flex xs12>
-          <v-layout justify-center>
-            <v-flex xs10 sm6 md3>
-              <v-card class="card__edges">
-                <div id="right-icon">
-                  <v-icon>done</v-icon>
-                </div>
-
-                <div class="card__body">
-                  <v-card-title primary-title>
-                    <div class="card__header">
-                      <h2 class="mb-3">منحة تدريبية</h2>
-                      <p class="card__desc">احصل على منحة تدريبية مغطاة التكاليف</p>
-                    </div>
-                  </v-card-title>
-
-                  <v-card-text>
-                    <span class="price price--prev">$149</span>
-                    <p class="price price--current">$0</p>
-                  </v-card-text>
-
-                  <v-card-actions>
-                    <v-btn depressed round class="button pa-4" to="/signup">قم بالتقديم الآن</v-btn>
-                  </v-card-actions>
-                </div>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-layout>
-    </div>-->
-
       <section id="other-tracks" class="section section--light">
         <v-layout justify-center wrap row align-center>
           <v-flex xs12 class="text-xs-center">
