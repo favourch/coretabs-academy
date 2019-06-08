@@ -2,12 +2,12 @@
 <div id="track">
   <v-layout justify-center class="hero-container">
     <v-flex xs12 lg9 xl7>
-      <v-card class="hero section section--dark card__edges" id="frontend-hero">
+      <v-card class="hero section section--dark card__edges" id="backend-hero">
         <div class="hero__body">
           <v-title class="section__header section__header--desc">
-            <h1 class="section__heading">مسار تطوير واجهات الويب</h1>
+            <h1 class="section__heading">مسار تطوير النظم الخلفية</h1>
             <h2 class="section__heading">(مستوى أول)</h2>
-            <p>في هذا المسار ستقوم بتطوير واجهات جميلة للمواقع الإلكترونية والتي من خلالها سيتفاعل المستخدمين مع التطبيق.</p>
+            <p>في هذا المسار ستقوم بتطوير نظم خلفية للبرمجيات والتي تعتبر جوهر أي تطبيق او موقع إلكتروني.</p>
           </v-title>
 
           <v-card-actions>
@@ -16,7 +16,6 @@
 
           <div class="hero__countdown">
             <p class="hero__countdown-text">باب التقديم للدفعة القادمة يغلق خلال</p>
-
             <Countdown deadline="june 21, 2019" labels="أيام-ساعة-دقيقة-ثانية"></Countdown>
           </div>
         </div>
@@ -216,7 +215,7 @@
                   <v-flex xs11 md8 class="project-card mt-4">
                     <div v-for="(project,i) in projects" :key="i" class="project-item" :class="{'project-item__active' : activeProjectItem === i}" @click="showProject(project,i)">
                       <h2>{{project.title}}</h2>
-                      <v-btn round depressed @click="showDemo(project.url)">
+                      <v-btn v-if="project.url" round depressed @click="showDemo(project.url)">
                         <v-icon class="grey--text ml-1" small>open_in_new</v-icon>
                         مشاهدة حية</v-btn>
                     </div>
@@ -283,14 +282,14 @@
                 <v-layout wrap row class="track-card">
                   <v-flex xs12 md5 class="track-card__img">
                     <img
-                    src="../../assets/multimedia/images/tracks/backend.jpg"
+                    src="../../assets/multimedia/images/tracks/frontend.jpg"
                     alt="مسار تطوير واجهات الويب"
                   >
                 </v-flex>
                     <v-flex xs12 md7 class="pa-5">
-                      <h2 class="mb-3">مسار تطوير النظم الخلفية</h2>
-                      <p class="card__desc">في هذا المسار ستقوم بتطوير نظم خلفية للبرمجيات والتي تعتبر جوهر أي تطبيق او موقع إلكتروني.</p>
-                      <v-btn depressed round class="button py-4 px-3 mt-4" to="/tracks/backend">استكشف المسار</v-btn>
+                      <h2 class="mb-3">مسار تطوير واجهات الويب</h2>
+                      <p class="card__desc">في هذا المسار ستقوم بتطوير واجهات المواقع الإلكترونية والتي من خلالها سيتفاعل المستخدمين مع التطبيق.</p>
+                      <v-btn depressed round class="button py-4 px-3 mt-4" to="/tracks/frontend">استكشف المسار</v-btn>
                     </v-flex>
                 </v-layout>
               </v-flex>
@@ -307,6 +306,6 @@
     </div>
 </template>
 
-<script src="./frontend-track.js"></script>
+<script src="./backend-track.js"></script>
 
-<style src="./frontend-track.scss" lang="scss" ></style>
+<style src="./backend-track.scss" lang="scss" ></style>
