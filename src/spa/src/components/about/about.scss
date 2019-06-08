@@ -26,12 +26,15 @@ About Style
           line-height: 30px;
 
           h1 {
-            margin: 20px auto;
+            margin: 20px auto 25px;
           }
 
           p{
             font-size: 18px;
-            line-height: 34px;
+            line-height: 36px;
+            @media(min-width: 960px) {
+              max-width: 450px;
+            }
           }
         }
       }
