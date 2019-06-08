@@ -1,6 +1,8 @@
-
 # django media
 src/api/media/
+
+# test photo
+test-photo.png
 
 # test database
 db.sqlite3

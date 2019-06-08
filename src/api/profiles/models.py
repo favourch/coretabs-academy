@@ -77,6 +77,20 @@ class Profile(models.Model):
         return f'{self.user.first_name} ({self.user.username})'
 
 
+class Project(models.Model):
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='projects')
+    description = models.CharField(max_length=500, blank=False)
+    photo = models.ImageField(upload_to='projects', blank=True)
+    github_link = models.CharField(max_length=100, blank=True)
+    live_demo_link = models.CharField(max_length=100, blank=True)
+
+    def is_owner(self, user):
+        return self.profile == user.profile
+
+    def __str__(self):
+        return f'{self.description} ({self.profile.user.first_name})'
+
+
 class Certificate(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='certificates')

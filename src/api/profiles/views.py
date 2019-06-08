@@ -1,10 +1,14 @@
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, BasePermission
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import RetrieveUpdateAPIView, RetrieveAPIView
+
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+
 from uuid import UUID
-from .models import Profile, Certificate
-from .serializers import ProfileSerializer, CertificateSerializer
+
+from .models import Profile, Project, Certificate
+from .serializers import ProfileSerializer, ProjectSerializer, CertificateSerializer
 
 
 class MyProfileView(RetrieveUpdateAPIView):
@@ -13,6 +17,17 @@ class MyProfileView(RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user.profile
+
+
+class MyProfileProjectsViewSet(ModelViewSet):
+    class HisOwnProfile(BasePermission):
+        def has_object_permission(self, request, view, obj):
+            return obj.is_owner(request.user)
+
+    serializer_class = ProjectSerializer
+    permission_classes = (IsAuthenticated, HisOwnProfile)
+    def get_queryset(self):
+       return Project.objects.filter(profile=self.request.user.profile)
 
 
 class ProfileView(RetrieveAPIView):

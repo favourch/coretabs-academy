@@ -3,7 +3,7 @@ from django.conf import settings
 from coretabs.admin import site, MyActionForm
 
 from django.contrib.admin import ModelAdmin
-from .models import Profile, Certificate, CertificateTemplate, CertificateSignature
+from .models import Profile, Project, Certificate, CertificateTemplate, CertificateSignature
 
 from .utils import render_mail
 
@@ -35,6 +35,8 @@ class ProfileAdmin(ModelAdmin):
 
 
 site.register(Profile, ProfileAdmin)
+site.register(Project)
+
 site.register(Certificate)
 site.register(CertificateTemplate)
 site.register(CertificateSignature)

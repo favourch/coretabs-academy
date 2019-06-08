@@ -2,7 +2,7 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
-from .models import Profile, Certificate, CertificateSignature
+from .models import Profile, Project , Certificate, CertificateSignature
 
 
 class ChoiceField(serializers.ChoiceField):
@@ -62,6 +62,37 @@ class ProfileCertificateSerializer(serializers.ModelSerializer):
         fields = ('id', 'date', 'heading')
 
 
+class ProjectSerializer(serializers.ModelSerializer):
+    description = serializers.CharField(required=False)
+    photo = serializers.ImageField(required=False)
+    github_link = serializers.RegexField(regex=r'[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)', 
+                                                     error_messages={'invalid': _('Invalid Website url')},
+                                                     allow_blank=True)
+    live_demo_link = serializers.RegexField(regex=r'[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)', 
+                                                     error_messages={'invalid': _('Invalid Website url')},
+                                                     allow_blank=True)
+
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+
+        instance = Project(profile=user.profile, **validated_data)
+        instance.save()
+
+        return instance
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Project
+        fields = ('id', 'description', 'photo', 'github_link', 'live_demo_link')
+
+
 class ProfileSerializer(serializers.ModelSerializer):
     links_errors = {
         'facebook': _('Invalid Facebook url'),
@@ -77,6 +108,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     level = ChoiceField(Profile.LEVEL_CHOICES, read_only=True)
     country = CountryField(Profile.COUNTRY_CHOICES)
     skills = SkillsField(Profile.SKILLS_CHOICES)
+    projects = ProjectSerializer(many=True, read_only=True)
     certificates = ProfileCertificateSerializer(many=True, read_only=True)
     date_joined = serializers.DateTimeField(source='user.date_joined')
 
@@ -107,6 +139,6 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('username', 'name', 'role', 'level', 'description',
-                  'country', 'bio', 'skills', 'certificates', 'avatar_url',
+                  'country', 'bio', 'skills', 'projects', 'certificates', 'avatar_url',
                   'facebook_link', 'twitter_link', 'linkedin_link', 'github_link',
                   'website_link', 'date_joined')
