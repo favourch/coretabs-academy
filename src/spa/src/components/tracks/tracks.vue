@@ -4,7 +4,7 @@
     <v-flex xs12 md12 lg10 xl8>
       <v-layout class="tracks-items" justify-center wrap>
         <v-flex xs10 md4 class="tracks-card">
-          <v-card height="100%" @click.native="toDetails('/tracks/frontend')">
+          <v-card height="100%" @click.native="toDetails('/tracks/backend')">
             <div class="pic-container">
               <img
                   :src="backendImg"
@@ -24,7 +24,7 @@
                 </v-card-text>
 
                 <v-card-actions>
-                  <v-btn depressed round class="button" to="/tracks/frontend"> {{tracks.track.discover_btn}} </v-btn>
+                  <v-btn depressed round class="button" to="/tracks/backend"> {{tracks.track.discover_btn}} </v-btn>
                 </v-card-actions>
               </div>
           </v-card>
