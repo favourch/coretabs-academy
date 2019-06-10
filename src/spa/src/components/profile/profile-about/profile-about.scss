@@ -33,11 +33,11 @@ $card1: (
       padding: 40px !important;
       
       &:first-of-type {
-        border-left: 1px solid $shadow-color;
+        border-left: 1px solid rgb(238, 238, 238);
         
         @media (max-width: 960px) {
           border-left: none;
-          border-bottom: 1px solid $shadow-color;;
+          border-bottom: 1px solid rgb(238, 238, 238);
         }
       }
     }
@@ -53,7 +53,7 @@ $card1: (
 }
 
 .lang-items {
-  margin-top: 25px;
+  margin-top: 20px;
   display: flex;
 
   .lang-item {
@@ -63,7 +63,7 @@ $card1: (
   }
 
   .lang-item ~ .lang-item {
-    margin-right: 1.5rem;
+    margin-right: .7rem;
   }
 
   .lang-img-wrapper {
@@ -77,6 +77,12 @@ $card1: (
     height: 48px;
     margin-bottom: 0.78rem;
   }
+  .skill-chip{
+    display: block;
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+  }
   
   .lang-title {
     color: #696969;
@@ -88,7 +94,8 @@ $card1: (
 .flex {
   .about-item {
     &__title {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      color: #2c3e50;
     }
   }
   
@@ -97,6 +104,9 @@ $card1: (
   }
 }
 
+.other-info-box{
+  background: #fdfdfd;
+}
 
 .other-info {
 

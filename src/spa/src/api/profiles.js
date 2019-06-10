@@ -61,7 +61,8 @@ const ProfilesAPI = {
         linkedin_link: response.data.linkedin_link,
         website_link: response.data.website_link,
         skills: response.data.skills,
-        certificates: []
+        certificates: [],
+        projects: response.data.projects
       }
       /*if (response.data.languages.length > 0) {
         profile.languages = response.data.languages.split(', ').reverse()

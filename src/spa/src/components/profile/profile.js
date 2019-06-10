@@ -18,13 +18,14 @@ export default {
       showEditProfileBtn: false,
       tabs: [
         { name: 'profile-about', text: 'حول' },
-        { name: 'profile-certificates', text: 'الإنجازات' }
+        { name: 'profile-certificates', text: 'الإنجازات' },
+        { name: 'profile-projects', text: 'المشاريع' }
       ]
     }
   },
   methods: {
     getProfileData() {
-      return this.$route.params.username === this.$store.getters.user('username') ? 
+      return this.$route.params.username === this.$store.getters.user('username') ?
       this.$profiles.getProfile(`/api/v1/profile`) :
       this.$profiles.getProfile(`/api/v1/profiles/${this.$route.params.username}`)
     }

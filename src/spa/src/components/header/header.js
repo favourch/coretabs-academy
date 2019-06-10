@@ -97,6 +97,7 @@ export default {
         case 'change-password':
         case 'profile-about':
         case 'profile-certificates':
+        case 'profile-projects':
         case 'lessons':
         case 'modules':
         case 'workshop':

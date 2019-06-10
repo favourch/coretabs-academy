@@ -3,7 +3,27 @@
 /*=====================================
 Profile Certificates
 =======================================*/
+.certificates__title {
+  margin-bottom: 16px;
+}
 
+.profile-projects{
+  .project-card{
+    overflow: hidden;
+  }
+  img{
+    width: 100%;
+    max-height: 190px;
+    object-fit: cover;
+  }
+  .card__title .card-title {
+    min-height: 40px;
+  }
+  .icon-github{
+    font-size: 18px;
+    margin-left: 4px;
+  }
+}
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -15,15 +35,14 @@ Profile Certificates
     margin: 0 !important;
   }
   
-  .card__title .card-title {
-    min-height: 40px;
-  }
+
   
   .card-title {
     color: #2c3e50;
     font-weight: 600;
   }
   
+ 
   .card-meta {
     display: flex;
     align-items: center;
@@ -50,7 +69,7 @@ Profile Certificates
   
   .card-icon {
     font-size: 1.5rem;
-    margin-left: .3rem;
+    margin-left: 3px !important;
   }
   
   .download-btn:hover,

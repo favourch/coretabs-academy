@@ -29,7 +29,7 @@ export default {
       return `https://forums.coretabs.net/u/${this.$store.getters.user('username')}/summary`
     },
     isProfile() {
-      return ['profile-about', 'profile', 'profile-certificates'].includes(this.$route.name)
+      return ['profile-about', 'profile', 'profile-certificates', 'profile-projects'].includes(this.$route.name)
     }
   },
   methods: {

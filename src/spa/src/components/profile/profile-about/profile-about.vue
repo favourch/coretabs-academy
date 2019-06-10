@@ -19,13 +19,14 @@
 
               <div class="lang-items">
                 <div class="lang-item" v-for="(skill, index) in profile.skills" :key="index">
-                  <div class="lang-img-wrapper">{{ skill.value }}</div>
-                  <span class="lang-title">{{ skill.text }}</span>
+                  <!-- <div class="lang-img-wrapper">{{ skill.value }}</div>
+                  <span class="lang-title">{{ skill.text }}</span> -->
+                  <span class="skill-chip">{{ skill.text }}</span>
                 </div>
               </div>
             </div>
           </v-flex>
-          <v-flex xs12 sm12 md4 v-if="profile.date_joined">
+          <v-flex class="other-info-box" xs12 sm12 md4 v-if="profile.date_joined">
             <section class="other-info">
               <div class="about-item">
                 <h4 class="about-item__title">تاريخ الإنضمام</h4>

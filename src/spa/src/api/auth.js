@@ -169,7 +169,7 @@ const AuthAPI = {
       { withCredentials: true })
       .then(async (response) => {
         let unread = root.$store.getters.unread
-        let notifications = response.data.notifications.slice(0, 5)
+        let notifications = response.data.notifications.slice(0, 8)
         let counter = 0
         notifications.forEach(async (notification) => {
           if (!notification.read) {

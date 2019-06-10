@@ -1,21 +1,18 @@
 <template>
   <div v-if="loaded && certificates && certificates.length > 0" class="certificates">
-    <h2 class="certificates__title">الإنجازات</h2>
 
     <div class="card-grid">
       <v-card v-for="certificate in certificates" :key="certificate.index">
         <v-card-title class="">
-          <h3 class="card-title">{{ certificate.heading }}</h3>
+          <h3 class="card-title pt-2 pb-3">{{ certificate.heading }}</h3>
         </v-card-title>
-
         <v-divider></v-divider>
-
         <div class="card-meta">
           <div class="card-date-wrapper">
             <v-icon class="card-icon">event</v-icon>
             <div class="card-date">{{ certificate.date }}</div>
           </div>
-
+        
           <v-spacer></v-spacer>
           <v-card-actions>
             <router-link :to="{name: 'certificate', params: {certificateId: certificate.id}}"  href="#" download="" class="download-btn">

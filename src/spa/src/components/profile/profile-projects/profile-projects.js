@@ -1,16 +1,16 @@
 export default {
-  name: 'ProfileCertificatesComponent',
+  name: 'profile-projects',
   data() {
     return {
       loaded: false,
-      certificates: null
+      projects: null
     }
   },
   created() {
     this.$parent.getProfileData()
     .then(profile => {
       this.loaded = true
-      this.certificates = profile.certificates
+      this.projects = profile.projects;
       document.title = `${profile.name} - ${document.title}`
     })
   },
@@ -19,7 +19,7 @@ export default {
       this.$parent.getProfileData()
       .then(profile => {
         this.loaded = true
-        this.certificates = profile.certificates
+        this.projects = profile.projects
       })
     }
   }

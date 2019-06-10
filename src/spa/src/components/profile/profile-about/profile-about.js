@@ -52,9 +52,9 @@ export default {
     $route() {
       this.$parent.getProfileData()
       .then(profile => {
-        this.loaded = true;
-        this.profile = profile;
-      });
+        this.loaded = true
+        this.profile = profile
+      })
     }
   }
 }

@@ -31,6 +31,7 @@ import maintenanceComponent from './components/maintenance/maintenance.vue'
 import ProfileComponent from './components/profile/profile.vue'
 import ProfileAboutComponent from './components/profile/profile-about/profile-about.vue'
 import ProfileCertificatesComponent from './components/profile/profile-certificates/profile-certificates.vue'
+import ProfileProjects from './components/profile/profile-projects/profile-projects.vue'
 import TracksComponent from './components/tracks/tracks.vue'
 import FrontendTrackComponent from './components/frontend-track/frontend-track.vue'
 import BackendTrackComponent from './components/backend-track/backend-track.vue'
@@ -138,6 +139,11 @@ const router = new Router({
       name: 'profile-certificates',
       path: 'certificates',
       component: ProfileCertificatesComponent
+    },
+    {
+      name: 'profile-projects',
+      path: 'projects',
+      component: ProfileProjects
     }]
     // beforeEnter: (to, from, next) => { (store.getters.isLogin) ? next() : next('/') }
   }, {

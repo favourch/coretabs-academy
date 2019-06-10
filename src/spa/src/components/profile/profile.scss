@@ -8,15 +8,16 @@ $content-padding: 50px;
 
 main.profile-main-content,
 main.profile-about-main-content,
-main.profile-certificates-main-content {
+main.profile-certificates-main-content,
+main.profile-projects-main-content{
   padding-top: 0 !important;
   padding-right: $navigator-drawer-width !important;
   background: $workshop-content-background !important;
 }
 
-.content {
-  padding-top: 3.5rem !important;
-}
+// .content {
+//   padding-top: 3.5rem !important;
+// }
 
 
 .title {
