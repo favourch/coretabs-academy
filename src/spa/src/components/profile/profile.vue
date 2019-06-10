@@ -22,6 +22,10 @@
                 <v-icon right small>place</v-icon>
                 <span class="profile-location-title">{{ profile.country.text }}</span>
               </div>
+              <div class="edit-profile-btn" v-if="showEditProfileBtn">
+                <v-btn round dark depressed class="mt-5" to="/profile/profile-info/">عدل ملفك الشخصي</v-btn>
+              </div>
+
             </div>
 
             <!-- <v-list>

@@ -15,6 +15,7 @@ export default {
       profile: {},
       avatar_url: null,
       avatar_letter: null,
+      showEditProfileBtn: false,
       tabs: [
         { name: 'profile-about', text: 'حول' },
         { name: 'profile-certificates', text: 'الإنجازات' }
@@ -32,8 +33,7 @@ export default {
     this.getProfileData()
     .then(profile => {
       document.title = `${profile.name} - ${document.title}`
-      this.profile = profile; 
-      
+      this.profile = profile
       this.avatar_url = profile.avatar_url
       if (this.avatar_url.slice(0, 4) !== 'http') {
         this.avatar_url = `${process.env.API_BASE_URL || ''}${profile.avatar_url}`
@@ -43,7 +43,8 @@ export default {
           this.avatar_letter = profile.name[0]
         }
       }
-      this.loaded = true;
+      this.loaded = true
+      this.showEditProfileBtn = (profile.username === this.$store.state.user.username)
     }).catch(() => {
       this.$store.dispatch('progress', { error: true })
     })

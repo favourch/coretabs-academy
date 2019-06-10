@@ -126,6 +126,13 @@ main.profile-certificates-main-content {
       margin-right: 0.25rem;
     }
     
+    .edit-profile-btn{
+      .btn{
+        background: rgb(144,66,232);
+        background: linear-gradient(90deg, rgba(144,66,232,1) 0%, rgba(42,60,217,1) 100%);
+      }
+    }
+
     .profile-subheader {
       color: #88919b !important;
       font-size: 1rem;
