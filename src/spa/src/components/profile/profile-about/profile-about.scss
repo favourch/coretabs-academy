@@ -46,14 +46,14 @@ $card1: (
 
 
 .user-bio {
-  color: #88919b;
-  line-height: 2.3rem;
+  line-height: 2.1rem;
   font-size: 14px;
   margin: 0;
+  max-width: 500px;
 }
 
 .lang-items {
-  margin-top: 30px;
+  margin-top: 25px;
   display: flex;
 
   .lang-item {
@@ -79,7 +79,7 @@ $card1: (
   }
   
   .lang-title {
-    color: #88919b;
+    color: #696969;
     font-size: 0.9rem;
   }
   

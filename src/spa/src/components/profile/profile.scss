@@ -32,7 +32,7 @@ main.profile-certificates-main-content {
     border-left: 0 !important;
     transition: none !important;
     overflow: hidden !important;
-    background: $workshop-content-background !important;
+    background: #fbfbfb !important;
     height: 100%;
 
     > div {
@@ -71,15 +71,12 @@ main.profile-certificates-main-content {
       height: 150px !important;
       width: 150px !important;
       align-self: center;
-      overflow: hidden;
-      
       span {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
         height: 100%;
-        background-color: $primary-color !important;
         color: $white-color;
         font-size: 3rem;
       }
@@ -88,11 +85,10 @@ main.profile-certificates-main-content {
     .user-badge {
       background: #ff742c;
       border-radius: 32px;
-      width: 32px;
-      height: 32px;
+      padding: 5px;
       position: absolute;
       bottom: 4px;
-      right: 12px;
+      right: 16px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -105,19 +101,19 @@ main.profile-certificates-main-content {
 
     .profile-username {
       color: $heading-color;
-    }
-    
-    .profile-username {
       font-size: 1.25rem;
     }
     
     .profile-subheading {
-      font-size: 1rem;
-      color: #88919b;
+      font-size: 1.1rem;
+      color: #696969;
+      margin: 5px auto 12px;
+      font-weight: 400;
+      max-width: 200px;
     }
     
     .profile-location {
-      color: #88919b;
+      color: #696969;
       display: flex;
       justify-content: center;
     }
@@ -148,17 +144,17 @@ main.profile-certificates-main-content {
         color: #fff;
         border-radius: 50%;
       }
-    
-      &-verified::after {
-        content: "check";
-        font-family: Material Icons;
-        font-size: 0.75rem;
-        background: #2d43e7;
-        margin-right: 8px;
-        top: 55%;
-        width: 16px;
-        height: 16px;
-      }
+      
+      // &-verified::after {
+      //   content: "check";
+      //   font-family: Material Icons;
+      //   font-size: 0.85rem;
+      //   background: #3b58ea;
+      //   margin-right: 8px;
+      //   top: 48%;
+      //   padding: 2px;
+      //   line-height: 100%;
+      // }
     }
     
     .user-level {

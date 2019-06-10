@@ -3,7 +3,7 @@ export default {
   data() {
     return {
       profile: {},
-      loaded: false,
+      loaded: false
     }
   },
   computed: {
