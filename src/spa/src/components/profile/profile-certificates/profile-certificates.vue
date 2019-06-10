@@ -30,7 +30,7 @@
   <div v-else-if="loaded && certificates && certificates.length === 0">
     <v-container fluid fill-height>
       <v-layout column align-center justify-center>
-        <p>لا أمتلك أي شهادة الآن ولكنني أعمل على ذلك 💪</p>
+        <p>أعمل على تحقيق أول إنجاز لي 💪</p>
       </v-layout>
     </v-container>
   </div>
