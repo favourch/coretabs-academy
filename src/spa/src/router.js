@@ -196,6 +196,11 @@ const router = new Router({
   }, {
     path: '*',
     redirect: '/404'
+  },
+  {
+    name: 'classroom',
+    path: '/classroom',
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? (store.getters.user('batch_status') ? next('/classroom/' + store.getters.account('track')) : location.reload()) : next('/') }
   }, {
     name: 'workshops',
     path: '/classroom/:track',
