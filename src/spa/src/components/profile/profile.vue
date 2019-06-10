@@ -11,6 +11,9 @@
                 <div class="user-badge" v-if="profile.role && profile.role !== 'Student'">
                   <span class="icon"></span>
                 </div>
+                <div class="edit-image-btn" title="تغيير الصورة الشخصية" v-if="showEditProfileBtn">
+                  <v-btn depressed fab to="/profile/personal-info"><v-icon>photo_camera</v-icon></v-btn>
+                </div>
                 <img v-if="avatar_url" :src="avatar_url" :alt="profile.name">
                 <span v-else v-html="avatar_letter"></span>
               </v-avatar>
