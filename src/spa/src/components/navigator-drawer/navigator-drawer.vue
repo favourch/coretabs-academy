@@ -22,7 +22,7 @@
 
     <v-list class="pt-0" dense id="nav-items">
       <v-list-tile v-for="item in items" :key="item.title" :class="{separator: item.separator}" >
-        <a v-if="item.link" :href="item.link" target="_blank">
+        <a v-if="item.link" :href="item.link" :target="item.target">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>

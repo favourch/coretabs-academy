@@ -30,15 +30,15 @@ export default {
       throw new Error(error.message)
     })
 
-    if(this.$store.getters.isLogin) {
+    if (this.$store.getters.isLogin) {
       this.items.push({ route: `/classroom/${this.$store.getters.account('track')}/`, icon: 'school', title: this.i18n.classroom })
       this.items.push({ link: 'https://forums.coretabs.net', icon: 'forum', title: this.i18n.forum })
       this.items.push({ route: `/user/${this.$store.getters.user('username')}/`, icon: 'person', title: this.i18n.profile, separator: true })
       this.items.push({ route: '/profile', icon: 'settings', title: this.i18n.settings })
       this.items.push({ route: '/logout', icon: 'exit_to_app', title: this.i18n.logout })
     } else {
-      this.items.push({ link: 'https://forums.coretabs.net', icon: 'forum', title: this.i18n.forum })
-      this.items.push({ link: '/signin', icon: 'exit_to_app', title: this.i18n.signin })
+      this.items.push({ link: 'https://forums.coretabs.net', icon: 'forum', title: this.i18n.forum, target: '_blank' })
+      this.items.push({ link: '/signin', icon: 'vpn_key', title: this.i18n.signin, target: '_self' })
     }
   },
   methods: {
@@ -46,7 +46,7 @@ export default {
       let target = event.target
       
       while (target) {
-        if(target.parentNode.tagName === "ASIDE") {
+        if (target.parentNode.tagName === "ASIDE") {
           this.mini = false
           document.querySelector('main.content').classList.add('navigator-drawer-opened')
           return false

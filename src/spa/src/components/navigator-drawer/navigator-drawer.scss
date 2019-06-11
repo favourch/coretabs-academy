@@ -56,8 +56,9 @@ html[dir='rtl'] {
     &#nav-items {
       margin: 16px 0;
       .icon{
-        color: #999;
+        color: #a8a8a8;
         transition-duration: .4s;
+        font-size: 26px;
       }
       a{
         display: flex;
@@ -84,7 +85,7 @@ html[dir='rtl'] {
   }
 
   .list--dense .list__tile:not(.list__tile--avatar) {
-    height: 40px;
+    height: 48px;
   }
 }
 
