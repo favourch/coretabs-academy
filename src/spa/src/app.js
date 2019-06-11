@@ -20,17 +20,22 @@ export default {
       let brandLogo = document.querySelector('.brand-logo')
       let burgerMenu = document.querySelector('.toolbar__side-icon')
       if (isAbout || isTracks) {
-        if (window.scrollY >= window.innerHeight + 200) {
-          header.classList.add('fixed-header')
-          header.classList.add('slide-bottom')
-          this.setProperty(brandLogo, 'margin', '10px')
-          this.setProperty(burgerMenu, 'margin', '0 16px 4px 0')
-        } else {
-          header.classList.remove('fixed-header')
-          header.classList.remove('slide-bottom')
-          this.setProperty(brandLogo, 'margin', '25px 10px 10px 20px')
-          this.setProperty(burgerMenu, 'margin', '13px 20px 29px 10px')
-        }
+        let prevPosition = window.pageYOffset
+        window.addEventListener('scroll', () => {
+          let currentPosition = window.pageYOffset
+          if (window.scrollY >= window.innerHeight && prevPosition > currentPosition) {
+            header.classList.add('fixed-header')
+            header.classList.add('slide-bottom')
+            this.setProperty(brandLogo, 'margin', '10px')
+            this.setProperty(burgerMenu, 'margin', '0 16px 4px 0')
+          } else {
+            header.classList.remove('fixed-header')
+            header.classList.remove('slide-bottom')
+            this.setProperty(brandLogo, 'margin', '25px 10px 10px 20px')
+            this.setProperty(burgerMenu, 'margin', '13px 20px 29px 10px')
+          }
+          prevPosition = currentPosition
+        })
       } else {
         header.classList.remove('fixed-header')
         header.classList.remove('slide-bottom')
@@ -68,7 +73,7 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', this.updateHeader)
+    this.updateHeader()
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onResize)
