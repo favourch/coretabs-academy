@@ -44,8 +44,8 @@ export default {
   async created() {
     await this.$parent.getProfileData()
     .then(profile => {
-      this.loaded = true;
-      this.profile = profile;
+      this.loaded = true
+      this.profile = profile
     });
   },
   watch: {

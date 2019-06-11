@@ -8,7 +8,8 @@
       <!--<router-link to="/">
         <img :src="$store.state.icon" alt="coretabs" />
       </router-link>-->
-      <v-menu :close-on-content-click="false" v-model="menu" content-class="notifications-menu" offset-y>
+     
+      <v-menu v-if="$store.getters.isLogin" :close-on-content-click="false" v-model="menu" content-class="notifications-menu" offset-y>
         <v-btn slot="activator" class="menu" :class="{'unread': unread}" @click="set_unread">
           <img v-if="avatar_url" :src="avatar_url" />
           <span v-else v-html="avatar_letter"></span>
@@ -49,6 +50,7 @@
 
         </v-card>
       </v-menu>
+      <!-- <v-btn v-else to="/signin" depressed round flat class="login-btn">تسجيل الدخول</v-btn> -->
     </nav>
   </v-toolbar>
 </div>

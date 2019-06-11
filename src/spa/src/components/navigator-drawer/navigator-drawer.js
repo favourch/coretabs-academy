@@ -38,6 +38,7 @@ export default {
       this.items.push({ route: '/logout', icon: 'exit_to_app', title: this.i18n.logout })
     } else {
       this.items.push({ link: 'https://forums.coretabs.net', icon: 'forum', title: this.i18n.forum })
+      this.items.push({ link: '/signin', icon: 'exit_to_app', title: this.i18n.signin })
     }
   },
   methods: {

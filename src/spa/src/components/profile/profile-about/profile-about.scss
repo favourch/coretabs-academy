@@ -55,17 +55,15 @@ $card1: (
 .lang-items {
   margin-top: 20px;
   display: flex;
-
+  flex-wrap: wrap;
   .lang-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 5px 0;
+    margin-left: .7rem;
   }
-
-  .lang-item ~ .lang-item {
-    margin-right: .7rem;
-  }
-
+  
   .lang-img-wrapper {
     display: flex;
     justify-content: center;

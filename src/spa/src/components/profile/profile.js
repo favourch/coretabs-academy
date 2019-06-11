@@ -42,7 +42,7 @@ export default {
         this.showEditProfileBtn = (profile.username === this.$store.state.user.username)
       }).catch(() => {
         this.$store.dispatch('progress', { error: true })
-      });
+      })
     }
   },
   methods: {

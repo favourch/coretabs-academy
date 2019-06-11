@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer v-model="drawer.isOpen" :right="drawer.isRight" :mini-variant.sync="mini" :width="200" hide-overlay app @mouseover.native="toggleDrawer($event)" @mouseleave.native="toggleDrawer($event)">
     <v-toolbar flat class="transparent">
-      <v-list class="pa-0">
+      <v-list class="pa-0 py-1">
         <v-list-tile avatar>
           <v-list-tile-avatar v-if="mini">
             <router-link to="/">

@@ -131,7 +131,8 @@ var i18n = `{
     "classroom": "ورش العمل",
     "forum": "المجتمع",
     "settings": "الإعدادات",
-    "logout": "تسجيل خروج"
+    "logout": "تسجيل خروج",
+    "signin": "تسجيل الدخول"
   },
   "account": {
     "titles": {

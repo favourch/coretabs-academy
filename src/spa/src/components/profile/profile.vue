@@ -2,7 +2,7 @@
   <div v-if="loaded" id="profile">
     <NavigatorDrawerComponent />
     <section id="column-flexed">
-      <inner-header-component></inner-header-component>
+      <!-- <inner-header-component></inner-header-component> -->
       <v-container fluid class="pa-0">
         <v-layout :column="$vuetify.breakpoint.smAndDown">
           <v-flex xs12 md3 class="profile">
