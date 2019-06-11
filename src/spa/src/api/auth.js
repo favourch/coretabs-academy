@@ -169,7 +169,7 @@ const AuthAPI = {
       { withCredentials: true })
       .then(async (response) => {
         let unread = root.$store.getters.unread
-        let notifications = response.data.notifications.slice(0, 8)
+        let notifications = response.data.notifications.slice(0, 5)
         let counter = 0
         notifications.forEach(async (notification) => {
           if (!notification.read) {
@@ -177,12 +177,13 @@ const AuthAPI = {
             counter++
           }
         })
-
         if(unread === false || notifications[0].id === response.data.seen_notification_id) {
           await root.$store.dispatch('unread', false)
         }
         
-        document.querySelector('button.menu.btn').setAttribute('counter', counter)
+        root.$store.dispatch('notificationsCounter', counter)
+
+        // document.querySelector('#unread-counter').innerHTML = counter
 
         root.notifications = notifications
         return root.$store.getters.unread

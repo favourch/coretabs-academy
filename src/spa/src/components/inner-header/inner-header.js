@@ -30,6 +30,9 @@ export default {
     },
     isProfile() {
       return ['profile-about', 'profile', 'profile-certificates', 'profile-projects'].includes(this.$route.name)
+    },
+    counter() {
+      return this.$store.getters.notificationsCounter
     }
   },
   methods: {

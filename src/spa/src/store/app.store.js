@@ -15,6 +15,7 @@ export default new Vuex.Store({
     maintenance: true,
     header: true,
     isLogin: false,
+    notificationsCounter: 0,
     user: {},
     profile: {},
     countries: [
@@ -103,6 +104,9 @@ export default new Vuex.Store({
       } else {
         state.progress.text = i18n.app.progress.errorText
       }
+    },
+    notificationsCounter(state, payload) {
+      state.notificationsCounter = payload
     }
   },
   actions: {
@@ -141,11 +145,17 @@ export default new Vuex.Store({
     },
     progress(context, payload) {
       context.commit('progress', payload)
+    },
+    notificationsCounter({commit}, payload) {
+      commit('notificationsCounter', payload)
     }
   },
   getters: {
     header: state => {
       return state.header
+    },
+    notificationsCounter: state => {
+      return state.notificationsCounter
     },
     isLogin: state => {
       return state.isLogin

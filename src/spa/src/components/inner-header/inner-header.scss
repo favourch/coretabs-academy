@@ -48,7 +48,7 @@ $toolbar-padding: 0 15px;
           width: $inner-header-height - 15 !important;
           height: $inner-header-height - 15 !important;
           vertical-align: top;
-          
+          counter-reset: count;
           .btn {
             background: $white-color !important;
             border-radius: 50%;
@@ -56,16 +56,15 @@ $toolbar-padding: 0 15px;
             margin: 0;
             min-width: unset;
 
-            &.unread::after {
+            #unread-counter {
               position: absolute;
               top: 0;
               right: -8px;
-              content: attr(counter);
               display: block;
               border-radius: 8px;
               width: 16px;
               height: 16px;
-              background-color: #e74c3c;
+              background-color: #e74c3c !important;
               color: #fff;
               font-size: 12px;
               line-height: 16px;
