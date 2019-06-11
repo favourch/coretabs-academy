@@ -23,6 +23,28 @@ export default {
       ]
     }
   },
+  watch: {
+    '$route.params.username'() {
+      this.getProfileData()
+      .then(profile => {
+        document.title = `${profile.name} - ${document.title}`
+        this.profile = profile
+        this.avatar_url = profile.avatar_url
+        if (this.avatar_url.slice(0, 4) !== 'http') {
+          this.avatar_url = `${process.env.API_BASE_URL || ''}${profile.avatar_url}`
+        } else {
+          if (this.avatar_url.search(/coretabs-academy-media/) === -1) {
+            this.avatar_url = null
+            this.avatar_letter = profile.name[0]
+          }
+        }
+        this.loaded = true
+        this.showEditProfileBtn = (profile.username === this.$store.state.user.username)
+      }).catch(() => {
+        this.$store.dispatch('progress', { error: true })
+      });
+    }
+  },
   methods: {
     getProfileData() {
       return this.$route.params.username === this.$store.getters.user('username') ?
