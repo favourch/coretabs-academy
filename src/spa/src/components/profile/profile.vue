@@ -45,7 +45,9 @@
             <v-tab v-for="tab in tabs" :key="tab.name" ripple :to="{name: tab.name}">{{ tab.text }}</v-tab>
           </v-tabs>
           <div class="profile-sub-page">
-            <router-view></router-view>
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
           </div>
           <JoinInviteComponent v-if="!$store.getters.isLogin" />
         </v-flex>
