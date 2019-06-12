@@ -124,7 +124,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     github_link = serializers.RegexField(regex=r'http(s)?://(www\.)?github\.com/[A-z0-9_-]+/?',
                                          error_messages={'invalid': links_errors['github']},
                                          allow_blank=True)
-    website_link = serializers.URLField(error_messages={'invalid': links_errors['website']},
+    website_link = serializers.RegexField(regex=r'[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)', 
                                         allow_blank=True)
 
     avatar_url = serializers.SerializerMethodField()
