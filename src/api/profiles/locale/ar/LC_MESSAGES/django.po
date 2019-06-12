@@ -55,18 +55,29 @@ msgstr ""
 msgid "Tunisia"
 msgstr ""
 
-#: .\serializers.py:44
-msgid "Invalid Facebook url"
-msgstr ""
-
-#: .\serializers.py:45
-msgid "Invalid Twitter url"
-msgstr ""
-
-#: .\serializers.py:46
-msgid "Invalid LinkedIn url"
-msgstr ""
+#: .\serializers.py:47
+msgid "Invalid Project GitHub URL"
+msgstr "رابط موقعك الشخصي يبدو غير سليم، الرجاء التحقق منه"
 
 #: .\serializers.py:47
-msgid "Invalid Website url"
-msgstr ""
+msgid "Invalid Project Demo URL"
+msgstr "رابط موقعك الشخصي يبدو غير سليم، الرجاء التحقق منه"
+
+#: .\serializers.py:44
+msgid "Invalid Facebook URL"
+msgstr "رابط Facebook يبدو غير سليم، الرجاء التحقق منه"
+
+msgid "Invalid Github URL"
+msgstr "رابط Github يبدو غير سليم، الرجاء التحقق منه"
+
+#: .\serializers.py:45
+msgid "Invalid Twitter URL"
+msgstr "رابط Twitter يبدو غير سليم، الرجاء التحقق منه"
+
+#: .\serializers.py:46
+msgid "Invalid LinkedIn URL"
+msgstr "رابط LinkedIn يبدو غير سليم، الرجاء التحقق منه"
+
+#: .\serializers.py:47
+msgid "Invalid Website URL"
+msgstr "رابط موقعك الشخصي يبدو غير سليم، الرجاء التحقق منه"

@@ -66,10 +66,10 @@ class ProjectSerializer(serializers.ModelSerializer):
     description = serializers.CharField(required=False)
     photo = serializers.ImageField(required=False)
     github_link = serializers.RegexField(regex=r'[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)', 
-                                                     error_messages={'invalid': _('Invalid Website url')},
+                                                     error_messages={'invalid': _('Invalid Project GitHub URL')},
                                                      allow_blank=True)
     live_demo_link = serializers.RegexField(regex=r'[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)', 
-                                                     error_messages={'invalid': _('Invalid Website url')},
+                                                     error_messages={'invalid': _('Invalid Project Demo URL')},
                                                      allow_blank=True)
 
 
@@ -95,11 +95,11 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     links_errors = {
-        'facebook': _('Invalid Facebook url'),
-        'twitter': _('Invalid Twitter url'),
-        'linkedin': _('Invalid LinkedIn url'),
-        'github': _('Invalid Github url'),
-        'website': _('Invalid Website url'),
+        'facebook': _('Invalid Facebook URL'),
+        'twitter': _('Invalid Twitter URL'),
+        'linkedin': _('Invalid LinkedIn URL'),
+        'github': _('Invalid Github URL'),
+        'website': _('Invalid Website URL'),
     }
 
     username = serializers.CharField(source='user.username', read_only=True)
@@ -125,7 +125,8 @@ class ProfileSerializer(serializers.ModelSerializer):
                                          error_messages={'invalid': links_errors['github']},
                                          allow_blank=True)
     website_link = serializers.RegexField(regex=r'[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)', 
-                                        allow_blank=True)
+                                         error_messages={'invalid': _('Invalid Website URL')},
+                                         allow_blank=True)
 
     avatar_url = serializers.SerializerMethodField()
 
