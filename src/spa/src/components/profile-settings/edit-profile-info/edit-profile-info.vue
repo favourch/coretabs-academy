@@ -11,14 +11,14 @@
                   <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
                   <v-text-field dir="auto" :label="form.description" v-model="description" @keyup.enter="submit" required></v-text-field>
                   <v-text-field dir="auto" :label="form.bio" v-model="bio" @keyup.enter="submit" required></v-text-field>
-                  <v-select v-model="userCountry" :items="countries" attach chips :label="form.country" ></v-select>
+                  <v-select v-model="userCountry" :items="countries" :rules="crRules" attach chips :label="form.country" ></v-select>
                   <v-select v-model="userSkills" :items="skills" attach chips :label="form.skills" multiple ></v-select>
                   <v-text-field dir="auto" prepend-icon="fab fa-github" :label="form.github_link" v-model="github_link" @keyup.enter="submit"></v-text-field>
                   <v-text-field dir="auto" prepend-icon="fab fa-linkedin" :label="form.linkedin_link" v-model="linkedin_link" @keyup.enter="submit"></v-text-field>
                   <v-text-field dir="auto" prepend-icon="fab fa-facebook-square" :label="form.facebook_link" v-model="facebook_link" @keyup.enter="submit"></v-text-field>
                   <v-text-field dir="auto" prepend-icon="fab fa-twitter" :label="form.twitter_link" v-model="twitter_link" @keyup.enter="submit"></v-text-field>
                   <v-text-field dir="auto" prepend-icon="fas fa-globe" :label="form.website_link" v-model="website_link" @keyup.enter="submit"></v-text-field>
-                  <v-btn right round id="submit" @click="submit" :disabled="waiting">
+                  <v-btn right round id="submit" @click="submit" :disabled="!valid || waiting">
                     <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
                     {{ i18n.submit_btn_text }}
                   </v-btn>
