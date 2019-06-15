@@ -8,6 +8,10 @@ Header Style
   z-index: 6 !important;
 }
 header {
+  @media (min-width: 600px) {
+    z-index: 1;
+  }
+  
   .navigation-drawer {
     background-color: transparent !important;
     z-index: 150 !important;
