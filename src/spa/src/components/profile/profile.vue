@@ -1,5 +1,6 @@
 <template>
 <div v-if="loaded" id="profile">
+  <inner-header-component v-if="$store.getters.isLogin && $vuetify.breakpoint.smAndDown"></inner-header-component>
   <NavigatorDrawerComponent />
   <section id="column-flexed">
     <v-container fluid class="pa-0">
@@ -40,7 +41,7 @@
         </v-flex>
 
         <v-flex xs12>
-          <inner-header-component v-if="$store.getters.isLogin"></inner-header-component>
+          <inner-header-component v-if="$store.getters.isLogin && $vuetify.breakpoint.mdAndUp"></inner-header-component>
           <v-tabs>
             <v-tab v-for="tab in tabs" :key="tab.name" ripple :to="{name: tab.name}">{{ tab.text }}</v-tab>
           </v-tabs>
