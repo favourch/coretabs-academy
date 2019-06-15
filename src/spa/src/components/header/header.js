@@ -93,6 +93,7 @@ export default {
       switch (this.$route.name) {
         case 'personal-info':
         case 'profile-info':
+        case 'manage-projects':
         case 'change-track':
         case 'change-password':
         case 'profile-about':

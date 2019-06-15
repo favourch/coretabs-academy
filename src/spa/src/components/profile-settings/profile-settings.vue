@@ -32,6 +32,17 @@
             </v-list-tile>
           </router-link>
           <v-divider></v-divider>
+          <router-link to="/profile/manage-projects" replace>
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon :color="`grey`">business_center</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title v-html="i18n.manage_projects"></v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </router-link>
+          <v-divider></v-divider>
           <router-link to="/profile/change-track" replace>
             <v-list-tile>
               <v-list-tile-action>

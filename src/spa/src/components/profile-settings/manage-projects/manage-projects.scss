@@ -1,0 +1,312 @@
+@import '../../../assets/styles/vars';
+@import '../../../../node_modules/rfs/scss/_rfs';
+@import url('https://use.fontawesome.com/releases/v5.8.2/css/all.css');
+
+.inner-header,
+.navigation-drawer--is-mobile {
+  z-index: 0;
+}
+
+// To make spinner in the center of the inner page
+.progress-container {
+  position: relative;
+  width: 100%;
+}
+
+.mother-container {
+  box-shadow: 5px 2px 14px #d8d7d7, -3px 6px 13px #d8d7d7;
+  @include border-radius(20px);
+  overflow: hidden;
+  margin: 0 auto;
+
+  @media (max-width: 1440px) {
+    max-width: 65%;
+  }
+
+  @media (max-width: 1366px) {
+    max-width: 70%;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 70%;
+  }
+
+  @media (max-width: 1023px) {
+    max-width: 90%;
+  }
+
+  @media (min-width: 1441px) {
+    max-width: 55%;
+  }
+
+  .alert {
+    text-align: right;
+    border-radius: 10px;
+    margin: 0 0 10px;
+    padding: 10px 10px 12px;
+    border-color: transparent !important;
+
+    &.alert {
+      border-color: transparent !important;
+    }
+  }
+
+  .manage-projects__header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 24px;
+    border-bottom: 1px solid $secondary-color;
+
+    #add-project {
+      height: 40px;
+      right: 0;
+      padding: 0px 30px;
+      background:$grading-color;
+      color:#fff !important;
+
+      &.btn--disabled {
+          background: #d5d5d5 !important;
+          color: #fff !important;
+      }
+    }
+  }
+
+  .list {
+    padding: 0;
+    
+    & > div {
+      
+      &:nth-of-type(odd) {
+        background: #FAFAFA;
+      }
+      
+      .list__tile__action {
+        display: none;
+      }
+
+      .list__tile {
+        height: 56px;
+        padding: 0 24px;
+        
+        &:hover {
+          background: transparent;
+          @include box-shadow(0px, 4px, 8px ,0 , rgba(0,0,0,0.1));
+        }
+      }
+
+      &:hover {
+
+        .list__tile__action {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+
+          & > .btn {
+            margin: 0;
+            color: #bbbbbb;
+          }
+        }
+      }
+    }
+  }
+
+  #emptyState {
+    height: 240px;
+    background: #FAFAFA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 960px) {
+    .form-container {
+      padding: 40px;
+    }
+  }
+}
+
+.dialog {
+  @include border-radius(20px);
+  background: #fff;
+  
+  .dialog-body {
+    padding: 40px;
+  }
+
+  .card {
+    box-shadow: none;
+
+    .form-container {
+      direction: rtl;
+      padding: 40px;
+  
+      .input-group.disabled {
+        .input-group__details {
+          min-height: 10px;
+        }
+  
+        .icon--disabled {
+          display: none;
+        }
+      }
+  
+      .input-group--text-field label {
+        max-width: unset;
+        text-align: right;
+        transform-origin: top right;
+      }
+  
+      .input-group--text-field.input-group--prepend-icon label {
+        left: unset;
+        right: 40px;
+      }
+  
+      .input-group--text-field.input-group--prepend-icon .input-group__prepend-icon {
+        justify-content: flex-start;
+      }
+  
+      .input-group--text-field.input-group--prepend-icon .input-group__details {
+        margin-left: unset;
+        margin-right: auto;
+      }
+      
+      .input-group--required label:after {
+        content: "";
+      }
+      
+      .input-group--error label:after {
+        content: " *";
+      }
+  
+      .fab:before {
+        font-family: "Font Awesome 5 Brands";
+      }
+  
+      .fas:before {
+        font-family: "Font Awesome 5 Free";
+      }
+  
+      .input-group--text-field .input-group__counter {
+        margin-left: unset;
+        margin-right: auto;
+      }
+    }
+  }
+
+  .dialog-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 20px;
+    border-top: 1px solid $secondary-color;
+
+    .yes {
+      background: $grading-color;
+      color: #fff;
+      @include box-shadow(0px, 15px,34px ,0px , $shadow-color);
+      transition: box-shadow ease-in-out 0.6s;
+
+      &:hover{
+        box-shadow: none;
+      }
+
+      &.btn--disabled {
+        background: #d5d5d5 !important;
+        color: #fff !important;
+      }
+    }
+
+    .delete-btn {
+      background: linear-gradient(to left, $error-color, $accent-color) !important;  
+    }
+
+    .no {
+      background: $white-color !important;
+      box-shadow: none;
+      border: 2px solid #ccc;
+      color: #717171;
+    }
+
+    .yes,
+    .no {
+      font-weight: 700;
+      height: 50px;
+      width: 45%;
+      max-width: 200px;
+      margin-left: 8px;
+      margin-right: 8px;
+
+      @media (max-width: 768px) {
+          margin: 24px 0 0 0 !important;
+          width: 100%;
+          max-width: 100%;
+          height: 55px;
+      }
+    }
+    @media (max-width: 768px) {
+      text-align: center;
+    }
+  }
+
+  .delete-dialog {
+    background: #fff !important;
+    
+    &__title {
+      margin-block-end: 24px;
+    }
+  }
+
+  .pic-container {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background: #FAFAFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .add-image-btn {
+
+    & > label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .icon {
+      background: #FAFAFA;
+      color: #bbbbbb;    
+      margin-block-end: 16px;
+    }
+
+    & p {
+      color: #bbb;
+    }
+  }
+
+  .leave {
+    position: absolute;
+    bottom: 0;
+    right:0;
+    width: 35px;
+    height:35px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 22px;
+    border-top-left-radius: 22px;
+    i {
+      font-size: 20px !important;
+      color: #8997a4;
+    }
+  }
+}

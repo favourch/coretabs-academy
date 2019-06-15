@@ -49,6 +49,9 @@ export default {
         case 'change-password':
           this.header = this.i18n.change_password
           break
+        case 'manage-projects':
+          this.header = this.i18n.manage_projects
+          break
       }
     },
     onResize() {

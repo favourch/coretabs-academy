@@ -1,6 +1,8 @@
 /* eslint-disable */
 import Vue from 'vue'
 import { createRouter } from '../router'
+import Cookies from 'js-cookie'
+
 const router = createRouter()
 
 const ProfilesAPI = {
@@ -154,6 +156,109 @@ const ProfilesAPI = {
     })
     .catch(err => {
       console.error(err)
+    })
+  },
+  async createProject(root) {
+    root.alert.success = false
+    root.alert.error = false
+
+    let formData = new FormData()
+    formData.append('description', root.project_name)
+    formData.append('github_link', root.repo_link)
+    formData.append('live_demo_link', root.demo_link)
+    formData.append('photo', root.validImage.imageData)
+
+    return await axios.post(`/api/v1/profile/projects`, formData, {
+      withCredentials: true,
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then((response) => {
+      root.alert.success = true
+      root.alert.message = root.i18n.add_success_message
+      
+      return false
+    }).catch((error) => {
+      if (error.response) {
+        root.alert.error = true
+        if (error.response.status === 400) {
+          for (var err in error.response.data) {
+            root.alert.message = error.response.data[err][0]
+            break
+          }
+        } else {
+          root.alert.message = root.form.message_endpoint_error
+        }
+        return false
+      }
+    })
+  },
+  async changeProjectInfo(root) {
+    root.alert.success = false
+    root.alert.error = false
+    let id = root.editProjectId;
+
+    let formData = new FormData()
+    formData.append('description', root.project_name)
+    formData.append('github_link', root.repo_link)
+    formData.append('live_demo_link', root.demo_link)
+    formData.append('photo', root.validImage.imageData)
+
+    return await axios.patch(`/api/v1/profile/projects/${id}`, formData, {
+      withCredentials: true,
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then((response) => {
+      root.alert.success = true
+      root.alert.message = root.i18n.edit_success_message
+
+      return false
+    }).catch((error) => {
+      if (error.response) {
+        root.alert.error = true
+        if (error.response.status === 400) {
+          for (var err in error.response.data) {
+            root.alert.message = error.response.data[err][0]
+            break
+          }
+        } else {
+          root.alert.message = root.form.message_endpoint_error
+        }
+        return false
+      }
+    })
+  },
+  async deleteProject(root) {
+    root.alert.success = false
+    root.alert.error = false
+    let id = root.editProjectId;
+
+    return await axios.delete(`/api/v1/profile/projects/${id}`, {
+      withCredentials: true,
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then((response) => {
+      root.alert.success = true
+
+      return false;
+    }).catch((error) => {
+      if (error.response) {
+        root.alert.error = true
+        if (error.response.status === 400) {
+          for (var err in error.response.data) {
+            root.alert.message = error.response.data[err][0]
+            break
+          }
+        } else {
+          root.alert.message = root.form.message_endpoint_error
+        }
+        return false
+      }
     })
   }
 }
