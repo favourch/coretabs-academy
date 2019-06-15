@@ -5,7 +5,7 @@ Modules Style
 =======================================*/
 $content-padding: 0;
 $padding: 0 0 0 15px;
-$ar-padding: 0 15px 0 0;
+$ar-padding: 0 7px 0 0;
 
 main.lessons-main-content,
 main.modules-main-content {
@@ -59,10 +59,11 @@ html[dir='rtl'] {
         .btn {
           width: 25px !important;
           height: 25px !important;
-          background: #393ba8 !important;
+          background: #38aeda !important;
           flex-shrink: 0;
 
           .icon {
+            color:#fff;
             width: 25px !important;
             height: 25px !important;
             font-size: 25px !important;
