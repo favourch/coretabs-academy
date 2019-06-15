@@ -4,9 +4,12 @@
   <div class="card-grid">
 
     <v-card class="project-card" v-for="(project,i) in projects" :key="i">
-      <img
+      <div class="card-pic">
+        <img
           :src="project.photo"
         >
+      </div>
+      
       <v-card-title>
         <h3 class="card-title">{{project.description}}</h3>
       </v-card-title>
