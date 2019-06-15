@@ -26,12 +26,19 @@
 
     </v-card>
 
+    <v-card class="add-card" to="/profile/manage-projects/" v-if="$store.getters.user('username') === $route.params.username">
+      <v-icon large class="card-icon">add</v-icon>
+    </v-card>
+
   </div>
 </div>
 <div v-else-if="loaded && projects && projects.length === 0">
   <v-container fluid fill-height>
     <v-layout column align-center justify-center>
       <p>أعمل على رفع أول مشروع لي 💪</p>
+      <div class="add-project-btn" v-if="$store.getters.user('username') === $route.params.username">
+        <v-btn round dark depressed class="mt-5" to="/profile/manage-projects/">أضف مشروعاً</v-btn>
+      </div>
     </v-layout>
   </v-container>
 </div>
