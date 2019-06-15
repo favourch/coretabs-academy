@@ -42,6 +42,13 @@ export default {
         this.setProperty(brandLogo, 'margin', '25px 10px 10px 20px')
         this.setProperty(burgerMenu, 'margin', '13px 20px 29px 10px')
       }
+    },
+    triggerFixedHeader() {
+      let fixedHeaderPages = ['frontend-track', 'backend-track', 'about']
+      let currentRoutePath = this.$router.currentRoute.name
+      if (fixedHeaderPages.includes(currentRoutePath)) {
+        this.updateHeader()
+      }
     }
   },
   created() {
@@ -72,8 +79,11 @@ export default {
       document.querySelector('html').setAttribute('dir', this.i18n.direction)
     }
   },
+  updated() {
+    this.triggerFixedHeader()
+  },
   mounted() {
-    this.updateHeader()
+    this.triggerFixedHeader()
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.onResize)
