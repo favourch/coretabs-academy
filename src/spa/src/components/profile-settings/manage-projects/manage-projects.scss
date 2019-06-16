@@ -8,9 +8,11 @@
 }
 
 // To make spinner in the center of the inner page
-.progress-container {
-  position: relative;
-  width: 100%;
+.settings {
+  .progress-container {
+    position: relative;
+    width: 100%;
+  }  
 }
 
 .mother-container {
