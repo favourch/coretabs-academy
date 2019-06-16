@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import i18n from '../i18n/ar/i18n'
-import { countries as imported_countries } from './countries'
+import { countries as importedCountries } from './countries'
 
 Vue.use(Vuex)
 
@@ -19,7 +19,7 @@ export default new Vuex.Store({
     notificationsCounter: 0,
     user: {},
     profile: {},
-    countries: imported_countries,
+    countries: importedCountries,
     skills: [
       { value: 'html', text: 'HTML' },
       { value: 'css', text: 'CSS' },

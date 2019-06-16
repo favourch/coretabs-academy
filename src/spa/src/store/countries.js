@@ -1,4 +1,4 @@
-countries = [
+let countries = [
     { value: 'ad', text: 'أندورا' },
     { value: 'ae', text: 'الإمارات العربية المتحدة' },
     { value: 'af', text: 'أفغانستان' },
@@ -249,3 +249,5 @@ countries = [
     { value: 'zm', text: 'زامبيا' },
     { value: 'zw', text: 'زيمبابوي' }
 ]
+
+module.exports = { countries }
