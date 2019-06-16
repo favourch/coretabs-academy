@@ -205,7 +205,7 @@ const router = new Router({
   {
     name: 'classroom',
     path: '/classroom',
-    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? (store.getters.user('batch_status') ? next('/classroom/' + store.getters.account('track')) : location.reload()) : next('/') }
+    beforeEnter: (to, from, next) => { (store.getters.isLogin) ? (store.getters.user('batch_status') ? next('/classroom/' + store.getters.account('track')) : next('/')) : next('/') }
   }, {
     name: 'workshops',
     path: '/classroom/:track',

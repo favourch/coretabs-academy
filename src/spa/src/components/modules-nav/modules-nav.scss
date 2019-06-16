@@ -26,7 +26,7 @@ html[dir='rtl'] {
 
         .list__group {
           .list__group__header {
-            padding: $ar-padding !important;
+            //padding: $ar-padding !important;
 
             > div:nth-child(1) {
               .list__tile {
@@ -47,7 +47,7 @@ html[dir='rtl'] {
           }
 
           .list__group__items {
-            padding: $ar-padding !important;
+            //padding: $ar-padding !important;
             
             @media (max-width: 480px) {
               padding: 0 5px 0 0 !important

@@ -30,11 +30,11 @@ html[dir='rtl'] {
           .icon {
             display: block !important;
           }
-          margin: $workshop-ar-margin !important;
+          // margin: $workshop-ar-margin !important;
         }
 
         .btn--icon {
-          background: #393ba8 !important;
+          background: #38aeda !important;
         }
 
       }
@@ -53,13 +53,14 @@ html[dir='rtl'] {
           }
           .list__tile__action {
             min-width:35px;
+            margin-right: 3px;
             i{
               color: #bbbbbb !important;
             }
           }
 
           .list__tile {
-            padding: auto 26px;
+            padding: auto 13px;
             background: $white-color;
             height: 55px;
             margin-top: -1px;
@@ -138,7 +139,7 @@ html[dir='rtl'] {
           font-size: 16px !important;
           font-weight: bold !important;
           color: $white-color !important;
-          margin-right: 9px;
+          margin-right: 3px;
         }
       }
     }
