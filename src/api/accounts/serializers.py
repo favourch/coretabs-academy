@@ -42,13 +42,13 @@ class LoginSerializer(serializers.Serializer):
         user = None
 
         if email and password:
-            is_email_not_found = User.objects.filter(email=email).exists() == False
+            is_email_not_found = User.objects.filter(email__iexact=email).exists() == False
             if is_email_not_found:
                 raise exceptions.ValidationError(_('login email not found'))
             user = authenticate(email=email, password=password)
 
         elif username and password:
-            is_username_not_found = User.objects.filter(username=username).exists() == False
+            is_username_not_found = User.objects.filter(username__iexact=username).exists() == False
             if is_username_not_found:
                 raise exceptions.ValidationError(_('login username not found'))
             user = authenticate(username=username, password=password)
@@ -412,7 +412,7 @@ class ResendConfirmSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
 
     def validate_email(self, email):
-        if not EmailAddress.objects.filter(email=email).exists():
+        if not EmailAddress.objects.filter(email__iexact=email).exists():
             raise serializers.ValidationError(_("The e-mail address is not assigned to any user account"))
         return email
 
