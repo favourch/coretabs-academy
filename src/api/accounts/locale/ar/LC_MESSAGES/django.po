@@ -68,6 +68,14 @@ msgid "User account is disabled."
 msgstr "الحساب موقف."
 
 #: .\serializers.py:67
+msgid "login email not found"
+msgstr "لا يوجد لدينا حساب مسجل بهذا الإيميل، تأكد من إيميلك أو قم بإنشاء حساب جديد"
+
+#: .\serializers.py:67
+msgid "login username not found"
+msgstr "لا يوجد لدينا حساب مسجل باسم المتسخدم الذي أدخلته، تأكد من اسم المستخدم أو قم بإنشاء حساب جديد"
+
+#: .\serializers.py:67
 msgid "Unable to log in with provided credentials."
 msgstr "تعذر تسجيل الدخول بالبيانات التي أدخلتها."
 

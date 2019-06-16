@@ -42,9 +42,17 @@ class LoginSerializer(serializers.Serializer):
         user = None
 
         if email and password:
+            is_email_not_found = User.objects.filter(email=email).exists() == False
+            if is_email_not_found:
+                raise exceptions.ValidationError(_('login email not found'))
             user = authenticate(email=email, password=password)
+
         elif username and password:
+            is_username_not_found = User.objects.filter(username=username).exists() == False
+            if is_username_not_found:
+                raise exceptions.ValidationError(_('login username not found'))
             user = authenticate(username=username, password=password)
+
         else:
             msg = _('Must include either "username" or "email" and "password".')
             raise exceptions.ValidationError(msg)
