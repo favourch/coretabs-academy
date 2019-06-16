@@ -7,6 +7,8 @@ from django.db.models.signals import post_save
 
 from django.dispatch import receiver
 
+from .country_chocies import COUNTRY_CHOICES as IMPORTED_COUNTRY_CHOICES
+
 User = get_user_model()
 
 
@@ -22,33 +24,7 @@ class Profile(models.Model):
         ('1', _('Intermediate')),
         ('2', _('Advanced')),
     )
-    COUNTRY_CHOICES = (
-        ('', ''),
-        ('dz', 'الجزائر'),
-        ('tn', 'تونس'),
-        ('eg', 'مصر'),
-        ('sd', 'السودان'),
-        ('iq', 'العراق'),
-        ('ma', 'المغرب'),
-        ('sa', 'السعودية'),
-        ('ye', 'اليمن'),
-        ('sy', 'سوريا'),
-        ('so', 'الصومال'),
-        ('jo', 'الأردن'),
-        ('ae', 'الإمارات'),
-        ('ly', 'ليبيا'),
-        ('lb', 'لبنان'),
-        ('ps', 'فلسطين'),
-        ('om', 'عمان'),
-        ('kw', 'الكويت'),
-        ('mr', 'موريطانيا'),
-        ('qa', 'قطر'),
-        ('bh', 'البحرين'),
-        ('dj', 'جيبوتي'),
-        ('km', 'جزر القمر'),
-        ('er', 'إريتيريا'),
-        ('eh', 'الصحراء الغربية'),
-    )
+    COUNTRY_CHOICES = IMPORTED_COUNTRY_CHOICES
     SKILLS_CHOICES = (
         ('html', 'HTML'),
         ('css', 'CSS'),

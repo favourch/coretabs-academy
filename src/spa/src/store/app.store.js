@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import i18n from '../i18n/ar/i18n'
+import { countries as imported_countries } from './countries'
 
 Vue.use(Vuex)
 
@@ -18,41 +19,16 @@ export default new Vuex.Store({
     notificationsCounter: 0,
     user: {},
     profile: {},
-    countries: [
-      {value: 'ae', text: 'الإمارات'},
-      {value: 'jo', text: 'الأردن'},
-      {value: 'bh', text: 'البحرين'},
-      {value: 'dz', text: 'الجزائر'},
-      {value: 'sa', text: 'السعودية'},
-      {value: 'sd', text: 'السودان'},
-      {value: 'eh', text: 'الصحراء الغربية'},
-      {value: 'so', text: 'الصومال'},
-      {value: 'iq', text: 'العراق'},
-      {value: 'kw', text: 'الكويت'},
-      {value: 'ma', text: 'المغرب'},
-      {value: 'ye', text: 'اليمن'},
-      {value: 'er', text: 'إريتيريا'},
-      {value: 'tn', text: 'تونس'},
-      {value: 'km', text: 'جزر القمر'},
-      {value: 'dj', text: 'جيبوتي'},
-      {value: 'sy', text: 'سوريا'},
-      {value: 'ps', text: 'فلسطين'},
-      {value: 'qa', text: 'قطر'},
-      {value: 'om', text: 'عمان'},
-      {value: 'lb', text: 'لبنان'},
-      {value: 'ly', text: 'ليبيا'},
-      {value: 'eg', text: 'مصر'},
-      {value: 'mr', text: 'موريتانيا'}
-    ],
+    countries: imported_countries,
     skills: [
-      {value: 'html', text: 'HTML'},
-      {value: 'css', text: 'CSS'},
-      {value: 'js', text: 'Javascript'},
-      {value: 'jquery', text: 'jQuery'},
-      {value: 'vuejs', text: 'VueJS'},
-      {value: 'python', text: 'Python'},
-      {value: 'flask', text: 'Flask'},
-      {value: 'django', text: 'Django'}
+      { value: 'html', text: 'HTML' },
+      { value: 'css', text: 'CSS' },
+      { value: 'js', text: 'Javascript' },
+      { value: 'jquery', text: 'jQuery' },
+      { value: 'vuejs', text: 'VueJS' },
+      { value: 'python', text: 'Python' },
+      { value: 'flask', text: 'Flask' },
+      { value: 'django', text: 'Django' }
     ],
     unread: null,
     progress: {
@@ -113,31 +89,31 @@ export default new Vuex.Store({
     getImgUrl(state, img) {
       return require(`../assets/multimedia/${img}`)
     },
-    header: ({commit}, payload) => {
+    header: ({ commit }, payload) => {
       return new Promise((resolve, reject) => {
         commit('header', payload)
         resolve(true)
       })
     },
-    user: ({commit}, payload) => {
+    user: ({ commit }, payload) => {
       return new Promise((resolve, reject) => {
         commit('user', payload)
         resolve(true)
       })
     },
-    account: ({commit}, payload) => {
+    account: ({ commit }, payload) => {
       return new Promise((resolve, reject) => {
         commit('account', payload)
         resolve(true)
       })
     },
-    profile: ({commit}, payload) => {
+    profile: ({ commit }, payload) => {
       return new Promise((resolve, reject) => {
         commit('profile', payload)
         resolve(true)
       })
     },
-    unread: ({commit}, payload) => {
+    unread: ({ commit }, payload) => {
       return new Promise((resolve, reject) => {
         commit('unread', payload)
         resolve(payload)
@@ -146,7 +122,7 @@ export default new Vuex.Store({
     progress(context, payload) {
       context.commit('progress', payload)
     },
-    notificationsCounter({commit}, payload) {
+    notificationsCounter({ commit }, payload) {
       commit('notificationsCounter', payload)
     }
   },
