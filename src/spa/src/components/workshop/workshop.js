@@ -50,19 +50,12 @@ export default {
       }
       return url
     },
-    getContinueURL(workshop) {
+    getContinueURL() {
       let module = this.$store.getters.account('last_opened_module_slug')
       let lesson = this.$store.getters.account('last_opened_lesson_slug')
-
-      workshop.modules.forEach((m) => {
-        if (m.url.params.module === module) {
-          m.lessons.forEach((l) => {
-            if (l.url.params.lesson === lesson) {
-              this.$router.push(l.url)
-            }
-          })
-        }
-      })
+      let workshop = this.$store.getters.account('last_opened_workshop_slug')
+      let track = this.$store.getters.account('track')
+      this.$router.push(`/classroom/${track}/${workshop}/${module}/${lesson}`)
     },
     toggleAvatar() {
       var isBreak = false
