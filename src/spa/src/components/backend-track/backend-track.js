@@ -66,7 +66,7 @@ export default {
     },
     scrollTo(sectionName) {
       let pricingSection = document.getElementById(sectionName)
-      let offset = pricingSection.offsetTop - 100
+      let offset = pricingSection.offsetTop
       window.scrollTo(0, offset)
     },
     showProject(project, index) {

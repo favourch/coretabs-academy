@@ -244,7 +244,8 @@
                 <h2 class="mb-3">منحة تدريبية</h2>
                 <p class="card__desc">احصل على منحة تدريبية مغطاة التكاليف</p>
                 <span class="current-price my-4">$0</span>
-                <v-btn depressed round class="button pa-4" to="/signup">قم بالتقديم الآن</v-btn>
+                <v-btn depressed round class="button pa-4" v-if="!this.$store.getters.isLogin" to="/signup">قم بالتقديم الآن</v-btn>
+                <v-btn depressed round class="button pa-4" v-else to="/classroom">الفصل الدراسي</v-btn>
               </v-flex>
               <v-flex xs12 md4 class="pricing-card__left pa-5">
                 <h2 class="mb-3">شاملة</h2>
