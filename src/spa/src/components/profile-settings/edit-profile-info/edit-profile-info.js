@@ -11,6 +11,7 @@ export default {
     vs: {
       v1: false
     },
+    crRules: [],
     description: '',
     bio: '',
     username: '',
