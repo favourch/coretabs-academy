@@ -219,5 +219,14 @@ $toolbar-padding: 0 15px;
 }
 
 #drift-widget {
-  display: none !important;
+  right: 60px !important;
+  transition: opacity 1s ease !important;
+
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+#drift-widget.hide {
+  opacity: 0 !important;
 }
