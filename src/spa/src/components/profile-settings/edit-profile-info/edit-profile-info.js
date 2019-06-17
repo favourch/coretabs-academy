@@ -45,7 +45,7 @@ export default {
       root.vs.v1 = true
       root.crRules.forEach((rule) => { if (rule(root.userCountry) !== true) { root.vs.v1 = false } })
       root.valid = root.vs.v1
-    },
+    }
   },
   async created() {
     let root = this

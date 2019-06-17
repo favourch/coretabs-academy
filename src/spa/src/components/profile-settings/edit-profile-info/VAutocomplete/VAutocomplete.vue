@@ -1,8 +1,8 @@
 <template>
 <div>
   <div tabindex="0" @focusin="hasFocus=true" class="v-autocomplete-select">
-    <v-text-field append-icon="arrow_drop_down" v-if="inputValue && !switchInput" label="الدولة" :value="inputValue" @focus="switchInput=true"></v-text-field>
-    <v-text-field append-icon="arrow_drop_down" v-else label="الدولة" @focus="hasFocus=true" autocomplete="off" ref="search" v-model="search" @keyup="moveToResults" @keydown="removeOption"></v-text-field>
+    <v-text-field append-icon="arrow_drop_down" v-if="inputValue && !switchInput" :label="form.country" :value="inputValue.text" @focus="switchInput=true"></v-text-field>
+    <v-text-field append-icon="arrow_drop_down" v-else :label="form.country" @focus="hasFocus=true" autocomplete="off" ref="search" v-model="search" @keyup="moveToResults" @keydown="removeOption"></v-text-field>
     <div v-if="showResultList" ref="resultList" class="countries-list">
       <div tabindex="0" ref="result" class="result" v-for="result in results" :key="result[optionValue]" v-html="highlight(result[optionText])" @click="selectOption(result)" @keyup.prevent="navigateResults(result, $event)">
       </div>
@@ -73,7 +73,8 @@ export default {
     },
     showPlaceholder: function () {
       return !this.hasFocus && !this.selectedOption;
-    }
+    },
+    form() { return this.$store.state.i18n.form }
   },
   watch: {
     hasFocus: function (hasFocus) {
