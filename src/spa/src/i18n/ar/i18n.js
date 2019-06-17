@@ -163,7 +163,8 @@ var i18n = `{
       "delete_project_message": "هل تريد فعلاً حذف مشروع",
       "submit_btn_text": "حفظ التغييرات",
       "delete_btn_text": "نعم، حذف المشروع",
-      "close_btn_text": "إلغاء"
+      "cancel_btn_text": "إلغاء",
+      "close_btn_text": "إغلاق"
     },
     "change_track": {
       "success_message": "تم تغيير المسار بنجاح، جاري تحويلك على الصف الدراسي الجديد",

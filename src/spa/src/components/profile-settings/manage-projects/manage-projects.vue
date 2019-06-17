@@ -49,7 +49,7 @@
                           {{ i18n.submit_btn_text }}
                         </v-btn>
                         <v-btn round class="no" @click="dialog = false" v-if="!waiting"> 
-                          {{ i18n.close_btn_text }}
+                          {{ closeDialogLabel }}
                         </v-btn>
                       </v-card-actions>
                     </v-card>
@@ -95,7 +95,7 @@
 
                     <v-card-actions class="dialog-footer">
                       <v-btn round class="no" @click="deleteDialog = false">
-                        {{ i18n.close_btn_text }}
+                        {{ i18n.cancel_btn_text }}
                       </v-btn>
 
                       <v-btn round class="yes delete-btn" @click="deleteProject" :disabled="waiting">

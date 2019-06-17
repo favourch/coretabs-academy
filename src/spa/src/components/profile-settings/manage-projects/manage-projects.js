@@ -3,6 +3,7 @@ export default {
   data: () => ({
     reader: null,
     project_img: '',
+    closeDialogLabel: '',
     alert: {
       success: false,
       error: false,
@@ -74,6 +75,7 @@ export default {
       this.isAdd = true
       this.$refs.form.reset()
       this.validImage.valid = false
+      this.closeDialogLabel = this.i18n.cancel_btn_text
 
       this.alert = {
         success: false,
@@ -91,6 +93,7 @@ export default {
       this.isAdd = false
       this.editProjectId = id
       this.validImage.valid = true
+      this.closeDialogLabel = this.i18n.cancel_btn_text
 
       this.alert = {
         success: false,
@@ -142,6 +145,7 @@ export default {
 
           if (!root.waiting && !this.alert.error) {
             this.fetchProjects()
+            this.closeDialogLabel = this.i18n.close_btn_text
             this.dialog = false
           }
         }
@@ -152,6 +156,7 @@ export default {
           root.waiting = await this.$profiles.changeProjectInfo(root)
             
           if (!root.waiting) {
+            this.closeDialogLabel = this.i18n.close_btn_text
             this.fetchProjects()
           }
         }
