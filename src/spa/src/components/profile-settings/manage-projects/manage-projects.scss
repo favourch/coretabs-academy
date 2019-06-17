@@ -2,17 +2,16 @@
 @import '../../../../node_modules/rfs/scss/_rfs';
 @import url('https://use.fontawesome.com/releases/v5.8.2/css/all.css');
 
+.overlay {
+  z-index: 100 !important;
+}
+
 .settings {
   // To make spinner in the center of the inner page
   .progress-container {
     position: relative;
     width: 100%;
   }  
-
-  .inner-header,
-  .navigation-drawer--is-mobile {
-    z-index: 0;
-  }
 }
 
 .mother-container {
