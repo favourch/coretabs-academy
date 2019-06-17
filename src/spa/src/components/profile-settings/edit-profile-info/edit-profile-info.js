@@ -1,4 +1,9 @@
+import VAutocomplete from './VAutocomplete/VAutocomplete'
+
 export default {
+  components: {
+    VAutocomplete
+  },
   name: 'EditProfileInfoComponent',
   data: () => ({
     alert: {
@@ -52,7 +57,7 @@ export default {
 
     this.description = await this.$store.getters.profile('description')
     this.bio = await this.$store.getters.profile('bio')
-    this.userCountry =  await this.$store.getters.profile('country')
+    this.userCountry = await this.$store.getters.profile('country')
     this.userSkills = await this.$store.getters.profile('skills')
     this.github_link = await this.$store.getters.profile('github_link')
     this.linkedin_link = await this.$store.getters.profile('linkedin_link')
@@ -61,7 +66,6 @@ export default {
     this.website_link = await this.$store.getters.profile('website_link')
     this.countries = await this.$store.getters.countries
     this.skills = await this.$store.getters.skills
-
     this.crRules = [
       v => !!v || {}
     ]
