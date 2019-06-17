@@ -11,7 +11,7 @@
                 <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
                 <v-text-field dir="auto" :label="form.description" v-model="description" @keyup.enter="submit" required></v-text-field>
                 <v-text-field dir="auto" :label="form.bio" v-model="bio" @keyup.enter="submit" required></v-text-field>
-                <v-autocomplete :options="countries" option-value="value" option-text="text" :input-value="userCountry" placeholder="type to search" v-model="userCountry" />
+                <v-autocomplete :options="countries" option-value="value" option-text="text" :input-value="userCountry" :rules="crRules" v-model="userCountry" />
                 <v-select v-model="userSkills" :items="skills" attach chips :label="form.skills" multiple></v-select>
                 <v-text-field dir="auto" prepend-icon="fab fa-github" :label="form.github_link" v-model="github_link" @keyup.enter="submit"></v-text-field>
                 <v-text-field dir="auto" prepend-icon="fab fa-linkedin" :label="form.linkedin_link" v-model="linkedin_link" @keyup.enter="submit"></v-text-field>
