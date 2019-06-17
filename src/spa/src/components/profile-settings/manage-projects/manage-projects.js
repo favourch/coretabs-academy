@@ -164,6 +164,8 @@ export default {
     }
   },
   async created() {
+    this.closeDialogLabel = this.i18n.cancel_btn_text
+
     if (this.$route.params.isAddFromRoute) {
       this.dialog = true
     }
