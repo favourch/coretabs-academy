@@ -10,7 +10,7 @@ export default {
     },
     isAdd: false,
     validImage: {
-      valid: 1,
+      valid: false,
       imageData: ''
     },
     waiting: false,
@@ -56,8 +56,9 @@ export default {
     chackValid() {
       let root = this
       root.vs.v1 = true
+
       root.pnRules.forEach((rule) => { if (rule(root.project_name) !== true) { root.vs.v1 = false } })
-      root.valid = root.vs.v1 && root.validImage.valid
+      root.valid = root.vs.v1 && (root.repo_link || root.demo_link) && root.validImage.valid
     },
     async fetchProjects() {
       let root = this
@@ -67,63 +68,66 @@ export default {
       }).then(async (response) => {
         await root.$auth.storeProfile(root.$store, response.data)
       }).catch()
-      this.projects = await this.$store.getters.profile('projects').reverse();
+      this.projects = await this.$store.getters.profile('projects').reverse()
     },
     addProject() {
-      this.isAdd = true;
+      this.isAdd = true
+      this.$refs.form.reset()
+      this.validImage.valid = false
 
       this.alert = {
         success: false,
         error: false,
         message: ''
-      };
+      }
 
-      this.project_name =  '';
-      this.project_img = '';
-      this.repo_link =  '';
-      this.demo_link =  '';
-      this.dialog = true;
+      this.project_name =  ''
+      this.project_img = ''
+      this.repo_link =  ''
+      this.demo_link =  ''
+      this.dialog = true
     },
     editProject(id) {
-      this.isAdd = false;
-      this.editProjectId = id;
+      this.isAdd = false
+      this.editProjectId = id
 
       this.alert = {
         success: false,
         error: false,
         message: ''
-      };
+      }
 
-      let project = this.projects.filter(e => e.id === id)[0];
+      this.valid = false
+      let project = this.projects.filter(e => e.id === id)[0]
 
-      this.project_name = project.description;
-      this.project_img = project.photo;
-      this.repo_link = project.github_link;
-      this.demo_link = project.live_demo_link;
+      this.project_name = project.description
+      this.project_img = project.photo
+      this.repo_link = project.github_link
+      this.demo_link = project.live_demo_link
 
-      this.dialog = true;
+      this.dialog = true
     },
     openDeleteDialog(id) {
-      this.editProjectId = id;
-      let project = this.projects.filter(e => e.id === id)[0];
-      this.project_name = project.description;
-      this.deleteDialog = true;
+      this.editProjectId = id
+      let project = this.projects.filter(e => e.id === id)[0]
+      this.project_name = project.description
+      this.deleteDialog = true
     },
     async deleteProject() {
       let root = this
       root.waiting = true
 
-      this.deleteDialog = true;
+      this.deleteDialog = true
       root.waiting = await this.$profiles.deleteProject(root)
       
       if (!root.waiting) {
-        this.deleteDialog = false;
-        this.fetchProjects();
+        this.deleteDialog = false
+        this.fetchProjects()
         this.alert = {
           success: false,
           error: false,
           message: ''
-        };
+        }
       }
     },
     async submit() {
@@ -132,33 +136,33 @@ export default {
         root.waiting = true
         
         // is the user will add new project
-        if (this.isAdd && this.project_name && this.repo_link && this.demo_link && this.project_img) {
-          root.waiting = await this.$profiles.createProject(root);
+        if (this.isAdd || this.$route.params.isAddFromRoute) {
+          root.waiting = await this.$profiles.createProject(root)
 
-          if (!root.waiting) {
-            this.fetchProjects();
-            this.dialog = false;
+          if (!root.waiting && !this.alert.error) {
+            this.fetchProjects()
+            this.dialog = false
           }
-        } else {
-          this.alert.error = true;
-          this.alert.message = this.i18n.add_error_message;
-          root.waiting = false;
         }
         
         // is the user will edit instead of add
         if (!this.isAdd) {
-          root.waiting = true;
-          root.waiting = await this.$profiles.changeProjectInfo(root);
+          root.waiting = true
+          root.waiting = await this.$profiles.changeProjectInfo(root)
             
           if (!root.waiting) {
-            this.fetchProjects();
+            this.fetchProjects()
           }
         }
       }
     }
   },
   async created() {
-    this.fetchProjects();
+    if (this.$route.params.isAddFromRoute) {
+      this.dialog = true
+    }
+
+    this.fetchProjects()
 
     this.pnRules = [
       v => !!v || '',

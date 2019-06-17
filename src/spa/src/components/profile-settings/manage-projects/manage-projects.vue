@@ -38,13 +38,13 @@
                         <v-form ref="form" lazy-validation>
                           <v-alert type="success" v-model="alert.success" v-text="alert.message"></v-alert>
                           <v-alert type="error" v-model="alert.error" v-text="alert.message"></v-alert>
-                          <v-text-field dir="auto" :label="form.projectname_label" v-model="project_name" @keyup.enter="submit" required></v-text-field>
-                          <v-text-field dir="auto" prepend-icon="fab fa-github" :label="form.repo_link" v-model="repo_link" @keyup.enter="submit" required></v-text-field>
-                          <v-text-field dir="auto" prepend-icon="fas fa-globe" :label="form.demo_link" v-model="demo_link" @keyup.enter="submit" required></v-text-field>
+                          <v-text-field dir="auto" :label="form.projectname_label" v-model="project_name" @keyup.enter="submit" :rules="pnRules" required></v-text-field>
+                          <v-text-field dir="auto" prepend-icon="fab fa-github" :label="form.repo_link" v-model="repo_link" @keyup.enter="submit"></v-text-field>
+                          <v-text-field dir="auto" prepend-icon="fas fa-globe" :label="form.demo_link" v-model="demo_link" @keyup.enter="submit"></v-text-field>
                         </v-form>
                       </div>
                       <v-card-actions class="dialog-footer">
-                        <v-btn round class="yes" :disabled="waiting" @click="submit">
+                        <v-btn round class="yes" :disabled="!valid || waiting" @click="submit">
                           <v-progress-circular indeterminate size="24" class="ml-2" v-if="waiting"></v-progress-circular>
                           {{ i18n.submit_btn_text }}
                         </v-btn>
@@ -61,18 +61,18 @@
                   <v-list-tile
                     v-for="(project, index) in projects"
                     :key="index"
-                    click=""
+                    @click="editProject(project.id)"
                   >
                     <v-list-tile-content>
                       <v-list-tile-title v-html="project.description"></v-list-tile-title>
                     </v-list-tile-content>
 
                     <v-list-tile-action>
-                      <v-btn icon ripple @click="editProject(project.id)">
+                      <v-btn icon ripple @click.stop="editProject(project.id)">
                         <v-icon>edit</v-icon>
                       </v-btn>
 
-                      <v-btn icon ripple @click="openDeleteDialog(project.id)">
+                      <v-btn icon ripple @click.stop="openDeleteDialog(project.id)">
                         <v-icon>delete_outline</v-icon>
                       </v-btn>
                     </v-list-tile-action>

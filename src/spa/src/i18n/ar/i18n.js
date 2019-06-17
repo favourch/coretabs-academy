@@ -155,7 +155,6 @@ var i18n = `{
     },
     "manage_projects": {
       "add_success_message": "تم اضافة المشروع بنجاح",
-      "add_error_message": "يجب تعبئة جميع الحقول",
       "edit_success_message": "تم تغيير بيانات المشروع بنجاح",
       "add_project_btn_text": "اضافة مشروع جديد",
       "add_project_img_label": "إضافة صورة المشروع",
