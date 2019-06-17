@@ -46,13 +46,15 @@ export default {
       let target = event.target
       
       while (target) {
-        if (target.parentNode.tagName === "ASIDE") {
+        if (target.parentNode && target.parentNode.tagName === "ASIDE") {
           this.mini = false
           document.querySelector('main.content').classList.add('navigator-drawer-opened')
+          document.querySelector('#drift-widget').classList.add('hide')
           return false
         } else {
           target = target.parentNode
           document.querySelector('main.content').classList.remove('navigator-drawer-opened')
+          document.querySelector('#drift-widget').classList.remove('hide')
           this.mini = true
         }
       }
