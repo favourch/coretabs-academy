@@ -90,6 +90,7 @@ export default {
     editProject(id) {
       this.isAdd = false
       this.editProjectId = id
+      this.validImage.valid = true
 
       this.alert = {
         success: false,
