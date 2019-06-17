@@ -16,12 +16,12 @@
 
       <v-divider></v-divider>
         <v-card-actions class="pa-3">
-          <a :href="'//' + project.github_link" target="_blank" class="download-btn">
+          <a v-if="project.github_link" :href="'//' + project.github_link" target="_blank" class="download-btn">
             <i class="icon-github"></i>
             المستودع
           </a>
           <v-spacer></v-spacer>
-          <a :href="'//' + project.live_demo_link" target="_blank" class="download-btn">
+          <a v-if="project.live_demo_link" :href="'//' + project.live_demo_link" target="_blank" class="download-btn">
             <v-icon class="card-icon">visibility</v-icon>
             معاينة
           </a>
