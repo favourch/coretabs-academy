@@ -93,7 +93,8 @@ export default {
 
     this.unRules = [
       v => !!v || '',
-      v => (v && v.length <= 20) || this.form.username_length_error
+      v => (v && v.length <= 20) || this.form.username_length_error,
+      v => /^([A-Za-z0-9\-_.])+$/.test(v.trim()) || this.form.userName_format_error
     ]
   },
   mounted() {
