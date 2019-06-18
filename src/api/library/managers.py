@@ -1,23 +1,16 @@
 from django.db import models as django_models
-from . import models as library_models
 
-from decimal import Decimal
 from model_utils.managers import InheritanceManager
 
 from caching.base import CachingManager
 
 
-class WorkshopManagerCacheable(CachingManager):
-    def get_workshop(self):
-        return library_models.Workshop.objects
-
-
-class WorkshopManager(django_models.Manager):
-    workshop_manager = WorkshopManagerCacheable()
+class WorkshopsQueryset(django_models.QuerySet):
+    def for_user_batch(self, user):
+        return self.filter(batches__group__in=user.groups.all())
 
     def with_shown_percentage(self, user):
-        workshops = self.workshop_manager.get_workshop()
-        workshops = workshops.annotate(
+        workshops = self.annotate(
 
             shown_count=django_models.Count('modules__lessons', filter=django_models.Q(
                 modules__lessons__id__in=user.lessons.values('id'))),
@@ -32,10 +25,19 @@ class WorkshopManager(django_models.Manager):
                  django_models.F('total_count')),
                 output_field=django_models.DecimalField(max_digits=2, decimal_places=2)))
 
-        #print('calculated = ', result[0].shown_count / result[0].total_count)
-        #print('queried = ', result[0].shown_percentage)
+        # print('calculated = ', result[0].shown_count / result[0].total_count)
+        # print('queried = ', result[0].shown_percentage)
 
         return workshops
+
+
+class WorkshopManager(CachingManager):
+
+    def get_queryset(self):
+        return WorkshopsQueryset(self.model, using=self._db)
+
+    def get_workshops(self, user):
+        return self.get_queryset().for_user_batch(user).exclude(is_hidden=True).with_shown_percentage(user)
 
 
 class BaseLessonManager(InheritanceManager, CachingManager):

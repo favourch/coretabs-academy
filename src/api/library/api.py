@@ -6,8 +6,6 @@ from . import serializers
 from . import models
 from django.db import models as django_models
 
-from django.contrib.auth.models import User
-
 
 class BaseLessonListAPIView(generics.ListAPIView):
     queryset = models.BaseLesson.objects.all()
@@ -76,8 +74,8 @@ class WorkshopListAPIView(generics.ListAPIView):
         modules = django_models.Prefetch(
             'modules', queryset=models.Module.objects.prefetch_related(lessons).all())
 
-        return self.queryset.with_shown_percentage(user).prefetch_related(modules).filter(
-            tracks__slug=self.kwargs.get('track_slug')).exclude(is_hidden=True)
+        return self.queryset.get_workshops(user).prefetch_related(modules).filter(
+            tracks__slug=self.kwargs.get('track_slug'))
 
 
 class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
@@ -95,7 +93,7 @@ class WorkshopRetrieveAPIView(generics.RetrieveAPIView):
         modules = django_models.Prefetch(
             'modules', queryset=models.Module.objects.prefetch_related(lessons).all())
 
-        return self.queryset.with_shown_percentage(user).filter(slug=self.kwargs.get('slug')).prefetch_related(modules).filter(
+        return self.queryset.get_workshops(user).filter(slug=self.kwargs.get('slug')).prefetch_related(modules).filter(
             tracks__slug=self.kwargs.get('track_slug'))
 
 
@@ -110,8 +108,6 @@ class TrackRetrieveAPIView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
     def get_queryset(self):
-        user = self.request.user
-
         lessons = django_models.Prefetch(
             'lessons', queryset=models.BaseLesson.objects.select_subclasses())
 

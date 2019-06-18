@@ -23,7 +23,7 @@ from .utils import send_confirmation_mail, update_email_in_mailing_lists
 from .helper_serializers import MailingListSerializer
 from django.utils.http import int_to_base36
 
-from library.models import Track, BaseLesson
+from library.models import Track, BaseLesson, Workshop
 
 User = get_user_model()
 
@@ -114,6 +114,7 @@ class Batch(models.Model):
     name = models.CharField(max_length=20)
     users_number = models.PositiveIntegerField(verbose_name='users number')
     start_date = models.DateField()
+    workshops = models.ManyToManyField(Workshop, blank=True, related_name='batches')
 
     class Meta:
         permissions = (
@@ -124,12 +125,13 @@ class Batch(models.Model):
         ordering = ['name']
 
     def save(self, *args, **kwargs):
-        if not self.group:
-            group = Group.objects.create(name=self.name)
-            self.group = group
+        if not self.pk:
+            if not self.group:
+                group = Group.objects.create(name=self.name)
+                self.group = group
 
-        self.prepare_batch()
-        self.prepare_mailing_list()
+            self.prepare_batch()
+            self.prepare_mailing_list()
         super().save()
 
     def _create_mailing_list(self, mailing_list):

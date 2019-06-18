@@ -14,7 +14,11 @@ class ModuleMainInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Module
-        fields = '__all__'
+        fields = ('title',
+                  'slug',
+                  'created_date',
+                  'last_update_date',
+                  'lessons')
 
 
 class WorkshopMainInfoSerializer(serializers.ModelSerializer):
@@ -34,4 +38,6 @@ class TrackMainInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Track
-        fields = '__all__'
+        fields = ('title',
+                  'slug',
+                  'workshops')
