@@ -70,16 +70,13 @@ html[dir='rtl'] {
   overflow: hidden !important;
   position: relative !important;
   background: $white-color !important;
-  .list__group__header__append-icon{
-    display: none;
-  }
   .stepper-item__active::before{
     content: '';
     display: block;
     width: 20px;
     height: 20px;
     position: absolute;
-    left: 12px;
+    left: 14px;
     top: 50%;
     transform: translateY(-50%);
     width: 0; 

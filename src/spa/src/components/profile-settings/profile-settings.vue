@@ -11,59 +11,19 @@
           <v-toolbar-title v-html="i18n.settings"></v-toolbar-title>
         </v-toolbar>
         <v-list class="py-0">
-          <router-link to="/profile/personal-info" replace>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon :color="`grey`">settings</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="i18n.personal_info"></v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </router-link>
-          <router-link to="/profile/profile-info" replace>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon :color="`grey`">person</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="i18n.profile_info"></v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </router-link>
-          <v-divider></v-divider>
-          <router-link to="/profile/manage-projects" replace>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon :color="`grey`">business_center</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="i18n.manage_projects"></v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </router-link>
-          <v-divider></v-divider>
-          <router-link to="/profile/change-track" replace>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon :color="`grey`">compare_arrows</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="i18n.change_track"></v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </router-link>
-          <v-divider></v-divider>
-          <router-link to="/profile/change-password" replace>
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon :color="`grey`">lock</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="i18n.change_password"></v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </router-link>
+          <template v-for="(navItem,i) in navDrawer">
+            <router-link :to="navItem.route" replace :key="i">
+              <v-list-tile  @click="setCurrentRoute(navItem.name)" :class="{'stepper-item__active' : currentRoute == navItem.name}">
+                <v-list-tile-action>
+                  <v-icon :color="`grey`">{{navItem.icon}}</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title v-html="navItem.text"></v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </router-link>
+            <v-divider :key="i"></v-divider>
+          </template>
         </v-list>
       </v-navigation-drawer>
       <section id="column-flexed">
