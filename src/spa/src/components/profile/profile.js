@@ -39,7 +39,7 @@ export default {
           }
         }
         this.loaded = true
-        this.showEditProfileBtn = (profile.username === this.$store.state.user.username)
+        this.showEditProfileBtn = (profile.username === this.$store.getters.user('username'))
       }).catch(() => {
         this.$store.dispatch('progress', { error: true })
       })

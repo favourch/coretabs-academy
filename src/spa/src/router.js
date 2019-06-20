@@ -126,7 +126,13 @@ const router = new Router({
     path: '/signin',
     component: SignInComponent,
     beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next() : next('/') }
-  }, {
+  },
+  {
+    name: 'profileRedirect',
+    path: '/user',
+    beforeEnter: (to, from, next) => { (!store.getters.isLogin) ? next('/404') : next(`/user/${store.getters.user('username')}`) }
+   },
+   {
     name: 'profile',
     path: '/user/:username',
     component: ProfileComponent,
