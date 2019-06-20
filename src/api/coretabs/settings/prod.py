@@ -1,12 +1,13 @@
 import dj_database_url
 from urllib.parse import quote_plus
 
+from .utils import to_bool
 from .base import *
 
 
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = to_bool(os.environ.get('DEBUG', False))
 
 
 # Database
