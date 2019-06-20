@@ -9,7 +9,7 @@
         <v-list class="py-0">
           <v-stepper v-model="current.workshop.index" vertical class="py-0">
             <v-list-group v-for="workshop in workshops" :key="`step-${workshop.index}`">
-              <v-list-tile slot="activator">
+              <v-list-tile slot="activator" :class="{'stepper-item__active' : workshop.index == current.workshop.index}">
                 <v-stepper-step :step="workshop.index" :complete="workshop.shown_percentage === 100" :class="{'stepper__step--active':workshop.shown_percentage > 0}">
                   <router-link :to="workshop.url">{{workshop.title}}</router-link>
                 </v-stepper-step>
