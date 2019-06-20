@@ -12,11 +12,6 @@ export default {
       message: ''
     },
     waiting: false,
-    valid: false,
-    vs: {
-      v1: false
-    },
-    crRules: [],
     description: '',
     bio: '',
     username: '',
@@ -39,12 +34,6 @@ export default {
       let root = this
       root.waiting = true
       root.waiting = await this.$auth.changeProfile(root)
-    },
-    chackValid() {
-      let root = this
-      root.vs.v1 = true
-      root.crRules.forEach((rule) => { if (rule(root.userCountry) !== true) { root.vs.v1 = false } })
-      root.valid = root.vs.v1
     }
   },
   async created() {
@@ -66,15 +55,9 @@ export default {
     this.website_link = await this.$store.getters.profile('website_link')
     this.countries = await this.$store.getters.countries
     this.skills = await this.$store.getters.skills
-    this.crRules = [
-      v => !!v || {}
-    ]
   },
   mounted() {
     window.addEventListener('resize', this.setAvatarsHeight)
-  },
-  updated() {
-    this.chackValid()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
