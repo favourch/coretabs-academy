@@ -6,7 +6,7 @@ def to_bool(value):
     if isinstance(value, bool):
         return value
 
-    if not isinstance(value, basestring):
+    if not isinstance(value, str):
         raise ValueError('invalid literal for boolean. Not a string.')
 
     lower_value = value.lower()
