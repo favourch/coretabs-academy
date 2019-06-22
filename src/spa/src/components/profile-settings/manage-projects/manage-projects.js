@@ -91,6 +91,8 @@ export default {
     },
     editProject(id) {
       this.isAdd = false
+      this.$route.params.isAddFromRoute = false
+      
       this.editProjectId = id
       this.validImage.valid = true
       this.closeDialogLabel = this.i18n.cancel_btn_text
@@ -151,7 +153,7 @@ export default {
         }
         
         // is the user will edit instead of add
-        if (!this.isAdd) {
+        if (!this.isAdd || !this.$route.params.isAddFromRoute) {
           root.waiting = true
           root.waiting = await this.$profiles.changeProjectInfo(root)
             
