@@ -12,7 +12,8 @@ var i18n = `{
     "rev_direction": "ltr",
     "progress": {
       "loadingText": "يُرجى الانتظار قليلًا",
-      "errorText": "خطأ.. حاول مرة أخرى!"
+      "errorText": "خطأ.. حاول مرة أخرى!",
+      "e404Text": "محتوى غير موجود أو غير متاح"
     }
   },
   "header": {

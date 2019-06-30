@@ -112,9 +112,6 @@ const WorkshopsAPI = {
       })
       return workshop
     })
-    .catch(err => {
-      console.error(err)
-    })
   }
 }
 

@@ -35,6 +35,7 @@ export default new Vuex.Store({
       width: 5,
       size: 80,
       error: null,
+      e404: false,
       text: ''
     },
     css: {
@@ -78,7 +79,7 @@ export default new Vuex.Store({
       if (payload.error === false) {
         state.progress.text = i18n.app.progress.loadingText
       } else {
-        state.progress.text = i18n.app.progress.errorText
+        state.progress.text = payload.e404 ? i18n.app.progress.e404Text : i18n.app.progress.errorText
       }
     },
     notificationsCounter(state, payload) {

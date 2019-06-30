@@ -74,8 +74,8 @@ export default {
           } else {
             this.$router.push('/404')
           }
-        }).catch(() => {
-          this.$store.dispatch('progress', { error: true })
+        }).catch((error) => {
+          this.$store.dispatch('progress', { error: true, e404: error.response.status === 404 ? true : false })
         })
     },
     getCurrentLesson(lessons) {
